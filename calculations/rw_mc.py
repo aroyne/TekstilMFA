@@ -4,6 +4,7 @@
 RW (rest of the world) pool: flows from abroad into the Norwegian system.
 """
 from calculations.trade import add_trade_flow_by_product
+from calculations.utils import PRODUCTS
 
 
 def execute_calculations_rw(preloaded_data, current_params, dataset_noise):
@@ -12,7 +13,7 @@ def execute_calculations_rw(preloaded_data, current_params, dataset_noise):
     add_trade_flow_by_product(
         results, preloaded_data, dataset_noise,
         flow_code='RW.RW-DI.RT-Finished textile products import-TOT',
-        is_import=True, category='finished', products=['CL', 'HT', 'FW'],
+        is_import=True, category='finished', products=PRODUCTS,
     )
 
     return results

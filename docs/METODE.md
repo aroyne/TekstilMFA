@@ -31,6 +31,7 @@ Implementert i [calculations/stock_model.py](../calculations/stock_model.py) og 
 * Diskret konvensjon: S(a) er andelen av en årgang som fortsatt er i lageret a år etter at den kom inn. Da blir lager(t) − lager(t−1) = I(t) − O(t) eksakt.
 * Innsvinging: Innstrømmen før 1988 er ukjent. Den settes til 1988-nivået (eller en trend) i et antall innsvingingsår, og valget testes i en følsomhetsanalyse (D2).
 * Kontroller: Lager per innbygger sammenlignes med garderobestudier (SIFO/OsloMet). Utstrømmen sammenlignes med avfall pluss innsamling (NORSUS 2023, plukkanalyser).
+* Produkter som behandles som emballasje (sekker, SA) får levetiden `immediate`: alt kasseres samme år, og det bygges ikke opp lager (D13).
 * Kjøp av brukt (CO.RE → US.HH) går inn som en ny årgang, med samme eller kortere restlevetid (egen parameter).
 
 ## 4. Overføringskoeffisienter (TK) som endrer seg over tid

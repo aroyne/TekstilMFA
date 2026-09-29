@@ -18,6 +18,15 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Tester: massebalanse og stasjonær tilstand i lagermodellen, og konsistens i systemregisteret (6 bestått).
 - [x] Første kontroll: netto import 2022 (CL+HT+FW) ≈ 94,7 kt mot NORSUS 105,9 kt satt på markedet.
 
+### 2026-09-29 – D1: OT tas med
+- [x] OT (HS 57, 6305–6308) er i omfanget: hs_mapping, import- og eksportflyter, levetider (US.HH og US.IC), ikke-tekstilandel og fibersammensetning.
+- [x] Import av OT: ca. 23 kt (2000) → 48 kt (2022) → 44 kt (2024). Tepper ca. 16 kt, sekker ca. 15 kt, presenninger og telt ca. 8 kt og andre konfeksjonerte varer ca. 10 kt i 2022. 6307 øker i 2020–21 (munnbind).
+- [x] OT er delt i CA (tepper, 57), SA (sekker, 6305), TA (presenninger og telt, 6306) og OM (andre konfeksjonerte varer, 6307–6308), med egne levetider, ikke-tekstilandeler og fiberrader. Import 2022: CA 15,7, SA 14,5, OM 10,0 og TA 8,1 kt.
+- [x] Ferdige tekniske varer i HS 56/59 er besluttet holdt utenfor.
+- [x] Sekker (SA) behandles som emballasje (D13): levetiden `immediate` er lagt til i lagermodellen (med test), og PP-kolonnen er lagt til i fibersammensetningen.
+- [x] D2 er besluttet: rapportering 1990–2024, innstrøm før 1988 settes til 1988-nivået (alternativt en trend), og startlageret testes i en følsomhetsanalyse.
+- [ ] Sjekke hvordan kasserte sekker registreres i avfallsstatistikken (plastemballasje eller tekstil), før validering.
+
 ## Neste
 
 ### Fase 1 – Låse systemdefinisjonen

@@ -5,14 +5,14 @@ hs_prefix,product,category,in_scope,description
 6302,HT,finished,yes,"Bed linen, table linen, toilet linen and kitchen linen"
 6303,HT,finished,yes,Curtains and interior blinds
 6304,HT,finished,yes,Other furnishing articles
-6305,OT,finished,no,Sacks and bags for packing of goods
-6306,OT,finished,no,"Tarpaulins, tents, sails, camping goods"
-6307,OT,finished,no,Other made-up articles (incl. face masks)
-6308,OT,finished,no,Sets of woven fabric and yarn for making rugs etc.
+6305,SA,finished,yes,Sacks and bags for packing of goods
+6306,TA,finished,yes,"Tarpaulins, tents, sails, camping goods"
+6307,OM,finished,yes,Other made-up articles (incl. face masks)
+6308,OM,finished,yes,Sets of woven fabric and yarn for making rugs etc.
 6309,UT,used,yes,Worn clothing and other worn articles
 6310,UT,used,yes,"Used or new rags, scrap twine, cordage"
 64,FW,finished,yes,Footwear (large non-textile share - see parameter nontextile_share_FW)
-57,OT,finished,no,Carpets and other textile floor coverings
+57,CA,finished,yes,Carpets and other textile floor coverings
 50,IM,intermediate,yes,Silk
 51,IM,intermediate,yes,"Wool, fine or coarse animal hair; yarn and woven fabric thereof"
 52,IM,intermediate,yes,Cotton

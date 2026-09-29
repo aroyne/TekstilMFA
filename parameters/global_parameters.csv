@@ -2,6 +2,9 @@ parameter_id,value,unit,description,source,lower_bound,upper_bound,uncertainty_t
 nontextile_share_CL,,kg/kg,"Mass share of non-textile parts (buttons, zips, trims) in clothing",,,,perc,,PERT,todo
 nontextile_share_HT,,kg/kg,Mass share of non-textile parts in household textiles,,,,perc,,PERT,todo
 nontextile_share_FW,,kg/kg,"Mass share of non-textile material (leather, rubber, plastic soles) in footwear",,,,perc,,PERT,todo
+nontextile_share_CA,,kg/kg,"Mass share of non-textile material in carpets (backing, latex)",,,,perc,,PERT,todo
+nontextile_share_TA,,kg/kg,"Mass share of non-textile material in tarpaulins and tents (poles, eyelets, coatings)",,,,perc,,PERT,todo
+nontextile_share_OM,,kg/kg,Mass share of non-textile material in other made-up articles,,,,perc,,PERT,todo
 private_import_share_CL,,-,"Private imports (cross-border shopping, travel) relative to registered clothing imports",,,,perc,,PERT,todo
 online_direct_share_CL,,-,Direct low-value online imports relative to registered clothing imports,,,,perc,,PERT,todo
 institutional_share_CL,,-,Share of clothing supply going to institutions and businesses (workwear/uniforms),,,,perc,,PERT,todo

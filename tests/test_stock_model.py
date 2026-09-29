@@ -21,3 +21,11 @@ def test_steady_state_stock_equals_inflow_times_mean_lifetime():
     assert outflow[-1] == pytest.approx(10.0, rel=1e-6)
     assert stock[-1] == pytest.approx(10.0 * surv[1:].sum(), rel=1e-6)
     assert stock[-1] == pytest.approx(60.0, rel=0.1)
+
+
+def test_immediate_lifetime_has_no_stock():
+    inflows = np.array([3.0, 5.0, 4.0])
+    surv = survival_curve('immediate', mean_years=None, shape=None, n_ages=10)
+    stock, outflow, _ = inflow_driven(inflows, surv)
+    np.testing.assert_allclose(stock, 0.0)
+    np.testing.assert_allclose(outflow, inflows)

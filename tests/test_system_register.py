@@ -21,3 +21,10 @@ def test_flows_only_connect_registered_processes():
 
 def test_flow_codes_unique():
     assert flows['flow_code'].is_unique
+
+
+def test_hs_mapping_finished_products_match_product_list():
+    from calculations.utils import PRODUCTS
+    mapping = pd.read_csv('parameters/hs_mapping.csv', dtype={'hs_prefix': str})
+    finished = mapping[(mapping['category'] == 'finished') & (mapping['in_scope'] == 'yes')]
+    assert set(finished['product']) == set(PRODUCTS)

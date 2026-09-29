@@ -4,3 +4,10 @@ HT,US.HH,weibull,,,,,perc,,todo,Household textiles in households
 FW,US.HH,weibull,,,,,perc,,todo,Footwear in households
 CL,US.IC,weibull,,,,,perc,,todo,Workwear and uniforms
 HT,US.IC,weibull,,,,,perc,,todo,Institutional linen (hotels/hospitals)
+CA,US.HH,weibull,,,,,perc,,todo,Carpets and rugs in households
+CA,US.IC,weibull,,,,,perc,,todo,"Carpets in offices, public and commercial buildings"
+SA,US.IC,immediate,,,,,,decision D1 (2026-09-29),decided,"Sacks and bulk bags (FIBC) treated as packaging: discarded in the year they enter, no in-use stock"
+TA,US.HH,weibull,,,,,perc,,todo,"Tents, tarpaulins and camping goods in households"
+TA,US.IC,weibull,,,,,perc,,todo,"Tarpaulins, awnings and sails in businesses"
+OM,US.HH,weibull,,,,,perc,,todo,"Other made-up articles in households (e.g. face masks, cleaning cloths)"
+OM,US.IC,weibull,,,,,perc,,todo,Other made-up articles in businesses

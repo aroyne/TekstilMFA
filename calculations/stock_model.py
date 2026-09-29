@@ -22,9 +22,14 @@ def survival_curve(distribution_type, mean_years, shape, n_ages):
     weibull:   shape is the Weibull shape parameter k; the scale follows from
                the mean as mean / Gamma(1 + 1/k).
     lognormal: shape is the standard deviation of log(lifetime).
+    immediate: everything leaves in the year it enters (no stock); used for
+               products treated as packaging. mean_years and shape are ignored.
     """
     ages = np.arange(n_ages + 1, dtype=float)
     dist = distribution_type.lower().strip()
+
+    if dist == 'immediate':
+        return (ages == 0).astype(float)
 
     if dist == 'weibull':
         scale = mean_years / math.gamma(1.0 + 1.0 / shape)

@@ -1,6 +1,6 @@
 # TekstilMFA – materialstrømsanalyse for tekstiler i Norge
 
-En dynamisk, probabilistisk MFA (Monte Carlo) for klær, hjemmetekstiler og sko i Norge 1990–2024. Arbeidsmetodikken, kodestrukturen og dokumentasjonsformen bygger på NitrogenBudsjett, men systemet er definert fra bunnen av: det finnes ingen offisiell struktur for tekstil-MFA, og vi rapporterer ikke i noe offisielt format.
+En dynamisk, probabilistisk MFA (Monte Carlo) for klær, hjemmetekstiler, sko og andre tekstilvarer (tepper, sekker, presenninger m.m.) i Norge 1990–2024. Arbeidsmetodikken, kodestrukturen og dokumentasjonsformen bygger på NitrogenBudsjett, men systemet er definert fra bunnen av: det finnes ingen offisiell struktur for tekstil-MFA, og vi rapporterer ikke i noe offisielt format.
 
 **Status:** tidlig fase. Se [docs/PLAN.md](docs/PLAN.md).
 

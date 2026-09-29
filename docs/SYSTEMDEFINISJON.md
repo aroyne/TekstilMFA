@@ -7,10 +7,10 @@
 | Dimensjon | Valg (forslag) | Status |
 |---|---|---|
 | Geografi | Norge (fastlandet). Import og eksport går via poolen RW. | forslag |
-| Tid | Data 1988–2024 (SSB 08801 starter i 1988). Rapportering 1990–2024, slik at lagermodellen får innsvingingsår. | beslutning D2 |
-| Produkter | Kjerne: klær (CL), hjemmetekstiler (HT) og sko (FW). Dette er samme avgrensning som NORSUS (2023) og EUs produsentansvar for tekstiler. Tekniske tekstiler, tepper og andre konfeksjonerte varer (OT) spores i handelsdata, men holdes utenfor kjernen. | beslutning D1 |
+| Tid | Data 1988–2024 (SSB 08801 starter i 1988). Rapportering 1990–2024, slik at lagermodellen får innsvingingsår. | besluttet D2 |
+| Produkter | Klær (CL), hjemmetekstiler (HT), sko (FW) og andre tekstilvarer (OT). OT er delt i tepper (CA, HS 57), sekker og storsekker (SA, 6305), presenninger og telt (TA, 6306) og andre konfeksjonerte varer (OM, 6307–6308), fordi brukerne og levetidene er svært ulike. CL+HT+FW tilsvarer avgrensningen til NORSUS (2023) og EUs produsentansvar, og kan alltid rapporteres separat (`CORE_PRODUCTS` i `calculations/utils.py`). Tekniske tekstiler i HS 56 og 59 er utenfor. | besluttet D1 |
 | Enhet | kt produktmasse (nettovekt slik den er deklarert). Tekstilmasse beregnes med andeler for ikke-tekstile deler. | beslutning D4 |
-| Materiallag | Fase 1–2: TOT (all masse). Fase 3: fibertyper (PES, PA, PAC, EL, CO, WO, CV, OTH) via sammensetningsmatrise. | beslutning D4 |
+| Materiallag | Fase 1–2: TOT (all masse). Fase 3: fibertyper (PES, PA, PAC, EL, PP, CO, WO, CV, OTH) via sammensetningsmatrise. | beslutning D4 |
 
 ## Navnekonvensjon (arvet fra NitrogenBudsjett)
 
@@ -18,7 +18,7 @@
 
 * Pool = to bokstaver, subpool = to bokstaver.
 * Laget er materialet. I N-budsjettet var dette N-forbindelsen (Nmix, NH3, …). Her er det TOT eller en fibertype.
-* **Nytt i forhold til N-budsjettet:** Resultatradene har en ekstra kolonne, `product` (CL/HT/FW/…). Produktgruppe er altså en dimensjon og ikke en del av flytnavnet. Uten dette måtte hver flyt dupliseres tre ganger (beslutning D5).
+* **Nytt i forhold til N-budsjettet:** Resultatradene har en ekstra kolonne, `product` (CL, HT, FW, CA, SA, TA, OM). Produktgruppe er altså en dimensjon og ikke en del av flytnavnet. Uten dette måtte hver flyt dupliseres tre ganger (beslutning D5).
 
 ## Pools og subpools
 
@@ -81,8 +81,9 @@ Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [syst
 
 | ID | Spørsmål | Anbefaling |
 |---|---|---|
-| D1 | Produktavgrensning | CL+HT+FW som kjerne. Beregn FW separat, slik at resultatene kan vises med og uten sko. OT er utenfor. |
-| D2 | Tidsperiode og startlager | Rapporter 1990–2024. Innstrøm før 1988 settes til 1988-nivået (alternativt en trend), og startlageret testes i en følsomhetsanalyse. |
+| D1 | Produktavgrensning | **Besluttet 2026-09-29:** CL, HT, FW og OT, med OT delt i CA, SA, TA og OM. Alle produktgrupper beregnes separat. Ferdige tekniske varer i HS 56/59 (tau, nett, slanger) er utenfor. Sekker (SA) behandles som emballasje: de kasseres samme år, uten lager i bruk. |
+| D13 | Sekker som emballasje | **Besluttet 2026-09-29:** SA går DI.RT → US.IC med levetiden `immediate` (ingen lager) → avfall samme år. Sekker telles med i tilført masse, men holdes utenfor sammenligninger med tekstilavfallsstatistikk, fordi de trolig registreres som plastemballasje der. |
+| D2 | Tidsperiode og startlager | **Besluttet 2026-09-29:** Rapporter 1990–2024. Innstrøm før 1988 settes til 1988-nivået (alternativt en trend), og startlageret testes i en følsomhetsanalyse. |
 | D3 | Hvor detaljert skal MA være? | Enkel balanse (P2). Norsk tekstilindustri er liten, men ull er en norsk særegenhet. |
 | D4 | Masse og lag | Produktmasse er primær. Tekstilmasse beregnes via `nontextile_share_*`. Fiberlaget kommer i fase 3. |
 | D5 | Produktdimensjon | Kolonnen `product` i resultatene (er implementert). |
