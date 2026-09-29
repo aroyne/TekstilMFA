@@ -4,3 +4,5 @@ __pycache__/
 # Reproducible from NitrogenBudsjett via scripts/extract_textile_trade.py
 data_files/Tab_08801_textiles_1988_2024.csv
 output_files/MC_Raw_Simulations.csv.gz
+# Literature PDFs are kept locally only
+litteratur/*.pdf

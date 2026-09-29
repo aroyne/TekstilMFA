@@ -19,7 +19,8 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | SSB industristatistikk (varestatistikk, NACE 13–15) / Eurostat Prodcom | Norsk produksjon av tekstiler, klær og sko | hent/verifiser tabell |
 | SSB grensehandelsstatistikk | Grensehandel i NOK, per varegruppe der det finnes | hent/verifiser |
 | SSB forbruksundersøkelsen / nasjonalregnskap (COICOP 03.1, 03.2, 05.2) | Husholdningenes utgifter til klær, sko og hjemmetekstiler, en proxy for trender | hent |
-| Tolletaten / SSB om lavverdiforsendelser, VOEC | Direkte netthandel; dekningsgrad i 08801 før og etter 2020 | verifiser |
+| SSB 08801, varenr. 99.60.1000/2000/3000 | Lavverdisendinger (næringsliv < 1 000 kr, privat, VOEC), 2023–, uten HS-fordeling. Er **ikke** med under HS-kodene i noe år. | har (i NitrogenBudsjett sin fulle 08801-fil) |
+| NORSUS (2026), ny kartlegging for Miljødirektoratet | Klær via VOEC 3 849 t (2024) og 13 961 t (2025); satt på markedet 87 531 t (2025); restavfall 44 405 t (2025) | hent rapporten |
 | Norilia / Animalia, NIBIO | Norsk ullmengde | hent/verifiser |
 
 ### Bruk og lager
@@ -34,6 +35,7 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 |---|---|---|
 | NORSUS (2023), *Kunnskapsstatus for tekstiler og tekstilavfall i Norge* | 2022: 105,9 kt satt på markedet (19,3 kg/pers), 78,5 kt avfall, 48,8 kt i restavfall, 29,6 kt separat innsamlet, ca. 85 % eksportert | hent (tallene finnes i TekstilEOL `config/market_volumes.csv`) |
 | Årsrapporter fra Fretex, UFF, Kirkens Bymisjon m.fl. | Innsamlede mengder, sortering, ombruk i Norge | hent |
+| Watson, Trzepacz, Rubach & Johnsen (2020), *Kartlegging av brukte tekstiler og tekstilavfall i Norge*, NORSUS/PlanMiljø OR 52.20, for Miljødirektoratet | Ankerår 2018: satt på markedet 74 340 t, netthandel 3 300 t, innsamlet 31 690 t, restavfall 25 400 t + gjenbruksstasjoner 6 130 t, usolgt ≥ 700 t | har (litteratur/, lokalt) |
 | Mepex-rapporter for Miljødirektoratet om brukte tekstiler og tekstilavfall | Mengder og flyter, flere årganger | verifiser |
 | Miljødirektoratets utredning av produsentansvar for tekstiler | Mengder og kanaler | verifiser |
 | Nordiske rapporter: Tojo et al. 2012 (TemaNord 2012:545), Palm et al. 2014 (TemaNord 2014:538), Watson et al. 2016 (TemaNord 2016:558) | Historiske nordiske tekstilflyter, blant annet for Norge | hent/verifiser |
