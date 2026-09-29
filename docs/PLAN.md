@@ -62,6 +62,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 
 ### Fase 2 – Kjerneflyter (P1)
 - [x] 2026-09-29: Alle 13 P1-flyter er implementert og kjører i MC for 1988–2025, med massebalansesjekk i hver iterasjon. Nye moduler: `co_mc`, `us_mc`, `wm_mc`, `timeseries`, `balances`. Ankerpunkter ligger i `data_files/anchor_values.csv` og `parameters/time_dependent_parameters.csv`. 11 tester.
+- [x] P2: Eksport av restavfall til forbrenning i utlandet (D11) med eksportandel fra SSB 13035 (KOSTRA, 2015–2025).
 - [ ] **Åpne spørsmål (A1–D3) i [claude_tekst/2026-09-29_sporsmal_fase2.md](../claude_tekst/2026-09-29_sporsmal_fase2.md).** Viktigst: restavfall før 2018 (A1), 2018-ankeret for netthandel (A2) og formelen for innsamling (A3).
 - [ ] Privatimport og direkte netthandel (D7).
 - [ ] DI.RT-balanse, som gir salg til husholdninger.

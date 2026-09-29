@@ -48,6 +48,12 @@ Det følger ideen i D17 (eksport som årlig hovedserie), men innsamlingen i mode
 
 **Spørsmål:** Er denne tolkningen av D17 ok?
 
+### A4. Eksport av restavfall (D11) – implementert etter at listen ble skrevet
+SSB 13035 (KOSTRA) gir andelen av restavfallet som eksporteres: 16 % (2015), 16 % (2018), 13 % (2022), 12 % (2025). Andelen brukes på alle tekstiler i WM.RS, også fra næringslivet. Det gir 10–14 kt tekstiler per år eksportert til forbrenning i utlandet siden 2012.
+- **Før 2015 finnes ingen offisielle tall.** Jeg har antatt 0 i 2005 og lineær økning til 2015-nivået. Har du en kilde, for eksempel Miljødirektoratets tall for grensekryssende avfall eller svensk importstatistikk?
+- Handelsstatistikken (HS 3825.10) fanger ikke opp denne eksporten (bare 0–27 kt i alt per år).
+- SSB 13035 har også «Tekstiler til ombruk» fra kommunene (13–21 kt per år, 2015–2025). Den serien er ikke brukt ennå, men kan være en kontroll av innsamlingen.
+
 ## B. Forenklinger jeg har gjort (bør bekreftes)
 
 ### B1. Produktgrupper etter salg
@@ -67,7 +73,7 @@ Satt til **12 %** (PERT 8–15 %) for alle produkter unntatt sekker, etter den d
 - Resultat: ca. 0,9 kt per år før pandemien, 0,1 kt i 2020 og 0,4–0,5 kt i 2023–2025.
 
 ### B5. Ikke implementert ennå (planlagt P2/P3)
-Norsk produksjon (MA), usolgte varer, materialgjenvinning som egen flyt (ligger nå i «sorting residues»), eksport av restavfall til forbrenning i Sverige (D11), mikrofibre, og innsamling fra næringslivet.
+Norsk produksjon (MA), usolgte varer, materialgjenvinning som egen flyt (ligger nå i «sorting residues»), mikrofibre, og innsamling fra næringslivet.
 
 ## C. Mangler data eller kilder
 

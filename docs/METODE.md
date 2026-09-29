@@ -85,6 +85,7 @@ Massemessig er dette små flyter, men de er viktige for miljøet. Frigjøringen 
   * **Innsamling (D17):** eksport av HS 6309+6310 + andelen som beholdes i Norge.
   * **Restavfall (D15):** ankerpunkter.
   * **Deponi og forbrenning (D15):** deponiandel fra SSB.
+  * **Eksport av restavfall (D11):** eksportandel fra SSB 13035, 2015–2025.
   * **Lagerendring i US.HH:** restledd (D8).
 * Åpne spørsmål og forenklinger: `claude_tekst/2026-09-29_sporsmal_fase2.md`.
 
