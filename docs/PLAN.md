@@ -42,9 +42,10 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 ### Fase 1 – Låse systemdefinisjonen (beslutningene D1–D13 er tatt 2026-09-29)
 - [ ] Litteraturgjennomgang av eksisterende tekstil-MFA-er: nordiske (Tojo 2012, Palm 2014, Watson 2016), NORSUS 2023, svenske og danske nasjonale tekstilflyter, JRC og EEA. Notér systemgrenser og tall til sammenligning (`claude_tekst/`).
 - [ ] Lage en datainventar per P1-flyt: hvilke år som er dekket, hvilke kilder, og hvor hullene er.
-- [x] **Første steg for D7:** Lavverdisendinger er undersøkt ([notat](../claude_tekst/2026-09-29_lavverdisendinger_VOEC_og_klesimport.md)). De er ikke med under HS-kodene i noe år. SSB har egne koder (99.60.x) fra 2023. Klær via VOEC var 3,8 kt i 2024 og 14,0 kt i 2025 (NORSUS 2026). Fallet i klesimport kom i 2023 (−12 kt, mest fra Kina, færre plagg), og VOEC forklarer bare en liten del av det.
+- [x] **Første steg for D7:** Lavverdisendinger er undersøkt ([notat](../claude_tekst/2026-09-29_lavverdisendinger_VOEC_og_klesimport.md)). De er ikke med under HS-kodene i noe år. SSB har egne koder (99.60.x) fra 2023. Tekstiler via VOEC (Tolletaten, via NORSUS 2026) var 0,5 / 4,8 / 3,8 / 14,0 kt i 2022–2025. Fallet i klesimport kom i 2023 (mest fra Kina, færre plagg), og VOEC forklarer omtrent en tredjedel av det.
 - [x] Kontroll mot Watson m.fl. (2020): Netto import CL+HT 2018 er 74,0 kt, mot 74,3 kt satt på markedet der.
-- [ ] Hente NORSUS 2026-rapporten (metode for VOEC-klær, satt på markedet 2025, restavfall 2025).
+- [x] NORSUS 2026 (OR.18.26) er gjennomgått. Brutto import stemmer med våre tall (≈ 2 kt lavere i alle år). Ankerår 2025 for kasseringer er hentet ut.
+- [ ] Hente NORSUS 2023 (OR.07.23) for ankeråret 2022.
 - [ ] Verifisere klesandelen i 99.60.1000 (næringsliv < 1 000 kr). Den kan bety en systematisk underdekning av klesimport på ca. 7 kt (≈ 13 %) i alle år. Parameter `lowvalue_undercoverage_CL`.
 - [ ] Oppdatere 08801 med 2025-data.
 
