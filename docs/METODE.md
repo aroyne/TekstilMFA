@@ -20,17 +20,23 @@ For hver prosess og hvert år skal følgende gjelde:
 
   Σ innstrømmer − Σ utstrømmer = lagerendring (0 for prosesser uten lager)
 
-Rekkefølgen i beregningen følger varestrømmen: RW/MA → DI → US → CO/WM → EN. Hver prosess har høyst én *balanseflyt*, og den regnes ut som restledd. Alle andre flyter kommer fra data, parametre eller lagermodellen. Balansene sjekkes i hver MC-iterasjon. En negativ balanseflyt betyr at dataene ikke er konsistente, og skal gi en tydelig feil. Den skal ikke klippes til null i det stille. Ubalanse mellom kasseringer fra lagermodellen og uavhengig avfallsstatistikk vises som diagnostikk (beslutning D8).
+Rekkefølgen i beregningen følger varestrømmen: RW/MA → DI → US → CO/WM → EN. Hver prosess har høyst én *balanseflyt*, og den regnes ut som restledd. Alle andre flyter kommer fra data, parametre eller lagermodellen. Balansene sjekkes i hver MC-iterasjon. En negativ balanseflyt betyr at dataene ikke er konsistente, og skal gi en tydelig feil. Den skal ikke klippes til null i det stille. **Kildehierarki (D8):** Kasseringer og avfallsflyter hentes fra offisielle kilder: først SSB og Miljødirektoratet, deretter rapporter bestilt av myndighetene (NORSUS, Mepex), og deretter aktørenes egne tall (innsamlere). For prosessene med lager i bruk (US.HH, US.IC) er lagerendringen restleddet:
+
+  ΔLager(t) = tilført(t) − kassert(t), der kassert(t) kommer fra avfallsstatistikken
+
+Lagerendringen kan være negativ, i motsetning til en balanseflyt. Lageret i bruk blir den akkumulerte summen fra et startlager (D2). Systematiske feil i avfalls- eller tilførselsdataene hoper seg da opp i lageret. Et urimelig lager (sammenlignet med garderobestudier og lagermodellen) er derfor et diskusjonspunkt i seg selv.
 
 ## 3. Dynamisk lagermodell (US.HH, US.IC, WM.LF)
 
 Implementert i [calculations/stock_model.py](../calculations/stock_model.py) og testet i [tests/test_stock_model.py](../tests/test_stock_model.py).
 
+**Rolle (D8):** Lagermodellen er et *parallelt, uavhengig anslag*. Kasseringene i hovedresultatet kommer fra avfallsstatistikken. Lagermodellen gir kasseringer og lager ut fra tilførsel og levetid, og de sammenlignes med hovedresultatet per år og produktgruppe. Forskjellene brukes som diskusjonsgrunnlag: er levetidene riktige, vokser lageret av klær som ikke brukes, er noen avfallsstrømmer underrapportert? Lagermodellen brukes også for mikrofibre (frigjøring ∝ lager i bruk) og for deponilageret (WM.LF).
+
 * Innstrømsdrevet: I(t) er summen av innstrømmene til lageret, altså salg til husholdninger, privatimport og kjøp av brukt.
 * Levetid: Weibull (standard) eller lognormal per produktgruppe. Parametrene er middellevetid og form ([parameters/lifetimes.csv](../parameters/lifetimes.csv)).
 * Diskret konvensjon: S(a) er andelen av en årgang som fortsatt er i lageret a år etter at den kom inn. Da blir lager(t) − lager(t−1) = I(t) − O(t) eksakt.
 * Innsvinging: Innstrømmen før 1988 er ukjent. Den settes til 1988-nivået (eller en trend) i et antall innsvingingsår, og valget testes i en følsomhetsanalyse (D2).
-* Kontroller: Lager per innbygger sammenlignes med garderobestudier (SIFO/OsloMet). Utstrømmen sammenlignes med avfall pluss innsamling (NORSUS 2023, plukkanalyser).
+* Sammenligning: Utstrømmen sammenlignes med kasseringene i avfallsstatistikken. Lageret sammenlignes med det akkumulerte restleddet og med garderobestudier (SIFO/OsloMet).
 * Produkter som behandles som emballasje (sekker, SA) får levetiden `immediate`: alt kasseres samme år, og det bygges ikke opp lager (D13).
 * Kjøp av brukt (CO.RE → US.HH) går inn som en ny årgang, med samme eller kortere restlevetid (egen parameter).
 

@@ -25,21 +25,31 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Ferdige tekniske varer i HS 56/59 er besluttet holdt utenfor.
 - [x] Sekker (SA) behandles som emballasje (D13): levetiden `immediate` er lagt til i lagermodellen (med test), og PP-kolonnen er lagt til i fibersammensetningen.
 - [x] D2 er besluttet: rapportering 1990–2024, innstrøm før 1988 settes til 1988-nivået (alternativt en trend), og startlageret testes i en følsomhetsanalyse.
+- [x] D3 er besluttet: MA (MA.FI og MA.TX) modelleres som enkel balanse med prioritet 2.
+- [x] D4 er besluttet: Produktmasse (nettovekt) er primær enhet, tekstilmasse beregnes via `nontextile_share_*`, og fiberlaget kommer i fase 3.
+- [x] D5 er besluttet: Produktgruppe er en egen kolonne (`product`) i resultatene.
+- [x] D6 er besluttet: Eksport av ferdigvarer føres fra DI.RT. En andel flyttes til MA.TX når norsk produksjon er kvantifisert.
+- [x] D7 er besluttet: Privatimport regnes om fra NOK til kg med enhetsverdier fra 08801. Direkte netthandel får stor usikkerhet med brudd i 2020 (VOEC).
+- [x] D8 er besluttet: Offisiell avfallsstatistikk er hovedkilden for kasseringer, og lagerendringen i bruk er restleddet. Lagermodellen kjøres parallelt og brukes til sammenligning og diskusjon.
+- [x] D9 er besluttet: Uformell ombruk inngår i levetiden i US.HH og er ikke en egen flyt.
+- [x] D10 er besluttet: Dvalende lager ligger i US.HH, og levetiden inkluderer lagringstid.
+- [x] D11 er besluttet: Forbrenning i Norge er et sluk. Forbrenning i utlandet er en RW-flyt (eksportert restavfall × tekstilandel).
+- [x] D12 er besluttet: Scenarier venter til den historiske modellen er ferdig.
 - [ ] Sjekke hvordan kasserte sekker registreres i avfallsstatistikken (plastemballasje eller tekstil), før validering.
 
 ## Neste
 
-### Fase 1 – Låse systemdefinisjonen
-- [ ] Ta beslutningene D1–D12 i [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md).
+### Fase 1 – Låse systemdefinisjonen (beslutningene D1–D13 er tatt 2026-09-29)
 - [ ] Litteraturgjennomgang av eksisterende tekstil-MFA-er: nordiske (Tojo 2012, Palm 2014, Watson 2016), NORSUS 2023, svenske og danske nasjonale tekstilflyter, JRC og EEA. Notér systemgrenser og tall til sammenligning (`claude_tekst/`).
 - [ ] Lage en datainventar per P1-flyt: hvilke år som er dekket, hvilke kilder, og hvor hullene er.
-- [ ] Sjekke om 08801 dekker lavverdiforsendelser før og etter VOEC (2020). Nedgangen i klesimport 2022→2024 (64 → 54 kt) må forklares.
+- [ ] **Første steg for D7:** Sjekke om 08801 dekker lavverdiforsendelser før og etter VOEC (2020). Nedgangen i klesimport 2022→2024 (64 → 54 kt) må forklares.
 
 ### Fase 2 – Kjerneflyter (P1)
 - [ ] Privatimport og direkte netthandel (D7).
 - [ ] DI.RT-balanse, som gir salg til husholdninger.
-- [ ] Lagermodell for US.HH per produktgruppe, med innsvinging og levetidsparametre.
-- [ ] Innsamling (ankerpunkter), restavfall, deponi og forbrenning, eksport av usortert.
+- [ ] Kasseringer fra offisiell statistikk: innsamling, restavfall, deponi og forbrenning, eksport av usortert. Hull interpoleres mellom ankerpunkter.
+- [ ] Lager i bruk (US.HH, US.IC) som akkumulert restledd fra startlageret.
+- [ ] Parallell lagermodell per produktgruppe (innsvinging og levetider), og sammenligning per år med restleddet og kasseringene. Dette er diskusjonsgrunnlaget.
 - [ ] CO-balanser (sortering, bruktbutikk og tilbake til US.HH).
 - [ ] Validering: 2022 mot NORSUS, lager per innbygger mot garderobestudier, kg per plagg over tid fra 08801.
 

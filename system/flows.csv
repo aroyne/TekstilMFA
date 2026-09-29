@@ -17,11 +17,11 @@ DI.RT-RW.RW-Export of finished textile products-TOT,DI.RT,RW.RW,Export of finish
 DI.RT-WM.RS-Unsold goods discarded-TOT,DI.RT,WM.RS,Unsold goods discarded,TOT,3,parameter,planned,Literature on destruction of unsold goods; Miljødirektoratet EPR assessment,
 DI.RT-CO.CO-Unsold goods donated-TOT,DI.RT,CO.CO,Unsold goods donated,TOT,3,parameter,planned,Collector annual reports,
 US.HH-CO.CO-Separate collection from households-TOT,US.HH,CO.CO,Separate collection from households,TOT,1,data,planned,"NORSUS 2023; Mepex surveys; collector annual reports (Fretex, UFF, others); SSB 10513",Anchor years only - interpolation between anchors
-US.HH-WM.RS-Textiles in residual and bulky waste-TOT,US.HH,WM.RS,Textiles in residual and bulky waste,TOT,1,data+stock_model,planned,Pick analyses (Mepex/Avfall Norge) x SSB household waste amounts; SSB 10513,Independent check of stock-model outflow
+US.HH-WM.RS-Textiles in residual and bulky waste-TOT,US.HH,WM.RS,Textiles in residual and bulky waste,TOT,1,data,planned,Pick analyses (Mepex/Avfall Norge) x SSB household waste amounts; SSB 10513,Official waste statistics are the primary source (D8); compared with stock-model outflow
 US.HH-WM.WW-Fibre release in laundry-TOT,US.HH,WM.WW,Fibre release in laundry,TOT,2,parameter,planned,Sundt et al. 2014 (Mepex for Miljødirektoratet); laundry release literature,Mass is small but environmentally relevant
 US.HH-EN.AI-Fibre release to air and dust-TOT,US.HH,EN.AI,Fibre release to air and dust,TOT,3,parameter,planned,Literature on airborne fibre release,
 US.IC-CO.CO-Collection from institutions-TOT,US.IC,CO.CO,Collection from institutions,TOT,3,parameter,planned,Collector reports; laundry companies,
-US.IC-WM.RS-Institutional textile waste-TOT,US.IC,WM.RS,Institutional textile waste,TOT,2,data+stock_model,planned,SSB 10513 (textile waste by industry),
+US.IC-WM.RS-Institutional textile waste-TOT,US.IC,WM.RS,Institutional textile waste,TOT,2,data,planned,SSB 10513 (textile waste by industry),Official waste statistics are the primary source (D8)
 US.IC-WM.WW-Fibre release in industrial laundry-TOT,US.IC,WM.WW,Fibre release in industrial laundry,TOT,3,parameter,planned,Laundry release literature,
 CO.CO-RW.RW-Export of unsorted collected textiles-TOT,CO.CO,RW.RW,Export of unsorted collected textiles,TOT,1,data,planned,SSB 08801 (HS 6309/6310 export); collector reports; NORSUS 2023 (about 85 % exported),HS 6309 export may also contain sorted grades - split needed
 CO.CO-CO.SO-Collected textiles to domestic sorting-TOT,CO.CO,CO.SO,Collected textiles to domestic sorting,TOT,1,balance,planned,Balance of CO.CO,
