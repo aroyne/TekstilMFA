@@ -3,3 +3,4 @@ dataset_name,source,lower_bound,upper_bound,uncertainty_type,uncertainty_source,
 10513,SSB,,,perc,,PERT,todo
 05281,SSB,,,perc,,PERT,todo
 trend interpolation,assumption,,,perc,,PERT,todo
+grensehandel,SSB,10,10,perc,placeholder - survey-based statistic,PERT,placeholder

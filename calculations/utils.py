@@ -31,3 +31,37 @@ def report_missing_years(flow_code, product, missing_years, results):
             'comment': 'not done',
             'data_sources': 'no data',
         })
+
+
+def add_series(results, flow_code, product, series, data_sources, comment='ok'):
+    """
+    Appends one result row per year in EXPECTED_YEARS from a {year: value}
+    series (kt). Every model year must be present in the series.
+    """
+    for year in sorted(EXPECTED_YEARS):
+        results.append({
+            'flow_name': flow_code,
+            'product': product,
+            'year': year,
+            'value': float(series[year]),
+            'comment': comment,
+            'data_sources': data_sources,
+        })
+
+
+def flow_by_year(results, flow_code, products=None):
+    """
+    Sums an already computed flow over the given products (all products if
+    None) and returns {year: value}. Raises KeyError if the flow has not been
+    computed yet, which means the pools ran in the wrong order.
+    """
+    series = {}
+    for rec in results:
+        if rec['flow_name'] != flow_code:
+            continue
+        if products is not None and rec['product'] not in products:
+            continue
+        series[rec['year']] = series.get(rec['year'], 0.0) + rec['value']
+    if not series:
+        raise KeyError(f"Flow '{flow_code}' (products {products}) has not been computed")
+    return series

@@ -63,3 +63,30 @@ def add_trade_flow_by_product(results, preloaded_data, dataset_noise, flow_code,
                 'data_sources': data_sources,
             })
         report_missing_years(flow_code, product, EXPECTED_YEARS - collected_years, results)
+
+
+def trade_kt_by_year(preloaded_data, dataset_noise, is_import, category, products):
+    """
+    Total trade in kt per year for the given category and products (in-scope
+    HS codes only), with the 08801 noise factor applied.
+    """
+    # 'trade_textiles' <- data_files/Tab_08801_textiles.csv (SSB 08801, HS 50-64)
+    df = preloaded_data['trade_textiles']
+    direction = 1 if is_import else 2
+    sel = df[(df['impeks'] == direction) & (df['category'] == category)
+             & (df['in_scope'] == 'yes') & df['product'].isin(products)]
+    kt = sel.groupby('year')['amount'].sum() / 1e6 * dataset_noise[TRADE_DATASET]
+    return {int(y): float(v) for y, v in kt.items() if y in EXPECTED_YEARS}
+
+
+def import_unit_value_by_year(preloaded_data, products):
+    """
+    Customs import value per kg (NOK/kg) per year for the given finished
+    products. A ratio of two quantities from the same records, so the 08801
+    noise factor cancels out and is not applied.
+    """
+    # 'trade_textiles' <- data_files/Tab_08801_textiles.csv (SSB 08801, HS 50-64)
+    df = preloaded_data['trade_textiles']
+    sel = df[(df['impeks'] == 1) & (df['category'] == 'finished') & df['product'].isin(products)]
+    sums = sel.groupby('year')[['value_nok', 'amount']].sum()
+    return {int(y): float(r['value_nok'] / r['amount']) for y, r in sums.iterrows() if y in EXPECTED_YEARS}

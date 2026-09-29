@@ -1,0 +1,17 @@
+parameter_id,year,value,unit,description,source,lower_bound,upper_bound,uncertainty_type,uncertainty_source,distribution_type,status
+online_direct_CL,2000,0.0,kt,Direct low-value online imports assumed negligible around 2000 (D7),assumption,0,0,abs,,none,assumption
+online_direct_CL,2018,3.3,kt,"Foreign online purchases of clothing 2018 (3.2 bn NOK, Virke) converted to mass; may overlap with declared parcels in 08801",Watson et al. 2020,60,60,perc,,PERT,literature
+online_direct_CL,2022,0.482,kt,"VOEC shipments to private persons, HS chapters 61+62 (CL) or 63 (HT); Tolletaten data described as indicative","Tolletaten via de Sadeleer & Rubach 2026, fig. 3-3",50,50,perc,,PERT,official
+online_direct_CL,2023,4.581,kt,"VOEC shipments to private persons, HS chapters 61+62 (CL) or 63 (HT); Tolletaten data described as indicative","Tolletaten via de Sadeleer & Rubach 2026, fig. 3-3",50,50,perc,,PERT,official
+online_direct_CL,2024,3.577,kt,"VOEC shipments to private persons, HS chapters 61+62 (CL) or 63 (HT); Tolletaten data described as indicative","Tolletaten via de Sadeleer & Rubach 2026, fig. 3-3",50,50,perc,,PERT,official
+online_direct_CL,2025,13.003,kt,"VOEC shipments to private persons, HS chapters 61+62 (CL) or 63 (HT); Tolletaten data described as indicative","Tolletaten via de Sadeleer & Rubach 2026, fig. 3-3",50,50,perc,,PERT,official
+online_direct_HT,2000,0.0,kt,Direct low-value online imports assumed negligible around 2000 (D7),assumption,0,0,abs,,none,assumption
+online_direct_HT,2018,0.0,kt,No separate estimate for household textiles before 2022,assumption,0,0,abs,,none,assumption
+online_direct_HT,2022,0.042,kt,"VOEC shipments to private persons, HS chapters 61+62 (CL) or 63 (HT); Tolletaten data described as indicative","Tolletaten via de Sadeleer & Rubach 2026, fig. 3-3",50,50,perc,,PERT,official
+online_direct_HT,2023,0.216,kt,"VOEC shipments to private persons, HS chapters 61+62 (CL) or 63 (HT); Tolletaten data described as indicative","Tolletaten via de Sadeleer & Rubach 2026, fig. 3-3",50,50,perc,,PERT,official
+online_direct_HT,2024,0.272,kt,"VOEC shipments to private persons, HS chapters 61+62 (CL) or 63 (HT); Tolletaten data described as indicative","Tolletaten via de Sadeleer & Rubach 2026, fig. 3-3",50,50,perc,,PERT,official
+online_direct_HT,2025,0.959,kt,"VOEC shipments to private persons, HS chapters 61+62 (CL) or 63 (HT); Tolletaten data described as indicative","Tolletaten via de Sadeleer & Rubach 2026, fig. 3-3",50,50,perc,,PERT,official
+residual_core,1998,58.5,kt,"Textiles in household residual waste, CL+HT+FW scope: SSB 1998 clothing+footwear+leather 59 kt + household-textile part of interior textiles (about 8 kt) minus 8 % recovered. Possibly supply-based (see open questions)","SSB Avfallsregnskap tekstiler 1990-1998 (2001), scope-converted",40,40,perc,,PERT,official (scope-converted)
+residual_core,2018,31.55,kt,"Textiles in household residual waste (kerbside 25.4 kt + recycling stations 6.13 kt), 11 pick analyses",Watson et al. 2020 (Mepex),30,30,perc,,PERT,literature
+residual_core,2022,48.809,kt,"Textiles in household residual waste (kerbside 33.6 kt + recycling stations 15.2 kt), 33 pick analyses; Syversen et al. 2023 give the same total for 2021",Rubach et al. 2023 (Mepex),30,30,perc,,PERT,literature
+residual_core,2025,44.461,kt,"Textiles in household residual waste (kerbside 28.5 kt + recycling stations 16.0 kt), 11 pick analyses",de Sadeleer & Rubach 2026 (Mepex),30,30,perc,,PERT,literature

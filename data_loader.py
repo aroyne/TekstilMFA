@@ -22,9 +22,21 @@ def _load_trade_textiles(path, hs_mapping):
     return map_hs_to_product(df, hs_mapping)
 
 
+def _load_crossborder(path, hs_mapping):
+    """{'total': {year: mill. NOK}, 'clothing': {year: mill. NOK}}"""
+    df = pd.read_csv(path)
+    total = df[df['series'] == 'total']
+    clothing = df[df['series'] == 'clothing_and_shoes']
+    return {
+        'total': dict(zip(total['year'], total['mill_nok'])),
+        'clothing': dict(zip(clothing['year'], clothing['mill_nok'])),
+    }
+
+
 # key: (pools that need it, path, loader)
 DATA_MAP = {
     'trade_textiles': ({'rw', 'di', 'ma', 'co'}, 'data_files/Tab_08801_textiles.csv', _load_trade_textiles),
+    'crossborder': ({'rw'}, 'data_files/SSB_grensehandel_05678_14221.csv', _load_crossborder),
 }
 
 

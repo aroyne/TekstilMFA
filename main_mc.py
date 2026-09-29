@@ -15,10 +15,13 @@ import time
 import numpy as np
 import pandas as pd
 
+from calculations.balances import check_mass_balance, load_processes
 from calculations.params import Parameters
 from data_loader import load_all_data
 
-ALL_POOLS = ['rw', 'di']   # extended as pool modules are added
+# Pools run in this order within each iteration: a pool may read flows
+# computed by the pools before it (goods flow downstream).
+ALL_POOLS = ['rw', 'di', 'co', 'us', 'wm']
 
 
 def parse_arguments():
@@ -55,16 +58,21 @@ def main():
     params = Parameters()
     preloaded_data = load_all_data(pools, params)
 
+    processes = load_processes()
     records = []
     start = time.time()
     for sim_id in range(args.nsim + 1):
-        current_params, dataset_noise = params.draw(rng, deterministic=(sim_id == 0))
+        current_params, dataset_noise, anchors = params.draw(rng, deterministic=(sim_id == 0))
+        computed = []
         for pool in pools:
             module = importlib.import_module(f'calculations.{pool}_mc')
-            pool_results = getattr(module, f'execute_calculations_{pool}')(preloaded_data, current_params, dataset_noise)
-            for rec in pool_results:
-                rec['sim_id'] = sim_id
-            records.extend(pool_results)
+            computed.extend(getattr(module, f'execute_calculations_{pool}')(
+                preloaded_data, current_params, dataset_noise, anchors, computed))
+        if pools == ALL_POOLS:
+            check_mass_balance(computed, processes)
+        for rec in computed:
+            rec['sim_id'] = sim_id
+        records.extend(computed)
     print(f"[INFO] {args.nsim} MC iterations + baseline in {time.time() - start:.1f} s")
 
     df_all = pd.DataFrame(records)

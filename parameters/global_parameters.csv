@@ -5,10 +5,9 @@ nontextile_share_FW,,kg/kg,"Mass share of non-textile material (leather, rubber,
 nontextile_share_CA,,kg/kg,"Mass share of non-textile material in carpets (backing, latex)",,,,perc,,PERT,todo
 nontextile_share_TA,,kg/kg,"Mass share of non-textile material in tarpaulins and tents (poles, eyelets, coatings)",,,,perc,,PERT,todo
 nontextile_share_OM,,kg/kg,Mass share of non-textile material in other made-up articles,,,,perc,,PERT,todo
-private_import_share_CL,,-,"Private imports (cross-border shopping, travel) relative to registered clothing imports",,,,perc,,PERT,todo
-online_direct_share_CL,,-,Direct low-value online imports relative to registered clothing imports,,,,perc,,PERT,todo
-institutional_share_CL,,-,Share of clothing supply going to institutions and businesses (workwear/uniforms),,,,perc,,PERT,todo
-institutional_share_HT,,-,Share of household-textile supply going to institutions (hotels/hospitals),,,,perc,,PERT,todo
 unsold_share,,-,Share of supply to retail that is never sold,,,,perc,,PERT,todo
 laundry_release_rate,,kg/kg,Fibre mass released to wastewater per kg textile in the in-use stock per year,,,,abs,,lognormal,todo
 wwtp_retention,,-,Share of fibres in wastewater retained in sludge,,,,abs,,PERT,todo
+institutional_share,0.12,-,"Share of supply of CL, HT, FW, CA, TA and OM used by businesses and the public sector (US.IC); sacks (SA) go entirely to US.IC","Watson et al. 2020 and Rubach et al. 2023 (Danish split, 88/12); Netherlands about 8 % workwear (Xu et al. 2024)",0.08,0.15,abs,literature,PERT,literature
+retail_markup,2.5,-,"Retail price per kg incl. VAT relative to customs import value per kg, used to convert cross-border shopping (NOK) to mass",assumption,1.8,3.5,abs,assumption,PERT,assumption
+crossborder_clothing_share,0.0467,-,Clothing and shoes share of cross-border day-trip shopping; mean of 2023-2025 applied to 2004-2022 (D16),SSB 14221 (5.3 / 4.6 / 4.1 %),0.041,0.053,abs,SSB 14221 range,PERT,official

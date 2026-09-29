@@ -71,6 +71,23 @@ Oppsettet er det samme som i NitrogenBudsjett:
 
 Massemessig er dette små flyter, men de er viktige for miljøet. Frigjøringen modelleres som lageret i bruk × frigjøringsrate per år, deretter fordelt med renseanleggets tilbakeholdelse (andel primær- og sekundærrensing i Norge, SSB) og slambruk. Egen prioritet (P2), og flytene skal kunne vises separat i resultatene.
 
+## 8. Implementering (fase 2)
+
+* **Rekkefølge:** Poolene kjøres i varestrømmens rekkefølge i hver iterasjon: `rw → di → co → us → wm` (`main_mc.py`). Hver modul får flytene som allerede er beregnet (`computed`) og leser dem med `flow_by_year()`. Flyter som mangler gir `KeyError`.
+* **Ankerpunkter:** Andeler og rater ligger i `parameters/time_dependent_parameters.csv`, og observerte mengder fra rapporter i `data_files/anchor_values.csv`. Begge har samme format og trekkes likt: hvert ankerpunkt for seg, med egen fordeling. Mellom ankerpunktene interpoleres det lineært (`calculations/timeseries.py`), og før første og etter siste holdes verdien konstant.
+* **Lagerendring** registreres som en flyt fra en prosess til seg selv (`US.HH-US.HH-Stock change-TOT`, `WM.LF-WM.LF-Stock change-TOT`).
+* **Massebalanse:** `calculations/balances.py` sjekker alle prosesser i hver iterasjon (inn − ut − lagerendring = 0) og stopper modellen ved avvik.
+* **Produktdimensjon:** Per produktgruppe til og med salg. Deretter `CORE` (CL+HT+FW) for innsamling, restavfall og sortering, og `ALL` for avfallsbehandlingen.
+* **Kjerneflyter:**
+  * **Privatimport (D16):** SSB NOK ÷ (tollverdi per kg × påslag), fordelt på CL og FW etter importert masse.
+  * **Direkte netthandel (D7):** ankerpunkter.
+  * **Salg (DI.RT-balansen):** import − eksport, fordelt på husholdninger og næringsliv/offentlig etter `institutional_share`. Sekker (SA) går til US.IC.
+  * **Innsamling (D17):** eksport av HS 6309+6310 + andelen som beholdes i Norge.
+  * **Restavfall (D15):** ankerpunkter.
+  * **Deponi og forbrenning (D15):** deponiandel fra SSB.
+  * **Lagerendring i US.HH:** restledd (D8).
+* Åpne spørsmål og forenklinger: `claude_tekst/2026-09-29_sporsmal_fase2.md`.
+
 ## Referanser (metode)
 
 * Brunner, P. H. & Rechberger, H. (2016). *Handbook of Material Flow Analysis*, 2nd ed. CRC Press.
