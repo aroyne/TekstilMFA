@@ -22,7 +22,7 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | SSB forbruksundersøkelsen / nasjonalregnskap (COICOP 03.1, 03.2, 05.2) | Husholdningenes utgifter til klær, sko og hjemmetekstiler, en proxy for trender | hent |
 | SSB 08801, varenr. 99.60.1000/2000/3000 | Lavverdisendinger (næringsliv < 1 000 kr, privat, VOEC), 2023–, uten HS-fordeling. Er **ikke** med under HS-kodene i noe år. | har (i NitrogenBudsjett sin fulle 08801-fil) |
 | de Sadeleer & Rubach (2026), *2026 Kunnskapsstatus for tekstiler og tekstilavfall i Norge*, NORSUS OR.18.26, **for NORSIRK/Videre Tekstil (bransje)** | Tekstiler via VOEC per kap. 61/62/63 fra Tolletaten 2022–2025 (524 / 4 797 / 3 849 / 13 962 t). Brutto import 2022–2025. Ankerår 2025: innsamlet 33 703 t, restavfall 44 461 t (Mepex), eksport av brukte tekstiler 34 331 t, ombruk i Norge 1 622 t | har (litteratur/, lokalt) |
-| Rubach m.fl. (2023), *2023 Kunnskapsstatus for tekstiler og tekstilavfall i Norge*, NORSUS OR.07.23 | Ankerår 2022 | hent |
+| Rubach m.fl. (2023), *2023 Kunnskapsstatus for tekstiler og tekstilavfall i Norge*, NORSUS OR.07.23, for Virke (KLDs arbeidsgruppe for produsentansvar) | Ankerår 2022: satt på markedet 105 913 t, innsamlet 29 643 t, ombruk i Norge 909 t, restavfall 48 809 t (23 + 10 plukkanalyser), eksport 31 642 t | har (litteratur/, lokalt) |
 | Norilia / Animalia, NIBIO | Norsk ullmengde | hent/verifiser |
 
 ### Bruk og lager
@@ -46,7 +46,7 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | Kilde | Innhold | Status |
 |---|---|---|
 | SSB 05281 (1995–2011) og 10513 (2012–) Avfallsregnskap | Tekstilavfall etter behandlingsmåte, også deponi. **Brudd i 2012:** «Tekstiler» faller fra 113 til 4 kt, trolig fordi tekstiler i restavfall flyttes til «Blandet avfall». Se `claude_tekst/2026-09-29_datainventar_P1-flyter.md` | 10513 har (data_files/); 05281 i NitrogenBudsjett – kopier |
-| SSB, *Avfallsregnskap, tekstiler, 1990–1998* (2001) | 1998: 106 kt tekstilavfall (husholdninger 83 kt, klær 47,2 kt), deponi 72 % (79 % i 1991), forbrenning ca. 20 %, gjenvinning/ombruk 8 % | har (nettside) – finn tabeller |
+| SSB, *Avfallsregnskap, tekstiler, 1990–1998* (2001) | 1998: 106 kt tekstilavfall (husholdninger 83 kt, klær 47,2 kt), deponi 72 % (79 % i 1991), forbrenning ca. 20 %, gjenvinning/ombruk 8 %. Klær 1991: 34,8 kt | har (bare tallene i nettsideteksten; tabellene er ikke på nett – spør SSB) |
 | Plukkanalyser (Mepex, Avfall Norge, kommuner) | Tekstilandel i restavfall | hent |
 | SSB husholdningsavfall | Mengder restavfall og grovavfall | hent/verifiser tabell |
 | Miljødirektoratet / SSB om avfallseksport | Restavfall eksportert til forbrenning (Sverige) | hent |

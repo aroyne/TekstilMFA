@@ -42,6 +42,29 @@ SSBs avfallsregnskap har en materialtype «Tekstiler», men tallene endrer seg h
 
 For 2012 og senere gir *ikke* SSBs avfallsregnskap tekstiler i restavfall direkte. Den beste offisielle kilden er da plukkanalyser (Mepex), satt sammen i rapporter bestilt av Miljødirektoratet (Watson 2020 for 2018) og av bransjen (NORSUS 2023 for 2022, NORSUS 2026 for 2025). Totalmengden restavfall kan hentes fra SSB. Tekstilandel fra plukkanalyser × SSBs restavfallsmengde er en variant som følger kildehierarkiet bedre, og den bør vurderes.
 
+## Ankerår – samlet oversikt
+
+| | 1991 | 1998 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|
+| **Kilde** | SSB tekstilregnskap | SSB tekstilregnskap | Watson m.fl. 2020 (for Miljødir.) | Rubach m.fl. 2023 (for Virke / KLDs arbeidsgruppe) | de Sadeleer & Rubach 2026 (for NORSIRK) |
+| Omfang | alt tekstilavfall | alt tekstilavfall | klær + boligtekstiler | klær, fottøy, boligtekstiler | klær, fottøy, boligtekstiler |
+| Satt på markedet | – | – | 74 340 t (+ ca. 5,8 kt skjult produksjon og netthandel) | 105 913 t (import 105 429 t, norsk produksjon 600 t) | 87 531 t (forskrift) / 91 040 t (utvidet) + VOEC 13 962 t |
+| Tekstilavfall i alt | – | 106 kt (husholdninger 83 kt) | – | – | – |
+| herav klær | 34,8 kt | 47,2 kt (59 kt med fottøy og lær) | – | – | – |
+| Separat innsamlet | – | ca. 8,5 kt gjenvunnet/ombrukt (8 %) | 31 690 t (uten sko og vesker) | 29 643 t | 33 703 t |
+| Ombruk i Norge | – | – | 549 t | 909 t | 1 622 t |
+| Tekstiler i restavfall | – | – | 25 400 t hentet + 6 130 t brakt = 31 550 t | 33 624 t hentet + 15 185 t brakt = 48 809 t | 28 475 t hentet + 15 986 t brakt = 44 461 t |
+| Plukkanalyser | – | – | 8 hentet + 3 brakt | 23 hentet + 10 brakt | 7 hentet + 4 brakt |
+| Deponi / forbrenning | 79 % / ca. 20 % | 72 % / ca. 20 % | ≈ 0 / ≈ 100 % | ≈ 0 / ≈ 100 % | ≈ 0 / ≈ 100 % |
+| Eksport av brukte tekstiler | – | (08801: 6,9 kt) | 30 661 t (08801: 36,5 kt) | 31 642 t (99,3 % som 6309) | 34 331 t |
+| Materialgjenvunnet i Norge | – | – | 93 t | 0 | 364 t |
+| Avvik tilført – avhendet | – | – | 6 745 t | 27 720 t | 25 160 t |
+
+**Merknader:**
+* Restavfall 2022 er høyt (+24 % mot 2018) og bygger på flere analyser enn 2018 og 2025. NORSUS 2023 påpeker at det er ukjent om tekstilene ble veid tørre eller fuktige, og at forskjellen kan være opptil 20 %. Dette må inn som usikkerhet på plukkanalysene.
+* Oppdragsgivere: Bare 2018 (Miljødirektoratet) og SSB er rent offentlige. 2022 er bestilt av Virke for en arbeidsgruppe opprettet av Klima- og miljødepartementet. 2025 er bestilt av NORSIRK. Alle bygger på SSB-data og Mepex-plukkanalyser.
+* De detaljerte tabellene i SSBs tekstilregnskap (1990–1998) er ikke tilgjengelige på nett. Bare tallene i teksten er brukt. Hele serien 1990–1998 kan eventuelt fås ved å spørre SSB.
+
 ## Inventar
 
 | # | Flyt | Kilde(r) | År med data | Hull og merknader | Status |
