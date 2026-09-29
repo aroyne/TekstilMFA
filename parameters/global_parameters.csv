@@ -1,0 +1,11 @@
+parameter_id,value,unit,description,source,lower_bound,upper_bound,uncertainty_type,uncertainty_source,distribution_type,status
+nontextile_share_CL,,kg/kg,"Mass share of non-textile parts (buttons, zips, trims) in clothing",,,,perc,,PERT,todo
+nontextile_share_HT,,kg/kg,Mass share of non-textile parts in household textiles,,,,perc,,PERT,todo
+nontextile_share_FW,,kg/kg,"Mass share of non-textile material (leather, rubber, plastic soles) in footwear",,,,perc,,PERT,todo
+private_import_share_CL,,-,"Private imports (cross-border shopping, travel) relative to registered clothing imports",,,,perc,,PERT,todo
+online_direct_share_CL,,-,Direct low-value online imports relative to registered clothing imports,,,,perc,,PERT,todo
+institutional_share_CL,,-,Share of clothing supply going to institutions and businesses (workwear/uniforms),,,,perc,,PERT,todo
+institutional_share_HT,,-,Share of household-textile supply going to institutions (hotels/hospitals),,,,perc,,PERT,todo
+unsold_share,,-,Share of supply to retail that is never sold,,,,perc,,PERT,todo
+laundry_release_rate,,kg/kg,Fibre mass released to wastewater per kg textile in the in-use stock per year,,,,abs,,lognormal,todo
+wwtp_retention,,-,Share of fibres in wastewater retained in sludge,,,,abs,,PERT,todo

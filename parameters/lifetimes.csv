@@ -1,0 +1,6 @@
+product,stock,distribution_type,mean_years,shape,lower_bound,upper_bound,uncertainty_type,source,status,description
+CL,US.HH,weibull,,,,,perc,,todo,Clothing in households incl. hibernating stock (Laitala/Klepp wardrobe studies are the main candidate source)
+HT,US.HH,weibull,,,,,perc,,todo,Household textiles in households
+FW,US.HH,weibull,,,,,perc,,todo,Footwear in households
+CL,US.IC,weibull,,,,,perc,,todo,Workwear and uniforms
+HT,US.IC,weibull,,,,,perc,,todo,Institutional linen (hotels/hospitals)

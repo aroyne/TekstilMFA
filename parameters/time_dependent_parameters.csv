@@ -1,0 +1,4 @@
+parameter_id,year,value,unit,description,source,lower_bound,upper_bound,uncertainty_type,uncertainty_source,distribution_type,status
+collection_rate_HH,2022,,kg/kg,Separately collected share of textiles discarded by households,NORSUS 2023 (29.6 kt collected / 78.5 kt waste),,,perc,,PERT,todo
+textile_share_residual_waste,2022,,kg/kg,Mass share of textiles in household residual waste (pick analyses),Mepex pick analyses via NORSUS 2023,,,perc,,PERT,todo
+export_share_collected,2022,,kg/kg,Share of separately collected textiles exported without domestic sorting,NORSUS 2023 (about 85 % exported),,,perc,,PERT,todo

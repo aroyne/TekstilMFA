@@ -1,0 +1,25 @@
+hs_prefix,product,category,in_scope,description
+61,CL,finished,yes,"Articles of apparel and clothing accessories, knitted or crocheted"
+62,CL,finished,yes,"Articles of apparel and clothing accessories, not knitted or crocheted"
+6301,HT,finished,yes,Blankets and travelling rugs
+6302,HT,finished,yes,"Bed linen, table linen, toilet linen and kitchen linen"
+6303,HT,finished,yes,Curtains and interior blinds
+6304,HT,finished,yes,Other furnishing articles
+6305,OT,finished,no,Sacks and bags for packing of goods
+6306,OT,finished,no,"Tarpaulins, tents, sails, camping goods"
+6307,OT,finished,no,Other made-up articles (incl. face masks)
+6308,OT,finished,no,Sets of woven fabric and yarn for making rugs etc.
+6309,UT,used,yes,Worn clothing and other worn articles
+6310,UT,used,yes,"Used or new rags, scrap twine, cordage"
+64,FW,finished,yes,Footwear (large non-textile share - see parameter nontextile_share_FW)
+57,OT,finished,no,Carpets and other textile floor coverings
+50,IM,intermediate,yes,Silk
+51,IM,intermediate,yes,"Wool, fine or coarse animal hair; yarn and woven fabric thereof"
+52,IM,intermediate,yes,Cotton
+53,IM,intermediate,yes,Other vegetable textile fibres; paper yarn
+54,IM,intermediate,yes,Man-made filaments
+55,IM,intermediate,yes,Man-made staple fibres
+56,IM,intermediate,no,"Wadding, felt, nonwovens, special yarns, twine, cordage"
+58,IM,intermediate,yes,"Special woven fabrics, lace, tapestries, embroidery"
+59,IM,intermediate,no,"Impregnated, coated or laminated textile fabrics; technical textiles"
+60,IM,intermediate,yes,Knitted or crocheted fabrics

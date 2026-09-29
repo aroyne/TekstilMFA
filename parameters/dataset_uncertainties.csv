@@ -1,0 +1,5 @@
+dataset_name,source,lower_bound,upper_bound,uncertainty_type,uncertainty_source,distribution_type,status
+08801,SSB,5,5,perc,placeholder - official trade statistics (net weight); to be set from data quality assessment,PERT,placeholder
+10513,SSB,,,perc,,PERT,todo
+05281,SSB,,,perc,,PERT,todo
+trend interpolation,assumption,,,perc,,PERT,todo

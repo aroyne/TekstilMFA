@@ -1,0 +1,19 @@
+code,pool,pool_name,subpool_name,type,has_stock,description
+RW.RW,RW,Rest of the world,Rest of the world,boundary,no,All countries outside Norway; source of imports and sink for exports
+PS.WO,PS,Primary production,Norwegian wool,boundary,no,Raw wool shorn from Norwegian sheep; system inflow of domestic virgin fibre
+MA.FI,MA,Manufacturing,Fibre and yarn production,process,no,"Wool scouring, spinning and other fibre/yarn production in Norway"
+MA.TX,MA,Manufacturing,Textile and apparel manufacturing,process,no,"Weaving, knitting, finishing, confection and footwear manufacturing in Norway"
+DI.RT,DI,Distribution,Wholesale and retail,process,no,"Wholesale, physical retail and online retail of finished textile products placed on the Norwegian market"
+US.HH,US,Use,Households,process,yes,"Textiles in use or stored (hibernating) in private households; the main in-use stock"
+US.IC,US,Use,Institutions and businesses,process,yes,"Workwear, uniforms, hotel/hospital/institutional linen and other non-household textile use"
+CO.CO,CO,Collection and sorting,Separate collection,process,no,"Separate collection of used textiles (containers, shops, take-back schemes, municipal recycling stations)"
+CO.SO,CO,Collection and sorting,Sorting,process,no,Sorting of collected textiles in Norway into reuse/recycling/reject grades
+CO.RE,CO,Collection and sorting,Second-hand retail,process,no,"Second-hand shops operated by collectors and other actors that sell sorted textiles back to Norwegian users"
+WM.RS,WM,Waste management,Residual and mixed waste collection,process,no,"Textiles in household residual waste, bulky waste and mixed commercial waste"
+WM.IN,WM,Waste management,Incineration,sink,no,Incineration with energy recovery in Norway; textile mass is destroyed (final sink)
+WM.LF,WM,Waste management,Landfill,process,yes,Landfilled textiles; relevant mainly before the 2009 ban on landfilling biodegradable waste
+WM.RC,WM,Waste management,Material recycling,process,no,Mechanical or chemical recycling of textiles (domestic facilities and brokers)
+WM.WW,WM,Waste management,Wastewater treatment,process,no,Municipal and industrial wastewater treatment receiving fibres released during laundry
+EN.WA,EN,Environment,Water,process,yes,"Fibres accumulating in freshwater and marine environments"
+EN.SO,EN,Environment,Soil,process,yes,Fibres reaching soil (mainly via sewage sludge)
+EN.AI,EN,Environment,Air and indoor dust,sink,no,Fibre fragments released to air and indoor dust
