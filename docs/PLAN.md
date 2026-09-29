@@ -45,8 +45,9 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Bruddet i SSBs avfallsregnskap i 2012 er bekreftet i SSBs dokumentasjon: blandet avfall ble en egen materialtype, og før 2012 ble noen materialer beregnet med varetilførsel og levetid. SSBs tekstilregnskap 1990–1998 gir ankerår 1991 og 1998. Forslag til kildekjede står i datainventaren.
 - [x] D15 er besluttet: kildekjede for tekstiler i restavfall og behandlingsmåte (se SYSTEMDEFINISJON).
 - [ ] Spørre SSB om «Tekstiler» i 05281 (1995–2011) ble beregnet med varetilførselsmetoden (nivået kan være modellbasert).
-- [ ] Finne SSBs statistikk for grensehandel (privatimport).
-- [ ] Kilder til innsamling før 2018 (TemaNord, innsamlernes årsrapporter, eksport av 6309 som proxy).
+- [x] Grensehandel: SSB 05678 (2004–2022) og 14221 (klær og sko 2023–2025). Flyten er liten (≈ 0,2–0,5 kt per år). Metode foreslått i [notat](../claude_tekst/2026-09-29_grensehandel_og_innsamling_for_2018.md).
+- [x] Innsamling før 2018: eksport av 6309+6310 fra 08801 ÷ eksportandel (ankerpunkter). Serien stemmer med innsamlingen i 2018, 2022 og 2025.
+- [x] D16 og D17 er besluttet: metodene for grensehandel og for innsamling før 2018 er godkjent.
 - [x] **Første steg for D7:** Lavverdisendinger er undersøkt ([notat](../claude_tekst/2026-09-29_lavverdisendinger_VOEC_og_klesimport.md)). De er ikke med under HS-kodene i noe år. SSB har egne koder (99.60.x) fra 2023. Tekstiler via VOEC (Tolletaten, via NORSUS 2026) var 0,5 / 4,8 / 3,8 / 14,0 kt i 2022–2025. Fallet i klesimport kom i 2023 (mest fra Kina, færre plagg), og VOEC forklarer omtrent en tredjedel av det.
 - [x] Kontroll mot Watson m.fl. (2020): Netto import CL+HT 2018 er 74,0 kt, mot 74,3 kt satt på markedet der.
 - [x] NORSUS 2026 (OR.18.26) er gjennomgått. Brutto import stemmer med våre tall (≈ 2 kt lavere i alle år). Ankerår 2025 for kasseringer er hentet ut.

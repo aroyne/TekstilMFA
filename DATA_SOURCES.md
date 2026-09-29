@@ -18,7 +18,7 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 |---|---|---|
 | SSB 08801 | Import og eksport per HS8, 1988–2025 | har |
 | SSB industristatistikk (varestatistikk, NACE 13–15) / Eurostat Prodcom | Norsk produksjon av tekstiler, klær og sko | hent/verifiser tabell |
-| SSB grensehandelsstatistikk | Grensehandel i NOK, per varegruppe der det finnes | hent/verifiser |
+| SSB 05678 og 14221 (Grensehandel), `data_files/SSB_grensehandel_05678_14221.csv` | Handlebeløp på dagsturer 2004–2022 (i alt) og klær og sko 2023–2025 (496 / 509 / 458 mill. kr) | har |
 | SSB forbruksundersøkelsen / nasjonalregnskap (COICOP 03.1, 03.2, 05.2) | Husholdningenes utgifter til klær, sko og hjemmetekstiler, en proxy for trender | hent |
 | SSB 08801, varenr. 99.60.1000/2000/3000 | Lavverdisendinger (næringsliv < 1 000 kr, privat, VOEC), 2023–, uten HS-fordeling. Er **ikke** med under HS-kodene i noe år. | har (i NitrogenBudsjett sin fulle 08801-fil) |
 | de Sadeleer & Rubach (2026), *2026 Kunnskapsstatus for tekstiler og tekstilavfall i Norge*, NORSUS OR.18.26, **for NORSIRK/Videre Tekstil (bransje)** | Tekstiler via VOEC per kap. 61/62/63 fra Tolletaten 2022–2025 (524 / 4 797 / 3 849 / 13 962 t). Brutto import 2022–2025. Ankerår 2025: innsamlet 33 703 t, restavfall 44 461 t (Mepex), eksport av brukte tekstiler 34 331 t, ombruk i Norge 1 622 t | har (litteratur/, lokalt) |
