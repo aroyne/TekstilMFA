@@ -4,6 +4,8 @@
 
 **Status:** Alle 13 kjerneflyter (P1) er implementert og kjører i MC for 1988–2025. Massebalansen sjekkes i hver iterasjon, og testene går gjennom (11). Resultater: `output_files/MC_summary.csv`.
 
+**Figur:** [output_files/plots/core_household_flows.png](../output_files/plots/core_household_flows.png) viser tilført, innsamlet, restavfall og lagerendring for husholdningene med 95 %-intervall. Laget av `scripts/plot_core_flows.py`. Bruddet i restavfallet før 2018 (A1) er godt synlig.
+
 ---
 
 ## A. Viktigst – påvirker resultatene mye
