@@ -15,7 +15,7 @@ import sys
 import pandas as pd
 
 SOURCE = '../NitrogenBudsjett/data_files/Tab_08801_1988_2024.csv'
-TARGET = 'data_files/Tab_08801_textiles_1988_2024.csv'
+TARGET = 'data_files/Tab_08801_textiles.csv'
 CHAPTERS = {str(c) for c in range(50, 65)}
 
 source = sys.argv[1] if len(sys.argv) > 1 else SOURCE

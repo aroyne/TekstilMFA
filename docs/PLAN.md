@@ -3,7 +3,7 @@
 *Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-09-29.*
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
 
-**Mål:** En dynamisk, probabilistisk MFA for tekstiler i Norge 1990–2024. Den skal identifisere pools, subpools, flyter og lagre, kvantifisere dem med data og parametre, beregne tidsutviklingen med Monte Carlo og dokumentere hver flyt slik det er gjort i NitrogenBudsjett.
+**Mål:** En dynamisk, probabilistisk MFA for tekstiler i Norge 1990–2025. Den skal identifisere pools, subpools, flyter og lagre, kvantifisere dem med data og parametre, beregne tidsutviklingen med Monte Carlo og dokumentere hver flyt slik det er gjort i NitrogenBudsjett.
 
 ---
 
@@ -41,13 +41,21 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 
 ### Fase 1 – Låse systemdefinisjonen (beslutningene D1–D13 er tatt 2026-09-29)
 - [ ] Litteraturgjennomgang av eksisterende tekstil-MFA-er: nordiske (Tojo 2012, Palm 2014, Watson 2016), NORSUS 2023, svenske og danske nasjonale tekstilflyter, JRC og EEA. Notér systemgrenser og tall til sammenligning (`claude_tekst/`).
-- [ ] Lage en datainventar per P1-flyt: hvilke år som er dekket, hvilke kilder, og hvor hullene er.
+- [x] Datainventar for P1-flytene ([notat](../claude_tekst/2026-09-29_datainventar_P1-flyter.md)). Handelsflytene er ferdige for 1988–2025. Kasseringene har ankerpunkter 2018, 2022 og 2025.
+- [x] Bruddet i SSBs avfallsregnskap i 2012 er bekreftet i SSBs dokumentasjon: blandet avfall ble en egen materialtype, og før 2012 ble noen materialer beregnet med varetilførsel og levetid. SSBs tekstilregnskap 1990–1998 gir ankerår 1991 og 1998. Forslag til kildekjede står i datainventaren.
+- [x] D15 er besluttet: kildekjede for tekstiler i restavfall og behandlingsmåte (se SYSTEMDEFINISJON).
+- [ ] Spørre SSB om «Tekstiler» i 05281 (1995–2011) ble beregnet med varetilførselsmetoden (nivået kan være modellbasert).
+- [ ] Finne SSBs statistikk for grensehandel (privatimport).
+- [ ] Kilder til innsamling før 2018 (TemaNord, innsamlernes årsrapporter, eksport av 6309 som proxy).
 - [x] **Første steg for D7:** Lavverdisendinger er undersøkt ([notat](../claude_tekst/2026-09-29_lavverdisendinger_VOEC_og_klesimport.md)). De er ikke med under HS-kodene i noe år. SSB har egne koder (99.60.x) fra 2023. Tekstiler via VOEC (Tolletaten, via NORSUS 2026) var 0,5 / 4,8 / 3,8 / 14,0 kt i 2022–2025. Fallet i klesimport kom i 2023 (mest fra Kina, færre plagg), og VOEC forklarer omtrent en tredjedel av det.
 - [x] Kontroll mot Watson m.fl. (2020): Netto import CL+HT 2018 er 74,0 kt, mot 74,3 kt satt på markedet der.
 - [x] NORSUS 2026 (OR.18.26) er gjennomgått. Brutto import stemmer med våre tall (≈ 2 kt lavere i alle år). Ankerår 2025 for kasseringer er hentet ut.
 - [ ] Hente NORSUS 2023 (OR.07.23) for ankeråret 2022.
-- [ ] Verifisere klesandelen i 99.60.1000 (næringsliv < 1 000 kr). Den kan bety en systematisk underdekning av klesimport på ca. 7 kt (≈ 13 %) i alle år. Parameter `lowvalue_undercoverage_CL`.
-- [ ] Oppdatere 08801 med 2025-data.
+- [x] Klesandelen i 99.60.1000 er verifisert: 23,6 % av **verdien** i 2024 (SSB). Varelinjene var utelatt før mai 2025. Det gir ca. 3,5 mrd NOK, som tilsvarer ca. 7 kt med gjennomsnittlig NOK/kg for klær. Prisen per kg for små varelinjer er ukjent. Lagt inn som forslag til parameter `lowvalue_undercoverage_CL` (status `proposal`).
+- [x] D14 er besluttet: Underdekningen for varelinjer under 1 000 kr holdes utenfor hovedresultatet. Den brukes som diskusjonspunkt og i følsomhetsanalyse.
+- [x] 08801 er oppdatert med 2023–2025 fra SSB API (`scripts/update_trade_ssb_api.py`). 2023 er uendret og 2024 marginalt revidert. Modellperioden er utvidet til 2025.
+  - Brutto import CL+HT+FW 2025: 85,7 kt (NORSUS 87,5 kt, samme avstand på ca. 2 kt som i 2022–2024).
+  - Eksport av brukte tekstiler (6309+6310) 2025: 34,33 kt, nøyaktig det samme som NORSUS (34 331 t).
 
 ### Fase 2 – Kjerneflyter (P1)
 - [ ] Privatimport og direkte netthandel (D7).

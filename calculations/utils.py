@@ -6,9 +6,9 @@ Helpers shared across the calculations/ modules.
 import numpy as np
 
 # SSB table 08801 (HS8 trade) starts in 1988, which sets the first year with
-# data for the dominant inflows.
+# data for the dominant inflows; END_YEAR is the latest year in that table.
 START_YEAR = 1988
-END_YEAR = 2024
+END_YEAR = 2025
 EXPECTED_YEARS = set(range(START_YEAR, END_YEAR + 1))
 
 # Clothing, household textiles and footwear: the scope of NORSUS (2023) and

@@ -8,14 +8,15 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 
 | Fil | Kilde | Innhold | Brukes i |
 |---|---|---|---|
-| `Tab_08801_textiles_1988_2024.csv` | SSB tabell 08801, utenrikshandel etter land og varenummer (HS8) | Uttrekk av HS-kapittel 50–64 fra NitrogenBudsjett sin fulle 08801-fil (`scripts/extract_textile_trade.py`). Kolonner: år; import/eksport; HS8; land; supplerende enhet; nettovekt kg; supplerende mengde; verdi NOK. 1988–2024. | `trade.py` (RW, DI) |
+| `SSB_10513_textiles_mixed_2012_2024.csv` | SSB tabell 10513, avfallsregnskap (API, 2026-09-29) | Materialtypene «Tekstiler» og «Blandet avfall» etter behandlingsmåte, 2012–2024, 1 000 tonn (latin-1-koding) | ikke ennå (se datainventar) |
+| `Tab_08801_textiles.csv` | SSB tabell 08801, utenrikshandel etter land og varenummer (HS8) | HS-kapittel 50–64. 1988–2022 er hentet fra NitrogenBudsjett sin fulle 08801-fil (`scripts/extract_textile_trade.py`). 2023–2025 er hentet fra SSB API 2026-09-29 (`scripts/update_trade_ssb_api.py`). Enhetskode for API-årene er tatt fra siste år med samme varenummer. Kolonner: år; import/eksport; HS8; land; supplerende enhet (S stykk, P par, 1 ingen); nettovekt kg; supplerende mengde; verdi NOK. | `trade.py` (RW, DI) |
 
 ## Kandidatkilder per område
 
 ### Tilførsel til markedet
 | Kilde | Innhold | Status |
 |---|---|---|
-| SSB 08801 | Import og eksport per HS8, 1988–2024 | har |
+| SSB 08801 | Import og eksport per HS8, 1988–2025 | har |
 | SSB industristatistikk (varestatistikk, NACE 13–15) / Eurostat Prodcom | Norsk produksjon av tekstiler, klær og sko | hent/verifiser tabell |
 | SSB grensehandelsstatistikk | Grensehandel i NOK, per varegruppe der det finnes | hent/verifiser |
 | SSB forbruksundersøkelsen / nasjonalregnskap (COICOP 03.1, 03.2, 05.2) | Husholdningenes utgifter til klær, sko og hjemmetekstiler, en proxy for trender | hent |
@@ -44,7 +45,8 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 ### Avfallshåndtering
 | Kilde | Innhold | Status |
 |---|---|---|
-| SSB 05281 (1995–2011) og 10513 (2012–) Avfallsregnskap | Tekstilavfall etter behandlingsmåte, også deponi | har i NitrogenBudsjett – kopier |
+| SSB 05281 (1995–2011) og 10513 (2012–) Avfallsregnskap | Tekstilavfall etter behandlingsmåte, også deponi. **Brudd i 2012:** «Tekstiler» faller fra 113 til 4 kt, trolig fordi tekstiler i restavfall flyttes til «Blandet avfall». Se `claude_tekst/2026-09-29_datainventar_P1-flyter.md` | 10513 har (data_files/); 05281 i NitrogenBudsjett – kopier |
+| SSB, *Avfallsregnskap, tekstiler, 1990–1998* (2001) | 1998: 106 kt tekstilavfall (husholdninger 83 kt, klær 47,2 kt), deponi 72 % (79 % i 1991), forbrenning ca. 20 %, gjenvinning/ombruk 8 % | har (nettside) – finn tabeller |
 | Plukkanalyser (Mepex, Avfall Norge, kommuner) | Tekstilandel i restavfall | hent |
 | SSB husholdningsavfall | Mengder restavfall og grovavfall | hent/verifiser tabell |
 | Miljødirektoratet / SSB om avfallseksport | Restavfall eksportert til forbrenning (Sverige) | hent |

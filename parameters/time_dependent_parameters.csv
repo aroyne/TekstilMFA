@@ -2,3 +2,4 @@ parameter_id,year,value,unit,description,source,lower_bound,upper_bound,uncertai
 collection_rate_HH,2022,,kg/kg,Separately collected share of textiles discarded by households,NORSUS 2023 (29.6 kt collected / 78.5 kt waste),,,perc,,PERT,todo
 textile_share_residual_waste,2022,,kg/kg,Mass share of textiles in household residual waste (pick analyses),Mepex pick analyses via NORSUS 2023,,,perc,,PERT,todo
 export_share_collected,2022,,kg/kg,Share of separately collected textiles exported without domestic sorting,NORSUS 2023 (about 85 % exported),,,perc,,PERT,todo
+lowvalue_undercoverage_CL,2024,,kg/kg,"Clothing in enterprise import lines under 1000 NOK (SSB 99.60.1000), which are missing from the HS-level statistics, relative to registered clothing imports","SSB: clothing = 23.6 % of 99.60.1000 value in 2024 (14.6 bn NOK); mass conversion needs a NOK/kg assumption (about 0.13 at the average clothing NOK/kg)",,,abs,,PERT,discussion only (D14)

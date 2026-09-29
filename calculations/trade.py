@@ -36,8 +36,9 @@ def add_trade_flow_by_product(results, preloaded_data, dataset_noise, flow_code,
     Appends one result row per (product, year) for a trade flow, in kt.
     The whole flow shares the 08801 noise factor of the current iteration.
     """
-    # 'trade_textiles' <- data_files/Tab_08801_textiles_1988_2024.csv
-    # (SSB 08801, HS chapters 50-64 only; see scripts/extract_textile_trade.py)
+    # 'trade_textiles' <- data_files/Tab_08801_textiles.csv
+    # (SSB 08801, HS chapters 50-64 only; built by scripts/extract_textile_trade.py
+    # and scripts/update_trade_ssb_api.py)
     df = preloaded_data['trade_textiles']
     noise_val = dataset_noise[TRADE_DATASET]
     data_sources = 'SSB tab 08801'

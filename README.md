@@ -1,6 +1,6 @@
 # TekstilMFA – materialstrømsanalyse for tekstiler i Norge
 
-En dynamisk, probabilistisk MFA (Monte Carlo) for klær, hjemmetekstiler, sko og andre tekstilvarer (tepper, sekker, presenninger m.m.) i Norge 1990–2024. Arbeidsmetodikken, kodestrukturen og dokumentasjonsformen bygger på NitrogenBudsjett, men systemet er definert fra bunnen av: det finnes ingen offisiell struktur for tekstil-MFA, og vi rapporterer ikke i noe offisielt format.
+En dynamisk, probabilistisk MFA (Monte Carlo) for klær, hjemmetekstiler, sko og andre tekstilvarer (tepper, sekker, presenninger m.m.) i Norge 1990–2025. Arbeidsmetodikken, kodestrukturen og dokumentasjonsformen bygger på NitrogenBudsjett, men systemet er definert fra bunnen av: det finnes ingen offisiell struktur for tekstil-MFA, og vi rapporterer ikke i noe offisielt format.
 
 **Status:** tidlig fase. Se [docs/PLAN.md](docs/PLAN.md).
 
@@ -32,7 +32,8 @@ litteratur/        Kilder (PDF-er, ikke i git)
 ## Kjøring
 
 ```bash
-python scripts/extract_textile_trade.py        # én gang: henter tekstilrader fra NitrogenBudsjett sin 08801-fil
+python scripts/extract_textile_trade.py                 # én gang: tekstilrader 1988– fra NitrogenBudsjett sin 08801-fil
+python scripts/update_trade_ssb_api.py 2023 2024 2025   # nyeste år (og revisjoner) fra SSB API
 python -m pytest -q
 python main_mc.py --pool all --nsim 1000 --seed 1
 ```

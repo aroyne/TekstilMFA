@@ -24,7 +24,7 @@ def _load_trade_textiles(path, hs_mapping):
 
 # key: (pools that need it, path, loader)
 DATA_MAP = {
-    'trade_textiles': ({'rw', 'di', 'ma', 'co'}, 'data_files/Tab_08801_textiles_1988_2024.csv', _load_trade_textiles),
+    'trade_textiles': ({'rw', 'di', 'ma', 'co'}, 'data_files/Tab_08801_textiles.csv', _load_trade_textiles),
 }
 
 
