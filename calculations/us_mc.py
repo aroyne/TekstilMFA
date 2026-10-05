@@ -3,76 +3,45 @@
 """
 US (use) pool. Discards from households come from official and commissioned
 statistics (D8, D15, D17); the change of the in-use stock is the residual of
-the US.HH balance. Collection and residual waste are not split by product
-group ('CORE' = CL+HT+FW).
+the US.HH balance and is computed from the flows by calculations.system.
+Collection and residual waste are not split by product within the CORE
+group (CL+HT+FW).
 
 Products without discard statistics (other textile goods CA/TA/OM, and all
 products used by institutions and businesses) are assumed to be discarded in
 the year they are supplied (no stock change) until a better basis exists.
 """
 from calculations.timeseries import interpolate
-from calculations.utils import CORE_PRODUCTS, EXPECTED_YEARS, OTHER_PRODUCTS, PRODUCTS, add_series, flow_by_year
-
-STEADY_STATE_NOTE = 'Discarded in the year supplied (no statistics)'
+from calculations.utils import PRODUCT_GROUPS, PRODUCTS, core_group_only
 
 
-def execute_calculations_us(preloaded_data, current_params, dataset_noise, anchors, computed):
-    results = []
-
-    _add_collection_mc(results, computed)
-    _add_residual_waste_mc(results, anchors)
-    _add_steady_state_discards(results, computed)
-    _add_household_stock_change(results, computed)
-
-    return results
+def execute_calculations_us(mfa, preloaded_data, current_params, dataset_noise, anchors):
+    _separate_collection_mc(mfa)
+    _residual_waste_mc(mfa, anchors)
+    _institutional_waste_mc(mfa)
 
 
-def _add_collection_mc(results, computed):
+def _separate_collection_mc(mfa):
     """Separately collected = exported used textiles + the part kept in Norway (D17)."""
-    exported = flow_by_year(computed, 'CO.CO-RW.RW-Export of unsorted collected textiles-TOT')
-    retained = flow_by_year(computed, 'CO.CO-CO.SO-Collected textiles to domestic sorting-TOT')
-    collected = {y: exported[y] + retained[y] for y in EXPECTED_YEARS}
-    add_series(results, 'US.HH-CO.CO-Separate collection from households-TOT', 'CORE', collected,
-               'SSB 08801 (HS 6309+6310 export) + retained share (D17)')
+    exported = mfa.flows['CO.CO-RW.RW-Export of unsorted collected textiles-TOT'].values
+    retained = mfa.flows['CO.CO-CO.SO-Collected textiles to domestic sorting-TOT'].values
+    mfa.flows['US.HH-CO.CO-Separate collection from households-TOT'].values[...] = exported + retained
 
 
-def _add_residual_waste_mc(results, anchors):
-    """Textiles in household residual and bulky waste, pick analyses and SSB (D15)."""
-    series = interpolate(anchors['residual_core'], EXPECTED_YEARS)
-    add_series(results, 'US.HH-WM.RS-Textiles in residual and bulky waste-TOT', 'CORE', series,
-               'SSB 1990-1998; Mepex pick analyses via Watson 2020, Rubach 2023, de Sadeleer & Rubach 2026')
-
-
-def _add_steady_state_discards(results, computed):
-    for product in OTHER_PRODUCTS:
-        if product == 'SA':
-            continue  # sacks are only used by businesses (D13)
-        supplied = flow_by_year(computed, 'DI.RT-US.HH-Sales to households-TOT', [product])
-        add_series(results, 'US.HH-WM.RS-Textiles in residual and bulky waste-TOT', product, supplied,
-                   STEADY_STATE_NOTE)
-    for product in PRODUCTS:
-        supplied = flow_by_year(computed, 'DI.RT-US.IC-Sales to institutions and businesses-TOT', [product])
-        add_series(results, 'US.IC-WM.RS-Institutional textile waste-TOT', product, supplied, STEADY_STATE_NOTE)
-
-
-def _add_household_stock_change(results, computed):
+def _residual_waste_mc(mfa, anchors):
     """
-    Change of the household in-use stock of CL+HT+FW: all inflows minus the
-    discards reported by the statistics. May be negative.
+    CORE: textiles in household residual and bulky waste from SSB and the
+    Mepex pick analyses (D15). CA, TA and OM: discarded in the year supplied.
+    Sacks (SA) are not used by households (D13).
     """
-    inflow_codes = [
-        ('DI.RT-US.HH-Sales to households-TOT', CORE_PRODUCTS),
-        ('RW.RW-US.HH-Private imports-TOT', None),
-        ('RW.RW-US.HH-Direct online imports-TOT', None),
-        ('CO.RE-US.HH-Secondhand sales to households-TOT', None),
-    ]
-    inflow = {y: 0.0 for y in EXPECTED_YEARS}
-    for code, products in inflow_codes:
-        series = flow_by_year(computed, code, products)
-        for y in EXPECTED_YEARS:
-            inflow[y] += series[y]
+    flow = mfa.flows['US.HH-WM.RS-Textiles in residual and bulky waste-TOT']
+    sales = mfa.flows['DI.RT-US.HH-Sales to households-TOT'].values
+    flow.values[...] = core_group_only(interpolate(anchors['residual_core']))
+    for product in ('CA', 'TA', 'OM'):
+        flow.values[:, PRODUCT_GROUPS.index(product)] = sales[:, PRODUCTS.index(product)]
 
-    collected = flow_by_year(results, 'US.HH-CO.CO-Separate collection from households-TOT')
-    residual = flow_by_year(results, 'US.HH-WM.RS-Textiles in residual and bulky waste-TOT', ['CORE'])
-    change = {y: inflow[y] - collected[y] - residual[y] for y in EXPECTED_YEARS}
-    add_series(results, 'US.HH-US.HH-Stock change-TOT', 'CORE', change, 'Balance of US.HH (D8)')
+
+def _institutional_waste_mc(mfa):
+    """All products used by institutions and businesses: discarded in the year supplied."""
+    sales = mfa.flows['DI.RT-US.IC-Sales to institutions and businesses-TOT'].values
+    mfa.flows['US.IC-WM.RS-Institutional textile waste-TOT'].values[...] = sales

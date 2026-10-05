@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Helpers shared across the calculations/ modules.
+Dimensions shared across the calculations/ modules.
 """
 import numpy as np
 
@@ -9,7 +9,7 @@ import numpy as np
 # data for the dominant inflows; END_YEAR is the latest year in that table.
 START_YEAR = 1988
 END_YEAR = 2025
-EXPECTED_YEARS = set(range(START_YEAR, END_YEAR + 1))
+YEARS = list(range(START_YEAR, END_YEAR + 1))
 
 # Clothing, household textiles and footwear: the scope of NORSUS (2023) and
 # the EU textile EPR, kept separable for comparison with those figures.
@@ -19,49 +19,17 @@ CORE_PRODUCTS = ['CL', 'HT', 'FW']
 OTHER_PRODUCTS = ['CA', 'SA', 'TA', 'OM']
 PRODUCTS = CORE_PRODUCTS + OTHER_PRODUCTS
 
-
-def report_missing_years(flow_code, product, missing_years, results):
-    """Appends NaN rows for years a flow has no value, so gaps stay visible."""
-    for year in sorted(missing_years):
-        results.append({
-            'flow_name': flow_code,
-            'product': product,
-            'year': year,
-            'value': np.nan,
-            'comment': 'not done',
-            'data_sources': 'no data',
-        })
+# Discard statistics (collection, pick analyses) cover CL+HT+FW together, so
+# flows after use are split by product group ('g') instead of product ('p').
+PRODUCT_GROUPS = ['CORE'] + OTHER_PRODUCTS
+GROUP_OF_PRODUCT = {p: ('CORE' if p in CORE_PRODUCTS else p) for p in PRODUCTS}
 
 
-def add_series(results, flow_code, product, series, data_sources, comment='ok'):
+def core_group_only(series):
     """
-    Appends one result row per year in EXPECTED_YEARS from a {year: value}
-    series (kt). Every model year must be present in the series.
+    Array (year, product group) with series in the CORE group and 0 in the
+    others, for flows whose statistics cover CL+HT+FW only.
     """
-    for year in sorted(EXPECTED_YEARS):
-        results.append({
-            'flow_name': flow_code,
-            'product': product,
-            'year': year,
-            'value': float(series[year]),
-            'comment': comment,
-            'data_sources': data_sources,
-        })
-
-
-def flow_by_year(results, flow_code, products=None):
-    """
-    Sums an already computed flow over the given products (all products if
-    None) and returns {year: value}. Raises KeyError if the flow has not been
-    computed yet, which means the pools ran in the wrong order.
-    """
-    series = {}
-    for rec in results:
-        if rec['flow_name'] != flow_code:
-            continue
-        if products is not None and rec['product'] not in products:
-            continue
-        series[rec['year']] = series.get(rec['year'], 0.0) + rec['value']
-    if not series:
-        raise KeyError(f"Flow '{flow_code}' (products {products}) has not been computed")
-    return series
+    arr = np.zeros((len(YEARS), len(PRODUCT_GROUPS)))
+    arr[:, PRODUCT_GROUPS.index('CORE')] = series
+    return arr

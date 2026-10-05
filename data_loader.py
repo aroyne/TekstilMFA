@@ -8,7 +8,7 @@ described in DATA_SOURCES.md.
 """
 import pandas as pd
 
-from calculations.trade import map_hs_to_product
+from calculations.trade import aggregate_trade, map_hs_to_product
 
 
 def _load_trade_textiles(path, hs_mapping):
@@ -47,4 +47,6 @@ def load_all_data(selected_pools, params):
             continue
         print(f"[DATA] {key} <- {path}")
         preloaded[key] = loader(path, params.hs_mapping)
+    if 'trade_textiles' in preloaded:
+        preloaded['trade_aggregated'] = aggregate_trade(preloaded['trade_textiles'])
     return preloaded

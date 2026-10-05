@@ -28,3 +28,17 @@ def test_hs_mapping_finished_products_match_product_list():
     mapping = pd.read_csv('parameters/hs_mapping.csv', dtype={'hs_prefix': str})
     finished = mapping[(mapping['category'] == 'finished') & (mapping['in_scope'] == 'yes')]
     assert set(finished['product']) == set(PRODUCTS)
+
+
+def test_implemented_flows_have_valid_dims():
+    implemented = flows[flows['status'].str.startswith('implemented')]
+    for code, dims in zip(implemented['flow_code'], implemented['dims']):
+        assert isinstance(dims, str), f"{code} has no dims"
+        letters = dims.split(',')
+        assert letters[0] == 't' and set(letters) <= {'t', 'p', 'g'}, f"{code}: {dims}"
+        assert not {'p', 'g'} <= set(letters), f"{code} has both product and product group"
+
+
+def test_stocks_and_sinks_have_stock_dims():
+    needs = processes[(processes['has_stock'] == 'yes') | (processes['type'] == 'sink')]
+    assert needs['stock_dims'].notna().all()

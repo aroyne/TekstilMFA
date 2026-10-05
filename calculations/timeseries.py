@@ -8,10 +8,11 @@ placing two anchors in adjacent years rather than by special-casing here.
 """
 import numpy as np
 
+from calculations.utils import YEARS
 
-def interpolate(anchors, years):
-    """Returns {year: value} for every year in years."""
+
+def interpolate(anchors, years=YEARS):
+    """Returns an array with one value per year in years."""
     anchor_years = np.array(sorted(anchors), dtype=float)
     anchor_values = np.array([anchors[y] for y in sorted(anchors)], dtype=float)
-    values = np.interp(np.array(sorted(years), dtype=float), anchor_years, anchor_values)
-    return dict(zip(sorted(years), values))
+    return np.interp(np.array(years, dtype=float), anchor_years, anchor_values)

@@ -11,7 +11,8 @@ Prosjektet bygger på arbeidsmetodikken i `../NitrogenBudsjett`. Konvensjonene u
 - **Kommentarer skrives på engelsk.** De forklarer koden slik den er nå: hvorfor, ikke hva. Ingen endringslogg-kommentarer, og ingen referanser til Claude.
 - **Modellen skal krasje høylytt.** Ingen `try/except` som svelger feil, ingen stille standardverdier (`.get(key, 0)`), ingen egne `None`-vakter rundt oppslag som uansett gir `KeyError`. En negativ balanseflyt er en feil og skal ikke klippes til 0. Klamping av trukne verdier til ≥ 0 er en domeneregel og er tillatt.
 - Én funksjon per flyt, slik at md-siden for flyten kan peke til ett sted i koden.
-- Datakilder og metode dokumenteres i koden og i detalj på en md-side per flyt. Resultatene trenger ikke `comment` eller `data_sources` per rad. Den radstrukturen (`{'flow_name', 'product', 'year', 'value', 'comment', 'data_sources'}` med `report_missing_years`) kom fra den offisielle rapporteringsfilen i NitrogenBudsjett, og er ikke et krav her. Den kan erstattes, for eksempel av flodym-arrays.
+- Modellen er bygget i flodym. Systemet bygges fra registeret (`calculations/system.py`), og en flyt er en array med dimensjonene fra kolonnen `dims` i `flows.csv`. Flytfunksjonene skriver til `mfa.flows['<flytkode>'].values` og leser tidligere flyter derfra. Alle flyter settes til NaN før hver iterasjon, så en flyt som ingen funksjon setter, gir feil i `close()`.
+- Datakilder og metode dokumenteres i koden og i detalj på en md-side per flyt, ikke per resultatrad. Radstrukturen med `comment` og `data_sources` kom fra den offisielle rapporteringsfilen i NitrogenBudsjett, og er ikke et krav her.
 - Hvert `preloaded_data['<key>']`-oppslag kommenteres med filnavn og en kort beskrivelse hentet fra `DATA_SOURCES.md`.
 - Når en flyt bytter datakilde ved en årsgrense, skal periodene ikke overlappe (ellers telles overlappsårene to ganger).
 - Flytnavn inneholder ikke `-`, fordi bindestreken skiller feltene i flytkoden.

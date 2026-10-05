@@ -32,18 +32,17 @@ Simplifications that belong to the prototype only:
 Usage (from the repository root):
     python -m prototype.fibre_layer_flodym
 """
-import importlib
 import math
 
 import flodym as fd
 import numpy as np
 import pandas as pd
 
-from calculations.balances import check_mass_balance, load_processes
 from calculations.params import Parameters
-from calculations.utils import CORE_PRODUCTS, END_YEAR, START_YEAR, flow_by_year
+from calculations.system import close, make_system
+from calculations.utils import CORE_PRODUCTS, END_YEAR, PRODUCT_GROUPS, PRODUCTS, START_YEAR
 from data_loader import load_all_data
-from main_mc import ALL_POOLS
+from main_mc import ALL_POOLS, run_pools
 
 HS_MAIN_FIBRE = 'parameters/hs_main_fibre.csv'
 OUTPUT = 'output_files/prototype_fibre_shares.csv'
@@ -104,13 +103,10 @@ def run_tot_baseline():
     params = Parameters()
     preloaded_data = load_all_data(ALL_POOLS, params)
     current_params, dataset_noise, anchors = params.draw(np.random.default_rng(0), deterministic=True)
-    computed = []
-    for pool in ALL_POOLS:
-        module = importlib.import_module(f'calculations.{pool}_mc')
-        computed.extend(getattr(module, f'execute_calculations_{pool}')(
-            preloaded_data, current_params, dataset_noise, anchors, computed))
-    check_mass_balance(computed, load_processes())
-    return computed, preloaded_data
+    tot = make_system()
+    run_pools(tot, ALL_POOLS, preloaded_data, current_params, dataset_noise, anchors)
+    close(tot)
+    return tot, preloaded_data
 
 
 def import_fibre_shares(preloaded_data):
@@ -132,19 +128,14 @@ def import_fibre_shares(preloaded_data):
     return arr / arr.sum(axis=2, keepdims=True)
 
 
-def tot_by_product(computed, code, products):
-    """TOT flow as array (t, p); products the flow does not cover are 0."""
-    arr = np.zeros((len(YEARS), len(CORE_PRODUCTS)))
-    for product in products:
-        series = flow_by_year(computed, code, [product])
-        arr[:, CORE_PRODUCTS.index(product)] = [series[y] for y in YEARS]
-    return arr
+def tot_by_product(tot, code):
+    """TOT flow of the core products, array (t, p)."""
+    return tot.flows[code].values[:, [PRODUCTS.index(p) for p in CORE_PRODUCTS]]
 
 
-def tot_core(computed, code):
-    """TOT flow that is not split by product ('CORE'), array (t,)."""
-    series = flow_by_year(computed, code, ['CORE'])
-    return np.array([series[y] for y in YEARS])
+def tot_core(tot, code):
+    """TOT flow of the CORE product group, array (t,)."""
+    return tot.flows[code].values[:, PRODUCT_GROUPS.index('CORE')]
 
 
 def discard_fibre_shares(new_goods, lifetimes):
@@ -176,7 +167,7 @@ def discard_fibre_shares(new_goods, lifetimes):
     return outflow / outflow.sum(axis=1, keepdims=True)
 
 
-def build_system(computed, supply_shares, discard_shares):
+def build_system(tot, supply_shares, discard_shares):
     dims = fd.DimensionSet(dim_list=[
         fd.Dimension(letter='t', name='Time', dtype=int, items=YEARS),
         fd.Dimension(letter='p', name='Product', dtype=str, items=CORE_PRODUCTS),
@@ -200,19 +191,19 @@ def build_system(computed, supply_shares, discard_shares):
     def by_discards(t):
         return t[:, None] * discard_shares
 
-    imports = tot_by_product(computed, 'RW.RW-DI.RT-Finished textile products import-TOT', CORE_PRODUCTS)
-    sales = tot_by_product(computed, 'DI.RT-US.HH-Sales to households-TOT', CORE_PRODUCTS)
+    imports = tot_by_product(tot, 'RW.RW-DI.RT-Finished textile products import-TOT')
+    sales = tot_by_product(tot, 'DI.RT-US.HH-Sales to households-TOT')
     mfa.flows[F_IMPORT].values[...] = by_supply(imports)
     mfa.flows[F_SALES].values[...] = by_supply(sales)
     mfa.flows[F_DI_OUT].values[...] = by_supply(imports - sales)
     mfa.flows[F_PRIVATE].values[...] = by_supply(
-        tot_by_product(computed, 'RW.RW-US.HH-Private imports-TOT', ['CL', 'FW']))
+        tot_by_product(tot, 'RW.RW-US.HH-Private imports-TOT'))
     mfa.flows[F_ONLINE].values[...] = by_supply(
-        tot_by_product(computed, 'RW.RW-US.HH-Direct online imports-TOT', ['CL', 'HT']))
+        tot_by_product(tot, 'RW.RW-US.HH-Direct online imports-TOT'))
 
     for name in (F_SECONDHAND, F_COLLECT, F_EXPORT_UNSORTED, F_TO_SORTING, F_REUSE, F_SORT_RESIDUES):
-        mfa.flows[name].values[...] = by_discards(tot_core(computed, name + '-TOT'))
-    mfa.flows[F_RESIDUAL].values[...] = by_discards(tot_core(computed, F_RESIDUAL + '-TOT'))
+        mfa.flows[name].values[...] = by_discards(tot_core(tot, name + '-TOT'))
+    mfa.flows[F_RESIDUAL].values[...] = by_discards(tot_core(tot, F_RESIDUAL + '-TOT'))
     mfa.flows[F_TREATMENT].values[...] = (mfa.flows[F_RESIDUAL].values
                                           + mfa.flows[F_SORT_RESIDUES].values)
 
@@ -240,18 +231,17 @@ def summarise(mfa, scenario):
 
 
 def main():
-    computed, preloaded_data = run_tot_baseline()
+    tot, preloaded_data = run_tot_baseline()
     supply_shares = import_fibre_shares(preloaded_data)
 
     new_goods = np.zeros((len(YEARS), len(CORE_PRODUCTS), len(FIBRES)))
-    for code, products in (('DI.RT-US.HH-Sales to households-TOT', CORE_PRODUCTS),
-                           ('RW.RW-US.HH-Private imports-TOT', ['CL', 'FW']),
-                           ('RW.RW-US.HH-Direct online imports-TOT', ['CL', 'HT'])):
-        new_goods += tot_by_product(computed, code, products)[:, :, None] * supply_shares
+    for code in ('DI.RT-US.HH-Sales to households-TOT', 'RW.RW-US.HH-Private imports-TOT',
+                 'RW.RW-US.HH-Direct online imports-TOT'):
+        new_goods += tot_by_product(tot, code)[:, :, None] * supply_shares
 
     rows = []
     for scenario, lifetimes in LIFETIME_SCENARIOS.items():
-        mfa = build_system(computed, supply_shares, discard_fibre_shares(new_goods, lifetimes))
+        mfa = build_system(tot, supply_shares, discard_fibre_shares(new_goods, lifetimes))
         rows.extend(summarise(mfa, scenario))
     df = pd.DataFrame(rows)
     df.to_csv(OUTPUT, index=False)

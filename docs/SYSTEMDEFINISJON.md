@@ -18,7 +18,12 @@
 
 * Pool = to bokstaver, subpool = to bokstaver.
 * Laget er materialet. I N-budsjettet var dette N-forbindelsen (Nmix, NH3, …). Her er det TOT eller en fibertype.
-* **Nytt i forhold til N-budsjettet:** Resultatradene har en ekstra kolonne, `product` (CL, HT, FW, CA, SA, TA, OM). Produktgruppe er altså en dimensjon og ikke en del av flytnavnet. Uten dette måtte hver flyt dupliseres per produktgruppe (beslutning D5).
+* **Nytt i forhold til N-budsjettet:** Produkt er en dimensjon og ikke en del av flytnavnet (D5). Modellen er bygget i flodym, og hver flyt har dimensjonene sine i kolonnen `dims` i `flows.csv`:
+  * `t`: år (1988–2025).
+  * `p`: produkt (CL, HT, FW, CA, SA, TA, OM). Brukes til og med salg og i US.IC.
+  * `g`: produktgruppe (CORE, CA, SA, TA, OM). Brukes etter bruk i husholdningene, fordi innsamlings- og plukkanalysestatistikken dekker CL+HT+FW samlet (CORE). Produkter regnes om til grupper med en fast koblingsmatrise.
+  * Flyter med bare `t` (avfallsbehandlingen) er ikke delt på produkt og rapporteres som `ALL`.
+* Lagre er definert i kolonnen `stock_dims` i `processes.csv`. Sluk (WM.IN, EN.AI) får også et lager, som er den akkumulerte massen som har forlatt kretsløpet. flodym sjekker massebalansen per prosess på dimensjonene alle flytene inn og ut har felles.
 
 ## Pools og subpools
 

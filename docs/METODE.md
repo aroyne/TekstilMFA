@@ -71,13 +71,15 @@ Oppsettet er det samme som i NitrogenBudsjett:
 
 Massemessig er dette små flyter, men de er viktige for miljøet. Frigjøringen modelleres som lageret i bruk × frigjøringsrate per år, deretter fordelt med renseanleggets tilbakeholdelse (andel primær- og sekundærrensing i Norge, SSB) og slambruk. Egen prioritet (P2), og flytene skal kunne vises separat i resultatene.
 
-## 8. Implementering (fase 2)
+## 8. Implementering
 
-* **Rekkefølge:** Poolene kjøres i varestrømmens rekkefølge i hver iterasjon: `rw → di → co → us → wm` (`main_mc.py`). Hver modul får flytene som allerede er beregnet (`computed`) og leser dem med `flow_by_year()`. Flyter som mangler gir `KeyError`.
+* **Rammeverk:** Systemet er bygget i [flodym](https://github.com/pik-piam/flodym) (PIK, MIT-lisens), etterfølgeren til ODYM. `calculations/system.py` bygger systemet én gang fra registeret: prosesser, implementerte flyter med dimensjoner (`dims`) og lagre (`stock_dims`). MC-trekkingen, parametertabellene og ankerpunktene er våre egne. flodym har ikke Monte Carlo.
+* **Rekkefølge:** Hver iterasjon setter alle flyter til NaN, og deretter kjører poolene i varestrømmens rekkefølge: `rw → di → co → us → wm` (`main_mc.py`). En pool leser flytene fra poolene før den direkte fra systemet (`mfa.flows[kode].values`). Til slutt lukkes systemet (`close()`). Det sjekker at ingen flyt er NaN eller negativ, beregner lagrene fra flytene og sjekker massebalansen. En flyt som ingen pool setter, gir feil.
+* **Resultater** lagres som én array per flyt (iterasjon × år × produkt) og oppsummeres til `output_files/MC_summary.csv`. Raden har flyt, produkt eller produktgruppe, år, median, 2,5- og 97,5-persentil, antall iterasjoner og den deterministiske verdien. Datakilder og metode dokumenteres i koden og på md-siden per flyt, ikke per rad.
+* **Handelsdata** summeres per retning, kategori, produkt og år én gang før MC-løkka (`aggregate_trade`). I hver iterasjon brukes bare støyfaktoren. 1 000 iterasjoner tar ca. 6 s.
 * **Ankerpunkter:** Andeler og rater ligger i `parameters/time_dependent_parameters.csv`, og observerte mengder fra rapporter i `data_files/anchor_values.csv`. Begge har samme format og trekkes likt: hvert ankerpunkt for seg, med egen fordeling. Mellom ankerpunktene interpoleres det lineært (`calculations/timeseries.py`), og før første og etter siste holdes verdien konstant.
-* **Lagerendring** registreres som en flyt fra en prosess til seg selv (`US.HH-US.HH-Stock change-TOT`, `WM.LF-WM.LF-Stock change-TOT`).
-* **Massebalanse:** `calculations/balances.py` sjekker alle prosesser i hver iterasjon (inn − ut − lagerendring = 0) og stopper modellen ved avvik.
-* **Produktdimensjon:** Per produktgruppe til og med salg. Deretter `CORE` (CL+HT+FW) for innsamling, restavfall og sortering, og `ALL` for avfallsbehandlingen.
+* **Lagerendring** er innstrømmer minus utstrømmer for prosessens lager i flodym. Den rapporteres som en flyt fra prosessen til seg selv (`US.HH-US.HH-Stock change-TOT` osv.).
+* **Produktdimensjon:** `p` (produkt) til og med salg og i US.IC, `g` (produktgruppe, der CORE = CL+HT+FW) for innsamling, restavfall og sortering, og ingen produktdimensjon (`ALL`) for avfallsbehandlingen.
 * **Kjerneflyter:**
   * **Privatimport (D16):** SSB NOK ÷ (tollverdi per kg × påslag), fordelt på CL og FW etter importert masse.
   * **Direkte netthandel (D7):** ankerpunkter.
