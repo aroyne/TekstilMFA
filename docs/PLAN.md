@@ -67,7 +67,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 
 ### Fase 1 – Låse systemdefinisjonen (beslutningene D1–D13 er tatt 2026-09-29)
 - [x] Litteraturgjennomgang ([notat](../claude_tekst/2026-09-29_litteraturgjennomgang_tekstil-MFA.md)): norske kartlegginger, nasjonale MFA-er (DK, SE, FI, NL, UK, CH), dynamiske og probabilistiske MFA-er (EU DPMFA 2024, Kina, Abbasi 2023 for norsk plast) og levetidsstudier (Laitala & Klepp). Nytt ankerår 2021 (Syversen m.fl. 2023). Ingen norsk tekstil-MFA har tidsserier.
-- [ ] Lese i fulltekst: Napolano m.fl. 2024, Kawecki m.fl. 2021 og Laitala & Klepp 2020 (levetidsparametre).
+- [x] Lest i fulltekst 2026-10-05: Napolano m.fl. 2025, Kawecki m.fl. 2021 og Laitala & Klepp 2020 (se litteraturnotatet 2026-10-05).
 - [x] Datainventar for P1-flytene ([notat](../claude_tekst/2026-09-29_datainventar_P1-flyter.md)). Handelsflytene er ferdige for 1988–2025. Kasseringene har ankerpunkter 2018, 2022 og 2025.
 - [x] Bruddet i SSBs avfallsregnskap i 2012 er bekreftet i SSBs dokumentasjon: blandet avfall ble en egen materialtype, og før 2012 ble noen materialer beregnet med varetilførsel og levetid. SSBs tekstilregnskap 1990–1998 gir ankerår 1991 og 1998. Forslag til kildekjede står i datainventaren.
 - [x] D15 er besluttet: kildekjede for tekstiler i restavfall og behandlingsmåte (se SYSTEMDEFINISJON).
@@ -90,12 +90,12 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] 2026-09-29: Alle 13 P1-flyter er implementert og kjører i MC for 1988–2025, med massebalansesjekk i hver iterasjon. Nye moduler: `co_mc`, `us_mc`, `wm_mc`, `timeseries`, `balances`. Ankerpunkter ligger i `data_files/anchor_values.csv` og `parameters/time_dependent_parameters.csv`. 11 tester.
 - [x] P2: Eksport av restavfall til forbrenning i utlandet (D11) med eksportandel fra SSB 13035 (KOSTRA, 2015–2025).
 - [ ] **Åpne spørsmål (A1–D3) i [claude_tekst/2026-09-29_sporsmal_fase2.md](../claude_tekst/2026-09-29_sporsmal_fase2.md).** Viktigst: restavfall før 2018 (A1), 2018-ankeret for netthandel (A2) og formelen for innsamling (A3).
-- [ ] Privatimport og direkte netthandel (D7).
-- [ ] DI.RT-balanse, som gir salg til husholdninger.
-- [ ] Kasseringer fra offisiell statistikk: innsamling, restavfall, deponi og forbrenning, eksport av usortert. Hull interpoleres mellom ankerpunkter.
-- [ ] Lager i bruk (US.HH, US.IC) som akkumulert restledd fra startlageret.
+- [x] Privatimport og direkte netthandel (D7).
+- [x] DI.RT-balanse, som gir salg til husholdninger.
+- [x] Kasseringer fra offisiell statistikk: innsamling, restavfall, deponi og forbrenning, eksport av usortert. Hull interpoleres mellom ankerpunkter.
+- [x] Lagerendring i bruk (US.HH, US.IC) som restledd. Lagernivået er akkumulert fra 0 i 1988. Startlageret (D2) mangler.
 - [ ] Parallell lagermodell per produktgruppe (innsvinging og levetider), og sammenligning per år med restleddet og kasseringene. Dette er diskusjonsgrunnlaget.
-- [ ] CO-balanser (sortering, bruktbutikk og tilbake til US.HH).
+- [x] CO-balanser (sortering, bruktbutikk og tilbake til US.HH).
 - [ ] Validering: 2022 mot NORSUS, lager per innbygger mot garderobestudier, kg per plagg over tid fra 08801.
 
 ### Fase 3 – P2- og P3-flyter
@@ -108,10 +108,12 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] MC med flodym er testet (se notatet). Ett system per iterasjon tar 5 ms. Full vektorisering sprenger minnet, men en levetidsmodell over (år, iterasjon, produkt) fungerer. Flaskehalsen er dagens pooler (400 ms per iterasjon), fordi 08801 summeres på nytt i hver iterasjon.
 - [x] Handelsdataene (08801) summeres én gang før MC-løkka.
 - [x] D19 er delvis besluttet: fem fibergrupper (SYN, CO, WO, CV, OTH). `fibre_composition.csv` har fått de samme kolonnene.
-- [ ] Andel SYN i HS-klassen MMF (kjemiske fibre uten nærmere angivelse).
+- [x] Andel SYN i HS-klassen MMF: `mmf_synthetic_share` = 0,92 (Textile Exchange 2024).
 - [x] Fiberlaget er flyttet inn i modellen som dimensjon `m`.
 - [x] `calculations/stock_model.py` er erstattet av flodyms `InflowDrivenDSM` (i fiberlaget).
-- [ ] Rapportere den parallelle lagermodellen (utstrøm og lager fra levetider) ved siden av statistikken (D8).
+- [x] Den parallelle lagermodellen rapporteres (utstrøm, lager, lagerendring) og er sammenlignet med statistikken ([notat](../claude_tekst/2026-10-05_lagermodell_mot_statistikk.md)). Anslagene er enige fra 2019. I 2008–2017 ligger lagermodellen 20–25 kt over statistikken, og i 1988–2000 ligger statistikken over tilførselen.
+- [ ] Ankerpunkt for restavfall rundt 2009 fra Laitala m.fl. 2012 (5,6 kg per innbygger, henteordning) + tillegg for gjenvinningsstasjoner. Fyller hullet mellom 1998 og 2018 (A1).
+- [ ] Startlager i 1988 (D2) fra lagermodellen, slik at lagernivået kan sammenlignes med garderobestudier.
 - [ ] Fiberlag: fiberspesifikke levetider (syntetisk lengre enn bomull), matrise hovedfiber → fiberandeler, usikkerhet på `fibre_composition.csv`, og egen sammensetning for brukbart og utslitt i restavfall.
 - [ ] Ull i kasseringer blir ca. 5 %, mot 3 % målt. Undersøk hvilke HS-koder som gir ull.
 

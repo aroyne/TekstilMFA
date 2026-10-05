@@ -128,12 +128,27 @@ def supply_composition(preloaded_data, current_params, fibre_composition):
                            np.broadcast_to(nontextile[None, :, None], textile.shape[:2] + (1,))], axis=2)
 
 
-def household_discard_composition(tot, supply, current_params):
+COHORT_DIMS = fd.DimensionSet(dim_list=[
+    fd.Dimension(letter='t', name='Time', dtype=int, items=YEARS),
+    fd.Dimension(letter='p', name='Product', dtype=str, items=CORE_PRODUCTS),
+    fd.Dimension(letter='m', name='Material', dtype=str, items=MATERIALS),
+])
+# The parallel stock model (D8), reported next to the statistics; named like
+# flows from US.HH to itself, as the residual stock change is.
+STOCK_MODEL_OUTPUTS = {
+    'discards': 'US.HH-US.HH-Stock model discards-TOT',
+    'stock': 'US.HH-US.HH-Stock model stock-TOT',
+    'stock_change': 'US.HH-US.HH-Stock model stock change-TOT',
+}
+
+
+def household_cohort_model(tot, supply, current_params):
     """
-    Material shares of household discards, array (year, product group,
-    material). CORE: outflow of an inflow-driven cohort model of the new
-    goods entering US.HH (second-hand purchases, 1-2 % of the inflow, are
-    left out). Other groups: discarded in the year supplied.
+    Inflow-driven cohort model of CL+HT+FW in US.HH (D8, D20): new goods
+    entering US.HH by material, Weibull lifetimes per product. Second-hand
+    purchases (1-2 % of the inflow) are left out. Returns
+    {'discards', 'stock', 'stock_change'} as FlodymArrays (year, product,
+    material) over the model years; the stock includes the spin-up cohorts.
     """
     core = [PRODUCTS.index(p) for p in CORE_PRODUCTS]
     new_goods = sum(tot.flows[code].values for code in NEW_GOODS_TO_HOUSEHOLDS)[:, core]
@@ -157,8 +172,21 @@ def household_discard_composition(tot, supply, current_params):
     dsm = fd.InflowDrivenDSM(name='US.HH cohorts', dims=dims, lifetime_model=lifetime,
                              inflow=fd.StockArray(dims=dims, values=inflow))
     dsm.compute()
-    outflow = dsm.outflow.values.sum(axis=1)[n_spinup:]
+    stock = dsm.stock.values
+    return {
+        'discards': fd.FlodymArray(dims=COHORT_DIMS, values=dsm.outflow.values[n_spinup:]),
+        'stock': fd.FlodymArray(dims=COHORT_DIMS, values=stock[n_spinup:]),
+        'stock_change': fd.FlodymArray(dims=COHORT_DIMS, values=np.diff(stock, axis=0)[n_spinup - 1:]),
+    }
 
+
+def household_discard_composition(cohorts, supply):
+    """
+    Material shares of household discards, array (year, product group,
+    material). CORE: outflow of the cohort model. Other groups: discarded in
+    the year supplied.
+    """
+    outflow = cohorts['discards'].values.sum(axis=1)
     composition = np.empty((len(YEARS), len(PRODUCT_GROUPS), len(MATERIALS)))
     for g, group in enumerate(PRODUCT_GROUPS):
         if group == 'CORE':
@@ -169,7 +197,11 @@ def household_discard_composition(tot, supply, current_params):
 
 
 def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_composition):
-    """Fills the fibre system from the closed TOT system and closes it."""
+    """
+    Fills the fibre system from the closed TOT system and closes it. Returns
+    the parallel stock model as {output name: FlodymArray (year, product,
+    material)}.
+    """
     unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + MIXED_FLOWS)
     if unassigned:
         raise KeyError(f"Flows without a fibre layer rule: {sorted(unassigned)}")
@@ -178,7 +210,8 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     supply = supply_composition(preloaded_data, current_params, fibre_composition)
     for code in SUPPLY_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * supply
-    discards = household_discard_composition(tot, supply, current_params)
+    cohorts = household_cohort_model(tot, supply, current_params)
+    discards = household_discard_composition(cohorts, supply)
     for code in DISCARD_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * discards
 
@@ -192,3 +225,4 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
         gap = np.abs(fibre.flows[code].values.sum(axis=-1) - flow.values).max()
         if gap > TOLERANCE_KT:
             raise ValueError(f"Fibre layer of {code} does not add up to TOT (max gap {gap:.2e} kt)")
+    return {STOCK_MODEL_OUTPUTS[key]: arr for key, arr in cohorts.items()}

@@ -135,8 +135,9 @@ def main():
         run_pools(mfa, pools, preloaded_data, current_params, dataset_noise, anchors)
         if closed:
             close(mfa)
-            compute_fibre_layer(fibre, mfa, preloaded_data, current_params, params.fibre_composition)
-            record(fibre_store, outputs(fibre, closed), sim_id, n_runs)
+            stock_model = compute_fibre_layer(fibre, mfa, preloaded_data, current_params, params.fibre_composition)
+            record(fibre_store, {**outputs(fibre, closed), **stock_model}, sim_id, n_runs)
+            record(store, {name: arr.sum_to(('t', 'p')) for name, arr in stock_model.items()}, sim_id, n_runs)
         record(store, outputs(mfa, closed), sim_id, n_runs)
     print(f"[INFO] {args.nsim} MC iterations + baseline in {time.time() - start:.1f} s")
 

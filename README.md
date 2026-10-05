@@ -42,4 +42,6 @@ python -m pytest -q
 python main_mc.py --pool all --nsim 1000 --seed 1
 python scripts/build_hs_main_fibre.py                   # hovedfiber per HS8-kode fra varetekstene i 08801
 python scripts/build_fibre_composition.py               # fibergrupper for HS-koder uten oppgitt fiber
+python scripts/plot_core_flows.py                       # figur: kjerneflyter i husholdningene
+python scripts/plot_stock_model.py                      # figur: statistikk mot parallell lagermodell
 ```
