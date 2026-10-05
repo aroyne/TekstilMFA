@@ -92,7 +92,7 @@ Massemessig er dette små flyter, men de er viktige for miljøet. Frigjøringen 
 
 ## 9. Tekstilform og fiberlag (D18, D19)
 
-**Tekstilform (D18)** er kolonnen `form` i `system/flows.csv` (FIB, FAB, NEW, MIX, USE, WRN, PCW, MFR). Den er en egenskap ved flyten, ikke en dimensjon. Der en blandet flyt har et tall av egen interesse, deles den. Tekstiler i restavfall fra husholdningene er derfor to flyter: brukbare (USE) og utslitte (WRN). Andelen brukbart er ankerpunkter fra plukkanalysene: 28 % (ca. 2011, Laitala m.fl. 2012), 45 % (2022, bare restavfall som hentes hjemme) og 40 % (2025). Den gjelder CORE-gruppen. CA, TA og OM regnes som utslitte.
+**Tekstilform (D18)** er kolonnen `form` i `system/flows.csv` (FIB, FAB, NEW, MIX, USE, WRN, PCW, MFR). Den er en egenskap ved flyten, ikke en dimensjon. Der en blandet flyt har et tall av egen interesse, deles den. Tekstiler i restavfall fra husholdningene er derfor to flyter: brukbare (USE) og utslitte (WRN). Andelen brukbart er ankerpunkter fra plukkanalysene: 27,5 % (2011, snitt av Oslo 2010 og 2011, Laitala m.fl. 2012), 45 % (2022, bare restavfall som hentes hjemme) og 40 % (2025). Den gjelder CORE-gruppen. CA, TA og OM regnes som utslitte.
 
 **Fiberlaget (D19)** ([calculations/fibre_layer.py](../calculations/fibre_layer.py)) er et eget flodym-system med de samme prosessene og flytene og en ekstra dimensjon `m`: SYN, CO, WO, CV, OTH og NT (ikke-tekstil). Det fylles etter at TOT-systemet er lukket, og endrer aldri TOT. Summen over `m` er lik TOT (det sjekkes), og massebalansen sjekkes per materiale.
 

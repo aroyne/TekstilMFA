@@ -130,13 +130,13 @@ PEFCR har i tillegg **fibersammensetning per produkttype** (EU-snitt). For eksem
 
 | Kilde | Tall |
 |---|---|
-| **Laitala m.fl. 2012** (Norge, sitert i Huygens 2023) | **28 %** av tekstilene i blandet husholdningsavfall kan brukes igjen. *Mulig ankerpunkt rundt 2011, må skaffes* |
+| **Laitala m.fl. 2012**, *Potensiale for økt materialgjenvinning av tekstilavfall …*, SIFO for Klif, TA-2994. **Lest** | Oslos plukkanalyser (Renovasjonsetaten, restavfall som hentes hjemme): **32 % brukbart i 2010, 23 % i 2011** (tab. 2-4). Brukbart per innbygger: 2,0 kg (2000), 2,3 (2005), 1,3 (2009), 3,1 (2010), 1,0 (2011) (tab. 2-5). Samlet: «mellom 1/3 og 1/4». Tekstiler i restavfall i norske analyser 2006–2011: 2,8–9,2 kg per innbygger, snitt 5,6. I SIFOs prosjekt *Textile waste* kunne bare 8 % av plaggene som ble tatt ut av bruk, absolutt ikke brukes. Huygens' 28 % er snittet av 2010 og 2011 |
 | Watson m.fl. 2018 (sitert i Huygens) | 23 % brukbart, 26 % gjenvinnbart |
 | Nørup 2019b, Hultén 2016 (Sverige) | 60–70 % brukbart i restavfallet |
 | Huygens 2023 | 58 % av det som samles inn separat er egnet for ombruk etter sortering (Watson 2020: 72 % for norsk «original») |
 | PEFCR 2025, vedlegg VI (17 forbrukerstudier) | Grunner til kassering: **utslitt 37 %**, passer ikke 28 %, lav opplevd verdi 35 % |
 
-*Konsekvens for D18:* Den norske serien for brukbart i restavfall blir 28 % (ca. 2011), 45 % (2022, bare hjemme) og 40 % (2025). Spredningen mellom studiene er stor (23–70 %), så usikkerheten må være bred. At bare 37 % kasseres fordi plagget er utslitt, er i samme størrelsesorden som de norske tallene.
+*Konsekvens for D18:* Den norske serien for brukbart i restavfall blir 27,5 % (snitt 2010–2011, bare Oslo), 45 % (2022, bare hjemme) og 40 % (2025). Spredningen mellom studiene er stor (23–70 %), så usikkerheten må være bred. At bare 37 % kasseres fordi plagget er utslitt, er i samme størrelsesorden som de norske tallene.
 
 ### 5.4 Forslag til parameterverdier (til avklaring)
 
@@ -148,11 +148,11 @@ PEFCR har i tillegg **fibersammensetning per produkttype** (EU-snitt). For eksem
 | Levetid CA | snitt **10 år** (5–16) | 5 (Fair Claims) – 15,6 (van Oorschot) |
 | Levetid TA / OM | 4 år / 2 år | Napolano SM4 |
 | NT CL / HT / FW | 1,5 % / 1 % / per tollposisjon | PEFCR 2025, Gottfridsson 2015 |
-| Brukbart i restavfall | 0,28 (2011), 0,45 (2022), 0,40 (2025) | Laitala 2012, Rubach 2023, de Sadeleer 2026 |
+| Brukbart i restavfall | 0,275 (2011), 0,45 (2022), 0,40 (2025) | Laitala 2012 (Oslo 2010–2011), Rubach 2023, de Sadeleer 2026 |
 
 ## Skaffe og lese
 
-**Status 2026-10-05:** Nr. 1–3 og 5–8 er lagt inn i Zotero og lest (se avsnitt 5). IMPRO Textiles (Beton m.fl. 2014) er også lagt inn og lest. Giorgi 2015 finnes ikke; WRAP har ikke gjort den tilgjengelig. **Erstatningen er lagt inn og lest:** WRAP (2023), *Citizen Insights: Estimating the Longevity of Home Textiles in the UK*, gratis PDF: https://wrap.ngo/resources/report/citizen-insights-estimating-longevity-home-textiles-uk. Fortsatt å skaffe: Laitala m.fl. 2012 (norsk andel brukbart i restavfall).
+**Status 2026-10-05:** Nr. 1–3 og 5–8 er lagt inn i Zotero og lest (se avsnitt 5). IMPRO Textiles (Beton m.fl. 2014) er også lagt inn og lest. Giorgi 2015 finnes ikke; WRAP har ikke gjort den tilgjengelig. **Erstatningen er lagt inn og lest:** WRAP (2023), *Citizen Insights: Estimating the Longevity of Home Textiles in the UK*, gratis PDF: https://wrap.ngo/resources/report/citizen-insights-estimating-longevity-home-textiles-uk. Laitala m.fl. 2012 er også lagt inn og lest.
 
 Referansene er kontrollert på nett 2026-10-05. «Åpen» betyr at fulltekst er fritt tilgjengelig.
 

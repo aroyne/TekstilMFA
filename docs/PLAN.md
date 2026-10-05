@@ -53,7 +53,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 ### 2026-10-05 – Litteraturgjennomgangen oppdatert
 - [x] Zotero-utvalget (NFTA, tekstil, MFA, sirkulær økonomi; 176 referanser) er gått gjennom ([notat](../claude_tekst/2026-10-05_litteraturgjennomgang_oppdatert.md)). Napolano 2025 er lest i fulltekst. Nye parameterkilder: andel brukbart i restavfall (2022, 2025), feilmargin for plukkanalyser (±22,8 %), NT per tollposisjon for sko (Gottfridsson & Zhang 2015) og arbeidstøy ≈ 1,5 % av klærne (ECAP 2017).
 - [x] Kildene som manglet (Kawecki 2021, Laitala & Klepp 2020, Laitala 2018, Napolano SM, PEFCR 2025, Huygens 2023, van Oorschot 2020) er lagt inn i Zotero og lest. Forslag til levetider, NT-andeler og ankerpunkter for brukbart i restavfall står i notatet (avsnitt 5.4).
-- [ ] Ta stilling til parameterforslagene i avsnitt 5.4 i litteraturnotatet. Skaffe Laitala m.fl. 2012 (28 % brukbart i restavfall, Norge).
+- [ ] Ta stilling til parameterforslagene i avsnitt 5.4 i litteraturnotatet. Laitala m.fl. 2012 er lagt inn: Oslo 32 % (2010) og 23 % (2011), ankerpunkt 27,5 %.
 - [ ] Vurdere `institutional_share` (12 %) per produkt.
 
 ### 2026-10-05 – D18 og D19 i modellen
