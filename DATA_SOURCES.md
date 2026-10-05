@@ -75,6 +75,7 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | Plukkanalyser med fibersortering; JRC (Köhler et al. 2021; Huygens et al. 2023) | Fiberandeler i EU-forbruk og -avfall | hent |
 | Textile Exchange, *Materials Market Report* | Globale fiberandeler (polyester 59 % i 2024) | har (via TekstilEOL) |
 | SSB 08801 på HS6-nivå | Mange HS-koder angir hovedfiber (for eksempel 6109.10 bomull, 6109.90 annet) | har |
+| Laitala m.fl. 2012, *Potensiale for økt materialgjenvinning av tekstilavfall …*, SIFO for Klif, TA-2994 | Brukbart i restavfall, Oslo, hentet: 32 % (2010) og 23 % (2011). Tekstiler i restavfall i norske plukkanalyser 2006–2011: 2,8–9,2 kg per innbygger | har (Zotero) |
 | Rubach m.fl. 2023 (tab. 3.17) og de Sadeleer & Rubach 2026 (tab. 3-10), Mepex-data | Brukbart i restavfall: 15 185 av 33 624 t (2022, bare hjemme), 17 707 av 44 461 t (2025). Fiber i avhendet: 38 % syntetisk og 3 % ull (2022), 48,3 % fossilbasert (2025) | har (litteratur/) |
 | Gottfridsson & Zhang 2015, masteroppgave Chalmers | Materialsammensetning av sko per tollposisjon 6401–6405 (tekstilandel 5–35 %, resten gummi, plast, lær osv.). Delvis antatt | har (Zotero) |
 | Quantis 2021, *PEFCR Apparel and Footwear*; Huygens m.fl. 2023 (JRC) | Sammensetning med ikke-tekstile deler per underkategori | hent |
