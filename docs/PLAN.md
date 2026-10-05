@@ -50,6 +50,11 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Resultatene er identiske med modellen før overgangen (avvik ≤ 10⁻¹³, deterministisk og MC med samme frø). `MC_summary.csv` og figuren er laget på nytt med 1 000 iterasjoner.
 - [x] Nye tester: systemet lukkes, en flyt uten verdi gir feil, ubalanse gir feil, og lagerendringen i US.HH er tilført minus kassert (15 tester).
 
+### 2026-10-05 – Litteraturgjennomgangen oppdatert
+- [x] Zotero-utvalget (NFTA, tekstil, MFA, sirkulær økonomi; 176 referanser) er gått gjennom ([notat](../claude_tekst/2026-10-05_litteraturgjennomgang_oppdatert.md)). Napolano 2025 er lest i fulltekst. Nye parameterkilder: andel brukbart i restavfall (2022, 2025), feilmargin for plukkanalyser (±22,8 %), NT per tollposisjon for sko (Gottfridsson & Zhang 2015) og arbeidstøy ≈ 1,5 % av klærne (ECAP 2017).
+- [ ] Skaffe: Kawecki 2021, Laitala & Klepp 2020, vedlegget til Napolano 2025, Quantis 2021 (PEFCR), Huygens 2023 (JRC).
+- [ ] Vurdere `institutional_share` (12 %) per produkt.
+
 ## Neste
 
 ### Fase 1 – Låse systemdefinisjonen (beslutningene D1–D13 er tatt 2026-09-29)

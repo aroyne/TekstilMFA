@@ -35,6 +35,9 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | SIFO/OsloMet (Klepp, Laitala m.fl.): garderobestudier, klesforbruk og levetid | Levetid, lager per person, dvalende klær | hent/verifiser |
 | WRAP (UK), *Valuing our clothes* | Levetid og lager (sammenligning) | hent |
 | Litteratur om institusjonstekstiler, vaskerier | Levetid og mengder i US.IC | hent |
+| ECAP 2017, *European Textiles & Workwear Market* | Arbeidstøy ca. 1,5 % av klesforbruket i EU og UK, levetid litt over 3 år (WRAP 2015) | har (Zotero) |
+| Kawecki m.fl. 2021; Laitala & Klepp 2020; vedlegget til Napolano m.fl. 2025 (SM4) | Levetidsfordelinger per produkttype | hent (ikke i Zotero) |
+| Leiden U, CBS, CML 2020, *Voorraden in de maatschappij* | Lager og levetider for tekstiler i Nederland | hent |
 
 ### Innsamling, sortering og ombruk
 | Kilde | Innhold | Status |
@@ -55,6 +58,11 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | SSB husholdningsavfall | Mengder restavfall og grovavfall | hent/verifiser tabell |
 | Miljødirektoratet / SSB om avfallseksport | Restavfall eksportert til forbrenning (Sverige) | hent |
 
+### Usikkerhet
+| Kilde | Innhold | Status |
+|---|---|---|
+| Avfall Norge 2015, *Veileder plukkanalyser*, rapport 10/2015 | Feilmargin for tekstilandel i restavfall ±22,8 % (90 % konfidens, 3 000 kg prøve, Oslo) | har (Zotero) |
+
 ### Mikrofibre
 | Kilde | Innhold | Status |
 |---|---|---|
@@ -67,6 +75,9 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | Plukkanalyser med fibersortering; JRC (Köhler et al. 2021; Huygens et al. 2023) | Fiberandeler i EU-forbruk og -avfall | hent |
 | Textile Exchange, *Materials Market Report* | Globale fiberandeler (polyester 59 % i 2024) | har (via TekstilEOL) |
 | SSB 08801 på HS6-nivå | Mange HS-koder angir hovedfiber (for eksempel 6109.10 bomull, 6109.90 annet) | har |
+| Rubach m.fl. 2023 (tab. 3.17) og de Sadeleer & Rubach 2026 (tab. 3-10), Mepex-data | Brukbart i restavfall: 15 185 av 33 624 t (2022, bare hjemme), 17 707 av 44 461 t (2025). Fiber i avhendet: 38 % syntetisk og 3 % ull (2022), 48,3 % fossilbasert (2025) | har (litteratur/) |
+| Gottfridsson & Zhang 2015, masteroppgave Chalmers | Materialsammensetning av sko per tollposisjon 6401–6405 (tekstilandel 5–35 %, resten gummi, plast, lær osv.). Delvis antatt | har (Zotero) |
+| Quantis 2021, *PEFCR Apparel and Footwear*; Huygens m.fl. 2023 (JRC) | Sammensetning med ikke-tekstile deler per underkategori | hent |
 | `parameters/hs_main_fibre.csv` | Hovedfiber for alle 1 406 HS8-koder i kapittel 50–64, klassifisert etter regler ut fra de engelske varetekstene i metadataene til SSB 08801 (API 2026-10-05, `scripts/build_hs_main_fibre.py`). Klasser: CO, WO, SYN, ART, MMF (kjemiske fibre uten nærmere angivelse), OTH (annen navngitt fiber), RES (restpost «of other textile materials»), UNK (fiber ikke oppgitt). Kolonnen `rule` viser hvilken regel som slo til | har (brukes i `prototype/`) |
 
 **Merk:** HS-koden gir hovedfiberen for en stor del av klesimporten. For klær (kap. 61/62) i 2025 er 40 % bomull og 33 % kjemiske fibre, mot 41 % og 32 % i NORSUS 2026. Restposter og koder uten fiber (RES+UNK) er 24 % for klær og 13 % for hjemmetekstiler (2025). For sko oppgir ingen koder fiber.

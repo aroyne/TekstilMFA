@@ -1,5 +1,7 @@
 # Litteraturgjennomgang: tekstil-MFA
 
+*Oppdatert 2026-10-05 med Zotero-utvalget (stikkordene NFTA, tekstil, MFA og sirkulær økonomi): se [2026-10-05_litteraturgjennomgang_oppdatert.md](2026-10-05_litteraturgjennomgang_oppdatert.md).*
+
 *Notat 2026-09-29. Fase 1 i [PLAN.md](../docs/PLAN.md). Formål: plassere TekstilMFA i forhold til eksisterende arbeid, finne tall til sammenligning og parametre, og se hvordan andre har løst metodevalgene våre (lager, levetid, usikkerhet, kildebruk).*
 
 **Kilder og verifisering.** Norske rapporter og Zotero-litteraturen (Termo-tekstil `literature/`) er lest i fulltekst. Utenlandske studier er dels lest i fulltekst (Millward-Hopkins 2023, Malinverno 2023, Logan 2025, Koch 2025, Xu 2024, Abbasi 2023) og dels bare gjennom sammendrag eller sekundærkilder. Disse er merket **(sammendrag)** og må leses før de siteres i en artikkel.
