@@ -14,20 +14,21 @@ parameters/        Parametre med usikkerhet (CSV, samme kolonner som N_parameter
   lifetimes.csv                   levetidsfordelinger per produkt og lager
   dataset_uncertainties.csv       støy per datasett
   hs_mapping.csv                  HS-prefiks → produktgruppe
-  fibre_composition.csv           fiberandeler (fase 3)
+  hs_main_fibre.csv               hovedfiber per HS8-kode (fiberlaget)
+  fibre_composition.csv           fibergrupper for HS-koder uten oppgitt fiber
 data_files/        Rådata (store filer er ikke i git; se DATA_SOURCES.md)
 calculations/      Én modul per pool (rw_mc.py, di_mc.py, ...) og felles hjelpere
   sampling.py      MC-trekk (PERT/lognormal/normal)
-  stock_model.py   Dynamisk lagermodell (innstrømsdrevet, Weibull/lognormal)
+  system.py        Bygger flodym-systemet fra registeret og lukker det (kontroll, lagre, massebalanse)
+  fibre_layer.py   Fiberlaget (D19): fordeler TOT på fibergrupper og ikke-tekstil, med årgangsmodell for US.HH
   trade.py         Flyter fra SSB 08801
 data_loader.py     Laster alle data én gang (DATA_MAP)
-main_mc.py         MC-driver → output_files/MC_summary.csv
+main_mc.py         MC-driver → output_files/MC_summary.csv (TOT) og MC_summary_fibre.csv (per materiale)
 scripts/           Hjelpeskript (uttrekk av data)
 tests/             pytest
 docs/              PLAN.md, SYSTEMDEFINISJON.md, METODE.md
 claude_tekst/      Notater og analyser skrevet av Claude
 litteratur/        Kilder (PDF-er, ikke i git)
-prototype/         Prøver som ikke inngår i modellen (fiberlag med flodym)
 ```
 
 ## Kjøring
@@ -40,5 +41,5 @@ python scripts/update_trade_ssb_api.py 2023 2024 2025   # nyeste år (og revisjo
 python -m pytest -q
 python main_mc.py --pool all --nsim 1000 --seed 1
 python scripts/build_hs_main_fibre.py                   # hovedfiber per HS8-kode fra varetekstene i 08801
-python -m prototype.fibre_layer_flodym                  # prototype av fiberlaget
+python scripts/build_fibre_composition.py               # fibergrupper for HS-koder uten oppgitt fiber
 ```

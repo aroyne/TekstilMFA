@@ -24,6 +24,11 @@ PRODUCTS = CORE_PRODUCTS + OTHER_PRODUCTS
 PRODUCT_GROUPS = ['CORE'] + OTHER_PRODUCTS
 GROUP_OF_PRODUCT = {p: ('CORE' if p in CORE_PRODUCTS else p) for p in PRODUCTS}
 
+# Fibre layer (D19): five fibre groups and non-textile material (buttons,
+# zips, soles, backing), so that TOT = sum over all materials.
+FIBRE_GROUPS = ['SYN', 'CO', 'WO', 'CV', 'OTH']
+MATERIALS = FIBRE_GROUPS + ['NT']
+
 
 def core_group_only(series):
     """

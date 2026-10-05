@@ -27,13 +27,20 @@ class Parameters:
         self.lifetimes = pd.read_csv(f'{param_dir}/lifetimes.csv')
         self.datasets = pd.read_csv(f'{param_dir}/dataset_uncertainties.csv', dtype={'dataset_name': str})
         self.hs_mapping = pd.read_csv(f'{param_dir}/hs_mapping.csv', dtype={'hs_prefix': str})
+        # Fibre groups of import mass whose HS code states no fibre (D19);
+        # fixed, without uncertainty bounds.
+        self.fibre_composition = pd.read_csv(f'{param_dir}/fibre_composition.csv').set_index('product')
+        # Main fibre stated by each HS8 code, built by scripts/build_hs_main_fibre.py.
+        self.hs_main_fibre = pd.read_csv(f'{param_dir}/hs_main_fibre.csv', dtype=str)
 
     def draw(self, rng, deterministic):
         """
         Returns (params, dataset_noise, anchors) for one MC iteration.
 
         params        : {parameter_id: value} for every global parameter with
-                        a value.
+                        a value, plus 'lifetime_mean_<stock>_<product>' and
+                        'lifetime_shape_<stock>_<product>' for every lifetime
+                        with a mean (the mean is drawn, the shape is fixed).
         dataset_noise : {dataset_name: multiplicative factor}, 1.0 in the
                         deterministic round. One factor per dataset and
                         iteration, i.e. fully correlated across years.
@@ -47,6 +54,15 @@ class Parameters:
                 val = draw_perturbed_value(rng, val, row['lower_bound'], row['upper_bound'],
                                            row['uncertainty_type'], row['distribution_type'])
             params[row['parameter_id']] = val
+
+        for _, row in self.lifetimes.dropna(subset=['mean_years']).iterrows():
+            mean = float(row['mean_years'])
+            if not deterministic:
+                mean = draw_perturbed_value(rng, mean, row['lower_bound'], row['upper_bound'],
+                                            row['uncertainty_type'], 'PERT')
+            key = f"{row['stock']}_{row['product']}"
+            params[f'lifetime_mean_{key}'] = mean
+            params[f'lifetime_shape_{key}'] = float(row['shape'])
 
         dataset_noise = {}
         for _, row in self.datasets.iterrows():

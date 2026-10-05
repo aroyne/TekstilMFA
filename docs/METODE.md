@@ -28,17 +28,16 @@ Lagerendringen kan være negativ, i motsetning til en balanseflyt. Lageret i bru
 
 ## 3. Dynamisk lagermodell (US.HH, US.IC, WM.LF)
 
-Implementert i [calculations/stock_model.py](../calculations/stock_model.py) og testet i [tests/test_stock_model.py](../tests/test_stock_model.py).
+Implementert med flodyms `InflowDrivenDSM` i [calculations/fibre_layer.py](../calculations/fibre_layer.py), foreløpig for CL+HT+FW i US.HH. Der gir modellen sammensetningen av kasseringene i fiberlaget (§ 9). Levetidene står i [parameters/lifetimes.csv](../parameters/lifetimes.csv) (forslag, se litteraturnotatet 2026-10-05 § 5), og middellevetiden trekkes i hver MC-iterasjon. Den parallelle sammenligningen av utstrømmen med avfallsstatistikken er ikke rapportert ennå.
 
 **Rolle (D8):** Lagermodellen er et *parallelt, uavhengig anslag*. Kasseringene i hovedresultatet kommer fra avfallsstatistikken. Lagermodellen gir kasseringer og lager ut fra tilførsel og levetid, og de sammenlignes med hovedresultatet per år og produktgruppe. Forskjellene brukes som diskusjonsgrunnlag: er levetidene riktige, vokser lageret av klær som ikke brukes, er noen avfallsstrømmer underrapportert? Lagermodellen brukes også for mikrofibre (frigjøring ∝ lager i bruk) og for deponilageret (WM.LF).
 
-* Innstrømsdrevet: I(t) er summen av innstrømmene til lageret, altså salg til husholdninger, privatimport og kjøp av brukt.
+* Innstrømsdrevet: I(t) er nye varer til husholdningene, altså salg, privatimport og direkte netthandel. Kjøp av brukt (1–2 % av innstrømmen) er foreløpig holdt utenfor.
 * Levetid: Weibull (standard) eller lognormal per produktgruppe. Parametrene er middellevetid og form ([parameters/lifetimes.csv](../parameters/lifetimes.csv)).
-* Tidskonvensjon (D20): Flytene er summer per kalenderår, og lageret er nivået ved årsslutt. Innstrømmen regnes som om den kom midt i året, så en årgang er 0,5, 1,5, 2,5 … år gammel ved årsslutt. Da blir lager(t) − lager(t−1) = I(t) − O(t) eksakt. `calculations/stock_model.py` regner i dag innstrømmen som om den kom ved årets start (alder 1 ved første årsslutt). Den skal erstattes av flodym og er bare i bruk i testene.
+* Tidskonvensjon (D20): Flytene er summer per kalenderår, og lageret er nivået ved årsslutt. Innstrømmen regnes som om den kom midt i året, så en årgang er 0,5, 1,5, 2,5 … år gammel ved årsslutt. Da blir lager(t) − lager(t−1) = I(t) − O(t) eksakt.
 * Innsvinging: Innstrømmen før 1988 er ukjent. Den settes til 1988-nivået (eller en trend) i et antall innsvingingsår, og valget testes i en følsomhetsanalyse (D2).
 * Sammenligning: Utstrømmen sammenlignes med kasseringene i avfallsstatistikken. Lageret sammenlignes med det akkumulerte restleddet og med garderobestudier (SIFO/OsloMet).
 * Produkter som behandles som emballasje (sekker, SA) får levetiden `immediate`: alt kasseres samme år, og det bygges ikke opp lager (D13).
-* Kjøp av brukt (CO.RE → US.HH) går inn som en ny årgang, med samme eller kortere restlevetid (egen parameter).
 
 ## 4. Overføringskoeffisienter (TK) som endrer seg over tid
 
@@ -90,6 +89,19 @@ Massemessig er dette små flyter, men de er viktige for miljøet. Frigjøringen 
   * **Eksport av restavfall (D11):** eksportandel fra SSB 13035, 2015–2025.
   * **Lagerendring i US.HH:** restledd (D8).
 * Åpne spørsmål og forenklinger: `claude_tekst/2026-09-29_sporsmal_fase2.md`.
+
+## 9. Tekstilform og fiberlag (D18, D19)
+
+**Tekstilform (D18)** er kolonnen `form` i `system/flows.csv` (FIB, FAB, NEW, MIX, USE, WRN, PCW, MFR). Den er en egenskap ved flyten, ikke en dimensjon. Der en blandet flyt har et tall av egen interesse, deles den. Tekstiler i restavfall fra husholdningene er derfor to flyter: brukbare (USE) og utslitte (WRN). Andelen brukbart er ankerpunkter fra plukkanalysene: 28 % (ca. 2011, Laitala m.fl. 2012), 45 % (2022, bare restavfall som hentes hjemme) og 40 % (2025). Den gjelder CORE-gruppen. CA, TA og OM regnes som utslitte.
+
+**Fiberlaget (D19)** ([calculations/fibre_layer.py](../calculations/fibre_layer.py)) er et eget flodym-system med de samme prosessene og flytene og en ekstra dimensjon `m`: SYN, CO, WO, CV, OTH og NT (ikke-tekstil). Det fylles etter at TOT-systemet er lukket, og endrer aldri TOT. Summen over `m` er lik TOT (det sjekkes), og massebalansen sjekkes per materiale.
+
+* **Tilført:** hovedfiberen i HS-koden (`parameters/hs_main_fibre.csv`) gir sammensetningen av registrert import per produkt og år. «Kjemiske fibre» uten nærmere angivelse (MMF) deles med `mmf_synthetic_share` (0,92, Textile Exchange 2024). Koder uten fiber (RES, UNK) fordeles med `parameters/fibre_composition.csv` (PEFCR 2025 for CL og FW, ellers produktets egne koder med oppgitt fiber). Tekstildelen skaleres med 1 − `nontextile_share_<produkt>`. Eksport, salg, privatimport, netthandel og institusjonsavfall får importsammensetningen. Eksport er for det meste gjeneksport (D6).
+* **Kassert fra husholdningene:** For CL+HT+FW kommer sammensetningen fra utstrømmen av årgangsmodellen (§ 3). Den gjelder innsamling, restavfall (brukbart og utslitt får samme sammensetning) og alt gjennom CO. CA, TA og OM kasseres samme år og beholder tilførselssammensetningen.
+* **Avfallsbehandling:** Flytene ut av WM.RS får blandingen av alt som går inn i WM.RS det året.
+* **Forenklinger:** Hovedfiberen regnes som hele tekstildelen. En matrise fra hovedfiber til fiberandeler mangler. Levetidene er like for alle fibre, selv om litteraturen tyder på lengre levetid for syntetiske plagg (Laitala m.fl. 2018; IMPRO 2014). `fibre_composition.csv` har ingen usikkerhet.
+* **Resultat:** `output_files/MC_summary_fibre.csv` (flyt × produkt × materiale × år).
+* **Validering:** Syntetisk andel av tekstilet i det som kastes er ca. 40 % (2021), 41 % (2022) og 42 % (2025), mot målt 44 % (Syversen 2023, 2021) og 38 % (Mepex via Rubach 2023, 2022). Syntetisk + NT er 51 % i 2025, mot 48,3 % fossilbasert målt (de Sadeleer & Rubach 2026). NT omfatter også lær og naturgummi. Ull blir ca. 5 %, mot 3 % målt.
 
 ## Referanser (metode)
 

@@ -8,6 +8,7 @@ described in DATA_SOURCES.md.
 """
 import pandas as pd
 
+from calculations.fibre_layer import aggregate_imports_by_fibre_class
 from calculations.trade import aggregate_trade, map_hs_to_product
 
 
@@ -49,4 +50,6 @@ def load_all_data(selected_pools, params):
         preloaded[key] = loader(path, params.hs_mapping)
     if 'trade_textiles' in preloaded:
         preloaded['trade_aggregated'] = aggregate_trade(preloaded['trade_textiles'])
+        preloaded['imports_by_fibre_class'] = aggregate_imports_by_fibre_class(
+            preloaded['trade_textiles'], params.hs_main_fibre)
     return preloaded

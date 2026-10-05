@@ -17,7 +17,8 @@
 `KILDE.SUB-MÅL.SUB-Navn-Lag`, for eksempel `RW.RW-DI.RT-Finished textile products import-TOT`.
 
 * Pool = to bokstaver, subpool = to bokstaver.
-* Laget er materialet. I N-budsjettet var dette N-forbindelsen (Nmix, NH3, …). Her er det TOT eller en fibertype.
+* Laget er materialet. I N-budsjettet var dette N-forbindelsen (Nmix, NH3, …). Her er alle flytkoder `TOT`. Fiberlaget (D19) er en egen dimensjon `m` i et parallelt system med de samme flytkodene, ikke egne flytkoder.
+* Kolonnen `form` i `flows.csv` angir tekstilformen (D18): FIB fibre og garn, FAB metervare, NEW nye varer, MIX brukte usortert, USE brukte ombrukbare, WRN brukte utslitte, PCW produksjonsavfall, MFR mikrofibre.
 * **Nytt i forhold til N-budsjettet:** Produkt er en dimensjon og ikke en del av flytnavnet (D5). Modellen er bygget i flodym, og hver flyt har dimensjonene sine i kolonnen `dims` i `flows.csv`:
   * `t`: år (1988–2025).
   * `p`: produkt (CL, HT, FW, CA, SA, TA, OM). Brukes til og med salg og i US.IC.
@@ -73,7 +74,7 @@ flowchart LR
   WW -.-> ENW[(EN.WA)] & ENS[(EN.SO)]
 ```
 
-Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [system/flows.csv](../system/flows.csv). Den har 40 flyter: 13 med prioritet 1, 16 med prioritet 2 og 11 med prioritet 3. Flytnavn kan ikke inneholde bindestrek, fordi `-` skiller feltene i koden (sjekkes av `tests/test_system_register.py`).
+Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [system/flows.csv](../system/flows.csv). Den har 41 flyter: 14 med prioritet 1, 16 med prioritet 2 og 11 med prioritet 3 (restavfall fra husholdningene er delt i brukbart og utslitt, D18). Flytnavn kan ikke inneholde bindestrek, fordi `-` skiller feltene i koden (sjekkes av `tests/test_system_register.py`).
 
 ## Metode per flyt (kolonnen `method`)
 
@@ -92,7 +93,8 @@ Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [syst
 | D15 | Kildekjede for tekstiler i restavfall og behandlingsmåte | **Besluttet 2026-09-29:** 1990–1998: SSBs avfallsregnskap for tekstiler (ankerår 1991 og 1998). 1995–2011: SSB 05281, brukt for fordelingen på behandlingsmåter (nivået brukes bare som sammenligning, fordi det kan være beregnet ut fra tilførsel og levetid). 2012–2017: interpolert. 2018, 2022, 2025: plukkanalyser (Mepex) via Watson 2020 og NORSUS 2023/2026. Se `claude_tekst/2026-09-29_datainventar_P1-flyter.md`. |
 | D16 | Metode for grensehandel (privatimport) | **Besluttet 2026-09-29:** 2023–2025: SSB 14221 (klær og sko, NOK) ÷ utsalgspris per kg (NOK/kg fra 08801 × påslagsfaktor). 2004–2022: SSB 05678 i alt × klesandel (snitt 2023–2025). Før 2004: holdes på 2004-nivå. Klær kjøpt på reiser med overnatting er et diskusjonspunkt. |
 | D17 | Metode for innsamling før 2018 | **Besluttet 2026-09-29:** Innsamlet = eksport av HS 6309+6310 fra 08801 ÷ eksportandel. Eksportandelen er tidsavhengig, med ankerpunkter fra Watson 2020, NORSUS 2023 og NORSUS 2026 (og 1998 fra SSBs tekstilregnskap hvis tabellene finnes). |
-| D19 | Fiberlag | **Delvis besluttet 2026-10-05:** Fem fibergrupper: syntetisk (SYN: PES, PA, PAC, PP, EL), bomull (CO), ull (WO), regenerert cellulose (CV: viskose, lyocell, acetat) og annet (OTH). Grunnen er at HS-kodene sjelden skiller mellom polymerene, så en finere inndeling ville bygd på en antatt fordelingsnøkkel. Syntetisk deles i polymerer bare i flyter der polymeren betyr noe (mikrofibre, materialgjenvinning), med en egen parameter med kilde og usikkerhet. Resten av D19 (fiber som dimensjon beregnet etter TOT, sammensetning av kasseringer fra årgangsmodellen, NT som materiale) er fortsatt et forslag. Se `claude_tekst/2026-10-05_lag_tekstilform_og_materiale.md`. |
+| D18 | Tekstilform | **Besluttet 2026-10-05:** Tekstilform er en egenskap ved flyten (kolonnen `form`), ikke en dimensjon. Åtte koder: FIB, FAB, NEW (inkl. usolgte varer), MIX, USE, WRN, PCW, MFR. Skadede, men reparerbare tekstiler følger sorteringen: sortert til ombruk = USE, ellers WRN. Blandede flyter deles bare der tallet har egen interesse. Foreløpig gjelder det tekstiler i restavfall fra husholdningene (brukbart / utslitt). |
+| D19 | Fiberlag | **Besluttet 2026-10-05:** Fem fibergrupper: syntetisk (SYN: PES, PA, PAC, PP, EL), bomull (CO), ull (WO), regenerert cellulose (CV) og annet (OTH), pluss ikke-tekstil (NT, erstatter regnestykket med `nontextile_share_*`). Gruppene er valgt fordi HS-kodene sjelden skiller mellom polymerene. Syntetisk deles i polymerer bare i flyter der polymeren betyr noe (mikrofibre, materialgjenvinning). Fiber er en dimensjon `m` i et parallelt flodym-system, beregnet etter TOT. Sammensetningen av kasseringer fra husholdningene kommer fra årgangsmodellen. Se METODE § 9. |
 | D20 | Tidskonvensjon for flyter og lager | **Besluttet 2026-10-05:** Flyter er summer per kalenderår, slik de fleste datakildene oppgir dem. Lager er nivået ved årsslutt. I lagermodellen regnes innstrømmen som om den kom midt i året, som et gjennomsnitt for et kalenderår. En årgang er da 0,5 år gammel ved første årsslutt. Dette er standard i flodym (`inflow_at='middle'`). For levetider under ca. ett år kan innstrømmen spres jevnt over året (`n_pts_per_interval`). |
 | D2 | Tidsperiode og startlager | **Besluttet 2026-09-29:** Rapporter fra 1990 til siste år med data (2024 da beslutningen ble tatt, 2025 fra oppdateringen samme dag). Innstrøm før 1988 settes til 1988-nivået (alternativt en trend), og startlageret testes i en følsomhetsanalyse. |
 | D3 | Hvor detaljert skal MA være? | **Besluttet 2026-09-29:** Enkel balanse (P2). Norsk tekstilindustri er liten, men ull er en norsk særegenhet. |

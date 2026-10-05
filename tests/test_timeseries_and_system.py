@@ -58,3 +58,34 @@ def test_household_stock_change_is_inflow_minus_discards(inputs):
                 + mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values[:, core]
                 + mfa.flows['US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT'].values[:, core])
     np.testing.assert_allclose(stock_change(mfa, 'US.HH').values[:, core], inflow - discards)
+
+
+@pytest.fixture(scope='module')
+def fibre_run(inputs):
+    from calculations.fibre_layer import compute_fibre_layer
+    from calculations.params import Parameters
+    tot = _run(inputs)
+    close(tot)
+    fibre = make_system(fibre=True)
+    preloaded_data, current_params, _, _ = inputs
+    compute_fibre_layer(fibre, tot, preloaded_data, current_params, Parameters().fibre_composition)
+    return tot, fibre, current_params
+
+
+def test_fibre_layer_adds_up_to_tot(fibre_run):
+    tot, fibre, _ = fibre_run
+    for code, flow in tot.flows.items():
+        np.testing.assert_allclose(fibre.flows[code].values.sum(axis=-1), flow.values, atol=1e-9)
+
+
+def test_footwear_supply_has_the_non_textile_share(fibre_run):
+    from calculations.utils import MATERIALS, PRODUCTS
+    _, fibre, current_params = fibre_run
+    sales = fibre.flows['DI.RT-US.HH-Sales to households-TOT'].values[:, PRODUCTS.index('FW'), :]
+    np.testing.assert_allclose(sales[:, MATERIALS.index('NT')] / sales.sum(axis=1),
+                               current_params['nontextile_share_FW'])
+
+
+def test_every_product_has_imports_every_year(inputs):
+    preloaded_data = inputs[0]
+    assert (preloaded_data['imports_by_fibre_class'].sum(axis=2) > 0).all()

@@ -5,9 +5,11 @@ CLI entry point and Monte Carlo driver for the textile MFA: loads data and
 parameters once, builds the flodym system from the register once, and runs
 nsim iterations over the selected pools (iteration 0 is the deterministic
 baseline). Every iteration resets all flows to NaN, lets the pools assign
-them, and closes the system (flow check, stocks, mass balance). Results are
-kept as one array per flow and written as per-flow, per-product, per-year
-summary statistics to output_files/.
+them, and closes the system (flow check, stocks, mass balance). The fibre
+layer (D19) then distributes the closed TOT system over materials in a
+second system. Results are kept as one array per flow and written as
+per-flow, per-product, per-year summary statistics to output_files/
+(MC_summary.csv for TOT, MC_summary_fibre.csv per material).
 
 Usage: python main_mc.py --pool all --nsim 1000 [--seed 1] [--export-raw-mc]
 """
@@ -18,6 +20,7 @@ import time
 import numpy as np
 import pandas as pd
 
+from calculations.fibre_layer import compute_fibre_layer
 from calculations.params import Parameters
 from calculations.system import close, load_register, make_system, reset, stock_change
 from data_loader import load_all_data
@@ -59,21 +62,30 @@ def outputs(mfa, closed):
     return result
 
 
+COLUMN_OF_DIM = {'t': 'year', 'p': 'product', 'g': 'product', 'm': 'material'}
+KEY_COLUMNS = ['flow_name', 'product', 'material', 'year']
+
+
+def record(store, arrays, sim_id, n_runs):
+    for name, arr in arrays.items():
+        if name not in store:
+            store[name] = (arr.copy(), np.empty((n_runs,) + arr.values.shape))
+        store[name][1][sim_id] = arr.values
+
+
 def to_long(name, arr, values):
     """
-    Long table of one output: values has shape (..., year[, product]) matching
-    arr.dims. 'product' is the product or product group, or 'ALL' for flows
-    without a product dimension.
+    Long table of one output: values has shape (iteration, *arr.dims). The
+    columns are year, 'product' (product or product group, 'ALL' for flows
+    without a product dimension) and, in the fibre layer, 'material'.
     """
     letters = arr.dims.letters
-    years = arr.dims['t'].items
-    product_letter = next((l for l in letters if l in ('p', 'g')), None)
-    products = arr.dims[product_letter].items if product_letter else ['ALL']
-    lead = values.shape[:values.ndim - len(letters)]
-    flat = values.reshape(lead + (len(years), len(products)))
-    year_col = np.repeat(years, len(products))
-    product_col = np.tile(products, len(years))
-    return flat.reshape(lead + (-1,)), pd.DataFrame({'flow_name': name, 'product': product_col, 'year': year_col})
+    grids = np.meshgrid(*[np.asarray(arr.dims[l].items) for l in letters], indexing='ij')
+    frame = pd.DataFrame({COLUMN_OF_DIM[l]: g.ravel() for l, g in zip(letters, grids)})
+    if 'product' not in frame:
+        frame['product'] = 'ALL'
+    frame['flow_name'] = name
+    return values.reshape(values.shape[0], -1), frame[[c for c in KEY_COLUMNS if c in frame]]
 
 
 def summarise(store):
@@ -88,7 +100,8 @@ def summarise(store):
         frame['n'] = mc.shape[0]
         frame['deterministic'] = flat[0]
         frames.append(frame)
-    return pd.concat(frames).sort_values(['flow_name', 'product', 'year']).reset_index(drop=True)
+    summary = pd.concat(frames)
+    return summary.sort_values([c for c in KEY_COLUMNS if c in summary]).reset_index(drop=True)
 
 
 def raw_table(store):
@@ -111,25 +124,29 @@ def main():
     params = Parameters()
     preloaded_data = load_all_data(pools, params)
     mfa = make_system()
+    fibre = make_system(fibre=True)
 
     n_runs = args.nsim + 1
     store = {}  # name -> (FlodymArray of iteration 0, array (iteration, ...))
+    fibre_store = {}
     start = time.time()
     for sim_id in range(n_runs):
         current_params, dataset_noise, anchors = params.draw(rng, deterministic=(sim_id == 0))
         run_pools(mfa, pools, preloaded_data, current_params, dataset_noise, anchors)
         if closed:
             close(mfa)
-        for name, arr in outputs(mfa, closed).items():
-            if name not in store:
-                store[name] = (arr.copy(), np.empty((n_runs,) + arr.values.shape))
-            store[name][1][sim_id] = arr.values
+            compute_fibre_layer(fibre, mfa, preloaded_data, current_params, params.fibre_composition)
+            record(fibre_store, outputs(fibre, closed), sim_id, n_runs)
+        record(store, outputs(mfa, closed), sim_id, n_runs)
     print(f"[INFO] {args.nsim} MC iterations + baseline in {time.time() - start:.1f} s")
 
     if not closed:
         store = {name: v for name, v in store.items() if not np.isnan(v[1]).all()}
     summarise(store).to_csv('output_files/MC_summary.csv', index=False)
     print("[INFO] Wrote output_files/MC_summary.csv")
+    if closed:
+        summarise(fibre_store).to_csv('output_files/MC_summary_fibre.csv', index=False)
+        print("[INFO] Wrote output_files/MC_summary_fibre.csv")
     if args.export_raw_mc:
         raw_table(store).to_csv('output_files/MC_Raw_Simulations.csv.gz', index=False)
 

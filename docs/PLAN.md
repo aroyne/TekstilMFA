@@ -56,6 +56,13 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [ ] Ta stilling til parameterforslagene i avsnitt 5.4 i litteraturnotatet. Skaffe Laitala m.fl. 2012 (28 % brukbart i restavfall, Norge).
 - [ ] Vurdere `institutional_share` (12 %) per produkt.
 
+### 2026-10-05 – D18 og D19 i modellen
+- [x] D18: `form` på alle flyter. Restavfall fra husholdningene er delt i brukbart og utslitt, med ankerpunkter 2011, 2022 og 2025.
+- [x] Parametre (status forslag, litteratur eller antakelse): levetider i US.HH (CL 6, HT 7, FW 4, CA 10, TA 4, OM 2 år; CL i US.IC 3 år), NT-andeler (CL 1,7 %, FW 80 %, PEFCR/Gottfridsson; HT, CA, TA, OM, SA er antakelser), `mmf_synthetic_share` 0,92, `fibre_composition.csv` fra `scripts/build_fibre_composition.py`.
+- [x] D19: fiberlaget i `calculations/fibre_layer.py` (eget flodym-system med dimensjon `m`, årgangsmodell for CL+HT+FW, massebalanse per materiale). Utdata: `MC_summary_fibre.csv`. Syntetisk andel i kasserte tekstiler ca. 40–42 % (målt 38–44 %).
+- [x] Død kode fjernet: `prototype/` og `calculations/stock_model.py` (erstattet av flodym, D20).
+- [x] Levetidene trekkes nå i MC. Det endrer rekkefølgen av tilfeldige tall, så MC-tallene er ikke identiske med tidligere kjøringer med samme frø.
+
 ## Neste
 
 ### Fase 1 – Låse systemdefinisjonen (beslutningene D1–D13 er tatt 2026-09-29)
@@ -94,7 +101,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 ### Fase 3 – P2- og P3-flyter
 - [ ] MA (norsk ull, produksjon), US.IC, sorteringsdetaljer, avfallseksport, materialgjenvinning.
 - [ ] Mikrofibre: vask → avløpsrensing → vann og jord.
-- [ ] Fiberlag: Ta stilling til D18, D19 og flodym (se notat 2026-10-05). Hovedfiber fra HS er ferdig, og prototypen kjører.
+- [x] Fiberlag: D18 og D19 er besluttet og implementert.
 - [ ] Fiberlag: Matrise for restposter og koder uten fiber (RES/UNK) per produkt, fra plukkanalyser med fibersortering eller JRC. Sko trenger egen behandling.
 - [ ] Fiberlag: Sammensetningsmatrise hovedfiber → fiberandeler (et «bomullsplagg» er ikke 100 % bomull).
 - [x] D20 er besluttet: Flyter er summer per kalenderår, lageret er nivået ved årsslutt, og innstrømmen regnes som om den kom midt i året (flodym-standard).
@@ -102,8 +109,11 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Handelsdataene (08801) summeres én gang før MC-løkka.
 - [x] D19 er delvis besluttet: fem fibergrupper (SYN, CO, WO, CV, OTH). `fibre_composition.csv` har fått de samme kolonnene.
 - [ ] Andel SYN i HS-klassen MMF (kjemiske fibre uten nærmere angivelse).
-- [ ] Flytte fiberlaget fra `prototype/` inn i modellen som dimensjon `m` (etter beslutning om resten av D19).
-- [ ] Erstatte `calculations/stock_model.py` med flodyms `InflowDrivenDSM` for den parallelle lagermodellen (D20). Den egne modellen brukes nå bare i testene og er død kode.
+- [x] Fiberlaget er flyttet inn i modellen som dimensjon `m`.
+- [x] `calculations/stock_model.py` er erstattet av flodyms `InflowDrivenDSM` (i fiberlaget).
+- [ ] Rapportere den parallelle lagermodellen (utstrøm og lager fra levetider) ved siden av statistikken (D8).
+- [ ] Fiberlag: fiberspesifikke levetider (syntetisk lengre enn bomull), matrise hovedfiber → fiberandeler, usikkerhet på `fibre_composition.csv`, og egen sammensetning for brukbart og utslitt i restavfall.
+- [ ] Ull i kasseringer blir ca. 5 %, mot 3 % målt. Undersøk hvilke HS-koder som gir ull.
 
 ### Fase 4 – Usikkerhet
 - [ ] Pedigree-basert usikkerhet for alle datasett og parametre.

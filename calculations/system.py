@@ -15,7 +15,7 @@ import flodym as fd
 import numpy as np
 import pandas as pd
 
-from calculations.utils import GROUP_OF_PRODUCT, PRODUCT_GROUPS, PRODUCTS, YEARS
+from calculations.utils import GROUP_OF_PRODUCT, MATERIALS, PRODUCT_GROUPS, PRODUCTS, YEARS
 
 PROCESSES_CSV = 'system/processes.csv'
 FLOWS_CSV = 'system/flows.csv'
@@ -24,6 +24,7 @@ DIMENSIONS = fd.DimensionSet(dim_list=[
     fd.Dimension(letter='t', name='Time', dtype=int, items=YEARS),
     fd.Dimension(letter='p', name='Product', dtype=str, items=PRODUCTS),
     fd.Dimension(letter='g', name='Product group', dtype=str, items=PRODUCT_GROUPS),
+    fd.Dimension(letter='m', name='Material', dtype=str, items=MATERIALS),
 ])
 
 PRODUCT_TO_GROUP = fd.Parameter(
@@ -42,8 +43,13 @@ def load_register():
     return processes, flows[flows['status'].str.startswith('implemented')]
 
 
-def make_system():
-    """An MFASystem with every implemented flow and all stocks, values unset."""
+def make_system(fibre=False):
+    """
+    An MFASystem with every implemented flow and all stocks, values unset.
+    With fibre=True every flow and stock also has the material dimension 'm'
+    (the fibre layer, D19).
+    """
+    extra = ('m',) if fibre else ()
     processes, flows = load_register()
     boundary = set(processes.loc[processes['type'] == 'boundary', 'code'])
     connected = (set(flows['source']) | set(flows['target'])) - boundary
@@ -57,14 +63,14 @@ def make_system():
         processes=fd_processes, dims=DIMENSIONS,
         flow_definitions=[
             fd.FlowDefinition(from_process_name=node(r['source']), to_process_name=node(r['target']),
-                              dim_letters=_letters(r['dims']), name_override=r['flow_code'])
+                              dim_letters=_letters(r['dims']) + extra, name_override=r['flow_code'])
             for _, r in flows.iterrows()
         ])
     with_stock = processes[processes['code'].isin(codes) & processes['stock_dims'].notna()]
     fd_stocks = fd.make_empty_stocks(
         processes=fd_processes, dims=DIMENSIONS,
         stock_definitions=[
-            fd.StockDefinition(name=r['code'], process=r['code'], dim_letters=_letters(r['stock_dims']),
+            fd.StockDefinition(name=r['code'], process=r['code'], dim_letters=_letters(r['stock_dims']) + extra,
                                subclass=fd.SimpleFlowDrivenStock)
             for _, r in with_stock.iterrows()
         ])
