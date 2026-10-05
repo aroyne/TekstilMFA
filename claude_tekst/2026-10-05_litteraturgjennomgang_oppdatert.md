@@ -95,9 +95,22 @@ Ingen ny kilde med levetider i år per produktgruppe ble funnet i utvalget.
 
 ## Skaffe og lese
 
-* Kawecki m.fl. 2021 og Laitala & Klepp 2020 (levetider, uendret fra forrige notat)
-* Napolano m.fl. 2025, vedlegget (SM4 levetider, SM7–SM8 sammensetning med ikke-tekstil)
-* Quantis 2021, PEFCR Apparel and Footwear (sammensetning og ikke-tekstil per underkategori)
-* Huygens m.fl. 2023, JRC, tekniske rapporter om tekstilavfall
-* Leiden U, CBS og CML 2020, *Voorraden in de maatschappij* (nederlandske levetider)
-* EEA 2024, *Product lifespans* (PDF mangler i Zotero)
+Referansene er kontrollert på nett 2026-10-05. «Åpen» betyr at fulltekst er fritt tilgjengelig.
+
+**Levetider (viktigst)**
+
+1. **Kawecki, D., Wu, Q., Gonçalves, J. S. V. & Nowack, B. (2021).** Polymer-specific dynamic probabilistic material flow analysis of seven polymers in Europe from 1950 to 2016. *Resources, Conservation and Recycling* 173, 105733. doi:[10.1016/j.resconrec.2021.105733](https://doi.org/10.1016/j.resconrec.2021.105733). Åpen versjon i ZORA (UZH): https://www.zora.uzh.ch/entities/publication/a5d5e20a-c698-4edb-a206-7020f5c2e686. *Det vi trenger:* levetidsfordelingene for klær, hjemmetekstiler og tekniske tekstiler i vedlegget (SI). Abbasi m.fl. 2023 bruker dem for Norge.
+2. **Laitala, K. & Klepp, I. G. (2020).** What affects garment lifespans? International clothing practices based on a wardrobe survey in China, Germany, Japan, the UK, and the USA. *Sustainability* 12(21), 9151. doi:[10.3390/su12219151](https://doi.org/10.3390/su12219151). Åpen (MDPI): https://www.mdpi.com/2071-1050/12/21/9151. *Det vi trenger:* levetid i år per plaggtype og land, antall brukere.
+3. **Laitala, K., Klepp, I. G. & Henry, B. (2018).** Does use matter? Comparison of environmental impacts of clothing based on fiber type. *Sustainability* 10(7), 2524. doi:[10.3390/su10072524](https://doi.org/10.3390/su10072524). Åpen (MDPI). *Det vi trenger:* levetidene som Napolano 2025 bygger på. Ny på listen.
+4. **Drycleaning Institute of Australia (2015).** *International Fair Claims Guide for Consumer Textile Products.* Bransjeveileder, se bransjens nettsider. Den amerikanske forløperen er DLI (1998), *Fair Claims Guide for Consumer Textile Products*, som Logan 2025 bruker. *Det vi trenger:* forventet levetid per produkttype. Det er et økonomisk erstatningsmål, ikke observert bruk, så den er svakere enn garderobestudier.
+
+**Sammensetning og ikke-tekstile deler**
+
+5. **Napolano, L., Foschi, J., Caldeira, C., Huygens, D. & Sala, S. (2025).** Understanding textile value chains: Dynamic Probabilistic Material Flow Analysis of textile in the European Union. *Resources, Conservation and Recycling* 212, 107888. doi:[10.1016/j.resconrec.2024.107888](https://doi.org/10.1016/j.resconrec.2024.107888). Åpen (CC BY). **Vedlegget** («Supplementary material») lastes ned fra artikkelsiden på ScienceDirect, under «Appendix A. Supplementary data». *Det vi trenger:* tabell SM4 (levetidsfordelinger), SM7–SM8 (fiber- og ikke-tekstil-sammensetning per underkategori) og SM3 (produksjonstap). Selve artikkelen er i Zotero, men vedlegget er det ikke.
+6. **Sustainable Apparel Coalition & Quantis (2021).** *Draft Product Environmental Footprint Category Rules (PEFCR) – Apparel and Footwear*, versjon 1.2, 7. juli 2021 (høringsutkast). PDF hos EEB: https://eeb.org/wp-content/uploads/2021/11/Draft-Product-Environmental-Footprint-Category-Rules-PEFCR-apparel-and-footwear.pdf. Det finnes senere versjoner (pressen omtaler en «ferdig» PEFCR i 2025), og den nyeste bør brukes hvis den er tilgjengelig. *Det vi trenger:* standard materialsammensetning og vekt per produktunderkategori, inkludert ikke-tekstile deler (knapper, glidelåser, såler).
+7. **Huygens, D., Foschi, J., Caro, D., Caldeira, C., Faraca, G., Foster, G. m.fl. (2023).** *Techno-scientific assessment of the management options for used and waste textiles in the European Union.* JRC Technical Report JRC134586, Publications Office of the EU, 30.11.2023. Åpen: https://publications.jrc.ec.europa.eu/repository/handle/JRC134586. *Det vi trenger:* fibersammensetning og forurensning i avfallsstrømmene, sorteringsandeler og ombruksandeler.
+
+**Lager og levetider i andre land**
+
+8. **CBS (2021).** *Voorraden in de maatschappij: de grondstoffenbasis voor een circulaire economie* (Centraal Bureau voor de Statistiek, på oppdrag fra PBL, publisert 4.2.2021, data for 2015–2019). https://www.cbs.nl/nl-nl/achtergrond/2021/03/voorraden-in-de-maatschappij-grondstoffenbasis-voor-een-circulaire-economie. Bygger på arbeid ved CML Leiden og siteres i Xu m.fl. 2024 som «Leiden U, CBS, CML (2020)». *Merk:* Nettsiden nevner tekstillager (5 438 kt husholdningstekstiler i 2019) og tilførsel per produktgruppe, men ikke levetider. Det må sjekkes i rapporten. Oppfølgeren er CBS *Materiaalvoorradenmonitor 2020* (2024): https://www.cbs.nl/nl-nl/longread/aanvullende-statistische-diensten/2024/materiaalvoorradenmonitor.
+9. **European Environment Agency (2024).** *Product lifespans – monitoring trends in Europe.* EEA Briefing. Åpen: https://www.eea.europa.eu/en/analysis/publications/product-lifespans-monitoring-trends. *Merk:* De sju indikatorene gjelder biler, hvitevarer og mobiltelefoner. Briefingen har trolig ingen tekstillevetider, så den er lav prioritet. Zotero-oppføringen (ID 257) mangler PDF.
