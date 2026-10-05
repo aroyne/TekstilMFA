@@ -27,6 +27,7 @@ tests/             pytest
 docs/              PLAN.md, SYSTEMDEFINISJON.md, METODE.md
 claude_tekst/      Notater og analyser skrevet av Claude
 litteratur/        Kilder (PDF-er, ikke i git)
+prototype/         Prøver som ikke inngår i modellen (fiberlag med flodym)
 ```
 
 ## Kjøring
@@ -36,4 +37,6 @@ python scripts/extract_textile_trade.py                 # én gang: tekstilrader
 python scripts/update_trade_ssb_api.py 2023 2024 2025   # nyeste år (og revisjoner) fra SSB API
 python -m pytest -q
 python main_mc.py --pool all --nsim 1000 --seed 1
+python scripts/build_hs_main_fibre.py                   # hovedfiber per HS8-kode fra varetekstene i 08801
+python -m prototype.fibre_layer_flodym                  # prototype av fiberlaget (krever pip install flodym)
 ```

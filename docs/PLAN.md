@@ -1,6 +1,6 @@
 # PLAN – TekstilMFA
 
-*Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-09-29.*
+*Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-10-05.*
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
 
 **Mål:** En dynamisk, probabilistisk MFA for tekstiler i Norge 1990–2025. Den skal identifisere pools, subpools, flyter og lagre, kvantifisere dem med data og parametre, beregne tidsutviklingen med Monte Carlo og dokumentere hver flyt slik det er gjort i NitrogenBudsjett.
@@ -36,6 +36,12 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] D11 er besluttet: Forbrenning i Norge er et sluk. Forbrenning i utlandet er en RW-flyt (eksportert restavfall × tekstilandel).
 - [x] D12 er besluttet: Scenarier venter til den historiske modellen er ferdig.
 - [ ] Sjekke hvordan kasserte sekker registreres i avfallsstatistikken (plastemballasje eller tekstil), før validering.
+
+### 2026-10-05 – Lag for tekstilform og materiale, flodym-prototype
+- [x] Forslag til to nye lag ([notat](../claude_tekst/2026-10-05_lag_tekstilform_og_materiale.md)): tekstilform som kolonne i `flows.csv` (D18) og fiber som lag beregnet etter TOT (D19). Ikke besluttet.
+- [x] Vurdert åpne MFA-pakker: flodym (PIK, MIT) passer best. Den har dimensjoner per flyt, årgangslager og balanse per felles dimensjon, men ikke MC.
+- [x] Hovedfiber per HS8-kode fra varetekstene i 08801 (`scripts/build_hs_main_fibre.py` → `parameters/hs_main_fibre.csv`). Klær 2025: 40 % bomull og 33 % kjemiske fibre (NORSUS 2026: 41 % og 32 %).
+- [x] Prototype av fiberlaget med flodym (`prototype/fibre_layer_flodym.py`) for CL+HT+FW i husholdningene. Massebalansen holder. Årgangseffekten på kasseringene er liten (≤ 3 prosentpoeng) og forklarer ikke 44 % syntetisk hos Syversen 2023. Mest sannsynlig skjuler det seg syntetiske fibre i restposter og koder uten fiber (ca. 35 %).
 
 ## Neste
 
@@ -75,7 +81,11 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 ### Fase 3 – P2- og P3-flyter
 - [ ] MA (norsk ull, produksjon), US.IC, sorteringsdetaljer, avfallseksport, materialgjenvinning.
 - [ ] Mikrofibre: vask → avløpsrensing → vann og jord.
-- [ ] Fiberlag (HS6-hovedfiber + sammensetningsmatrise).
+- [ ] Fiberlag: Ta stilling til D18, D19 og flodym (se notat 2026-10-05). Hovedfiber fra HS er ferdig, og prototypen kjører.
+- [ ] Fiberlag: Matrise for restposter og koder uten fiber (RES/UNK) per produkt, fra plukkanalyser med fibersortering eller JRC. Sko trenger egen behandling.
+- [ ] Fiberlag: Sammensetningsmatrise hovedfiber → fiberandeler (et «bomullsplagg» er ikke 100 % bomull).
+- [x] D20 er besluttet: Flyter er summer per kalenderår, lageret er nivået ved årsslutt, og innstrømmen regnes som om den kom midt i året (flodym-standard).
+- [ ] Prøve MC som dimensjon i flodym-prototypen.
 
 ### Fase 4 – Usikkerhet
 - [ ] Pedigree-basert usikkerhet for alle datasett og parametre.

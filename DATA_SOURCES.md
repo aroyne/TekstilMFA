@@ -67,5 +67,6 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | Plukkanalyser med fibersortering; JRC (Köhler et al. 2021; Huygens et al. 2023) | Fiberandeler i EU-forbruk og -avfall | hent |
 | Textile Exchange, *Materials Market Report* | Globale fiberandeler (polyester 59 % i 2024) | har (via TekstilEOL) |
 | SSB 08801 på HS6-nivå | Mange HS-koder angir hovedfiber (for eksempel 6109.10 bomull, 6109.90 annet) | har |
+| `parameters/hs_main_fibre.csv` | Hovedfiber for alle 1 406 HS8-koder i kapittel 50–64, klassifisert etter regler ut fra de engelske varetekstene i metadataene til SSB 08801 (API 2026-10-05, `scripts/build_hs_main_fibre.py`). Klasser: CO, WO, SYN, ART, MMF (kjemiske fibre uten nærmere angivelse), OTH (annen navngitt fiber), RES (restpost «of other textile materials»), UNK (fiber ikke oppgitt). Kolonnen `rule` viser hvilken regel som slo til | har (brukes i `prototype/`) |
 
-**Merk:** HS-koden gir hovedfiberen gratis for en stor del av klesimporten. Det gir en empirisk start på fiberlaget.
+**Merk:** HS-koden gir hovedfiberen for en stor del av klesimporten. For klær (kap. 61/62) i 2025 er 40 % bomull og 33 % kjemiske fibre, mot 41 % og 32 % i NORSUS 2026. Restposter og koder uten fiber (RES+UNK) er 24 % for klær og 13 % for hjemmetekstiler (2025). For sko oppgir ingen koder fiber.
