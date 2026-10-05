@@ -1,8 +1,8 @@
-product,year,PES,PA,PAC,PP,EL,CO,WO,CV,OTH,source,status
-CL,,,,,,,,,,,,todo
-HT,,,,,,,,,,,,todo
-FW,,,,,,,,,,,,todo
-CA,,,,,,,,,,,,todo
-SA,,,,,,,,,,,,todo
-TA,,,,,,,,,,,,todo
-OM,,,,,,,,,,,,todo
+product,year,SYN,CO,WO,CV,OTH,source,status
+CL,,,,,,,,todo
+HT,,,,,,,,todo
+FW,,,,,,,,todo
+CA,,,,,,,,todo
+SA,,,,,,,,todo
+TA,,,,,,,,todo
+OM,,,,,,,,todo

@@ -94,7 +94,9 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] D20 er besluttet: Flyter er summer per kalenderår, lageret er nivået ved årsslutt, og innstrømmen regnes som om den kom midt i året (flodym-standard).
 - [x] MC med flodym er testet (se notatet). Ett system per iterasjon tar 5 ms. Full vektorisering sprenger minnet, men en levetidsmodell over (år, iterasjon, produkt) fungerer. Flaskehalsen er dagens pooler (400 ms per iterasjon), fordi 08801 summeres på nytt i hver iterasjon.
 - [x] Handelsdataene (08801) summeres én gang før MC-løkka.
-- [ ] Flytte fiberlaget fra `prototype/` inn i modellen som dimensjon `m` (etter beslutning om D19).
+- [x] D19 er delvis besluttet: fem fibergrupper (SYN, CO, WO, CV, OTH). `fibre_composition.csv` har fått de samme kolonnene.
+- [ ] Andel SYN i HS-klassen MMF (kjemiske fibre uten nærmere angivelse).
+- [ ] Flytte fiberlaget fra `prototype/` inn i modellen som dimensjon `m` (etter beslutning om resten av D19).
 - [ ] Erstatte `calculations/stock_model.py` med flodyms `InflowDrivenDSM` for den parallelle lagermodellen (D20). Den egne modellen brukes nå bare i testene og er død kode.
 
 ### Fase 4 – Usikkerhet

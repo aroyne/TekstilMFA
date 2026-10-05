@@ -60,7 +60,16 @@ To ting må på plass samtidig:
 * **Massebalansen må sjekkes per lag.** `balances.py` grupperer i dag på (prosess, år). Hvis fiberrader legges til uten endring, telles massen dobbelt (TOT + sum av fibre), og sjekken feiler. Den må gruppere på (prosess, år, lag).
 * **Minne.** I dag er det ca. 40 flyter × 8 produkter × 38 år ≈ 12 000 rader per iterasjon, lagret som dict-er. Med 10 lag blir det over 100 millioner rader ved 1 000 iterasjoner. Forslag: fiberlaget slås på med et flagg (`--layers fibre`), og fiberradene oppsummeres per iterasjon (løpende persentiler eller lagring som numpy-matrise per flyt) i stedet for å samles som dict-er.
 
-Fibertyper: De ni i `fibre_composition.csv` (PES, PA, PAC, PP, EL, CO, WO, CV, OTH) pluss NT. Det kan reduseres til fem grupper for rapportering (syntetisk, bomull, ull, regenerert cellulose, annet + NT) uten å endre beregningen.
+Fibergrupper (**besluttet 2026-10-05**): fem grupper, SYN (syntetisk: PES, PA, PAC, PP, EL), CO (bomull), WO (ull), CV (regenerert cellulose) og OTH (annet), pluss NT hvis det blir besluttet. Syntetisk deles i polymerer bare i flyter som trenger det (mikrofibre, gjenvinning), med en egen parameter.
+
+Fra hovedfiberklassene i `hs_main_fibre.csv` til gruppene:
+
+| HS-klasse | Gruppe |
+|---|---|
+| CO, WO, SYN, OTH | samme |
+| ART (kunstige fibre) | CV |
+| MMF (kjemiske fibre uten nærmere angivelse) | delt mellom SYN og CV, med en andel som må settes (trolig stor andel SYN) |
+| RES, UNK | fordelt med en matrise per produkt (se under) |
 
 ## 3. Produktdimensjonen
 
@@ -154,5 +163,4 @@ De to variantene gir identiske resultater (avvik 2·10⁻¹⁶).
 
 * Er de åtte formkategoriene riktige? Spesielt: Skal usolgte varer være NEW (som foreslått) eller egen kategori? Skal skadede, men reparerbare produkter regnes som USE?
 * Skal NT erstatte `nontextile_share_*` (forslag) eller ligge ved siden av?
-* Skal fiberlaget rapporteres med ni fibre eller fem grupper?
 * Skal vi gå over til flodym fullt ut (trinn 2)? Prototypen er laget, og radkonvensjonen er ikke lenger et hinder.
