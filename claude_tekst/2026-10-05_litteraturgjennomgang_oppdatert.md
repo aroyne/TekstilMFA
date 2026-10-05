@@ -93,7 +93,64 @@ Ingen ny kilde med levetider i år per produktgruppe ble funnet i utvalget.
 6. **Posisjonering:** Napolano 2025 er nærmeste sammenligning, men har bare to år, uniforme fordelinger og kasseringer fra levetider. Vi har en tidsserie, kasseringer fra statistikk og lagermodellen som uavhengig kontroll. Begge har lageret som restledd med stor usikkerhet.
 7. **Mulig metode for levetider:** salg og eierskap over tid (Krych & Pettersen 2025), med garderobestudier som lagerdata.
 
+## 5. Tillegg: kildene som ble lagt inn i Zotero 2026-10-05
+
+Dette ble lagt inn og lest: Kawecki m.fl. 2021 med vedlegg, Laitala & Klepp 2020, Laitala m.fl. 2018, International Fair Claims Guide (2015), vedlegget til Napolano m.fl. 2025, PEFCR Apparel & Footwear (Cascale 2025, ferdig versjon), Huygens m.fl. 2023 (JRC) og van Oorschot m.fl. 2020 (*Voorraden in de maatschappij deel II*, CML/CBS, utkast nov. 2020).
+
+### 5.1 Levetider
+
+| Kilde | Type | Klær | Hjemmetekstiler | Sko | Andre |
+|---|---|---|---|---|---|
+| **Laitala & Klepp 2020** (garderobeundersøkelse, 5 land, N = 46 857 plagg) | gjennomsnittsalder × 2, **én eier** | **5,2 år** i snitt (nåværende alder 2,6 år). Tidligere studier: snitt 4 år | – | – | – |
+| **Laitala m.fl. 2018**, tab. 7 (9 studier, bl.a. 2 norske) | én eier | 2,6 (sokker) – 7,6 (frakker), alle plagg ca. 4–4,7 år. **Etter fiber: syntetisk 6,3 år, bomullsblanding 4,2 år, 100 % bomull 3,6 år**. Eldste plagg i bruk i Norge: 15,8 år i snitt, 14 % over 30 år | – | – | – |
+| **Napolano m.fl. 2025, SM4** (Laitala 2018 + Fair Claims Guide, 226 Prodcom-koder) | én eier eller erstatningsnorm, uniform min–maks | median 4,7 år (1–8,7) | sengetøy 3, håndklær 2–3, gardiner 4, pledd 5–10, dyner 5 | 4,7 | tepper 5, presenninger/telt 4, sekker 1, kluter 2 |
+| **van Oorschot m.fl. 2020**, tab. 4.3 (NL; Consumentenbond, forsikringslister; normalfordeling, sd = snitt/2,5) | erstatningsnorm | yttertøy 3,0, undertøy/sokker 1,8, annet 3,25, arbeidstøy 2,0 | sengetøy 5,9, boligtekstiler 9,8 | – | tepper 15,6 |
+| **Kawecki m.fl. 2021** (vedlegg tab. S6) | fordelinger fra IMPRO Textiles (Beton m.fl. 2014, JRC) og OECD 2012 (klær), Giorgi 2015 (hjemmetekstiler) | **ingen tallverdier i vedlegget**, bare kildene | | | |
+| ECAP 2017 (WRAP 2015) | – | arbeidstøy litt over 3 år | | | |
+
+**Viktig for tolkningen (D9/D10):** Alle tallene gjelder **én eier**, eller en økonomisk erstatningsnorm. Levetiden i lagermodellen vår skal være den samlede tiden i norske husholdninger, med dvalende lager og uformell videreføring (Laitala & Klepp 2021: en ny bruker dobler levetiden i år). Den bør derfor være **lengre enn 5 år for klær**. Andelen brukte plagg i garderobene er bare 7,4 % (Laitala & Klepp 2020), så tillegget fra videreføring er trolig moderat.
+
+**Følge med på fiberlaget (D19):** Hvis syntetiske plagg lever 6,3 år og bomullsplagg 3,6 år, får kasseringene **mindre** syntetisk enn tilførselen på kort sikt. Det trekker motsatt vei av observasjonen (44–48 % syntetisk/fossilt i avfallet). Det styrker antakelsen om at det er restpostene i HS-kodene som skjuler syntetiske fibre. Fiberspesifikke levetider kan legges inn i årgangsmodellen.
+
+### 5.2 Ikke-tekstile deler (NT)
+
+| Kilde | Klær | Sko | Hele avfallsstrømmen |
+|---|---|---|---|
+| **PEFCR 2025, tab. A.IV 2–3** (materialliste per representativt produkt, EU-snitt) | tilbehør (knapper, glidelåser, etiketter) **0,2–1,6 %**. Lær og pels: under 1 % i jakker og bukser, ca. 7 % i tilbehør. **NT ≈ 1–2 %** | tekstil ≈ **4 %** (åpne sko, 350 g), **≈ 41 %** (lukkede sko, 900 g), **≈ 20 %** (støvler, 1 100 g). Resten er EVA, gummi, PU, PVC, TPU, lær, kork og metall | – |
+| Gottfridsson & Zhang 2015 | – | tekstil 5–35 % per tollposisjon | – |
+| **Huygens m.fl. 2023** (JRC) | – | – | **NT = 11 %** av tekstilavfallet etter forbruk i EU (lær, metall, inkl. sko) |
+
+*Forslag:* NT for CL ca. 1,5 % (1–3 %), for HT ca. 1 % (antakelse, ingen kilde), for FW per tollposisjon fra Gottfridsson/PEFCR (gir ca. 70–90 %). Huygens' 11 % kan brukes som kontroll av helheten.
+
+PEFCR har i tillegg **fibersammensetning per produkttype** (EU-snitt). For eksempel er T-skjorter 70 % bomull og 23 % polyester, og jakker 15 % bomull, 36 % polyester, 15 % PA og 11 % akryl. Det er en kandidat for å fordele restpostene og kodene uten fiber (RES/UNK) per produkt (D19).
+
+### 5.3 Brukbart i restavfall og innsamling
+
+| Kilde | Tall |
+|---|---|
+| **Laitala m.fl. 2012** (Norge, sitert i Huygens 2023) | **28 %** av tekstilene i blandet husholdningsavfall kan brukes igjen. *Mulig ankerpunkt rundt 2011, må skaffes* |
+| Watson m.fl. 2018 (sitert i Huygens) | 23 % brukbart, 26 % gjenvinnbart |
+| Nørup 2019b, Hultén 2016 (Sverige) | 60–70 % brukbart i restavfallet |
+| Huygens 2023 | 58 % av det som samles inn separat er egnet for ombruk etter sortering (Watson 2020: 72 % for norsk «original») |
+| PEFCR 2025, vedlegg VI (17 forbrukerstudier) | Grunner til kassering: **utslitt 37 %**, passer ikke 28 %, lav opplevd verdi 35 % |
+
+*Konsekvens for D18:* Den norske serien for brukbart i restavfall blir 28 % (ca. 2011), 45 % (2022, bare hjemme) og 40 % (2025). Spredningen mellom studiene er stor (23–70 %), så usikkerheten må være bred. At bare 37 % kasseres fordi plagget er utslitt, er i samme størrelsesorden som de norske tallene.
+
+### 5.4 Forslag til parameterverdier (til avklaring)
+
+| Parameter | Forslag | Grunnlag |
+|---|---|---|
+| Levetid CL, US.HH | Weibull, snitt **6 år** (4–9), form ca. 2 | 5,2 år per eier (Laitala & Klepp 2020) + videreføring og dvalende lager |
+| Levetid HT, US.HH | snitt **6 år** (3–10) | 3–10 år per type (Napolano SM4, van Oorschot) |
+| Levetid FW, US.HH | snitt **4 år** (3–6) | 4,7 år (Napolano SM4) |
+| Levetid CA | snitt **10 år** (5–16) | 5 (Fair Claims) – 15,6 (van Oorschot) |
+| Levetid TA / OM | 4 år / 2 år | Napolano SM4 |
+| NT CL / HT / FW | 1,5 % / 1 % / per tollposisjon | PEFCR 2025, Gottfridsson 2015 |
+| Brukbart i restavfall | 0,28 (2011), 0,45 (2022), 0,40 (2025) | Laitala 2012, Rubach 2023, de Sadeleer 2026 |
+
 ## Skaffe og lese
+
+**Status 2026-10-05:** Nr. 1–3 og 5–8 er lagt inn i Zotero og lest (se avsnitt 5). Nye kilder å skaffe: Laitala m.fl. 2012 (norsk andel brukbart i restavfall), Beton m.fl. 2014 *IMPRO Textiles* (JRC) og Giorgi 2015 *Non-clothing textiles* (WRAP), som Kawecki bygger levetidene på.
 
 Referansene er kontrollert på nett 2026-10-05. «Åpen» betyr at fulltekst er fritt tilgjengelig.
 
