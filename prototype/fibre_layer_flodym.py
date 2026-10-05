@@ -203,7 +203,9 @@ def build_system(tot, supply_shares, discard_shares):
 
     for name in (F_SECONDHAND, F_COLLECT, F_EXPORT_UNSORTED, F_TO_SORTING, F_REUSE, F_SORT_RESIDUES):
         mfa.flows[name].values[...] = by_discards(tot_core(tot, name + '-TOT'))
-    mfa.flows[F_RESIDUAL].values[...] = by_discards(tot_core(tot, F_RESIDUAL + '-TOT'))
+    residual = sum(tot_core(tot, f'US.HH-WM.RS-{kind} textiles in residual and bulky waste-TOT')
+                   for kind in ('Reusable', 'Worn'))
+    mfa.flows[F_RESIDUAL].values[...] = by_discards(residual)
     mfa.flows[F_TREATMENT].values[...] = (mfa.flows[F_RESIDUAL].values
                                           + mfa.flows[F_SORT_RESIDUES].values)
 

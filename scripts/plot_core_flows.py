@@ -28,7 +28,8 @@ INFLOWS = ['DI.RT-US.HH-Sales to households-TOT', 'RW.RW-US.HH-Private imports-T
 PANELS = [
     ('Tilført husholdninger (salg, privatimport, netthandel, brukt)', INFLOWS),
     ('Separat innsamlet', ['US.HH-CO.CO-Separate collection from households-TOT']),
-    ('Tekstiler i restavfall', ['US.HH-WM.RS-Textiles in residual and bulky waste-TOT']),
+    ('Tekstiler i restavfall', ['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT',
+                                'US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT']),
     ('Lagerendring i husholdningene (restledd)', ['US.HH-US.HH-Stock change-TOT']),
 ]
 

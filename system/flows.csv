@@ -1,41 +1,42 @@
-flow_code,source,target,name,layer,dims,priority,method,status,candidate_data,note
-RW.RW-MA.FI-Fibre and yarn import-TOT,RW.RW,MA.FI,Fibre and yarn import,TOT,,2,data,planned,SSB 08801 (HS 50-56 fibre/yarn headings),Only fibres/yarns used by textile manufacturing; exclude e.g. HS 5601 wadding for hygiene products if scoped out
-RW.RW-MA.TX-Fabric import-TOT,RW.RW,MA.TX,Fabric import,TOT,,2,data,planned,"SSB 08801 (HS 58, 59, 60 and woven fabric headings in 50-55)",Includes technical fabrics; scope decision D3
-RW.RW-DI.RT-Finished textile products import-TOT,RW.RW,DI.RT,Finished textile products import,TOT,"t,p",1,data,implemented,"SSB 08801 (HS 61, 62, 6301-6304, 64)",Net weight as declared; includes non-textile parts (buttons/zips/soles)
-RW.RW-US.HH-Private imports-TOT,RW.RW,US.HH,Private imports,TOT,"t,p",1,data+parameter,implemented,SSB 05678 (cross-border day trips total 2004-2022) and 14221 (clothing and shoes 2023-2025); NOK-to-kg via 08801 unit values x retail markup,Not in trade statistics; small (about 0.2-0.5 kt/yr); purchases on overnight travel not covered
-RW.RW-US.HH-Direct online imports-TOT,RW.RW,US.HH,Direct online imports,TOT,"t,p",1,parameter,implemented,Tolletaten VOEC data for HS 61/62/63 2022-2025 via NORSUS 2026; Watson et al. 2020 (3300 t in 2018); SSB 08801 codes 99603000 (VOEC total 2023-),Low-value shipments are not in 08801 under HS codes; see claude_tekst/2026-09-29_lavverdisendinger_VOEC_og_klesimport.md
-RW.RW-CO.SO-Used textile import-TOT,RW.RW,CO.SO,Used textile import,TOT,,3,data,planned,SSB 08801 (HS 6309 and 6310 import),Expected small
-PS.WO-MA.FI-Norwegian raw wool-TOT,PS.WO,MA.FI,Norwegian raw wool,TOT,,2,data,planned,Norilia/Animalia wool statistics; SSB/NIBIO,Greasy vs. scoured wool basis must be stated
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,MA.FI,MA.TX,Yarn to textile manufacturing,TOT,,3,balance,planned,Balance of MA.FI,
-MA.FI-RW.RW-Fibre and yarn export-TOT,MA.FI,RW.RW,Fibre and yarn export,TOT,,2,data,planned,SSB 08801 (HS 50-56 export incl. raw wool 5101),
-MA.TX-DI.RT-Domestic finished products-TOT,MA.TX,DI.RT,Domestic finished products,TOT,,2,data+balance,planned,SSB industrial production statistics (NACE 13-15); Prodcom,Cross-check against balance of MA.TX
-MA.TX-RW.RW-Textile export-TOT,MA.TX,RW.RW,Textile export,TOT,,2,data+parameter,planned,SSB 08801 export; split vs. re-export needs parameter,Trade statistics do not separate domestic production from re-export - decision D6
-MA.TX-WM.RS-Preconsumer production waste-TOT,MA.TX,WM.RS,Preconsumer production waste,TOT,,3,parameter,planned,SSB 10513 (textile waste by industry) or waste fraction of production,
-DI.RT-US.HH-Sales to households-TOT,DI.RT,US.HH,Sales to households,TOT,"t,p",1,balance,implemented,Balance of DI.RT,Key inflow to the in-use stock
-DI.RT-US.IC-Sales to institutions and businesses-TOT,DI.RT,US.IC,Sales to institutions and businesses,TOT,"t,p",2,parameter,implemented,Share of workwear/linen in supply; public procurement data (Doffin/DFØ); industry reports,
-DI.RT-RW.RW-Export of finished textile products-TOT,DI.RT,RW.RW,Export of finished textile products,TOT,"t,p",1,data,implemented,"SSB 08801 (HS 61, 62, 6301-6304, 64 export)",Includes re-export and returns from online sales
-DI.RT-WM.RS-Unsold goods discarded-TOT,DI.RT,WM.RS,Unsold goods discarded,TOT,,3,parameter,planned,Literature on destruction of unsold goods; Miljødirektoratet EPR assessment,
-DI.RT-CO.CO-Unsold goods donated-TOT,DI.RT,CO.CO,Unsold goods donated,TOT,,3,parameter,planned,Collector annual reports,
-US.HH-CO.CO-Separate collection from households-TOT,US.HH,CO.CO,Separate collection from households,TOT,"t,g",1,data,implemented,"SSB 08801 export of HS 6309+6310 (1988-2025) divided by export share anchored in Watson 2020, NORSUS 2023 and NORSUS 2026",Anchor years only - interpolation between anchors
-US.HH-WM.RS-Textiles in residual and bulky waste-TOT,US.HH,WM.RS,Textiles in residual and bulky waste,TOT,"t,g",1,data,implemented,Pick analyses (Mepex/Avfall Norge) x SSB household waste amounts; SSB 10513,Official waste statistics are the primary source (D8); compared with stock-model outflow
-US.HH-WM.WW-Fibre release in laundry-TOT,US.HH,WM.WW,Fibre release in laundry,TOT,,2,parameter,planned,Sundt et al. 2014 (Mepex for Miljødirektoratet); laundry release literature,Mass is small but environmentally relevant
-US.HH-EN.AI-Fibre release to air and dust-TOT,US.HH,EN.AI,Fibre release to air and dust,TOT,,3,parameter,planned,Literature on airborne fibre release,
-US.IC-CO.CO-Collection from institutions-TOT,US.IC,CO.CO,Collection from institutions,TOT,,3,parameter,planned,Collector reports; laundry companies,
-US.IC-WM.RS-Institutional textile waste-TOT,US.IC,WM.RS,Institutional textile waste,TOT,"t,p",2,data,"implemented (steady state, see open questions)",SSB 10513 (textile waste by industry),Official waste statistics are the primary source (D8)
-US.IC-WM.WW-Fibre release in industrial laundry-TOT,US.IC,WM.WW,Fibre release in industrial laundry,TOT,,3,parameter,planned,Laundry release literature,
-CO.CO-RW.RW-Export of unsorted collected textiles-TOT,CO.CO,RW.RW,Export of unsorted collected textiles,TOT,"t,g",1,data,implemented,SSB 08801 (HS 6309/6310 export); collector reports; NORSUS 2023 (about 85 % exported),HS 6309 export may also contain sorted grades - split needed
-CO.CO-CO.SO-Collected textiles to domestic sorting-TOT,CO.CO,CO.SO,Collected textiles to domestic sorting,TOT,"t,g",1,balance,implemented,Balance of CO.CO,
-CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT,CO.SO,CO.RE,Sorted for domestic secondhand sales,TOT,"t,g",1,data,implemented,Collector annual reports,
-CO.SO-RW.RW-Export of sorted textiles-TOT,CO.SO,RW.RW,Export of sorted textiles,TOT,,2,data,planned,Collector reports; SSB 08801,
-CO.SO-WM.RC-Sorted for recycling-TOT,CO.SO,WM.RC,Sorted for recycling,TOT,,2,data,planned,Collector and recycler reports,
-CO.SO-WM.RS-Sorting residues-TOT,CO.SO,WM.RS,Sorting residues,TOT,"t,g",2,parameter,implemented (incl. recycling until WM.RC is split),Reject share from collector reports,
-CO.RE-US.HH-Secondhand sales to households-TOT,CO.RE,US.HH,Secondhand sales to households,TOT,"t,g",1,balance,implemented,Balance of CO.RE,Re-enters the in-use stock
-CO.RE-WM.RS-Unsold secondhand goods-TOT,CO.RE,WM.RS,Unsold secondhand goods,TOT,,3,parameter,planned,Collector reports,
-WM.RS-WM.IN-Domestic incineration-TOT,WM.RS,WM.IN,Domestic incineration,TOT,t,1,balance,implemented,Balance of WM.RS; SSB 10513 treatment by material,
-WM.RS-RW.RW-Residual waste export for incineration-TOT,WM.RS,RW.RW,Residual waste export for incineration,TOT,t,2,data+parameter,implemented,"SSB 13035 (KOSTRA): residual waste exported / residual waste total, 2015-2025",Mainly to Sweden
-WM.RS-WM.LF-Landfilling of textiles-TOT,WM.RS,WM.LF,Landfilling of textiles,TOT,t,1,data,implemented,SSB 05281 (1995-2011) and 10513 (2012-); earlier years extrapolated,Dominant route before 2009 landfill ban - important for the time series
-WM.RC-MA.TX-Recycled fibre to domestic manufacturing-TOT,WM.RC,MA.TX,Recycled fibre to domestic manufacturing,TOT,,3,data,planned,Recycler reports,Expected near zero historically
-WM.RC-RW.RW-Export for recycling-TOT,WM.RC,RW.RW,Export for recycling,TOT,,2,data,planned,Collector/recycler reports; SSB 10513,
-WM.WW-EN.WA-Fibres in treated wastewater-TOT,WM.WW,EN.WA,Fibres in treated wastewater,TOT,,2,parameter,planned,Retention efficiency of Norwegian WWTPs (share of primary vs. secondary treatment - SSB 05280),
-WM.WW-EN.SO-Fibres in sewage sludge to soil-TOT,WM.WW,EN.SO,Fibres in sewage sludge to soil,TOT,,2,parameter,planned,Sludge disposal shares (SSB),
-WM.WW-WM.IN-Fibres in sludge to other treatment-TOT,WM.WW,WM.IN,Fibres in sludge to other treatment,TOT,,3,parameter,planned,Sludge disposal shares (SSB),
+flow_code,source,target,name,layer,dims,form,priority,method,status,candidate_data,note
+RW.RW-MA.FI-Fibre and yarn import-TOT,RW.RW,MA.FI,Fibre and yarn import,TOT,,FIB,2,data,planned,SSB 08801 (HS 50-56 fibre/yarn headings),Only fibres/yarns used by textile manufacturing; exclude e.g. HS 5601 wadding for hygiene products if scoped out
+RW.RW-MA.TX-Fabric import-TOT,RW.RW,MA.TX,Fabric import,TOT,,FAB,2,data,planned,"SSB 08801 (HS 58, 59, 60 and woven fabric headings in 50-55)",Includes technical fabrics; scope decision D3
+RW.RW-DI.RT-Finished textile products import-TOT,RW.RW,DI.RT,Finished textile products import,TOT,"t,p",NEW,1,data,implemented,"SSB 08801 (HS 61, 62, 6301-6304, 64)",Net weight as declared; includes non-textile parts (buttons/zips/soles)
+RW.RW-US.HH-Private imports-TOT,RW.RW,US.HH,Private imports,TOT,"t,p",NEW,1,data+parameter,implemented,SSB 05678 (cross-border day trips total 2004-2022) and 14221 (clothing and shoes 2023-2025); NOK-to-kg via 08801 unit values x retail markup,Not in trade statistics; small (about 0.2-0.5 kt/yr); purchases on overnight travel not covered
+RW.RW-US.HH-Direct online imports-TOT,RW.RW,US.HH,Direct online imports,TOT,"t,p",NEW,1,parameter,implemented,Tolletaten VOEC data for HS 61/62/63 2022-2025 via NORSUS 2026; Watson et al. 2020 (3300 t in 2018); SSB 08801 codes 99603000 (VOEC total 2023-),Low-value shipments are not in 08801 under HS codes; see claude_tekst/2026-09-29_lavverdisendinger_VOEC_og_klesimport.md
+RW.RW-CO.SO-Used textile import-TOT,RW.RW,CO.SO,Used textile import,TOT,,MIX,3,data,planned,SSB 08801 (HS 6309 and 6310 import),Expected small
+PS.WO-MA.FI-Norwegian raw wool-TOT,PS.WO,MA.FI,Norwegian raw wool,TOT,,FIB,2,data,planned,Norilia/Animalia wool statistics; SSB/NIBIO,Greasy vs. scoured wool basis must be stated
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,MA.FI,MA.TX,Yarn to textile manufacturing,TOT,,FIB,3,balance,planned,Balance of MA.FI,
+MA.FI-RW.RW-Fibre and yarn export-TOT,MA.FI,RW.RW,Fibre and yarn export,TOT,,FIB,2,data,planned,SSB 08801 (HS 50-56 export incl. raw wool 5101),
+MA.TX-DI.RT-Domestic finished products-TOT,MA.TX,DI.RT,Domestic finished products,TOT,,NEW,2,data+balance,planned,SSB industrial production statistics (NACE 13-15); Prodcom,Cross-check against balance of MA.TX
+MA.TX-RW.RW-Textile export-TOT,MA.TX,RW.RW,Textile export,TOT,,NEW,2,data+parameter,planned,SSB 08801 export; split vs. re-export needs parameter,Trade statistics do not separate domestic production from re-export - decision D6
+MA.TX-WM.RS-Preconsumer production waste-TOT,MA.TX,WM.RS,Preconsumer production waste,TOT,,PCW,3,parameter,planned,SSB 10513 (textile waste by industry) or waste fraction of production,
+DI.RT-US.HH-Sales to households-TOT,DI.RT,US.HH,Sales to households,TOT,"t,p",NEW,1,balance,implemented,Balance of DI.RT,Key inflow to the in-use stock
+DI.RT-US.IC-Sales to institutions and businesses-TOT,DI.RT,US.IC,Sales to institutions and businesses,TOT,"t,p",NEW,2,parameter,implemented,Share of workwear/linen in supply; public procurement data (Doffin/DFØ); industry reports,
+DI.RT-RW.RW-Export of finished textile products-TOT,DI.RT,RW.RW,Export of finished textile products,TOT,"t,p",NEW,1,data,implemented,"SSB 08801 (HS 61, 62, 6301-6304, 64 export)",Includes re-export and returns from online sales
+DI.RT-WM.RS-Unsold goods discarded-TOT,DI.RT,WM.RS,Unsold goods discarded,TOT,,NEW,3,parameter,planned,Literature on destruction of unsold goods; Miljødirektoratet EPR assessment,
+DI.RT-CO.CO-Unsold goods donated-TOT,DI.RT,CO.CO,Unsold goods donated,TOT,,NEW,3,parameter,planned,Collector annual reports,
+US.HH-CO.CO-Separate collection from households-TOT,US.HH,CO.CO,Separate collection from households,TOT,"t,g",MIX,1,data,implemented,"SSB 08801 export of HS 6309+6310 (1988-2025) divided by export share anchored in Watson 2020, NORSUS 2023 and NORSUS 2026",Anchor years only - interpolation between anchors
+US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT,US.HH,WM.RS,Reusable textiles in residual and bulky waste,TOT,"t,g",USE,1,data+parameter,implemented,"Pick analyses (Mepex/Avfall Norge) x SSB household waste amounts; SSB 10513; Reusable share of pick analyses: Laitala et al. 2012 (via Huygens et al. 2023), Rubach et al. 2023, de Sadeleer & Rubach 2026",D18. CORE group only: residual textiles x reusable share; CA/TA/OM are counted as worn
+US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT,US.HH,WM.RS,Worn textiles in residual and bulky waste,TOT,"t,g",WRN,1,data+parameter,implemented,"Pick analyses (Mepex/Avfall Norge) x SSB household waste amounts; SSB 10513; Reusable share of pick analyses: Laitala et al. 2012 (via Huygens et al. 2023), Rubach et al. 2023, de Sadeleer & Rubach 2026","D18. CORE residual textiles not reusable, plus CA/TA/OM discarded in the year supplied"
+US.HH-WM.WW-Fibre release in laundry-TOT,US.HH,WM.WW,Fibre release in laundry,TOT,,MFR,2,parameter,planned,Sundt et al. 2014 (Mepex for Miljødirektoratet); laundry release literature,Mass is small but environmentally relevant
+US.HH-EN.AI-Fibre release to air and dust-TOT,US.HH,EN.AI,Fibre release to air and dust,TOT,,MFR,3,parameter,planned,Literature on airborne fibre release,
+US.IC-CO.CO-Collection from institutions-TOT,US.IC,CO.CO,Collection from institutions,TOT,,MIX,3,parameter,planned,Collector reports; laundry companies,
+US.IC-WM.RS-Institutional textile waste-TOT,US.IC,WM.RS,Institutional textile waste,TOT,"t,p",MIX,2,data,"implemented (steady state, see open questions)",SSB 10513 (textile waste by industry),Official waste statistics are the primary source (D8)
+US.IC-WM.WW-Fibre release in industrial laundry-TOT,US.IC,WM.WW,Fibre release in industrial laundry,TOT,,MFR,3,parameter,planned,Laundry release literature,
+CO.CO-RW.RW-Export of unsorted collected textiles-TOT,CO.CO,RW.RW,Export of unsorted collected textiles,TOT,"t,g",MIX,1,data,implemented,SSB 08801 (HS 6309/6310 export); collector reports; NORSUS 2023 (about 85 % exported),HS 6309 export may also contain sorted grades - split needed
+CO.CO-CO.SO-Collected textiles to domestic sorting-TOT,CO.CO,CO.SO,Collected textiles to domestic sorting,TOT,"t,g",MIX,1,balance,implemented,Balance of CO.CO,
+CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT,CO.SO,CO.RE,Sorted for domestic secondhand sales,TOT,"t,g",USE,1,data,implemented,Collector annual reports,
+CO.SO-RW.RW-Export of sorted textiles-TOT,CO.SO,RW.RW,Export of sorted textiles,TOT,,USE,2,data,planned,Collector reports; SSB 08801,
+CO.SO-WM.RC-Sorted for recycling-TOT,CO.SO,WM.RC,Sorted for recycling,TOT,,WRN,2,data,planned,Collector and recycler reports,
+CO.SO-WM.RS-Sorting residues-TOT,CO.SO,WM.RS,Sorting residues,TOT,"t,g",WRN,2,parameter,implemented (incl. recycling until WM.RC is split),Reject share from collector reports,
+CO.RE-US.HH-Secondhand sales to households-TOT,CO.RE,US.HH,Secondhand sales to households,TOT,"t,g",USE,1,balance,implemented,Balance of CO.RE,Re-enters the in-use stock
+CO.RE-WM.RS-Unsold secondhand goods-TOT,CO.RE,WM.RS,Unsold secondhand goods,TOT,,USE,3,parameter,planned,Collector reports,
+WM.RS-WM.IN-Domestic incineration-TOT,WM.RS,WM.IN,Domestic incineration,TOT,t,MIX,1,balance,implemented,Balance of WM.RS; SSB 10513 treatment by material,
+WM.RS-RW.RW-Residual waste export for incineration-TOT,WM.RS,RW.RW,Residual waste export for incineration,TOT,t,MIX,2,data+parameter,implemented,"SSB 13035 (KOSTRA): residual waste exported / residual waste total, 2015-2025",Mainly to Sweden
+WM.RS-WM.LF-Landfilling of textiles-TOT,WM.RS,WM.LF,Landfilling of textiles,TOT,t,MIX,1,data,implemented,SSB 05281 (1995-2011) and 10513 (2012-); earlier years extrapolated,Dominant route before 2009 landfill ban - important for the time series
+WM.RC-MA.TX-Recycled fibre to domestic manufacturing-TOT,WM.RC,MA.TX,Recycled fibre to domestic manufacturing,TOT,,FIB,3,data,planned,Recycler reports,Expected near zero historically
+WM.RC-RW.RW-Export for recycling-TOT,WM.RC,RW.RW,Export for recycling,TOT,,WRN,2,data,planned,Collector/recycler reports; SSB 10513,
+WM.WW-EN.WA-Fibres in treated wastewater-TOT,WM.WW,EN.WA,Fibres in treated wastewater,TOT,,MFR,2,parameter,planned,Retention efficiency of Norwegian WWTPs (share of primary vs. secondary treatment - SSB 05280),
+WM.WW-EN.SO-Fibres in sewage sludge to soil-TOT,WM.WW,EN.SO,Fibres in sewage sludge to soil,TOT,,MFR,2,parameter,planned,Sludge disposal shares (SSB),
+WM.WW-WM.IN-Fibres in sludge to other treatment-TOT,WM.WW,WM.IN,Fibres in sludge to other treatment,TOT,,MFR,3,parameter,planned,Sludge disposal shares (SSB),

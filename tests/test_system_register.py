@@ -42,3 +42,8 @@ def test_implemented_flows_have_valid_dims():
 def test_stocks_and_sinks_have_stock_dims():
     needs = processes[(processes['has_stock'] == 'yes') | (processes['type'] == 'sink')]
     assert needs['stock_dims'].notna().all()
+
+
+def test_every_flow_has_a_valid_form():
+    # D18: textile form of the flow
+    assert flows['form'].isin(['FIB', 'FAB', 'NEW', 'MIX', 'USE', 'WRN', 'PCW', 'MFR']).all()

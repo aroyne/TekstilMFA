@@ -13,7 +13,8 @@ from calculations.timeseries import interpolate
 from calculations.utils import YEARS
 
 INFLOWS_WM_RS = [
-    'US.HH-WM.RS-Textiles in residual and bulky waste-TOT',
+    'US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT',
+    'US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT',
     'US.IC-WM.RS-Institutional textile waste-TOT',
     'CO.SO-WM.RS-Sorting residues-TOT',
 ]

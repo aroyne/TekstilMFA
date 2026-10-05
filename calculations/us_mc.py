@@ -17,7 +17,8 @@ from calculations.utils import PRODUCT_GROUPS, PRODUCTS, core_group_only
 
 def execute_calculations_us(mfa, preloaded_data, current_params, dataset_noise, anchors):
     _separate_collection_mc(mfa)
-    _residual_waste_mc(mfa, anchors)
+    _reusable_residual_waste_mc(mfa, anchors)
+    _worn_residual_waste_mc(mfa, anchors)
     _institutional_waste_mc(mfa)
 
 
@@ -28,15 +29,31 @@ def _separate_collection_mc(mfa):
     mfa.flows['US.HH-CO.CO-Separate collection from households-TOT'].values[...] = exported + retained
 
 
-def _residual_waste_mc(mfa, anchors):
+def _residual_core(anchors):
+    """CL+HT+FW in household residual and bulky waste, SSB and Mepex pick analyses (D15)."""
+    return interpolate(anchors['residual_core'])
+
+
+def _reusable_residual_waste_mc(mfa, anchors):
     """
-    CORE: textiles in household residual and bulky waste from SSB and the
-    Mepex pick analyses (D15). CA, TA and OM: discarded in the year supplied.
-    Sacks (SA) are not used by households (D13).
+    Part of the CORE residual textiles that could have been reused (D18),
+    share from the pick analyses. The analyses cover CL+HT+FW only, so the
+    other products are 0 here and counted as worn.
     """
-    flow = mfa.flows['US.HH-WM.RS-Textiles in residual and bulky waste-TOT']
+    reusable_share = interpolate(anchors['reusable_share_residual'])
+    mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values[...] = (
+        core_group_only(_residual_core(anchors) * reusable_share))
+
+
+def _worn_residual_waste_mc(mfa, anchors):
+    """
+    CORE: residual textiles that are not reusable. CA, TA and OM: discarded
+    in the year supplied. Sacks (SA) are not used by households (D13).
+    """
+    flow = mfa.flows['US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT']
+    reusable = mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values
     sales = mfa.flows['DI.RT-US.HH-Sales to households-TOT'].values
-    flow.values[...] = core_group_only(interpolate(anchors['residual_core']))
+    flow.values[...] = core_group_only(_residual_core(anchors)) - reusable
     for product in ('CA', 'TA', 'OM'):
         flow.values[:, PRODUCT_GROUPS.index(product)] = sales[:, PRODUCTS.index(product)]
 
