@@ -40,3 +40,20 @@ Lageret i lagermodellen er ca. 98 kg per innbygger i 2018 og 85 kg i 2025. Restl
 2. **Spørre SSB** om tekstiltallene for 1995–2011 og 1998 er beregnet ut fra tilførselen (står allerede i PLAN).
 3. **Startlager (D2):** Sett restleddets startlager i 1988 lik lagermodellens lager (241 kt, ca. 57 kg per innbygger), slik at lagernivåene kan sammenlignes med garderobestudier.
 4. **Følsomhet:** Kjør lagermodellen med lengre levetider for CL i 2005–2015 for å se hvor mye «dvalelager» som trengs for å forklare avviket.
+
+## Oppfølging samme dag: ankerpunkt 2009 og startlager
+
+**Ankerpunkt for restavfall 2009** (`data_files/anchor_values.csv`): 33,5 kt (±40 %). Det er 5,6 kg per innbygger i restavfall som hentes hjemme (snitt av norske plukkanalyser 2006–2011, Laitala m.fl. 2012, tab. 2-12) × 4,83 mill. innbyggere (SSB 07459), pluss avfall levert på gjenvinningsstasjoner med forholdet fra 2018 (0,24).
+Det nye punktet ligger **under** den gamle rette linjen (43,7 kt i 2009). Statistikkens kasseringer blir derfor lavere i 2000–2017, og avviket mot lagermodellen **øker**: i 2009 er det 51 kt i statistikken mot 77 kt i modellen. Restavfallet forklarer altså ikke avviket. Lengre levetider eller et voksende dvalelager, og eventuelt for lav innsamling før 2018, står igjen som forklaringer.
+
+**Startlager (D2):** Lagernivået i balansen er nå lagermodellens lager ved utgangen av 1987 (ca. 240 kt) pluss restleddet akkumulert fra 1988. Det rapporteres som `US.HH-US.HH-Stock-TOT` (CORE) og per materiale.
+
+| År | Lager, restledd (95 %) | kg per innbygger | Lager, lagermodell | kg per innbygger |
+|---|---|---|---|---|
+| 1990 | 190 kt (114–268) | 45 | 241 kt | 57 |
+| 2000 | 128 kt (−109–357) | 29 | 339 kt | 76 |
+| 2010 | 422 kt (107–708) | 87 | 509 kt | 105 |
+| 2018 | 646 kt (318–953) | 122 | 511 kt | 96 |
+| 2025 | 658 kt (329–971) | 118 | 470 kt | 84 |
+
+Intervallet for restleddet går under null rundt 2000. Det er et tegn på at kasseringene i statistikken før 2000 er for høye (SSB 1998, se A1). Kg per innbygger er regnet med et omtrentlig folketall og bør sammenlignes med garderobestudier.

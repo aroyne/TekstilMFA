@@ -112,8 +112,9 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Fiberlaget er flyttet inn i modellen som dimensjon `m`.
 - [x] `calculations/stock_model.py` er erstattet av flodyms `InflowDrivenDSM` (i fiberlaget).
 - [x] Den parallelle lagermodellen rapporteres (utstrøm, lager, lagerendring) og er sammenlignet med statistikken ([notat](../claude_tekst/2026-10-05_lagermodell_mot_statistikk.md)). Anslagene er enige fra 2019. I 2008–2017 ligger lagermodellen 20–25 kt over statistikken, og i 1988–2000 ligger statistikken over tilførselen.
-- [ ] Ankerpunkt for restavfall rundt 2009 fra Laitala m.fl. 2012 (5,6 kg per innbygger, henteordning) + tillegg for gjenvinningsstasjoner. Fyller hullet mellom 1998 og 2018 (A1).
-- [ ] Startlager i 1988 (D2) fra lagermodellen, slik at lagernivået kan sammenlignes med garderobestudier.
+- [x] Ankerpunkt for restavfall 2009 (33,5 kt, Laitala m.fl. 2012). Avviket mot lagermodellen i 2005–2017 øker (51 mot 77 kt i 2009). Restavfallet forklarer det ikke.
+- [x] Startlager i 1988 (D2) fra lagermodellen. Lagernivået rapporteres (`US.HH-US.HH-Stock-TOT`): ca. 120 kg per innbygger i 2018–2025, mot 84–96 kg i lagermodellen.
+- [ ] Sammenligne lagernivået med garderobestudier (SIFO). Følsomhet: lengre levetider for CL i 2005–2015 (dvalelager).
 - [ ] Fiberlag: fiberspesifikke levetider (syntetisk lengre enn bomull), matrise hovedfiber → fiberandeler, usikkerhet på `fibre_composition.csv`, og egen sammensetning for brukbart og utslitt i restavfall.
 - [ ] Ull i kasseringer blir ca. 5 %, mot 3 % målt. Undersøk hvilke HS-koder som gir ull.
 

@@ -140,6 +140,14 @@ STOCK_MODEL_OUTPUTS = {
     'stock': 'US.HH-US.HH-Stock model stock-TOT',
     'stock_change': 'US.HH-US.HH-Stock model stock change-TOT',
 }
+# Stock level of the statistics-based balance: the residual stock changes
+# accumulated from the stock model's stock at the end of 1987 (D2).
+RESIDUAL_STOCK_OUTPUT = 'US.HH-US.HH-Stock-TOT'
+CORE_STOCK_DIMS = fd.DimensionSet(dim_list=[
+    fd.Dimension(letter='t', name='Time', dtype=int, items=YEARS),
+    fd.Dimension(letter='g', name='Product group', dtype=str, items=['CORE']),
+    fd.Dimension(letter='m', name='Material', dtype=str, items=MATERIALS),
+])
 
 
 def household_cohort_model(tot, supply, current_params):
@@ -148,7 +156,8 @@ def household_cohort_model(tot, supply, current_params):
     entering US.HH by material, Weibull lifetimes per product. Second-hand
     purchases (1-2 % of the inflow) are left out. Returns
     {'discards', 'stock', 'stock_change'} as FlodymArrays (year, product,
-    material) over the model years; the stock includes the spin-up cohorts.
+    material) over the model years, and 'stock_1987' as an array (product,
+    material); the stock includes the spin-up cohorts.
     """
     core = [PRODUCTS.index(p) for p in CORE_PRODUCTS]
     new_goods = sum(tot.flows[code].values for code in NEW_GOODS_TO_HOUSEHOLDS)[:, core]
@@ -177,6 +186,7 @@ def household_cohort_model(tot, supply, current_params):
         'discards': fd.FlodymArray(dims=COHORT_DIMS, values=dsm.outflow.values[n_spinup:]),
         'stock': fd.FlodymArray(dims=COHORT_DIMS, values=stock[n_spinup:]),
         'stock_change': fd.FlodymArray(dims=COHORT_DIMS, values=np.diff(stock, axis=0)[n_spinup - 1:]),
+        'stock_1987': stock[n_spinup - 1],
     }
 
 
@@ -199,8 +209,8 @@ def household_discard_composition(cohorts, supply):
 def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_composition):
     """
     Fills the fibre system from the closed TOT system and closes it. Returns
-    the parallel stock model as {output name: FlodymArray (year, product,
-    material)}.
+    {output name: FlodymArray with material dimension} for the parallel stock
+    model and for the stock level of the statistics-based balance.
     """
     unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + MIXED_FLOWS)
     if unassigned:
@@ -225,4 +235,9 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
         gap = np.abs(fibre.flows[code].values.sum(axis=-1) - flow.values).max()
         if gap > TOLERANCE_KT:
             raise ValueError(f"Fibre layer of {code} does not add up to TOT (max gap {gap:.2e} kt)")
-    return {STOCK_MODEL_OUTPUTS[key]: arr for key, arr in cohorts.items()}
+    stock = fibre.stocks['US.HH']
+    change = (stock.inflow - stock.outflow).values[:, PRODUCT_GROUPS.index('CORE'), :]
+    level = cohorts['stock_1987'].sum(axis=0) + np.cumsum(change, axis=0)
+    result = {STOCK_MODEL_OUTPUTS[key]: cohorts[key] for key in STOCK_MODEL_OUTPUTS}
+    result[RESIDUAL_STOCK_OUTPUT] = fd.FlodymArray(dims=CORE_STOCK_DIMS, values=level[:, None, :])
+    return result
