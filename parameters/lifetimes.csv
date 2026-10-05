@@ -1,13 +1,13 @@
 product,stock,distribution_type,mean_years,shape,lower_bound,upper_bound,uncertainty_type,source,status,description
-CL,US.HH,weibull,,,,,perc,,todo,Clothing in households incl. hibernating stock (Laitala/Klepp wardrobe studies are the main candidate source)
-HT,US.HH,weibull,,,,,perc,,todo,Household textiles in households
-FW,US.HH,weibull,,,,,perc,,todo,Footwear in households
-CL,US.IC,weibull,,,,,perc,,todo,Workwear and uniforms
+CL,US.HH,weibull,6,2,4,9,abs,"Laitala & Klepp 2020 (5.2 years per owner, N = 46 857), WRAP 2023 (4.3), Napolano 2025 SM4 (median 4.7); longer because informal reuse and hibernating stock are included (D9, D10). Weibull shape 2 is an assumption",proposal,Clothing in households incl. hibernating stock (Laitala/Klepp wardrobe studies are the main candidate source)
+HT,US.HH,weibull,7,2,3,10,abs,"WRAP 2023 (6.9 years, home textiles); Napolano 2025 SM4 (2-10 by type). Weibull shape 2 is an assumption",proposal,Household textiles in households
+FW,US.HH,weibull,4,2,3,6,abs,"Napolano 2025 SM4 (4.7 years, Laitala et al. 2018). Weibull shape 2 is an assumption",proposal,Footwear in households
+CL,US.IC,weibull,3,2,2,4,abs,ECAP 2017 (WRAP 2015): workwear just over 3 years; van Oorschot et al. 2020: 2.0. Weibull shape 2 is an assumption,proposal,Workwear and uniforms
 HT,US.IC,weibull,,,,,perc,,todo,Institutional linen (hotels/hospitals)
-CA,US.HH,weibull,,,,,perc,,todo,Carpets and rugs in households
+CA,US.HH,weibull,10,2,5,16,abs,"Napolano 2025 SM4 (5, Fair Claims Guide) to van Oorschot et al. 2020 (15.6). Weibull shape 2 is an assumption",proposal,Carpets and rugs in households
 CA,US.IC,weibull,,,,,perc,,todo,"Carpets in offices, public and commercial buildings"
 SA,US.IC,immediate,,,,,,decision D1 (2026-09-29),decided,"Sacks and bulk bags (FIBC) treated as packaging: discarded in the year they enter, no in-use stock"
-TA,US.HH,weibull,,,,,perc,,todo,"Tents, tarpaulins and camping goods in households"
+TA,US.HH,weibull,4,2,3,6,abs,"Napolano 2025 SM4 (tarpaulins and tents 4, sails 3). Weibull shape 2 is an assumption",proposal,"Tents, tarpaulins and camping goods in households"
 TA,US.IC,weibull,,,,,perc,,todo,"Tarpaulins, awnings and sails in businesses"
-OM,US.HH,weibull,,,,,perc,,todo,"Other made-up articles in households (e.g. face masks, cleaning cloths)"
+OM,US.HH,weibull,2,2,1,3,abs,Napolano 2025 SM4 (cleaning cloths and other made-up articles 2). Weibull shape 2 is an assumption,proposal,"Other made-up articles in households (e.g. face masks, cleaning cloths)"
 OM,US.IC,weibull,,,,,perc,,todo,Other made-up articles in businesses

@@ -1,8 +1,8 @@
 product,year,SYN,CO,WO,CV,OTH,source,status
-CL,,,,,,,,todo
-HT,,,,,,,,todo
-FW,,,,,,,,todo
-CA,,,,,,,,todo
-SA,,,,,,,,todo
-TA,,,,,,,,todo
-OM,,,,,,,,todo
+CL,,0.4748,0.389,0.0691,0.057,0.0102,"PEFCR Apparel & Footwear (Cascale 2025), tab. A.IV 2-3, mean of representative products",literature
+HT,,0.3488,0.6305,0.0207,0.0,0.0,SSB 08801 2015-2025: imports of the same product with fibre stated in the HS code,assumption
+FW,,0.8281,0.0469,0.0625,0.0625,0.0,"PEFCR Apparel & Footwear (Cascale 2025), tab. A.IV 2-3, mean of representative products",literature
+CA,,0.6124,0.0,0.1664,0.0,0.2212,SSB 08801 2015-2025: imports of the same product with fibre stated in the HS code,assumption
+SA,,0.9702,0.0062,0.0,0.0,0.0236,SSB 08801 2015-2025: imports of the same product with fibre stated in the HS code,assumption
+TA,,1.0,0.0,0.0,0.0,0.0,SSB 08801 2015-2025: imports of the same product with fibre stated in the HS code,assumption
+OM,,0.452,0.4544,0.0606,0.0083,0.0247,SSB 08801 2015-2025: imports of all finished products except footwear with fibre stated in the HS code,assumption
