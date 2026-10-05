@@ -24,6 +24,8 @@ calculations/      Én modul per pool (rw_mc.py, di_mc.py, ...) og felles hjelpe
   trade.py         Flyter fra SSB 08801
 data_loader.py     Laster alle data én gang (DATA_MAP)
 main_mc.py         MC-driver → output_files/MC_summary.csv (TOT) og MC_summary_fibre.csv (per materiale)
+report_generator.py  Nettside (just-the-docs): én side per pool, subpool og flyt i <pool>_pool/
+utils_stat.py      Interaktive Plotly-plott til nettsiden (output_files/plots/pages/)
 scripts/           Hjelpeskript (uttrekk av data)
 tests/             pytest
 docs/              PLAN.md, SYSTEMDEFINISJON.md, METODE.md
@@ -44,4 +46,5 @@ python scripts/build_hs_main_fibre.py                   # hovedfiber per HS8-kod
 python scripts/build_fibre_composition.py               # fibergrupper for HS-koder uten oppgitt fiber
 python scripts/plot_core_flows.py                       # figur: kjerneflyter i husholdningene
 python scripts/plot_stock_model.py                      # figur: statistikk mot parallell lagermodell
+python report_generator.py                              # nettsidene (etter main_mc.py med --pool all)
 ```

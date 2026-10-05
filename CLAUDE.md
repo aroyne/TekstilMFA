@@ -17,3 +17,7 @@ Prosjektet bygger på arbeidsmetodikken i `../NitrogenBudsjett`. Konvensjonene u
 - Når en flyt bytter datakilde ved en årsgrense, skal periodene ikke overlappe (ellers telles overlappsårene to ganger).
 - Flytnavn inneholder ikke `-`, fordi bindestreken skiller feltene i flytkoden.
 - Flagg død kode du ser underveis.
+
+## Nettsiden
+- `report_generator.py` genererer `index.md` og `<pool>_pool/`-mappene (pool-, subpool- og flytsider) fra `system/*.csv`, resultatene og docstringene i `calculations/`. Sidene skrives helt på nytt, bortsett fra teksten mellom `<!-- MANUAL:<NAVN>:START -->` og `<!-- MANUAL:<NAVN>:END -->`. Manuell tekst skal bare skrives der.
+- Datakilder og metode for en flyt dokumenteres i docstringen til funksjonen som beregner flyten, og i hjelpefunksjonene den kaller. Det er dette som vises på flytsiden.

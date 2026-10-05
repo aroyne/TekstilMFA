@@ -124,9 +124,12 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [ ] Konvergenstest og innsvingingstest (D2).
 
 ### Fase 5 – Resultater og dokumentasjon
-- [ ] `utils_stat.py`: balanseplott per pool/subpool, tidsserier per flyt, Sankey med årsglider og lagerkurver.
-- [ ] `report_generator.py`: GitHub Pages (just-the-docs), med pool-, subpool- og flytsider generert fra `system/*.csv`, `<!-- MANUAL:... -->`-blokker og `library.bib`. Pool-mappene (`rest_of_the_world_pool/` osv.) opprettes av generatoren.
-- [ ] Metodebeskrivelse per flyt.
+- [x] `utils_stat.py`: balanseplott per pool og subpool, tidsserie per flyt (per produkt, 95 % for summen), materialsammensetning per flyt (2026-10-05).
+- [x] `report_generator.py`: just-the-docs med 8 pool-, 18 subpool- og 41 flytsider, generert fra `system/*.csv`, resultatene og docstringene i koden. `MANUAL`-blokker bevares (2026-10-05).
+- [ ] Sankey med årsglider på forsiden.
+- [ ] `library.bib` og siteringer (`<!--cite:nøkkel-->`) som i NitrogenBudsjett.
+- [ ] Skrive manuelle beskrivelser per flyt i `MANUAL`-blokkene.
+- [ ] Slå på GitHub Pages for repoet (Settings → Pages, gren `main`, rotmappe) når grenen er merget.
 
 ### Fase 6 (valgfritt) – Scenarier
 - [ ] Framskriving 2025–2035 med produsentansvar, innsamlingsmål og tiltak mot fast fashion (D12).

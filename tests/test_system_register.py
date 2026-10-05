@@ -47,3 +47,9 @@ def test_stocks_and_sinks_have_stock_dims():
 def test_every_flow_has_a_valid_form():
     # D18: textile form of the flow
     assert flows['form'].isin(['FIB', 'FAB', 'NEW', 'MIX', 'USE', 'WRN', 'PCW', 'MFR']).all()
+
+
+def test_report_finds_the_function_of_every_implemented_flow():
+    from report_generator import flow_functions
+    implemented = flows.loc[flows['status'].str.startswith('implemented'), 'flow_code']
+    assert set(implemented) <= set(flow_functions())

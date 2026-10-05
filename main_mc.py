@@ -73,26 +73,31 @@ def record(store, arrays, sim_id, n_runs):
         store[name][1][sim_id] = arr.values
 
 
-def to_long(name, arr, values):
+def to_long(name, arr, values, product_label='ALL'):
     """
     Long table of one output: values has shape (iteration, *arr.dims). The
-    columns are year, 'product' (product or product group, 'ALL' for flows
-    without a product dimension) and, in the fibre layer, 'material'.
+    columns are year, 'product' (product or product group, product_label for
+    outputs without a product dimension) and, in the fibre layer, 'material'.
     """
     letters = arr.dims.letters
     grids = np.meshgrid(*[np.asarray(arr.dims[l].items) for l in letters], indexing='ij')
     frame = pd.DataFrame({COLUMN_OF_DIM[l]: g.ravel() for l, g in zip(letters, grids)})
     if 'product' not in frame:
-        frame['product'] = 'ALL'
+        frame['product'] = product_label
     frame['flow_name'] = name
     return values.reshape(values.shape[0], -1), frame[[c for c in KEY_COLUMNS if c in frame]]
 
 
 def summarise(store):
-    """Median and 95 % interval over iterations 1..n, plus the deterministic value."""
+    """
+    Median and 95 % interval over iterations 1..n, plus the deterministic
+    value. Outputs split by product or product group also get rows with
+    product 'TOTAL', summed per iteration, so their interval is exact rather
+    than a sum of percentiles.
+    """
     frames = []
-    for name, (arr, runs) in store.items():
-        flat, frame = to_long(name, arr, runs)
+    for name, arr, runs, label in _with_totals(store):
+        flat, frame = to_long(name, arr, runs, label)
         mc = flat[1:]
         frame['median'] = np.median(mc, axis=0)
         frame['p2_5'] = np.quantile(mc, 0.025, axis=0)
@@ -102,6 +107,15 @@ def summarise(store):
         frames.append(frame)
     summary = pd.concat(frames)
     return summary.sort_values([c for c in KEY_COLUMNS if c in summary]).reset_index(drop=True)
+
+
+def _with_totals(store):
+    for name, (arr, runs) in store.items():
+        yield name, arr, runs, 'ALL'
+        letter = next((l for l in arr.dims.letters if l in ('p', 'g')), None)
+        if letter is not None:
+            axis = arr.dims.letters.index(letter)
+            yield name, arr.sum_over((letter,)), runs.sum(axis=axis + 1), 'TOTAL'
 
 
 def raw_table(store):
