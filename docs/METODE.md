@@ -34,7 +34,7 @@ Implementert i [calculations/stock_model.py](../calculations/stock_model.py) og 
 
 * Innstrømsdrevet: I(t) er summen av innstrømmene til lageret, altså salg til husholdninger, privatimport og kjøp av brukt.
 * Levetid: Weibull (standard) eller lognormal per produktgruppe. Parametrene er middellevetid og form ([parameters/lifetimes.csv](../parameters/lifetimes.csv)).
-* Diskret konvensjon: S(a) er andelen av en årgang som fortsatt er i lageret a år etter at den kom inn. Da blir lager(t) − lager(t−1) = I(t) − O(t) eksakt.
+* Tidskonvensjon (D20): Flytene er summer per kalenderår, og lageret er nivået ved årsslutt. Innstrømmen regnes som om den kom midt i året, så en årgang er 0,5, 1,5, 2,5 … år gammel ved årsslutt. Da blir lager(t) − lager(t−1) = I(t) − O(t) eksakt. `calculations/stock_model.py` regner i dag innstrømmen som om den kom ved årets start (alder 1 ved første årsslutt). Den skal erstattes av flodym og er bare i bruk i testene.
 * Innsvinging: Innstrømmen før 1988 er ukjent. Den settes til 1988-nivået (eller en trend) i et antall innsvingingsår, og valget testes i en følsomhetsanalyse (D2).
 * Sammenligning: Utstrømmen sammenlignes med kasseringene i avfallsstatistikken. Lageret sammenlignes med det akkumulerte restleddet og med garderobestudier (SIFO/OsloMet).
 * Produkter som behandles som emballasje (sekker, SA) får levetiden `immediate`: alt kasseres samme år, og det bygges ikke opp lager (D13).
@@ -58,7 +58,7 @@ Oppsettet er det samme som i NitrogenBudsjett:
 * **Resultat:** median, 2,5- og 97,5-persentil og den deterministiske verdien per flyt × produkt × år ([main_mc.py](../main_mc.py)). Rådata kan eksporteres med `--export-raw-mc` til trendanalyser.
 * **Følsomhet:** Rangkorrelasjon (Spearman) mellom trukne input og nøkkelresultater (lager 2024, kasseringer, innsamlingsgrad). Det krever at trekkene lagres per iterasjon (planlagt).
 * **Konvergens:** Sjekk at median og persentiler er stabile for n = 1000 mot 5000.
-* **Kjent fallgruve fra N-budsjettet:** Når en flyt bytter datakilde ved en årsgrense, må periodene ikke overlappe. Overlappende år gir doble rader per iterasjon og forskyver fordelingen.
+* **Kjent fallgruve fra N-budsjettet:** Når en flyt bytter datakilde ved en årsgrense, må periodene ikke overlappe. Ellers telles overlappsårene to ganger, og fordelingen forskyves.
 
 ## 6. Handelsdata (SSB 08801)
 
