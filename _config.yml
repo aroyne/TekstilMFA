@@ -1,4 +1,6 @@
 remote_theme: just-the-docs/just-the-docs
+plugins:
+  - jekyll-remote-theme
 title: Tekstil-MFA Norge
 description: Dynamisk, probabilistisk materialstrømanalyse av tekstiler i Norge 1988–2025
 nav_sort: case_insensitive
@@ -6,8 +8,21 @@ nav_exclude:
   - /index.md
 include:
   - output_files
+# Only index.md, the <pool>_pool folders and output_files make up the site;
+# the rest is linked on GitHub. Markdown files without front matter would
+# otherwise become pages in the navigation.
 exclude:
+  - README.md
+  - CLAUDE.md
+  - DATA_SOURCES.md
+  - docs
+  - claude_tekst
+  - calculations
+  - scripts
+  - system
+  - parameters
   - data_files
   - litteratur
   - tests
+  - "*.py"
   - "*.csv.gz"

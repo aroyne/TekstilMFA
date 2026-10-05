@@ -308,20 +308,6 @@ def write_pool_page(site, pool, nav_order):
 
 # --- Landing page and config -----------------------------------------------
 
-CONFIG = """remote_theme: just-the-docs/just-the-docs
-title: Tekstil-MFA Norge
-description: Dynamisk, probabilistisk materialstrømanalyse av tekstiler i Norge 1988–2025
-nav_sort: case_insensitive
-nav_exclude:
-  - /index.md
-include:
-  - output_files
-exclude:
-  - data_files
-  - litteratur
-  - tests
-  - "*.csv.gz"
-"""
 
 
 def write_index(site):
@@ -350,7 +336,7 @@ def write_index(site):
 def main():
     site = Site()
     if not os.path.exists('_config.yml'):
-        open('_config.yml', 'w', encoding='utf-8').write(CONFIG)
+        raise FileNotFoundError('_config.yml (the just-the-docs site configuration) is missing')
     write_index(site)
     for i, pool in enumerate(site.pools, start=1):
         os.makedirs(site.folder(pool), exist_ok=True)
