@@ -106,11 +106,13 @@ Dette ble lagt inn og lest: Kawecki m.fl. 2021 med vedlegg, Laitala & Klepp 2020
 | **Napolano m.fl. 2025, SM4** (Laitala 2018 + Fair Claims Guide, 226 Prodcom-koder) | én eier eller erstatningsnorm, uniform min–maks | median 4,7 år (1–8,7) | sengetøy 3, håndklær 2–3, gardiner 4, pledd 5–10, dyner 5 | 4,7 | tepper 5, presenninger/telt 4, sekker 1, kluter 2 |
 | **van Oorschot m.fl. 2020**, tab. 4.3 (NL; Consumentenbond, forsikringslister; normalfordeling, sd = snitt/2,5) | erstatningsnorm | yttertøy 3,0, undertøy/sokker 1,8, annet 3,25, arbeidstøy 2,0 | sengetøy 5,9, boligtekstiler 9,8 | – | tepper 15,6 |
 | **Kawecki m.fl. 2021** (vedlegg tab. S6) | fordelinger fra IMPRO Textiles (Beton m.fl. 2014, JRC) og OECD 2012 (klær), Giorgi 2015 (hjemmetekstiler) | **ingen tallverdier i vedlegget**, bare kildene | | | |
+| **Beton m.fl. 2014, IMPRO Textiles** (JRC), tab. 25 | regnet fra antall vask, LCA-forutsetning | T-skjorter og skjorter **1 år**, sokker, undertøy og BH **2 år**, gensere **3 år**. Gjenbrukte klær får +50 % (oppgitt som udokumentert) | gardiner 10 år | – | – |
+| **WRAP 2023**, *Citizen Insights: Estimating the Longevity of Home Textiles in the UK* (2 000+ intervjuer, sept. 2022) | forbrukeranslag | – | **6,9 år** samlet for 57 hjemmetekstiler per husholdning | – | – |
 | ECAP 2017 (WRAP 2015) | – | arbeidstøy litt over 3 år | | | |
 
 **Viktig for tolkningen (D9/D10):** Alle tallene gjelder **én eier**, eller en økonomisk erstatningsnorm. Levetiden i lagermodellen vår skal være den samlede tiden i norske husholdninger, med dvalende lager og uformell videreføring (Laitala & Klepp 2021: en ny bruker dobler levetiden i år). Den bør derfor være **lengre enn 5 år for klær**. Andelen brukte plagg i garderobene er bare 7,4 % (Laitala & Klepp 2020), så tillegget fra videreføring er trolig moderat.
 
-**Følge med på fiberlaget (D19):** Hvis syntetiske plagg lever 6,3 år og bomullsplagg 3,6 år, får kasseringene **mindre** syntetisk enn tilførselen på kort sikt. Det trekker motsatt vei av observasjonen (44–48 % syntetisk/fossilt i avfallet). Det styrker antakelsen om at det er restpostene i HS-kodene som skjuler syntetiske fibre. Fiberspesifikke levetider kan legges inn i årgangsmodellen.
+**Følge med på fiberlaget (D19):** Laboratorietester i IMPRO (Martindale-slitasje) gir levetid relativt til bomull på **1,9 for polyester og 1,6 for bomull/polyester** (T-skjorter). Det bekrefter fiberforskjellen i Laitala 2018. Hvis syntetiske plagg lever 6,3 år og bomullsplagg 3,6 år, får kasseringene **mindre** syntetisk enn tilførselen på kort sikt. Det trekker motsatt vei av observasjonen (44–48 % syntetisk/fossilt i avfallet). Det styrker antakelsen om at det er restpostene i HS-kodene som skjuler syntetiske fibre. Fiberspesifikke levetider kan legges inn i årgangsmodellen.
 
 ### 5.2 Ikke-tekstile deler (NT)
 
@@ -141,7 +143,7 @@ PEFCR har i tillegg **fibersammensetning per produkttype** (EU-snitt). For eksem
 | Parameter | Forslag | Grunnlag |
 |---|---|---|
 | Levetid CL, US.HH | Weibull, snitt **6 år** (4–9), form ca. 2 | 5,2 år per eier (Laitala & Klepp 2020) + videreføring og dvalende lager |
-| Levetid HT, US.HH | snitt **6 år** (3–10) | 3–10 år per type (Napolano SM4, van Oorschot) |
+| Levetid HT, US.HH | snitt **7 år** (3–10) | 6,9 år (WRAP 2023), 3–10 år per type (Napolano SM4, van Oorschot) |
 | Levetid FW, US.HH | snitt **4 år** (3–6) | 4,7 år (Napolano SM4) |
 | Levetid CA | snitt **10 år** (5–16) | 5 (Fair Claims) – 15,6 (van Oorschot) |
 | Levetid TA / OM | 4 år / 2 år | Napolano SM4 |
@@ -150,7 +152,7 @@ PEFCR har i tillegg **fibersammensetning per produkttype** (EU-snitt). For eksem
 
 ## Skaffe og lese
 
-**Status 2026-10-05:** Nr. 1–3 og 5–8 er lagt inn i Zotero og lest (se avsnitt 5). Nye kilder å skaffe: Laitala m.fl. 2012 (norsk andel brukbart i restavfall), Beton m.fl. 2014 *IMPRO Textiles* (JRC) og Giorgi 2015 *Non-clothing textiles* (WRAP), som Kawecki bygger levetidene på.
+**Status 2026-10-05:** Nr. 1–3 og 5–8 er lagt inn i Zotero og lest (se avsnitt 5). IMPRO Textiles (Beton m.fl. 2014) er også lagt inn og lest. Giorgi 2015 finnes ikke; WRAP har ikke gjort den tilgjengelig. **Erstatning:** WRAP (2023), *Citizen Insights: Estimating the Longevity of Home Textiles in the UK*, gratis PDF: https://wrap.ngo/resources/report/citizen-insights-estimating-longevity-home-textiles-uk. Fortsatt å skaffe: Laitala m.fl. 2012 (norsk andel brukbart i restavfall).
 
 Referansene er kontrollert på nett 2026-10-05. «Åpen» betyr at fulltekst er fritt tilgjengelig.
 
