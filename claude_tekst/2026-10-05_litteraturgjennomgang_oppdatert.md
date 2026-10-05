@@ -107,7 +107,7 @@ Dette ble lagt inn og lest: Kawecki m.fl. 2021 med vedlegg, Laitala & Klepp 2020
 | **van Oorschot m.fl. 2020**, tab. 4.3 (NL; Consumentenbond, forsikringslister; normalfordeling, sd = snitt/2,5) | erstatningsnorm | yttertøy 3,0, undertøy/sokker 1,8, annet 3,25, arbeidstøy 2,0 | sengetøy 5,9, boligtekstiler 9,8 | – | tepper 15,6 |
 | **Kawecki m.fl. 2021** (vedlegg tab. S6) | fordelinger fra IMPRO Textiles (Beton m.fl. 2014, JRC) og OECD 2012 (klær), Giorgi 2015 (hjemmetekstiler) | **ingen tallverdier i vedlegget**, bare kildene | | | |
 | **Beton m.fl. 2014, IMPRO Textiles** (JRC), tab. 25 | regnet fra antall vask, LCA-forutsetning | T-skjorter og skjorter **1 år**, sokker, undertøy og BH **2 år**, gensere **3 år**. Gjenbrukte klær får +50 % (oppgitt som udokumentert) | gardiner 10 år | – | – |
-| **WRAP 2023**, *Citizen Insights: Estimating the Longevity of Home Textiles in the UK* (2 000+ intervjuer, sept. 2022) | forbrukeranslag | – | **6,9 år** samlet for 57 hjemmetekstiler per husholdning | – | – |
+| **Rao, Salvidge, Doriza m.fl. (WRAP 2023)**, *Citizen Insights: Estimating the Longevity of Home Textiles in the UK* (2 000+ intervjuer, sept. 2022). **Lest** | tid eid hittil + forventet videre bruk, nåværende eier | **4,3 år** (WRAPs klesstudie med samme metode) | **6,9 år** samlet. Duker 10,7, gardiner 8,6, sengetøy 5,5, puter 4,4. Mange tror puter (39 %), håndklær (25 %) og pledd (23 %) varer under 18 måneder | – | – |
 | ECAP 2017 (WRAP 2015) | – | arbeidstøy litt over 3 år | | | |
 
 **Viktig for tolkningen (D9/D10):** Alle tallene gjelder **én eier**, eller en økonomisk erstatningsnorm. Levetiden i lagermodellen vår skal være den samlede tiden i norske husholdninger, med dvalende lager og uformell videreføring (Laitala & Klepp 2021: en ny bruker dobler levetiden i år). Den bør derfor være **lengre enn 5 år for klær**. Andelen brukte plagg i garderobene er bare 7,4 % (Laitala & Klepp 2020), så tillegget fra videreføring er trolig moderat.
@@ -152,7 +152,7 @@ PEFCR har i tillegg **fibersammensetning per produkttype** (EU-snitt). For eksem
 
 ## Skaffe og lese
 
-**Status 2026-10-05:** Nr. 1–3 og 5–8 er lagt inn i Zotero og lest (se avsnitt 5). IMPRO Textiles (Beton m.fl. 2014) er også lagt inn og lest. Giorgi 2015 finnes ikke; WRAP har ikke gjort den tilgjengelig. **Erstatning:** WRAP (2023), *Citizen Insights: Estimating the Longevity of Home Textiles in the UK*, gratis PDF: https://wrap.ngo/resources/report/citizen-insights-estimating-longevity-home-textiles-uk. Fortsatt å skaffe: Laitala m.fl. 2012 (norsk andel brukbart i restavfall).
+**Status 2026-10-05:** Nr. 1–3 og 5–8 er lagt inn i Zotero og lest (se avsnitt 5). IMPRO Textiles (Beton m.fl. 2014) er også lagt inn og lest. Giorgi 2015 finnes ikke; WRAP har ikke gjort den tilgjengelig. **Erstatningen er lagt inn og lest:** WRAP (2023), *Citizen Insights: Estimating the Longevity of Home Textiles in the UK*, gratis PDF: https://wrap.ngo/resources/report/citizen-insights-estimating-longevity-home-textiles-uk. Fortsatt å skaffe: Laitala m.fl. 2012 (norsk andel brukbart i restavfall).
 
 Referansene er kontrollert på nett 2026-10-05. «Åpen» betyr at fulltekst er fritt tilgjengelig.
 
