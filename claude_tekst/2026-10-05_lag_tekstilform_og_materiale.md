@@ -129,9 +129,26 @@ Kode: [prototype/fibre_layer_flodym.py](../prototype/fibre_layer_flodym.py). Hov
 
 **Det som mangler i flodym, og som vi må bygge selv:**
 
-* **Monte Carlo.** Prototypen er deterministisk. Iterasjoner som egen dimensjon `s` er ikke prøvd.
+* **Monte Carlo.** flodym har det ikke. Testet 2026-10-05, se under.
 * **Kobling til flytsidene.** Generatoren for md-sidene (fase 5) må hente flytene fra flodym-systemet og metadata fra `flows.csv`. Det er en liten jobb, fordi flytnavnene kan være de samme som kodene i registeret.
 * **Tidskonvensjon (besluttet som D20).** Flyter er summer per kalenderår, og lageret er nivået ved årsslutt. Innstrømmen regnes som om den kom midt i året (flodym-standard). `stock_model.py` regner med årets start og blir erstattet.
+
+## Test av Monte Carlo med flodym (2026-10-05)
+
+Testskriptet trakk levetidene per iterasjon (±30 %) og kjørte poolene for TOT som i dag. Fiberlaget ble beregnet på to måter:
+
+| Variant | Tid | Minne |
+|---|---|---|
+| Løkke: ett flodym-system med lager og balansesjekk per iterasjon | 5 ms per iterasjon | lite |
+| Vektorisert: levetidsmodell over (år, iterasjon, produkt), og kasseringer per fiber med `einsum` | 0,2 s for 1 000 iterasjoner | 440 MB ved 1 000 |
+| *Til sammenligning: dagens pooler (TOT)* | *400 ms per iterasjon* | |
+
+De to variantene gir identiske resultater (avvik 2·10⁻¹⁶).
+
+* **Full vektorisering over alle dimensjoner fungerer ikke.** flodym lagrer lageret per årgang over hele dimensjonssettet. Med (år, årgang, iterasjon, produkt, fiber) blir det over 1 GB per array ved 1 000 iterasjoner. Løsningen er at levetidsmodellen bare får dimensjonene levetiden faktisk avhenger av (iterasjon og produkt), og at fiberen ganges inn etterpå. Det er gyldig fordi utstrømmen er lineær i innstrømmen.
+* **flodym-delen er ikke flaskehalsen.** Fiberlaget, lagermodellen og balansesjekken koster ca. 1 % av tiden. 85 % av tiden i poolene går med til å filtrere og summere 08801-tabellen på nytt i hver iterasjon (`trade_kt_by_year`, `add_trade_flow_by_product`), selv om bare støyfaktoren endrer seg. Hvis handelstallene summeres én gang før MC-løkka, går tiden trolig fra ca. 400 til ca. 60 ms per iterasjon, uavhengig av flodym.
+
+**Anbefaling for trinn 2:** Behold MC-løkka med ett flodym-system per iterasjon. Det er enkelt, bruker lite minne og er raskt nok. Bruk den vektoriserte varianten bare for lagermodellen hvis vi senere trenger det. Start trinn 2 med å summere handelsdataene før løkka.
 
 ## Spørsmål til beslutning
 

@@ -85,7 +85,8 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [ ] Fiberlag: Matrise for restposter og koder uten fiber (RES/UNK) per produkt, fra plukkanalyser med fibersortering eller JRC. Sko trenger egen behandling.
 - [ ] Fiberlag: Sammensetningsmatrise hovedfiber → fiberandeler (et «bomullsplagg» er ikke 100 % bomull).
 - [x] D20 er besluttet: Flyter er summer per kalenderår, lageret er nivået ved årsslutt, og innstrømmen regnes som om den kom midt i året (flodym-standard).
-- [ ] Prøve MC som dimensjon i flodym-prototypen.
+- [x] MC med flodym er testet (se notatet). Ett system per iterasjon tar 5 ms. Full vektorisering sprenger minnet, men en levetidsmodell over (år, iterasjon, produkt) fungerer. Flaskehalsen er dagens pooler (400 ms per iterasjon), fordi 08801 summeres på nytt i hver iterasjon.
+- [ ] Summere handelsdataene (08801) én gang før MC-løkka. Det gir ca. 85 % kortere kjøretid.
 
 ### Fase 4 – Usikkerhet
 - [ ] Pedigree-basert usikkerhet for alle datasett og parametre.
