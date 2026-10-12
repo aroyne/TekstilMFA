@@ -7,8 +7,8 @@ export for incineration abroad (share of residual waste exported, SSB
 KOSTRA, D11) and domestic incineration (the rest). The treatment shares are
 not product specific, so these flows have no product dimension.
 """
-import numpy as np
 
+from calculations.system import clip_negative
 from calculations.timeseries import interpolate
 
 INFLOWS_WM_RS = [
@@ -49,16 +49,9 @@ def _residual_export_mc(mfa, anchors):
 def _domestic_incineration_mc(mfa):
     """
     Balance of WM.RS. A negative balance (landfill and export shares
-    summing to more than 1) is not physical: incineration is clipped at 0
-    and landfill and export are scaled down to what enters WM.RS.
+    summing to more than 1) is not physical and is clipped at 0; the
+    clipped mass is recorded and reported on the flow page.
     """
-    landfill = mfa.flows['WM.RS-WM.LF-Landfilling of textiles-TOT']
-    export = mfa.flows['WM.RS-RW.RW-Residual waste export for incineration-TOT']
-    total = _total_wm_rs(mfa)
-    removed = landfill.values + export.values
-    scale = np.minimum(1.0, total / removed)
-    landfill.values[...] *= scale
-    export.values[...] *= scale
-    # Clipping removes rounding residue where landfill and export were scaled to the total.
-    mfa.flows['WM.RS-WM.IN-Domestic incineration-TOT'].values[...] = np.clip(
-        total - landfill.values - export.values, 0.0, None)
+    landfill = mfa.flows['WM.RS-WM.LF-Landfilling of textiles-TOT'].values
+    export = mfa.flows['WM.RS-RW.RW-Residual waste export for incineration-TOT'].values
+    clip_negative(mfa, 'WM.RS-WM.IN-Domestic incineration-TOT', _total_wm_rs(mfa) - landfill - export)

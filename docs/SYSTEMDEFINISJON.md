@@ -32,15 +32,15 @@
 |---|---|---|---|---|
 | **RW** Rest of the world | RW.RW | systemgrense | – | Import og eksport |
 | **PS** Primary production | PS.WO | systemgrense | – | Norsk råull |
-| **MA** Manufacturing | MA.FI | prosess | – | Ullvaskeri, spinneri |
+| **MA** Manufacturing | MA.FI | prosess | klippelager | Ullvaskeri, spinneri |
 | | MA.TX | prosess | midlertidig (D24) | Veving, strikking, konfeksjon, sko |
-| **DI** Distribution | DI.RT | prosess | – | Engros, butikk og netthandel |
+| **DI** Distribution | DI.RT | prosess | klippelager | Engros, butikk og netthandel |
 | **US** Use | US.HH | prosess | **ja** | Husholdninger, inkludert «dvalende» lager (klær som ikke brukes) |
 | | US.IC | prosess | **ja** | Arbeidsklær, uniformer og institusjonstekstiler |
 | **CO** Collection and sorting | CO.CO | prosess | – | Separat innsamling |
 | | CO.SO | prosess | – | Sortering i Norge |
 | | CO.RE | prosess | – | Bruktbutikker |
-| **WM** Waste management | WM.RS | prosess | – | Restavfall, grovavfall og blandet næringsavfall |
+| **WM** Waste management | WM.RS | prosess | klippelager | Restavfall, grovavfall og blandet næringsavfall |
 | | WM.IN | sluk | – | Forbrenning med energiutnyttelse |
 | | WM.LF | prosess | **ja** | Deponi (viktig før 2009) |
 | | WM.RC | prosess | – | Materialgjenvinning |
@@ -83,7 +83,7 @@ Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [syst
 * **data**: Flyten er målt direkte (for eksempel handelsstatistikk).
 * **parameter**: Flyten er en annen flyt eller et lager multiplisert med en overføringskoeffisient eller rate.
 * **stock_model**: Flyten er utstrømmen fra lagermodellen (innstrøm og levetid). Brukes ikke for flyter der det finnes offisiell statistikk (D8). Lagermodellen gir da et parallelt anslag til sammenligning.
-* **balance**: Flyten er restleddet i massebalansen til en prosess. Hver prosess har høyst én balanseflyt. En negativ flyt er ikke-fysisk og klippes til 0. Underskuddet tas da opp av en navngitt flyt i samme prosess (for eksempel eksporten), slik at massebalansen går opp. Det er beskrevet på md-siden for flyten. Klipping betyr at dataene ikke er helt konsistente, og er et diskusjonspunkt.
+* **balance**: Flyten er restleddet i massebalansen til en prosess. Hver prosess har høyst én balanseflyt. En negativ flyt er ikke-fysisk og klippes til 0. Fysiske flyter går foran massebalansen: underskuddet flyttes ikke til andre flyter, men tas opp av et klippelager i prosessen (MA.FI, DI.RT og WM.RS, `has_stock = clipping`), som rapporteres som «Clipping imbalance». Hvor ofte og hvor mye det klippes, står på md-siden for flyten. Klipping betyr at dataene ikke er helt konsistente, og er et diskusjonspunkt.
 
 ## Beslutninger
 

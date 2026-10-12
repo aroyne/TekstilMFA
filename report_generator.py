@@ -30,6 +30,7 @@ PROCESSES_CSV = 'system/processes.csv'
 FLOWS_CSV = 'system/flows.csv'
 SUMMARY = 'output_files/MC_summary.csv'
 FIBRE_SUMMARY = 'output_files/MC_summary_fibre.csv'
+CLIPPING_SUMMARY = 'output_files/clipping_summary.csv'
 PLOT_DIR = 'output_files/plots/pages'
 KEY_YEARS = [1990, 2000, 2010, 2018, 2022, 2025]
 REPO_URL = 'https://github.com/aroyne/TekstilMFA/blob/main'
@@ -82,7 +83,8 @@ def flow_functions(paths=None):
     {flow code: (file, function name, line, documentation)} for every
     function in calculations/*_mc.py that assigns a flow, found from the
     source: an assignment to mfa.flows['<code>'].values, directly or through
-    a variable bound to mfa.flows['<code>']. The documentation is the
+    a variable bound to mfa.flows['<code>'], or a call
+    clip_negative(mfa, '<code>', ...). The documentation is the
     function's docstring followed by those of the helper functions in the
     same module that it calls (where data sources are often named).
     """
@@ -97,6 +99,11 @@ def flow_functions(paths=None):
                         and isinstance(node.targets[0], ast.Name) and _flow_key(node.value)):
                     bound[node.targets[0].id] = _flow_key(node.value)
             for node in ast.walk(func):
+                # clip_negative(mfa, '<code>', values) assigns the flow too
+                if (isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+                        and node.func.id == 'clip_negative' and len(node.args) >= 2
+                        and isinstance(node.args[1], ast.Constant)):
+                    found.setdefault(node.args[1].value, (path, func.name, func.lineno, _documentation(func, local)))
                 if not isinstance(node, (ast.Assign, ast.AugAssign)):
                     continue
                 for target in (node.targets if isinstance(node, ast.Assign) else [node.target]):
@@ -149,6 +156,7 @@ class Site:
         self.flows = pd.read_csv(FLOWS_CSV)
         self.summary = pd.read_csv(SUMMARY)
         self.fibre = pd.read_csv(FIBRE_SUMMARY)
+        self.clipping = pd.read_csv(CLIPPING_SUMMARY)
         self.functions = flow_functions()
         self.pools = list(dict.fromkeys(self.processes['pool']))
         self.pool_name = dict(zip(self.processes['pool'], self.processes['pool_name']))
@@ -189,6 +197,37 @@ def _key_numbers(summary, code):
     return '\n'.join(lines)
 
 
+LAYER_NAMES = {'TOT': 'TOT', 'fibre': 'fiberlaget (per materiale)'}
+
+
+def _clipping(clipping, code):
+    """
+    Section on clipping at 0 for a flow that can be clipped: how often and
+    how much, per layer, for the years where it happened in this run.
+    """
+    rows = clipping[clipping['flow_name'] == code]
+    if rows.empty:
+        return []
+    lines = ['## Klipping av negative verdier', '',
+             'Flyten er en balanseflyt. Negative verdier er ikke-fysiske og klippes til 0. Massen som da '
+             'oppstår, tas opp av klippelageret i prosessen flyten går ut fra (rapportert som «Clipping '
+             'imbalance»), og flyttes ikke til andre flyter.', '']
+    for layer, part in rows.groupby('layer', sort=False):
+        n = int(part['n'].iloc[0])
+        hit = part[(part['n_clipped'] > 0) | (part['deterministic_kt'] > 0)]
+        if hit.empty:
+            lines += [f'I {LAYER_NAMES[layer]}: ikke klippet i noen av de {n} MC-iterasjonene eller i '
+                      'det deterministiske løpet.', '']
+            continue
+        lines += [f'I {LAYER_NAMES[layer]}:', '',
+                  '| År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |',
+                  '|---|---|---|---|---|']
+        lines += [f"| {r['year']} | {r['n_clipped']} av {n} | {r['mean_kt']:.3f} | {r['max_kt']:.3f} | "
+                  f"{r['deterministic_kt']:.3f} |" for _, r in hit.iterrows()]
+        lines.append('')
+    return lines
+
+
 def _fibre_rule(code):
     from calculations import fibre_layer
     for key, codes in (('supply', fibre_layer.SUPPLY_FLOWS), ('discards', fibre_layer.DISCARD_FLOWS),
@@ -224,7 +263,7 @@ def write_flow_page(site, row, nav_order):
         utils_stat.plot_flow(site.summary, code, f"{row['name']} – per produkt (median, 95 % for summen)", plot)
         utils_stat.plot_flow_materials(site.fibre, code, f"{row['name']} – per materiale (median)", fibre_plot)
         body += ['## Tidsserie', '', _iframe(plot, 420), '', '## Nøkkeltall (sum over produkter)', '',
-                 _key_numbers(site.summary, code), '',
+                 _key_numbers(site.summary, code), ''] + _clipping(site.clipping, code) + [
                  '## Materialsammensetning (fiberlag, D19)', '', _fibre_rule(code), '', _iframe(fibre_plot, 420), '']
         if code in site.functions:
             file, func, line, doc = site.functions[code]
@@ -253,8 +292,9 @@ def _flow_lines(site, rows, direction):
 
 
 def _stock_outputs(site, code):
-    names = [f'{code}-{code}-Stock change-TOT']
-    return [(f'Lagerendring {code}', n) for n in names if n in set(site.summary['flow_name'])]
+    names = [(f'Lagerendring {code}', f'{code}-{code}-Stock change-TOT'),
+             (f'Ubalanse fra klipping {code}', f'{code}-{code}-Clipping imbalance-TOT')]
+    return [(label, n) for label, n in names if n in set(site.summary['flow_name'])]
 
 
 def write_subpool_page(site, proc, nav_order):

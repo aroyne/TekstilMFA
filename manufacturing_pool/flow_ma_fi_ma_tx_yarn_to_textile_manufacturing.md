@@ -29,12 +29,25 @@ nav_order: 1
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 13.19 | 12.79 – 13.49 |
-| 2000 | 10.38 | 10.08 – 10.67 |
-| 2010 | 5.90 | 5.60 – 6.00 |
-| 2018 | 7.12 | 6.92 – 7.26 |
-| 2022 | 6.75 | 6.57 – 6.89 |
-| 2025 | 6.15 | 5.94 – 6.28 |
+| 1990 | 13.10 | 12.58 – 13.60 |
+| 2000 | 10.34 | 9.92 – 10.76 |
+| 2010 | 5.86 | 5.61 – 6.09 |
+| 2018 | 7.09 | 6.85 – 7.33 |
+| 2022 | 6.72 | 6.49 – 6.95 |
+| 2025 | 6.11 | 5.88 – 6.34 |
+
+## Klipping av negative verdier
+
+Flyten er en balanseflyt. Negative verdier er ikke-fysiske og klippes til 0. Massen som da oppstår, tas opp av klippelageret i prosessen flyten går ut fra (rapportert som «Clipping imbalance»), og flyttes ikke til andre flyter.
+
+I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministiske løpet.
+
+I fiberlaget (per materiale):
+
+| År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
+|---|---|---|---|---|
+| 1989 | 2 av 1000 | 0.000 | 0.080 | 0.000 |
+| 2000 | 2 av 1000 | 0.000 | 0.035 | 0.000 |
 
 ## Materialsammensetning (fiberlag, D19)
 
@@ -44,12 +57,12 @@ Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er
 
 ## Beregning i koden
 
-Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L123). Dokumentasjonen i koden:
+Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L122). Dokumentasjonen i koden:
 
 > Balance of MA.FI: Norwegian wool and imported fibre and yarn minus
 > exports, the scouring loss and hand knitting yarn sold through retail.
-> A negative balance is not physical: the flow is clipped at 0 and the
-> export of fibre and yarn is reduced by the deficit.
+> A negative balance is not physical and is clipped at 0; the clipped
+> mass is recorded and reported on the flow page.
 
 ## Beskrivelse
 

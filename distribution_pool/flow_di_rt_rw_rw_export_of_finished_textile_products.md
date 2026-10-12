@@ -29,12 +29,12 @@ nav_order: 3
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 3.93 | 3.83 – 4.01 |
-| 2000 | 4.46 | 4.35 – 4.55 |
-| 2010 | 4.81 | 4.69 – 4.91 |
-| 2018 | 5.48 | 5.34 – 5.59 |
-| 2022 | 8.05 | 7.85 – 8.22 |
-| 2025 | 9.52 | 9.28 – 9.72 |
+| 1990 | 3.89 | 3.75 – 4.03 |
+| 2000 | 4.41 | 4.26 – 4.57 |
+| 2010 | 4.76 | 4.60 – 4.93 |
+| 2018 | 5.42 | 5.23 – 5.62 |
+| 2022 | 7.97 | 7.69 – 8.25 |
+| 2025 | 9.43 | 9.09 – 9.76 |
 
 ## Materialsammensetning (fiberlag, D19)
 
@@ -44,12 +44,10 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 ## Beregning i koden
 
-Beregnes i `_finished_products_export_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L17). Dokumentasjonen i koden:
+Beregnes i `_finished_products_export_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L18). Dokumentasjonen i koden:
 
 > Registered exports of finished goods, SSB 08801. Export from DI.RT covers
 > both re-export and export of domestically manufactured products (D6).
-> In a year where exports of a product exceed what DI.RT has, they are
-> reduced by the deficit (see _sales_to_users_mc).
 
 ## Beskrivelse
 

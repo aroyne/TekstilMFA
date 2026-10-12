@@ -9,7 +9,8 @@ them, and closes the system (flow check, stocks, mass balance). The fibre
 layer (D19) then distributes the closed TOT system over materials in a
 second system. Results are kept as one array per flow and written as
 per-flow, per-product, per-year summary statistics to output_files/
-(MC_summary.csv for TOT, MC_summary_fibre.csv per material).
+(MC_summary.csv for TOT, MC_summary_fibre.csv per material) and how
+often and how much negative flows were clipped (clipping_summary.csv).
 
 Usage: python main_mc.py --pool all --nsim 1000 [--seed 1] [--export-raw-mc]
 """
@@ -50,16 +51,42 @@ def run_pools(mfa, pools, preloaded_data, current_params, dataset_noise, anchors
 def outputs(mfa, closed):
     """
     {name: FlodymArray} of everything reported: all flows, and when the
-    system is closed the stock change of every in-use stock (named like a
-    flow from the process to itself).
+    system is closed the stock change of every stock (named like a flow
+    from the process to itself). For a clipping stock the change is the
+    mass created by clipping negative flows at 0, reported as 'Clipping
+    imbalance'.
     """
     result = dict(mfa.flows)
     if closed:
         processes, _ = load_register()
-        for code in processes.loc[processes['has_stock'] == 'yes', 'code']:
-            if code in mfa.stocks:
-                result[f'{code}-{code}-Stock change-TOT'] = stock_change(mfa, code)
+        names = {'yes': 'Stock change', 'clipping': 'Clipping imbalance'}
+        for code, kind in zip(processes['code'], processes['has_stock']):
+            if kind in names and code in mfa.stocks:
+                result[f'{code}-{code}-{names[kind]}-TOT'] = stock_change(mfa, code)
     return result
+
+
+def clipping_summary(clip_store, layer):
+    """
+    How often and how much each clippable flow was clipped, per year
+    (summed over products and materials): iterations 1..n with clipping,
+    the mean and maximum clipped mass over all iterations, and the clipped
+    mass in the deterministic baseline.
+    """
+    rows = []
+    for name, (arr, runs) in clip_store.items():
+        per_year = runs.reshape(runs.shape[0], runs.shape[1], -1).sum(axis=2)
+        mc = per_year[1:]
+        for i, year in enumerate(arr.dims['t'].items):
+            rows.append({'flow_name': name, 'layer': layer, 'year': year, 'n': mc.shape[0],
+                         'n_clipped': int((mc[:, i] > CLIP_TOLERANCE_KT).sum()),
+                         'mean_kt': mc[:, i].mean(), 'max_kt': mc[:, i].max(),
+                         'deterministic_kt': per_year[0, i]})
+    return pd.DataFrame(rows)
+
+
+# Clipped mass below this is rounding, not clipping.
+CLIP_TOLERANCE_KT = 1e-9
 
 
 COLUMN_OF_DIM = {'t': 'year', 'p': 'product', 'g': 'product', 'm': 'material'}
@@ -143,6 +170,8 @@ def main():
     n_runs = args.nsim + 1
     store = {}  # name -> (FlodymArray of iteration 0, array (iteration, ...))
     fibre_store = {}
+    clip_store = {}
+    fibre_clip_store = {}
     start = time.time()
     for sim_id in range(n_runs):
         current_params, dataset_noise, anchors = params.draw(rng, deterministic=(sim_id == 0))
@@ -151,7 +180,12 @@ def main():
             close(mfa)
             stock_model = compute_fibre_layer(fibre, mfa, preloaded_data, current_params, params.fibre_composition)
             record(fibre_store, {**outputs(fibre, closed), **stock_model}, sim_id, n_runs)
+            # The fibre layer clips MA.FI yarn per material on its own; the
+            # rest of its clipping is inherited from TOT.
+            record(fibre_clip_store, {c: d for c, d in fibre.clipped.items() if d is not mfa.clipped.get(c)},
+                   sim_id, n_runs)
             record(store, {name: arr.sum_over(('m',)) for name, arr in stock_model.items()}, sim_id, n_runs)
+        record(clip_store, mfa.clipped, sim_id, n_runs)
         record(store, outputs(mfa, closed), sim_id, n_runs)
     print(f"[INFO] {args.nsim} MC iterations + baseline in {time.time() - start:.1f} s")
 
@@ -162,6 +196,9 @@ def main():
     if closed:
         summarise(fibre_store).to_csv('output_files/MC_summary_fibre.csv', index=False)
         print("[INFO] Wrote output_files/MC_summary_fibre.csv")
+        pd.concat([clipping_summary(clip_store, 'TOT'), clipping_summary(fibre_clip_store, 'fibre')]).to_csv(
+            'output_files/clipping_summary.csv', index=False)
+        print("[INFO] Wrote output_files/clipping_summary.csv")
     if args.export_raw_mc:
         raw_table(store).to_csv('output_files/MC_Raw_Simulations.csv.gz', index=False)
 

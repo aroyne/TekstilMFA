@@ -10,6 +10,13 @@ PS.WO) are flodym's 'sysenv'. Every process with 'stock_dims' gets a
 flow-driven stock whose change is inflows minus outflows: for the use
 processes this is the stock change as residual of the balance (D8), for
 sinks the mass that leaves the material cycle.
+
+Negative flows are not physical and are clipped at 0 (clip_negative); the
+clipped mass is recorded per flow in mfa.clipped. Processes with a balance
+flow that can be clipped have a clipping stock (has_stock 'clipping'): its
+change is the mass created by the clipping, so flodym's mass balance holds,
+and close() checks that it equals the recorded clipped mass and nothing
+else.
 """
 import flodym as fd
 import numpy as np
@@ -74,7 +81,9 @@ def make_system(fibre=False):
                                subclass=fd.SimpleFlowDrivenStock)
             for _, r in with_stock.iterrows()
         ])
-    return fd.MFASystem(dims=DIMENSIONS, parameters={}, processes=fd_processes, flows=fd_flows, stocks=fd_stocks)
+    mfa = fd.MFASystem(dims=DIMENSIONS, parameters={}, processes=fd_processes, flows=fd_flows, stocks=fd_stocks)
+    mfa.clipped = {}
+    return mfa
 
 
 def reset(mfa):
@@ -84,6 +93,19 @@ def reset(mfa):
     for stock in mfa.stocks.values():
         for arr in (stock.stock, stock.inflow, stock.outflow):
             arr.values[...] = np.nan
+    mfa.clipped = {}
+
+
+def clip_negative(mfa, code, values):
+    """
+    Sets the flow to values clipped at 0 and records the clipped mass
+    (FlodymArray like the flow, >= 0) in mfa.clipped[code]. Every flow that
+    can be clipped is recorded in every iteration, also when nothing is
+    clipped.
+    """
+    flow = mfa.flows[code]
+    flow.values[...] = np.clip(values, 0.0, None)
+    mfa.clipped[code] = fd.FlodymArray(dims=flow.dims, values=np.clip(-values, 0.0, None))
 
 
 def to_dims(arr, letters):
@@ -96,8 +118,9 @@ def to_dims(arr, letters):
 def close(mfa):
     """
     Checks that every flow is set and non-negative, computes the stocks from
-    the flows, and checks the mass balance of every process. Raises
-    ValueError on any failure.
+    the flows, checks the mass balance of every process, and checks that
+    every clipping stock changes by exactly the mass clipped from the flows
+    leaving it. Raises ValueError on any failure.
     """
     mfa.check_flows(raise_error=True)
     for name, stock in mfa.stocks.items():
@@ -111,6 +134,29 @@ def close(mfa):
                 stock.outflow.values[...] += to_dims(flow, letters).values
         stock.compute()
     mfa.check_mass_balance(raise_error=True)
+    _check_clipping_stocks(mfa)
+
+
+def clipping_stocks():
+    processes, _ = load_register()
+    return list(processes.loc[processes['has_stock'] == 'clipping', 'code'])
+
+
+def _check_clipping_stocks(mfa):
+    # The clipped mass may have fewer dimensions than the stock (in the fibre
+    # system, clipping inherited from TOT has no material), so both sides are
+    # compared on the dimensions they share.
+    tolerance = 100 * mfa._absolute_float_precision
+    for code in clipping_stocks():
+        if code not in mfa.stocks:
+            continue
+        change = stock_change(mfa, code)
+        clipped = [d for c, d in mfa.clipped.items() if mfa.flows[c].from_process.name == code]
+        common = tuple(l for l in change.dims.letters if all(l in d.dims.letters for d in clipped))
+        error = change.sum_to(common).values + sum(d.sum_to(common).values for d in clipped)
+        if np.abs(error).max() > tolerance:
+            raise ValueError(f"Clipping stock {code} changes by more than the clipped mass "
+                             f"(max {np.abs(error).max():.3g} kt)")
 
 
 def stock_change(mfa, code):

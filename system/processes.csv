@@ -1,15 +1,15 @@
 code,pool,pool_name,subpool_name,type,has_stock,stock_dims,description
 RW.RW,RW,Rest of the world,Rest of the world,boundary,no,,All countries outside Norway; source of imports and sink for exports
 PS.WO,PS,Primary production,Norwegian wool,boundary,no,,Raw wool shorn from Norwegian sheep; system inflow of domestic virgin fibre
-MA.FI,MA,Manufacturing,Fibre and yarn production,process,no,,"Wool scouring, spinning and other fibre/yarn production in Norway"
+MA.FI,MA,Manufacturing,Fibre and yarn production,process,clipping,t,"Wool scouring, spinning and other fibre/yarn production in Norway. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0"
 MA.TX,MA,Manufacturing,Textile and apparel manufacturing,process,yes,t,"Weaving, knitting, finishing, confection and footwear manufacturing in Norway. Temporary stock: receives the yarn from MA.FI until the outflows of MA.TX are implemented"
-DI.RT,DI,Distribution,Wholesale and retail,process,no,,"Wholesale, physical retail and online retail of finished textile products placed on the Norwegian market"
+DI.RT,DI,Distribution,Wholesale and retail,process,clipping,"t,p","Wholesale, physical retail and online retail of finished textile products placed on the Norwegian market. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0"
 US.HH,US,Use,Households,process,yes,"t,g",Textiles in use or stored (hibernating) in private households; the main in-use stock
 US.IC,US,Use,Institutions and businesses,process,yes,"t,p","Workwear, uniforms, hotel/hospital/institutional linen and other non-household textile use"
 CO.CO,CO,Collection and sorting,Separate collection,process,no,,"Separate collection of used textiles (containers, shops, take-back schemes, municipal recycling stations)"
 CO.SO,CO,Collection and sorting,Sorting,process,no,,Sorting of collected textiles in Norway into reuse/recycling/reject grades
 CO.RE,CO,Collection and sorting,Second-hand retail,process,no,,Second-hand shops operated by collectors and other actors that sell sorted textiles back to Norwegian users
-WM.RS,WM,Waste management,Residual and mixed waste collection,process,no,,"Textiles in household residual waste, bulky waste and mixed commercial waste"
+WM.RS,WM,Waste management,Residual and mixed waste collection,process,clipping,t,"Textiles in household residual waste, bulky waste and mixed commercial waste. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0"
 WM.IN,WM,Waste management,Incineration,sink,no,t,Incineration with energy recovery in Norway; textile mass is destroyed (final sink)
 WM.LF,WM,Waste management,Landfill,process,yes,t,Landfilled textiles; relevant mainly before the 2009 ban on landfilling biodegradable waste
 WM.RC,WM,Waste management,Material recycling,process,no,,Mechanical or chemical recycling of textiles (domestic facilities and brokers)

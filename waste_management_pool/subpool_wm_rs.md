@@ -8,9 +8,9 @@ has_children: true
 
 # Residual and mixed waste collection (WM.RS)
 
-Textiles in household residual waste, bulky waste and mixed commercial waste
+Textiles in household residual waste, bulky waste and mixed commercial waste. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0
 
-Type: process. Lager: no.
+Type: process. Lager: clipping.
 
 ## Flyter ut
 

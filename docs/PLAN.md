@@ -113,8 +113,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 ### Fase 3 – P2- og P3-flyter
 - [x] Høyfast filamentgarn (5402.10/11/19/20) er tatt ut som garn til tau og nett (D22).
 - [x] Håndstrikkegarn 1988–89 fra SSBs varetall (NOS B 941, B 998: 0,99 og 0,89 kt), interpolert til Prodcom 2008.
-- [x] Ny regel (CLAUDE.md): Negative flyter er ikke-fysiske og klippes til 0. Underskuddet tas opp av en navngitt flyt (eksport i MA.FI og DI.RT, deponi og avfallseksport i WM.RS) og beskrives i docstringen, som vises på md-siden.
-- [x] Ullbalansen i MA.FI er stram i 1989 og 2000. Balansen per materiale i fiberlaget klippes nå til 0, og eksportens sammensetning tar opp differansen (godkjent 2026-10-12). Ingen feil i 1 000 trekk.
+- [x] Ny regel (CLAUDE.md): Negative flyter er ikke-fysiske og klippes til 0. Underskuddet tas opp av klippelagre i MA.FI, DI.RT og WM.RS («Clipping imbalance») og flyttes ikke til andre flyter. Hvor ofte og hvor mye det klippes, står på flytsidene. N = 1000: bare ull i garnet til MA.TX i fiberlaget klippes (1989: 2 av 1 000, maks 0,08 kt; 2000: 2 av 1 000, maks 0,03 kt).
 - [ ] **Gjennomgang flyt for flyt, neste subpool: MA.TX.** Ta opp 5402.61 og 5503.x (nettgarn, dynefyll eller fiberduk), Prodcom 13.94 og gjeneksport (D6). Fjern det midlertidige lageret i MA.TX (D24).
 - [ ] Deretter DI.RT, US.HH, US.IC, CO.CO, CO.SO, CO.RE, WM.RS, WM.RC og WM.WW/EN. Det midlertidige lageret i WM.WW fjernes med mikrofibre- og slamflytene.
 - [ ] US.IC, sorteringsdetaljer, avfallseksport, materialgjenvinning.

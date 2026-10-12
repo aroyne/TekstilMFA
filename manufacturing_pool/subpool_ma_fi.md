@@ -8,9 +8,9 @@ has_children: true
 
 # Fibre and yarn production (MA.FI)
 
-Wool scouring, spinning and other fibre/yarn production in Norway
+Wool scouring, spinning and other fibre/yarn production in Norway. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0
 
-Type: process. Lager: no.
+Type: process. Lager: clipping.
 
 ## Flyter ut
 

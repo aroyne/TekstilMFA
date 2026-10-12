@@ -29,12 +29,12 @@ nav_order: 1
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 15.43 | 15.04 – 15.75 |
-| 2000 | 12.33 | 12.02 – 12.58 |
-| 2010 | 7.05 | 6.87 – 7.19 |
-| 2018 | 8.03 | 7.83 – 8.20 |
-| 2022 | 7.58 | 7.39 – 7.73 |
-| 2025 | 7.14 | 6.96 – 7.29 |
+| 1990 | 15.28 | 14.74 – 15.82 |
+| 2000 | 12.21 | 11.78 – 12.64 |
+| 2010 | 6.98 | 6.73 – 7.23 |
+| 2018 | 7.95 | 7.67 – 8.23 |
+| 2022 | 7.50 | 7.24 – 7.77 |
+| 2025 | 7.07 | 6.82 – 7.32 |
 
 ## Materialsammensetning (fiberlag, D19)
 
@@ -44,7 +44,7 @@ Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er
 
 ## Beregning i koden
 
-Beregnes i `_fibre_and_yarn_import_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L46). Dokumentasjonen i koden:
+Beregnes i `_fibre_and_yarn_import_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L47). Dokumentasjonen i koden:
 
 > Registered imports of fibre and yarn, SSB 08801 (HS 50-55 except woven
 > fabric and retail yarn). Includes raw, scoured and carbonised wool and

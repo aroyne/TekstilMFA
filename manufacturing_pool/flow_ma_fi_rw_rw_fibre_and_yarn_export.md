@@ -29,12 +29,12 @@ nav_order: 3
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 5.32 | 5.19 – 5.43 |
-| 2000 | 5.17 | 5.04 – 5.28 |
-| 2010 | 4.63 | 4.52 – 4.73 |
-| 2018 | 4.06 | 3.96 – 4.15 |
-| 2022 | 3.25 | 3.16 – 3.31 |
-| 2025 | 3.02 | 2.95 – 3.08 |
+| 1990 | 5.27 | 5.08 – 5.45 |
+| 2000 | 5.12 | 4.94 – 5.30 |
+| 2010 | 4.59 | 4.42 – 4.75 |
+| 2018 | 4.02 | 3.88 – 4.17 |
+| 2022 | 3.21 | 3.10 – 3.33 |
+| 2025 | 2.99 | 2.89 – 3.10 |
 
 ## Materialsammensetning (fiberlag, D19)
 
@@ -44,15 +44,13 @@ Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er
 
 ## Beregning i koden
 
-Beregnes i `_fibre_and_yarn_export_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L56). Dokumentasjonen i koden:
+Beregnes i `_fibre_and_yarn_export_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L57). Dokumentasjonen i koden:
 
 > Registered exports of fibre and yarn, SSB 08801 (HS 50-55 except woven
 > fabric and retail yarn). Dominated by greasy Norwegian wool (HS 5101.11
 > and 5101.19), which since 2007 is 90-100 % of Norwegian wool. Yarn
 > exports may include re-export of yarn spun abroad for Norwegian brands,
 > which the trade statistics do not separate from domestic production.
-> In a year where exports exceed what MA.FI has, they are reduced by the
-> deficit (see _yarn_to_manufacturing_mc).
 
 ## Beskrivelse
 

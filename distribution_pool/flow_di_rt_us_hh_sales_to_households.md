@@ -29,12 +29,18 @@ nav_order: 1
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 62.13 | 61.04 – 64.01 |
-| 2000 | 80.87 | 79.49 – 83.37 |
-| 2010 | 116.54 | 114.65 – 120.24 |
-| 2018 | 108.44 | 106.70 – 111.88 |
-| 2022 | 114.42 | 112.58 – 118.08 |
-| 2025 | 98.51 | 96.90 – 101.63 |
+| 1990 | 61.87 | 59.04 – 64.57 |
+| 2000 | 80.56 | 76.89 – 84.11 |
+| 2010 | 116.13 | 110.87 – 121.24 |
+| 2018 | 108.05 | 103.17 – 112.80 |
+| 2022 | 114.03 | 108.86 – 119.05 |
+| 2025 | 98.17 | 93.72 – 102.49 |
+
+## Klipping av negative verdier
+
+Flyten er en balanseflyt. Negative verdier er ikke-fysiske og klippes til 0. Massen som da oppstår, tas opp av klippelageret i prosessen flyten går ut fra (rapportert som «Clipping imbalance»), og flyttes ikke til andre flyter.
+
+I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministiske løpet.
 
 ## Materialsammensetning (fiberlag, D19)
 
@@ -44,15 +50,16 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 ## Beregning i koden
 
-Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L28). Dokumentasjonen i koden:
+Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L27). Dokumentasjonen i koden:
 
 > Balance of DI.RT per product: registered imports plus hand knitting yarn
 > spun in Norway minus exports, split between households and
 > institutions/businesses. Sacks (SA) are packaging
 > used by businesses (D13) and go entirely to US.IC; retail yarn (YA) goes
 > entirely to households. Other domestic manufacturing (MA.TX) and unsold
-> goods are not yet included. A negative balance is not physical: sales
-> are clipped at 0 and exports of the product are reduced by the deficit.
+> goods are not yet included. A negative balance is not physical and is
+> clipped at 0; the clipped mass is recorded and reported on the flow
+> pages.
 
 ## Beskrivelse
 

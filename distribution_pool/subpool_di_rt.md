@@ -8,9 +8,9 @@ has_children: true
 
 # Wholesale and retail (DI.RT)
 
-Wholesale, physical retail and online retail of finished textile products placed on the Norwegian market
+Wholesale, physical retail and online retail of finished textile products placed on the Norwegian market. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0
 
-Type: process. Lager: no.
+Type: process. Lager: clipping.
 
 ## Flyter ut
 

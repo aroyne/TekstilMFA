@@ -40,7 +40,7 @@ def test_implemented_flows_have_valid_dims():
 
 
 def test_stocks_and_sinks_have_stock_dims():
-    needs = processes[(processes['has_stock'] == 'yes') | (processes['type'] == 'sink')]
+    needs = processes[processes['has_stock'].isin(['yes', 'clipping']) | (processes['type'] == 'sink')]
     assert needs['stock_dims'].notna().all()
 
 

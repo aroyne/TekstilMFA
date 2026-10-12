@@ -38,7 +38,7 @@ import flodym as fd
 import numpy as np
 import pandas as pd
 
-from calculations.system import close, reset, to_dims
+from calculations.system import clip_negative, close, reset, to_dims
 from calculations.utils import (CORE_GROUP_PRODUCTS, FIBRE_GROUPS, MATERIALS, PRODUCT_GROUPS, PRODUCTS, START_YEAR,
                                 YEARS)
 
@@ -175,9 +175,8 @@ def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     yarn. Yarn to textile manufacturing is the balance of MA.FI per
     material, clipped at 0: a material whose exports, losses and hand
     knitting yarn exceed its supply (wool in 1989 and 2000 in some draws)
-    gets 0, the other materials are scaled down so that the flow keeps its
-    TOT mass, and the export composition takes up the difference, so that
-    every material still balances.
+    gets 0, and the flow is then larger than in TOT by the clipped mass,
+    which the clipping stock of MA.FI takes up.
     """
     fibre.flows[HAND_KNITTING_YARN].values[...] = tot.flows[HAND_KNITTING_YARN].values[..., None] * _only('WO')
     fibre.flows[RAW_WOOL].values[...] = tot.flows[RAW_WOOL].values[:, None] * _only('WO')
@@ -185,17 +184,10 @@ def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     for code, impeks in ((FIBRE_YARN_IMPORT, 1), (FIBRE_YARN_EXPORT, 2)):
         shares = fibre_yarn_composition(preloaded_data, current_params, fibre_composition, impeks)
         fibre.flows[code].values[...] = tot.flows[code].values[:, None] * shares
-    supply = sum(fibre.flows[c].values for c in (RAW_WOOL, FIBRE_YARN_IMPORT))
-    removed = fibre.flows[SCOURING_LOSS].values + fibre.flows[HAND_KNITTING_YARN].values.sum(axis=1)
-    balance = supply - removed - fibre.flows[FIBRE_YARN_EXPORT].values
-    clipped = np.clip(balance, 0.0, None)
-    total = tot.flows[YARN_TO_MANUFACTURING].values[:, None]
-    yarn = clipped * total / clipped.sum(axis=1, keepdims=True)
-    fibre.flows[YARN_TO_MANUFACTURING].values[...] = yarn
-    fibre.flows[FIBRE_YARN_EXPORT].values[...] = supply - removed - yarn
-    if (fibre.flows[FIBRE_YARN_EXPORT].values < -TOLERANCE_KT).any():
-        t, m = np.argwhere(fibre.flows[FIBRE_YARN_EXPORT].values < -TOLERANCE_KT)[0]
-        raise ValueError(f"MA.FI cannot export more {MATERIALS[m]} than it has in {YEARS[t]}")
+    balance = sum(fibre.flows[c].values for c in (RAW_WOOL, FIBRE_YARN_IMPORT)) - sum(
+        fibre.flows[c].values for c in (FIBRE_YARN_EXPORT, SCOURING_LOSS)) - fibre.flows[
+        HAND_KNITTING_YARN].values.sum(axis=1)
+    clip_negative(fibre, YARN_TO_MANUFACTURING, balance)
 
 
 def retail_composition(tot, imported):
@@ -323,9 +315,15 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     for code in MIXED_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * mix_shares
 
+    # Flows taken from TOT carry its clipping; MA.FI yarn is clipped again per
+    # material and exceeds TOT by that clipped mass.
+    for code, clipped in tot.clipped.items():
+        fibre.clipped.setdefault(code, clipped)
     close(fibre)
     for code, flow in tot.flows.items():
-        gap = np.abs(fibre.flows[code].values.sum(axis=-1) - flow.values).max()
+        own = code in fibre.clipped and fibre.clipped[code] is not tot.clipped.get(code)
+        extra = fibre.clipped[code].values.sum(axis=-1) if own else 0.0
+        gap = np.abs(fibre.flows[code].values.sum(axis=-1) - extra - flow.values).max()
         if gap > TOLERANCE_KT:
             raise ValueError(f"Fibre layer of {code} does not add up to TOT (max gap {gap:.2e} kt)")
     stock = fibre.stocks['US.HH']

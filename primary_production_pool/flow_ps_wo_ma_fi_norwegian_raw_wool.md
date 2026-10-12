@@ -29,12 +29,12 @@ nav_order: 1
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 4.92 | 4.86 – 5.05 |
-| 2000 | 4.92 | 4.85 – 5.05 |
-| 2010 | 4.33 | 4.27 – 4.45 |
-| 2018 | 3.88 | 3.83 – 3.98 |
-| 2022 | 3.13 | 3.09 – 3.22 |
-| 2025 | 2.84 | 2.80 – 2.92 |
+| 1990 | 4.96 | 4.79 – 5.13 |
+| 2000 | 4.95 | 4.78 – 5.12 |
+| 2010 | 4.37 | 4.21 – 4.52 |
+| 2018 | 3.91 | 3.77 – 4.04 |
+| 2022 | 3.16 | 3.05 – 3.27 |
+| 2025 | 2.86 | 2.76 – 2.96 |
 
 ## Materialsammensetning (fiberlag, D19)
 
@@ -44,7 +44,7 @@ Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er
 
 ## Beregning i koden
 
-Beregnes i `_norwegian_raw_wool_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L32). Dokumentasjonen i koden:
+Beregnes i `_norwegian_raw_wool_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L33). Dokumentasjonen i koden:
 
 > Norwegian wool (greasy, as weighed in) from Totalkalkylen for
 > jordbrukssektoren (Budsjettnemnda for jordbruket, NIBIO), the official
