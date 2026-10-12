@@ -14,11 +14,15 @@ Type: boundary. Lager: no.
 
 ## Flyter ut
 
-* [Norwegian raw wool](../primary_production_pool/flow_ps_wo_ma_fi_norwegian_raw_wool.html) → MA.FI *(planlagt)*
+* [Norwegian raw wool](../primary_production_pool/flow_ps_wo_ma_fi_norwegian_raw_wool.html) → MA.FI
 
 ## Flyter inn
 
 *Ingen.*
+
+## Massebalanse
+
+<iframe src="../output_files/plots/pages/balance_ps_wo.html" width="100%" height="500px" frameborder="0" scrolling="no"></iframe>
 
 ## Merknader
 

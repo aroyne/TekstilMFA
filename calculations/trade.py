@@ -17,7 +17,8 @@ def map_hs_to_product(df_trade, df_mapping):
     """
     Adds 'product', 'category' and 'in_scope' columns to the trade table by
     matching each HS8 code against the longest HS prefix in hs_mapping.csv
-    (a 4-digit heading such as 6309 takes precedence over its chapter 63).
+    (a 4-digit heading such as 6309 takes precedence over its chapter 63, and
+    a 6-digit subheading over its heading).
     Codes that match no prefix get product NaN.
     """
     df = df_trade.copy()
@@ -25,7 +26,7 @@ def map_hs_to_product(df_trade, df_mapping):
     df['product'] = None
     df['category'] = None
     df['in_scope'] = None
-    for prefix_len in (2, 4):
+    for prefix_len in (2, 4, 6):
         prefixes = mapping[mapping.index.str.len() == prefix_len]
         hs_prefix = df['HS8'].str[:prefix_len]
         hit = hs_prefix.isin(prefixes.index)

@@ -8,9 +8,9 @@ has_children: true
 
 # Textile and apparel manufacturing (MA.TX)
 
-Weaving, knitting, finishing, confection and footwear manufacturing in Norway
+Weaving, knitting, finishing, confection and footwear manufacturing in Norway. Temporary stock: receives the yarn from MA.FI until the outflows of MA.TX are implemented
 
-Type: process. Lager: no.
+Type: process. Lager: yes.
 
 ## Flyter ut
 
@@ -21,8 +21,12 @@ Type: process. Lager: no.
 ## Flyter inn
 
 * [Fabric import](../rest_of_the_world_pool/flow_rw_rw_ma_tx_fabric_import.html) ← RW.RW *(planlagt)*
-* [Yarn to textile manufacturing](../manufacturing_pool/flow_ma_fi_ma_tx_yarn_to_textile_manufacturing.html) ← MA.FI *(planlagt)*
+* [Yarn to textile manufacturing](../manufacturing_pool/flow_ma_fi_ma_tx_yarn_to_textile_manufacturing.html) ← MA.FI
 * [Recycled fibre to domestic manufacturing](../waste_management_pool/flow_wm_rc_ma_tx_recycled_fibre_to_domestic_manufacturing.html) ← WM.RC *(planlagt)*
+
+## Massebalanse
+
+<iframe src="../output_files/plots/pages/balance_ma_tx.html" width="100%" height="500px" frameborder="0" scrolling="no"></iframe>
 
 ## Merknader
 

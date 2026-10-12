@@ -27,7 +27,7 @@ from data_loader import load_all_data
 
 # Pools run in this order within each iteration: a pool may read flows
 # assigned by the pools before it (goods flow downstream).
-ALL_POOLS = ['rw', 'di', 'co', 'us', 'wm']
+ALL_POOLS = ['rw', 'ma', 'di', 'co', 'us', 'wm']
 
 
 def parse_arguments():

@@ -17,12 +17,17 @@ CORE_PRODUCTS = ['CL', 'HT', 'FW']
 # Other textile goods ('OT'): carpets, sacks, tarpaulins/tents and other
 # made-up articles, split because their users and lifetimes differ widely.
 OTHER_PRODUCTS = ['CA', 'SA', 'TA', 'OM']
-PRODUCTS = CORE_PRODUCTS + OTHER_PRODUCTS
+# Yarn put up for retail sale ('YA'), knitted or sewn into garments in the
+# households.
+PRODUCTS = CORE_PRODUCTS + OTHER_PRODUCTS + ['YA']
 
 # Discard statistics (collection, pick analyses) cover CL+HT+FW together, so
 # flows after use are split by product group ('g') instead of product ('p').
+# Hand-made garments are discarded as clothing, so retail yarn belongs to the
+# CORE group.
 PRODUCT_GROUPS = ['CORE'] + OTHER_PRODUCTS
-GROUP_OF_PRODUCT = {p: ('CORE' if p in CORE_PRODUCTS else p) for p in PRODUCTS}
+CORE_GROUP_PRODUCTS = CORE_PRODUCTS + ['YA']
+GROUP_OF_PRODUCT = {p: ('CORE' if p in CORE_GROUP_PRODUCTS else p) for p in PRODUCTS}
 
 # Fibre layer (D19): five fibre groups and non-textile material (buttons,
 # zips, soles, backing), so that TOT = sum over all materials.

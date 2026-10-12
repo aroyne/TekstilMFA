@@ -45,8 +45,8 @@ def test_stocks_and_sinks_have_stock_dims():
 
 
 def test_every_flow_has_a_valid_form():
-    # D18: textile form of the flow
-    assert flows['form'].isin(['FIB', 'FAB', 'NEW', 'MIX', 'USE', 'WRN', 'PCW', 'MFR']).all()
+    # D18: textile form of the flow; BYP is non-textile by-product mass (wool grease and dirt)
+    assert flows['form'].isin(['FIB', 'FAB', 'NEW', 'MIX', 'USE', 'WRN', 'PCW', 'MFR', 'BYP']).all()
 
 
 def test_report_finds_the_function_of_every_implemented_flow():

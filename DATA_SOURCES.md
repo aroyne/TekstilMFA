@@ -8,11 +8,14 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 
 | Fil | Kilde | Innhold | Brukes i |
 |---|---|---|---|
-| `anchor_values.csv` | Kuraterte ankerpunkter fra rapporter og offisiell statistikk | Direkte netthandel (VOEC, Watson 2020) og restavfall (SSB 1998, Watson 2020, Rubach 2023, de Sadeleer & Rubach 2026) i kt, med kilde, usikkerhet og status per punkt | `rw_mc.py`, `us_mc.py` |
+| `anchor_values.csv` | Kuraterte ankerpunkter fra rapporter og offisiell statistikk | Direkte netthandel (VOEC, Watson 2020), restavfall (SSB 1998, Watson 2020, Rubach 2023, de Sadeleer & Rubach 2026) og uvasket ull vasket i Norge (periodesnitt fra Totalkalkylen og 08801, `scripts/derive_wool_scouring_anchors.py`) i kt, med kilde, usikkerhet og status per punkt | `rw_mc.py`, `us_mc.py`, `ma_mc.py` |
 | `SSB_13035_restavfall_eksport_2015_2025.csv` | SSB 13035 (KOSTRA, hele landet, API 2026-09-29) | Restavfall i alt og eksportert til utlandet (tonn), og tekstiler til ombruk rapportert av kommunene (13–21 kt per år), 2015–2025 | parameter `residual_export_share`. Tekstiler til ombruk er ikke brukt ennå – mulig kontroll av innsamlingen |
 | `SSB_05281_avfallsregnskap_1995_2011.xlsx` | SSB 05281 (kopi fra NitrogenBudsjett) | Avfall etter materialtype og behandlingsmåte 1995–2011. Tekstilradene gir deponiandelen i `parameters/time_dependent_parameters.csv` | parameter `landfill_share_residual` |
 | `SSB_10513_textiles_mixed_2012_2024.csv` | SSB tabell 10513, avfallsregnskap (API, 2026-09-29) | Materialtypene «Tekstiler» og «Blandet avfall» etter behandlingsmåte, 2012–2024, 1 000 tonn (latin-1-koding) | ikke ennå (se datainventar) |
-| `Tab_08801_textiles.csv` | SSB tabell 08801, utenrikshandel etter land og varenummer (HS8) | HS-kapittel 50–64. 1988–2022 er hentet fra NitrogenBudsjett sin fulle 08801-fil (`scripts/extract_textile_trade.py`). 2023–2025 er hentet fra SSB API 2026-09-29 (`scripts/update_trade_ssb_api.py`). Enhetskode for API-årene er tatt fra siste år med samme varenummer. Kolonner: år; import/eksport; HS8; land; supplerende enhet (S stykk, P par, 1 ingen); nettovekt kg; supplerende mengde; verdi NOK. | `trade.py` (RW, DI) |
+| `NIBIO_totalkalkylen_ull.csv` | Totalkalkylen for jordbrukssektoren (Budsjettnemnda for jordbruket), NIBIOs statistikktjeneste (API `statisticsNewTK`, post 8462 «Ull», hentet 2026-10-12) | Norsk ull per år 1959–2026: tonn (innveid, uvasket), kr/kg og verdi (1 000 kr). Siste år er budsjett, året før er foreløpig regnskap | `ma_mc.py` (PS.WO → MA.FI), `scripts/derive_wool_scouring_anchors.py` |
+| `SSB_10455_prodcom_garn_tau_nett_2008_2025.csv` | SSB 10455, solgt produksjon av varer for store foretak i industri (API, hentet 2026-10-12) | Alle prodcomkoder 13.10 (garn) og 13.94 (tau og nett), mengde, verdi og solgt produksjon i alt, 2008–2025, med SSBs statuskoder (`:` skjult, `..` mangler). Ullgarn i detaljopplegg (13.10.50.50) 0,59–1,03 kt i 2008–2023 | `ma_mc.py` (MA.FI → DI.RT). 13.94 er kandidat for MA.TX |
+| `SSB_industristatistikk_varetall_1988_1989.csv` | SSB, Industristatistikk 1988 og 1989, Hefte II Varetall (NOS B 941 og B 998), tabell 3, lest manuelt fra skannede sider | Ullgarn i detaljopplegg (5109.1001 og 5109.1002) produsert i store bedrifter: 993 t (1988) og 893 t (1989), med verdi | `ma_mc.py` (MA.FI → DI.RT) |
+| `Tab_08801_textiles.csv` | SSB tabell 08801, utenrikshandel etter land og varenummer (HS8) | HS-kapittel 50–64. 1988–2022 er hentet fra NitrogenBudsjett sin fulle 08801-fil (`scripts/extract_textile_trade.py`). 2023–2025 er hentet fra SSB API 2026-09-29 (`scripts/update_trade_ssb_api.py`). Enhetskode for API-årene er tatt fra siste år med samme varenummer. Kolonner: år; import/eksport; HS8; land; supplerende enhet (S stykk, P par, 1 ingen); nettovekt kg; supplerende mengde; verdi NOK. | `trade.py` (RW, MA, DI) |
 
 ## Kandidatkilder per område
 
@@ -20,14 +23,18 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | Kilde | Innhold | Status |
 |---|---|---|
 | SSB 08801 | Import og eksport per HS8, 1988–2025 | har |
-| SSB industristatistikk (varestatistikk, NACE 13–15) / Eurostat Prodcom | Norsk produksjon av tekstiler, klær og sko | hent/verifiser tabell |
+| SSB 10455 (Prodcom, solgt produksjon i store foretak, 2008–2025) | Norsk produksjon per prodcomkode, mengde (kg, m² eller stk) og verdi. Mange celler er skjult | 13.10 og 13.94 har (`SSB_10455_prodcom_garn_tau_nett_2008_2025.csv`); andre koder for MA.TX hentes ved behov |
+| SNL, «garn» og «Sandnes Garn» | Omtrent 1 000 t håndstrikkegarn produseres i Norge per år, og omsetningen er over 500 mill. kr (begge uten årstall). Sandnes Garn produserer ca. 600 t | brukes til usikkerheten på 10455 |
+| SSB, Industristatistikk 1985–1989, Hefte II Varetall (NOS B 689, B 781, B 876, B 941, B 998) | Varetall for industrien før Prodcom, etter HS fra 1988 | 1988–89 har (`SSB_industristatistikk_varetall_1988_1989.csv`). Skannet uten tekstlag. Fra 1990 til 2007 publiserte SSB bare næringstall |
+| SSB 12910 (hovedtall for foretak og bedrifter etter næring, 2017–2024) og 08675 (resultatposter for NACE 13–15, 2007–2024) | Omsetning, sysselsatte og varekostnader for næring 13.1 (spinning) og 13–15 | kandidat for MA (ikke hentet) |
 | SSB 05678 og 14221 (Grensehandel), `data_files/SSB_grensehandel_05678_14221.csv` (kolonner: ssb_table, series, year, mill_nok) | Handlebeløp på dagsturer 2004–2022 (i alt) og klær og sko 2023–2025 (496 / 509 / 458 mill. kr) | har (`rw_mc.py`) |
 | SSB forbruksundersøkelsen / nasjonalregnskap (COICOP 03.1, 03.2, 05.2) | Husholdningenes utgifter til klær, sko og hjemmetekstiler, en proxy for trender | hent |
 | SSB 08801, varenr. 99.60.1000/2000/3000 | Lavverdisendinger (næringsliv < 1 000 kr, privat, VOEC), 2023–, uten HS-fordeling. Er **ikke** med under HS-kodene i noe år. | har (i NitrogenBudsjett sin fulle 08801-fil) |
 | de Sadeleer & Rubach (2026), *2026 Kunnskapsstatus for tekstiler og tekstilavfall i Norge*, NORSUS OR.18.26, **for NORSIRK/Videre Tekstil (bransje)** | Tekstiler via VOEC per kap. 61/62/63 fra Tolletaten 2022–2025 (524 / 4 797 / 3 849 / 13 962 t). Brutto import 2022–2025. Ankerår 2025: innsamlet 33 703 t, restavfall 44 461 t (Mepex), eksport av brukte tekstiler 34 331 t, ombruk i Norge 1 622 t | har (litteratur/, lokalt) |
 | Syversen, Klepp m.fl. (2023), *Dypdykk i materialstrømmene for tekstiler fra husholdninger i Norge*, Mepex/SIFO (Wasted Textiles), for Forskningsrådet og Handelens Miljøfond | Ankerår 2021: avhendet 79 007 t (tekstilboks 30 198 t, restavfall hentet 33 536 t, brakt 15 273 t). 44 % syntetisk, 3 % ull i avhendede tekstiler | har (Termo-tekstil/literature) |
 | Rubach m.fl. (2023), *2023 Kunnskapsstatus for tekstiler og tekstilavfall i Norge*, NORSUS OR.07.23, for Virke (KLDs arbeidsgruppe for produsentansvar) | Ankerår 2022: satt på markedet 105 913 t, innsamlet 29 643 t, ombruk i Norge 909 t, restavfall 48 809 t (23 + 10 plukkanalyser), eksport 31 642 t | har (litteratur/, lokalt) |
-| Norilia / Animalia, NIBIO | Norsk ullmengde | hent/verifiser |
+| Totalkalkylen (NIBIO) | Norsk ullmengde 1959– | har (`NIBIO_totalkalkylen_ull.csv`) |
+| Norilia / Animalia (årsrapporter FFULL), Norwegian Wool Book (Flokk), Ullialt-rapporten (Norges Husflidslag 2018) | Kvalitetsklasser, vasking i Bradford, ca. 20 % av norsk ull brukt i Norge, vaskesvinn ca. 1/3 | kontroll og parameter `wool_scouring_loss_share` |
 
 ### Bruk og lager
 | Kilde | Innhold | Status |

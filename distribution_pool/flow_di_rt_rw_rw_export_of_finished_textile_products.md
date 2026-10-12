@@ -18,8 +18,8 @@ nav_order: 3
 | Metode | data |
 | Status | implemented |
 | Prioritet | 1 |
-| Kandidatdata | SSB 08801 (HS 61, 62, 6301-6304, 64 export) |
-| Merknad | Includes re-export and returns from online sales |
+| Kandidatdata | SSB 08801 (HS 61, 62, 63, 64, 57 and retail yarn export) |
+| Merknad | Includes re-export and returns from online sales, and retail yarn spun in Norway |
 
 ## Tidsserie
 
@@ -29,16 +29,16 @@ nav_order: 3
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 3.44 | 3.33 – 3.57 |
-| 2000 | 4.17 | 4.03 – 4.32 |
-| 2010 | 4.30 | 4.15 – 4.45 |
-| 2018 | 4.68 | 4.52 – 4.85 |
-| 2022 | 6.63 | 6.41 – 6.87 |
-| 2025 | 7.37 | 7.12 – 7.63 |
+| 1990 | 3.93 | 3.83 – 4.01 |
+| 2000 | 4.46 | 4.35 – 4.55 |
+| 2010 | 4.81 | 4.69 – 4.91 |
+| 2018 | 5.48 | 5.34 – 5.59 |
+| 2022 | 8.05 | 7.85 – 8.22 |
+| 2025 | 9.52 | 9.28 – 9.72 |
 
 ## Materialsammensetning (fiberlag, D19)
 
-Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden).
+Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). For garn i detaljsalg blandes norsk spunnet håndstrikkegarn (ull) inn i flytene ut av DI.RT.
 
 <iframe src="../output_files/plots/pages/di_rt_rw_rw_export_of_finished_textile_products_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

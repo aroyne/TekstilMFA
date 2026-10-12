@@ -4,6 +4,7 @@ import pytest
 from calculations.params import Parameters
 from calculations.system import close, make_system, stock_change
 from calculations.timeseries import interpolate
+from calculations.utils import CORE_GROUP_PRODUCTS, PRODUCTS
 from data_loader import load_all_data
 from main_mc import ALL_POOLS, run_pools
 
@@ -50,7 +51,8 @@ def test_household_stock_change_is_inflow_minus_discards(inputs):
     mfa = _run(inputs)
     close(mfa)
     core = 0
-    inflow = sum(mfa.flows[code].values[:, :3].sum(axis=1) for code in (
+    core_products = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
+    inflow = sum(mfa.flows[code].values[:, core_products].sum(axis=1) for code in (
         'DI.RT-US.HH-Sales to households-TOT', 'RW.RW-US.HH-Private imports-TOT',
         'RW.RW-US.HH-Direct online imports-TOT'))
     inflow = inflow + mfa.flows['CO.RE-US.HH-Secondhand sales to households-TOT'].values[:, core]

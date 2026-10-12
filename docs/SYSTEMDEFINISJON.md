@@ -8,7 +8,7 @@
 |---|---|---|
 | Geografi | Norge (fastlandet). Import og eksport går via poolen RW. | forslag |
 | Tid | Data 1988–2025 (SSB 08801 starter i 1988). Rapportering fra 1990 til siste år med handelsdata (nå 2025), slik at lagermodellen får innsvingingsår. | besluttet D2 |
-| Produkter | Klær (CL), hjemmetekstiler (HT), sko (FW) og andre tekstilvarer (OT). OT er delt i tepper (CA, HS 57), sekker og storsekker (SA, 6305), presenninger og telt (TA, 6306) og andre konfeksjonerte varer (OM, 6307–6308), fordi brukerne og levetidene er svært ulike. CL+HT+FW tilsvarer avgrensningen til NORSUS (2023) og EUs produsentansvar, og kan alltid rapporteres separat (`CORE_PRODUCTS` i `calculations/utils.py`). Tekniske tekstiler i HS 56 og 59 er utenfor. | besluttet D1 |
+| Produkter | Klær (CL), hjemmetekstiler (HT), sko (FW) og andre tekstilvarer (OT). OT er delt i tepper (CA, HS 57), sekker og storsekker (SA, 6305), presenninger og telt (TA, 6306) og andre konfeksjonerte varer (OM, 6307–6308), fordi brukerne og levetidene er svært ulike. CL+HT+FW tilsvarer avgrensningen til NORSUS (2023) og EUs produsentansvar, og kan alltid rapporteres separat (`CORE_PRODUCTS` i `calculations/utils.py`). Garn i detaljsalg (YA) er et eget produkt (D21). Tekniske tekstiler i HS 56 og 59 er utenfor, også som innsatsvarer til MA (D22). | besluttet D1, D21, D22 |
 | Enhet | kt produktmasse (nettovekt slik den er deklarert). Tekstilmasse beregnes med andeler for ikke-tekstile deler. | besluttet D4 |
 | Materiallag | Fase 1–2: TOT (all masse). Fase 3: fem fibergrupper (SYN, CO, WO, CV, OTH) fra hovedfiberen i HS-kodene og en sammensetningsmatrise. | besluttet D4, D19 (delvis) |
 
@@ -18,12 +18,12 @@
 
 * Pool = to bokstaver, subpool = to bokstaver.
 * Laget er materialet. I N-budsjettet var dette N-forbindelsen (Nmix, NH3, …). Her er alle flytkoder `TOT`. Fiberlaget (D19) er en egen dimensjon `m` i et parallelt system med de samme flytkodene, ikke egne flytkoder.
-* Kolonnen `form` i `flows.csv` angir tekstilformen (D18): FIB fibre og garn, FAB metervare, NEW nye varer, MIX brukte usortert, USE brukte ombrukbare, WRN brukte utslitte, PCW produksjonsavfall, MFR mikrofibre.
+* Kolonnen `form` i `flows.csv` angir tekstilformen (D18): FIB fibre og garn, FAB metervare, NEW nye varer, MIX brukte usortert, USE brukte ombrukbare, WRN brukte utslitte, PCW produksjonsavfall, MFR mikrofibre, BYP biprodukt som ikke er tekstil (fett og smuss fra ullvasking, D23).
 * **Nytt i forhold til N-budsjettet:** Produkt er en dimensjon og ikke en del av flytnavnet (D5). Modellen er bygget i flodym, og hver flyt har dimensjonene sine i kolonnen `dims` i `flows.csv`:
   * `t`: år (1988–2025).
-  * `p`: produkt (CL, HT, FW, CA, SA, TA, OM). Brukes til og med salg og i US.IC.
-  * `g`: produktgruppe (CORE, CA, SA, TA, OM). Brukes etter bruk i husholdningene, fordi innsamlings- og plukkanalysestatistikken dekker CL+HT+FW samlet (CORE). Produkter regnes om til grupper med en fast koblingsmatrise.
-  * Flyter med bare `t` (avfallsbehandlingen) er ikke delt på produkt og rapporteres som `ALL`.
+  * `p`: produkt (CL, HT, FW, CA, SA, TA, OM, YA). Brukes til og med salg og i US.IC.
+  * `g`: produktgruppe (CORE, CA, SA, TA, OM). Brukes etter bruk i husholdningene, fordi innsamlings- og plukkanalysestatistikken dekker CL+HT+FW samlet (CORE). Garn i detaljsalg (YA) hører til CORE, fordi hjemmelagde plagg kasseres som klær. Produkter regnes om til grupper med en fast koblingsmatrise.
+  * Flyter med bare `t` (avfallsbehandlingen og MA.FI) er ikke delt på produkt og rapporteres som `ALL`.
 * Lagre er definert i kolonnen `stock_dims` i `processes.csv`. Sluk (WM.IN, EN.AI) får også et lager, som er den akkumulerte massen som har forlatt kretsløpet. flodym sjekker massebalansen per prosess på dimensjonene alle flytene inn og ut har felles.
 
 ## Pools og subpools
@@ -33,7 +33,7 @@
 | **RW** Rest of the world | RW.RW | systemgrense | – | Import og eksport |
 | **PS** Primary production | PS.WO | systemgrense | – | Norsk råull |
 | **MA** Manufacturing | MA.FI | prosess | – | Ullvaskeri, spinneri |
-| | MA.TX | prosess | – | Veving, strikking, konfeksjon, sko |
+| | MA.TX | prosess | midlertidig (D24) | Veving, strikking, konfeksjon, sko |
 | **DI** Distribution | DI.RT | prosess | – | Engros, butikk og netthandel |
 | **US** Use | US.HH | prosess | **ja** | Husholdninger, inkludert «dvalende» lager (klær som ikke brukes) |
 | | US.IC | prosess | **ja** | Arbeidsklær, uniformer og institusjonstekstiler |
@@ -44,7 +44,7 @@
 | | WM.IN | sluk | – | Forbrenning med energiutnyttelse |
 | | WM.LF | prosess | **ja** | Deponi (viktig før 2009) |
 | | WM.RC | prosess | – | Materialgjenvinning |
-| | WM.WW | prosess | – | Avløpsrensing (fibre fra vask) |
+| | WM.WW | prosess | midlertidig (D24) | Avløpsrensing (fibre fra vask, vaskevann fra ullvasking) |
 | **EN** Environment | EN.WA / EN.SO | prosess | **ja** | Fibre i vann og jord |
 | | EN.AI | sluk | – | Fibre til luft og støv |
 
@@ -55,6 +55,8 @@ flowchart LR
   RW((RW)) ==> DI[DI.RT<br>Handel]
   RW ==>|privatimport<br>netthandel| HH
   PS[PS.WO] -.-> FI[MA.FI] -.-> TX[MA.TX] -.-> DI
+  FI -.->|vaskesvinn| WW
+  FI -.->|håndstrikkegarn| DI
   RW -.-> FI & TX
   DI ==> HH[(US.HH<br>husholdninger)]
   DI -.-> IC[(US.IC<br>institusjoner)]
@@ -74,7 +76,7 @@ flowchart LR
   WW -.-> ENW[(EN.WA)] & ENS[(EN.SO)]
 ```
 
-Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [system/flows.csv](../system/flows.csv). Den har 41 flyter: 14 med prioritet 1, 16 med prioritet 2 og 11 med prioritet 3 (restavfall fra husholdningene er delt i brukbart og utslitt, D18). Flytnavn kan ikke inneholde bindestrek, fordi `-` skiller feltene i koden (sjekkes av `tests/test_system_register.py`).
+Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [system/flows.csv](../system/flows.csv). Den har 43 flyter: 14 med prioritet 1, 17 med prioritet 2 og 12 med prioritet 3 (restavfall fra husholdningene er delt i brukbart og utslitt, D18, og vaskesvinnet fra ullvasking og norsk spunnet håndstrikkegarn er lagt til, D23 og D21). Flytnavn kan ikke inneholde bindestrek, fordi `-` skiller feltene i koden (sjekkes av `tests/test_system_register.py`).
 
 ## Metode per flyt (kolonnen `method`)
 
@@ -107,3 +109,7 @@ Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [syst
 | D10 | Dvalende lager | **Besluttet 2026-09-29:** Ligger inne i US.HH. Levetiden måles fra kjøp til kassering, inkludert lagringstid. Andelen som ikke brukes kan eventuelt skilles ut som diskusjonspunkt hvis garderobestudiene oppgir den. |
 | D11 | Forbrenning | **Besluttet 2026-09-29:** WM.IN er et sluk (aske og utslipp følges ikke). Forbrenning i utlandet er en flyt til RW, beregnet som eksportert restavfall × tekstilandel fra plukkanalyser. |
 | D12 | Framtidsscenarier (produsentansvar, 2030+) | **Besluttet 2026-09-29:** Utenfor omfanget til den historiske modellen er ferdig. Arkitekturen skal likevel tillate det. |
+| D21 | Garn i detaljsalg | **Besluttet 2026-10-12:** Garn i detaljopplegg (HS 5109, 5207, 5204.20, 5406, 5511) er et eget produkt YA. Det går RW → DI.RT → US.HH og ikke til MA.FI, fordi det strikkes eller sys til plagg i husholdningene. YA hører til produktgruppen CORE etter bruk. Levetiden i lagermodellen (8 år, garnlager pluss plaggets levetid) er en antakelse. Norsk spunnet håndstrikkegarn går MA.FI → DI.RT (SSB Industristatistikk, Varetall 1988–89: 0,99 og 0,89 kt; SSB 10455, Prodcom 13.10.50.50: 0,59–1,03 kt i 2008–2023; interpolert i 1990–2007). Ut av DI.RT blandes det med importert detaljgarn i fiberlaget. |
+| D22 | HS 56 og garn til tau og nett | **Besluttet 2026-10-12:** HS 56 (vatt, filt, fiberduk, tau, nett) er utenfor omfanget, også som innsatsvare til MA. Høyfast filamentgarn av nylon, polyester og aramid (5402.10, 5402.11, 5402.19, 5402.20; import 1,3–5,6 kt per år) er garnet tau og nett lages av, og er også utenfor, både for import og eksport. Importen er stor (tau 13,7 kt, nett 10,0 kt og fiberduk 12,2 kt i 2022), men går til fiske, havbruk, bygg og hygieneprodukter. Fiber og garn (FY) og metervare (FA) skilles i `parameters/hs_mapping.csv`. |
+| D23 | Vaskesvinn ved ullvasking | **Besluttet 2026-10-12:** Egen flyt MA.FI → WM.WW (form BYP): uvasket ull vasket i Norge × svinnandel (ca. 1/3). Uvasket ull vasket i Norge er norsk ull + import − eksport av uvasket ull, som periodesnitt fordi årsbalansen er preget av lagring og tidspunkt (negativ i 2017). Usikkerheten er standardfeilen til snittet. Eksport deklarert som karbonisert ull (5101.30) i 1996–2000 og 2002 regnes som uvasket, fordi prisen per kg er som for uvasket ull og eksporten av uvasket ull faller like mye de årene. Fra 2007 eksporteres 90–100 % av norsk ull uvasket, og det meste vaskes i Bradford. I fiberlaget regnes uvasket ull som ull, inkludert fettet. |
+| D24 | Midlertidige lagre | **Besluttet 2026-10-12:** MA.TX og WM.WW har et midlertidig lager (`stock_dims` = t) til utstrømmene deres er implementert, slik at systemet lukker og massebalansen sjekkes. Lagerendringen er da lik innstrømmen og er ikke et lager i fysisk forstand. Lagrene fjernes når MA.TX- og WM.WW-flytene er på plass. |

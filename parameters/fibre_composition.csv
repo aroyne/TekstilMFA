@@ -6,3 +6,5 @@ CA,,0.6124,0.0,0.1664,0.0,0.2212,SSB 08801 2015-2025: imports of the same produc
 SA,,0.9702,0.0062,0.0,0.0,0.0236,SSB 08801 2015-2025: imports of the same product with fibre stated in the HS code,assumption
 TA,,1.0,0.0,0.0,0.0,0.0,SSB 08801 2015-2025: imports of the same product with fibre stated in the HS code,assumption
 OM,,0.452,0.4544,0.0606,0.0083,0.0247,SSB 08801 2015-2025: imports of all finished products except footwear with fibre stated in the HS code,assumption
+YA,,0.15,0.20,0.60,0.05,0.0,"assumption: hand-knitting yarn is mostly wool; only used for HS codes stating no fibre, which no retail yarn code does",assumption
+FY,,0.70,0.15,0.10,0.05,0.0,"assumption: only used for fibre and yarn codes stating no fibre (e.g. silk cocoons, waste)",assumption

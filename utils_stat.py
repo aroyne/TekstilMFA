@@ -15,10 +15,13 @@ import plotly.graph_objects as go
 SLOTS = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#4a3aa7', '#e34948']
 OTHER = '#9a9893'
 COLOR_OF_PRODUCT = {'CL': SLOTS[0], 'HT': SLOTS[1], 'FW': SLOTS[2], 'CA': SLOTS[3], 'SA': SLOTS[4],
-                    'TA': SLOTS[5], 'OM': SLOTS[6], 'CORE': SLOTS[7], 'ALL': SLOTS[0]}
+                    'TA': SLOTS[5], 'OM': SLOTS[6], 'CORE': SLOTS[7], 'ALL': SLOTS[0],
+                    # Retail yarn never shares a flow with the CORE group (flows have products or
+                    # product groups, not both), so the two can share a slot.
+                    'YA': SLOTS[7]}
 COLOR_OF_MATERIAL = dict(zip(['SYN', 'CO', 'WO', 'CV', 'OTH', 'NT'], SLOTS))
 PRODUCT_NAMES = {'CL': 'Klær', 'HT': 'Hjemmetekstiler', 'FW': 'Sko', 'CA': 'Tepper', 'SA': 'Sekker',
-                 'TA': 'Presenninger og telt', 'OM': 'Andre konfeksjonerte varer',
+                 'TA': 'Presenninger og telt', 'OM': 'Andre konfeksjonerte varer', 'YA': 'Garn i detaljsalg',
                  'CORE': 'Klær, hjemmetekstiler og sko', 'ALL': 'Alle produkter'}
 MATERIAL_NAMES = {'SYN': 'Syntetisk', 'CO': 'Bomull', 'WO': 'Ull', 'CV': 'Regenerert cellulose',
                   'OTH': 'Andre fibre', 'NT': 'Ikke-tekstil'}

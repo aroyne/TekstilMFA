@@ -31,14 +31,14 @@ nav_order: 5
 |---|---|---|
 | 1990 | 0.00 | 0.00 – 0.00 |
 | 2000 | 0.00 | 0.00 – 0.00 |
-| 2010 | 1.85 | 1.09 – 2.65 |
-| 2018 | 3.33 | 1.96 – 4.77 |
-| 2022 | 0.52 | 0.35 – 0.69 |
-| 2025 | 13.94 | 9.38 – 18.77 |
+| 2010 | 2.10 | 1.52 – 2.62 |
+| 2018 | 3.77 | 2.74 – 4.71 |
+| 2022 | 0.49 | 0.43 – 0.60 |
+| 2025 | 12.93 | 10.63 – 16.73 |
 
 ## Materialsammensetning (fiberlag, D19)
 
-Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden).
+Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). For garn i detaljsalg blandes norsk spunnet håndstrikkegarn (ull) inn i flytene ut av DI.RT.
 
 <iframe src="../output_files/plots/pages/rw_rw_us_hh_direct_online_imports_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

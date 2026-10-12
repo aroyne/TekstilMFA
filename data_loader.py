@@ -8,8 +8,9 @@ described in DATA_SOURCES.md.
 """
 import pandas as pd
 
-from calculations.fibre_layer import aggregate_imports_by_fibre_class
+from calculations.fibre_layer import aggregate_by_fibre_class
 from calculations.trade import aggregate_trade, map_hs_to_product
+from calculations.utils import PRODUCTS
 
 
 def _load_trade_textiles(path, hs_mapping):
@@ -34,10 +35,29 @@ def _load_crossborder(path, hs_mapping):
     }
 
 
+def _load_wool_production(path, hs_mapping):
+    """{year: tonnes of Norwegian wool}"""
+    df = pd.read_csv(path)
+    return dict(zip(df['year'], df['tonnes']))
+
+
+def _load_prodcom(path, hs_mapping):
+    """Long table: prodcom, text, variable, year, value, status (':' confidential, '..' missing)."""
+    return pd.read_csv(path, dtype={'prodcom': str})
+
+
+def _load_varetall(path, hs_mapping):
+    """Long table: year, commodity, text, unit, quantity, value_1000_nok, source."""
+    return pd.read_csv(path, dtype={'commodity': str})
+
+
 # key: (pools that need it, path, loader)
 DATA_MAP = {
     'trade_textiles': ({'rw', 'di', 'ma', 'co'}, 'data_files/Tab_08801_textiles.csv', _load_trade_textiles),
     'crossborder': ({'rw'}, 'data_files/SSB_grensehandel_05678_14221.csv', _load_crossborder),
+    'wool_production': ({'ma'}, 'data_files/NIBIO_totalkalkylen_ull.csv', _load_wool_production),
+    'prodcom': ({'ma'}, 'data_files/SSB_10455_prodcom_garn_tau_nett_2008_2025.csv', _load_prodcom),
+    'varetall': ({'ma'}, 'data_files/SSB_industristatistikk_varetall_1988_1989.csv', _load_varetall),
 }
 
 
@@ -50,6 +70,10 @@ def load_all_data(selected_pools, params):
         preloaded[key] = loader(path, params.hs_mapping)
     if 'trade_textiles' in preloaded:
         preloaded['trade_aggregated'] = aggregate_trade(preloaded['trade_textiles'])
-        preloaded['imports_by_fibre_class'] = aggregate_imports_by_fibre_class(
-            preloaded['trade_textiles'], params.hs_main_fibre)
+        trade = preloaded['trade_textiles']
+        preloaded['imports_by_fibre_class'] = aggregate_by_fibre_class(
+            trade, params.hs_main_fibre, 1, 'finished', PRODUCTS)
+        preloaded['fibre_yarn_by_fibre_class'] = {
+            impeks: aggregate_by_fibre_class(trade, params.hs_main_fibre, impeks, 'intermediate', ['FY'])
+            for impeks in (1, 2)}
     return preloaded

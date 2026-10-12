@@ -13,13 +13,41 @@ hs_prefix,product,category,in_scope,description
 6310,UT,used,yes,"Used or new rags, scrap twine, cordage"
 64,FW,finished,yes,Footwear (large non-textile share - see parameter nontextile_share_FW)
 57,CA,finished,yes,Carpets and other textile floor coverings
-50,IM,intermediate,yes,Silk
-51,IM,intermediate,yes,"Wool, fine or coarse animal hair; yarn and woven fabric thereof"
-52,IM,intermediate,yes,Cotton
-53,IM,intermediate,yes,Other vegetable textile fibres; paper yarn
-54,IM,intermediate,yes,Man-made filaments
-55,IM,intermediate,yes,Man-made staple fibres
-56,IM,intermediate,no,"Wadding, felt, nonwovens, special yarns, twine, cordage"
-58,IM,intermediate,yes,"Special woven fabrics, lace, tapestries, embroidery"
-59,IM,intermediate,no,"Impregnated, coated or laminated textile fabrics; technical textiles"
-60,IM,intermediate,yes,Knitted or crocheted fabrics
+50,FY,intermediate,yes,"Silk: raw silk, waste and yarn (fabric 5007 below)"
+5007,FA,intermediate,yes,Woven fabrics of silk
+51,FY,intermediate,yes,"Wool and animal hair: raw, scoured, carbonised, tops and yarn (fabric 5111-5113 below)"
+5109,YA,finished,yes,"Yarn of wool or fine animal hair, put up for retail sale"
+5111,FA,intermediate,yes,Woven fabrics of wool or animal hair
+5112,FA,intermediate,yes,Woven fabrics of wool or animal hair
+5113,FA,intermediate,yes,Woven fabrics of wool or animal hair
+52,FY,intermediate,yes,"Cotton: raw, waste, carded and yarn (fabric 5208-5212 below)"
+520420,YA,finished,yes,"Cotton sewing thread, put up for retail sale"
+5207,YA,finished,yes,"Cotton yarn (excl. sewing thread), put up for retail sale"
+5208,FA,intermediate,yes,Woven fabrics of cotton
+5209,FA,intermediate,yes,Woven fabrics of cotton
+5210,FA,intermediate,yes,Woven fabrics of cotton
+5211,FA,intermediate,yes,Woven fabrics of cotton
+5212,FA,intermediate,yes,Woven fabrics of cotton
+53,FY,intermediate,yes,Other vegetable textile fibres and their yarn; paper yarn (fabric 5309-5311 below)
+5309,FA,intermediate,yes,Woven fabrics of other vegetable fibres or paper yarn
+5310,FA,intermediate,yes,Woven fabrics of other vegetable fibres or paper yarn
+5311,FA,intermediate,yes,Woven fabrics of other vegetable fibres or paper yarn
+54,FY,intermediate,yes,Man-made filaments and filament yarn (fabric 5407-5408 below)
+5406,YA,finished,yes,"Man-made filament yarn (excl. sewing thread), put up for retail sale"
+5407,FA,intermediate,yes,Woven fabrics of man-made filament yarn
+5408,FA,intermediate,yes,Woven fabrics of man-made filament yarn
+55,FY,intermediate,yes,Man-made staple fibres and their yarn (fabric 5512-5516 below)
+5511,YA,finished,yes,"Yarn of man-made staple fibres (excl. sewing thread), put up for retail sale"
+5512,FA,intermediate,yes,Woven fabrics of man-made staple fibres
+5513,FA,intermediate,yes,Woven fabrics of man-made staple fibres
+5514,FA,intermediate,yes,Woven fabrics of man-made staple fibres
+5515,FA,intermediate,yes,Woven fabrics of man-made staple fibres
+5516,FA,intermediate,yes,Woven fabrics of man-made staple fibres
+56,FY,intermediate,no,"Wadding, felt, nonwovens, special yarns, twine, cordage, ropes and nets: mainly used by fisheries, aquaculture, construction and hygiene products, outside the scope"
+58,FA,intermediate,yes,"Special woven fabrics, lace, tapestries, embroidery"
+59,FA,intermediate,no,"Impregnated, coated or laminated textile fabrics; technical textiles"
+60,FA,intermediate,yes,Knitted or crocheted fabrics
+540210,FY,intermediate,no,"High-tenacity filament yarn of nylon (1988-2006): yarn for ropes, nets and industrial use, outside the scope like HS 56"
+540211,FY,intermediate,no,"High-tenacity filament yarn of aramids: yarn for ropes, nets and industrial use, outside the scope like HS 56"
+540219,FY,intermediate,no,"High-tenacity filament yarn of nylon (2007-): yarn for ropes, nets and industrial use, outside the scope like HS 56"
+540220,FY,intermediate,no,"High-tenacity filament yarn of polyesters: yarn for ropes, nets and industrial use, outside the scope like HS 56"

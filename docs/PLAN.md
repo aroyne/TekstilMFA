@@ -1,6 +1,6 @@
 # PLAN – TekstilMFA
 
-*Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-10-05.*
+*Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-10-12.*
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
 
 **Mål:** En dynamisk, probabilistisk MFA for tekstiler i Norge 1990–2025. Den skal identifisere pools, subpools, flyter og lagre, kvantifisere dem med data og parametre, beregne tidsutviklingen med Monte Carlo og dokumentere hver flyt slik det er gjort i NitrogenBudsjett.
@@ -63,6 +63,18 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Død kode fjernet: `prototype/` og `calculations/stock_model.py` (erstattet av flodym, D20).
 - [x] Levetidene trekkes nå i MC. Det endrer rekkefølgen av tilfeldige tall, så MC-tallene er ikke identiske med tidligere kjøringer med samme frø.
 
+### 2026-10-12 – Gjennomgang flyt for flyt: PS.WO og MA.FI
+- [x] Gjennomgangen går én subpool av gangen, i den rekkefølgen materialet går ([notat](../claude_tekst/2026-10-12_gjennomgang_MA.FI.md)).
+- [x] Norsk råull fra Totalkalkylen (NIBIO), 1959–2026 (`data_files/NIBIO_totalkalkylen_ull.csv`).
+- [x] Import og eksport av fiber og garn fra 08801. HS-mappingen skiller fiber og garn (FY), metervare (FA) og detaljgarn (YA).
+- [x] D21: Detaljgarn (YA) går RW → DI.RT → US.HH og hører til CORE etter bruk. Levetiden på 8 år er en antakelse.
+- [x] D22: HS 56 er utenfor, også som innsatsvare.
+- [x] D23: Ny flyt for vaskesvinn MA.FI → WM.WW (form BYP), med periodesnitt fra `scripts/derive_wool_scouring_anchors.py` og svinnandel 0,33.
+- [x] D24: Midlertidige lagre i MA.TX og WM.WW, slik at systemet lukker.
+- [x] Garn til MA.TX som balanse (ca. 10 kt i 2018–2025, 6–8 kt av det syntetisk). MC-kjøring med N = 10, figurer og sider er oppdatert.
+- [x] Ny flyt MA.FI → DI.RT for norsk spunnet håndstrikkegarn (SSB 10455, Prodcom 13.10.50.50, 0,6–1,0 kt). Datafil: `SSB_10455_prodcom_garn_tau_nett_2008_2025.csv`.
+- [x] Eksport deklarert som karbonisert ull i 1996–2000 og 2002 er uvasket ull etter pris per kg. Den er regnet som uvasket, og ankerpunktet for 1996–2000 er rettet fra 3,7 til 2,2 kt. Usikkerheten er standardfeilen til periodesnittet.
+
 ## Neste
 
 ### Fase 1 – Låse systemdefinisjonen (beslutningene D1–D13 er tatt 2026-09-29)
@@ -99,7 +111,12 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [ ] Validering: 2022 mot NORSUS, lager per innbygger mot garderobestudier, kg per plagg over tid fra 08801.
 
 ### Fase 3 – P2- og P3-flyter
-- [ ] MA (norsk ull, produksjon), US.IC, sorteringsdetaljer, avfallseksport, materialgjenvinning.
+- [x] Høyfast filamentgarn (5402.10/11/19/20) er tatt ut som garn til tau og nett (D22).
+- [x] Håndstrikkegarn 1988–89 fra SSBs varetall (NOS B 941, B 998: 0,99 og 0,89 kt), interpolert til Prodcom 2008.
+- [x] Ullbalansen i MA.FI er stram i 1989 og 2000. Balansen per materiale i fiberlaget klippes nå til 0, og eksportens sammensetning tar opp differansen (godkjent 2026-10-12). Ingen feil i 1 000 trekk.
+- [ ] **Gjennomgang flyt for flyt, neste subpool: MA.TX.** Ta opp 5402.61 og 5503.x (nettgarn, dynefyll eller fiberduk), Prodcom 13.94 og gjeneksport (D6). Fjern det midlertidige lageret i MA.TX (D24).
+- [ ] Deretter DI.RT, US.HH, US.IC, CO.CO, CO.SO, CO.RE, WM.RS, WM.RC og WM.WW/EN. Det midlertidige lageret i WM.WW fjernes med mikrofibre- og slamflytene.
+- [ ] US.IC, sorteringsdetaljer, avfallseksport, materialgjenvinning.
 - [ ] Mikrofibre: vask → avløpsrensing → vann og jord.
 - [x] Fiberlag: D18 og D19 er besluttet og implementert.
 - [ ] Fiberlag: Matrise for restposter og koder uten fiber (RES/UNK) per produkt, fra plukkanalyser med fibersortering eller JRC. Sko trenger egen behandling.

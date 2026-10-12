@@ -6,14 +6,14 @@ nav_order: 1
 
 # Tekstil-MFA for Norge
 
-**Sist generert:** 2026-10-05
+**Sist generert:** 2026-10-12
 
 {: .label .label-red }
 Under arbeid
 
 > Modellen, dataene og resultatene er under utvikling og ikke validert. Ikke bruk tallene til forskning eller beslutninger ennå.
 
-Dynamisk, probabilistisk MFA (Monte Carlo, flodym) for klær, hjemmetekstiler, sko og andre tekstilvarer i Norge, 1988–2025. Hver flyt har en egen side med tidsserie, usikkerhet, fibersammensetning og dokumentasjon fra koden. Systemdefinisjon, metode og plan står i [SYSTEMDEFINISJON](https://github.com/aroyne/TekstilMFA/blob/main/docs/SYSTEMDEFINISJON.md), [METODE](https://github.com/aroyne/TekstilMFA/blob/main/docs/METODE.md) og [PLAN](https://github.com/aroyne/TekstilMFA/blob/main/docs/PLAN.md).
+Dynamisk, probabilistisk MFA (Monte Carlo, flodym) for klær, hjemmetekstiler, sko, garn og andre tekstilvarer i Norge, 1988–2025. Hver flyt har en egen side med tidsserie, usikkerhet, fibersammensetning og dokumentasjon fra koden. Systemdefinisjon, metode og plan står i [SYSTEMDEFINISJON](https://github.com/aroyne/TekstilMFA/blob/main/docs/SYSTEMDEFINISJON.md), [METODE](https://github.com/aroyne/TekstilMFA/blob/main/docs/METODE.md) og [PLAN](https://github.com/aroyne/TekstilMFA/blob/main/docs/PLAN.md).
 
 ## Pools
 

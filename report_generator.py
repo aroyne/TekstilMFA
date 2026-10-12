@@ -36,13 +36,18 @@ REPO_URL = 'https://github.com/aroyne/TekstilMFA/blob/main'
 
 FORM_NAMES = {'FIB': 'fibre og garn', 'FAB': 'metervare og halvfabrikata', 'NEW': 'nye varer',
               'MIX': 'brukte, usortert', 'USE': 'brukte, ombrukbare', 'WRN': 'brukte, utslitte',
-              'PCW': 'produksjonsavfall', 'MFR': 'mikrofibre'}
+              'PCW': 'produksjonsavfall', 'MFR': 'mikrofibre', 'BYP': 'biprodukt, ikke tekstil'}
 DIM_NAMES = {'t': 'år', 'p': 'produkt', 'g': 'produktgruppe'}
 FIBRE_RULES = {
-    'supply': 'Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden).',
+    'supply': 'Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). '
+              'For garn i detaljsalg blandes norsk spunnet håndstrikkegarn (ull) inn i flytene ut av DI.RT.',
     'discards': 'For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdningene. '
                 'For andre produkter: tilførselssammensetningen samme år.',
     'mixed': 'Blandingen av alt som går inn i WM.RS samme år.',
+    'manufacturing': 'Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). '
+                     'Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. '
+                     'Garn til MA.TX er balansen per materiale, klippet til 0 (eksportens sammensetning tar '
+                     'opp differansen).',
 }
 
 
@@ -187,7 +192,7 @@ def _key_numbers(summary, code):
 def _fibre_rule(code):
     from calculations import fibre_layer
     for key, codes in (('supply', fibre_layer.SUPPLY_FLOWS), ('discards', fibre_layer.DISCARD_FLOWS),
-                       ('mixed', fibre_layer.MIXED_FLOWS)):
+                       ('mixed', fibre_layer.MIXED_FLOWS), ('manufacturing', fibre_layer.MANUFACTURING_FLOWS)):
         if code in codes:
             return FIBRE_RULES[key]
     return ''
@@ -318,7 +323,7 @@ def write_index(site):
         '{: .label .label-red }', 'Under arbeid', '',
         '> Modellen, dataene og resultatene er under utvikling og ikke validert. Ikke bruk tallene '
         'til forskning eller beslutninger ennå.', '',
-        'Dynamisk, probabilistisk MFA (Monte Carlo, flodym) for klær, hjemmetekstiler, sko og andre '
+        'Dynamisk, probabilistisk MFA (Monte Carlo, flodym) for klær, hjemmetekstiler, sko, garn og andre '
         'tekstilvarer i Norge, 1988–2025. Hver flyt har en egen side med tidsserie, usikkerhet, '
         'fibersammensetning og dokumentasjon fra koden. Systemdefinisjon, metode og plan står i '
         f'[SYSTEMDEFINISJON]({REPO_URL}/docs/SYSTEMDEFINISJON.md), [METODE]({REPO_URL}/docs/METODE.md) og '

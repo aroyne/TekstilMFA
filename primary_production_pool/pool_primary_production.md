@@ -11,6 +11,10 @@ Subpooler:
 
 * [Norwegian wool (PS.WO)](subpool_ps_wo.html)
 
+## Massebalanse
+
+<iframe src="../output_files/plots/pages/balance_pool_ps.html" width="100%" height="500px" frameborder="0" scrolling="no"></iframe>
+
 ## Merknader
 
 <!-- MANUAL:POOL_TEXT:START -->

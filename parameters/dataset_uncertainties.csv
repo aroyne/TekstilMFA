@@ -4,3 +4,5 @@ dataset_name,source,lower_bound,upper_bound,uncertainty_type,uncertainty_source,
 05281,SSB,,,perc,,PERT,todo
 trend interpolation,assumption,,,perc,,PERT,todo
 grensehandel,SSB,10,10,perc,placeholder - survey-based statistic,PERT,placeholder
+totalkalkylen,NIBIO,5,5,perc,placeholder - weighed-in wool at the wool stations plus an estimate for wool sold outside them,PERT,placeholder
+vareproduksjon,SSB,10,50,perc,"Industristatistikk varetall (1988-1989) and Prodcom 10455 (2008-) cover large establishments or enterprises only; SNL gives about 1000 t hand knitting yarn per year against 0.6-1.0 kt in the statistics",PERT,placeholder

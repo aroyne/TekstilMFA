@@ -11,3 +11,4 @@ TA,US.HH,weibull,4,2,3,6,abs,"Napolano 2025 SM4 (tarpaulins and tents 4, sails 3
 TA,US.IC,weibull,,,,,perc,,todo,"Tarpaulins, awnings and sails in businesses"
 OM,US.HH,weibull,2,2,1,3,abs,Napolano 2025 SM4 (cleaning cloths and other made-up articles 2). Weibull shape 2 is an assumption,proposal,"Other made-up articles in households (e.g. face masks, cleaning cloths)"
 OM,US.IC,weibull,,,,,perc,,todo,Other made-up articles in businesses
+YA,US.HH,weibull,8,2,5,15,abs,"assumption: time in the yarn stash plus the life of hand-knitted garments, which are kept longer than bought clothing (Klepp & Laitala). Weibull shape 2 is an assumption",proposal,Retail yarn and the garments made from it in households

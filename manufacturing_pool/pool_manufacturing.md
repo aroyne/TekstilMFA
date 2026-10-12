@@ -12,6 +12,10 @@ Subpooler:
 * [Fibre and yarn production (MA.FI)](subpool_ma_fi.html)
 * [Textile and apparel manufacturing (MA.TX)](subpool_ma_tx.html)
 
+## Massebalanse
+
+<iframe src="../output_files/plots/pages/balance_pool_ma.html" width="100%" height="500px" frameborder="0" scrolling="no"></iframe>
+
 ## Merknader
 
 <!-- MANUAL:POOL_TEXT:START -->

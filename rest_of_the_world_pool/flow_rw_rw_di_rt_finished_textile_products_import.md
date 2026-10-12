@@ -18,8 +18,8 @@ nav_order: 3
 | Metode | data |
 | Status | implemented |
 | Prioritet | 1 |
-| Kandidatdata | SSB 08801 (HS 61, 62, 6301-6304, 64) |
-| Merknad | Net weight as declared; includes non-textile parts (buttons/zips/soles) |
+| Kandidatdata | SSB 08801 (HS 61, 62, 63, 64, 57; retail yarn 5109, 5207, 520420, 5406, 5511) |
+| Merknad | Net weight as declared; includes non-textile parts (buttons/zips/soles). Retail yarn is product YA |
 
 ## Tidsserie
 
@@ -29,16 +29,16 @@ nav_order: 3
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 74.89 | 72.31 – 77.58 |
-| 2000 | 100.68 | 97.22 – 104.30 |
-| 2010 | 142.48 | 137.58 – 147.60 |
-| 2018 | 137.26 | 132.54 – 142.19 |
-| 2022 | 148.19 | 143.10 – 153.52 |
-| 2025 | 130.29 | 125.82 – 134.98 |
+| 1990 | 76.40 | 74.48 – 77.97 |
+| 2000 | 102.08 | 99.51 – 104.18 |
+| 2010 | 145.26 | 141.61 – 148.25 |
+| 2018 | 140.89 | 137.35 – 143.79 |
+| 2022 | 151.80 | 148.00 – 154.93 |
+| 2025 | 134.28 | 130.91 – 137.04 |
 
 ## Materialsammensetning (fiberlag, D19)
 
-Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden).
+Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). For garn i detaljsalg blandes norsk spunnet håndstrikkegarn (ull) inn i flytene ut av DI.RT.
 
 <iframe src="../output_files/plots/pages/rw_rw_di_rt_finished_textile_products_import_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
