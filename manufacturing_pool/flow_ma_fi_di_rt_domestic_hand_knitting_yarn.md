@@ -29,22 +29,22 @@ nav_order: 2
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 0.94 | 0.82 – 1.16 |
-| 2000 | 0.96 | 0.84 – 1.18 |
+| 1990 | 0.93 | 0.82 – 1.16 |
+| 2000 | 0.95 | 0.84 – 1.18 |
 | 2010 | 0.79 | 0.69 – 0.98 |
-| 2018 | 0.64 | 0.56 – 0.79 |
-| 2022 | 0.62 | 0.54 – 0.77 |
-| 2025 | 0.73 | 0.63 – 0.90 |
+| 2018 | 0.64 | 0.56 – 0.80 |
+| 2022 | 0.62 | 0.55 – 0.77 |
+| 2025 | 0.72 | 0.64 – 0.90 |
 
 ## Materialsammensetning (fiberlag, D19)
 
-Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Garn til MA.TX er balansen per materiale, klippet til 0 (eksportens sammensetning tar opp differansen).
+Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. Produksjonsavfall har blandingen av garn og metervare inn i MA.TX.
 
 <iframe src="../output_files/plots/pages/ma_fi_di_rt_domestic_hand_knitting_yarn_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_domestic_hand_knitting_yarn_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L88). Dokumentasjonen i koden:
+Beregnes i `_domestic_hand_knitting_yarn_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L96). Dokumentasjonen i koden:
 
 > Yarn spun in Norway and put up for retail sale (product YA), sold to
 > households through retail; hand knitting yarn is by far the largest

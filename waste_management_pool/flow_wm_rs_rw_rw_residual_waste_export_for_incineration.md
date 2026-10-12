@@ -31,10 +31,10 @@ nav_order: 2
 |---|---|---|
 | 1990 | 0.00 | 0.00 – 0.00 |
 | 2000 | 0.00 | 0.00 – 0.00 |
-| 2010 | 6.30 | 5.51 – 7.22 |
-| 2018 | 13.65 | 12.13 – 15.41 |
-| 2022 | 13.68 | 11.95 – 15.41 |
-| 2025 | 11.32 | 9.99 – 12.83 |
+| 2010 | 6.35 | 5.50 – 7.18 |
+| 2018 | 13.67 | 12.14 – 15.27 |
+| 2022 | 13.74 | 11.95 – 15.55 |
+| 2025 | 11.38 | 10.00 – 12.88 |
 
 ## Materialsammensetning (fiberlag, D19)
 
@@ -44,7 +44,7 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 ## Beregning i koden
 
-Beregnes i `_residual_export_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L38). Dokumentasjonen i koden:
+Beregnes i `_residual_export_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L39). Dokumentasjonen i koden:
 
 > Share of residual waste exported, SSB 13035 (D11). The share is measured
 > for household residual waste and is applied to all textiles in WM.RS,

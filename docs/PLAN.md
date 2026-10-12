@@ -1,6 +1,8 @@
 # PLAN – TekstilMFA
 
 *Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-10-12.*
+
+> **Her fortsetter vi:** Gjennomgangen flyt for flyt (én subpool av gangen) står i MA.TX. Neste steg er å implementere D26 (se punktene under «Neste» i fase 3). Notatene ligger i `claude_tekst/2026-10-12_gjennomgang_MA.FI.md` og `claude_tekst/2026-10-12_gjennomgang_MA.TX.md`. Arbeidsflyten for hver subpool er slik: kildene for hver flyt gås gjennom og diskuteres, deretter implementeres de, så kjøres MC (N = 1000 tar ca. 25 s), deretter genereres sidene på nytt (`report_generator.py`, `scripts/plot_core_flows.py`, `scripts/plot_stock_model.py`), og til slutt committes og pushes det.
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
 
 **Mål:** En dynamisk, probabilistisk MFA for tekstiler i Norge 1990–2025. Den skal identifisere pools, subpools, flyter og lagre, kvantifisere dem med data og parametre, beregne tidsutviklingen med Monte Carlo og dokumentere hver flyt slik det er gjort i NitrogenBudsjett.
@@ -114,8 +116,15 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Høyfast filamentgarn (5402.10/11/19/20) er tatt ut som garn til tau og nett (D22).
 - [x] Håndstrikkegarn 1988–89 fra SSBs varetall (NOS B 941, B 998: 0,99 og 0,89 kt), interpolert til Prodcom 2008.
 - [x] Ny regel (CLAUDE.md): Negative flyter er ikke-fysiske og klippes til 0. Underskuddet tas opp av klippelagre i MA.FI, DI.RT og WM.RS («Clipping imbalance») og flyttes ikke til andre flyter. Hvor ofte og hvor mye det klippes, står på flytsidene. N = 1000: bare ull i garnet til MA.TX i fiberlaget klippes (1989: 2 av 1 000, maks 0,08 kt; 2000: 2 av 1 000, maks 0,03 kt).
-- [ ] **Gjennomgang flyt for flyt, neste subpool: MA.TX.** Ta opp 5402.61 og 5503.x (nettgarn, dynefyll eller fiberduk), Prodcom 13.94 og gjeneksport (D6). Fjern det midlertidige lageret i MA.TX (D24).
-- [ ] Deretter DI.RT, US.HH, US.IC, CO.CO, CO.SO, CO.RE, WM.RS, WM.RC og WM.WW/EN. Det midlertidige lageret i WM.WW fjernes med mikrofibre- og slamflytene.
+- [x] MA.TX: import og eksport av metervare (08801) og produksjonsavfall (SSB 08604/14457) er implementert (D25). 5402.61, 5402.49 og 5503.40 er tatt ut (D22). Balansen i MA.TX er 8–11 kt i 2008–2025 og 18 kt i 1990 ([notat](../claude_tekst/2026-10-12_gjennomgang_MA.TX.md)).
+- [x] D26 er besluttet: massebasert produktfordeling for MA.TX → DI.RT, og dyner og puter (9404.40/9404.90) er HT.
+- [ ] **Neste: implementere D26.**
+  1. Hent HS 9404.40 og 9404.90 (og 9404.30 for sammenligning) fra den fulle 08801-fila (`../NitrogenBudsjett/data_files/Tab_08801_1988_2024.csv`) og fra SSB-API-et for 2025. Utvid `scripts/extract_textile_trade.py` og `scripts/update_trade_ssb_api.py`, og legg 9404.40/9404.90 som HT i `hs_mapping.csv`. Sjekk fibertabellen (`hs_main_fibre.csv`), siden fyllet ofte er polyester eller dun (OTH).
+  2. Les varetallene for ferdigvarer (kapittel 57–64 og 94) i NOS B 941 (1988) og B 998 (1989). Sidene tegnes med Swift/PDFKit, fordi sidene er JBIG2-komprimert. Rendreren ligger i `scripts/tools/render_pdf_pages.swift`.
+  3. Prodcom 2008, 2009 og 2011: koble de 25 ferdigvarekodene til produkt og HS-kode. Regn ut kg per stykk fra importen og norsk pris per kg der bare verdi finnes. Lagre resultatet som datafil.
+  4. Implementer `MA.TX-DI.RT-Domestic finished products-TOT` (dims t,p) som balanse × masseandeler. Ta det med i DI.RT-balansen. Fjern det midlertidige lageret i MA.TX (D24) og oppdater fiberlaget.
+  5. Avklar om soveposer (9404.30) skal med.
+- [ ] Deretter fortsetter gjennomgangen med DI.RT, US.HH, US.IC, CO.CO, CO.SO, CO.RE, WM.RS, WM.RC og WM.WW/EN. Det midlertidige lageret i WM.WW fjernes med mikrofibre- og slamflytene.
 - [ ] US.IC, sorteringsdetaljer, avfallseksport, materialgjenvinning.
 - [ ] Mikrofibre: vask → avløpsrensing → vann og jord.
 - [x] Fiberlag: D18 og D19 er besluttet og implementert.

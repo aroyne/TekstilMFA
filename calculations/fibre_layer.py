@@ -24,9 +24,10 @@ and flows. The TOT masses are never changed: they come from the statistics
   mixed     Flows out of WM.RS get the composition of everything entering
             WM.RS that year.
   manufacturing
-            MA.FI: raw wool is wool, traded fibre and yarn have the main
-            fibre of their HS codes, and yarn to MA.TX is the balance per
-            material (see manufacturing_layer).
+            MA: raw wool is wool, traded fibre, yarn and fabric have the
+            main fibre of their HS codes, yarn to MA.TX is the balance of
+            MA.FI per material, and production waste has the mix of MA.TX
+            inputs (see manufacturing_layer).
 
 The main fibre is taken as the whole textile part of a good (a garment
 classified as cotton counts as 100 % cotton); a main fibre to fibre shares
@@ -83,8 +84,11 @@ FIBRE_YARN_EXPORT = 'MA.FI-RW.RW-Fibre and yarn export-TOT'
 SCOURING_LOSS = 'MA.FI-WM.WW-Wool scouring loss-TOT'
 YARN_TO_MANUFACTURING = 'MA.FI-MA.TX-Yarn to textile manufacturing-TOT'
 HAND_KNITTING_YARN = 'MA.FI-DI.RT-Domestic hand knitting yarn-TOT'
+FABRIC_IMPORT = 'RW.RW-MA.TX-Fabric import-TOT'
+TEXTILE_EXPORT = 'MA.TX-RW.RW-Textile export-TOT'
+PRECONSUMER_WASTE = 'MA.TX-WM.RS-Preconsumer production waste-TOT'
 MANUFACTURING_FLOWS = [RAW_WOOL, FIBRE_YARN_IMPORT, FIBRE_YARN_EXPORT, SCOURING_LOSS, HAND_KNITTING_YARN,
-                       YARN_TO_MANUFACTURING]
+                       YARN_TO_MANUFACTURING, FABRIC_IMPORT, TEXTILE_EXPORT, PRECONSUMER_WASTE]
 FINISHED_IMPORT = 'RW.RW-DI.RT-Finished textile products import-TOT'
 TOLERANCE_KT = 1e-9
 
@@ -152,23 +156,23 @@ def supply_composition(preloaded_data, current_params, fibre_composition):
                            np.broadcast_to(nontextile[None, :, None], textile.shape[:2] + (1,))], axis=2)
 
 
-def fibre_yarn_composition(preloaded_data, current_params, fibre_composition, impeks):
+def intermediate_composition(preloaded_data, current_params, fibre_composition, product, impeks):
     """
-    Material shares of traded fibre and yarn (1 import, 2 export), array
-    (year, material): the main fibre stated by the HS code, no non-textile
-    part.
+    Material shares of traded fibre and yarn ('FY') or fabric ('FA'), import
+    (1) or export (2), array (year, material): the main fibre stated by the
+    HS code, no non-textile part.
     """
-    # 'fibre_yarn_by_fibre_class' <- data_files/Tab_08801_textiles.csv (SSB
-    # 08801, HS 50-55 fibre and yarn) and parameters/hs_main_fibre.csv, summed
-    # when the data is loaded
-    kg = preloaded_data['fibre_yarn_by_fibre_class'][impeks]
-    textile = _fibre_group_shares(kg, ['FY'], current_params, fibre_composition)[:, 0, :]
+    # 'intermediate_by_fibre_class' <- data_files/Tab_08801_textiles.csv (SSB
+    # 08801, HS 50-60 fibre, yarn and fabric) and parameters/hs_main_fibre.csv,
+    # summed when the data is loaded
+    kg = preloaded_data['intermediate_by_fibre_class'][(product, impeks)]
+    textile = _fibre_group_shares(kg, [product], current_params, fibre_composition)[:, 0, :]
     return np.concatenate([textile, np.zeros((len(YEARS), 1))], axis=1)
 
 
 def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_composition):
     """
-    Fills the MA.FI flows of the fibre system. Norwegian raw wool is WO;
+    Fills the MA flows of the fibre system. Norwegian raw wool is WO;
     greasy wool is counted as WO including its grease, so the scouring loss
     is WO too. Traded fibre and yarn have the main fibre of their HS codes.
     Hand knitting yarn to DI.RT is WO: the Prodcom code it comes from is wool
@@ -176,18 +180,24 @@ def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     material, clipped at 0: a material whose exports, losses and hand
     knitting yarn exceed its supply (wool in 1989 and 2000 in some draws)
     gets 0, and the flow is then larger than in TOT by the clipped mass,
-    which the clipping stock of MA.FI takes up.
+    which the clipping stock of MA.FI takes up. Traded fabric has the main
+    fibre of its HS codes, and production waste the mix of yarn and fabric
+    entering MA.TX.
     """
     fibre.flows[HAND_KNITTING_YARN].values[...] = tot.flows[HAND_KNITTING_YARN].values[..., None] * _only('WO')
     fibre.flows[RAW_WOOL].values[...] = tot.flows[RAW_WOOL].values[:, None] * _only('WO')
     fibre.flows[SCOURING_LOSS].values[...] = tot.flows[SCOURING_LOSS].values[:, None] * _only('WO')
-    for code, impeks in ((FIBRE_YARN_IMPORT, 1), (FIBRE_YARN_EXPORT, 2)):
-        shares = fibre_yarn_composition(preloaded_data, current_params, fibre_composition, impeks)
+    for code, product, impeks in ((FIBRE_YARN_IMPORT, 'FY', 1), (FIBRE_YARN_EXPORT, 'FY', 2),
+                                  (FABRIC_IMPORT, 'FA', 1), (TEXTILE_EXPORT, 'FA', 2)):
+        shares = intermediate_composition(preloaded_data, current_params, fibre_composition, product, impeks)
         fibre.flows[code].values[...] = tot.flows[code].values[:, None] * shares
     balance = sum(fibre.flows[c].values for c in (RAW_WOOL, FIBRE_YARN_IMPORT)) - sum(
         fibre.flows[c].values for c in (FIBRE_YARN_EXPORT, SCOURING_LOSS)) - fibre.flows[
         HAND_KNITTING_YARN].values.sum(axis=1)
     clip_negative(fibre, YARN_TO_MANUFACTURING, balance)
+    inputs = fibre.flows[YARN_TO_MANUFACTURING].values + fibre.flows[FABRIC_IMPORT].values
+    fibre.flows[PRECONSUMER_WASTE].values[...] = (tot.flows[PRECONSUMER_WASTE].values[:, None]
+                                                  * inputs / inputs.sum(axis=1, keepdims=True))
 
 
 def retail_composition(tot, imported):

@@ -47,8 +47,8 @@ FIBRE_RULES = {
     'mixed': 'Blandingen av alt som går inn i WM.RS samme år.',
     'manufacturing': 'Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). '
                      'Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. '
-                     'Garn til MA.TX er balansen per materiale, klippet til 0 (eksportens sammensetning tar '
-                     'opp differansen).',
+                     'Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. '
+                     'Produksjonsavfall har blandingen av garn og metervare inn i MA.TX.',
 }
 
 

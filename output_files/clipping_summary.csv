@@ -152,7 +152,7 @@ WM.RS-WM.IN-Domestic incineration-TOT,TOT,2023,1000,0,0.0,0.0,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,2024,1000,0,0.0,0.0,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,2025,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1988,1000,0,0.0,0.0,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1989,1000,2,0.0001050386488031525,0.08011999660741576,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1989,1000,1,5.511328120582215e-05,0.05511328120582215,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1990,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1991,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1992,1000,0,0.0,0.0,0.0
@@ -163,7 +163,7 @@ MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1996,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1997,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1998,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1999,1000,0,0.0,0.0,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2000,1000,2,6.621243182532322e-05,0.0347765210297768,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2000,1000,1,0.00011391073451421785,0.11391073451421785,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2001,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2002,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2003,1000,0,0.0,0.0,0.0

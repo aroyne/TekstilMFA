@@ -29,9 +29,9 @@ nav_order: 3
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 67.73 | 53.16 – 82.14 |
-| 2000 | 54.04 | 44.20 – 64.63 |
-| 2010 | 15.51 | 13.42 – 17.67 |
+| 1990 | 68.48 | 55.80 – 83.70 |
+| 2000 | 54.39 | 45.78 – 64.77 |
+| 2010 | 15.60 | 13.61 – 17.73 |
 | 2018 | 0.00 | 0.00 – 0.00 |
 | 2022 | 0.00 | 0.00 – 0.00 |
 | 2025 | 0.00 | 0.00 – 0.00 |
@@ -44,7 +44,7 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 ## Beregning i koden
 
-Beregnes i `_landfilling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L32). Dokumentasjonen i koden:
+Beregnes i `_landfilling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L33). Dokumentasjonen i koden:
 
 > Landfilled share from SSB Avfallsregnskap tekstiler 1990-1998, SSB 05281 and 10513 (D15).
 

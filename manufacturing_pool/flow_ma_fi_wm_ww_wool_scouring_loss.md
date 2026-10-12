@@ -29,8 +29,8 @@ nav_order: 4
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 0.92 | 0.66 – 1.16 |
-| 2000 | 0.73 | 0.53 – 0.95 |
+| 1990 | 0.93 | 0.68 – 1.17 |
+| 2000 | 0.74 | 0.53 – 0.96 |
 | 2010 | 0.09 | 0.07 – 0.12 |
 | 2018 | 0.09 | 0.07 – 0.12 |
 | 2022 | 0.09 | 0.07 – 0.12 |
@@ -38,13 +38,13 @@ nav_order: 4
 
 ## Materialsammensetning (fiberlag, D19)
 
-Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Garn til MA.TX er balansen per materiale, klippet til 0 (eksportens sammensetning tar opp differansen).
+Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. Produksjonsavfall har blandingen av garn og metervare inn i MA.TX.
 
 <iframe src="../output_files/plots/pages/ma_fi_wm_ww_wool_scouring_loss_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_wool_scouring_loss_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L69). Dokumentasjonen i koden:
+Beregnes i `_wool_scouring_loss_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L77). Dokumentasjonen i koden:
 
 > Grease, suint and dirt removed when greasy wool is scoured in Norway,
 > sent with the scouring water to wastewater treatment. The greasy wool

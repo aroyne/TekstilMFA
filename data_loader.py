@@ -73,7 +73,8 @@ def load_all_data(selected_pools, params):
         trade = preloaded['trade_textiles']
         preloaded['imports_by_fibre_class'] = aggregate_by_fibre_class(
             trade, params.hs_main_fibre, 1, 'finished', PRODUCTS)
-        preloaded['fibre_yarn_by_fibre_class'] = {
-            impeks: aggregate_by_fibre_class(trade, params.hs_main_fibre, impeks, 'intermediate', ['FY'])
-            for impeks in (1, 2)}
+        preloaded['intermediate_by_fibre_class'] = {
+            (product, impeks): aggregate_by_fibre_class(trade, params.hs_main_fibre, impeks, 'intermediate',
+                                                        [product])
+            for product in ('FY', 'FA') for impeks in (1, 2)}
     return preloaded

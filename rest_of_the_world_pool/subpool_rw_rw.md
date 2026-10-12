@@ -15,7 +15,7 @@ Type: boundary. Lager: no.
 ## Flyter ut
 
 * [Fibre and yarn import](../rest_of_the_world_pool/flow_rw_rw_ma_fi_fibre_and_yarn_import.html) → MA.FI
-* [Fabric import](../rest_of_the_world_pool/flow_rw_rw_ma_tx_fabric_import.html) → MA.TX *(planlagt)*
+* [Fabric import](../rest_of_the_world_pool/flow_rw_rw_ma_tx_fabric_import.html) → MA.TX
 * [Finished textile products import](../rest_of_the_world_pool/flow_rw_rw_di_rt_finished_textile_products_import.html) → DI.RT
 * [Private imports](../rest_of_the_world_pool/flow_rw_rw_us_hh_private_imports.html) → US.HH
 * [Direct online imports](../rest_of_the_world_pool/flow_rw_rw_us_hh_direct_online_imports.html) → US.HH
@@ -24,7 +24,7 @@ Type: boundary. Lager: no.
 ## Flyter inn
 
 * [Fibre and yarn export](../manufacturing_pool/flow_ma_fi_rw_rw_fibre_and_yarn_export.html) ← MA.FI
-* [Textile export](../manufacturing_pool/flow_ma_tx_rw_rw_textile_export.html) ← MA.TX *(planlagt)*
+* [Textile export](../manufacturing_pool/flow_ma_tx_rw_rw_textile_export.html) ← MA.TX
 * [Export of finished textile products](../distribution_pool/flow_di_rt_rw_rw_export_of_finished_textile_products.html) ← DI.RT
 * [Export of unsorted collected textiles](../collection_and_sorting_pool/flow_co_co_rw_rw_export_of_unsorted_collected_textiles.html) ← CO.CO
 * [Export of sorted textiles](../collection_and_sorting_pool/flow_co_so_rw_rw_export_of_sorted_textiles.html) ← CO.SO *(planlagt)*

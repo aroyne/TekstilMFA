@@ -24,6 +24,8 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 |---|---|---|
 | SSB 08801 | Import og eksport per HS8, 1988–2025 | har |
 | SSB 10455 (Prodcom, solgt produksjon i store foretak, 2008–2025) | Norsk produksjon per prodcomkode, mengde (kg, m² eller stk) og verdi. Mange celler er skjult | 13.10 og 13.94 har (`SSB_10455_prodcom_garn_tau_nett_2008_2025.csv`); andre koder for MA.TX hentes ved behov |
+| SSB 08604 (2008, 2015) og 14457 (2015, 2022), industriavfall etter næring og materialtype | Tekstilavfall fra NACE 13–15: 1 / 0 / 0 kt (avrundet til hele tusen tonn), blandet avfall 1–4 kt | ankerpunkter `preconsumer_waste_textile_industry` i `anchor_values.csv` |
+| SSB 12910, hovedtall for foretak og bedrifter etter næring (2017–2024) | Sysselsatte og produksjonsverdi per næring: 13.92 konfeksjonerte tekstilvarer ~2,1–3,1 mrd. kr, 14.1 klær ~2,7–3,1 mrd. kr, 13.94 tau og nett ~1,7–3,3 mrd. kr | kandidat for produktfordelingen i MA.TX (ikke hentet til data_files) |
 | SNL, «garn» og «Sandnes Garn» | Omtrent 1 000 t håndstrikkegarn produseres i Norge per år, og omsetningen er over 500 mill. kr (begge uten årstall). Sandnes Garn produserer ca. 600 t | brukes til usikkerheten på 10455 |
 | SSB, Industristatistikk 1985–1989, Hefte II Varetall (NOS B 689, B 781, B 876, B 941, B 998) | Varetall for industrien før Prodcom, etter HS fra 1988 | 1988–89 har (`SSB_industristatistikk_varetall_1988_1989.csv`). Skannet uten tekstlag. Fra 1990 til 2007 publiserte SSB bare næringstall |
 | SSB 12910 (hovedtall for foretak og bedrifter etter næring, 2017–2024) og 08675 (resultatposter for NACE 13–15, 2007–2024) | Omsetning, sysselsatte og varekostnader for næring 13.1 (spinning) og 13–15 | kandidat for MA (ikke hentet) |

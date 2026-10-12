@@ -29,12 +29,12 @@ nav_order: 1
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 13.10 | 12.58 – 13.60 |
-| 2000 | 10.34 | 9.92 – 10.76 |
-| 2010 | 5.86 | 5.61 – 6.09 |
-| 2018 | 7.09 | 6.85 – 7.33 |
-| 2022 | 6.72 | 6.49 – 6.95 |
-| 2025 | 6.11 | 5.88 – 6.34 |
+| 1990 | 12.13 | 11.65 – 12.62 |
+| 2000 | 9.96 | 9.54 – 10.36 |
+| 2010 | 5.20 | 4.95 – 5.41 |
+| 2018 | 5.04 | 4.83 – 5.22 |
+| 2022 | 5.16 | 4.97 – 5.34 |
+| 2025 | 5.24 | 5.03 – 5.44 |
 
 ## Klipping av negative verdier
 
@@ -46,18 +46,18 @@ I fiberlaget (per materiale):
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 1989 | 2 av 1000 | 0.000 | 0.080 | 0.000 |
-| 2000 | 2 av 1000 | 0.000 | 0.035 | 0.000 |
+| 1989 | 1 av 1000 | 0.000 | 0.055 | 0.000 |
+| 2000 | 1 av 1000 | 0.000 | 0.114 | 0.000 |
 
 ## Materialsammensetning (fiberlag, D19)
 
-Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Garn til MA.TX er balansen per materiale, klippet til 0 (eksportens sammensetning tar opp differansen).
+Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. Produksjonsavfall har blandingen av garn og metervare inn i MA.TX.
 
 <iframe src="../output_files/plots/pages/ma_fi_ma_tx_yarn_to_textile_manufacturing_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L122). Dokumentasjonen i koden:
+Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L130). Dokumentasjonen i koden:
 
 > Balance of MA.FI: Norwegian wool and imported fibre and yarn minus
 > exports, the scouring loss and hand knitting yarn sold through retail.

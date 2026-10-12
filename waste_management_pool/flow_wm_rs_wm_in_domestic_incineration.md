@@ -29,12 +29,12 @@ nav_order: 1
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 18.01 | 12.39 – 24.62 |
-| 2000 | 30.65 | 24.67 – 37.53 |
-| 2010 | 56.52 | 50.10 – 62.98 |
-| 2018 | 69.73 | 63.52 – 76.33 |
-| 2022 | 92.91 | 83.46 – 102.33 |
-| 2025 | 86.24 | 77.40 – 94.63 |
+| 1990 | 18.23 | 12.82 – 24.61 |
+| 2000 | 31.24 | 24.77 – 38.17 |
+| 2010 | 56.92 | 50.06 – 63.52 |
+| 2018 | 69.79 | 63.78 – 76.21 |
+| 2022 | 93.33 | 83.48 – 103.42 |
+| 2025 | 86.53 | 77.00 – 94.94 |
 
 ## Klipping av negative verdier
 
@@ -50,7 +50,7 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 ## Beregning i koden
 
-Beregnes i `_domestic_incineration_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L49). Dokumentasjonen i koden:
+Beregnes i `_domestic_incineration_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L50). Dokumentasjonen i koden:
 
 > Balance of WM.RS. A negative balance (landfill and export shares
 > summing to more than 1) is not physical and is clipped at 0; the

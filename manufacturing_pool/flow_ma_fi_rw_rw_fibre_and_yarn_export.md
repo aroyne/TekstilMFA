@@ -29,22 +29,22 @@ nav_order: 3
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 5.27 | 5.08 – 5.45 |
-| 2000 | 5.12 | 4.94 – 5.30 |
-| 2010 | 4.59 | 4.42 – 4.75 |
-| 2018 | 4.02 | 3.88 – 4.17 |
-| 2022 | 3.21 | 3.10 – 3.33 |
-| 2025 | 2.99 | 2.89 – 3.10 |
+| 1990 | 5.24 | 5.07 – 5.43 |
+| 2000 | 5.11 | 4.94 – 5.30 |
+| 2010 | 4.57 | 4.42 – 4.73 |
+| 2018 | 3.96 | 3.83 – 4.11 |
+| 2022 | 3.21 | 3.10 – 3.32 |
+| 2025 | 2.96 | 2.86 – 3.07 |
 
 ## Materialsammensetning (fiberlag, D19)
 
-Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Garn til MA.TX er balansen per materiale, klippet til 0 (eksportens sammensetning tar opp differansen).
+Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. Produksjonsavfall har blandingen av garn og metervare inn i MA.TX.
 
 <iframe src="../output_files/plots/pages/ma_fi_rw_rw_fibre_and_yarn_export_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_fibre_and_yarn_export_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L57). Dokumentasjonen i koden:
+Beregnes i `_fibre_and_yarn_export_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L65). Dokumentasjonen i koden:
 
 > Registered exports of fibre and yarn, SSB 08801 (HS 50-55 except woven
 > fabric and retail yarn). Dominated by greasy Norwegian wool (HS 5101.11

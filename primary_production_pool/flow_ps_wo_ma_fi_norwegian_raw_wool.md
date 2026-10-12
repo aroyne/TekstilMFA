@@ -29,22 +29,22 @@ nav_order: 1
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 4.96 | 4.79 – 5.13 |
-| 2000 | 4.95 | 4.78 – 5.12 |
-| 2010 | 4.37 | 4.21 – 4.52 |
-| 2018 | 3.91 | 3.77 – 4.04 |
+| 1990 | 4.96 | 4.79 – 5.14 |
+| 2000 | 4.95 | 4.79 – 5.13 |
+| 2010 | 4.36 | 4.22 – 4.52 |
+| 2018 | 3.91 | 3.78 – 4.05 |
 | 2022 | 3.16 | 3.05 – 3.27 |
-| 2025 | 2.86 | 2.76 – 2.96 |
+| 2025 | 2.86 | 2.77 – 2.97 |
 
 ## Materialsammensetning (fiberlag, D19)
 
-Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Garn til MA.TX er balansen per materiale, klippet til 0 (eksportens sammensetning tar opp differansen).
+Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. Produksjonsavfall har blandingen av garn og metervare inn i MA.TX.
 
 <iframe src="../output_files/plots/pages/ps_wo_ma_fi_norwegian_raw_wool_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_norwegian_raw_wool_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L33). Dokumentasjonen i koden:
+Beregnes i `_norwegian_raw_wool_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L41). Dokumentasjonen i koden:
 
 > Norwegian wool (greasy, as weighed in) from Totalkalkylen for
 > jordbrukssektoren (Budsjettnemnda for jordbruket, NIBIO), the official

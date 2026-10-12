@@ -19,7 +19,7 @@ nav_order: 1
 | Status | implemented |
 | Prioritet | 2 |
 | Kandidatdata | SSB 08801 (HS 50-55 fibre and yarn; woven fabric and retail yarn excluded) |
-| Merknad | HS 56 (nonwovens, ropes, nets) and high-tenacity filament yarn (5402.10/11/19/20, for ropes and nets) are outside the scope. Retail yarn goes to DI.RT as product YA |
+| Merknad | HS 56, high-tenacity filament yarn (5402.10/11/19/20), nylon net twine (5402.61), other single synthetic filament yarn (5402.49) and polypropylene staple fibre (5503.40) are outside the scope: they go to ropes, nets, nonwovens and technical products. Retail yarn goes to DI.RT as product YA |
 
 ## Tidsserie
 
@@ -29,22 +29,22 @@ nav_order: 1
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 15.28 | 14.74 – 15.82 |
-| 2000 | 12.21 | 11.78 – 12.64 |
-| 2010 | 6.98 | 6.73 – 7.23 |
-| 2018 | 7.95 | 7.67 – 8.23 |
-| 2022 | 7.50 | 7.24 – 7.77 |
-| 2025 | 7.07 | 6.82 – 7.32 |
+| 1990 | 14.29 | 13.81 – 14.80 |
+| 2000 | 11.82 | 11.42 – 12.24 |
+| 2010 | 6.29 | 6.08 – 6.52 |
+| 2018 | 5.83 | 5.63 – 6.04 |
+| 2022 | 5.93 | 5.73 – 6.14 |
+| 2025 | 6.17 | 5.96 – 6.39 |
 
 ## Materialsammensetning (fiberlag, D19)
 
-Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Garn til MA.TX er balansen per materiale, klippet til 0 (eksportens sammensetning tar opp differansen).
+Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. Produksjonsavfall har blandingen av garn og metervare inn i MA.TX.
 
 <iframe src="../output_files/plots/pages/rw_rw_ma_fi_fibre_and_yarn_import_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_fibre_and_yarn_import_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L47). Dokumentasjonen i koden:
+Beregnes i `_fibre_and_yarn_import_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L55). Dokumentasjonen i koden:
 
 > Registered imports of fibre and yarn, SSB 08801 (HS 50-55 except woven
 > fabric and retail yarn). Includes raw, scoured and carbonised wool and
