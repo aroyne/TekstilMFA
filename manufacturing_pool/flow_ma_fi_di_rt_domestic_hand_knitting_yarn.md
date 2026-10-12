@@ -44,7 +44,7 @@ Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er
 
 ## Beregning i koden
 
-Beregnes i `_domestic_hand_knitting_yarn_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L87). Dokumentasjonen i koden:
+Beregnes i `_domestic_hand_knitting_yarn_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L89). Dokumentasjonen i koden:
 
 > Yarn spun in Norway and put up for retail sale (product YA), sold to
 > households through retail; hand knitting yarn is by far the largest

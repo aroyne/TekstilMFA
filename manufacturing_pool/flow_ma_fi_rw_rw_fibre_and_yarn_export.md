@@ -51,6 +51,8 @@ Beregnes i `_fibre_and_yarn_export_mc` i [calculations/ma_mc.py](https://github.
 > and 5101.19), which since 2007 is 90-100 % of Norwegian wool. Yarn
 > exports may include re-export of yarn spun abroad for Norwegian brands,
 > which the trade statistics do not separate from domestic production.
+> In a year where exports exceed what MA.FI has, they are reduced by the
+> deficit (see _yarn_to_manufacturing_mc).
 
 ## Beskrivelse
 

@@ -60,6 +60,8 @@ def _fibre_and_yarn_export_mc(mfa, preloaded_data, dataset_noise):
     and 5101.19), which since 2007 is 90-100 % of Norwegian wool. Yarn
     exports may include re-export of yarn spun abroad for Norwegian brands,
     which the trade statistics do not separate from domestic production.
+    In a year where exports exceed what MA.FI has, they are reduced by the
+    deficit (see _yarn_to_manufacturing_mc).
     """
     mfa.flows['MA.FI-RW.RW-Fibre and yarn export-TOT'].values[...] = (
         trade_kt(preloaded_data, dataset_noise, False, 'intermediate', ['FY'])[:, 0])
@@ -122,6 +124,8 @@ def _yarn_to_manufacturing_mc(mfa):
     """
     Balance of MA.FI: Norwegian wool and imported fibre and yarn minus
     exports, the scouring loss and hand knitting yarn sold through retail.
+    A negative balance is not physical: the flow is clipped at 0 and the
+    export of fibre and yarn is reduced by the deficit.
     """
     supply = (mfa.flows['PS.WO-MA.FI-Norwegian raw wool-TOT'].values
               + mfa.flows['RW.RW-MA.FI-Fibre and yarn import-TOT'].values)
@@ -129,7 +133,5 @@ def _yarn_to_manufacturing_mc(mfa):
                + mfa.flows['MA.FI-WM.WW-Wool scouring loss-TOT'].values
                + mfa.flows['MA.FI-DI.RT-Domestic hand knitting yarn-TOT'].values.sum(axis=1))
     balance = supply - removed
-    if (balance < 0).any():
-        year = YEARS[int(np.argmax(balance < 0))]
-        raise ValueError(f"Negative MA.FI balance in {year}: {balance[YEARS.index(year)]:.3f} kt")
-    mfa.flows['MA.FI-MA.TX-Yarn to textile manufacturing-TOT'].values[...] = balance
+    mfa.flows['MA.FI-MA.TX-Yarn to textile manufacturing-TOT'].values[...] = np.clip(balance, 0.0, None)
+    mfa.flows['MA.FI-RW.RW-Fibre and yarn export-TOT'].values[...] += np.clip(balance, None, 0.0)

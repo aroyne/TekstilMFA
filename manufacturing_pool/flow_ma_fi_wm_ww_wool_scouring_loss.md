@@ -44,7 +44,7 @@ Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er
 
 ## Beregning i koden
 
-Beregnes i `_wool_scouring_loss_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L68). Dokumentasjonen i koden:
+Beregnes i `_wool_scouring_loss_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L70). Dokumentasjonen i koden:
 
 > Grease, suint and dirt removed when greasy wool is scoured in Norway,
 > sent with the scouring water to wastewater treatment. The greasy wool

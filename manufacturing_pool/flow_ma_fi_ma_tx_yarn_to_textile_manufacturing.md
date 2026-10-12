@@ -44,10 +44,12 @@ Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er
 
 ## Beregning i koden
 
-Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L121). Dokumentasjonen i koden:
+Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L123). Dokumentasjonen i koden:
 
 > Balance of MA.FI: Norwegian wool and imported fibre and yarn minus
 > exports, the scouring loss and hand knitting yarn sold through retail.
+> A negative balance is not physical: the flow is clipped at 0 and the
+> export of fibre and yarn is reduced by the deficit.
 
 ## Beskrivelse
 

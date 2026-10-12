@@ -44,7 +44,7 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 ## Beregning i koden
 
-Beregnes i `_residual_export_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L39). Dokumentasjonen i koden:
+Beregnes i `_residual_export_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L38). Dokumentasjonen i koden:
 
 > Share of residual waste exported, SSB 13035 (D11). The share is measured
 > for household residual waste and is applied to all textiles in WM.RS,

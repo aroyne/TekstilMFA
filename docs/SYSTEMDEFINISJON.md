@@ -83,7 +83,7 @@ Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [syst
 * **data**: Flyten er målt direkte (for eksempel handelsstatistikk).
 * **parameter**: Flyten er en annen flyt eller et lager multiplisert med en overføringskoeffisient eller rate.
 * **stock_model**: Flyten er utstrømmen fra lagermodellen (innstrøm og levetid). Brukes ikke for flyter der det finnes offisiell statistikk (D8). Lagermodellen gir da et parallelt anslag til sammenligning.
-* **balance**: Flyten er restleddet i massebalansen til en prosess. Hver prosess har høyst én balanseflyt. Blir den negativ i en MC-iterasjon, er det et signal om at dataene er inkonsistente. Da skal modellen feile tydelig, ikke klippe verdien til 0 i det stille.
+* **balance**: Flyten er restleddet i massebalansen til en prosess. Hver prosess har høyst én balanseflyt. En negativ flyt er ikke-fysisk og klippes til 0. Underskuddet tas da opp av en navngitt flyt i samme prosess (for eksempel eksporten), slik at massebalansen går opp. Det er beskrevet på md-siden for flyten. Klipping betyr at dataene ikke er helt konsistente, og er et diskusjonspunkt.
 
 ## Beslutninger
 

@@ -48,6 +48,8 @@ Beregnes i `_finished_products_export_mc` i [calculations/di_mc.py](https://gith
 
 > Registered exports of finished goods, SSB 08801. Export from DI.RT covers
 > both re-export and export of domestically manufactured products (D6).
+> In a year where exports of a product exceed what DI.RT has, they are
+> reduced by the deficit (see _sales_to_users_mc).
 
 ## Beskrivelse
 

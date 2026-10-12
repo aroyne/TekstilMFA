@@ -44,9 +44,11 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 ## Beregning i koden
 
-Beregnes i `_domestic_incineration_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L50). Dokumentasjonen i koden:
+Beregnes i `_domestic_incineration_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L49). Dokumentasjonen i koden:
 
-> Balance of WM.RS.
+> Balance of WM.RS. A negative balance (landfill and export shares
+> summing to more than 1) is not physical: incineration is clipped at 0
+> and landfill and export are scaled down to what enters WM.RS.
 
 ## Beskrivelse
 

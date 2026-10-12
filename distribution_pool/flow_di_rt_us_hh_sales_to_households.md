@@ -44,14 +44,15 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 ## Beregning i koden
 
-Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L26). Dokumentasjonen i koden:
+Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L28). Dokumentasjonen i koden:
 
 > Balance of DI.RT per product: registered imports plus hand knitting yarn
 > spun in Norway minus exports, split between households and
 > institutions/businesses. Sacks (SA) are packaging
 > used by businesses (D13) and go entirely to US.IC; retail yarn (YA) goes
 > entirely to households. Other domestic manufacturing (MA.TX) and unsold
-> goods are not yet included.
+> goods are not yet included. A negative balance is not physical: sales
+> are clipped at 0 and exports of the product are reduced by the deficit.
 
 ## Beskrivelse
 
