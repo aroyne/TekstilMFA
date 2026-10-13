@@ -33,6 +33,7 @@ def execute_calculations_us(mfa, preloaded_data, current_params, dataset_noise, 
     _laundry_fibre_release_mc(mfa, preloaded_data, current_params, anchors)
     _air_and_dust_release_mc(mfa, current_params)
     _institutional_waste_mc(mfa, current_params)
+    _industrial_laundry_release_mc(mfa, preloaded_data, current_params, anchors)
 
 
 def _separate_collection_mc(mfa):
@@ -106,15 +107,19 @@ def _other_goods_discards(mfa, current_params):
     return use_cohorts(inflow, COHORT_PRODUCTS, current_params)['outflow'][:, :, 0]
 
 
+def _supply(preloaded_data, current_params):
+    # 'fibre_composition' <- parameters/fibre_composition.csv (fibre groups of
+    # import mass whose HS code states no fibre), passed with the data
+    return supply_composition(preloaded_data, current_params, preloaded_data['fibre_composition'])
+
+
 def _household_textile_stock(mfa, preloaded_data, current_params):
     """
     Stock of textile fibre in the CORE group of US.HH by fibre group, array
     (year, fibre group), from the cohort model of new goods entering the
     households, with the composition of registered imports.
     """
-    # 'fibre_composition' <- parameters/fibre_composition.csv (fibre groups of
-    # import mass whose HS code states no fibre), passed with the data
-    supply = supply_composition(preloaded_data, current_params, preloaded_data['fibre_composition'])
+    supply = _supply(preloaded_data, current_params)
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
     new_goods = sum(mfa.flows[code].values for code in NEW_GOODS_TO_HOUSEHOLDS)[:, core]
     stock = use_cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS,
@@ -137,10 +142,14 @@ def _laundry_fibre_release_mc(mfa, preloaded_data, current_params, anchors):
     splits the flow into synthetic and other fibres.
     """
     stock = _household_textile_stock(mfa, preloaded_data, current_params)
-    synthetic = stock[:, FIBRE_GROUPS.index('SYN')]
-    release_per_kt = anchors['laundry_release_synthetic'][2014] / synthetic[YEARS.index(2014)]
     mfa.flows['US.HH-WM.WW-Fibre release in laundry-TOT'].values[...] = core_group_only(
-        release_per_kt * stock.sum(axis=1))
+        _laundry_release_per_kt(stock, anchors) * stock.sum(axis=1))
+
+
+def _laundry_release_per_kt(household_stock, anchors):
+    """Fibres released in laundry per kt textile fibre in use, from the synthetic release in 2014."""
+    synthetic = household_stock[:, FIBRE_GROUPS.index('SYN')]
+    return anchors['laundry_release_synthetic'][2014] / synthetic[YEARS.index(2014)]
 
 
 def _air_and_dust_release_mc(mfa, current_params):
@@ -172,3 +181,27 @@ def _institutional_waste_mc(mfa, current_params):
     cohort = [PRODUCTS.index(p) for p in INSTITUTIONAL_COHORT_PRODUCTS]
     flow.values[:, cohort] = use_cohorts(sales[:, cohort, None], INSTITUTIONAL_COHORT_PRODUCTS, current_params,
                                          stock='US.IC')['outflow'][:, :, 0]
+
+
+def _industrial_laundry_release_mc(mfa, preloaded_data, current_params, anchors):
+    """
+    Fibres released when textiles used by institutions and businesses are
+    washed (mostly in industrial laundries) and sent to wastewater
+    treatment. There are no Norwegian data, so the release per kt textile
+    fibre in use is the same as in household laundry, applied to the textile
+    stock of the US.IC cohort model per product. Institutional textiles are
+    washed more often, but industrial laundries often filter and treat their
+    water; the two pull in opposite directions. Sacks have no stock and
+    release nothing.
+    """
+    supply = _supply(preloaded_data, current_params)
+    sales = mfa.flows['DI.RT-US.IC-Sales to institutions and businesses-TOT'].values
+    cohort = [PRODUCTS.index(p) for p in INSTITUTIONAL_COHORT_PRODUCTS]
+    stock = use_cohorts(sales[:, cohort, None] * supply[:, cohort, :], INSTITUTIONAL_COHORT_PRODUCTS,
+                        current_params, stock='US.IC')['stock']
+    textile = stock[:, :, [MATERIALS.index(g) for g in FIBRE_GROUPS]].sum(axis=2)
+    release_per_kt = _laundry_release_per_kt(_household_textile_stock(mfa, preloaded_data, current_params), anchors)
+    flow = mfa.flows['US.IC-WM.WW-Fibre release in industrial laundry-TOT']
+    flow.values[...] = 0.0
+    flow.values[:, cohort] = release_per_kt * textile
+

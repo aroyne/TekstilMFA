@@ -82,7 +82,7 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 ## Beregning i koden
 
-Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L125). Dokumentasjonen i koden:
+Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L130). Dokumentasjonen i koden:
 
 > Fibres released from household textiles in washing machines and sent to
 > wastewater treatment. Mepex (Sundt et al. 2014, cited in Sundt et al.
@@ -99,3 +99,5 @@ Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.
 > `_household_textile_stock`: Stock of textile fibre in the CORE group of US.HH by fibre group, array
 > (year, fibre group), from the cohort model of new goods entering the
 > households, with the composition of registered imports.
+>
+> `_laundry_release_per_kt`: Fibres released in laundry per kt textile fibre in use, from the synthetic release in 2014.

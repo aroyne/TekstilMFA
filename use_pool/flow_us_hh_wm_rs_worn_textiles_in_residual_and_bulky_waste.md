@@ -84,7 +84,7 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 ## Beregning i koden
 
-Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L86). Dokumentasjonen i koden:
+Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L87). Dokumentasjonen i koden:
 
 > CORE: residual textiles that are not reusable. CA, TA and OM: the
 > outflow of a cohort model of the goods sold to households, with Weibull

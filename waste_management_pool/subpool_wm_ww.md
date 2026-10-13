@@ -22,7 +22,7 @@ Type: process. Lager: yes.
 
 * [Wool scouring loss](../manufacturing_pool/flow_ma_fi_wm_ww_wool_scouring_loss.html) ← MA.FI
 * [Fibre release in laundry](../use_pool/flow_us_hh_wm_ww_fibre_release_in_laundry.html) ← US.HH
-* [Fibre release in industrial laundry](../use_pool/flow_us_ic_wm_ww_fibre_release_in_industrial_laundry.html) ← US.IC *(planlagt)*
+* [Fibre release in industrial laundry](../use_pool/flow_us_ic_wm_ww_fibre_release_in_industrial_laundry.html) ← US.IC
 
 ## Massebalanse
 

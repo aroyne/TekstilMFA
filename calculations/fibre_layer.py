@@ -26,7 +26,8 @@ and flows. The TOT masses are never changed: they come from the statistics
   collected Flows through CO get the mix of what is collected from
             households and unsold clothing donated by retailers.
   release   Fibres released in laundry and to air have the fibre groups of
-            the textile stock of the household cohort model.
+            the textile stock of the household cohort model, and fibres from
+            industrial laundry those of the US.IC cohort model.
   institutions
             Goods discarded by institutions and businesses get the outflow
             of a cohort model of the goods sold to them.
@@ -83,6 +84,7 @@ INSTITUTIONAL_SALES = 'DI.RT-US.IC-Sales to institutions and businesses-TOT'
 # Goods in US.IC discarded by a cohort model; sacks are discarded in the year
 # supplied and retail yarn is not sold to the sector.
 INSTITUTIONAL_COHORT_PRODUCTS = [p for p in PRODUCTS if p not in ('SA', 'YA')]
+INSTITUTIONAL_RELEASE = 'US.IC-WM.WW-Fibre release in industrial laundry-TOT'
 # Fibres released from household textiles in use, with the fibre groups of
 # the textile stock of the household cohort model.
 RELEASE_FLOWS = [
@@ -356,6 +358,23 @@ def institutional_discard_composition(tot, supply, current_params):
     return composition
 
 
+def institutional_release_composition(tot, supply, current_params):
+    """
+    Material shares of fibres released in industrial laundry, array (year,
+    product, material): the fibre groups of the textile stock of the US.IC
+    cohort model per product, without non-textile material. Products
+    without a stock keep the supply composition (their flows are zero).
+    """
+    sales = tot.flows[INSTITUTIONAL_SALES].values
+    cohort = [PRODUCTS.index(p) for p in INSTITUTIONAL_COHORT_PRODUCTS]
+    stock = use_cohorts(sales[:, cohort, None] * supply[:, cohort, :], INSTITUTIONAL_COHORT_PRODUCTS,
+                        current_params, stock='US.IC')['stock']
+    stock[:, :, MATERIALS.index('NT')] = 0.0
+    composition = supply.copy()
+    composition[:, cohort, :] = stock / stock.sum(axis=2, keepdims=True)
+    return composition
+
+
 def release_composition(cohorts):
     """
     Material shares of fibres released from household textiles, array (year,
@@ -387,7 +406,7 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     model and for the stock level of the statistics-based balance.
     """
     unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + COLLECTED_FLOWS + RELEASE_FLOWS + MIXED_FLOWS
-                                      + MANUFACTURING_FLOWS + [INSTITUTIONAL_WASTE])
+                                      + MANUFACTURING_FLOWS + [INSTITUTIONAL_WASTE, INSTITUTIONAL_RELEASE])
     if unassigned:
         raise KeyError(f"Flows without a fibre layer rule: {sorted(unassigned)}")
 
@@ -400,6 +419,8 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * shares
     fibre.flows[INSTITUTIONAL_WASTE].values[...] = tot.flows[INSTITUTIONAL_WASTE].values[..., None] * (
         institutional_discard_composition(tot, supply, current_params))
+    fibre.flows[INSTITUTIONAL_RELEASE].values[...] = tot.flows[INSTITUTIONAL_RELEASE].values[..., None] * (
+        institutional_release_composition(tot, supply, current_params))
     cohorts = household_cohort_model(tot, supply, current_params)
     discards = household_discard_composition(tot, cohorts, supply, current_params)
     for code in DISCARD_FLOWS:

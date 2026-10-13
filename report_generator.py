@@ -49,6 +49,8 @@ FIBRE_RULES = {
                  'klær som forhandlerne gir til innsamlerne (tilførselssammensetningen).',
     'institutions': 'Utstrømmen av en årgangsmodell av salget til institusjoner og bedrifter. Sekker har '
                     'tilførselssammensetningen samme år.',
+    'industrial_release': 'Fibergruppene i tekstillageret i årgangsmodellen for institusjoner og bedrifter, per '
+                          'varetype (uten ikke-tekstil).',
     'release': 'Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-tekstil). '
                'Syntetisk er mikroplast, de andre gruppene er naturfibre og regenerert cellulose.',
 }
@@ -286,6 +288,7 @@ def _fibre_rule(code):
     for key, codes in (('supply', fibre_layer.SUPPLY_FLOWS), ('discards', fibre_layer.DISCARD_FLOWS),
                        ('collected', fibre_layer.COLLECTED_FLOWS), ('release', fibre_layer.RELEASE_FLOWS),
                        ('institutions', [fibre_layer.INSTITUTIONAL_WASTE]),
+                       ('industrial_release', [fibre_layer.INSTITUTIONAL_RELEASE]),
                        ('mixed', fibre_layer.MIXED_FLOWS)):
         if code in codes:
             return FIBRE_RULES[key]

@@ -77,7 +77,7 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 ## Beregning i koden
 
-Beregnes i `_air_and_dust_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L146). Dokumentasjonen i koden:
+Beregnes i `_air_and_dust_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L155). Dokumentasjonen i koden:
 
 > Fibres released to air and indoor dust while household textiles are worn
 > and used, set to the same level as the release in laundry, with a factor
