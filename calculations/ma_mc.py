@@ -221,12 +221,20 @@ def _domestic_finished_products_mc(mfa, preloaded_data):
     from value divided by a Norwegian price per kg. The shares are
     interpolated between the anchors and held after 2009. Footwear is left
     out, because its main materials (leather, rubber) are not MA.TX inputs.
-    Around 1988-89
-    clothing and household textiles are about a third each and tarpaulins
-    and tents about a fifth; in 2008-2011 household textiles (mostly
-    bedding) are about half, tarpaulins and tents a quarter and clothing a
-    fifth. A negative balance is not physical and is clipped at 0; the
-    clipped mass is recorded and reported on the flow page.
+    Around 1988-89 clothing and household textiles are about a third each
+    and tarpaulins and tents about a fifth; in 2008-2011 household textiles
+    (mostly bedding) are about half, tarpaulins and tents a quarter and
+    clothing a fifth.
+
+    The balance seems too high: SSB's commodity statistics give 7-8 kt for
+    large units in 1988-89 and about 4.5 kt in 2008-2011, against 8-18 kt
+    here, and the household stock rises accordingly. Part of the imported
+    fabric and yarn probably goes to other industries (upholstery,
+    mattresses, vehicle and boat interiors, technical uses), which are
+    outside the scope. The balance is kept until this is resolved.
+
+    A negative balance is not physical and is clipped at 0; the clipped
+    mass is recorded and reported on the flow page.
     """
     balance = (_manufacturing_input(mfa)
                - mfa.flows['MA.TX-RW.RW-Textile export-TOT'].values

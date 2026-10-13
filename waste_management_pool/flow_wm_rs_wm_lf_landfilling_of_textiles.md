@@ -36,9 +36,50 @@ nav_order: 3
 | 2022 | 0.00 | 0.00 – 0.00 |
 | 2025 | 0.00 | 0.00 – 0.00 |
 
-## Materialsammensetning (fiberlag, D19)
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- *Ikke skrevet ennå.*
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- *Ikke skrevet ennå.*
+
+#### Antakelser
+
+- *Ikke skrevet ennå.*
+
+#### Sammensetning (varetype og materiale)
+
+- *Ikke skrevet ennå.*
+
+#### Tidsutvikling og sammenligninger
+
+- *Ikke skrevet ennå.*
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+*Flyten er ikke delt på varetype.*
+
+### Materiale (fiberlag, D19)
 
 Blandingen av alt som går inn i WM.RS samme år.
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 36 % | 37 % | 28 % | nan % | nan % | nan % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | nan % | nan % | nan % |
+| Ikke-tekstil | 18 % | 16 % | 17 % | nan % | nan % | nan % |
+| Andre fibre | 2 % | 3 % | 3 % | nan % | nan % | nan % |
+| Syntetisk | 35 % | 36 % | 46 % | nan % | nan % | nan % |
+| Ull | 6 % | 6 % | 5 % | nan % | nan % | nan % |
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_lf_landfilling_of_textiles_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -47,9 +88,3 @@ Blandingen av alt som går inn i WM.RS samme år.
 Beregnes i `_landfilling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L33). Dokumentasjonen i koden:
 
 > Landfilled share from SSB Avfallsregnskap tekstiler 1990-1998, SSB 05281 and 10513 (D15).
-
-## Beskrivelse
-
-<!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
-<!-- MANUAL:FLOW_DESCRIPTION:END -->

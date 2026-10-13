@@ -36,9 +36,53 @@ nav_order: 5
 | 2022 | 0.54 | 0.36 – 0.70 |
 | 2025 | 13.92 | 9.16 – 18.64 |
 
-## Materialsammensetning (fiberlag, D19)
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- *Ikke skrevet ennå.*
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- *Ikke skrevet ennå.*
+
+#### Antakelser
+
+- *Ikke skrevet ennå.*
+
+#### Sammensetning (varetype og materiale)
+
+- *Ikke skrevet ennå.*
+
+#### Tidsutvikling og sammenligninger
+
+- *Ikke skrevet ennå.*
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Klær | nan % | nan % | 100 % | 100 % | 92 % | 93 % |
+| Hjemmetekstiler | nan % | nan % | 0 % | 0 % | 8 % | 7 % |
+
+### Materiale (fiberlag, D19)
 
 Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | nan % | nan % | 57 % | 45 % | 45 % | 46 % |
+| Regenerert cellulose | nan % | nan % | 3 % | 4 % | 3 % | 3 % |
+| Ikke-tekstil | nan % | nan % | 2 % | 2 % | 3 % | 2 % |
+| Andre fibre | nan % | nan % | 1 % | 0 % | 1 % | 1 % |
+| Syntetisk | nan % | nan % | 32 % | 42 % | 42 % | 41 % |
+| Ull | nan % | nan % | 6 % | 7 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/rw_rw_us_hh_direct_online_imports_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -50,9 +94,3 @@ Beregnes i `_direct_online_imports_mc` i [calculations/rw_mc.py](https://github.
 > 08801 under their HS codes (D7). Official VOEC data 2022-2025, one
 > estimate for 2018, and zero around 2000. VOEC figures exist for clothing
 > (HS 61+62) and household textiles (HS 63) only, so other products are 0.
-
-## Beskrivelse
-
-<!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
-<!-- MANUAL:FLOW_DESCRIPTION:END -->

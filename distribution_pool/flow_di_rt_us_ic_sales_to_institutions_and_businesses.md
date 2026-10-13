@@ -36,17 +36,66 @@ nav_order: 2
 | 2022 | 30.59 | 26.78 – 33.90 |
 | 2025 | 27.28 | 24.03 – 30.10 |
 
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- *Ikke skrevet ennå.*
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- *Ikke skrevet ennå.*
+
+#### Antakelser
+
+- *Ikke skrevet ennå.*
+
+#### Sammensetning (varetype og materiale)
+
+- *Ikke skrevet ennå.*
+
+#### Tidsutvikling og sammenligninger
+
+- *Ikke skrevet ennå.*
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Tepper | 16 % | 7 % | 7 % | 6 % | 6 % | 6 % |
+| Klær | 33 % | 33 % | 33 % | 25 % | 24 % | 23 % |
+| Sko | 10 % | 9 % | 9 % | 7 % | 7 % | 6 % |
+| Hjemmetekstiler | 14 % | 12 % | 13 % | 11 % | 9 % | 8 % |
+| Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 4 % |
+| Sekker | 21 % | 34 % | 33 % | 44 % | 45 % | 48 % |
+| Presenninger og telt | 5 % | 3 % | 4 % | 4 % | 4 % | 3 % |
+
+### Materiale (fiberlag, D19)
+
+Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 32 % | 26 % | 25 % | 16 % | 16 % | 16 % |
+| Regenerert cellulose | 2 % | 2 % | 1 % | 2 % | 1 % | 1 % |
+| Ikke-tekstil | 15 % | 11 % | 12 % | 11 % | 10 % | 9 % |
+| Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |
+| Syntetisk | 46 % | 55 % | 55 % | 66 % | 67 % | 69 % |
+| Ull | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
+
+<iframe src="../output_files/plots/pages/di_rt_us_ic_sales_to_institutions_and_businesses_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
 ## Klipping av negative verdier
 
 Flyten er en balanseflyt. Negative verdier er ikke-fysiske og klippes til 0. Massen som da oppstår, tas opp av klippelageret i prosessen flyten går ut fra (rapportert som «Clipping imbalance»), og flyttes ikke til andre flyter.
 
 I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministiske løpet.
-
-## Materialsammensetning (fiberlag, D19)
-
-Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).
-
-<iframe src="../output_files/plots/pages/di_rt_us_ic_sales_to_institutions_and_businesses_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
@@ -59,9 +108,3 @@ Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aro
 > entirely to households. Unsold goods are not yet included. A negative
 > balance is not physical and is clipped at 0; the clipped mass is recorded and reported on the flow
 > pages.
-
-## Beskrivelse
-
-<!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
-<!-- MANUAL:FLOW_DESCRIPTION:END -->

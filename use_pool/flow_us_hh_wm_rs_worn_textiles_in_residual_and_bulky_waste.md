@@ -36,9 +36,55 @@ nav_order: 3
 | 2022 | 58.60 | 51.61 – 67.46 |
 | 2025 | 55.61 | 48.88 – 62.68 |
 
-## Materialsammensetning (fiberlag, D19)
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- *Ikke skrevet ennå.*
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- *Ikke skrevet ennå.*
+
+#### Antakelser
+
+- *Ikke skrevet ennå.*
+
+#### Sammensetning (varetype og materiale)
+
+- *Ikke skrevet ennå.*
+
+#### Tidsutvikling og sammenligninger
+
+- *Ikke skrevet ennå.*
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Tepper | 24 % | 18 % | 26 % | 27 % | 23 % | 23 % |
+| Klær, hjemmetekstiler og sko | 66 % | 68 % | 51 % | 41 % | 45 % | 48 % |
+| Andre konfeksjonerte varer | 3 % | 5 % | 9 % | 13 % | 15 % | 16 % |
+| Presenninger og telt | 7 % | 8 % | 14 % | 19 % | 16 % | 12 % |
+
+### Materiale (fiberlag, D19)
 
 For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdningene. For andre produkter: tilførselssammensetningen samme år.
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 34 % | 38 % | 27 % | 22 % | 23 % | 25 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 19 % | 17 % | 19 % | 18 % | 17 % | 17 % |
+| Andre fibre | 2 % | 3 % | 4 % | 4 % | 3 % | 3 % |
+| Syntetisk | 35 % | 32 % | 43 % | 49 % | 49 % | 47 % |
+| Ull | 6 % | 7 % | 5 % | 5 % | 5 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_worn_textiles_in_residual_and_bulky_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -50,9 +96,3 @@ Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.co
 > in the year supplied. Sacks (SA) are not used by households (D13).
 >
 > `_residual_core`: CL+HT+FW in household residual and bulky waste, SSB and Mepex pick analyses (D15).
-
-## Beskrivelse
-
-<!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
-<!-- MANUAL:FLOW_DESCRIPTION:END -->

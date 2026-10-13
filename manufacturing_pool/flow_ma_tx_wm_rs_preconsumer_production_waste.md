@@ -36,9 +36,55 @@ nav_order: 3
 | 2022 | 0.25 | 0.08 – 0.42 |
 | 2025 | 0.25 | 0.08 – 0.41 |
 
-## Materialsammensetning (fiberlag, D19)
+## Beskrivelse
 
-Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. Produksjonsavfall har blandingen av garn og metervare inn i MA.TX, og ferdigvarer til DI.RT resten av MA.TX per materiale.
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- **MA.TX-WM.RS-Preconsumer production waste-TOT** er tekstilavfall fra tekstil-, klær- og lærvareindustrien (kutt- og produksjonsrester) som går til restavfall og videre behandling.
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- SSBs undersøkelser om industriavfall: tabell 08604 (2008 og 2015) og 14457 (2015 og 2022), generert avfall etter næring (NACE 13–15) og materialtype.
+- Tekstilavfallet er publisert i hele tusen tonn: 1 kt i 2008 og 0 kt i 2015 og 2022. I tillegg kommer 1–4 kt blandet avfall, som kan inneholde tekstiler.
+- Tallene bygger på utvalgsundersøkelser blant industribedrifter, oppblåst til hele næringen.
+
+#### Antakelser
+
+- Ankerpunkter: 1,0 kt i 2008 (±50 %) og 0,25 kt i 2015 og 2022 (0–0,5 kt, fordi 0 betyr under 0,5 kt).
+- Avfallet uttrykkes per kt garn og metervare inn i MA.TX i ankerårene, og forholdstallet interpoleres. Før 2008 følger avfallet innsatsen, med 2008 som referanse. Etter 2022 følger det innsatsen med 2022 som referanse.
+- Alt går til WM.RS, altså ikke til materialgjenvinning.
+
+#### Sammensetning (varetype og materiale)
+
+- Ingen varetype.
+- Materialet er blandingen av garn og metervare inn i MA.TX: 49 % bomull og 38 % syntetisk i 1990, og 65 % syntetisk, 14 % ull og 11 % bomull i 2022.
+
+#### Tidsutvikling og sammenligninger
+
+- Avfallet var 1,4–1,7 kt per år på 1990-tallet og har vært omtrent 0,25 kt fra 2015.
+- Som andel av innsatsen tilsvarer det omtrent 6 % i 2008 og 2–3 % i 2015–2022.
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+*Flyten er ikke delt på varetype.*
+
+### Materiale (fiberlag, D19)
+
+Blandingen av garn og metervare som går inn i MA.TX samme år.
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 49 % | 43 % | 21 % | 13 % | 11 % | 8 % |
+| Regenerert cellulose | 8 % | 7 % | 2 % | 2 % | 2 % | 1 % |
+| Andre fibre | 1 % | 3 % | 7 % | 4 % | 8 % | 7 % |
+| Syntetisk | 38 % | 43 % | 61 % | 67 % | 65 % | 71 % |
+| Ull | 4 % | 4 % | 9 % | 14 % | 14 % | 13 % |
 
 <iframe src="../output_files/plots/pages/ma_tx_wm_rs_preconsumer_production_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -52,9 +98,3 @@ Beregnes i `_preconsumer_waste_mc` i [calculations/ma_mc.py](https://github.com/
 > The waste is expressed per kt of MA.TX input (yarn and fabric) in the
 > anchor years and the ratio is interpolated, so the waste follows the
 > input before 2008, with 2008 as reference, and after 2022.
-
-## Beskrivelse
-
-<!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
-<!-- MANUAL:FLOW_DESCRIPTION:END -->

@@ -36,9 +36,59 @@ nav_order: 3
 | 2022 | 158.40 | 153.07 – 164.09 |
 | 2025 | 138.24 | 133.58 – 143.20 |
 
-## Materialsammensetning (fiberlag, D19)
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- *Ikke skrevet ennå.*
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- *Ikke skrevet ennå.*
+
+#### Antakelser
+
+- *Ikke skrevet ennå.*
+
+#### Sammensetning (varetype og materiale)
+
+- *Ikke skrevet ennå.*
+
+#### Tidsutvikling og sammenligninger
+
+- *Ikke skrevet ennå.*
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Tepper | 22 % | 11 % | 9 % | 10 % | 10 % | 11 % |
+| Klær | 43 % | 49 % | 47 % | 41 % | 40 % | 40 % |
+| Sko | 16 % | 14 % | 13 % | 12 % | 12 % | 12 % |
+| Hjemmetekstiler | 12 % | 15 % | 17 % | 17 % | 15 % | 14 % |
+| Andre konfeksjonerte varer | 1 % | 3 % | 3 % | 5 % | 6 % | 8 % |
+| Sekker | 4 % | 6 % | 6 % | 9 % | 9 % | 10 % |
+| Presenninger og telt | 1 % | 2 % | 4 % | 5 % | 6 % | 4 % |
+| Garn i detaljsalg | 1 % | 0 % | 1 % | 2 % | 1 % | 2 % |
+
+### Materiale (fiberlag, D19)
 
 Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 37 % | 36 % | 36 % | 28 % | 28 % | 29 % |
+| Regenerert cellulose | 1 % | 2 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 22 % | 18 % | 18 % | 18 % | 17 % | 16 % |
+| Andre fibre | 2 % | 3 % | 2 % | 3 % | 2 % | 2 % |
+| Syntetisk | 34 % | 36 % | 37 % | 45 % | 46 % | 45 % |
+| Ull | 4 % | 5 % | 5 % | 5 % | 5 % | 6 % |
 
 <iframe src="../output_files/plots/pages/rw_rw_di_rt_finished_textile_products_import_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -47,9 +97,3 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 Beregnes i `_finished_products_import_mc` i [calculations/rw_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/rw_mc.py#L19). Dokumentasjonen i koden:
 
 > Registered imports of finished goods, SSB 08801.
-
-## Beskrivelse
-
-<!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
-<!-- MANUAL:FLOW_DESCRIPTION:END -->

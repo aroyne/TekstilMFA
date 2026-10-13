@@ -36,9 +36,52 @@ nav_order: 1
 | 2022 | 32.51 | 31.41 – 33.72 |
 | 2025 | 36.28 | 34.82 – 37.70 |
 
-## Materialsammensetning (fiberlag, D19)
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- *Ikke skrevet ennå.*
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- *Ikke skrevet ennå.*
+
+#### Antakelser
+
+- *Ikke skrevet ennå.*
+
+#### Sammensetning (varetype og materiale)
+
+- *Ikke skrevet ennå.*
+
+#### Tidsutvikling og sammenligninger
+
+- *Ikke skrevet ennå.*
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Klær, hjemmetekstiler og sko | 100 % | 100 % | 100 % | 100 % | 100 % | 100 % |
+
+### Materiale (fiberlag, D19)
 
 For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdningene. For andre produkter: tilførselssammensetningen samme år.
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 46 % | 48 % | 44 % | 40 % | 37 % | 36 % |
+| Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 17 % | 16 % | 18 % | 17 % | 17 % | 17 % |
+| Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
+| Syntetisk | 27 % | 26 % | 30 % | 33 % | 36 % | 37 % |
+| Ull | 6 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_co_co_separate_collection_from_households_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -47,9 +90,3 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 Beregnes i `_separate_collection_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L25). Dokumentasjonen i koden:
 
 > Separately collected = exported used textiles + the part kept in Norway (D17).
-
-## Beskrivelse
-
-<!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
-<!-- MANUAL:FLOW_DESCRIPTION:END -->

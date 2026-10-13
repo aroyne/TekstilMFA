@@ -36,9 +36,54 @@ nav_order: 2
 | 2022 | 0.62 | 0.55 – 0.77 |
 | 2025 | 0.72 | 0.64 – 0.90 |
 
-## Materialsammensetning (fiberlag, D19)
+## Beskrivelse
 
-Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. Produksjonsavfall har blandingen av garn og metervare inn i MA.TX, og ferdigvarer til DI.RT resten av MA.TX per materiale.
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- **MA.FI-DI.RT-Domestic hand knitting yarn-TOT** er garn spunnet i Norge og pakket for detaljsalg (produkt YA). Det selges til husholdningene gjennom handelen.
+- Håndstrikkegarn er den klart største produktgruppen til norske spinnerier.
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- 1988 og 1989: SSB, Industristatistikk, Hefte II Varetall (NOS B 941 og B 998), varenummer 5109.1001 og 5109.1002 (ullgarn i detaljopplegg) for store bedrifter: 993 og 893 t. Tallene er lest manuelt fra skannede sider.
+- 2008–2023: SSB 10455 (Prodcom), kode 13.10.50.50, solgt produksjon av ullgarn i detaljsalg for store foretak: 0,59–1,03 kt. Mange år er skjult av SSB.
+- SSB publiserte ingen varetall for 1990–2007. Bomulls- og syntetisk garn i detaljsalg er skjult i alle år.
+- Til kontroll: SNL oppgir omtrent 1 000 t håndstrikkegarn per år fra norske spinnerier, og Sandnes Garn lager omtrent 600 t.
+
+#### Antakelser
+
+- År uten tall interpoleres, og verdien holdes fast etter 2023.
+- Statistikken dekker bare store enheter, så usikkerheten er skjevfordelt oppover (−10 / +50 %).
+
+#### Sammensetning (varetype og materiale)
+
+- Varetype: garn i detaljsalg (YA). Det hører til produktgruppen CORE etter bruk, fordi hjemmelagde plagg kasseres som klær.
+- Materialet er ull (WO), fordi varenummer og Prodcom-kode gjelder ullgarn.
+
+#### Tidsutvikling og sammenligninger
+
+- Produksjonen har vært forholdsvis stabil på 0,6–1,0 kt per år. Den var 1,0 kt i 1988, 0,6 kt i 2018–2019 og 1,1 kt i 2021, da det ble strikket mye under pandemien.
+- Eksporten av detaljgarn (via DI.RT) har økt fra 0,7 kt i 2018 til 2,1 kt i 2025. Noe av dette er trolig norskprodusert garn.
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Garn i detaljsalg | 100 % | 100 % | 100 % | 100 % | 100 % | 100 % |
+
+### Materiale (fiberlag, D19)
+
+Ull (WO): Prodcom-koden og varenummeret gjelder ullgarn.
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Ull | 100 % | 100 % | 100 % | 100 % | 100 % | 100 % |
 
 <iframe src="../output_files/plots/pages/ma_fi_di_rt_domestic_hand_knitting_yarn_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -59,9 +104,3 @@ Beregnes i `_domestic_hand_knitting_yarn_mc` i [calculations/ma_mc.py](https://g
 > Norwegian spinning mills), so the noise factor is skewed upwards. Cotton
 > and synthetic yarn put up for retail sale are suppressed in every year
 > and are left out.
-
-## Beskrivelse
-
-<!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
-<!-- MANUAL:FLOW_DESCRIPTION:END -->

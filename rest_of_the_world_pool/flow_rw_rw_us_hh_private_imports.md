@@ -36,9 +36,53 @@ nav_order: 4
 | 2022 | 0.46 | 0.36 – 0.62 |
 | 2025 | 0.41 | 0.32 – 0.52 |
 
-## Materialsammensetning (fiberlag, D19)
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- *Ikke skrevet ennå.*
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- *Ikke skrevet ennå.*
+
+#### Antakelser
+
+- *Ikke skrevet ennå.*
+
+#### Sammensetning (varetype og materiale)
+
+- *Ikke skrevet ennå.*
+
+#### Tidsutvikling og sammenligninger
+
+- *Ikke skrevet ennå.*
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Klær | 74 % | 78 % | 78 % | 77 % | 77 % | 78 % |
+| Sko | 26 % | 22 % | 22 % | 23 % | 23 % | 22 % |
+
+### Materiale (fiberlag, D19)
 
 Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 46 % | 40 % | 44 % | 35 % | 36 % | 36 % |
+| Regenerert cellulose | 2 % | 3 % | 3 % | 3 % | 3 % | 3 % |
+| Ikke-tekstil | 23 % | 19 % | 19 % | 20 % | 20 % | 19 % |
+| Andre fibre | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % |
+| Syntetisk | 26 % | 33 % | 29 % | 36 % | 36 % | 35 % |
+| Ull | 3 % | 5 % | 5 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/rw_rw_us_hh_private_imports_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -51,9 +95,3 @@ Beregnes i `_private_imports_mc` i [calculations/rw_mc.py](https://github.com/ar
 > customs import value per kg of CL+FW times a retail markup, and split
 > between CL and FW by their shares of registered import mass. The
 > statistics cover clothing and shoes only, so other products are 0.
-
-## Beskrivelse
-
-<!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
-<!-- MANUAL:FLOW_DESCRIPTION:END -->

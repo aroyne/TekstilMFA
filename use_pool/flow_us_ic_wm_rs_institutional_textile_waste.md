@@ -36,9 +36,58 @@ nav_order: 2
 | 2022 | 30.59 | 26.78 – 33.90 |
 | 2025 | 27.28 | 24.03 – 30.10 |
 
-## Materialsammensetning (fiberlag, D19)
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- *Ikke skrevet ennå.*
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- *Ikke skrevet ennå.*
+
+#### Antakelser
+
+- *Ikke skrevet ennå.*
+
+#### Sammensetning (varetype og materiale)
+
+- *Ikke skrevet ennå.*
+
+#### Tidsutvikling og sammenligninger
+
+- *Ikke skrevet ennå.*
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Tepper | 16 % | 7 % | 7 % | 6 % | 6 % | 6 % |
+| Klær | 33 % | 33 % | 33 % | 25 % | 24 % | 23 % |
+| Sko | 10 % | 9 % | 9 % | 7 % | 7 % | 6 % |
+| Hjemmetekstiler | 14 % | 12 % | 13 % | 11 % | 9 % | 8 % |
+| Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 4 % |
+| Sekker | 21 % | 34 % | 33 % | 44 % | 45 % | 48 % |
+| Presenninger og telt | 5 % | 3 % | 4 % | 4 % | 4 % | 3 % |
+
+### Materiale (fiberlag, D19)
 
 Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 32 % | 26 % | 25 % | 16 % | 16 % | 16 % |
+| Regenerert cellulose | 2 % | 2 % | 1 % | 2 % | 1 % | 1 % |
+| Ikke-tekstil | 15 % | 11 % | 12 % | 11 % | 10 % | 9 % |
+| Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |
+| Syntetisk | 46 % | 55 % | 55 % | 66 % | 67 % | 69 % |
+| Ull | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
 
 <iframe src="../output_files/plots/pages/us_ic_wm_rs_institutional_textile_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -47,9 +96,3 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L61). Dokumentasjonen i koden:
 
 > All products used by institutions and businesses: discarded in the year supplied.
-
-## Beskrivelse
-
-<!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
-<!-- MANUAL:FLOW_DESCRIPTION:END -->

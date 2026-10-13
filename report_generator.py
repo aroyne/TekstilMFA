@@ -45,11 +45,19 @@ FIBRE_RULES = {
     'discards': 'For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdningene. '
                 'For andre produkter: tilførselssammensetningen samme år.',
     'mixed': 'Blandingen av alt som går inn i WM.RS samme år.',
-    'manufacturing': 'Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). '
-                     'Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. '
-                     'Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. '
-                     'Produksjonsavfall har blandingen av garn og metervare inn i MA.TX, og ferdigvarer til DI.RT resten av MA.TX '
-                     'per materiale.',
+}
+# Fibre layer rule of each MA flow (calculations/fibre_layer.manufacturing_layer).
+MANUFACTURING_RULES = {
+    'PS.WO-MA.FI-Norwegian raw wool-TOT': 'Ull (WO). Uvasket ull regnes som ull, inkludert fett og smuss.',
+    'RW.RW-MA.FI-Fibre and yarn import-TOT': 'Hovedfiberen fra HS-koden (fiber og garn, FY).',
+    'MA.FI-RW.RW-Fibre and yarn export-TOT': 'Hovedfiberen fra HS-koden (fiber og garn, FY).',
+    'MA.FI-WM.WW-Wool scouring loss-TOT': 'Ull (WO), fordi uvasket ull regnes som ull inkludert fettet.',
+    'MA.FI-DI.RT-Domestic hand knitting yarn-TOT': 'Ull (WO): Prodcom-koden og varenummeret gjelder ullgarn.',
+    'MA.FI-MA.TX-Yarn to textile manufacturing-TOT': 'Balansen i MA.FI per materiale, klippet til 0.',
+    'RW.RW-MA.TX-Fabric import-TOT': 'Hovedfiberen fra HS-koden (metervare, FA).',
+    'MA.TX-RW.RW-Textile export-TOT': 'Hovedfiberen fra HS-koden (metervare, FA).',
+    'MA.TX-WM.RS-Preconsumer production waste-TOT': 'Blandingen av garn og metervare som går inn i MA.TX samme år.',
+    'MA.TX-DI.RT-Domestic finished products-TOT': 'Balansen i MA.TX per materiale (klippet til 0), lik for alle varetyper.',
 }
 
 
@@ -63,14 +71,19 @@ def _manual_block(path, name):
     return match.group(1) if match else None
 
 
-def write_page(path, frontmatter, body, manual_name, manual_default):
-    """Writes frontmatter + body, keeping the existing manual block if there is one."""
+def write_page(path, frontmatter, body, manual_name, manual_default, after='', replaced_defaults=()):
+    """
+    Writes frontmatter + body + manual block + after, keeping the existing
+    manual block if there is one. A block that still holds one of
+    replaced_defaults (an earlier default text) gets the new default.
+    """
     manual = _manual_block(path, manual_name)
-    manual = manual if manual is not None else manual_default
+    manual = manual if manual is not None and manual.strip() not in replaced_defaults else manual_default
     lines = ['---'] + [f'{k}: {v}' for k, v in frontmatter.items()] + ['---', '']
     with open(path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines) + '\n' + body.rstrip() + '\n\n'
-                + f'<!-- MANUAL:{manual_name}:START -->\n{manual}\n<!-- MANUAL:{manual_name}:END -->\n')
+                + f'<!-- MANUAL:{manual_name}:START -->\n{manual}\n<!-- MANUAL:{manual_name}:END -->\n'
+                + ('\n' + after.rstrip() + '\n' if after.strip() else ''))
 
 
 def _iframe(path, height):
@@ -189,6 +202,46 @@ class Site:
 
 # --- Flow pages ------------------------------------------------------------
 
+# Headings of the manual flow description, after the flow descriptions in
+# NitrogenBudsjett, with one more for the composition by product and material.
+FLOW_DESCRIPTION_TEMPLATE = '\n'.join(f'#### {heading}\n\n- *Ikke skrevet ennå.*\n' for heading in (
+    'Hva flyten omfatter',
+    'Datakilder (og hvordan kildetallene er produsert)',
+    'Antakelser',
+    'Sammensetning (varetype og materiale)',
+    'Tidsutvikling og sammenligninger',
+)).rstrip()
+OLD_FLOW_DEFAULTS = ('*Ingen manuell beskrivelse ennå.*',)
+
+
+def _share_table(rows, column, names, label):
+    """Table of shares of the total at KEY_YEARS, one row per category in column."""
+    rows = rows[rows['year'].isin(KEY_YEARS)]
+    total = rows.groupby('year')['median'].sum()
+    shares = rows.pivot_table(index=column, columns='year', values='median', aggfunc='sum').div(total, axis=1)
+    shares = shares[(shares.abs() > 0.0005).any(axis=1)]
+    if shares.empty:
+        return []
+    years = [y for y in KEY_YEARS if y in shares.columns]
+    lines = [f"| {label} | " + ' | '.join(str(y) for y in years) + ' |', '|---' * (len(years) + 1) + '|']
+    for key, r in shares.iterrows():
+        lines.append(f"| {names.get(key, key)} | " + ' | '.join(f"{100 * r[y]:.0f} %" for y in years) + ' |')
+    return lines
+
+
+def _composition(site, code, name, fibre_plot):
+    products = site.summary[(site.summary['flow_name'] == code) & ~site.summary['product'].isin(['TOTAL', 'ALL'])]
+    materials = site.fibre[(site.fibre['flow_name'] == code) & site.fibre['product'].isin(['TOTAL', 'ALL'])]
+    lines = ['## Sammensetning', '', 'Andel av summen i nøkkelår (median).', '']
+    by_product = _share_table(products, 'product', utils_stat.PRODUCT_NAMES, 'Varetype')
+    lines += (['### Varetype', ''] + by_product + ['']) if by_product else [
+        '### Varetype', '', '*Flyten er ikke delt på varetype.*', '']
+    lines += ['### Materiale (fiberlag, D19)', '', _fibre_rule(code), '']
+    lines += _share_table(materials, 'material', utils_stat.MATERIAL_NAMES, 'Materiale') + ['']
+    lines += [_iframe(fibre_plot, 420), '']
+    return lines
+
+
 def _key_numbers(summary, code):
     rows = summary[(summary['flow_name'] == code) & summary['product'].isin(['TOTAL', 'ALL'])]
     rows = rows[rows['year'].isin(KEY_YEARS)].set_index('year')
@@ -231,8 +284,10 @@ def _clipping(clipping, code):
 
 def _fibre_rule(code):
     from calculations import fibre_layer
+    if code in MANUFACTURING_RULES:
+        return MANUFACTURING_RULES[code]
     for key, codes in (('supply', fibre_layer.SUPPLY_FLOWS), ('discards', fibre_layer.DISCARD_FLOWS),
-                       ('mixed', fibre_layer.MIXED_FLOWS), ('manufacturing', fibre_layer.MANUFACTURING_FLOWS)):
+                       ('mixed', fibre_layer.MIXED_FLOWS)):
         if code in codes:
             return FIBRE_RULES[key]
     return ''
@@ -264,20 +319,22 @@ def write_flow_page(site, row, nav_order):
         utils_stat.plot_flow(site.summary, code, f"{row['name']} – per produkt (median, 95 % for summen)", plot)
         utils_stat.plot_flow_materials(site.fibre, code, f"{row['name']} – per materiale (median)", fibre_plot)
         body += ['## Tidsserie', '', _iframe(plot, 420), '', '## Nøkkeltall (sum over produkter)', '',
-                 _key_numbers(site.summary, code), ''] + _clipping(site.clipping, code) + [
-                 '## Materialsammensetning (fiberlag, D19)', '', _fibre_rule(code), '', _iframe(fibre_plot, 420), '']
+                 _key_numbers(site.summary, code), '']
+        after = _composition(site, code, row['name'], fibre_plot) + _clipping(site.clipping, code)
         if code in site.functions:
             file, func, line, doc = site.functions[code]
             quoted = '\n'.join('> ' + l if l else '>' for l in doc.splitlines())
-            body += ['## Beregning i koden', '',
-                     f'Beregnes i `{func}` i [{file}]({REPO_URL}/{file}#L{line}). Dokumentasjonen i koden:', '',
-                     quoted, '']
+            after += ['## Beregning i koden', '',
+                      f'Beregnes i `{func}` i [{file}]({REPO_URL}/{file}#L{line}). Dokumentasjonen i koden:', '',
+                      quoted, '']
     else:
         body += ['*Flyten er ikke implementert ennå.*', '']
+        after = []
     body += ['## Beskrivelse', '']
     frontmatter = {'layout': 'default', 'title': row['name'], 'parent': site.subpool_title(row['source']),
                    'grand_parent': site.pool_title(pool), 'nav_order': nav_order}
-    write_page(path, frontmatter, '\n'.join(body), 'FLOW_DESCRIPTION', '*Ingen manuell beskrivelse ennå.*')
+    write_page(path, frontmatter, '\n'.join(body), 'FLOW_DESCRIPTION', FLOW_DESCRIPTION_TEMPLATE,
+               after='\n'.join(after), replaced_defaults=OLD_FLOW_DEFAULTS)
 
 
 # --- Subpool and pool pages ------------------------------------------------

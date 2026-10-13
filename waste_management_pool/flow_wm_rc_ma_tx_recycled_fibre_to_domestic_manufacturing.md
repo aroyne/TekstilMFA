@@ -26,5 +26,23 @@ nav_order: 1
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
-*Ingen manuell beskrivelse ennå.*
+#### Hva flyten omfatter
+
+- **WM.RC-MA.TX-Recycled fibre to domestic manufacturing-TOT** er fiber fra materialgjenvinning av tekstiler som brukes i norsk tekstilindustri.
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- Ingen. Det har ikke vært industriell fiber-til-fiber-gjenvinning i Norge i perioden.
+
+#### Antakelser
+
+- Flyten er ikke implementert. Den beholdes i registeret for framtidige scenarioer.
+
+#### Sammensetning (varetype og materiale)
+
+- Ikke relevant ennå.
+
+#### Tidsutvikling og sammenligninger
+
+- Ikke relevant ennå.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
