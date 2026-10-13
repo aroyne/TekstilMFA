@@ -19,7 +19,7 @@ nav_order: 1
 | Status | implemented |
 | Prioritet | 3 |
 | Kandidatdata | Balance of MA.FI; SSB 10455 (Prodcom, yarn produced in large enterprises 2008-) for checking |
-| Merknad | MA.TX has a temporary stock until its outflows are implemented |
+| Merknad | – |
 
 ## Tidsserie
 
@@ -51,13 +51,13 @@ I fiberlaget (per materiale):
 
 ## Materialsammensetning (fiberlag, D19)
 
-Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. Produksjonsavfall har blandingen av garn og metervare inn i MA.TX.
+Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. Produksjonsavfall har blandingen av garn og metervare inn i MA.TX, og ferdigvarer til DI.RT resten av MA.TX per materiale.
 
 <iframe src="../output_files/plots/pages/ma_fi_ma_tx_yarn_to_textile_manufacturing_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L130). Dokumentasjonen i koden:
+Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L141). Dokumentasjonen i koden:
 
 > Balance of MA.FI: Norwegian wool and imported fibre and yarn minus
 > exports, the scouring loss and hand knitting yarn sold through retail.

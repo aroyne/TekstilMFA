@@ -13,10 +13,12 @@ Bradford); only the part scoured in Norway loses its grease and dirt here.
 
 MA.TX (textile, apparel and footwear manufacturing) receives yarn from
 MA.FI and imported fabric (product 'FA': woven fabric in HS 50-55, HS 58
-and 60; HS 59 is outside the scope), exports fabric and discards
-production waste. Exports of finished goods stay with DI.RT (D6).
+and 60; HS 59 is outside the scope), exports fabric, discards production
+waste and sends the rest to DI.RT as finished goods. Exports of finished
+goods stay with DI.RT (D6).
 """
 import numpy as np
+import pandas as pd
 
 from calculations.system import clip_negative
 from calculations.timeseries import interpolate
@@ -24,6 +26,12 @@ from calculations.trade import trade_kt
 from calculations.utils import PRODUCTS, YEARS
 
 HAND_KNITTING_YARN_PRODCOM = '13.10.50.50'
+# Prodcom has most published quantities in 2008, 2009 and 2011; their mean
+# per commodity is one anchor, placed at 2009.
+PRODCOM_ANCHOR_YEAR = 2009
+# Footwear is made mainly of leather and rubber, which are not MA.TX inputs,
+# so the textile balance of MA.TX cannot become footwear.
+NOT_FROM_TEXTILE_BALANCE = ['FW']
 
 
 def execute_calculations_ma(mfa, preloaded_data, current_params, dataset_noise, anchors):
@@ -36,6 +44,7 @@ def execute_calculations_ma(mfa, preloaded_data, current_params, dataset_noise, 
     _fabric_import_mc(mfa, preloaded_data, dataset_noise)
     _textile_export_mc(mfa, preloaded_data, dataset_noise)
     _preconsumer_waste_mc(mfa, anchors)
+    _domestic_finished_products_mc(mfa, preloaded_data)
 
 
 def _norwegian_raw_wool_mc(mfa, preloaded_data, dataset_noise):
@@ -110,10 +119,12 @@ def _domestic_hand_knitting_yarn_mc(mfa, preloaded_data, dataset_noise):
     and are left out.
     """
     # 'varetall' <- data_files/SSB_industristatistikk_varetall_1988_1989.csv:
-    # wool yarn put up for retail sale produced in large establishments,
-    # tonnes, from SSB Industristatistikk 1988 and 1989, Hefte II Varetall
+    # commodities produced in large establishments in 1988 and 1989 (SSB
+    # Industristatistikk, Hefte II Varetall); product YA is wool yarn put up
+    # for retail sale, in tonnes
     varetall = preloaded_data['varetall']
-    early = varetall.groupby('year')['quantity'].sum() / 1000
+    yarn = varetall[varetall['product'] == 'YA']
+    early = yarn.groupby('year')['quantity'].sum() / 1000
     # 'prodcom' <- data_files/SSB_10455_prodcom_garn_tau_nett_2008_2025.csv:
     # sold production by Prodcom code (13.10 yarn, 13.94 ropes and nets),
     # quantity and value, 2008-2025, with SSB's status codes
@@ -178,4 +189,48 @@ def _preconsumer_waste_mc(mfa, anchors):
     total_input = _manufacturing_input(mfa)
     ratio = interpolate({year: kt / total_input[YEARS.index(year)] for year, kt in waste.items()})
     mfa.flows['MA.TX-WM.RS-Preconsumer production waste-TOT'].values[...] = ratio * total_input
+
+
+def _domestic_product_shares(preloaded_data):
+    """
+    Mass share of each product in finished goods made in Norway, array
+    (year, product), from SSB's commodity statistics for large units (D26).
+    """
+    # 'domestic_production' <- data_files/domestic_production_mass.csv: mass
+    # of finished goods made in Norway per commodity in 1988, 1989 (SSB
+    # Industristatistikk, Varetall) and 2008, 2009, 2011 (Prodcom, SSB 10455),
+    # from scripts/derive_domestic_product_mass.py
+    mass = preloaded_data['domestic_production']
+    early = mass[mass['source'] == 'varetall'].groupby(['year', 'product'])['mass_t'].sum().unstack(fill_value=0.0)
+    prodcom = mass[mass['source'] == 'prodcom'].groupby(['code', 'product'])['mass_t'].mean()
+    late = prodcom.groupby('product').sum().to_frame(PRODCOM_ANCHOR_YEAR).T
+    table = pd.concat([early, late]).reindex(columns=PRODUCTS, fill_value=0.0).fillna(0.0)
+    table[NOT_FROM_TEXTILE_BALANCE] = 0.0
+    shares = table.div(table.sum(axis=1), axis=0)
+    return np.stack([interpolate(shares[p].to_dict()) for p in PRODUCTS], axis=1)
+
+
+def _domestic_finished_products_mc(mfa, preloaded_data):
+    """
+    Balance of MA.TX: yarn and fabric in, minus fabric exports and
+    production waste, split over products by mass shares of finished goods
+    made in Norway (D26). The shares come from SSB's commodity statistics
+    for large units: Industristatistikk, Varetall, 1988 and 1989, and
+    Prodcom 2008, 2009 and 2011 averaged per commodity (anchor 2009). Mass
+    is taken as published, from pieces times the import mass per piece, or
+    from value divided by a Norwegian price per kg. The shares are
+    interpolated between the anchors and held after 2009. Footwear is left
+    out, because its main materials (leather, rubber) are not MA.TX inputs.
+    Around 1988-89
+    clothing and household textiles are about a third each and tarpaulins
+    and tents about a fifth; in 2008-2011 household textiles (mostly
+    bedding) are about half, tarpaulins and tents a quarter and clothing a
+    fifth. A negative balance is not physical and is clipped at 0; the
+    clipped mass is recorded and reported on the flow page.
+    """
+    balance = (_manufacturing_input(mfa)
+               - mfa.flows['MA.TX-RW.RW-Textile export-TOT'].values
+               - mfa.flows['MA.TX-WM.RS-Preconsumer production waste-TOT'].values)
+    clip_negative(mfa, 'MA.TX-DI.RT-Domestic finished products-TOT',
+                  balance[:, None] * _domestic_product_shares(preloaded_data))
 

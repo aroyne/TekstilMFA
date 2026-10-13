@@ -8,13 +8,13 @@ has_children: true
 
 # Textile and apparel manufacturing (MA.TX)
 
-Weaving, knitting, finishing, confection and footwear manufacturing in Norway. Temporary stock: receives the yarn from MA.FI until the outflows of MA.TX are implemented
+Weaving, knitting, finishing, confection and footwear manufacturing in Norway. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0
 
-Type: process. Lager: yes.
+Type: process. Lager: clipping.
 
 ## Flyter ut
 
-* [Domestic finished products](../manufacturing_pool/flow_ma_tx_di_rt_domestic_finished_products.html) → DI.RT *(planlagt)*
+* [Domestic finished products](../manufacturing_pool/flow_ma_tx_di_rt_domestic_finished_products.html) → DI.RT
 * [Textile export](../manufacturing_pool/flow_ma_tx_rw_rw_textile_export.html) → RW.RW
 * [Preconsumer production waste](../manufacturing_pool/flow_ma_tx_wm_rs_preconsumer_production_waste.html) → WM.RS
 

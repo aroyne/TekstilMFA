@@ -24,7 +24,7 @@ Type: process. Lager: clipping.
 
 * [Finished textile products import](../rest_of_the_world_pool/flow_rw_rw_di_rt_finished_textile_products_import.html) ← RW.RW
 * [Domestic hand knitting yarn](../manufacturing_pool/flow_ma_fi_di_rt_domestic_hand_knitting_yarn.html) ← MA.FI
-* [Domestic finished products](../manufacturing_pool/flow_ma_tx_di_rt_domestic_finished_products.html) ← MA.TX *(planlagt)*
+* [Domestic finished products](../manufacturing_pool/flow_ma_tx_di_rt_domestic_finished_products.html) ← MA.TX
 
 ## Massebalanse
 

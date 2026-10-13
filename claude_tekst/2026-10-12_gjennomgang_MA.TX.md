@@ -61,3 +61,44 @@ Hvis norsk dyneproduksjon føres som HT til DI.RT mens importen av dyner ikke er
 ## Beslutning (samme dag)
 
 Den massebaserte produktfordelingen er godkjent. Dyner og puter er hjemmetekstiler, og 9404.40 og 9404.90 tas med i HT (D26). Om soveposer (9404.30) skal med, er ikke avklart. Rekkefølgen for implementeringen står i [PLAN](../docs/PLAN.md) under fase 3.
+
+## Implementert 2026-10-13 (D26)
+
+**Dyner og hodeputer** (9404.40 og 9404.90 unntatt møbelputer) er med i HT. Importen er 0,7–4,3 kt og eksporten 0,5–2,6 kt per år. Dun og fjær regnes som OTH, annet fyll som SYN (antakelse: polyester). Soveposer (9404.30) og møbelputer ligger i dataene, men er utenfor inntil det er avklart.
+
+**Produktandeler** fra SSBs varestatistikk for store foretak (`data_files/domestic_production_mass.csv`):
+
+| Ankerår | CL | HT | TA | OM | CA | Sum masse (store foretak) |
+|---|---|---|---|---|---|---|
+| 1988 (Varetall) | 35 % | 30 % | 18 % | 7 % | 2 % | 8,0 kt (pluss sko 0,7 kt) |
+| 1989 (Varetall) | 30 % | 30 % | 24 % | 8 % | 2 % | 7,3 kt (pluss sko 0,5 kt) |
+| 2008–2011 (Prodcom, snitt per kode) | 21 % | 49 % | 27 % | 3 % | 0 % | 4,5 kt |
+
+- Masse per kode: kg eller tonn som publisert, stk/par × importvekt per stk for samme HS-kode, eller verdi ÷ norsk pris per kg. Den norske prisen tas fra samme kode i et annet år, eller er importprisen × 2,5, som er medianforholdet over 71 koder der begge er kjent.
+- Sko er holdt utenfor, fordi lær og gummi ikke er innsatsvarer i MA.TX.
+- Andelene interpoleres mellom 1988, 1989 og 2009 og holdes fast etter 2009.
+
+**Ferdigvarer til DI.RT** (median, N = 1000):
+
+| | 1990 | 2000 | 2008 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| CL | 5,7 | 3,9 | 2,4 | 2,4 | 2,1 | 1,7 |
+| HT | 6,0 | 6,2 | 5,3 | 5,4 | 4,8 | 3,9 |
+| TA | 4,6 | 3,9 | 3,0 | 3,0 | 2,7 | 2,2 |
+| OM | 1,5 | 0,8 | 0,4 | 0,4 | 0,3 | 0,3 |
+| CA | 0,4 | 0,2 | 0,0 | 0,0 | 0,0 | 0,0 |
+| Sum | 18,2 | 15,0 | 11,0 | 11,1 | 10,0 | 8,1 |
+
+## Diskusjonspunkt: balansen i MA.TX ser for høy ut
+
+Balansen i MA.TX er 8–18 kt per år. Varestatistikken for store foretak gir 7–8 kt i 1988–89 og omtrent 4,5 kt i 2008–2011. Små foretak mangler i statistikken, men forskjellen er stor. Konsekvensen er at lageret i husholdningene (restledd, D8) øker fra ca. 135 til ca. 206 kg per innbygger i 2018–2025.
+
+Mulige årsaker:
+- **Metervare til andre næringer.** Importert vevd metervare går også til møbeltrekk (møbelindustri, NACE 31), madrasser, bil- og båtinteriør, fallskjermer og tekniske formål. Dette er ikke tekstilindustri og ikke forbrukertekstiler i vår avgrensning.
+- **Garn til tekniske produkter** utover kodene som allerede er tatt ut (D22).
+- **Produksjon for eksport.** Den er med, siden eksporten av ferdigvarer føres fra DI.RT.
+
+Mulige grep:
+1. **Øvre grense fra varestatistikken.** Ferdigvarer til DI.RT settes til massen fra varetall og Prodcom, skalert opp for små foretak med forholdet mellom produksjonsverdien i 12910 og verdien som er publisert i Prodcom. Resten av balansen går til en ny flyt for innsatsvarer som brukes i andre næringer (utenfor omfanget).
+2. **Andel metervare til andre næringer** som parameter (fra litteratur eller anslag), trukket fra før balansen.
+3. **Behold balansen** og bruk lagernivået mot garderobestudier (SIFO) som kontroll.

@@ -2,7 +2,7 @@ code,pool,pool_name,subpool_name,type,has_stock,stock_dims,description
 RW.RW,RW,Rest of the world,Rest of the world,boundary,no,,All countries outside Norway; source of imports and sink for exports
 PS.WO,PS,Primary production,Norwegian wool,boundary,no,,Raw wool shorn from Norwegian sheep; system inflow of domestic virgin fibre
 MA.FI,MA,Manufacturing,Fibre and yarn production,process,clipping,t,"Wool scouring, spinning and other fibre/yarn production in Norway. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0"
-MA.TX,MA,Manufacturing,Textile and apparel manufacturing,process,yes,t,"Weaving, knitting, finishing, confection and footwear manufacturing in Norway. Temporary stock: receives the yarn from MA.FI until the outflows of MA.TX are implemented"
+MA.TX,MA,Manufacturing,Textile and apparel manufacturing,process,clipping,t,"Weaving, knitting, finishing, confection and footwear manufacturing in Norway. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0"
 DI.RT,DI,Distribution,Wholesale and retail,process,clipping,"t,p","Wholesale, physical retail and online retail of finished textile products placed on the Norwegian market. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0"
 US.HH,US,Use,Households,process,yes,"t,g",Textiles in use or stored (hibernating) in private households; the main in-use stock
 US.IC,US,Use,Institutions and businesses,process,yes,"t,p","Workwear, uniforms, hotel/hospital/institutional linen and other non-household textile use"

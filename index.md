@@ -6,7 +6,7 @@ nav_order: 1
 
 # Tekstil-MFA for Norge
 
-**Sist generert:** 2026-10-12
+**Sist generert:** 2026-10-13
 
 {: .label .label-red }
 Under arbeid

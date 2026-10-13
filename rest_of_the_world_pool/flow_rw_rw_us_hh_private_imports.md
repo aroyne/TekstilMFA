@@ -38,7 +38,7 @@ nav_order: 4
 
 ## Materialsammensetning (fiberlag, D19)
 
-Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). For garn i detaljsalg blandes norsk spunnet håndstrikkegarn (ull) inn i flytene ut av DI.RT.
+Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).
 
 <iframe src="../output_files/plots/pages/rw_rw_us_hh_private_imports_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

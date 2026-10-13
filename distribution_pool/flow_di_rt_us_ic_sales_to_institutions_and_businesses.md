@@ -29,12 +29,12 @@ nav_order: 2
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 10.85 | 9.02 – 12.43 |
-| 2000 | 17.08 | 14.63 – 19.18 |
-| 2010 | 23.75 | 20.23 – 26.76 |
-| 2018 | 26.68 | 23.44 – 29.51 |
-| 2022 | 28.96 | 25.49 – 31.96 |
-| 2025 | 26.11 | 23.11 – 28.73 |
+| 1990 | 13.02 | 10.67 – 15.01 |
+| 2000 | 18.86 | 15.99 – 21.29 |
+| 2010 | 24.97 | 21.16 – 28.22 |
+| 2018 | 28.32 | 24.70 – 31.45 |
+| 2022 | 30.34 | 26.59 – 33.60 |
+| 2025 | 27.09 | 23.88 – 29.87 |
 
 ## Klipping av negative verdier
 
@@ -44,7 +44,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Materialsammensetning (fiberlag, D19)
 
-Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). For garn i detaljsalg blandes norsk spunnet håndstrikkegarn (ull) inn i flytene ut av DI.RT.
+Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).
 
 <iframe src="../output_files/plots/pages/di_rt_us_ic_sales_to_institutions_and_businesses_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -52,13 +52,12 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L27). Dokumentasjonen i koden:
 
-> Balance of DI.RT per product: registered imports plus hand knitting yarn
-> spun in Norway minus exports, split between households and
-> institutions/businesses. Sacks (SA) are packaging
+> Balance of DI.RT per product: registered imports plus finished goods
+> and hand knitting yarn made in Norway minus exports, split between
+> households and institutions/businesses. Sacks (SA) are packaging
 > used by businesses (D13) and go entirely to US.IC; retail yarn (YA) goes
-> entirely to households. Other domestic manufacturing (MA.TX) and unsold
-> goods are not yet included. A negative balance is not physical and is
-> clipped at 0; the clipped mass is recorded and reported on the flow
+> entirely to households. Unsold goods are not yet included. A negative
+> balance is not physical and is clipped at 0; the clipped mass is recorded and reported on the flow
 > pages.
 
 ## Beskrivelse

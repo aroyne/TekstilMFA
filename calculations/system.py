@@ -83,6 +83,7 @@ def make_system(fibre=False):
         ])
     mfa = fd.MFASystem(dims=DIMENSIONS, parameters={}, processes=fd_processes, flows=fd_flows, stocks=fd_stocks)
     mfa.clipped = {}
+    mfa.clipped_inflows = set()
     return mfa
 
 
@@ -94,6 +95,7 @@ def reset(mfa):
         for arr in (stock.stock, stock.inflow, stock.outflow):
             arr.values[...] = np.nan
     mfa.clipped = {}
+    mfa.clipped_inflows = set()
 
 
 def clip_negative(mfa, code, values):
@@ -145,15 +147,21 @@ def clipping_stocks():
 def _check_clipping_stocks(mfa):
     # The clipped mass may have fewer dimensions than the stock (in the fibre
     # system, clipping inherited from TOT has no material), so both sides are
-    # compared on the dimensions they share.
+    # compared on the dimensions they share. A flow in mfa.clipped_inflows
+    # is larger than the flows its target process passes on (they are not
+    # computed from it), so its clipped mass also stays in the target.
     tolerance = 100 * mfa._absolute_float_precision
     for code in clipping_stocks():
         if code not in mfa.stocks:
             continue
         change = stock_change(mfa, code)
-        clipped = [d for c, d in mfa.clipped.items() if mfa.flows[c].from_process.name == code]
+        leaving = [d for c, d in mfa.clipped.items() if mfa.flows[c].from_process.name == code]
+        entering = [d for c, d in mfa.clipped.items()
+                    if c in mfa.clipped_inflows and mfa.flows[c].to_process.name == code]
+        clipped = leaving + entering
         common = tuple(l for l in change.dims.letters if all(l in d.dims.letters for d in clipped))
-        error = change.sum_to(common).values + sum(d.sum_to(common).values for d in clipped)
+        error = (change.sum_to(common).values + sum(d.sum_to(common).values for d in leaving)
+                 - sum(d.sum_to(common).values for d in entering))
         if np.abs(error).max() > tolerance:
             raise ValueError(f"Clipping stock {code} changes by more than the clipped mass "
                              f"(max {np.abs(error).max():.3g} kt)")

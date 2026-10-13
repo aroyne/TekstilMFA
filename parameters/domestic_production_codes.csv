@@ -1,0 +1,21 @@
+source,code,product,hs_prefixes,note
+prodcom,13.92.15.70,HT,6303,"Curtains of nonwovens; quantity in m², so converted by value"
+prodcom,13.92.22.10,TA,630612;630619;630610,Tarpaulins and awnings
+prodcom,13.92.22.30,TA,630622;630629;630621,Tents
+prodcom,13.92.22.50,TA,630630;630631;630639,Sails
+prodcom,13.92.24.93,HT,94049001;94044001;94049011,"Bedding with down or feathers; quantity in pieces, but 9404 has no pieces in 08801, so converted by value"
+prodcom,13.92.24.99,HT,94049003;94049004;94044009;94049012;94049019,"Bedding not with down or feathers; quantity in pieces, but 9404 has no pieces in 08801, so converted by value"
+prodcom,13.92.29.90,OM,630710;630720,"Floor cloths, dish cloths and the like, life jackets"
+prodcom,14.12.11.30,CL,620332;620333;620339;620432;620433;620439,Workwear jackets and blazers
+prodcom,14.12.30.13,CL,621132;621133;621142;621143,Other workwear
+prodcom,14.13.22.10,CL,620311;620312;620319,"Men's suits, woven"
+prodcom,14.13.22.20,CL,620322;620323;620329,"Men's ensembles, woven"
+prodcom,14.13.32.20,CL,620422;620423;620429,"Women's ensembles, woven"
+prodcom,14.13.34.80,CL,62045,"Skirts, woven"
+prodcom,14.14.21.00,CL,6205,"Men's shirts, woven"
+prodcom,14.14.23.00,CL,6206,"Women's blouses and shirts, woven"
+prodcom,14.14.30.00,CL,6109,"T-shirts and singlets, knitted"
+prodcom,14.19.22.10,CL,621120;621132;621133;621139,"Tracksuits and other garments for men, woven"
+prodcom,14.19.32.00,CL,6210,Garments of felt or nonwovens or impregnated or coated fabric
+prodcom,14.31.10.90,CL,6115,"Socks and stockings, knitted"
+prodcom,14.39.10.31,CL,6110,"Jerseys, pullovers and cardigans, knitted"

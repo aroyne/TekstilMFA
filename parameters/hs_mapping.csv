@@ -54,3 +54,18 @@ hs_prefix,product,category,in_scope,description
 550340,FY,intermediate,no,"Staple fibres of polypropylene, not processed for spinning: mainly for nonwovens and geotextiles (HS 56), outside the scope"
 540261,FY,intermediate,no,"Multiple folded or cabled filament yarn of nylon: mainly net twine for fishing and aquaculture nets (HS 56), outside the scope"
 540249,FY,intermediate,no,"Single synthetic filament yarn n.e.s. (incl. monofilament < 67 dtex): mainly yarn for nets and technical products, outside the scope"
+94049001,HT,finished,yes,"Pillows, duvets and quilts with down or feathers (1988-2021)"
+94049002,HT,finished,yes,"Pillows, duvets and quilts, not with down or feathers (1988-1989)"
+94049003,HT,finished,yes,"Pillows, duvets and quilts, not with down or feathers, with HFC, PFC or CFC (1990-2021)"
+94049004,HT,finished,yes,"Pillows, duvets and quilts, not with down or feathers, without HFC, PFC or CFC (1990-2021)"
+94044001,HT,finished,yes,"Duvets, eiderdowns and quilted bedspreads with down or feathers (2022-)"
+94044009,HT,finished,yes,"Duvets, eiderdowns and quilted bedspreads, not with down or feathers (2022-)"
+94049011,HT,finished,yes,Pillows with down or feathers (2022-)
+94049012,HT,finished,yes,"Pillows, not with down or feathers, with HFC, PFC or CFC (2022-)"
+94049019,HT,finished,yes,"Pillows, not with down or feathers, without HFC, PFC or CFC (2022-)"
+94049005,HT,finished,no,"Furniture cushions and the like (1990-2021): mainly foam with a textile cover; scope not decided"
+94049006,HT,finished,no,"Furniture cushions and the like (1990-2021): mainly foam with a textile cover; scope not decided"
+94049009,HT,finished,no,"Furniture cushions and the like (1988-1989): mainly foam with a textile cover; scope not decided"
+94049091,HT,finished,no,"Furniture cushions and the like (2022-): mainly foam with a textile cover; scope not decided"
+94049099,HT,finished,no,"Furniture cushions and the like (2022-): mainly foam with a textile cover; scope not decided"
+94043000,TA,finished,no,Sleeping bags: scope not decided

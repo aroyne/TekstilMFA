@@ -14,7 +14,8 @@ and flows. The TOT masses are never changed: they come from the statistics
             distributed by parameters/fibre_composition.csv, scaled to the
             textile part (1 - nontextile_share). Exports are mostly re-export
             (D6), so they share the import composition. Flows out of DI.RT
-            mix in hand knitting yarn spun in Norway (WO) for retail yarn.
+            mix in finished goods made in Norway (the MA.TX balance per
+            material) and hand knitting yarn spun in Norway (WO).
   discards  Flows out of US.HH and through CO: the CORE group (CL+HT+FW and
             retail yarn) gets the composition of the outflow of an
             inflow-driven cohort model of US.HH, so it
@@ -87,8 +88,9 @@ HAND_KNITTING_YARN = 'MA.FI-DI.RT-Domestic hand knitting yarn-TOT'
 FABRIC_IMPORT = 'RW.RW-MA.TX-Fabric import-TOT'
 TEXTILE_EXPORT = 'MA.TX-RW.RW-Textile export-TOT'
 PRECONSUMER_WASTE = 'MA.TX-WM.RS-Preconsumer production waste-TOT'
+DOMESTIC_GOODS = 'MA.TX-DI.RT-Domestic finished products-TOT'
 MANUFACTURING_FLOWS = [RAW_WOOL, FIBRE_YARN_IMPORT, FIBRE_YARN_EXPORT, SCOURING_LOSS, HAND_KNITTING_YARN,
-                       YARN_TO_MANUFACTURING, FABRIC_IMPORT, TEXTILE_EXPORT, PRECONSUMER_WASTE]
+                       YARN_TO_MANUFACTURING, FABRIC_IMPORT, TEXTILE_EXPORT, PRECONSUMER_WASTE, DOMESTIC_GOODS]
 FINISHED_IMPORT = 'RW.RW-DI.RT-Finished textile products import-TOT'
 TOLERANCE_KT = 1e-9
 
@@ -181,8 +183,9 @@ def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     knitting yarn exceed its supply (wool in 1989 and 2000 in some draws)
     gets 0, and the flow is then larger than in TOT by the clipped mass,
     which the clipping stock of MA.FI takes up. Traded fabric has the main
-    fibre of its HS codes, and production waste the mix of yarn and fabric
-    entering MA.TX.
+    fibre of its HS codes, production waste the mix of yarn and fabric
+    entering MA.TX, and finished goods to DI.RT the rest of MA.TX per
+    material.
     """
     fibre.flows[HAND_KNITTING_YARN].values[...] = tot.flows[HAND_KNITTING_YARN].values[..., None] * _only('WO')
     fibre.flows[RAW_WOOL].values[...] = tot.flows[RAW_WOOL].values[:, None] * _only('WO')
@@ -198,19 +201,36 @@ def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     inputs = fibre.flows[YARN_TO_MANUFACTURING].values + fibre.flows[FABRIC_IMPORT].values
     fibre.flows[PRECONSUMER_WASTE].values[...] = (tot.flows[PRECONSUMER_WASTE].values[:, None]
                                                   * inputs / inputs.sum(axis=1, keepdims=True))
+    fibre.flows[DOMESTIC_GOODS].values[...] = (tot.flows[DOMESTIC_GOODS].values[..., None]
+                                               * domestic_goods_composition(fibre)[:, None, :])
 
 
-def retail_composition(tot, imported):
+def domestic_goods_composition(fibre):
+    """
+    Material shares of finished goods made in Norway, array (year, material):
+    the balance of MA.TX per material, with materials that come out
+    negative set to 0 (the clipping stock of MA.TX takes up the difference).
+    Every product gets the same composition.
+    """
+    balance = (fibre.flows[YARN_TO_MANUFACTURING].values + fibre.flows[FABRIC_IMPORT].values
+               - fibre.flows[TEXTILE_EXPORT].values - fibre.flows[PRECONSUMER_WASTE].values)
+    clipped = np.clip(balance, 0.0, None)
+    return clipped / clipped.sum(axis=1, keepdims=True)
+
+
+def retail_composition(tot, imported, domestic_goods):
     """
     Material shares of goods leaving DI.RT, array (year, product, material):
-    the mix of registered imports and hand knitting yarn spun in Norway
-    (WO), so that DI.RT balances per material. Equal to the import
-    composition for every product except retail yarn (YA).
+    the mix of registered imports, finished goods made in Norway
+    (domestic_goods, array (year, material)) and hand knitting yarn spun in
+    Norway (WO), so that DI.RT balances per material.
     """
     imports = tot.flows[FINISHED_IMPORT].values
-    domestic = tot.flows[HAND_KNITTING_YARN].values
-    mixed = imports[..., None] * imported + domestic[..., None] * _only('WO')
-    return mixed / (imports + domestic)[..., None]
+    goods = tot.flows[DOMESTIC_GOODS].values
+    yarn = tot.flows[HAND_KNITTING_YARN].values
+    mixed = (imports[..., None] * imported + goods[..., None] * domestic_goods[:, None, :]
+             + yarn[..., None] * _only('WO'))
+    return mixed / (imports + goods + yarn)[..., None]
 
 
 def _only(material):
@@ -310,11 +330,11 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
 
     reset(fibre)
     imported = supply_composition(preloaded_data, current_params, fibre_composition)
-    supply = retail_composition(tot, imported)
+    manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_composition)
+    supply = retail_composition(tot, imported, domestic_goods_composition(fibre))
     for code in SUPPLY_FLOWS:
         shares = imported if code == FINISHED_IMPORT else supply
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * shares
-    manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_composition)
     cohorts = household_cohort_model(tot, supply, current_params)
     discards = household_discard_composition(cohorts, supply)
     for code in DISCARD_FLOWS:
@@ -326,7 +346,9 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * mix_shares
 
     # Flows taken from TOT carry its clipping; MA.FI yarn is clipped again per
-    # material and exceeds TOT by that clipped mass.
+    # material and exceeds TOT by that clipped mass, which stays in MA.TX
+    # because the MA.TX outflows are taken from TOT.
+    fibre.clipped_inflows = set(fibre.clipped)
     for code, clipped in tot.clipped.items():
         fibre.clipped.setdefault(code, clipped)
     close(fibre)

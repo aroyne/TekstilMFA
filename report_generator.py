@@ -41,14 +41,15 @@ FORM_NAMES = {'FIB': 'fibre og garn', 'FAB': 'metervare og halvfabrikata', 'NEW'
 DIM_NAMES = {'t': 'år', 'p': 'produkt', 'g': 'produktgruppe'}
 FIBRE_RULES = {
     'supply': 'Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). '
-              'For garn i detaljsalg blandes norsk spunnet håndstrikkegarn (ull) inn i flytene ut av DI.RT.',
+              'Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).',
     'discards': 'For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdningene. '
                 'For andre produkter: tilførselssammensetningen samme år.',
     'mixed': 'Blandingen av alt som går inn i WM.RS samme år.',
     'manufacturing': 'Råull er ull (uvasket ull regnes som ull, inkludert fettet, så vaskesvinnet er også ull). '
                      'Fiber og garn i handelen har hovedfiberen fra HS-koden. Norsk spunnet håndstrikkegarn er ull. '
                      'Metervare har hovedfiberen fra HS-koden. Garn til MA.TX er balansen per materiale, klippet til 0. '
-                     'Produksjonsavfall har blandingen av garn og metervare inn i MA.TX.',
+                     'Produksjonsavfall har blandingen av garn og metervare inn i MA.TX, og ferdigvarer til DI.RT resten av MA.TX '
+                     'per materiale.',
 }
 
 

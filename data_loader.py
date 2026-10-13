@@ -47,8 +47,13 @@ def _load_prodcom(path, hs_mapping):
 
 
 def _load_varetall(path, hs_mapping):
-    """Long table: year, commodity, text, unit, quantity, value_1000_nok, source."""
+    """Long table: year, commodity, product, text, unit, quantity, value_1000_nok, source, note."""
     return pd.read_csv(path, dtype={'commodity': str})
+
+
+def _load_domestic_production(path, hs_mapping):
+    """One row per commodity and anchor year: source, code, product, mass_t and how it was derived."""
+    return pd.read_csv(path, dtype={'code': str})
 
 
 # key: (pools that need it, path, loader)
@@ -58,6 +63,7 @@ DATA_MAP = {
     'wool_production': ({'ma'}, 'data_files/NIBIO_totalkalkylen_ull.csv', _load_wool_production),
     'prodcom': ({'ma'}, 'data_files/SSB_10455_prodcom_garn_tau_nett_2008_2025.csv', _load_prodcom),
     'varetall': ({'ma'}, 'data_files/SSB_industristatistikk_varetall_1988_1989.csv', _load_varetall),
+    'domestic_production': ({'ma'}, 'data_files/domestic_production_mass.csv', _load_domestic_production),
 }
 
 

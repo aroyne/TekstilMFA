@@ -26,19 +26,19 @@ def _finished_products_export_mc(mfa, preloaded_data, dataset_noise):
 
 def _sales_to_users_mc(mfa, current_params):
     """
-    Balance of DI.RT per product: registered imports plus hand knitting yarn
-    spun in Norway minus exports, split between households and
-    institutions/businesses. Sacks (SA) are packaging
+    Balance of DI.RT per product: registered imports plus finished goods
+    and hand knitting yarn made in Norway minus exports, split between
+    households and institutions/businesses. Sacks (SA) are packaging
     used by businesses (D13) and go entirely to US.IC; retail yarn (YA) goes
-    entirely to households. Other domestic manufacturing (MA.TX) and unsold
-    goods are not yet included. A negative balance is not physical and is
-    clipped at 0; the clipped mass is recorded and reported on the flow
+    entirely to households. Unsold goods are not yet included. A negative
+    balance is not physical and is clipped at 0; the clipped mass is recorded and reported on the flow
     pages.
     """
     imports = mfa.flows['RW.RW-DI.RT-Finished textile products import-TOT'].values
     exports = mfa.flows['DI.RT-RW.RW-Export of finished textile products-TOT'].values
     domestic_yarn = mfa.flows['MA.FI-DI.RT-Domestic hand knitting yarn-TOT'].values
-    balance = imports + domestic_yarn - exports
+    domestic_goods = mfa.flows['MA.TX-DI.RT-Domestic finished products-TOT'].values
+    balance = imports + domestic_goods + domestic_yarn - exports
 
     institutional_share = current_params['institutional_share']
     share_ic = np.array([1.0 if p == 'SA' else 0.0 if p == 'YA' else institutional_share for p in PRODUCTS])

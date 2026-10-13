@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Refreshes the given years of SSB table 08801 (HS chapters 50-64) from the
+Refreshes the given years of SSB table 08801 (HS chapters 50-64 and the
+bedding headings 9404.30, 9404.40 and 9404.90) from the
 SSB PxWebApi and merges them into data_files/Tab_08801_textiles.csv,
 replacing any existing rows for those years (so revisions are picked up).
 
@@ -21,6 +22,7 @@ import requests
 API = 'https://data.ssb.no/api/v0/no/table/08801'
 TARGET = 'data_files/Tab_08801_textiles.csv'
 CHAPTERS = {str(c) for c in range(50, 65)}
+EXTRA_HS6 = {'940430', '940440', '940490'}
 # The API refuses queries above 800 000 cells; 2 directions x 262 countries
 # x 3 variables x 3 years is about 4 700 cells per HS code.
 CODES_PER_QUERY = 150
@@ -55,8 +57,9 @@ def fetch(codes, years):
 def main(years):
     meta = requests.get(API, timeout=60).json()
     all_codes = next(v['values'] for v in meta['variables'] if v['code'] == 'Varekoder')
-    codes = [c for c in all_codes if c.split('_')[0].zfill(8)[:2] in CHAPTERS]
-    print(f"{len(codes)} HS codes in chapters 50-64")
+    hs8 = [c.split('_')[0].zfill(8) for c in all_codes]
+    codes = [c for c, h in zip(all_codes, hs8) if h[:2] in CHAPTERS or h[:6] in EXTRA_HS6]
+    print(f"{len(codes)} HS codes in chapters 50-64 and 9404.30/40/90")
 
     parts = []
     for i in range(0, len(codes), CODES_PER_QUERY):
