@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 from calculations.system import clip_negative
-from calculations.timeseries import interpolate
+from calculations.timeseries import AnchorSeries, interpolate
 from calculations.trade import trade_kt
 from calculations.utils import PRODUCTS, YEARS
 
@@ -39,12 +39,12 @@ def execute_calculations_ma(mfa, preloaded_data, current_params, dataset_noise, 
     _fibre_and_yarn_import_mc(mfa, preloaded_data, dataset_noise)
     _fibre_and_yarn_export_mc(mfa, preloaded_data, dataset_noise)
     _wool_scouring_loss_mc(mfa, current_params, anchors)
-    _domestic_hand_knitting_yarn_mc(mfa, preloaded_data, dataset_noise)
+    _domestic_hand_knitting_yarn_mc(mfa, preloaded_data, current_params, dataset_noise)
     _yarn_to_manufacturing_mc(mfa)
     _fabric_import_mc(mfa, preloaded_data, dataset_noise)
     _textile_export_mc(mfa, preloaded_data, dataset_noise)
     _preconsumer_waste_mc(mfa, anchors)
-    _domestic_finished_products_mc(mfa, preloaded_data)
+    _domestic_finished_products_mc(mfa, preloaded_data, current_params)
 
 
 def _norwegian_raw_wool_mc(mfa, preloaded_data, dataset_noise):
@@ -102,7 +102,7 @@ def _wool_scouring_loss_mc(mfa, current_params, anchors):
         scoured * current_params['wool_scouring_loss_share'])
 
 
-def _domestic_hand_knitting_yarn_mc(mfa, preloaded_data, dataset_noise):
+def _domestic_hand_knitting_yarn_mc(mfa, preloaded_data, current_params, dataset_noise):
     """
     Yarn spun in Norway and put up for retail sale (product YA), sold to
     households through retail; hand knitting yarn is by far the largest
@@ -112,7 +112,8 @@ def _domestic_hand_knitting_yarn_mc(mfa, preloaded_data, dataset_noise):
     in 2008-2023 (SSB 10455, Prodcom 13.10.50.50, sold production). SSB
     published no commodity figures for 1990-2007, and suppresses some
     Prodcom years; those years are interpolated, and the series is held at
-    its last value after 2023. Both sources cover large units only (Sandnes
+    its last value after 2023, with uncertainty growing with the distance
+    to a published year (D30). Both sources cover large units only (Sandnes
     Garn alone makes about 600 t a year, and SNL gives about 1000 t for all
     Norwegian spinning mills), so the noise factor is skewed upwards. Cotton
     and synthetic yarn put up for retail sale are suppressed in every year
@@ -132,7 +133,8 @@ def _domestic_hand_knitting_yarn_mc(mfa, preloaded_data, dataset_noise):
     sel = prodcom[(prodcom['prodcom'] == HAND_KNITTING_YARN_PRODCOM) & (prodcom['variable'] == 'Mengde')]
     published = sel.dropna(subset=['value'])
     late = published.set_index('year')['value'] / 1e6
-    kt = interpolate({**early.to_dict(), **late.to_dict()})
+    kt = interpolate(AnchorSeries('hand_knitting_yarn', {**early.to_dict(), **late.to_dict()},
+                                  current_params['gap_noise']))
     flow = mfa.flows['MA.FI-DI.RT-Domestic hand knitting yarn-TOT']
     flow.values[...] = 0.0
     flow.values[:, PRODUCTS.index('YA')] = kt * dataset_noise['vareproduksjon']
@@ -187,14 +189,16 @@ def _preconsumer_waste_mc(mfa, anchors):
     """
     waste = anchors['preconsumer_waste_textile_industry']
     total_input = _manufacturing_input(mfa)
-    ratio = interpolate({year: kt / total_input[YEARS.index(year)] for year, kt in waste.items()})
+    ratio = interpolate({year: kt / total_input[YEARS.index(year)] for year, kt in waste.items()}, noise=waste)
     mfa.flows['MA.TX-WM.RS-Preconsumer production waste-TOT'].values[...] = ratio * total_input
 
 
-def _domestic_product_shares(preloaded_data):
+def _domestic_product_shares(preloaded_data, current_params):
     """
     Mass share of each product in finished goods made in Norway, array
     (year, product), from SSB's commodity statistics for large units (D26).
+    Each product share gets gap noise between and after the anchor years
+    (D30), and the shares are scaled to sum to 1 again.
     """
     # 'domestic_production' <- data_files/domestic_production_mass.csv: mass
     # of finished goods made in Norway per commodity in 1988, 1989 (SSB
@@ -207,10 +211,12 @@ def _domestic_product_shares(preloaded_data):
     table = pd.concat([early, late]).reindex(columns=PRODUCTS, fill_value=0.0).fillna(0.0)
     table[NOT_FROM_TEXTILE_BALANCE] = 0.0
     shares = table.div(table.sum(axis=1), axis=0)
-    return np.stack([interpolate(shares[p].to_dict()) for p in PRODUCTS], axis=1)
+    noisy = np.stack([interpolate(AnchorSeries(f'domestic_share_{p}', shares[p].to_dict(), current_params['gap_noise']))
+                      for p in PRODUCTS], axis=1)
+    return noisy / noisy.sum(axis=1, keepdims=True)
 
 
-def _domestic_finished_products_mc(mfa, preloaded_data):
+def _domestic_finished_products_mc(mfa, preloaded_data, current_params):
     """
     Balance of MA.TX: yarn and fabric in, minus fabric exports and
     production waste, split over products by mass shares of finished goods
@@ -240,5 +246,5 @@ def _domestic_finished_products_mc(mfa, preloaded_data):
                - mfa.flows['MA.TX-RW.RW-Textile export-TOT'].values
                - mfa.flows['MA.TX-WM.RS-Preconsumer production waste-TOT'].values)
     clip_negative(mfa, 'MA.TX-DI.RT-Domestic finished products-TOT',
-                  balance[:, None] * _domestic_product_shares(preloaded_data))
+                  balance[:, None] * _domestic_product_shares(preloaded_data, current_params))
 

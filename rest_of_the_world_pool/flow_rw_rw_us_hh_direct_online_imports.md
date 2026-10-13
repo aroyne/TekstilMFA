@@ -83,7 +83,7 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 ## Beregning i koden
 
-Beregnes i `_direct_online_imports_mc` i [calculations/rw_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/rw_mc.py#L63). Dokumentasjonen i koden:
+Beregnes i `_direct_online_imports_mc` i [calculations/rw_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/rw_mc.py#L64). Dokumentasjonen i koden:
 
 > Low-value parcels bought directly from foreign web shops, which are not in
 > 08801 under their HS codes (D7). Official VOEC data (Tolletaten, via de

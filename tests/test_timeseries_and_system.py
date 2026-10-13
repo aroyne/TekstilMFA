@@ -93,3 +93,18 @@ def test_footwear_supply_has_the_non_textile_share(fibre_run):
 def test_every_product_has_imports_every_year(inputs):
     preloaded_data = inputs[0]
     assert (preloaded_data['imports_by_fibre_class'].sum(axis=2) > 0).all()
+
+
+def test_gap_noise_grows_with_distance_and_is_one_at_anchors():
+    from calculations.timeseries import GapNoise
+    years = list(range(1988, 2026))
+    anchors = [2010, 2020]
+    assert (GapNoise(np.random.default_rng(0), True, 0.02, 0.05, 1.0).factor('x', anchors, years) == 1).all()
+    draws = np.array([GapNoise(np.random.default_rng(i), False, 0.02, 0.05, 1.0).factor('x', anchors, years)
+                      for i in range(2000)])
+    spread = draws.std(axis=0)
+    at = [years.index(a) for a in anchors]
+    assert (spread[at] == 0).all()
+    assert spread[years.index(1990)] > spread[years.index(2005)] > spread[years.index(2009)]
+    assert spread[years.index(2015)] > spread[years.index(2012)]
+    assert abs(np.median(draws, axis=0)[years.index(2015)] - 1) < 0.02

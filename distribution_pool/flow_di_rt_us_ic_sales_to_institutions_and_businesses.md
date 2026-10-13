@@ -65,7 +65,7 @@ Andel av summen i nøkkelår (median).
 | Hjemmetekstiler | 14 % | 12 % | 13 % | 11 % | 9 % | 8 % |
 | Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 5 % |
 | Sekker | 21 % | 34 % | 33 % | 44 % | 45 % | 48 % |
-| Presenninger og telt | 5 % | 3 % | 4 % | 4 % | 4 % | 3 % |
+| Presenninger og telt | 4 % | 3 % | 4 % | 4 % | 4 % | 3 % |
 
 ### Materiale (fiberlag, D19)
 
@@ -73,7 +73,7 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 32 % | 26 % | 25 % | 16 % | 16 % | 16 % |
+| Bomull | 31 % | 26 % | 25 % | 16 % | 16 % | 16 % |
 | Regenerert cellulose | 2 % | 2 % | 1 % | 2 % | 1 % | 1 % |
 | Ikke-tekstil | 15 % | 11 % | 12 % | 11 % | 10 % | 9 % |
 | Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |

@@ -9,6 +9,7 @@ a KeyError instead of silently running on a missing value.
 import pandas as pd
 
 from calculations.sampling import draw_perturbed_value
+from calculations.timeseries import AnchorSeries, GapNoise
 
 PARAM_DIR = 'parameters'
 ANCHOR_VALUES = 'data_files/anchor_values.csv'
@@ -44,8 +45,12 @@ class Parameters:
         dataset_noise : {dataset_name: multiplicative factor}, 1.0 in the
                         deterministic round. One factor per dataset and
                         iteration, i.e. fully correlated across years.
-        anchors       : {parameter_id: {year: value}}; every anchor point is
-                        drawn independently of the others.
+        anchors       : {parameter_id: AnchorSeries}; every anchor point is
+                        drawn independently of the others, and the years
+                        between and outside them get gap noise (D30).
+
+        params also holds 'gap_noise', the GapNoise of the iteration, for
+        series built from yearly data with gaps.
         """
         params = {}
         for _, row in self.global_params.dropna(subset=['value']).iterrows():
@@ -72,12 +77,16 @@ class Parameters:
                                               row['uncertainty_type'], row['distribution_type'])
             dataset_noise[str(row['dataset_name']).strip()] = factor
 
-        anchors = {}
+        points = {}
         for _, row in self.anchor_table.dropna(subset=['value']).iterrows():
             val = float(row['value'])
             if not deterministic:
                 val = draw_perturbed_value(rng, val, row['lower_bound'], row['upper_bound'],
                                            row['uncertainty_type'], row['distribution_type'])
-            anchors.setdefault(row['parameter_id'], {})[int(row['year'])] = val
+            points.setdefault(row['parameter_id'], {})[int(row['year'])] = val
+        gap_noise = GapNoise(rng, deterministic, params['gap_cv_interpolation'], params['gap_cv_extrapolation'],
+                             params['gap_cv_cap'])
+        anchors = {name: AnchorSeries(name, values, gap_noise) for name, values in points.items()}
+        params['gap_noise'] = gap_noise
 
         return params, dataset_noise, anchors

@@ -8,9 +8,9 @@ has_children: true
 
 # Separate collection (CO.CO)
 
-Separate collection of used textiles (containers, shops, take-back schemes, municipal recycling stations)
+Separate collection of used textiles (containers, shops, take-back schemes, municipal recycling stations). Clipping stock: takes up the mass created when collection from households (the balance of CO.CO) is clipped at 0
 
-Type: process. Lager: no.
+Type: process. Lager: clipping.
 
 ## Flyter ut
 

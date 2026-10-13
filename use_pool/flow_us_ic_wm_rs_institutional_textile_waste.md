@@ -66,9 +66,9 @@ Andel av summen i nøkkelår (median).
 | Tepper | 20 % | 11 % | 6 % | 6 % | 6 % | 6 % |
 | Klær | 31 % | 30 % | 31 % | 26 % | 23 % | 23 % |
 | Sko | 10 % | 8 % | 9 % | 7 % | 6 % | 7 % |
-| Hjemmetekstiler | 12 % | 11 % | 13 % | 11 % | 11 % | 10 % |
+| Hjemmetekstiler | 12 % | 11 % | 13 % | 11 % | 10 % | 9 % |
 | Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 4 % |
-| Sekker | 21 % | 34 % | 35 % | 44 % | 47 % | 46 % |
+| Sekker | 21 % | 34 % | 35 % | 44 % | 47 % | 47 % |
 | Presenninger og telt | 4 % | 3 % | 3 % | 4 % | 4 % | 4 % |
 
 ### Materiale (fiberlag, D19)
@@ -88,7 +88,7 @@ Utstrømmen av en årgangsmodell av salget til institusjoner og bedrifter. Sekke
 
 ## Beregning i koden
 
-Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L167). Dokumentasjonen i koden:
+Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L169). Dokumentasjonen i koden:
 
 > Goods discarded by institutions and businesses: the outflow of a cohort
 > model of the goods sold to them, with Weibull lifetimes per product

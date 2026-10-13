@@ -250,7 +250,10 @@ def domestic_goods_composition(fibre):
     balance = (fibre.flows[YARN_TO_MANUFACTURING].values + fibre.flows[FABRIC_IMPORT].values
                - fibre.flows[TEXTILE_EXPORT].values - fibre.flows[PRECONSUMER_WASTE].values)
     clipped = np.clip(balance, 0.0, None)
-    return clipped / clipped.sum(axis=1, keepdims=True)
+    total = clipped.sum(axis=1, keepdims=True)
+    # In a year where every material is negative, the TOT flow is clipped to
+    # 0 too, so the composition does not matter.
+    return np.divide(clipped, total, out=np.zeros_like(clipped), where=total > 0)
 
 
 def retail_composition(tot, imported, domestic_goods):
@@ -441,6 +444,7 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     # material and exceeds TOT by that clipped mass, which stays in MA.TX
     # because the MA.TX outflows are taken from TOT.
     fibre.clipped_inflows = set(fibre.clipped)
+    fibre.clipped_at_target = set(tot.clipped_at_target)
     for code, clipped in tot.clipped.items():
         fibre.clipped.setdefault(code, clipped)
     close(fibre)

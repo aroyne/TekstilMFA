@@ -62,11 +62,11 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 49 % | 31 % | 24 % | 26 % | 26 % | 28 % |
-| Klær | 33 % | 47 % | 51 % | 46 % | 44 % | 43 % |
+| Klær | 34 % | 47 % | 52 % | 47 % | 44 % | 44 % |
 | Sko | 1 % | 2 % | 2 % | 2 % | 2 % | 2 % |
-| Hjemmetekstiler | 8 % | 11 % | 13 % | 12 % | 12 % | 11 % |
+| Hjemmetekstiler | 8 % | 11 % | 12 % | 12 % | 11 % | 10 % |
 | Andre konfeksjonerte varer | 1 % | 2 % | 2 % | 3 % | 5 % | 5 % |
-| Presenninger og telt | 7 % | 8 % | 8 % | 11 % | 12 % | 11 % |
+| Presenninger og telt | 6 % | 8 % | 8 % | 11 % | 12 % | 11 % |
 
 ### Materiale (fiberlag, D19)
 
@@ -74,17 +74,17 @@ Fibergruppene i tekstillageret i årgangsmodellen for institusjoner og bedrifter
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 29 % | 36 % | 38 % | 28 % | 28 % | 27 % |
+| Bomull | 29 % | 36 % | 38 % | 29 % | 28 % | 28 % |
 | Regenerert cellulose | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
 | Andre fibre | 4 % | 6 % | 5 % | 5 % | 5 % | 5 % |
-| Syntetisk | 56 % | 46 % | 47 % | 57 % | 58 % | 58 % |
-| Ull | 7 % | 9 % | 7 % | 7 % | 6 % | 7 % |
+| Syntetisk | 57 % | 46 % | 47 % | 56 % | 58 % | 58 % |
+| Ull | 7 % | 9 % | 7 % | 7 % | 7 % | 7 % |
 
 <iframe src="../output_files/plots/pages/us_ic_wm_ww_fibre_release_in_industrial_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_industrial_laundry_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L186). Dokumentasjonen i koden:
+Beregnes i `_industrial_laundry_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L188). Dokumentasjonen i koden:
 
 > Fibres released when textiles used by institutions and businesses are
 > washed (mostly in industrial laundries) and sent to wastewater

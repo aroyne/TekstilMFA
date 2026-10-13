@@ -33,7 +33,7 @@ def _total_wm_rs(mfa):
 
 def _landfilling_mc(mfa, anchors):
     """Landfilled share from SSB Avfallsregnskap tekstiler 1990-1998, SSB 05281 and 10513 (D15)."""
-    landfill_share = interpolate(anchors['landfill_share_residual'])
+    landfill_share = interpolate(anchors['landfill_share_residual'], upper=1.0)
     mfa.flows['WM.RS-WM.LF-Landfilling of textiles-TOT'].values[...] = _total_wm_rs(mfa) * landfill_share
 
 
@@ -43,7 +43,7 @@ def _residual_export_mc(mfa, anchors):
     for household residual waste and is applied to all textiles in WM.RS,
     including institutional waste.
     """
-    export_share = interpolate(anchors['residual_export_share'])
+    export_share = interpolate(anchors['residual_export_share'], upper=1.0)
     mfa.flows['WM.RS-RW.RW-Residual waste export for incineration-TOT'].values[...] = (
         _total_wm_rs(mfa) * export_share)
 

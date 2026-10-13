@@ -33,7 +33,7 @@ def _to_domestic_sorting_mc(mfa, anchors):
     Watson 2020, Rubach 2023 and de Sadeleer & Rubach 2026.
     """
     export = mfa.flows['CO.CO-RW.RW-Export of unsorted collected textiles-TOT'].values
-    retained_share = interpolate(anchors['retained_share_collected'])
+    retained_share = interpolate(anchors['retained_share_collected'], upper=1.0)
     mfa.flows['CO.CO-CO.SO-Collected textiles to domestic sorting-TOT'].values[...] = (
         export * retained_share[:, None])
 
@@ -41,7 +41,7 @@ def _to_domestic_sorting_mc(mfa, anchors):
 def _sorted_for_secondhand_mc(mfa, anchors):
     """Share of the retained textiles sold second-hand in Norway (same anchors)."""
     retained = mfa.flows['CO.CO-CO.SO-Collected textiles to domestic sorting-TOT'].values
-    reuse_fraction = interpolate(anchors['reuse_fraction_retained'])
+    reuse_fraction = interpolate(anchors['reuse_fraction_retained'], upper=1.0)
     mfa.flows['CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT'].values[...] = (
         retained * reuse_fraction[:, None])
 

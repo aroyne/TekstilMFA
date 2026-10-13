@@ -65,8 +65,8 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 2 % | 1 % | 0 % | 0 % | 0 % | 0 % |
-| Klær | 27 % | 24 % | 21 % | 21 % | 21 % | 21 % |
-| Hjemmetekstiler | 40 % | 44 % | 49 % | 49 % | 49 % | 49 % |
+| Klær | 27 % | 24 % | 21 % | 22 % | 22 % | 22 % |
+| Hjemmetekstiler | 40 % | 44 % | 49 % | 49 % | 49 % | 48 % |
 | Andre konfeksjonerte varer | 7 % | 5 % | 3 % | 3 % | 3 % | 3 % |
 | Presenninger og telt | 24 % | 26 % | 27 % | 27 % | 27 % | 27 % |
 
@@ -92,7 +92,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_domestic_finished_products_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L213). Dokumentasjonen i koden:
+Beregnes i `_domestic_finished_products_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L219). Dokumentasjonen i koden:
 
 > Balance of MA.TX: yarn and fabric in, minus fabric exports and
 > production waste, split over products by mass shares of finished goods
@@ -120,3 +120,5 @@ Beregnes i `_domestic_finished_products_mc` i [calculations/ma_mc.py](https://gi
 >
 > `_domestic_product_shares`: Mass share of each product in finished goods made in Norway, array
 > (year, product), from SSB's commodity statistics for large units (D26).
+> Each product share gets gap noise between and after the anchor years
+> (D30), and the shares are scaled to sum to 1 again.

@@ -88,7 +88,8 @@ Beregnes i `_domestic_hand_knitting_yarn_mc` i [calculations/ma_mc.py](https://g
 > in 2008-2023 (SSB 10455, Prodcom 13.10.50.50, sold production). SSB
 > published no commodity figures for 1990-2007, and suppresses some
 > Prodcom years; those years are interpolated, and the series is held at
-> its last value after 2023. Both sources cover large units only (Sandnes
+> its last value after 2023, with uncertainty growing with the distance
+> to a published year (D30). Both sources cover large units only (Sandnes
 > Garn alone makes about 600 t a year, and SNL gives about 1000 t for all
 > Norwegian spinning mills), so the noise factor is skewed upwards. Cotton
 > and synthetic yarn put up for retail sale are suppressed in every year

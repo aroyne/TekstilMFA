@@ -49,9 +49,10 @@ def _private_imports_mc(mfa, preloaded_data, current_params, dataset_noise):
     # mill. NOK / (NOK/kg) = million kg = kt
     total_kt = mill_nok * noise_val / (import_unit_value(preloaded_data, ['CL', 'FW']) * markup)
     # Before the SSB series starts (2004) the mass is held at the first
-    # year's level (D16).
+    # year's level (D16), with uncertainty growing with the distance (D30).
     first = YEARS.index(min(crossborder['total']))
-    total_kt[:first] = total_kt[first]
+    held = current_params['gap_noise'].factor('crossborder', list(crossborder['total']) + list(crossborder['clothing']))
+    total_kt[:first] = total_kt[first] * held[:first]
     imports = trade_kt(preloaded_data, dataset_noise, True, 'finished', ['CL', 'FW'])
     split = imports / imports.sum(axis=1, keepdims=True)
 

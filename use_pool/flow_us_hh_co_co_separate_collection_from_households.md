@@ -71,11 +71,11 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 45 % | 47 % | 44 % | 40 % | 37 % | 36 % |
+| Bomull | 45 % | 48 % | 44 % | 40 % | 37 % | 36 % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 18 % | 16 % | 19 % | 18 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 27 % | 26 % | 30 % | 33 % | 36 % | 37 % |
+| Syntetisk | 27 % | 26 % | 29 % | 33 % | 36 % | 37 % |
 | Ull | 6 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_co_co_separate_collection_from_households_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -84,7 +84,15 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 Flyten er en balanseflyt. Negative verdier er ikke-fysiske og klippes til 0. Massen som da oppstår, tas opp av klippelageret i prosessen flyten går ut fra (rapportert som «Clipping imbalance»), og flyttes ikke til andre flyter.
 
-I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministiske løpet.
+I TOT:
+
+| År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
+|---|---|---|---|---|
+| 1988 | 223 av 1000 | 0.097 | 1.582 | 0.000 |
+| 1989 | 112 av 1000 | 0.043 | 1.256 | 0.000 |
+| 1990 | 47 av 1000 | 0.015 | 0.960 | 0.000 |
+| 1991 | 75 av 1000 | 0.029 | 1.235 | 0.000 |
+| 1992 | 2 av 1000 | 0.000 | 0.350 | 0.000 |
 
 ## Beregning i koden
 

@@ -48,7 +48,7 @@ def _separate_collection_mc(mfa):
     retained = mfa.flows['CO.CO-CO.SO-Collected textiles to domestic sorting-TOT'].values
     donated = mfa.flows['DI.RT-CO.CO-Unsold goods donated-TOT'].values.sum(axis=1)
     clip_negative(mfa, 'US.HH-CO.CO-Separate collection from households-TOT',
-                  exported + retained - core_group_only(donated))
+                  exported + retained - core_group_only(donated), balance_of='target')
 
 
 def _residual_core(preloaded_data, anchors):
@@ -66,10 +66,12 @@ def _residual_core(preloaded_data, anchors):
     # population on 1 January (SSB 05803); the mean of two years is used
     population = preloaded_data['population']
     residual = interpolate(anchors['residual_core'])
-    per_inhabitant = residual[YEARS.index(FIRST_RESIDUAL_ANCHOR)] / population[FIRST_RESIDUAL_ANCHOR]
-    for i, year in enumerate(YEARS):
-        if year < FIRST_RESIDUAL_ANCHOR:
-            residual[i] = per_inhabitant * population[year]
+    first = YEARS.index(FIRST_RESIDUAL_ANCHOR)
+    per_inhabitant = residual[first] / population[FIRST_RESIDUAL_ANCHOR]
+    for i, year in enumerate(YEARS[:first]):
+        # residual[i] / residual[first] is the gap factor of the held value
+        # (D30), so the extrapolation keeps its growing uncertainty.
+        residual[i] = per_inhabitant * population[year] * residual[i] / residual[first]
     return residual
 
 
@@ -79,7 +81,7 @@ def _reusable_residual_waste_mc(mfa, preloaded_data, anchors):
     share from the pick analyses. The analyses cover CL+HT+FW only, so the
     other products are 0 here and counted as worn.
     """
-    reusable_share = interpolate(anchors['reusable_share_residual'])
+    reusable_share = interpolate(anchors['reusable_share_residual'], upper=1.0)
     mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values[...] = (
         core_group_only(_residual_core(preloaded_data, anchors) * reusable_share))
 

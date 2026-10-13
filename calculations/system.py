@@ -84,6 +84,7 @@ def make_system(fibre=False):
     mfa = fd.MFASystem(dims=DIMENSIONS, parameters={}, processes=fd_processes, flows=fd_flows, stocks=fd_stocks)
     mfa.clipped = {}
     mfa.clipped_inflows = set()
+    mfa.clipped_at_target = set()
     return mfa
 
 
@@ -96,18 +97,23 @@ def reset(mfa):
             arr.values[...] = np.nan
     mfa.clipped = {}
     mfa.clipped_inflows = set()
+    mfa.clipped_at_target = set()
 
 
-def clip_negative(mfa, code, values):
+def clip_negative(mfa, code, values, balance_of='source'):
     """
     Sets the flow to values clipped at 0 and records the clipped mass
     (FlodymArray like the flow, >= 0) in mfa.clipped[code]. Every flow that
     can be clipped is recorded in every iteration, also when nothing is
-    clipped.
+    clipped. balance_of says which process the flow balances: 'source' (the
+    usual case; the source sends out the clipped mass too much) or 'target'
+    (the target receives it too much), whose clipping stock takes it up.
     """
     flow = mfa.flows[code]
     flow.values[...] = np.clip(values, 0.0, None)
     mfa.clipped[code] = fd.FlodymArray(dims=flow.dims, values=np.clip(-values, 0.0, None))
+    if balance_of == 'target':
+        mfa.clipped_at_target.add(code)
 
 
 def to_dims(arr, letters):
@@ -147,17 +153,21 @@ def clipping_stocks():
 def _check_clipping_stocks(mfa):
     # The clipped mass may have fewer dimensions than the stock (in the fibre
     # system, clipping inherited from TOT has no material), so both sides are
-    # compared on the dimensions they share. A flow in mfa.clipped_inflows
-    # is larger than the flows its target process passes on (they are not
-    # computed from it), so its clipped mass also stays in the target.
+    # compared on the dimensions they share. The clipped mass of a flow
+    # leaves its source too much, unless the flow is the balance of its
+    # target (mfa.clipped_at_target). It stays in the target if the flow is
+    # the target's balance, or if the target's outflows are not computed
+    # from it (mfa.clipped_inflows, clipping in the fibre layer only).
     tolerance = 100 * mfa._absolute_float_precision
     for code in clipping_stocks():
         if code not in mfa.stocks:
             continue
         change = stock_change(mfa, code)
-        leaving = [d for c, d in mfa.clipped.items() if mfa.flows[c].from_process.name == code]
+        leaving = [d for c, d in mfa.clipped.items()
+                   if mfa.flows[c].from_process.name == code and c not in mfa.clipped_at_target]
         entering = [d for c, d in mfa.clipped.items()
-                    if c in mfa.clipped_inflows and mfa.flows[c].to_process.name == code]
+                    if (c in mfa.clipped_inflows or c in mfa.clipped_at_target)
+                    and mfa.flows[c].to_process.name == code]
         clipped = leaving + entering
         common = tuple(l for l in change.dims.letters if all(l in d.dims.letters for d in clipped))
         error = (change.sum_to(common).values + sum(d.sum_to(common).values for d in leaving)

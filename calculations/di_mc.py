@@ -27,7 +27,7 @@ def _per_clothing_import(mfa, anchor):
     clothing imports of each year.
     """
     clothing = mfa.flows['RW.RW-DI.RT-Finished textile products import-TOT'].values[:, PRODUCTS.index('CL')]
-    ratio = interpolate({year: kt / clothing[YEARS.index(year)] for year, kt in anchor.items()})
+    ratio = interpolate({year: kt / clothing[YEARS.index(year)] for year, kt in anchor.items()}, noise=anchor)
     values = np.zeros((len(YEARS), len(PRODUCTS)))
     values[:, PRODUCTS.index('CL')] = ratio * clothing
     return values

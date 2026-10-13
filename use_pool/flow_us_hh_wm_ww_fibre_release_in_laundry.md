@@ -72,7 +72,7 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 56 % | 56 % | 54 % | 46 % | 43 % | 43 % |
+| Bomull | 57 % | 56 % | 54 % | 46 % | 43 % | 43 % |
 | Regenerert cellulose | 4 % | 3 % | 2 % | 3 % | 3 % | 3 % |
 | Andre fibre | 1 % | 1 % | 2 % | 2 % | 2 % | 2 % |
 | Syntetisk | 32 % | 32 % | 36 % | 42 % | 44 % | 43 % |
@@ -82,7 +82,7 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 ## Beregning i koden
 
-Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L130). Dokumentasjonen i koden:
+Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L132). Dokumentasjonen i koden:
 
 > Fibres released from household textiles in washing machines and sent to
 > wastewater treatment. Mepex (Sundt et al. 2014, cited in Sundt et al.
