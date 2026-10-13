@@ -25,17 +25,6 @@ nav_order: 1
 
 <iframe src="../output_files/plots/pages/ma_fi_ma_tx_yarn_to_textile_manufacturing.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 12.13 | 11.65 – 12.62 |
-| 2000 | 9.96 | 9.54 – 10.36 |
-| 2010 | 5.20 | 4.95 – 5.41 |
-| 2018 | 5.04 | 4.83 – 5.22 |
-| 2022 | 5.16 | 4.97 – 5.34 |
-| 2025 | 5.24 | 5.03 – 5.44 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

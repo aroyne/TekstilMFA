@@ -25,17 +25,6 @@ nav_order: 2
 
 <iframe src="../output_files/plots/pages/ma_fi_di_rt_domestic_hand_knitting_yarn.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 0.93 | 0.82 – 1.16 |
-| 2000 | 0.95 | 0.84 – 1.18 |
-| 2010 | 0.79 | 0.69 – 0.98 |
-| 2018 | 0.64 | 0.56 – 0.80 |
-| 2022 | 0.62 | 0.55 – 0.77 |
-| 2025 | 0.72 | 0.64 – 0.90 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

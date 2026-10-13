@@ -25,17 +25,6 @@ nav_order: 2
 
 <iframe src="../output_files/plots/pages/co_co_co_so_collected_textiles_to_domestic_sorting.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 0.05 | 0.03 – 0.06 |
-| 2000 | 0.28 | 0.18 – 0.38 |
-| 2010 | 0.61 | 0.39 – 0.83 |
-| 2018 | 1.20 | 0.76 – 1.63 |
-| 2022 | 0.92 | 0.58 – 1.23 |
-| 2025 | 2.01 | 1.27 – 2.68 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

@@ -25,17 +25,6 @@ nav_order: 3
 
 <iframe src="../output_files/plots/pages/ma_tx_wm_rs_preconsumer_production_waste.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 1.48 | 0.95 – 2.01 |
-| 2000 | 1.41 | 0.90 – 1.91 |
-| 2010 | 0.62 | 0.42 – 0.82 |
-| 2018 | 0.29 | 0.14 – 0.44 |
-| 2022 | 0.25 | 0.08 – 0.42 |
-| 2025 | 0.25 | 0.08 – 0.41 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

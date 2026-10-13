@@ -25,17 +25,6 @@ nav_order: 4
 
 <iframe src="../output_files/plots/pages/co_so_wm_rs_sorting_residues.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 0.02 | 0.01 – 0.03 |
-| 2000 | 0.12 | 0.04 – 0.21 |
-| 2010 | 0.25 | 0.09 – 0.45 |
-| 2018 | 0.50 | 0.18 – 0.88 |
-| 2022 | 0.12 | 0.01 – 0.39 |
-| 2025 | 0.43 | 0.08 – 1.04 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

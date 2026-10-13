@@ -25,17 +25,6 @@ nav_order: 1
 
 <iframe src="../output_files/plots/pages/di_rt_us_hh_sales_to_households.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 79.02 | 75.59 – 82.84 |
-| 2000 | 95.38 | 91.31 – 100.07 |
-| 2010 | 128.19 | 122.61 – 134.40 |
-| 2018 | 121.09 | 115.88 – 126.92 |
-| 2022 | 126.17 | 120.69 – 132.31 |
-| 2025 | 106.81 | 102.19 – 112.00 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

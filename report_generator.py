@@ -242,6 +242,9 @@ def _composition(site, code, name, fibre_plot):
     return lines
 
 
+LAYER_NAMES = {'TOT': 'TOT', 'fibre': 'fiberlaget (per materiale)'}
+
+
 def _clipping(clipping, code):
     """
     Section on clipping at 0 for a flow that can be clipped: how often and

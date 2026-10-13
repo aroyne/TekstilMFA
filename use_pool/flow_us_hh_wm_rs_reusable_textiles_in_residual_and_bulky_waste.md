@@ -25,17 +25,6 @@ nav_order: 2
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_reusable_textiles_in_residual_and_bulky_waste.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 15.67 | 11.19 – 21.76 |
-| 2000 | 14.51 | 10.60 – 19.79 |
-| 2010 | 9.02 | 6.51 – 12.05 |
-| 2018 | 12.06 | 8.84 – 15.86 |
-| 2022 | 21.89 | 15.36 – 29.63 |
-| 2025 | 17.79 | 12.94 – 23.17 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

@@ -25,17 +25,6 @@ nav_order: 1
 
 <iframe src="../output_files/plots/pages/ma_tx_di_rt_domestic_finished_products.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 18.16 | 17.32 – 19.07 |
-| 2000 | 15.01 | 14.28 – 15.80 |
-| 2010 | 8.31 | 7.95 – 8.68 |
-| 2018 | 11.09 | 10.74 – 11.48 |
-| 2022 | 9.97 | 9.62 – 10.35 |
-| 2025 | 8.08 | 7.76 – 8.41 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

@@ -25,17 +25,6 @@ nav_order: 2
 
 <iframe src="../output_files/plots/pages/us_ic_wm_rs_institutional_textile_waste.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 13.16 | 10.77 – 15.17 |
-| 2000 | 19.08 | 16.15 – 21.55 |
-| 2010 | 25.38 | 21.48 – 28.70 |
-| 2018 | 28.45 | 24.80 – 31.60 |
-| 2022 | 30.59 | 26.78 – 33.90 |
-| 2025 | 27.28 | 24.03 – 30.10 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

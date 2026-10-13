@@ -25,17 +25,6 @@ nav_order: 2
 
 <iframe src="../output_files/plots/pages/wm_rs_rw_rw_residual_waste_export_for_incineration.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 0.00 | 0.00 – 0.00 |
-| 2000 | 0.00 | 0.00 – 0.00 |
-| 2010 | 6.69 | 5.82 – 7.54 |
-| 2018 | 14.51 | 12.93 – 16.15 |
-| 2022 | 14.34 | 12.52 – 16.20 |
-| 2025 | 11.79 | 10.39 – 13.32 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

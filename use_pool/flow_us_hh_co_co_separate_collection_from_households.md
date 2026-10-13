@@ -25,17 +25,6 @@ nav_order: 1
 
 <iframe src="../output_files/plots/pages/us_hh_co_co_separate_collection_from_households.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 1.45 | 1.40 – 1.50 |
-| 2000 | 8.74 | 8.43 – 9.06 |
-| 2010 | 19.15 | 18.48 – 19.87 |
-| 2018 | 37.63 | 36.31 – 39.04 |
-| 2022 | 32.51 | 31.41 – 33.72 |
-| 2025 | 36.28 | 34.82 – 37.70 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

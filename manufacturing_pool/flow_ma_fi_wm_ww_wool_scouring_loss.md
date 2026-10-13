@@ -25,17 +25,6 @@ nav_order: 4
 
 <iframe src="../output_files/plots/pages/ma_fi_wm_ww_wool_scouring_loss.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 0.93 | 0.68 – 1.17 |
-| 2000 | 0.74 | 0.53 – 0.96 |
-| 2010 | 0.09 | 0.07 – 0.12 |
-| 2018 | 0.09 | 0.07 – 0.12 |
-| 2022 | 0.09 | 0.07 – 0.12 |
-| 2025 | 0.09 | 0.07 – 0.12 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

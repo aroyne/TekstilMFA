@@ -25,17 +25,6 @@ nav_order: 3
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_worn_textiles_in_residual_and_bulky_waste.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 63.90 | 52.47 – 76.56 |
-| 2000 | 56.90 | 47.49 – 67.65 |
-| 2010 | 47.79 | 41.49 – 54.33 |
-| 2018 | 47.24 | 42.89 – 52.60 |
-| 2022 | 58.60 | 51.61 – 67.46 |
-| 2025 | 55.61 | 48.88 – 62.68 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

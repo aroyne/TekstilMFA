@@ -25,17 +25,6 @@ nav_order: 1
 
 <iframe src="../output_files/plots/pages/co_so_co_re_sorted_for_domestic_secondhand_sales.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 0.03 | 0.01 – 0.04 |
-| 2000 | 0.15 | 0.08 – 0.27 |
-| 2010 | 0.33 | 0.18 – 0.59 |
-| 2018 | 0.65 | 0.35 – 1.16 |
-| 2022 | 0.77 | 0.46 – 1.13 |
-| 2025 | 1.51 | 0.82 – 2.28 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

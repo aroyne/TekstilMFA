@@ -25,17 +25,6 @@ nav_order: 1
 
 <iframe src="../output_files/plots/pages/co_co_rw_rw_export_of_unsorted_collected_textiles.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 1.40 | 1.35 – 1.45 |
-| 2000 | 8.46 | 8.17 – 8.76 |
-| 2010 | 18.54 | 17.91 – 19.20 |
-| 2018 | 36.42 | 35.20 – 37.73 |
-| 2022 | 31.61 | 30.54 – 32.74 |
-| 2025 | 34.29 | 33.14 – 35.52 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

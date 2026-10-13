@@ -25,17 +25,6 @@ nav_order: 3
 
 <iframe src="../output_files/plots/pages/di_rt_rw_rw_export_of_finished_textile_products.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 4.57 | 4.41 – 4.73 |
-| 2000 | 6.51 | 6.29 – 6.74 |
-| 2010 | 6.99 | 6.75 – 7.24 |
-| 2018 | 9.68 | 9.36 – 10.03 |
-| 2022 | 12.31 | 11.90 – 12.75 |
-| 2025 | 13.02 | 12.59 – 13.49 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

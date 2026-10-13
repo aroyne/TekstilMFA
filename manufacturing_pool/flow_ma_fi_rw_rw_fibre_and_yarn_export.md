@@ -25,17 +25,6 @@ nav_order: 3
 
 <iframe src="../output_files/plots/pages/ma_fi_rw_rw_fibre_and_yarn_export.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 5.24 | 5.07 – 5.43 |
-| 2000 | 5.11 | 4.94 – 5.30 |
-| 2010 | 4.57 | 4.42 – 4.73 |
-| 2018 | 3.96 | 3.83 – 4.11 |
-| 2022 | 3.21 | 3.10 – 3.32 |
-| 2025 | 2.96 | 2.86 – 3.07 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

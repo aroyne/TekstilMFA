@@ -25,17 +25,6 @@ nav_order: 3
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_lf_landfilling_of_textiles.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 74.52 | 61.72 – 89.92 |
-| 2000 | 58.50 | 49.75 – 69.07 |
-| 2010 | 16.43 | 14.39 – 18.60 |
-| 2018 | 0.00 | 0.00 – 0.00 |
-| 2022 | 0.00 | 0.00 – 0.00 |
-| 2025 | 0.00 | 0.00 – 0.00 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

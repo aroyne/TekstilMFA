@@ -25,17 +25,6 @@ nav_order: 1
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_in_domestic_incineration.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 19.80 | 14.04 – 26.41 |
-| 2000 | 33.60 | 26.78 – 40.70 |
-| 2010 | 59.96 | 52.97 – 66.58 |
-| 2018 | 74.05 | 67.93 – 80.63 |
-| 2022 | 97.56 | 87.44 – 107.54 |
-| 2025 | 89.62 | 80.10 – 98.14 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
