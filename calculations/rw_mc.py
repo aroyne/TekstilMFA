@@ -63,9 +63,13 @@ def _private_imports_mc(mfa, preloaded_data, current_params, dataset_noise):
 def _direct_online_imports_mc(mfa, anchors):
     """
     Low-value parcels bought directly from foreign web shops, which are not in
-    08801 under their HS codes (D7). Official VOEC data 2022-2025, one
-    estimate for 2018, and zero around 2000. VOEC figures exist for clothing
-    (HS 61+62) and household textiles (HS 63) only, so other products are 0.
+    08801 under their HS codes (D7). Official VOEC data (Tolletaten, via de
+    Sadeleer & Rubach 2026) for 2023-2025, and zero in 2019, the year
+    before the VOEC scheme. The VOEC figure for 2022 (0.5 kt) looks
+    incomplete, and the estimate of Watson et al. 2020 for 2018 (3.3 kt)
+    probably overlaps with parcels declared in 08801, so neither is used
+    (A2). VOEC figures exist for clothing (HS 61+62) and household textiles
+    (HS 63) only, so other products are 0.
     """
     flow = mfa.flows['RW.RW-US.HH-Direct online imports-TOT']
     flow.values[...] = 0.0

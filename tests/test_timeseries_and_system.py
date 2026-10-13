@@ -58,7 +58,9 @@ def test_household_stock_change_is_inflow_minus_discards(inputs):
     inflow = inflow + mfa.flows['CO.RE-US.HH-Secondhand sales to households-TOT'].values[:, core]
     discards = (mfa.flows['US.HH-CO.CO-Separate collection from households-TOT'].values[:, core]
                 + mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values[:, core]
-                + mfa.flows['US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT'].values[:, core])
+                + mfa.flows['US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT'].values[:, core]
+                + mfa.flows['US.HH-WM.WW-Fibre release in laundry-TOT'].values[:, core]
+                + mfa.flows['US.HH-EN.AI-Fibre release to air and dust-TOT'].values[:, core])
     np.testing.assert_allclose(stock_change(mfa, 'US.HH').values[:, core], inflow - discards)
 
 

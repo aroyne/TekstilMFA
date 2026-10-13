@@ -13,6 +13,10 @@ Subpooler:
 * [Soil (EN.SO)](subpool_en_so.html)
 * [Air and indoor dust (EN.AI)](subpool_en_ai.html)
 
+## Massebalanse
+
+<iframe src="../output_files/plots/pages/balance_pool_en.html" width="100%" height="500px" frameborder="0" scrolling="no"></iframe>
+
 ## Merknader
 
 <!-- MANUAL:POOL_TEXT:START -->

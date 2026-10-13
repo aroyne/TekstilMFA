@@ -65,7 +65,7 @@ Hovedfiberen fra HS-koden (metervare, FA).
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 54 % | 36 % | 24 % | 13 % | 8 % | 2 % |
+| Bomull | 53 % | 36 % | 24 % | 13 % | 8 % | 2 % |
 | Regenerert cellulose | 1 % | 2 % | 1 % | 1 % | 2 % | 0 % |
 | Andre fibre | 0 % | 0 % | 0 % | 2 % | 1 % | 0 % |
 | Syntetisk | 40 % | 58 % | 63 % | 13 % | 18 % | 69 % |

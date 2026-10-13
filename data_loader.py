@@ -56,6 +56,12 @@ def _load_domestic_production(path, hs_mapping):
     return pd.read_csv(path, dtype={'code': str})
 
 
+def _load_population(path, hs_mapping):
+    """{year: mean population}, the mean of 1 January of the year and of the next year."""
+    df = pd.read_csv(path).set_index('year')['population_1_january']
+    return {year: (df[year] + df[year + 1]) / 2 for year in df.index[:-1]}
+
+
 # key: (pools that need it, path, loader)
 DATA_MAP = {
     'trade_textiles': ({'rw', 'di', 'ma', 'co'}, 'data_files/Tab_08801_textiles.csv', _load_trade_textiles),
@@ -64,6 +70,7 @@ DATA_MAP = {
     'prodcom': ({'ma'}, 'data_files/SSB_10455_prodcom_garn_tau_nett_2008_2025.csv', _load_prodcom),
     'varetall': ({'ma'}, 'data_files/SSB_industristatistikk_varetall_1988_1989.csv', _load_varetall),
     'domestic_production': ({'ma'}, 'data_files/domestic_production_mass.csv', _load_domestic_production),
+    'population': ({'us'}, 'data_files/SSB_05803_befolkning_1985_2026.csv', _load_population),
 }
 
 
@@ -79,6 +86,8 @@ def load_all_data(selected_pools, params):
         trade = preloaded['trade_textiles']
         preloaded['imports_by_fibre_class'] = aggregate_by_fibre_class(
             trade, params.hs_main_fibre, 1, 'finished', PRODUCTS)
+        # The household cohorts in the US pool need the supply composition.
+        preloaded['fibre_composition'] = params.fibre_composition
         preloaded['intermediate_by_fibre_class'] = {
             (product, impeks): aggregate_by_fibre_class(trade, params.hs_main_fibre, impeks, 'intermediate',
                                                         [product])

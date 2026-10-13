@@ -5,21 +5,32 @@ US (use) pool. Discards from households come from official and commissioned
 statistics (D8, D15, D17); the change of the in-use stock is the residual of
 the US.HH balance and is computed from the flows by calculations.system.
 Collection and residual waste are not split by product within the CORE
-group (CL+HT+FW).
+group (CL+HT+FW and retail yarn).
 
-Products without discard statistics (other textile goods CA/TA/OM, and all
-products used by institutions and businesses) are assumed to be discarded in
-the year they are supplied (no stock change) until a better basis exists.
+Other textile goods in households (CA, TA, OM) have no discard statistics
+and are discarded by a cohort model with lifetimes per product, an
+exception to D8. Products used by institutions and businesses are assumed
+to be discarded in the year they are supplied.
 """
+from calculations.cohorts import household_cohorts
+from calculations.fibre_layer import NEW_GOODS_TO_HOUSEHOLDS, OTHER_HOUSEHOLD_GOODS, supply_composition
 from calculations.system import clip_negative
 from calculations.timeseries import interpolate
-from calculations.utils import PRODUCT_GROUPS, PRODUCTS, core_group_only
+from calculations.utils import (CORE_GROUP_PRODUCTS, FIBRE_GROUPS, MATERIALS, PRODUCT_GROUPS, PRODUCTS, YEARS,
+                                core_group_only)
+
+COHORT_PRODUCTS = OTHER_HOUSEHOLD_GOODS
+# Pick analyses of residual waste exist from 2009; before that the waste per
+# inhabitant is held at the 2009 level.
+FIRST_RESIDUAL_ANCHOR = 2009
 
 
 def execute_calculations_us(mfa, preloaded_data, current_params, dataset_noise, anchors):
     _separate_collection_mc(mfa)
-    _reusable_residual_waste_mc(mfa, anchors)
-    _worn_residual_waste_mc(mfa, anchors)
+    _reusable_residual_waste_mc(mfa, preloaded_data, anchors)
+    _worn_residual_waste_mc(mfa, preloaded_data, current_params, anchors)
+    _laundry_fibre_release_mc(mfa, preloaded_data, current_params, anchors)
+    _air_and_dust_release_mc(mfa, current_params)
     _institutional_waste_mc(mfa)
 
 
@@ -38,12 +49,29 @@ def _separate_collection_mc(mfa):
                   exported + retained - core_group_only(donated))
 
 
-def _residual_core(anchors):
-    """CL+HT+FW in household residual and bulky waste, SSB and Mepex pick analyses (D15)."""
-    return interpolate(anchors['residual_core'])
+def _residual_core(preloaded_data, anchors):
+    """
+    CL+HT+FW in household residual and bulky waste from pick analyses: 2009
+    (Laitala et al. 2012), 2018, 2022 and 2025 (Mepex, via Watson et al. 2020
+    and NORSUS 2023 and 2026), interpolated between them. Before 2009 the
+    waste per inhabitant is held at the 2009 level. SSB's textile accounts
+    for 1998 (58.5 kt) are not used as a level: the clothing in the waste in
+    1991 and 1998 (34.8 and 47.2 kt) is nearly equal to net clothing imports
+    those years (34.5 and 46.6 kt), so it was probably calculated from the
+    supply, and it would make the stock shrink in the early 1990s.
+    """
+    # 'population' <- data_files/SSB_05803_befolkning_1985_2026.csv:
+    # population on 1 January (SSB 05803); the mean of two years is used
+    population = preloaded_data['population']
+    residual = interpolate(anchors['residual_core'])
+    per_inhabitant = residual[YEARS.index(FIRST_RESIDUAL_ANCHOR)] / population[FIRST_RESIDUAL_ANCHOR]
+    for i, year in enumerate(YEARS):
+        if year < FIRST_RESIDUAL_ANCHOR:
+            residual[i] = per_inhabitant * population[year]
+    return residual
 
 
-def _reusable_residual_waste_mc(mfa, anchors):
+def _reusable_residual_waste_mc(mfa, preloaded_data, anchors):
     """
     Part of the CORE residual textiles that could have been reused (D18),
     share from the pick analyses. The analyses cover CL+HT+FW only, so the
@@ -51,20 +79,79 @@ def _reusable_residual_waste_mc(mfa, anchors):
     """
     reusable_share = interpolate(anchors['reusable_share_residual'])
     mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values[...] = (
-        core_group_only(_residual_core(anchors) * reusable_share))
+        core_group_only(_residual_core(preloaded_data, anchors) * reusable_share))
 
 
-def _worn_residual_waste_mc(mfa, anchors):
+def _worn_residual_waste_mc(mfa, preloaded_data, current_params, anchors):
     """
-    CORE: residual textiles that are not reusable. CA, TA and OM: discarded
-    in the year supplied. Sacks (SA) are not used by households (D13).
+    CORE: residual textiles that are not reusable. CA, TA and OM: the
+    outflow of a cohort model of the goods sold to households, with Weibull
+    lifetimes (carpets 10, tarpaulins and tents 4, other made-up articles 2
+    years), because there are no discard statistics for them (an exception
+    to D8). Sacks (SA) are not used by households (D13).
     """
     flow = mfa.flows['US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT']
     reusable = mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values
+    flow.values[...] = core_group_only(_residual_core(preloaded_data, anchors)) - reusable
+    discards = _other_goods_discards(mfa, current_params)
+    for j, product in enumerate(COHORT_PRODUCTS):
+        flow.values[:, PRODUCT_GROUPS.index(product)] = discards[:, j]
+
+
+def _other_goods_discards(mfa, current_params):
+    """Outflow of the household cohort model for CA, TA and OM, array (year, product)."""
     sales = mfa.flows['DI.RT-US.HH-Sales to households-TOT'].values
-    flow.values[...] = core_group_only(_residual_core(anchors)) - reusable
-    for product in ('CA', 'TA', 'OM'):
-        flow.values[:, PRODUCT_GROUPS.index(product)] = sales[:, PRODUCTS.index(product)]
+    inflow = sales[:, [PRODUCTS.index(p) for p in COHORT_PRODUCTS], None]
+    return household_cohorts(inflow, COHORT_PRODUCTS, current_params)['outflow'][:, :, 0]
+
+
+def _household_textile_stock(mfa, preloaded_data, current_params):
+    """
+    Stock of textile fibre in the CORE group of US.HH by fibre group, array
+    (year, fibre group), from the cohort model of new goods entering the
+    households, with the composition of registered imports.
+    """
+    # 'fibre_composition' <- parameters/fibre_composition.csv (fibre groups of
+    # import mass whose HS code states no fibre), passed with the data
+    supply = supply_composition(preloaded_data, current_params, preloaded_data['fibre_composition'])
+    core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
+    new_goods = sum(mfa.flows[code].values for code in NEW_GOODS_TO_HOUSEHOLDS)[:, core]
+    stock = household_cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS,
+                              current_params)['stock'].sum(axis=1)
+    return stock[:, [MATERIALS.index(g) for g in FIBRE_GROUPS]]
+
+
+def _laundry_fibre_release_mc(mfa, preloaded_data, current_params, anchors):
+    """
+    Fibres released from household textiles in washing machines and sent to
+    wastewater treatment. Mepex (Sundt et al. 2014, cited in Sundt et al.
+    2016 for the Norwegian Environment Agency) estimated about 600 t
+    synthetic microfibres a year from household laundry. The release per kt
+    synthetic fibre in the household stock is set so that the synthetic
+    release in 2014 matches that estimate, and the other fibre groups
+    (cotton, wool, regenerated cellulose, other) release the same per kt
+    (Lant et al. 2020 found that most fibres released in real laundry are
+    natural). The stock is that of the household cohort model, because the
+    residual stock of the balance is probably too high. The fibre layer
+    splits the flow into synthetic and other fibres.
+    """
+    stock = _household_textile_stock(mfa, preloaded_data, current_params)
+    synthetic = stock[:, FIBRE_GROUPS.index('SYN')]
+    release_per_kt = anchors['laundry_release_synthetic'][2014] / synthetic[YEARS.index(2014)]
+    mfa.flows['US.HH-WM.WW-Fibre release in laundry-TOT'].values[...] = core_group_only(
+        release_per_kt * stock.sum(axis=1))
+
+
+def _air_and_dust_release_mc(mfa, current_params):
+    """
+    Fibres released to air and indoor dust while household textiles are worn
+    and used, set to the same level as the release in laundry, with a factor
+    of 1 (0.3-3): De Falco et al. (2020) found a release during wear of the
+    same order as in washing. There are no Norwegian data.
+    """
+    laundry = mfa.flows['US.HH-WM.WW-Fibre release in laundry-TOT'].values
+    mfa.flows['US.HH-EN.AI-Fibre release to air and dust-TOT'].values[...] = (
+        laundry * current_params['air_release_relative_to_laundry'])
 
 
 def _institutional_waste_mc(mfa):

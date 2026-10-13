@@ -66,12 +66,12 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 36 % | 37 % | 28 % | nan % | nan % | nan % |
-| Regenerert cellulose | 3 % | 3 % | 2 % | nan % | nan % | nan % |
-| Ikke-tekstil | 18 % | 16 % | 17 % | nan % | nan % | nan % |
-| Andre fibre | 2 % | 3 % | 3 % | nan % | nan % | nan % |
-| Syntetisk | 35 % | 36 % | 46 % | nan % | nan % | nan % |
-| Ull | 6 % | 6 % | 5 % | nan % | nan % | nan % |
+| Bomull | 30 % | 32 % | 29 % | nan % | nan % | nan % |
+| Regenerert cellulose | 3 % | 2 % | 2 % | nan % | nan % | nan % |
+| Ikke-tekstil | 19 % | 16 % | 16 % | nan % | nan % | nan % |
+| Andre fibre | 3 % | 3 % | 3 % | nan % | nan % | nan % |
+| Syntetisk | 41 % | 41 % | 44 % | nan % | nan % | nan % |
+| Ull | 5 % | 6 % | 5 % | nan % | nan % | nan % |
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_lf_landfilling_of_textiles_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

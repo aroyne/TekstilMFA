@@ -43,10 +43,12 @@ FIBRE_RULES = {
     'supply': 'Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). '
               'Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).',
     'discards': 'For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdningene. '
-                'For andre produkter: tilførselssammensetningen samme år.',
+                'For tepper, presenninger og andre konfeksjonerte varer: utstrømmen av en årgangsmodell av salget.',
     'mixed': 'Blandingen av alt som går inn i WM.RS samme år.',
     'collected': 'Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmodellen) og usolgte '
                  'klær som forhandlerne gir til innsamlerne (tilførselssammensetningen).',
+    'release': 'Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-tekstil). '
+               'Syntetisk er mikroplast, de andre gruppene er naturfibre og regenerert cellulose.',
 }
 # Fibre layer rule of each MA flow (calculations/fibre_layer.manufacturing_layer).
 MANUFACTURING_RULES = {
@@ -280,7 +282,8 @@ def _fibre_rule(code):
     if code in MANUFACTURING_RULES:
         return MANUFACTURING_RULES[code]
     for key, codes in (('supply', fibre_layer.SUPPLY_FLOWS), ('discards', fibre_layer.DISCARD_FLOWS),
-                       ('collected', fibre_layer.COLLECTED_FLOWS), ('mixed', fibre_layer.MIXED_FLOWS)):
+                       ('collected', fibre_layer.COLLECTED_FLOWS), ('release', fibre_layer.RELEASE_FLOWS),
+                       ('mixed', fibre_layer.MIXED_FLOWS)):
         if code in codes:
             return FIBRE_RULES[key]
     return ''

@@ -18,7 +18,11 @@ Type: sink. Lager: no.
 
 ## Flyter inn
 
-* [Fibre release to air and dust](../use_pool/flow_us_hh_en_ai_fibre_release_to_air_and_dust.html) ← US.HH *(planlagt)*
+* [Fibre release to air and dust](../use_pool/flow_us_hh_en_ai_fibre_release_to_air_and_dust.html) ← US.HH
+
+## Massebalanse
+
+<iframe src="../output_files/plots/pages/balance_en_ai.html" width="100%" height="500px" frameborder="0" scrolling="no"></iframe>
 
 ## Merknader
 

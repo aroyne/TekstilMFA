@@ -65,12 +65,12 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 36 % | 37 % | 28 % | 23 % | 24 % | 24 % |
-| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 18 % | 16 % | 17 % | 15 % | 15 % | 15 % |
-| Andre fibre | 2 % | 3 % | 3 % | 3 % | 3 % | 3 % |
-| Syntetisk | 35 % | 36 % | 46 % | 52 % | 51 % | 51 % |
-| Ull | 6 % | 6 % | 5 % | 4 % | 5 % | 5 % |
+| Bomull | 30 % | 31 % | 29 % | 23 % | 25 % | 24 % |
+| Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 19 % | 16 % | 16 % | 15 % | 15 % | 15 % |
+| Andre fibre | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
+| Syntetisk | 41 % | 41 % | 44 % | 51 % | 51 % | 52 % |
+| Ull | 5 % | 6 % | 5 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_in_domestic_incineration_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

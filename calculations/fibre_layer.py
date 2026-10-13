@@ -20,11 +20,13 @@ and flows. The TOT masses are never changed: they come from the statistics
   discards  Flows out of US.HH: the CORE group (CL+HT+FW and retail
             yarn) gets the composition of the outflow of an inflow-driven
             cohort model of US.HH, so it
-            reflects what was bought earlier. CA, TA and OM are discarded in
-            the year supplied, so they keep the supply composition.
+            reflects what was bought earlier. CA, TA and OM get the outflow
+            of a cohort model of the goods sold to households.
             Reusable and worn residual textiles share one composition.
   collected Flows through CO get the mix of what is collected from
             households and unsold clothing donated by retailers.
+  release   Fibres released in laundry and to air have the fibre groups of
+            the textile stock of the household cohort model.
   mixed     Flows out of WM.RS get the composition of everything entering
             WM.RS that year.
   manufacturing
@@ -37,12 +39,11 @@ The main fibre is taken as the whole textile part of a good (a garment
 classified as cotton counts as 100 % cotton); a main fibre to fibre shares
 matrix is not yet part of the layer.
 """
-import math
-
 import flodym as fd
 import numpy as np
 import pandas as pd
 
+from calculations.cohorts import household_cohorts
 from calculations.system import clip_negative, close, reset, to_dims
 from calculations.utils import (CORE_GROUP_PRODUCTS, FIBRE_GROUPS, MATERIALS, PRODUCT_GROUPS, PRODUCTS, START_YEAR,
                                 YEARS)
@@ -52,9 +53,6 @@ from calculations.utils import (CORE_GROUP_PRODUCTS, FIBRE_GROUPS, MATERIALS, PR
 FIBRE_CLASSES = ['CO', 'WO', 'SYN', 'ART', 'MMF', 'OTH', 'RES', 'UNK', 'NT']
 DIRECT_CLASSES = {'CO': 'CO', 'WO': 'WO', 'SYN': 'SYN', 'ART': 'CV', 'OTH': 'OTH'}
 
-# Inflow before 1988 is held at the 1988 level and composition (D2).
-SPINUP_START = 1950
-DSM_YEARS = list(range(SPINUP_START, YEARS[-1] + 1))
 
 NEW_GOODS_TO_HOUSEHOLDS = [
     'DI.RT-US.HH-Sales to households-TOT',
@@ -75,6 +73,15 @@ DISCARD_FLOWS = [
     'US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT',
 ]
 COLLECTION = 'US.HH-CO.CO-Separate collection from households-TOT'
+# Household goods without discard statistics, discarded by a cohort model
+# (calculations/us_mc.py).
+OTHER_HOUSEHOLD_GOODS = ['CA', 'TA', 'OM']
+# Fibres released from household textiles in use, with the fibre groups of
+# the textile stock of the household cohort model.
+RELEASE_FLOWS = [
+    'US.HH-WM.WW-Fibre release in laundry-TOT',
+    'US.HH-EN.AI-Fibre release to air and dust-TOT',
+]
 UNSOLD_DONATED = 'DI.RT-CO.CO-Unsold goods donated-TOT'
 # Flows through CO, with the mix of collected used textiles and donated
 # unsold clothing.
@@ -284,57 +291,57 @@ def household_cohort_model(tot, supply, current_params):
     """
     Inflow-driven cohort model of the CORE group (CL+HT+FW and retail yarn)
     in US.HH (D8, D20): new goods entering US.HH by material, Weibull
-    lifetimes per product. Second-hand
-    purchases (1-2 % of the inflow) are left out. Returns
-    {'discards', 'stock', 'stock_change'} as FlodymArrays (year, product,
-    material) over the model years, and 'stock_1987' as an array (product,
-    material); the stock includes the spin-up cohorts.
+    lifetimes per product. Second-hand purchases (1-2 % of the inflow) are
+    left out. Returns {'discards', 'stock', 'stock_change'} as FlodymArrays
+    (year, product, material) over the model years, and 'stock_1987' as an
+    array (product, material); the stock includes the spin-up cohorts.
     """
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
     new_goods = sum(tot.flows[code].values for code in NEW_GOODS_TO_HOUSEHOLDS)[:, core]
-    inflow = new_goods[:, :, None] * supply[:, core, :]
-    n_spinup = START_YEAR - SPINUP_START
-    inflow = np.concatenate([np.repeat(inflow[:1], n_spinup, axis=0), inflow], axis=0)
-
-    dims = fd.DimensionSet(dim_list=[
-        fd.Dimension(letter='t', name='Time', dtype=int, items=DSM_YEARS),
-        fd.Dimension(letter='p', name='Product', dtype=str, items=CORE_GROUP_PRODUCTS),
-        fd.Dimension(letter='m', name='Material', dtype=str, items=MATERIALS),
-    ])
-    shape = np.array([current_params[f'lifetime_shape_US.HH_{p}'] for p in CORE_GROUP_PRODUCTS])
-    mean = np.array([current_params[f'lifetime_mean_US.HH_{p}'] for p in CORE_GROUP_PRODUCTS])
-    scale = mean / np.array([math.gamma(1.0 + 1.0 / k) for k in shape])
-    lifetime = fd.WeibullLifetime(
-        dims=dims,
-        weibull_shape=fd.Parameter(dims=dims[('p',)], values=shape),
-        weibull_scale=fd.Parameter(dims=dims[('p',)], values=scale),
-    )
-    dsm = fd.InflowDrivenDSM(name='US.HH cohorts', dims=dims, lifetime_model=lifetime,
-                             inflow=fd.StockArray(dims=dims, values=inflow))
-    dsm.compute()
-    stock = dsm.stock.values
+    cohorts = household_cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS, current_params)
+    stock = np.concatenate([cohorts['stock_1987'][None], cohorts['stock']], axis=0)
     return {
-        'discards': fd.FlodymArray(dims=COHORT_DIMS, values=dsm.outflow.values[n_spinup:]),
-        'stock': fd.FlodymArray(dims=COHORT_DIMS, values=stock[n_spinup:]),
-        'stock_change': fd.FlodymArray(dims=COHORT_DIMS, values=np.diff(stock, axis=0)[n_spinup - 1:]),
-        'stock_1987': stock[n_spinup - 1],
+        'discards': fd.FlodymArray(dims=COHORT_DIMS, values=cohorts['outflow']),
+        'stock': fd.FlodymArray(dims=COHORT_DIMS, values=cohorts['stock']),
+        'stock_change': fd.FlodymArray(dims=COHORT_DIMS, values=np.diff(stock, axis=0)),
+        'stock_1987': cohorts['stock_1987'],
     }
 
 
-def household_discard_composition(cohorts, supply):
+def household_discard_composition(tot, cohorts, supply, current_params):
     """
     Material shares of household discards, array (year, product group,
-    material). CORE: outflow of the cohort model. Other groups: discarded in
-    the year supplied.
+    material). CORE: outflow of the cohort model of new goods. CA, TA and
+    OM: outflow of a cohort model of the goods sold to households, as in the
+    TOT calculation. SA is not used by households, so it keeps the supply
+    composition (its flows are zero).
     """
     outflow = cohorts['discards'].values.sum(axis=1)
+    sales = tot.flows['DI.RT-US.HH-Sales to households-TOT'].values
+    others = [PRODUCTS.index(p) for p in OTHER_HOUSEHOLD_GOODS]
+    other_outflow = household_cohorts(sales[:, others, None] * supply[:, others, :], OTHER_HOUSEHOLD_GOODS,
+                                      current_params)['outflow']
     composition = np.empty((len(YEARS), len(PRODUCT_GROUPS), len(MATERIALS)))
     for g, group in enumerate(PRODUCT_GROUPS):
         if group == 'CORE':
             composition[:, g, :] = outflow / outflow.sum(axis=1, keepdims=True)
+        elif group in OTHER_HOUSEHOLD_GOODS:
+            part = other_outflow[:, OTHER_HOUSEHOLD_GOODS.index(group), :]
+            composition[:, g, :] = part / part.sum(axis=1, keepdims=True)
         else:
             composition[:, g, :] = supply[:, PRODUCTS.index(group), :]
     return composition
+
+
+def release_composition(cohorts):
+    """
+    Material shares of fibres released from household textiles, array (year,
+    material): the fibre groups of the textile stock of the cohort model,
+    without non-textile material.
+    """
+    stock = cohorts['stock'].values.sum(axis=1)
+    stock[:, MATERIALS.index('NT')] = 0.0
+    return stock / stock.sum(axis=1, keepdims=True)
 
 
 def collected_composition(fibre):
@@ -356,7 +363,7 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     {output name: FlodymArray with material dimension} for the parallel stock
     model and for the stock level of the statistics-based balance.
     """
-    unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + COLLECTED_FLOWS + MIXED_FLOWS
+    unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + COLLECTED_FLOWS + RELEASE_FLOWS + MIXED_FLOWS
                                       + MANUFACTURING_FLOWS)
     if unassigned:
         raise KeyError(f"Flows without a fibre layer rule: {sorted(unassigned)}")
@@ -369,12 +376,15 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
         shares = imported if code == FINISHED_IMPORT else supply
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * shares
     cohorts = household_cohort_model(tot, supply, current_params)
-    discards = household_discard_composition(cohorts, supply)
+    discards = household_discard_composition(tot, cohorts, supply, current_params)
     for code in DISCARD_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * discards
     collected = collected_composition(fibre)
     for code in COLLECTED_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * collected
+    released = release_composition(cohorts)
+    for code in RELEASE_FLOWS:
+        fibre.flows[code].values[...] = tot.flows[code].values[..., None] * released[:, None, :]
 
     mix = sum(to_dims(f, ('t', 'm')).values for f in fibre.flows.values() if f.to_process.name == MIXED_SOURCE)
     mix_shares = mix / mix.sum(axis=1, keepdims=True)

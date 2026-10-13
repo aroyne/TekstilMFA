@@ -62,10 +62,10 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 16 % | 7 % | 7 % | 6 % | 6 % | 6 % |
-| Klær | 33 % | 33 % | 32 % | 24 % | 24 % | 23 % |
+| Klær | 33 % | 33 % | 32 % | 25 % | 24 % | 23 % |
 | Sko | 10 % | 9 % | 9 % | 7 % | 7 % | 6 % |
 | Hjemmetekstiler | 14 % | 12 % | 13 % | 11 % | 9 % | 8 % |
-| Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 4 % |
+| Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 5 % |
 | Sekker | 21 % | 34 % | 33 % | 44 % | 45 % | 48 % |
 | Presenninger og telt | 5 % | 3 % | 4 % | 4 % | 4 % | 3 % |
 
@@ -79,13 +79,13 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 | Regenerert cellulose | 2 % | 2 % | 1 % | 2 % | 1 % | 1 % |
 | Ikke-tekstil | 15 % | 11 % | 12 % | 11 % | 10 % | 9 % |
 | Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |
-| Syntetisk | 46 % | 55 % | 56 % | 66 % | 67 % | 69 % |
+| Syntetisk | 46 % | 55 % | 55 % | 66 % | 67 % | 69 % |
 | Ull | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
 
 <iframe src="../output_files/plots/pages/us_ic_wm_rs_institutional_textile_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L70). Dokumentasjonen i koden:
+Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L157). Dokumentasjonen i koden:
 
 > All products used by institutions and businesses: discarded in the year supplied.
