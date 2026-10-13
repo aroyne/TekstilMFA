@@ -18,7 +18,7 @@ nav_order: 3
 | Metode | data |
 | Status | implemented |
 | Prioritet | 1 |
-| Kandidatdata | SSB 08801 (HS 61, 62, 63, 64, 57 and retail yarn export) |
+| Kandidatdata | SSB 08801 (HS 61, 62, 63, 64, 57, 9404.30/40/90 and retail yarn export) |
 | Merknad | Includes re-export and returns from online sales, and retail yarn spun in Norway |
 
 ## Tidsserie
@@ -29,12 +29,12 @@ nav_order: 3
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 4.37 | 4.22 – 4.53 |
-| 2000 | 5.97 | 5.77 – 6.18 |
-| 2010 | 6.27 | 6.06 – 6.50 |
-| 2018 | 6.67 | 6.44 – 6.91 |
-| 2022 | 10.51 | 10.16 – 10.89 |
-| 2025 | 11.87 | 11.47 – 12.29 |
+| 1990 | 4.57 | 4.41 – 4.73 |
+| 2000 | 6.51 | 6.29 – 6.74 |
+| 2010 | 6.99 | 6.75 – 7.24 |
+| 2018 | 9.68 | 9.36 – 10.03 |
+| 2022 | 12.31 | 11.90 – 12.75 |
+| 2025 | 13.02 | 12.59 – 13.49 |
 
 ## Materialsammensetning (fiberlag, D19)
 

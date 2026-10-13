@@ -16,6 +16,9 @@ The bedding codes (9404) name no fibre in English, but the Norwegian texts
 say whether the filling is down or feathers. The filling dominates the
 weight, so down and feathers count as other fibre (OTH), and other filling
 as synthetic (SYN, an assumption: polyester fibre is the usual filling).
+Furniture cushions are mostly foam with a textile cover and count as
+non-textile (NT, an assumption), and sleeping bags as synthetic (SYN, an
+assumption: synthetic shell and filling).
 
 Usage: python scripts/build_hs_main_fibre.py
 """
@@ -66,6 +69,10 @@ def classify(text):
 
 def classify_bedding(text_no):
     """Main fibre of a 9404 code from its Norwegian text."""
+    if text_no.startswith('Møbelputer'):
+        return 'NT', 'furniture cushions, mostly foam (assumed non-textile)'
+    if text_no.startswith('Soveposer'):
+        return 'SYN', 'sleeping bags (assumed synthetic shell and filling)'
     if 'ikke med dun' in text_no:
         return 'SYN', 'bedding, not down or feathers (assumed polyester filling)'
     if 'med dun eller fjær' in text_no:

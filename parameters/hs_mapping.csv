@@ -63,9 +63,9 @@ hs_prefix,product,category,in_scope,description
 94049011,HT,finished,yes,Pillows with down or feathers (2022-)
 94049012,HT,finished,yes,"Pillows, not with down or feathers, with HFC, PFC or CFC (2022-)"
 94049019,HT,finished,yes,"Pillows, not with down or feathers, without HFC, PFC or CFC (2022-)"
-94049005,HT,finished,no,"Furniture cushions and the like (1990-2021): mainly foam with a textile cover; scope not decided"
-94049006,HT,finished,no,"Furniture cushions and the like (1990-2021): mainly foam with a textile cover; scope not decided"
-94049009,HT,finished,no,"Furniture cushions and the like (1988-1989): mainly foam with a textile cover; scope not decided"
-94049091,HT,finished,no,"Furniture cushions and the like (2022-): mainly foam with a textile cover; scope not decided"
-94049099,HT,finished,no,"Furniture cushions and the like (2022-): mainly foam with a textile cover; scope not decided"
-94043000,TA,finished,no,Sleeping bags: scope not decided
+94049005,HT,finished,yes,Furniture cushions and the like (1990-2021): mainly foam with a textile cover (material NT in the fibre layer)
+94049006,HT,finished,yes,Furniture cushions and the like (1990-2021): mainly foam with a textile cover (material NT in the fibre layer)
+94049009,HT,finished,yes,Furniture cushions and the like (1988-1989): mainly foam with a textile cover (material NT in the fibre layer)
+94049091,HT,finished,yes,Furniture cushions and the like (2022-): mainly foam with a textile cover (material NT in the fibre layer)
+94049099,HT,finished,yes,Furniture cushions and the like (2022-): mainly foam with a textile cover (material NT in the fibre layer)
+94043000,TA,finished,yes,Sleeping bags (camping goods)

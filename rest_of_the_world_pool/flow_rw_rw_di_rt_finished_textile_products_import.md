@@ -18,7 +18,7 @@ nav_order: 3
 | Metode | data |
 | Status | implemented |
 | Prioritet | 1 |
-| Kandidatdata | SSB 08801 (HS 61, 62, 63, 64, 57; retail yarn 5109, 5207, 520420, 5406, 5511) |
+| Kandidatdata | SSB 08801 (HS 61, 62, 63, 64, 57; retail yarn 5109, 5207, 520420, 5406, 5511; bedding 9404.30, 9404.40, 9404.90) |
 | Merknad | Net weight as declared; includes non-textile parts (buttons/zips/soles). Retail yarn is product YA |
 
 ## Tidsserie
@@ -29,12 +29,12 @@ nav_order: 3
 
 | År | Median (kt) | 95 %-intervall (kt) |
 |---|---|---|
-| 1990 | 76.21 | 73.65 – 78.95 |
-| 2000 | 102.59 | 99.14 – 106.27 |
-| 2010 | 147.22 | 142.26 – 152.50 |
-| 2018 | 143.35 | 138.52 – 148.50 |
-| 2022 | 154.46 | 149.26 – 160.01 |
-| 2025 | 135.39 | 130.84 – 140.26 |
+| 1990 | 77.55 | 74.94 – 80.34 |
+| 2000 | 104.95 | 101.42 – 108.72 |
+| 2010 | 151.39 | 146.30 – 156.83 |
+| 2018 | 147.43 | 142.47 – 152.72 |
+| 2022 | 158.40 | 153.07 – 164.09 |
+| 2025 | 138.24 | 133.58 – 143.20 |
 
 ## Materialsammensetning (fiberlag, D19)
 

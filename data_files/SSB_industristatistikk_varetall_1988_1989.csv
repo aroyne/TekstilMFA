@@ -66,8 +66,8 @@ year,commodity,product,text,unit,quantity,value_1000_nok,source,note
 1988,6403.4000,FW,,1000 pairs,152,40832,"SSB, Industristatistikk 1988. Hefte II. Varetall (NOS B 941), table 3, page 29",
 1988,6403.5000-6403.9000,FW,,1000 pairs,155,44111,"SSB, Industristatistikk 1988. Hefte II. Varetall (NOS B 941), table 3, page 29",
 1988,9404.9002,HT,,1000 pieces,1140,93431,"SSB, Industristatistikk 1988. Hefte II. Varetall (NOS B 941), table 3, page 35","pillows, duvets and quilts, not with down or feathers"
-1988,9404.3000,,,1000 pieces,110,35639,"SSB, Industristatistikk 1988. Hefte II. Varetall (NOS B 941), table 3, page 35","sleeping bags, scope not decided"
-1988,9404.9009,,,,,80003,"SSB, Industristatistikk 1988. Hefte II. Varetall (NOS B 941), table 3, page 35","furniture cushions, scope not decided"
+1988,9404.3000,TA,,1000 pieces,110,35639,"SSB, Industristatistikk 1988. Hefte II. Varetall (NOS B 941), table 3, page 35",sleeping bags
+1988,9404.9009,HT,,,,80003,"SSB, Industristatistikk 1988. Hefte II. Varetall (NOS B 941), table 3, page 35",furniture cushions
 1989,5702.0000-5705.0000,CA,,,,10351,"SSB, Industristatistikk 1989. Hefte II. Varetall (NOS B 998), table 3, page 23",
 1989,6101.0000-6105.9000,CL,,,,8341,"SSB, Industristatistikk 1989. Hefte II. Varetall (NOS B 998), table 3, page 23",
 1989,6107.1100-6107.9000,CL,,,,38613,"SSB, Industristatistikk 1989. Hefte II. Varetall (NOS B 998), table 3, page 23",
@@ -128,5 +128,5 @@ year,commodity,product,text,unit,quantity,value_1000_nok,source,note
 1989,6403.4000,FW,,1000 pairs,135,37824,"SSB, Industristatistikk 1989. Hefte II. Varetall (NOS B 998), table 3, page 24",
 1989,6403.5000-6403.9000,FW,,1000 pairs,179,47526,"SSB, Industristatistikk 1989. Hefte II. Varetall (NOS B 998), table 3, page 24",
 1989,9404.9002,HT,,1000 pieces,1614,106522,"SSB, Industristatistikk 1989. Hefte II. Varetall (NOS B 998), table 3, page 30","pillows, duvets and quilts, not with down or feathers"
-1989,9404.3000,,,1000 pieces,115,39133,"SSB, Industristatistikk 1989. Hefte II. Varetall (NOS B 998), table 3, page 30","sleeping bags, scope not decided"
-1989,9404.9009,,,,,123681,"SSB, Industristatistikk 1989. Hefte II. Varetall (NOS B 998), table 3, page 30","furniture cushions, scope not decided"
+1989,9404.3000,TA,,1000 pieces,115,39133,"SSB, Industristatistikk 1989. Hefte II. Varetall (NOS B 998), table 3, page 30",sleeping bags
+1989,9404.9009,HT,,,,123681,"SSB, Industristatistikk 1989. Hefte II. Varetall (NOS B 998), table 3, page 30",furniture cushions

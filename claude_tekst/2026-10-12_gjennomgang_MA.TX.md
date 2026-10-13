@@ -102,3 +102,5 @@ Mulige grep:
 1. **Øvre grense fra varestatistikken.** Ferdigvarer til DI.RT settes til massen fra varetall og Prodcom, skalert opp for små foretak med forholdet mellom produksjonsverdien i 12910 og verdien som er publisert i Prodcom. Resten av balansen går til en ny flyt for innsatsvarer som brukes i andre næringer (utenfor omfanget).
 2. **Andel metervare til andre næringer** som parameter (fra litteratur eller anslag), trukket fra før balansen.
 3. **Behold balansen** og bruk lagernivået mot garderobestudier (SIFO) som kontroll.
+
+**Oppdatering 2026-10-13:** Soveposer (9404.30) er med som TA, og møbelputer (9404.90) som HT. Møbelputer er for det meste skum og regnes som ikke-tekstil (NT) i fiberlaget. I 2022 er 3,5 kt av importen av hjemmetekstiler NT. Lageret i husholdningene er nå ca. 214–220 kg per innbygger i 2018–2025. Grepet for balansen i MA.TX (se over) er ikke valgt ennå.

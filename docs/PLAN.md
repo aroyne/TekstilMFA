@@ -120,7 +120,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] D26 er besluttet: massebasert produktfordeling for MA.TX → DI.RT, og dyner og puter (9404.40/9404.90) er HT.
 - [x] D26 er implementert (2026-10-13): HS 9404.40/9404.90 (dyner og hodeputer) er med i HT. Varetall for ferdigvarer i 1988–89 er lest, og Prodcom 2008–2011 er koblet til produkter (`scripts/derive_domestic_product_mass.py`). `MA.TX-DI.RT-Domestic finished products-TOT` er implementert, og MA.TX har klippelager i stedet for midlertidig lager.
 - [ ] **Diskusjon:** Ferdigvarer fra MA.TX er 8–18 kt per år, og lageret i husholdningene øker fra ca. 135 til ca. 206 kg per innbygger (2018–2025). Trolig går en del av metervaren og garnet til produkter utenfor omfanget eller til andre næringer (møbeltrekk, madrasser, bil- og båtinteriør, tekniske formål). Prodcom og varetall gir 4–8 kt i store foretak. Se notatet om MA.TX.
-- [ ] Avklare om soveposer (9404.30) og møbelputer skal med.
+- [x] Soveposer (9404.30, TA) og møbelputer (9404.90, HT, materiale NT) er med (2026-10-13). Lageret i husholdningene er da ca. 220 kg per innbygger i 2018–2025.
 - [ ] Deretter fortsetter gjennomgangen med DI.RT, US.HH, US.IC, CO.CO, CO.SO, CO.RE, WM.RS, WM.RC og WM.WW/EN. Det midlertidige lageret i WM.WW fjernes med mikrofibre- og slamflytene.
 - [ ] US.IC, sorteringsdetaljer, avfallseksport, materialgjenvinning.
 - [ ] Mikrofibre: vask → avløpsrensing → vann og jord.

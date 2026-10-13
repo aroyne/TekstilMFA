@@ -12,7 +12,8 @@ and flows. The TOT masses are never changed: they come from the statistics
             the product in that year: the main fibre stated by the HS code
             (parameters/hs_main_fibre.csv), with codes that state none
             distributed by parameters/fibre_composition.csv, scaled to the
-            textile part (1 - nontextile_share). Exports are mostly re-export
+            textile part (1 - nontextile_share). Codes whose weight is
+            mainly non-textile (furniture cushions) are NT as a whole. Exports are mostly re-export
             (D6), so they share the import composition. Flows out of DI.RT
             mix in finished goods made in Norway (the MA.TX balance per
             material) and hand knitting yarn spun in Norway (WO).
@@ -44,8 +45,9 @@ from calculations.system import clip_negative, close, reset, to_dims
 from calculations.utils import (CORE_GROUP_PRODUCTS, FIBRE_GROUPS, MATERIALS, PRODUCT_GROUPS, PRODUCTS, START_YEAR,
                                 YEARS)
 
-# Main fibre classes in parameters/hs_main_fibre.csv.
-FIBRE_CLASSES = ['CO', 'WO', 'SYN', 'ART', 'MMF', 'OTH', 'RES', 'UNK']
+# Main fibre classes in parameters/hs_main_fibre.csv. 'NT' marks codes whose
+# weight is mainly non-textile (furniture cushions: foam).
+FIBRE_CLASSES = ['CO', 'WO', 'SYN', 'ART', 'MMF', 'OTH', 'RES', 'UNK', 'NT']
 DIRECT_CLASSES = {'CO': 'CO', 'WO': 'WO', 'SYN': 'SYN', 'ART': 'CV', 'OTH': 'OTH'}
 
 # Inflow before 1988 is held at the 1988 level and composition (D2).
@@ -134,28 +136,36 @@ def _class_to_group(fibre_composition, product, synthetic):
         elif fibre_class == 'MMF':
             to_group[c, FIBRE_GROUPS.index('SYN')] = synthetic
             to_group[c, FIBRE_GROUPS.index('CV')] = 1.0 - synthetic
-        else:  # RES, UNK: no fibre stated
+        elif fibre_class in ('RES', 'UNK'):  # no fibre stated
             to_group[c, :] = _fallback_composition(fibre_composition, product)
+        # NT: no fibre group; see _shares_with_nontextile
     return to_group
 
 
-def _fibre_group_shares(kg, products, current_params, fibre_composition):
-    """Fibre group shares, array (year, product, fibre group), from kg per fibre class."""
+def _shares_with_nontextile(kg, products, current_params, fibre_composition, nontextile):
+    """
+    Material shares, array (year, product, material), from kg per fibre
+    class. Codes of class NT are non-textile as a whole; the rest is split
+    over fibre groups, with the share nontextile (per product) of it
+    non-textile (buttons, zips, soles).
+    """
     class_shares = kg / kg.sum(axis=2, keepdims=True)
     synthetic = current_params['mmf_synthetic_share']
     to_group = np.stack([_class_to_group(fibre_composition, p, synthetic) for p in products])
-    return np.einsum('tpc,pcg->tpg', class_shares, to_group)
+    fibres = np.einsum('tpc,pcg->tpg', class_shares, to_group)
+    nt_class = class_shares[:, :, FIBRE_CLASSES.index('NT')]
+    nt = nt_class + (1.0 - nt_class) * nontextile[None, :]
+    return np.concatenate([fibres * (1.0 - nontextile)[None, :, None], nt[:, :, None]], axis=2)
 
 
 def supply_composition(preloaded_data, current_params, fibre_composition):
     """Material shares of goods supplied, array (year, product, material)."""
     # 'imports_by_fibre_class' <- data_files/Tab_08801_textiles.csv (SSB 08801,
-    # HS 50-64) and parameters/hs_main_fibre.csv, summed when the data is loaded
-    textile = _fibre_group_shares(preloaded_data['imports_by_fibre_class'], PRODUCTS, current_params,
-                                  fibre_composition)
+    # HS 50-64 and 9404) and parameters/hs_main_fibre.csv, summed when the
+    # data is loaded
     nontextile = np.array([current_params[f'nontextile_share_{p}'] for p in PRODUCTS])
-    return np.concatenate([textile * (1.0 - nontextile)[None, :, None],
-                           np.broadcast_to(nontextile[None, :, None], textile.shape[:2] + (1,))], axis=2)
+    return _shares_with_nontextile(preloaded_data['imports_by_fibre_class'], PRODUCTS, current_params,
+                                   fibre_composition, nontextile)
 
 
 def intermediate_composition(preloaded_data, current_params, fibre_composition, product, impeks):
@@ -168,8 +178,7 @@ def intermediate_composition(preloaded_data, current_params, fibre_composition, 
     # 08801, HS 50-60 fibre, yarn and fabric) and parameters/hs_main_fibre.csv,
     # summed when the data is loaded
     kg = preloaded_data['intermediate_by_fibre_class'][(product, impeks)]
-    textile = _fibre_group_shares(kg, [product], current_params, fibre_composition)[:, 0, :]
-    return np.concatenate([textile, np.zeros((len(YEARS), 1))], axis=1)
+    return _shares_with_nontextile(kg, [product], current_params, fibre_composition, np.zeros(1))[:, 0, :]
 
 
 def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_composition):
