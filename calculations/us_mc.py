@@ -7,13 +7,14 @@ the US.HH balance and is computed from the flows by calculations.system.
 Collection and residual waste are not split by product within the CORE
 group (CL+HT+FW and retail yarn).
 
-Other textile goods in households (CA, TA, OM) have no discard statistics
-and are discarded by a cohort model with lifetimes per product, an
-exception to D8. Products used by institutions and businesses are assumed
-to be discarded in the year they are supplied.
+Other textile goods in households (CA, TA, OM) and all goods used by
+institutions and businesses have no discard statistics and are discarded
+by a cohort model with lifetimes per product, an exception to D8. Sacks
+(SA) are packaging and are discarded in the year they are supplied (D13).
 """
-from calculations.cohorts import household_cohorts
-from calculations.fibre_layer import NEW_GOODS_TO_HOUSEHOLDS, OTHER_HOUSEHOLD_GOODS, supply_composition
+from calculations.cohorts import use_cohorts
+from calculations.fibre_layer import (INSTITUTIONAL_COHORT_PRODUCTS, NEW_GOODS_TO_HOUSEHOLDS, OTHER_HOUSEHOLD_GOODS,
+                                      supply_composition)
 from calculations.system import clip_negative
 from calculations.timeseries import interpolate
 from calculations.utils import (CORE_GROUP_PRODUCTS, FIBRE_GROUPS, MATERIALS, PRODUCT_GROUPS, PRODUCTS, YEARS,
@@ -31,7 +32,7 @@ def execute_calculations_us(mfa, preloaded_data, current_params, dataset_noise, 
     _worn_residual_waste_mc(mfa, preloaded_data, current_params, anchors)
     _laundry_fibre_release_mc(mfa, preloaded_data, current_params, anchors)
     _air_and_dust_release_mc(mfa, current_params)
-    _institutional_waste_mc(mfa)
+    _institutional_waste_mc(mfa, current_params)
 
 
 def _separate_collection_mc(mfa):
@@ -102,7 +103,7 @@ def _other_goods_discards(mfa, current_params):
     """Outflow of the household cohort model for CA, TA and OM, array (year, product)."""
     sales = mfa.flows['DI.RT-US.HH-Sales to households-TOT'].values
     inflow = sales[:, [PRODUCTS.index(p) for p in COHORT_PRODUCTS], None]
-    return household_cohorts(inflow, COHORT_PRODUCTS, current_params)['outflow'][:, :, 0]
+    return use_cohorts(inflow, COHORT_PRODUCTS, current_params)['outflow'][:, :, 0]
 
 
 def _household_textile_stock(mfa, preloaded_data, current_params):
@@ -116,7 +117,7 @@ def _household_textile_stock(mfa, preloaded_data, current_params):
     supply = supply_composition(preloaded_data, current_params, preloaded_data['fibre_composition'])
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
     new_goods = sum(mfa.flows[code].values for code in NEW_GOODS_TO_HOUSEHOLDS)[:, core]
-    stock = household_cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS,
+    stock = use_cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS,
                               current_params)['stock'].sum(axis=1)
     return stock[:, [MATERIALS.index(g) for g in FIBRE_GROUPS]]
 
@@ -154,7 +155,20 @@ def _air_and_dust_release_mc(mfa, current_params):
         laundry * current_params['air_release_relative_to_laundry'])
 
 
-def _institutional_waste_mc(mfa):
-    """All products used by institutions and businesses: discarded in the year supplied."""
+def _institutional_waste_mc(mfa, current_params):
+    """
+    Goods discarded by institutions and businesses: the outflow of a cohort
+    model of the goods sold to them, with Weibull lifetimes per product
+    (workwear 3, footwear 2, institutional linen 2, carpets 10, tarpaulins
+    and awnings 5 and other made-up articles 2 years; all but workwear are
+    assumptions). There are no discard statistics for this sector: textiles
+    from businesses are mostly in mixed waste in SSB's waste accounts.
+    Sacks (SA) are packaging and are discarded in the year they are
+    supplied (D13), and retail yarn is not sold to this sector.
+    """
     sales = mfa.flows['DI.RT-US.IC-Sales to institutions and businesses-TOT'].values
-    mfa.flows['US.IC-WM.RS-Institutional textile waste-TOT'].values[...] = sales
+    flow = mfa.flows['US.IC-WM.RS-Institutional textile waste-TOT']
+    flow.values[...] = sales
+    cohort = [PRODUCTS.index(p) for p in INSTITUTIONAL_COHORT_PRODUCTS]
+    flow.values[:, cohort] = use_cohorts(sales[:, cohort, None], INSTITUTIONAL_COHORT_PRODUCTS, current_params,
+                                         stock='US.IC')['outflow'][:, :, 0]

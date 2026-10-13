@@ -67,9 +67,9 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 |---|---|---|---|---|---|---|
 | Bomull | 49 % | 48 % | 44 % | 40 % | 37 % | 36 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 14 % | 16 % | 18 % | 18 % | 17 % | 17 % |
+| Ikke-tekstil | 14 % | 16 % | 18 % | 17 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 28 % | 27 % | 30 % | 33 % | 36 % | 37 % |
+| Syntetisk | 28 % | 27 % | 30 % | 33 % | 35 % | 37 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/co_so_wm_rs_sorting_residues_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>

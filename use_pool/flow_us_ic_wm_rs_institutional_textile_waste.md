@@ -15,11 +15,11 @@ nav_order: 2
 | Til | [Residual and mixed waste collection (WM.RS)](../waste_management_pool/subpool_wm_rs.html) |
 | Tekstilform | MIX – brukte, usortert |
 | Dimensjoner | år × produkt |
-| Metode | data |
-| Status | implemented (steady state, see open questions) |
+| Metode | stock_model |
+| Status | implemented |
 | Prioritet | 2 |
-| Kandidatdata | SSB 10513 (textile waste by industry) |
-| Merknad | Official waste statistics are the primary source (D8) |
+| Kandidatdata | Cohort model of sales to institutions and businesses with lifetimes per product (parameters/lifetimes.csv); SSB 10513 cannot separate textiles from mixed business waste |
+| Merknad | No discard statistics for the sector, so an exception to D8 (D29). Sacks discarded in the year supplied (D13) |
 
 ## Tidsserie
 
@@ -30,27 +30,29 @@ nav_order: 2
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- **US.IC-WM.RS-Institutional textile waste-TOT** er kasserte tekstiler fra bedrifter og offentlig sektor: arbeidsklær, uniformer, institusjonstekstiler, tepper, presenninger og sekker.
+- **US.IC-WM.RS-Institutional textile waste-TOT** er kasserte tekstiler fra bedrifter og offentlig sektor: arbeidsklær, uniformer og vernesko, institusjonstekstiler (sengetøy, håndklær), tepper i næringsbygg, presenninger og markiser, andre konfeksjonerte varer og sekker.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- Ingen egen datakilde ennå. Flyten er lik salget til institusjoner og bedrifter (DI.RT-US.IC-Sales to institutions and businesses-TOT).
-- SSB 10513 (avfallsregnskapet etter materialtype) er en mulig kilde, men tekstiler fra næringslivet ligger mest i blandet avfall og kan ikke skilles ut.
+- Det finnes ingen kasseringsstatistikk for sektoren. I SSBs avfallsregnskap (10513) ligger tekstiler fra næringslivet mest i blandet avfall og kan ikke skilles ut. NORSUS (Rubach m.fl. 2023) fikk heller ikke data fra private avfallsaktører eller vaskerier.
+- Flyten beregnes derfor med en årgangsmodell av salget til institusjoner og bedrifter (DI.RT-US.IC-Sales to institutions and businesses-TOT), et unntak fra D8 (D29).
 
 #### Antakelser
 
-- Stasjonær tilstand: alt kasseres samme år som det kjøpes, og lageret i US.IC endrer seg ikke.
+- Weibull-levetider (form 2) per varetype i `parameters/lifetimes.csv`: arbeidsklær 3 år (2–4; ECAP 2017/WRAP 2015, van Oorschot m.fl. 2020), vernesko 2 år (1–3), institusjonstekstiler 2 år (1–4), tepper 10 år (5–15), presenninger og markiser 5 år (3–8) og andre konfeksjonerte varer 2 år (1–3). Alle unntatt arbeidsklær er antakelser.
+- Innstrømmen før 1988 holdes på 1988-nivå (D2).
+- Sekker er emballasje og kastes samme år (D13).
 - Alt går til restavfall (WM.RS). Innsamling fra institusjoner er ikke implementert.
 
 #### Sammensetning (varetype og materiale)
 
-- Samme som salget til institusjoner og bedrifter: sekker 21–45 % og klær 24–33 %.
-- Materialet er sammensetningen til salget samme år.
+- Sekker økte fra 21 % i 1990 til 47 % i 2022. Klær er 23–31 %.
+- Materialet er utstrømmen av årgangsmodellen, altså sammensetningen til det som ble kjøpt tidligere. Sekker har sammensetningen til salget samme år.
 
 #### Tidsutvikling og sammenligninger
 
-- Flyten følger salget: 13 kt i 1990 og 28–31 kt i 2018–2025.
-- Antakelsen om stasjonær tilstand er et åpent spørsmål. Arbeidsklær har en levetid på omtrent tre år, så kasseringene ligger noe etter salget.
+- Flyten følger salget med et lite etterslep: 13 kt i 1990, 23 kt i 2008 (salg 25 kt) og 28–30 kt i 2018–2025.
+- Lageret i US.IC endrer seg lite (−1 til +1,4 kt per år), fordi levetidene er korte.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
@@ -61,31 +63,38 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Tepper | 16 % | 7 % | 7 % | 6 % | 6 % | 6 % |
-| Klær | 33 % | 33 % | 32 % | 25 % | 24 % | 23 % |
-| Sko | 10 % | 9 % | 9 % | 7 % | 7 % | 6 % |
-| Hjemmetekstiler | 14 % | 12 % | 13 % | 11 % | 9 % | 8 % |
-| Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 5 % |
-| Sekker | 21 % | 34 % | 33 % | 44 % | 45 % | 48 % |
-| Presenninger og telt | 5 % | 3 % | 4 % | 4 % | 4 % | 3 % |
+| Tepper | 20 % | 11 % | 6 % | 6 % | 6 % | 6 % |
+| Klær | 31 % | 30 % | 31 % | 26 % | 23 % | 23 % |
+| Sko | 10 % | 8 % | 9 % | 7 % | 6 % | 7 % |
+| Hjemmetekstiler | 12 % | 11 % | 13 % | 11 % | 11 % | 10 % |
+| Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 4 % |
+| Sekker | 21 % | 34 % | 35 % | 44 % | 47 % | 46 % |
+| Presenninger og telt | 4 % | 3 % | 3 % | 4 % | 4 % | 4 % |
 
 ### Materiale (fiberlag, D19)
 
-Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).
+Utstrømmen av en årgangsmodell av salget til institusjoner og bedrifter. Sekker har tilførselssammensetningen samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 32 % | 26 % | 25 % | 16 % | 16 % | 16 % |
-| Regenerert cellulose | 2 % | 2 % | 1 % | 2 % | 1 % | 1 % |
-| Ikke-tekstil | 15 % | 11 % | 12 % | 11 % | 10 % | 9 % |
-| Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |
-| Syntetisk | 46 % | 55 % | 55 % | 66 % | 67 % | 69 % |
-| Ull | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
+| Bomull | 27 % | 26 % | 25 % | 18 % | 16 % | 16 % |
+| Regenerert cellulose | 3 % | 2 % | 1 % | 2 % | 1 % | 1 % |
+| Ikke-tekstil | 16 % | 12 % | 12 % | 10 % | 10 % | 10 % |
+| Andre fibre | 2 % | 2 % | 3 % | 3 % | 3 % | 2 % |
+| Syntetisk | 48 % | 54 % | 55 % | 65 % | 68 % | 69 % |
+| Ull | 4 % | 4 % | 3 % | 3 % | 3 % | 3 % |
 
 <iframe src="../output_files/plots/pages/us_ic_wm_rs_institutional_textile_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L157). Dokumentasjonen i koden:
+Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L158). Dokumentasjonen i koden:
 
-> All products used by institutions and businesses: discarded in the year supplied.
+> Goods discarded by institutions and businesses: the outflow of a cohort
+> model of the goods sold to them, with Weibull lifetimes per product
+> (workwear 3, footwear 2, institutional linen 2, carpets 10, tarpaulins
+> and awnings 5 and other made-up articles 2 years; all but workwear are
+> assumptions). There are no discard statistics for this sector: textiles
+> from businesses are mostly in mixed waste in SSB's waste accounts.
+> Sacks (SA) are packaging and are discarded in the year they are
+> supplied (D13), and retail yarn is not sold to this sector.

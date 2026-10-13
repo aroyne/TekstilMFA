@@ -3,12 +3,13 @@ CL,US.HH,weibull,6,2,4,9,abs,"Laitala & Klepp 2020 (5.2 years per owner, N = 46 
 HT,US.HH,weibull,7,2,3,10,abs,"WRAP 2023 (6.9 years, home textiles); Napolano 2025 SM4 (2-10 by type). Weibull shape 2 is an assumption",proposal,Household textiles in households
 FW,US.HH,weibull,4,2,3,6,abs,"Napolano 2025 SM4 (4.7 years, Laitala et al. 2018). Weibull shape 2 is an assumption",proposal,Footwear in households
 CL,US.IC,weibull,3,2,2,4,abs,ECAP 2017 (WRAP 2015): workwear just over 3 years; van Oorschot et al. 2020: 2.0. Weibull shape 2 is an assumption,proposal,Workwear and uniforms
-HT,US.IC,weibull,,,,,perc,,todo,Institutional linen (hotels/hospitals)
+HT,US.IC,weibull,2,2,1,4,abs,"assumption: institutional linen in hotels, hospitals and care homes is washed very often and replaced within a few years; no source found. Weibull shape 2 is an assumption",assumption,Institutional linen (hotels/hospitals)
 CA,US.HH,weibull,10,2,5,16,abs,"Napolano 2025 SM4 (5, Fair Claims Guide) to van Oorschot et al. 2020 (15.6). Weibull shape 2 is an assumption",proposal,Carpets and rugs in households
-CA,US.IC,weibull,,,,,perc,,todo,"Carpets in offices, public and commercial buildings"
+CA,US.IC,weibull,10,2,5,15,abs,"assumption: same order as carpets in households (Napolano et al. 2025 SM4, van Oorschot et al. 2020). Weibull shape 2 is an assumption",assumption,"Carpets in offices, public and commercial buildings"
 SA,US.IC,immediate,,,,,,decision D1 (2026-09-29),decided,"Sacks and bulk bags (FIBC) treated as packaging: discarded in the year they enter, no in-use stock"
 TA,US.HH,weibull,4,2,3,6,abs,"Napolano 2025 SM4 (tarpaulins and tents 4, sails 3). Weibull shape 2 is an assumption",proposal,"Tents, tarpaulins and camping goods in households"
-TA,US.IC,weibull,,,,,perc,,todo,"Tarpaulins, awnings and sails in businesses"
+TA,US.IC,weibull,5,2,3,8,abs,assumption: slightly longer than tarpaulins and tents in households (4 years). Weibull shape 2 is an assumption,assumption,"Tarpaulins, awnings and sails in businesses"
 OM,US.HH,weibull,2,2,1,3,abs,Napolano 2025 SM4 (cleaning cloths and other made-up articles 2). Weibull shape 2 is an assumption,proposal,"Other made-up articles in households (e.g. face masks, cleaning cloths)"
-OM,US.IC,weibull,,,,,perc,,todo,Other made-up articles in businesses
+OM,US.IC,weibull,2,2,1,3,abs,assumption: as other made-up articles in households (Napolano et al. 2025 SM4). Weibull shape 2 is an assumption,assumption,Other made-up articles in businesses
 YA,US.HH,weibull,8,2,5,15,abs,"assumption: time in the yarn stash plus the life of hand-knitted garments, which are kept longer than bought clothing (Klepp & Laitala). Weibull shape 2 is an assumption",proposal,Retail yarn and the garments made from it in households
+FW,US.IC,weibull,2,2,1,3,abs,"assumption: safety and work footwear, shorter than footwear in households (4 years). Weibull shape 2 is an assumption",assumption,Safety and work footwear

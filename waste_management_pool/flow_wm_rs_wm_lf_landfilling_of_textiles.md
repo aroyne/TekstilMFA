@@ -66,7 +66,7 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 30 % | 32 % | 29 % | nan % | nan % | nan % |
+| Bomull | 29 % | 31 % | 30 % | nan % | nan % | nan % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | nan % | nan % | nan % |
 | Ikke-tekstil | 19 % | 16 % | 16 % | nan % | nan % | nan % |
 | Andre fibre | 3 % | 3 % | 3 % | nan % | nan % | nan % |

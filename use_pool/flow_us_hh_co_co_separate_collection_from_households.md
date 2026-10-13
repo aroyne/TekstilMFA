@@ -73,9 +73,9 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 |---|---|---|---|---|---|---|
 | Bomull | 45 % | 47 % | 44 % | 40 % | 37 % | 36 % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 17 % | 16 % | 19 % | 18 % | 17 % | 17 % |
+| Ikke-tekstil | 18 % | 16 % | 19 % | 18 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 27 % | 26 % | 29 % | 33 % | 36 % | 37 % |
+| Syntetisk | 27 % | 26 % | 30 % | 33 % | 36 % | 37 % |
 | Ull | 6 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_co_co_separate_collection_from_households_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -88,7 +88,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_separate_collection_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L37). Dokumentasjonen i koden:
+Beregnes i `_separate_collection_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L38). Dokumentasjonen i koden:
 
 > Separately collected from households = exported used textiles + the part
 > kept in Norway (D17) - unsold clothing donated by retailers, which is

@@ -47,6 +47,8 @@ FIBRE_RULES = {
     'mixed': 'Blandingen av alt som går inn i WM.RS samme år.',
     'collected': 'Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmodellen) og usolgte '
                  'klær som forhandlerne gir til innsamlerne (tilførselssammensetningen).',
+    'institutions': 'Utstrømmen av en årgangsmodell av salget til institusjoner og bedrifter. Sekker har '
+                    'tilførselssammensetningen samme år.',
     'release': 'Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-tekstil). '
                'Syntetisk er mikroplast, de andre gruppene er naturfibre og regenerert cellulose.',
 }
@@ -283,6 +285,7 @@ def _fibre_rule(code):
         return MANUFACTURING_RULES[code]
     for key, codes in (('supply', fibre_layer.SUPPLY_FLOWS), ('discards', fibre_layer.DISCARD_FLOWS),
                        ('collected', fibre_layer.COLLECTED_FLOWS), ('release', fibre_layer.RELEASE_FLOWS),
+                       ('institutions', [fibre_layer.INSTITUTIONAL_WASTE]),
                        ('mixed', fibre_layer.MIXED_FLOWS)):
         if code in codes:
             return FIBRE_RULES[key]
