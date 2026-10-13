@@ -60,7 +60,7 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 16 % | 7 % | 7 % | 6 % | 6 % | 6 % |
-| Klær | 33 % | 33 % | 33 % | 25 % | 24 % | 23 % |
+| Klær | 33 % | 33 % | 32 % | 24 % | 24 % | 23 % |
 | Sko | 10 % | 9 % | 9 % | 7 % | 7 % | 6 % |
 | Hjemmetekstiler | 14 % | 12 % | 13 % | 11 % | 9 % | 8 % |
 | Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 4 % |
@@ -77,7 +77,7 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 | Regenerert cellulose | 2 % | 2 % | 1 % | 2 % | 1 % | 1 % |
 | Ikke-tekstil | 15 % | 11 % | 12 % | 11 % | 10 % | 9 % |
 | Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |
-| Syntetisk | 46 % | 55 % | 55 % | 66 % | 67 % | 69 % |
+| Syntetisk | 46 % | 55 % | 56 % | 66 % | 67 % | 69 % |
 | Ull | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
 
 <iframe src="../output_files/plots/pages/di_rt_us_ic_sales_to_institutions_and_businesses_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -90,12 +90,12 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L27). Dokumentasjonen i koden:
+Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L73). Dokumentasjonen i koden:
 
 > Balance of DI.RT per product: registered imports plus finished goods
-> and hand knitting yarn made in Norway minus exports, split between
-> households and institutions/businesses. Sacks (SA) are packaging
+> and hand knitting yarn made in Norway minus exports and unsold goods,
+> split between households and institutions/businesses. Sacks (SA) are packaging
 > used by businesses (D13) and go entirely to US.IC; retail yarn (YA) goes
-> entirely to households. Unsold goods are not yet included. A negative
-> balance is not physical and is clipped at 0; the clipped mass is recorded and reported on the flow
+> entirely to households. A negative balance is not physical and is
+> clipped at 0; the clipped mass is recorded and reported on the flow
 > pages.

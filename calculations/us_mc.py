@@ -11,6 +11,7 @@ Products without discard statistics (other textile goods CA/TA/OM, and all
 products used by institutions and businesses) are assumed to be discarded in
 the year they are supplied (no stock change) until a better basis exists.
 """
+from calculations.system import clip_negative
 from calculations.timeseries import interpolate
 from calculations.utils import PRODUCT_GROUPS, PRODUCTS, core_group_only
 
@@ -23,10 +24,18 @@ def execute_calculations_us(mfa, preloaded_data, current_params, dataset_noise, 
 
 
 def _separate_collection_mc(mfa):
-    """Separately collected = exported used textiles + the part kept in Norway (D17)."""
+    """
+    Separately collected from households = exported used textiles + the part
+    kept in Norway (D17) - unsold clothing donated by retailers, which is
+    exported with the used textiles (D27). A negative value is not physical
+    and is clipped at 0; the clipped mass is recorded and reported on the
+    flow page.
+    """
     exported = mfa.flows['CO.CO-RW.RW-Export of unsorted collected textiles-TOT'].values
     retained = mfa.flows['CO.CO-CO.SO-Collected textiles to domestic sorting-TOT'].values
-    mfa.flows['US.HH-CO.CO-Separate collection from households-TOT'].values[...] = exported + retained
+    donated = mfa.flows['DI.RT-CO.CO-Unsold goods donated-TOT'].values.sum(axis=1)
+    clip_negative(mfa, 'US.HH-CO.CO-Separate collection from households-TOT',
+                  exported + retained - core_group_only(donated))
 
 
 def _residual_core(anchors):

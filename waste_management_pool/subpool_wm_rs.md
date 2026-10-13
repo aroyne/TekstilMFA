@@ -21,7 +21,7 @@ Type: process. Lager: clipping.
 ## Flyter inn
 
 * [Preconsumer production waste](../manufacturing_pool/flow_ma_tx_wm_rs_preconsumer_production_waste.html) ← MA.TX
-* [Unsold goods discarded](../distribution_pool/flow_di_rt_wm_rs_unsold_goods_discarded.html) ← DI.RT *(planlagt)*
+* [Unsold goods discarded](../distribution_pool/flow_di_rt_wm_rs_unsold_goods_discarded.html) ← DI.RT
 * [Reusable textiles in residual and bulky waste](../use_pool/flow_us_hh_wm_rs_reusable_textiles_in_residual_and_bulky_waste.html) ← US.HH
 * [Worn textiles in residual and bulky waste](../use_pool/flow_us_hh_wm_rs_worn_textiles_in_residual_and_bulky_waste.html) ← US.HH
 * [Institutional textile waste](../use_pool/flow_us_ic_wm_rs_institutional_textile_waste.html) ← US.IC

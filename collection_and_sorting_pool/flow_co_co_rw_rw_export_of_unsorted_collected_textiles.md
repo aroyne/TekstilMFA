@@ -38,13 +38,13 @@ nav_order: 1
 
 #### Antakelser
 
-- All eksport av 6309 og 6310 kommer fra separat innsamling fra husholdningene. Noe kan være sortert, og noe kan være filler fra industri og institusjoner.
+- Eksporten av 6309 og 6310 kommer fra separat innsamling fra husholdningene og fra usolgte klær som forhandlerne gir til innsamlerne (D27). Noe kan være sortert, og noe kan være filler fra industri og institusjoner.
 - Flyten er bare i produktgruppen CORE.
 
 #### Sammensetning (varetype og materiale)
 
 - Bare CORE.
-- Materialet er utstrømmen fra årgangsmodellen for husholdningene.
+- Materialet er blandingen av det som samles inn fra husholdningene (utstrømmen fra årgangsmodellen) og donerte usolgte klær.
 
 #### Tidsutvikling og sammenligninger
 
@@ -64,16 +64,16 @@ Andel av summen i nøkkelår (median).
 
 ### Materiale (fiberlag, D19)
 
-For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdningene. For andre produkter: tilførselssammensetningen samme år.
+Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmodellen) og usolgte klær som forhandlerne gir til innsamlerne (tilførselssammensetningen).
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 46 % | 48 % | 44 % | 40 % | 37 % | 36 % |
-| Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 17 % | 16 % | 18 % | 17 % | 17 % | 17 % |
+| Bomull | 49 % | 48 % | 44 % | 40 % | 37 % | 36 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 14 % | 16 % | 18 % | 17 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 27 % | 26 % | 30 % | 33 % | 36 % | 37 % |
-| Ull | 6 % | 6 % | 5 % | 5 % | 6 % | 6 % |
+| Syntetisk | 28 % | 27 % | 30 % | 33 % | 36 % | 37 % |
+| Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/co_co_rw_rw_export_of_unsorted_collected_textiles_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

@@ -70,8 +70,8 @@ Balansen i MA.FI per materiale, klippet til 0.
 | Bomull | 32 % | 22 % | 5 % | 6 % | 3 % | 2 % |
 | Regenerert cellulose | 11 % | 10 % | 1 % | 2 % | 1 % | 1 % |
 | Andre fibre | 1 % | 5 % | 12 % | 7 % | 14 % | 12 % |
-| Syntetisk | 51 % | 58 % | 67 % | 59 % | 56 % | 62 % |
-| Ull | 5 % | 5 % | 15 % | 28 % | 25 % | 24 % |
+| Syntetisk | 51 % | 58 % | 67 % | 59 % | 57 % | 62 % |
+| Ull | 5 % | 5 % | 15 % | 27 % | 24 % | 24 % |
 
 <iframe src="../output_files/plots/pages/ma_fi_ma_tx_yarn_to_textile_manufacturing_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -85,8 +85,8 @@ I fiberlaget (per materiale):
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 1989 | 1 av 1000 | 0.000 | 0.055 | 0.000 |
-| 2000 | 1 av 1000 | 0.000 | 0.114 | 0.000 |
+| 1989 | 1 av 1000 | 0.000 | 0.034 | 0.000 |
+| 2000 | 1 av 1000 | 0.000 | 0.017 | 0.000 |
 
 ## Beregning i koden
 

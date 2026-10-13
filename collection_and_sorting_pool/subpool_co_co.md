@@ -19,7 +19,7 @@ Type: process. Lager: no.
 
 ## Flyter inn
 
-* [Unsold goods donated](../distribution_pool/flow_di_rt_co_co_unsold_goods_donated.html) ← DI.RT *(planlagt)*
+* [Unsold goods donated](../distribution_pool/flow_di_rt_co_co_unsold_goods_donated.html) ← DI.RT
 * [Separate collection from households](../use_pool/flow_us_hh_co_co_separate_collection_from_households.html) ← US.HH
 * [Collection from institutions](../use_pool/flow_us_ic_co_co_collection_from_institutions.html) ← US.IC *(planlagt)*
 

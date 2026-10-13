@@ -45,6 +45,8 @@ FIBRE_RULES = {
     'discards': 'For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdningene. '
                 'For andre produkter: tilførselssammensetningen samme år.',
     'mixed': 'Blandingen av alt som går inn i WM.RS samme år.',
+    'collected': 'Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmodellen) og usolgte '
+                 'klær som forhandlerne gir til innsamlerne (tilførselssammensetningen).',
 }
 # Fibre layer rule of each MA flow (calculations/fibre_layer.manufacturing_layer).
 MANUFACTURING_RULES = {
@@ -278,7 +280,7 @@ def _fibre_rule(code):
     if code in MANUFACTURING_RULES:
         return MANUFACTURING_RULES[code]
     for key, codes in (('supply', fibre_layer.SUPPLY_FLOWS), ('discards', fibre_layer.DISCARD_FLOWS),
-                       ('mixed', fibre_layer.MIXED_FLOWS)):
+                       ('collected', fibre_layer.COLLECTED_FLOWS), ('mixed', fibre_layer.MIXED_FLOWS)):
         if code in codes:
             return FIBRE_RULES[key]
     return ''

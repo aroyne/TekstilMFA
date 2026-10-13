@@ -17,6 +17,7 @@ INFLOWS_WM_RS = [
     'US.IC-WM.RS-Institutional textile waste-TOT',
     'CO.SO-WM.RS-Sorting residues-TOT',
     'MA.TX-WM.RS-Preconsumer production waste-TOT',
+    'DI.RT-WM.RS-Unsold goods discarded-TOT',
 ]
 
 

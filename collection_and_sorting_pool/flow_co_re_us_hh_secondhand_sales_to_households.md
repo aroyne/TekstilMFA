@@ -43,7 +43,7 @@ nav_order: 1
 
 #### Sammensetning (varetype og materiale)
 
-- Bare CORE, med utstrømmen fra årgangsmodellen.
+- Bare CORE, med blandingen av det som samles inn fra husholdningene (utstrømmen fra årgangsmodellen) og donerte usolgte klær.
 
 #### Tidsutvikling og sammenligninger
 
@@ -62,16 +62,16 @@ Andel av summen i nøkkelår (median).
 
 ### Materiale (fiberlag, D19)
 
-For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdningene. For andre produkter: tilførselssammensetningen samme år.
+Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmodellen) og usolgte klær som forhandlerne gir til innsamlerne (tilførselssammensetningen).
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 46 % | 48 % | 44 % | 40 % | 37 % | 36 % |
-| Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 17 % | 16 % | 18 % | 17 % | 17 % | 17 % |
+| Bomull | 50 % | 48 % | 44 % | 40 % | 37 % | 36 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 14 % | 16 % | 18 % | 17 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 27 % | 26 % | 30 % | 33 % | 36 % | 37 % |
-| Ull | 6 % | 6 % | 5 % | 5 % | 6 % | 6 % |
+| Syntetisk | 28 % | 27 % | 30 % | 33 % | 36 % | 37 % |
+| Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/co_re_us_hh_secondhand_sales_to_households_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

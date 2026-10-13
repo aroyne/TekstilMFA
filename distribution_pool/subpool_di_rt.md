@@ -17,8 +17,8 @@ Type: process. Lager: clipping.
 * [Sales to households](../distribution_pool/flow_di_rt_us_hh_sales_to_households.html) → US.HH
 * [Sales to institutions and businesses](../distribution_pool/flow_di_rt_us_ic_sales_to_institutions_and_businesses.html) → US.IC
 * [Export of finished textile products](../distribution_pool/flow_di_rt_rw_rw_export_of_finished_textile_products.html) → RW.RW
-* [Unsold goods discarded](../distribution_pool/flow_di_rt_wm_rs_unsold_goods_discarded.html) → WM.RS *(planlagt)*
-* [Unsold goods donated](../distribution_pool/flow_di_rt_co_co_unsold_goods_donated.html) → CO.CO *(planlagt)*
+* [Unsold goods discarded](../distribution_pool/flow_di_rt_wm_rs_unsold_goods_discarded.html) → WM.RS
+* [Unsold goods donated](../distribution_pool/flow_di_rt_co_co_unsold_goods_donated.html) → CO.CO
 
 ## Flyter inn
 

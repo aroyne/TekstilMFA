@@ -17,12 +17,14 @@ and flows. The TOT masses are never changed: they come from the statistics
             (D6), so they share the import composition. Flows out of DI.RT
             mix in finished goods made in Norway (the MA.TX balance per
             material) and hand knitting yarn spun in Norway (WO).
-  discards  Flows out of US.HH and through CO: the CORE group (CL+HT+FW and
-            retail yarn) gets the composition of the outflow of an
-            inflow-driven cohort model of US.HH, so it
+  discards  Flows out of US.HH: the CORE group (CL+HT+FW and retail
+            yarn) gets the composition of the outflow of an inflow-driven
+            cohort model of US.HH, so it
             reflects what was bought earlier. CA, TA and OM are discarded in
             the year supplied, so they keep the supply composition.
             Reusable and worn residual textiles share one composition.
+  collected Flows through CO get the mix of what is collected from
+            households and unsold clothing donated by retailers.
   mixed     Flows out of WM.RS get the composition of everything entering
             WM.RS that year.
   manufacturing
@@ -64,11 +66,19 @@ SUPPLY_FLOWS = [
     'DI.RT-RW.RW-Export of finished textile products-TOT',
     'DI.RT-US.IC-Sales to institutions and businesses-TOT',
     'US.IC-WM.RS-Institutional textile waste-TOT',
+    'DI.RT-CO.CO-Unsold goods donated-TOT',
+    'DI.RT-WM.RS-Unsold goods discarded-TOT',
 ] + NEW_GOODS_TO_HOUSEHOLDS
 DISCARD_FLOWS = [
     'US.HH-CO.CO-Separate collection from households-TOT',
     'US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT',
     'US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT',
+]
+COLLECTION = 'US.HH-CO.CO-Separate collection from households-TOT'
+UNSOLD_DONATED = 'DI.RT-CO.CO-Unsold goods donated-TOT'
+# Flows through CO, with the mix of collected used textiles and donated
+# unsold clothing.
+COLLECTED_FLOWS = [
     'CO.CO-RW.RW-Export of unsorted collected textiles-TOT',
     'CO.CO-CO.SO-Collected textiles to domestic sorting-TOT',
     'CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT',
@@ -327,13 +337,27 @@ def household_discard_composition(cohorts, supply):
     return composition
 
 
+def collected_composition(fibre):
+    """
+    Material shares of what passes through CO, array (year, product group,
+    material): the mix of used textiles collected from households and
+    unsold goods donated by retailers, so that CO.CO balances per material.
+    """
+    mix = to_dims(fibre.flows[COLLECTION], ('t', 'g', 'm')).values + to_dims(
+        fibre.flows[UNSOLD_DONATED], ('t', 'g', 'm')).values
+    total = mix.sum(axis=2, keepdims=True)
+    # Groups that collect nothing (all but CORE) get zero flows anyway.
+    return np.divide(mix, total, out=np.zeros_like(mix), where=total > 0)
+
+
 def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_composition):
     """
     Fills the fibre system from the closed TOT system and closes it. Returns
     {output name: FlodymArray with material dimension} for the parallel stock
     model and for the stock level of the statistics-based balance.
     """
-    unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + MIXED_FLOWS + MANUFACTURING_FLOWS)
+    unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + COLLECTED_FLOWS + MIXED_FLOWS
+                                      + MANUFACTURING_FLOWS)
     if unassigned:
         raise KeyError(f"Flows without a fibre layer rule: {sorted(unassigned)}")
 
@@ -348,6 +372,9 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     discards = household_discard_composition(cohorts, supply)
     for code in DISCARD_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * discards
+    collected = collected_composition(fibre)
+    for code in COLLECTED_FLOWS:
+        fibre.flows[code].values[...] = tot.flows[code].values[..., None] * collected
 
     mix = sum(to_dims(f, ('t', 'm')).values for f in fibre.flows.values() if f.to_process.name == MIXED_SOURCE)
     mix_shares = mix / mix.sum(axis=1, keepdims=True)
