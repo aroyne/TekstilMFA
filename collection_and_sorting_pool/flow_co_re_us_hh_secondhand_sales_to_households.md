@@ -30,23 +30,24 @@ nav_order: 1
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **CO.RE-US.HH-Secondhand sales to households-TOT** er brukte tekstiler solgt fra innsamlernes bruktbutikker tilbake til husholdningene.
+- Uformell ombruk (Finn, Tise, arv) er ikke med. Den regnes som lengre levetid i husholdningene (D9).
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Flyten er balansen i CO.RE: alt som sorteres til bruktbutikk, selges.
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Usolgte varer i bruktbutikk er ikke med ennå.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Bare CORE, med utstrømmen fra årgangsmodellen.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Flyten er liten sammenlignet med salget av nye varer: under 1 kt per år fram til 2022 og 1,5 kt i 2025.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

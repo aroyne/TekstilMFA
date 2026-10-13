@@ -30,23 +30,27 @@ nav_order: 2
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **US.IC-WM.RS-Institutional textile waste-TOT** er kasserte tekstiler fra bedrifter og offentlig sektor: arbeidsklær, uniformer, institusjonstekstiler, tepper, presenninger og sekker.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Ingen egen datakilde ennå. Flyten er lik salget til institusjoner og bedrifter (DI.RT-US.IC-Sales to institutions and businesses-TOT).
+- SSB 10513 (avfallsregnskapet etter materialtype) er en mulig kilde, men tekstiler fra næringslivet ligger mest i blandet avfall og kan ikke skilles ut.
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Stasjonær tilstand: alt kasseres samme år som det kjøpes, og lageret i US.IC endrer seg ikke.
+- Alt går til restavfall (WM.RS). Innsamling fra institusjoner er ikke implementert.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Samme som salget til institusjoner og bedrifter: sekker 21–45 % og klær 24–33 %.
+- Materialet er sammensetningen til salget samme år.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Flyten følger salget: 13 kt i 1990 og 28–31 kt i 2018–2025.
+- Antakelsen om stasjonær tilstand er et åpent spørsmål. Arbeidsklær har en levetid på omtrent tre år, så kasseringene ligger noe etter salget.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

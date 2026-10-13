@@ -30,23 +30,25 @@ nav_order: 2
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **DI.RT-US.IC-Sales to institutions and businesses-TOT** er tekstilvarer brukt av bedrifter og offentlig sektor: arbeidsklær, uniformer, sengetøy og håndklær i hoteller og sykehus, tepper i bygg, presenninger og sekker til emballasje.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Det finnes ingen norsk statistikk over denne fordelingen. Andelen er hentet fra Watson m.fl. (2020) og Rubach m.fl. (2023), som bruker den danske fordelingen 88/12, og kontrollert mot Nederland (omtrent 8 % arbeidsklær, Xu m.fl. 2024).
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- 12 % (8–15 %, PERT) av tilførselen av klær, hjemmetekstiler, sko, tepper, presenninger og andre konfeksjonerte varer. Sekker (SA) er emballasje og går helt hit (D13), og garn i detaljopplegg går ikke hit.
+- Samme andel i alle år.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Sekker økte fra 21 % i 1990 til 45 % i 2022. Klær er 24–33 %.
+- Materialet er blandingen av det som går inn i DI.RT. Syntetisk er 46–67 %, på grunn av sekker og storsekker av polypropylen.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Flyten økte fra 13 kt i 1990 til 28–31 kt i 2018–2025, mest på grunn av importen av sekker.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

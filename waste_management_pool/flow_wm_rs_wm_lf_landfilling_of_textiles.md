@@ -30,23 +30,26 @@ nav_order: 3
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **WM.RS-WM.LF-Landfilling of textiles-TOT** er tekstiler i restavfall og blandet avfall som deponeres.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Andel deponert: SSB, Avfallsregnskap for tekstiler 1990–1998 (79 % i 1991) og SSB 05281 (avfall etter materialtype og behandlingsmåte, 1995–2011). Fra 2012 viser SSB 10513 at tekstiler ikke deponeres.
+- SSBs avfallsregnskap bygger på data fra avfallsselskaper og forbrenningsanlegg, og for noen materialer før 2012 på beregninger av tilført mengde og levetid (D15).
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Andelen gjelder alt som går inn i WM.RS: restavfall fra husholdninger, institusjoner og produksjon, og sorteringsrester.
+- Andelen interpoleres mellom ankerpunktene og holdes på 1991-nivå før 1991.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Flyten er ikke delt på varetype.
+- Materialet er blandingen av alt som går inn i WM.RS samme år.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Deponeringen falt fra 78 kt i 1988 til 30 kt i 2009 og opphørte i 2012, etter forbudet mot å deponere nedbrytbart avfall fra 2009.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

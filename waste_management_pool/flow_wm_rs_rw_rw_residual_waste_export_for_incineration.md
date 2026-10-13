@@ -30,23 +30,26 @@ nav_order: 2
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **WM.RS-RW.RW-Residual waste export for incineration-TOT** er tekstiler i restavfall som eksporteres til forbrenning i utlandet, mest til Sverige.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Andel eksportert: SSB 13035 (KOSTRA), restavfall levert til forbrenning i utlandet delt på restavfall i alt, 2015–2025. Kommunene rapporterer tallene til KOSTRA.
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Andelen som gjelder husholdningenes restavfall, brukes for alle tekstiler i WM.RS, også fra institusjoner og produksjon.
+- Andelen er satt til 0 i 2005 og interpoleres til 2015-verdien.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Flyten er ikke delt på varetype.
+- Materialet er blandingen av alt som går inn i WM.RS.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Eksporten økte fra 0 i 2005 til 16 kt i 2017 og var 12–14 kt i 2020–2025.
+- Eksportandelen falt fra 16–19 % i 2015–2019 til 11–13 % i 2020–2025.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

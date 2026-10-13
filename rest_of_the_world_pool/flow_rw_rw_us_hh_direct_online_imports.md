@@ -30,23 +30,29 @@ nav_order: 5
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **RW.RW-US.HH-Direct online imports-TOT** er klær og hjemmetekstiler kjøpt direkte fra utenlandske nettbutikker i lavverdisendinger. Disse er ikke med under HS-kodene i 08801 (D7).
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- 2022–2025: sendinger til privatpersoner under VOEC-ordningen (forenklet mva-ordning for netthandel), HS-kapittel 61+62 og 63, fra Tolletaten via de Sadeleer & Rubach (2026). Tolletaten beskriver tallene som veiledende.
+- 2018: Watson m.fl. (2020) anslo 3,3 kt (3,2 mrd. kr i utenlandsk netthandel med klær, regnet om til masse). Anslaget kan overlappe med deklarerte pakker i 08801.
+- SSB 08801 har egne varenumre for lavverdisendinger fra 2023 (99.60.x), men uten fordeling på varer.
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Null rundt 2000, lineært mellom ankerpunktene og holdt fast etter 2025.
+- Usikkerhet ±50–60 % per ankerpunkt.
+- Hjemmetekstiler har ikke eget anslag før 2022.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Omtrent 90 % klær og 10 % hjemmetekstiler.
+- Materialet er sammensetningen til registrert import av samme varetype.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Flyten øker fra 0 rundt 2000 til 3,3 kt i 2018. VOEC-tallene er svært ujevne: 0,5 kt i 2022, 4,8 kt i 2023, 3,8 kt i 2024 og 14,0 kt i 2025.
+- Hvorfor 2022 er så mye lavere enn årene etter, er ikke avklart. VOEC-ordningen har gjeldt siden 2020.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

@@ -30,23 +30,25 @@ nav_order: 3
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT** er tekstiler i husholdningenes restavfall og grovavfall som ikke kan brukes om igjen (form WRN, D18): utslitte klær, hjemmetekstiler og sko, og alle tepper, presenninger, telt og andre konfeksjonerte varer som kasseres.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- CORE: tekstiler i restavfall og grovavfall fra plukkanalysene minus den brukbare delen (se US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT).
+- Tepper, presenninger og andre konfeksjonerte varer: salget til husholdningene samme år (DI.RT-US.HH-Sales to households-TOT).
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Tepper, presenninger og andre konfeksjonerte varer har ikke kasseringsstatistikk og kasseres samme år som de kjøpes (ingen lagerendring). Sekker brukes ikke av husholdninger (D13).
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- CORE falt fra 66 % i 1990 til 45 % i 2022. Tepper er 23–24 %, og presenninger og andre konfeksjonerte varer økte.
+- CORE har utstrømmen fra årgangsmodellen, og de andre varetypene har sammensetningen til salget samme år. Syntetisk økte fra 35 % i 1990 til 49 % i 2022.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Flyten falt fra 68 kt i 1988 til 46 kt i 2009 og økte til 56–59 kt i 2022–2025, i takt med tekstilene i restavfallet.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

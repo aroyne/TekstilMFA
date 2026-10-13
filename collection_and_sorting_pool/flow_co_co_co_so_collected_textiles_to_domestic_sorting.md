@@ -30,23 +30,24 @@ nav_order: 2
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **CO.CO-CO.SO-Collected textiles to domestic sorting-TOT** er innsamlede tekstiler som sorteres i Norge i stedet for å eksporteres usortert.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Andel av eksporten av brukte tekstiler, fra kartleggingene: 3,3 % i 2018 (Watson m.fl. 2020: 549 t ombruk, 93 t gjenvinning og 374 t rest), 2,9 % i 2022 (Rubach m.fl. 2023: 909 t ombruk) og 5,8 % i 2025 (de Sadeleer & Rubach 2026: 1 622 t ombruk og 364 t annet).
+- Kartleggingene bygger på tall fra innsamlerne (Fretex, UFF, Kirkens Bymisjon m.fl.).
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Andelen holdes fast før 2018 og interpoleres mellom ankerpunktene, med usikkerhet ±50 %.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Bare CORE, med utstrømmen fra årgangsmodellen.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Flyten var under 1 kt per år fram til 2015, 1,2 kt i 2018 og 2,0 kt i 2025.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

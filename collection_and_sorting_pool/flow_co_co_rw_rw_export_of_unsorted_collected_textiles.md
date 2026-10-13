@@ -30,23 +30,26 @@ nav_order: 1
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **CO.CO-RW.RW-Export of unsorted collected textiles-TOT** er eksport av brukte klær, hjemmetekstiler og sko og filler (HS 6309 og 6310), for det meste usortert til sortering i utlandet.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- SSB tabell 08801, nettovekt i kg (se RW.RW-DI.RT-Finished textile products import-TOT).
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- All eksport av 6309 og 6310 kommer fra separat innsamling fra husholdningene. Noe kan være sortert, og noe kan være filler fra industri og institusjoner.
+- Flyten er bare i produktgruppen CORE.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Bare CORE.
+- Materialet er utstrømmen fra årgangsmodellen for husholdningene.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Eksporten økte fra 0,6 kt i 1988 til 37,7 kt i 2019 og var 31–34 kt i 2022–2025.
+- Eksporten i 2025 (34,33 kt) er nøyaktig det samme som i de Sadeleer & Rubach (2026). For 2018 oppgir Watson m.fl. (2020) 30,7 kt, mot 36,4 kt i 08801.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

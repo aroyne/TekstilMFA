@@ -30,23 +30,25 @@ nav_order: 1
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **WM.RS-WM.IN-Domestic incineration-TOT** er tekstiler i restavfall og blandet avfall som forbrennes med energiutnyttelse i Norge.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Flyten er balansen i WM.RS: alt som går inn, minus deponi og eksport til forbrenning i utlandet.
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- WM.IN er et sluk: aske og utslipp følges ikke videre (D11).
+- En negativ balanse (deponi- og eksportandel over 1) er ikke-fysisk og klippes til 0. Det har ikke skjedd.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Flyten er ikke delt på varetype.
+- Materialet er blandingen av alt som går inn i WM.RS. Syntetisk økte fra 35 % i 1990 til 51 % i 2022.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Forbrenningen økte fra omtrent 20 kt per år rundt 1990 til 75 kt i 2012, da deponeringen opphørte, og til 90–98 kt i 2022–2025.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

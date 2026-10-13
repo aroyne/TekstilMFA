@@ -30,23 +30,28 @@ nav_order: 1
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **US.HH-CO.CO-Separate collection from households-TOT** er brukte tekstiler (klær, hjemmetekstiler og sko) som husholdningene leverer til separat innsamling: containere, butikker og gjenbruksstasjoner.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Innsamlet = eksport av brukte tekstiler og filler (HS 6309+6310, SSB 08801) + den delen som blir i Norge (D17).
+- Andelen som blir i Norge, er regnet som andel av eksporten fra de nasjonale kartleggingene: Watson m.fl. (2020) for 2018 (3,3 %), Rubach m.fl. (2023) for 2022 (2,9 %) og de Sadeleer & Rubach (2026) for 2025 (5,8 %). Kartleggingene bygger på tall fra innsamlerne.
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Nesten alt som samles inn, eksporteres usortert samme år.
+- Andelen som blir i Norge, holdes fast før 2018 og interpoleres mellom ankerpunktene (usikkerhet ±50 %).
+- Statistikken dekker klær, hjemmetekstiler og sko samlet, så flyten er bare i produktgruppen CORE.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Bare CORE.
+- Materialet er utstrømmen fra årgangsmodellen for husholdningene, altså det som ble kjøpt tidligere. Bomull falt fra 46 % i 1990 til 37 % i 2022, og syntetisk økte fra 27 % til 36 %. Ikke-tekstil (17 %) er mest såler fra sko.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Innsamlingen økte fra 0,6 kt i 1988 til 39 kt i 2019 og var 33–36 kt i 2022–2025.
+- Modellen gir mer enn kartleggingene: 37,6 kt mot 31,7 kt i 2018 (Watson), 32,5 kt mot 29,6 kt i 2022 (NORSUS) og 36,3 kt mot 33,7 kt i 2025. Forskjellen kommer fra eksporten i 08801, som trolig også omfatter filler og brukte tekstiler fra andre enn husholdningene.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

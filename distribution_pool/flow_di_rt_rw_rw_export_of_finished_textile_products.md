@@ -30,23 +30,27 @@ nav_order: 3
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **DI.RT-RW.RW-Export of finished textile products-TOT** er registrert eksport av ferdige tekstilvarer og garn i detaljopplegg, med samme varetyper som importen.
+- Flyten omfatter både gjeneksport (importerte varer, også returer fra netthandel) og eksport av varer laget i Norge (D6).
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- SSB tabell 08801, nettovekt i kg (se RW.RW-DI.RT-Finished textile products import-TOT).
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- All eksport av ferdigvarer føres fra DI.RT, fordi handelsstatistikken ikke skiller gjeneksport fra norsk produksjon. Eksport av metervare føres fra MA.TX.
+- Overstiger eksporten det DI.RT har av en varetype, klippes salget til 0 (se DI.RT-US.HH-Sales to households-TOT). Det har ikke skjedd.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Hjemmetekstiler økte fra 23 % i 1990 til 38 % i 2022, blant annet dyner og puter. Klær er 28–32 %, sko falt fra 18 % til 10 %, og garn i detaljopplegg er 10–11 %.
+- Materialet er blandingen av det som går inn i DI.RT (import, norske ferdigvarer og norsk håndstrikkegarn) per varetype.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Eksporten økte fra 4,5 kt i 1988 til 13,0 kt i 2025, og veksten har vært raskest etter 2015.
+- Eksport av garn i detaljopplegg økte fra 0,7 kt i 2018 til 2,1 kt i 2025.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

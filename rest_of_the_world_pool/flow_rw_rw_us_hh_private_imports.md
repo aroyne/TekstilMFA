@@ -30,23 +30,30 @@ nav_order: 4
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **RW.RW-US.HH-Private imports-TOT** er klær og sko kjøpt av husholdninger på dagsturer til utlandet (grensehandel), som ikke er med i handelsstatistikken.
+- Kjøp på reiser med overnatting er ikke med.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- SSB 05678 (grensehandel på dagsturer i alt, mill. kr, 2004–2022) og SSB 14221 (klær og sko, mill. kr, 2023–2025).
+- Grensehandelsstatistikken bygger på en utvalgsundersøkelse av husholdningene, oppblåst til hele befolkningen.
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- 2004–2022: grensehandelen i alt × klesandelen, som er snittet av 2023–2025 (4,7 %, D16).
+- Kroner regnes om til kg med tollverdien per kg for importerte klær og sko samme år × et påslag for utsalgspris (2,5, usikkerhet 1,8–3,5).
+- Massen fordeles mellom klær og sko etter andelen av registrert import.
+- Før 2004 holdes mengden på 2004-nivå.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Omtrent 75 % klær og 25 % sko.
+- Materialet er sammensetningen til registrert import av samme varetype.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Flyten er liten: 0,9–1,0 kt per år i 2004–2019, 0,1 kt i 2020–2021 da grensene var stengt, og 0,4–0,5 kt i 2022–2025.
+- Nivået etter 2023 bygger på det direkte tallet for klær og sko, mens nivået før bygger på klesandelen av all grensehandel. Overgangen kan derfor delvis skyldes metoden.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

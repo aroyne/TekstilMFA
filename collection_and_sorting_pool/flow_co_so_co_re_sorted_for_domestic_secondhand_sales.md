@@ -30,23 +30,23 @@ nav_order: 1
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT** er tekstiler sortert i Norge som selges i norske bruktbutikker.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Andel av det som sorteres i Norge, fra kartleggingene: 54 % i 2018 (Watson m.fl. 2020: 549 av 1 016 t), 95 % i 2022 (Rubach m.fl. 2023: rest ikke oppgitt, antatt liten) og 82 % i 2025 (de Sadeleer & Rubach 2026: 1 622 av 1 986 t).
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Andelen holdes fast før 2018 og interpoleres mellom ankerpunktene (usikkerhet 0,3–1,0).
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Bare CORE, med utstrømmen fra årgangsmodellen.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Flyten var under 0,5 kt per år fram til 2015, 0,7–0,8 kt i 2018–2022 og 1,5 kt i 2025.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

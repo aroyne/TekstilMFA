@@ -30,23 +30,29 @@ nav_order: 2
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT** er klær, hjemmetekstiler og sko i husholdningenes restavfall og grovavfall som kunne vært brukt om igjen (form USE, D18).
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Tekstiler i restavfall og grovavfall (CORE): plukkanalyser fra Mepex og kommunene, via Watson m.fl. (2020) for 2018 (31,6 kt), Rubach m.fl. (2023) for 2022 (48,8 kt) og de Sadeleer & Rubach (2026) for 2025 (44,5 kt). For 2009 brukes Laitala m.fl. (2012), 5,6 kg per innbygger i restavfallet (33,5 kt med gjenbruksstasjoner), og for 1998 SSBs avfallsregnskap for tekstiler (58,5 kt, omregnet til CORE).
+- I en plukkanalyse sorteres et utvalg restavfall fra husholdninger, og andelen tekstiler skaleres opp med kommunenes avfallsmengder.
+- Andel brukbart: Laitala m.fl. (2012) for Oslo 2010–2011 (27,5 %), Rubach m.fl. (2023) for 2022 (45 %, bare hentet restavfall) og de Sadeleer & Rubach (2026) for 2025 (40 %).
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Mengden og andelen interpoleres mellom ankerpunktene. Mengden holdes fast før 1998, og andelen holdes fast før 2011.
+- Usikkerhet: 30–40 % på mengden og 0,2–0,6 (absolutt) på andelen.
+- Andre varetyper (tepper, presenninger, andre konfeksjonerte varer) regnes som utslitte.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Bare CORE.
+- Materialet er utstrømmen fra årgangsmodellen. Brukbart og utslitt har samme sammensetning.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Flyten var 15,7 kt per år fram til 1998, falt til 8,9 kt i 2011 og økte til 21,9 kt i 2022 og 17,8 kt i 2025.
+- Økningen etter 2011 kommer både fra mer tekstiler i restavfallet og fra høyere andel brukbart i de nye plukkanalysene.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

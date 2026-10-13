@@ -30,23 +30,27 @@ nav_order: 1
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **DI.RT-US.HH-Sales to households-TOT** er nye tekstilvarer solgt til private husholdninger gjennom handelen (butikk og norsk netthandel).
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Flyten er balansen i DI.RT og har ingen egen datakilde: import (08801) + norske ferdigvarer (MA.TX) + norsk håndstrikkegarn − eksport (08801), minus salget til institusjoner og bedrifter.
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Alt som tilføres handelen, selges samme år. Lager i handelen og usolgte varer er ikke med ennå.
+- 12 % av klær, hjemmetekstiler, sko, tepper, presenninger og andre konfeksjonerte varer går til institusjoner og bedrifter. Sekker går bare dit, og garn i detaljopplegg bare til husholdningene.
+- En negativ balanse er ikke-fysisk og klippes til 0. Det har ikke skjedd.
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Klær er 41–44 %, hjemmetekstiler 17 % og sko 13 %. Tepper falt fra 20 % i 1990 til 11 % i 2022.
+- Materialet er blandingen av det som går inn i DI.RT per varetype. Syntetisk økte fra 32 % i 1990 til 42 % i 2022.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Salget økte fra 76–81 kt rundt 1990 til 116 kt i 2005 og har ligget på 106–131 kt siden (høyest i 2011).
+- Fallet til 107 kt i 2025 følger fallet i klesimporten etter 2023, men en del av det er erstattet av direkte netthandel.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

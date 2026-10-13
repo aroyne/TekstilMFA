@@ -30,23 +30,23 @@ nav_order: 4
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- *Ikke skrevet ennå.*
+- **CO.SO-WM.RS-Sorting residues-TOT** er tekstiler sortert i Norge som ikke selges brukt i Norge: utsortert avfall og tekstiler til materialgjenvinning.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- *Ikke skrevet ennå.*
+- Flyten er balansen i CO.SO: det som sorteres i Norge, minus det som går til bruktbutikk.
 
 #### Antakelser
 
-- *Ikke skrevet ennå.*
+- Materialgjenvinning er ikke skilt ut ennå (WM.RC er ikke implementert), så alt går til restavfall (WM.RS).
 
 #### Sammensetning (varetype og materiale)
 
-- *Ikke skrevet ennå.*
+- Bare CORE, med utstrømmen fra årgangsmodellen.
 
 #### Tidsutvikling og sammenligninger
 
-- *Ikke skrevet ennå.*
+- Flyten er liten: under 0,5 kt per år i hele perioden.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
