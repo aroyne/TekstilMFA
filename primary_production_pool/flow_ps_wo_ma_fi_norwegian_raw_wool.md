@@ -25,17 +25,6 @@ nav_order: 1
 
 <iframe src="../output_files/plots/pages/ps_wo_ma_fi_norwegian_raw_wool.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 4.96 | 4.79 – 5.14 |
-| 2000 | 4.95 | 4.79 – 5.13 |
-| 2010 | 4.36 | 4.22 – 4.52 |
-| 2018 | 3.91 | 3.78 – 4.05 |
-| 2022 | 3.16 | 3.05 – 3.27 |
-| 2025 | 2.86 | 2.77 – 2.97 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

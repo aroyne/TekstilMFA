@@ -25,17 +25,6 @@ nav_order: 5
 
 <iframe src="../output_files/plots/pages/rw_rw_us_hh_direct_online_imports.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
-## Nøkkeltall (sum over produkter)
-
-| År | Median (kt) | 95 %-intervall (kt) |
-|---|---|---|
-| 1990 | 0.00 | 0.00 – 0.00 |
-| 2000 | 0.00 | 0.00 – 0.00 |
-| 2010 | 1.84 | 1.05 – 2.57 |
-| 2018 | 3.32 | 1.89 – 4.63 |
-| 2022 | 0.54 | 0.36 – 0.70 |
-| 2025 | 13.92 | 9.16 – 18.64 |
-
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->

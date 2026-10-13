@@ -6,8 +6,8 @@ summaries: one folder per pool with a pool page, one page per subpool and
 one page per flow, as in NitrogenBudsjett.
 
   * Flow pages live under the subpool the flow leaves (imports under RW.RW).
-    They hold the register entry, plots (by product and by material), key
-    numbers, and the docstring of the function in calculations/ that
+    They hold the register entry, plots (by product and by material), the
+    manual description, composition tables, and the docstring of the function in calculations/ that
     computes the flow, so the documentation in the code is shown as is.
   * Subpool and pool pages hold their flows and a mass balance plot.
   * Text written by hand between <!-- MANUAL:<NAME>:START --> and
@@ -242,18 +242,6 @@ def _composition(site, code, name, fibre_plot):
     return lines
 
 
-def _key_numbers(summary, code):
-    rows = summary[(summary['flow_name'] == code) & summary['product'].isin(['TOTAL', 'ALL'])]
-    rows = rows[rows['year'].isin(KEY_YEARS)].set_index('year')
-    lines = ['| År | Median (kt) | 95 %-intervall (kt) |', '|---|---|---|']
-    for year, r in rows.iterrows():
-        lines.append(f"| {year} | {r['median']:.2f} | {r['p2_5']:.2f} – {r['p97_5']:.2f} |")
-    return '\n'.join(lines)
-
-
-LAYER_NAMES = {'TOT': 'TOT', 'fibre': 'fiberlaget (per materiale)'}
-
-
 def _clipping(clipping, code):
     """
     Section on clipping at 0 for a flow that can be clipped: how often and
@@ -318,8 +306,7 @@ def write_flow_page(site, row, nav_order):
         fibre_plot = f'{PLOT_DIR}/{slug}_materials.html'
         utils_stat.plot_flow(site.summary, code, f"{row['name']} – per produkt (median, 95 % for summen)", plot)
         utils_stat.plot_flow_materials(site.fibre, code, f"{row['name']} – per materiale (median)", fibre_plot)
-        body += ['## Tidsserie', '', _iframe(plot, 420), '', '## Nøkkeltall (sum over produkter)', '',
-                 _key_numbers(site.summary, code), '']
+        body += ['## Tidsserie', '', _iframe(plot, 420), '']
         after = _composition(site, code, row['name'], fibre_plot) + _clipping(site.clipping, code)
         if code in site.functions:
             file, func, line, doc = site.functions[code]
