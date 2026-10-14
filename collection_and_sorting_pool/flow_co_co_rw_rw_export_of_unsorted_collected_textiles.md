@@ -38,7 +38,7 @@ nav_order: 1
 
 #### Antakelser
 
-- Eksporten av 6309 og 6310 kommer fra separat innsamling fra husholdningene og fra usolgte klær som forhandlerne gir til innsamlerne (D27). Noe kan være sortert, og noe kan være filler fra industri og institusjoner.
+- Eksporten av 6309 og 6310 kommer fra separat innsamling fra husholdningene og fra usolgte klær som forhandlerne gir til innsamlerne (D27). Noe kan være sortert, og noe av fillene (6310) kan komme fra industri og institusjoner. Mengden filler er liten, så den beholdes i flyten (D31).
 - Flyten er bare i produktgruppen CORE.
 
 #### Sammensetning (varetype og materiale)
@@ -48,7 +48,8 @@ nav_order: 1
 
 #### Tidsutvikling og sammenligninger
 
-- Eksporten økte fra 0,6 kt i 1988 til 37,7 kt i 2019 og var 31–34 kt i 2022–2025.
+- Eksporten økte fra 0,6 kt i 1988 til 37,7 kt i 2019 og var 31–34 kt i 2022–2025. Nesten alt er brukte klær (6309). Filler (6310) var 0,2–0,9 kt per år, men 1,5 kt i 2025.
+- Eksporten går mest til sorteringsland: i 2022 Polen (12 kt), Tyskland (6 kt), Bulgaria (5 kt) og Litauen (3 kt). Eksportprisen er 6–9 kr/kg, som for usortert vare.
 - Eksporten i 2025 (34,33 kt) er nøyaktig det samme som i de Sadeleer & Rubach (2026). For 2018 oppgir Watson m.fl. (2020) 30,7 kt, mot 36,4 kt i 08801.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 

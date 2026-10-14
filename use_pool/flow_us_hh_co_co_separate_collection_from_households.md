@@ -41,7 +41,7 @@ nav_order: 1
 
 - Nesten alt som samles inn, eksporteres usortert samme år.
 - Usolgte klær fra forhandlere eksporteres sammen med de innsamlede tekstilene og trekkes derfor fra. Blir resultatet negativt, klippes det til 0.
-- Andelen som blir i Norge, holdes fast før 2018 og interpoleres mellom ankerpunktene (usikkerhet ±50 %).
+- Andelen som blir i Norge, holdes på 2018-nivået før 2018, med usikkerhet som øker bakover (D30), og interpoleres mellom ankerpunktene (usikkerhet ±50 %). Bruktbutikker (blant annet Fretex) har eksistert hele perioden, så andelen var neppe null tidlig.
 - Statistikken dekker klær, hjemmetekstiler og sko samlet, så flyten er bare i produktgruppen CORE.
 
 #### Sammensetning (varetype og materiale)
@@ -52,7 +52,8 @@ nav_order: 1
 #### Tidsutvikling og sammenligninger
 
 - Innsamlingen økte fra 0,6 kt i 1988 til 39 kt i 2019 og var 33–36 kt i 2022–2025.
-- Modellen gir mer enn kartleggingene: 36,9 kt mot 31,7 kt i 2018 (Watson), 32,3 kt mot 29,6 kt i 2022 (NORSUS) og 36,1 kt mot 33,7 kt i 2025. Forskjellen kommer fra eksporten i 08801, som trolig også omfatter filler og brukte tekstiler fra andre enn husholdningene.
+- Modellen gir mer enn kartleggingene: 36,9 kt mot 31,7 kt i 2018 (Watson), 32,3 kt mot 29,6 kt i 2022 (NORSUS) og 36,1 kt mot 33,7 kt i 2025. Eksportstatistikken regnes som mer fullstendig enn kartleggingene (D31): NORSUS oppgir selv eksport fra tollstatistikken (31,6 kt i 2022) som er større enn innsamlingen innsamlerne rapporterer (29,6 kt). Man kan ikke eksportere mer enn man samler inn, og importen av brukte tekstiler er under 0,3 kt. Trolig mangler kartleggingene noen aktører, for eksempel private innsamlere utenfor nettverket.
+- Kommunenes tall i KOSTRA (SSB 13035, «Tekstiler til ombruk», 10–15 kt i 2015–2018) gjelder bare kommunale ordninger og er en nedre kontroll.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning

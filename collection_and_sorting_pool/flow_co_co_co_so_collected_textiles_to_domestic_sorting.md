@@ -39,7 +39,7 @@ nav_order: 2
 
 #### Antakelser
 
-- Andelen holdes fast før 2018 og interpoleres mellom ankerpunktene, med usikkerhet ±50 %.
+- Andelen holdes på 2018-nivået før 2018, med usikkerhet som øker bakover (D30), og interpoleres mellom ankerpunktene, med usikkerhet ±50 %. Bruktbutikker har eksistert hele perioden, så andelen var neppe null tidlig (D31).
 
 #### Sammensetning (varetype og materiale)
 
