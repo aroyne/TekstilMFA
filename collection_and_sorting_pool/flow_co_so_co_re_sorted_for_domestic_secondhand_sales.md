@@ -30,15 +30,17 @@ nav_order: 1
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- **CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT** er tekstiler sortert i Norge som selges i norske bruktbutikker.
+- **CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT** er tekstiler sortert i Norge som selges i norske bruktbutikker, og importerte brukte klær (HS 6309) som selges i bruktbutikker og vintagebutikker.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
 - Andel av det som sorteres i Norge, fra kartleggingene: 54 % i 2018 (Watson m.fl. 2020: 549 av 1 016 t), 95 % i 2022 (Rubach m.fl. 2023: rest ikke oppgitt, antatt liten) og 82 % i 2025 (de Sadeleer & Rubach 2026: 1 622 av 1 986 t).
 
+- Importerte brukte klær: SSB 08801 (HS 6309), 0,02–0,35 kt per år.
+
 #### Antakelser
 
-- Andelen holdes fast før 2018 og interpoleres mellom ankerpunktene (usikkerhet 0,3–1,0).
+- Andelen holdes på 2018-nivået før 2018, med usikkerhet som øker bakover (D30), og interpoleres mellom ankerpunktene (usikkerhet 0,3–1,0).
 
 #### Sammensetning (varetype og materiale)
 
@@ -46,7 +48,7 @@ nav_order: 1
 
 #### Tidsutvikling og sammenligninger
 
-- Flyten var under 0,5 kt per år fram til 2015, 0,7–0,8 kt i 2018–2022 og 1,5 kt i 2025.
+- Flyten var under 0,5 kt per år fram til 2013, 0,7 kt i 2018, 1,0 kt i 2022 og 1,9 kt i 2025.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
@@ -65,9 +67,9 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 52 % | 48 % | 44 % | 40 % | 37 % | 36 % |
+| Bomull | 51 % | 48 % | 44 % | 40 % | 37 % | 36 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 11 % | 15 % | 18 % | 18 % | 17 % | 17 % |
+| Ikke-tekstil | 13 % | 15 % | 18 % | 18 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
 | Syntetisk | 28 % | 27 % | 30 % | 33 % | 36 % | 37 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
@@ -76,6 +78,7 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 ## Beregning i koden
 
-Beregnes i `_sorted_for_secondhand_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L41). Dokumentasjonen i koden:
+Beregnes i `_sorted_for_secondhand_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L56). Dokumentasjonen i koden:
 
-> Share of the retained textiles sold second-hand in Norway (same anchors).
+> Share of the retained textiles sold second-hand in Norway (same anchors
+> as the share retained), plus imported used clothing (HS 6309).

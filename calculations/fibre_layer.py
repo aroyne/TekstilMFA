@@ -93,8 +93,9 @@ RELEASE_FLOWS = [
 ]
 UNSOLD_DONATED = 'DI.RT-CO.CO-Unsold goods donated-TOT'
 # Flows through CO, with the mix of collected used textiles and donated
-# unsold clothing.
+# unsold clothing; imported used textiles are assumed to have the same mix.
 COLLECTED_FLOWS = [
+    'RW.RW-CO.SO-Used textile import-TOT',
     'CO.CO-RW.RW-Export of unsorted collected textiles-TOT',
     'CO.CO-CO.SO-Collected textiles to domestic sorting-TOT',
     'CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT',

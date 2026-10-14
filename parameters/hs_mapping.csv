@@ -10,7 +10,7 @@ hs_prefix,product,category,in_scope,description
 6307,OM,finished,yes,Other made-up articles (incl. face masks)
 6308,OM,finished,yes,Sets of woven fabric and yarn for making rugs etc.
 6309,UT,used,yes,Worn clothing and other worn articles
-6310,UT,used,yes,"Used or new rags, scrap twine, cordage"
+6310,RG,used,yes,"Used or new rags, scrap twine, cordage (mostly wiping rags)"
 64,FW,finished,yes,Footwear (large non-textile share - see parameter nontextile_share_FW)
 57,CA,finished,yes,Carpets and other textile floor coverings
 50,FY,intermediate,yes,"Silk: raw silk, waste and yarn (fabric 5007 below)"

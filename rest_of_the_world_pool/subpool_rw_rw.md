@@ -19,7 +19,7 @@ Type: boundary. Lager: no.
 * [Finished textile products import](../rest_of_the_world_pool/flow_rw_rw_di_rt_finished_textile_products_import.html) → DI.RT
 * [Private imports](../rest_of_the_world_pool/flow_rw_rw_us_hh_private_imports.html) → US.HH
 * [Direct online imports](../rest_of_the_world_pool/flow_rw_rw_us_hh_direct_online_imports.html) → US.HH
-* [Used textile import](../rest_of_the_world_pool/flow_rw_rw_co_so_used_textile_import.html) → CO.SO *(planlagt)*
+* [Used textile import](../rest_of_the_world_pool/flow_rw_rw_co_so_used_textile_import.html) → CO.SO
 
 ## Flyter inn
 

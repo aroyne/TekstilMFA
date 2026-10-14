@@ -19,7 +19,7 @@ nav_order: 2
 | Status | planned |
 | Prioritet | 2 |
 | Kandidatdata | Collector reports; SSB 08801 |
-| Merknad | – |
+| Merknad | No separate source; rags (6310) are in the export from CO.CO (D31, D32) |
 
 *Flyten er ikke implementert ennå.*
 

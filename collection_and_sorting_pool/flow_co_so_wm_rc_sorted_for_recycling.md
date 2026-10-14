@@ -19,7 +19,7 @@ nav_order: 3
 | Status | planned |
 | Prioritet | 2 |
 | Kandidatdata | Collector and recycler reports |
-| Merknad | – |
+| Merknad | Implemented with WM.RC: Watson 2020 (93 t in 2018), de Sadeleer & Rubach 2026 (one plant in Norway, 364 t in 2025, of which 142 t from households) (D32) |
 
 *Flyten er ikke implementert ennå.*
 

@@ -21,7 +21,7 @@ Type: process. Lager: no.
 
 ## Flyter inn
 
-* [Used textile import](../rest_of_the_world_pool/flow_rw_rw_co_so_used_textile_import.html) ← RW.RW *(planlagt)*
+* [Used textile import](../rest_of_the_world_pool/flow_rw_rw_co_so_used_textile_import.html) ← RW.RW
 * [Collected textiles to domestic sorting](../collection_and_sorting_pool/flow_co_co_co_so_collected_textiles_to_domestic_sorting.html) ← CO.CO
 
 ## Massebalanse
