@@ -17,7 +17,7 @@ Type: process. Lager: clipping.
 * [Yarn to textile manufacturing](../manufacturing_pool/flow_ma_fi_ma_tx_yarn_to_textile_manufacturing.html) → MA.TX
 * [Domestic hand knitting yarn](../manufacturing_pool/flow_ma_fi_di_rt_domestic_hand_knitting_yarn.html) → DI.RT
 * [Fibre and yarn export](../manufacturing_pool/flow_ma_fi_rw_rw_fibre_and_yarn_export.html) → RW.RW
-* [Wool scouring loss](../manufacturing_pool/flow_ma_fi_wm_ww_wool_scouring_loss.html) → WM.WW
+* [Wool scouring loss](../manufacturing_pool/flow_ma_fi_en_wa_wool_scouring_loss.html) → EN.WA
 
 ## Flyter inn
 

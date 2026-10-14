@@ -90,7 +90,7 @@ I fiberlaget (per materiale):
 
 ## Beregning i koden
 
-Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L159). Dokumentasjonen i koden:
+Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L160). Dokumentasjonen i koden:
 
 > Balance of MA.FI: Norwegian wool, imported fibre and yarn and recycled
 > fibre minus exports, the scouring loss and hand knitting yarn sold

@@ -16,7 +16,7 @@ Type: process. Lager: yes.
 
 * [Collection from institutions](../use_pool/flow_us_ic_co_co_collection_from_institutions.html) → CO.CO *(planlagt)*
 * [Institutional textile waste](../use_pool/flow_us_ic_wm_rs_institutional_textile_waste.html) → WM.RS
-* [Fibre release in industrial laundry](../use_pool/flow_us_ic_wm_ww_fibre_release_in_industrial_laundry.html) → WM.WW
+* [Fibre release in industrial laundry](../use_pool/flow_us_ic_en_wa_fibre_release_in_industrial_laundry.html) → EN.WA
 * [Institutional textiles to recycling](../use_pool/flow_us_ic_wm_rc_institutional_textiles_to_recycling.html) → WM.RC
 
 ## Flyter inn

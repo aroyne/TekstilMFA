@@ -132,8 +132,9 @@ def _household_textile_stock(mfa, preloaded_data, current_params):
 
 def _laundry_fibre_release_mc(mfa, preloaded_data, current_params, anchors):
     """
-    Fibres released from household textiles in washing machines and sent to
-    wastewater treatment. Mepex (Sundt et al. 2014, cited in Sundt et al.
+    Fibres released from household textiles in washing machines to
+    wastewater, where the model stops following them: treatment, sludge and
+    spread in the environment are not modelled (D35). Mepex (Sundt et al. 2014, cited in Sundt et al.
     2016 for the Norwegian Environment Agency) estimated about 600 t
     synthetic microfibres a year from household laundry. The release per kt
     synthetic fibre in the household stock is set so that the synthetic
@@ -145,7 +146,7 @@ def _laundry_fibre_release_mc(mfa, preloaded_data, current_params, anchors):
     splits the flow into synthetic and other fibres.
     """
     stock = _household_textile_stock(mfa, preloaded_data, current_params)
-    mfa.flows['US.HH-WM.WW-Fibre release in laundry-TOT'].values[...] = core_group_only(
+    mfa.flows['US.HH-EN.WA-Fibre release in laundry-TOT'].values[...] = core_group_only(
         _laundry_release_per_kt(stock, anchors) * stock.sum(axis=1))
 
 
@@ -162,7 +163,7 @@ def _air_and_dust_release_mc(mfa, current_params):
     of 1 (0.3-3): De Falco et al. (2020) found a release during wear of the
     same order as in washing. There are no Norwegian data.
     """
-    laundry = mfa.flows['US.HH-WM.WW-Fibre release in laundry-TOT'].values
+    laundry = mfa.flows['US.HH-EN.WA-Fibre release in laundry-TOT'].values
     mfa.flows['US.HH-EN.AI-Fibre release to air and dust-TOT'].values[...] = (
         laundry * current_params['air_release_relative_to_laundry'])
 
@@ -205,8 +206,8 @@ def _institutional_waste_mc(mfa, current_params):
 def _industrial_laundry_release_mc(mfa, preloaded_data, current_params, anchors):
     """
     Fibres released when textiles used by institutions and businesses are
-    washed (mostly in industrial laundries) and sent to wastewater
-    treatment. There are no Norwegian data, so the release per kt textile
+    washed (mostly in industrial laundries) to wastewater, where the model
+    stops following them (D35). There are no Norwegian data, so the release per kt textile
     fibre in use is the same as in household laundry, applied to the textile
     stock of the US.IC cohort model per product. Institutional textiles are
     washed more often, but industrial laundries often filter and treat their
@@ -220,7 +221,7 @@ def _industrial_laundry_release_mc(mfa, preloaded_data, current_params, anchors)
                         current_params, stock='US.IC')['stock']
     textile = stock[:, :, [MATERIALS.index(g) for g in FIBRE_GROUPS]].sum(axis=2)
     release_per_kt = _laundry_release_per_kt(_household_textile_stock(mfa, preloaded_data, current_params), anchors)
-    flow = mfa.flows['US.IC-WM.WW-Fibre release in industrial laundry-TOT']
+    flow = mfa.flows['US.IC-EN.WA-Fibre release in industrial laundry-TOT']
     flow.values[...] = 0.0
     flow.values[:, cohort] = release_per_kt * textile
 

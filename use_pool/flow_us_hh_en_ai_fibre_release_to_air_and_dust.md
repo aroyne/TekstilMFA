@@ -19,7 +19,7 @@ nav_order: 5
 | Status | implemented |
 | Prioritet | 3 |
 | Kandidatdata | Same level as the release in laundry (factor 1, 0.3-3; De Falco et al. 2020) |
-| Merknad | No Norwegian data |
+| Merknad | No Norwegian data. Not followed further (D35) |
 
 ## Tidsserie
 
@@ -40,7 +40,7 @@ nav_order: 5
 #### Antakelser
 
 - Utslippet settes til samme nivå som utslippet ved vask, med en faktor 1 (0,3–3, PERT). Usikkerheten er stor.
-- EN.AI er et sluk. Fibrene følges ikke videre (for eksempel til støvsugerposer og restavfall).
+- EN.AI er en systemgrense. Fibrene følges ikke videre, for eksempel til støvsugerposer og restavfall (D35).
 
 #### Sammensetning (varetype og materiale)
 
@@ -77,7 +77,7 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 ## Beregning i koden
 
-Beregnes i `_air_and_dust_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L158). Dokumentasjonen i koden:
+Beregnes i `_air_and_dust_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L159). Dokumentasjonen i koden:
 
 > Fibres released to air and indoor dust while household textiles are worn
 > and used, set to the same level as the release in laundry, with a factor

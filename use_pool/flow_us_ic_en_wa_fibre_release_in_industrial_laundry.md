@@ -10,28 +10,29 @@ nav_order: 3
 
 | | |
 |---|---|
-| Flytkode | `US.IC-WM.WW-Fibre release in industrial laundry-TOT` |
+| Flytkode | `US.IC-EN.WA-Fibre release in industrial laundry-TOT` |
 | Fra | [Institutions and businesses (US.IC)](../use_pool/subpool_us_ic.html) |
-| Til | [Wastewater treatment (WM.WW)](../waste_management_pool/subpool_wm_ww.html) |
+| Til | [Wastewater and water (not followed) (EN.WA)](../environment_pool/subpool_en_wa.html) |
 | Tekstilform | MFR – mikrofibre |
 | Dimensjoner | år × produkt |
 | Metode | parameter |
 | Status | implemented |
 | Prioritet | 3 |
 | Kandidatdata | Same release per kt textile in use as in household laundry (Mepex 2014), applied to the textile stock of the US.IC cohort model |
-| Merknad | No Norwegian data; more frequent washing and filters in industrial laundries pull in opposite directions (D29) |
+| Merknad | No Norwegian data; more frequent washing and filters in industrial laundries pull in opposite directions (D29). Released to wastewater; treatment is not modelled (D35) |
 
 ## Tidsserie
 
-<iframe src="../output_files/plots/pages/us_ic_wm_ww_fibre_release_in_industrial_laundry.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+<iframe src="../output_files/plots/pages/us_ic_en_wa_fibre_release_in_industrial_laundry.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- **US.IC-WM.WW-Fibre release in industrial laundry-TOT** er fibre som løsner når tekstiler brukt av bedrifter og offentlig sektor vaskes (mest i industrivaskerier), og som går til avløpsrensing.
+- **US.IC-EN.WA-Fibre release in industrial laundry-TOT** er fibre som løsner når tekstiler brukt av bedrifter og offentlig sektor vaskes (mest i industrivaskerier), og som går med avløpsvannet.
 - Både syntetiske fibre og naturfibre er med, og de skilles i fiberlaget.
+- Flyten går ut av systemet til avløp. Rensing i renseanlegg, slam og videre spredning til vann og jord følges ikke (D35). Usikkerheten i tilbakeholdelse og slambruk er stor og mengdene små, så det hører hjemme i en egen mikroplastmodell. Se Sundt m.fl. (2016) for Miljødirektoratet.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
@@ -80,15 +81,15 @@ Fibergruppene i tekstillageret i årgangsmodellen for institusjoner og bedrifter
 | Syntetisk | 57 % | 46 % | 47 % | 56 % | 58 % | 58 % |
 | Ull | 7 % | 9 % | 7 % | 7 % | 6 % | 7 % |
 
-<iframe src="../output_files/plots/pages/us_ic_wm_ww_fibre_release_in_industrial_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+<iframe src="../output_files/plots/pages/us_ic_en_wa_fibre_release_in_industrial_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_industrial_laundry_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L205). Dokumentasjonen i koden:
+Beregnes i `_industrial_laundry_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L206). Dokumentasjonen i koden:
 
 > Fibres released when textiles used by institutions and businesses are
-> washed (mostly in industrial laundries) and sent to wastewater
-> treatment. There are no Norwegian data, so the release per kt textile
+> washed (mostly in industrial laundries) to wastewater, where the model
+> stops following them (D35). There are no Norwegian data, so the release per kt textile
 > fibre in use is the same as in household laundry, applied to the textile
 > stock of the US.IC cohort model per product. Institutional textiles are
 > washed more often, but industrial laundries often filter and treat their

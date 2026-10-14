@@ -13,7 +13,5 @@ WM.RS,WM,Waste management,Residual and mixed waste collection,process,clipping,t
 WM.IN,WM,Waste management,Incineration,sink,no,t,Incineration with energy recovery in Norway; textile mass is destroyed (final sink)
 WM.LF,WM,Waste management,Landfill,process,yes,t,Landfilled textiles; relevant mainly before the 2009 ban on landfilling biodegradable waste
 WM.RC,WM,Waste management,Material recycling,process,clipping,t,"Mechanical or chemical recycling of textiles: abroad, and from 2024 at Norsk Tekstilgjenvinning (Sandefjord). Clipping stock: takes up the mass created when export for recycling (the balance) is clipped at 0"
-WM.WW,WM,Waste management,Wastewater treatment,process,yes,t,Municipal and industrial wastewater treatment receiving fibres released during laundry. Temporary stock: receives the wool scouring loss until the outflows of WM.WW are implemented
-EN.WA,EN,Environment,Water,process,yes,t,Fibres accumulating in freshwater and marine environments
-EN.SO,EN,Environment,Soil,process,yes,t,Fibres reaching soil (mainly via sewage sludge)
-EN.AI,EN,Environment,Air and indoor dust,sink,no,t,Fibre fragments released to air and indoor dust
+EN.WA,EN,Environment,Wastewater and water (not followed),boundary,no,,"System boundary: fibres and scouring residues released to wastewater. Wastewater treatment, sludge and further spread in the environment are not modelled (D35)"
+EN.AI,EN,Environment,Air and indoor dust,boundary,no,,System boundary: fibre fragments released to air and indoor dust; not followed further (D35)

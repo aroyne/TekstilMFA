@@ -13,7 +13,6 @@ Subpooler:
 * [Incineration (WM.IN)](subpool_wm_in.html)
 * [Landfill (WM.LF)](subpool_wm_lf.html)
 * [Material recycling (WM.RC)](subpool_wm_rc.html)
-* [Wastewater treatment (WM.WW)](subpool_wm_ww.html)
 
 ## Massebalanse
 

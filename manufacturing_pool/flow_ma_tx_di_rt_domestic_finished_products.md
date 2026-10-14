@@ -92,7 +92,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_domestic_finished_products_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L249). Dokumentasjonen i koden:
+Beregnes i `_domestic_finished_products_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L250). Dokumentasjonen i koden:
 
 > Balance of MA.TX: yarn and fabric in, minus fabric exports and
 > production waste, split over products by mass shares of finished goods

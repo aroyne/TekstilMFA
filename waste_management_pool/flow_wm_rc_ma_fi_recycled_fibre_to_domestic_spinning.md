@@ -77,7 +77,7 @@ Andel av summen i nøkkelår (median).
 
 ## Beregning i koden
 
-Beregnes i `_recycled_fibre_to_spinning_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L145). Dokumentasjonen i koden:
+Beregnes i `_recycled_fibre_to_spinning_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L146). Dokumentasjonen i koden:
 
 > Fibre from mechanical textile recycling at Norsk Tekstilgjenvinning
 > (Sandefjord), which can be spun to new yarn: 93 t in 2024 and 364 t in

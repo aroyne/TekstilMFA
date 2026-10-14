@@ -24,7 +24,7 @@
   * `p`: produkt (CL, HT, FW, CA, SA, TA, OM, YA). Brukes til og med salg og i US.IC.
   * `g`: produktgruppe (CORE, CA, SA, TA, OM). Brukes etter bruk i husholdningene, fordi innsamlings- og plukkanalysestatistikken dekker CL+HT+FW samlet (CORE). Garn i detaljsalg (YA) hører til CORE, fordi hjemmelagde plagg kasseres som klær. Produkter regnes om til grupper med en fast koblingsmatrise.
   * Flyter med bare `t` (avfallsbehandlingen og MA.FI) er ikke delt på produkt og rapporteres som `ALL`.
-* Lagre er definert i kolonnen `stock_dims` i `processes.csv`. Sluk (WM.IN, EN.AI) får også et lager, som er den akkumulerte massen som har forlatt kretsløpet. flodym sjekker massebalansen per prosess på dimensjonene alle flytene inn og ut har felles.
+* Lagre er definert i kolonnen `stock_dims` i `processes.csv`. Sluk (WM.IN) får også et lager, som er den akkumulerte massen som har forlatt kretsløpet. flodym sjekker massebalansen per prosess på dimensjonene alle flytene inn og ut har felles.
 
 ## Pools og subpools
 
@@ -44,9 +44,8 @@
 | | WM.IN | sluk | – | Forbrenning med energiutnyttelse |
 | | WM.LF | prosess | **ja** | Deponi (viktig før 2009) |
 | | WM.RC | prosess | – | Materialgjenvinning |
-| | WM.WW | prosess | midlertidig (D24) | Avløpsrensing (fibre fra vask, vaskevann fra ullvasking) |
-| **EN** Environment | EN.WA / EN.SO | prosess | **ja** | Fibre i vann og jord |
-| | EN.AI | sluk | – | Fibre til luft og støv |
+| **EN** Environment | EN.WA | systemgrense | – | Avløp og vann: fibre og vaskesvinn til avløp, ikke fulgt videre (D35) |
+| | EN.AI | systemgrense | – | Fibre til luft og støv, ikke fulgt videre (D35) |
 
 ## Systemdiagram (kjerneflyter P1 med tykk strek)
 
@@ -55,7 +54,7 @@ flowchart LR
   RW((RW)) ==> DI[DI.RT<br>Handel]
   RW ==>|privatimport<br>netthandel| HH
   PS[PS.WO] -.-> FI[MA.FI] -.-> TX[MA.TX] -.-> DI
-  FI -.->|vaskesvinn| WW
+  FI -.->|vaskesvinn| ENW
   FI -.->|håndstrikkegarn| DI
   RW -.-> FI & TX
   DI ==> HH[(US.HH<br>husholdninger)]
@@ -63,7 +62,7 @@ flowchart LR
   DI ==>|eksport| RW
   HH ==> CO[CO.CO<br>innsamling]
   HH ==> RS[WM.RS<br>restavfall]
-  HH -.->|vask| WW[WM.WW]
+  HH -.->|vask| ENW((EN.WA))
   CO ==>|usortert eksport| RW
   CO ==> SO[CO.SO<br>sortering]
   SO ==> RE[CO.RE<br>bruktbutikk] ==> HH
@@ -73,7 +72,6 @@ flowchart LR
   RS ==> IN{{WM.IN<br>forbrenning}}
   RS ==> LF[(WM.LF<br>deponi)]
   RS -.->|avfallseksport| RW
-  WW -.-> ENW[(EN.WA)] & ENS[(EN.SO)]
 ```
 
 Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [system/flows.csv](../system/flows.csv). Den har 43 flyter: 14 med prioritet 1, 17 med prioritet 2 og 12 med prioritet 3 (restavfall fra husholdningene er delt i brukbart og utslitt, D18, og vaskesvinnet fra ullvasking og norsk spunnet håndstrikkegarn er lagt til, D23 og D21). Flytnavn kan ikke inneholde bindestrek, fordi `-` skiller feltene i koden (sjekkes av `tests/test_system_register.py`).
@@ -111,8 +109,8 @@ Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [syst
 | D12 | Framtidsscenarier (produsentansvar, 2030+) | **Besluttet 2026-09-29:** Utenfor omfanget til den historiske modellen er ferdig. Arkitekturen skal likevel tillate det. |
 | D21 | Garn i detaljsalg | **Besluttet 2026-10-12:** Garn i detaljopplegg (HS 5109, 5207, 5204.20, 5406, 5511) er et eget produkt YA. Det går RW → DI.RT → US.HH og ikke til MA.FI, fordi det strikkes eller sys til plagg i husholdningene. YA hører til produktgruppen CORE etter bruk. Levetiden i lagermodellen (8 år, garnlager pluss plaggets levetid) er en antakelse. Norsk spunnet håndstrikkegarn går MA.FI → DI.RT (SSB Industristatistikk, Varetall 1988–89: 0,99 og 0,89 kt; SSB 10455, Prodcom 13.10.50.50: 0,59–1,03 kt i 2008–2023; interpolert i 1990–2007). Ut av DI.RT blandes det med importert detaljgarn i fiberlaget. |
 | D22 | HS 56 og garn til tau og nett | **Besluttet 2026-10-12:** HS 56 (vatt, filt, fiberduk, tau, nett) er utenfor omfanget, også som innsatsvare til MA. Høyfast filamentgarn av nylon, polyester og aramid (5402.10, 5402.11, 5402.19, 5402.20; import 1,3–5,6 kt per år) er garnet tau og nett lages av, og er også utenfor, både for import og eksport. Det samme gjelder tvunnet nylongarn (5402.61, nettgarn), annet enkelt syntetisk filamentgarn (5402.49) og polypropylen stapelfiber (5503.40, fiberduk), til sammen 0,6–2 kt per år (besluttet 2026-10-12). Importen er stor (tau 13,7 kt, nett 10,0 kt og fiberduk 12,2 kt i 2022), men går til fiske, havbruk, bygg og hygieneprodukter. Fiber og garn (FY) og metervare (FA) skilles i `parameters/hs_mapping.csv`. |
-| D23 | Vaskesvinn ved ullvasking | **Besluttet 2026-10-12:** Egen flyt MA.FI → WM.WW (form BYP): uvasket ull vasket i Norge × svinnandel (ca. 1/3). Uvasket ull vasket i Norge er norsk ull + import − eksport av uvasket ull, som periodesnitt fordi årsbalansen er preget av lagring og tidspunkt (negativ i 2017). Usikkerheten er standardfeilen til snittet. Eksport deklarert som karbonisert ull (5101.30) i 1996–2000 og 2002 regnes som uvasket, fordi prisen per kg er som for uvasket ull og eksporten av uvasket ull faller like mye de årene. Fra 2007 eksporteres 90–100 % av norsk ull uvasket, og det meste vaskes i Bradford. I fiberlaget regnes uvasket ull som ull, inkludert fettet. |
-| D24 | Midlertidige lagre | **Besluttet 2026-10-12:** MA.TX og WM.WW har et midlertidig lager (`stock_dims` = t) til utstrømmene deres er implementert, slik at systemet lukker og massebalansen sjekkes. Lagerendringen er da lik innstrømmen og er ikke et lager i fysisk forstand. Lagrene fjernes når MA.TX- og WM.WW-flytene er på plass. |
+| D23 | Vaskesvinn ved ullvasking | **Besluttet 2026-10-12:** Egen flyt MA.FI → WM.WW, fra D35 MA.FI → EN.WA (form BYP): uvasket ull vasket i Norge × svinnandel (ca. 1/3). Uvasket ull vasket i Norge er norsk ull + import − eksport av uvasket ull, som periodesnitt fordi årsbalansen er preget av lagring og tidspunkt (negativ i 2017). Usikkerheten er standardfeilen til snittet. Eksport deklarert som karbonisert ull (5101.30) i 1996–2000 og 2002 regnes som uvasket, fordi prisen per kg er som for uvasket ull og eksporten av uvasket ull faller like mye de årene. Fra 2007 eksporteres 90–100 % av norsk ull uvasket, og det meste vaskes i Bradford. I fiberlaget regnes uvasket ull som ull, inkludert fettet. |
+| D24 | Midlertidige lagre | **Besluttet 2026-10-12, avviklet 2026-10-14** (MA.TX fikk klippelager med D26, WM.WW ble fjernet med D35): MA.TX og WM.WW har et midlertidig lager (`stock_dims` = t) til utstrømmene deres er implementert, slik at systemet lukker og massebalansen sjekkes. Lagerendringen er da lik innstrømmen og er ikke et lager i fysisk forstand. Lagrene fjernes når MA.TX- og WM.WW-flytene er på plass. |
 | D25 | MA.TX: metervare, eksport og produksjonsavfall | **Besluttet 2026-10-12:** Import og eksport av metervare (vevnader i HS 50–55, HS 58 og 60) fra 08801. MA.TX → RW er bare metervare, og eksporten av ferdigvarer blir værende i DI.RT (D6). Produksjonsavfall fra SSBs industriavfallsundersøkelse (NACE 13–15: 1 kt i 2008, under 0,5 kt i 2015 og 2022), uttrykt per kt innsatsvare (garn og metervare) i ankerårene, slik at avfallet følger innsatsen før 2008 med 2008 som referanse. Ferdigvarer til DI.RT og fordelingen på produkter er ikke besluttet ennå. Til da tar det midlertidige lageret i MA.TX opp balansen (D24). |
 | D26 | MA.TX → DI.RT og dyner | **Besluttet 2026-10-12, implementert 2026-10-13:** Ferdigvarer fra MA.TX til DI.RT er balansen i MA.TX, fordelt på produkter med masseandeler fra SSBs varestatistikk i ankerår: 1988–89 (Industristatistikk, Varetall) og 2008, 2009, 2011 (Prodcom). Mengde i kg brukes direkte, stykk ganges med kg per stykk fra importen av samme HS-kode, og koder med bare verdi deles på norsk pris per kg fra år der både mengde og verdi finnes. Prodcom-årene er for tynne hver for seg, så snittet per varekode for 2008, 2009 og 2011 er ett ankerpunkt (2009). Andelene interpoleres mellom 1988, 1989 og 2009 og holdes fast etter 2009. Sko holdes utenfor, fordi lær og gummi ikke er innsatsvarer i MA.TX. Dyner, hodeputer og møbelputer (9404.40 og 9404.90) er hjemmetekstiler (HT), og soveposer (9404.30) er TA (besluttet 2026-10-13). Møbelputer er for det meste skum og regnes som ikke-tekstil (NT) i fiberlaget. MA.TX har nå et klippelager i stedet for det midlertidige lageret (D24). |
 | D27 | DI.RT: usolgte varer, institusjoner, gjeneksport | **Besluttet 2026-10-13:** Usolgte klær gitt til innsamlere (Watson 2020: ca. 600 t i 2018; Rubach 2023: ca. 200 t i 2022) og kastet (minimum fra undersøkelsene: 95 t i 2018 og 221 t i 2022) er egne flyter. Begge uttrykkes per kt klesimport i ankerårene, så de følger klesimporten før, mellom og etter. Donerte varer eksporteres med de brukte tekstilene og trekkes fra innsamlingen fra husholdningene. EEAs anslag (4–9 % av det som settes på markedet destrueres) brukes bare til følsomhetsanalyse og diskusjon. Andelen til institusjoner og bedrifter (12 %), gjeneksport (D6) og små varelinjer (D14) beholdes. |
@@ -123,3 +121,4 @@ Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [syst
 | D32 | CO.SO: import, eksport av sortert, gjenvinning | **Besluttet 2026-10-14:** Import av brukte tekstiler (08801) er implementert: brukte klær (6309) går til bruktbutikk, filler (6310, mest tørkefiller) til sorteringsrester og restavfall. 6310 er skilt ut som eget produkt (RG) i HS-mappingen. Eksport av sortert står som planlagt (filler er med i eksporten fra CO.CO). Sortert til materialgjenvinning implementeres med WM.RC, med 93 t i 2018 (Watson 2020) og 142 t fra husholdninger i 2025 (de Sadeleer & Rubach 2026). |
 | D33 | WM.RS og CO.RE | **Besluttet 2026-10-14:** Eksport av restavfall til forbrenning før 2015 beholdes som antakelse (0 i 2005, lineært til KOSTRA-andelen i 2015), fordi ingen offisiell serie er funnet. Deponi- og eksportandelene for husholdningsavfall brukes på alt i WM.RS. Usolgte bruktvarer (CO.RE → WM.RS) står som planlagt, fordi det ikke finnes data og ankerpunktene for ombruk gjelder det som faktisk er solgt. |
 | D34 | WM.RC: materialgjenvinning | **Besluttet 2026-10-14:** Bare det som faktisk gjenvinnes, går inn i WM.RC. Fra husholdninger: andel av det som sorteres ut ved norsk sortering (20 % i 2018, Watson 2020; 39 % i 2025, NORSUS 2026). Fra institusjoner (ny flyt US.IC → WM.RC, hjemmetekstiler) og produksjon (ny flyt MA.TX → WM.RC): NTGs gjenvinning fordelt etter innstrømningen, 2024–2025, 0 før. WM.RC → MA.TX er endret til WM.RC → MA.FI (fiber spinnes til garn): 50 % (0–100 %) av NTGs fiber. Eksport til gjenvinning er balansen i WM.RC, som har fått klippelager. |
+| D35 | Avløpsrensing og miljø | **Besluttet 2026-10-14:** WM.WW (avløpsrensing) og EN.SO (jord) er fjernet. EN.WA (avløp og vann) og EN.AI (luft og støv) er systemgrenser. Fiber fra vask og vaskesvinn fra ullvask går til EN.WA, fiber fra bruk til EN.AI. Rensing, slam og videre spredning i miljøet behandles ikke, fordi usikkerheten er stor og mengdene små. Det står på flytsidene. |

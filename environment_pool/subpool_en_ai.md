@@ -2,15 +2,15 @@
 layout: default
 title: Air and indoor dust (EN.AI)
 parent: 8. Environment (EN)
-nav_order: 3
+nav_order: 2
 has_children: true
 ---
 
 # Air and indoor dust (EN.AI)
 
-Fibre fragments released to air and indoor dust
+System boundary: fibre fragments released to air and indoor dust; not followed further (D35)
 
-Type: sink. Lager: no.
+Type: boundary. Lager: no.
 
 ## Flyter ut
 

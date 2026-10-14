@@ -76,7 +76,7 @@ Andel av summen i nøkkelår (median).
 
 ## Beregning i koden
 
-Beregnes i `_production_waste_to_recycling_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L214). Dokumentasjonen i koden:
+Beregnes i `_production_waste_to_recycling_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L215). Dokumentasjonen i koden:
 
 > Production waste (mainly from wool production) recycled at Norsk
 > Tekstilgjenvinning: its share of the plant's intake (20 of 153 t in

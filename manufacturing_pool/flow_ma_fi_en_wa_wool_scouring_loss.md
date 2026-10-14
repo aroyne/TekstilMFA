@@ -10,28 +10,28 @@ nav_order: 4
 
 | | |
 |---|---|
-| Flytkode | `MA.FI-WM.WW-Wool scouring loss-TOT` |
+| Flytkode | `MA.FI-EN.WA-Wool scouring loss-TOT` |
 | Fra | [Fibre and yarn production (MA.FI)](../manufacturing_pool/subpool_ma_fi.html) |
-| Til | [Wastewater treatment (WM.WW)](../waste_management_pool/subpool_wm_ww.html) |
+| Til | [Wastewater and water (not followed) (EN.WA)](../environment_pool/subpool_en_wa.html) |
 | Tekstilform | BYP – biprodukt, ikke tekstil |
 | Dimensjoner | år |
 | Metode | data+parameter |
 | Status | implemented |
 | Prioritet | 3 |
 | Kandidatdata | Greasy wool scoured in Norway (Totalkalkylen + SSB 08801 greasy wool trade, period means) x loss share (Norwegian Wool Book) |
-| Merknad | Grease, suint and dirt, not textile. WM.WW has a temporary stock until its outflows are implemented |
+| Merknad | Grease, suint and dirt, not textile. Released to wastewater; treatment is not modelled (D35) |
 
 ## Tidsserie
 
-<iframe src="../output_files/plots/pages/ma_fi_wm_ww_wool_scouring_loss.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+<iframe src="../output_files/plots/pages/ma_fi_en_wa_wool_scouring_loss.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- **MA.FI-WM.WW-Wool scouring loss-TOT** er fett (lanolin), ullsvette, smuss og plantemateriale som vaskes ut når uvasket ull vaskes i Norge. Massen er ikke tekstil (form BYP) og går med vaskevannet til avløpsrensing.
-- WM.WW har foreløpig et midlertidig lager som tar imot flyten, til utstrømmene fra avløpsrensing er implementert (D24).
+- **MA.FI-EN.WA-Wool scouring loss-TOT** er fett (lanolin), ullsvette, smuss og plantemateriale som vaskes ut når uvasket ull vaskes i Norge. Massen er ikke tekstil (form BYP) og går med vaskevannet.
+- Flyten går ut av systemet til avløp. Hva som skjer i renseanlegget (mye brytes ned), følges ikke (D35).
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
@@ -70,14 +70,15 @@ Ull (WO), fordi uvasket ull regnes som ull inkludert fettet.
 |---|---|---|---|---|---|---|
 | Ull | 100 % | 100 % | 100 % | 100 % | 100 % | 100 % |
 
-<iframe src="../output_files/plots/pages/ma_fi_wm_ww_wool_scouring_loss_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+<iframe src="../output_files/plots/pages/ma_fi_en_wa_wool_scouring_loss_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
 Beregnes i `_wool_scouring_loss_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L88). Dokumentasjonen i koden:
 
-> Grease, suint and dirt removed when greasy wool is scoured in Norway,
-> sent with the scouring water to wastewater treatment. The greasy wool
+> Grease, suint and dirt removed when greasy wool is scoured in Norway and
+> released with the scouring water to wastewater, where the model stops
+> following it (D35). The greasy wool
 > scoured in Norway is Norwegian wool plus imports minus exports of greasy
 > wool, as a mean over periods because the annual balance is dominated by
 > the timing of shearing, storage and export (anchors derived by

@@ -9,8 +9,7 @@ has_children: true
 
 Subpooler:
 
-* [Water (EN.WA)](subpool_en_wa.html)
-* [Soil (EN.SO)](subpool_en_so.html)
+* [Wastewater and water (not followed) (EN.WA)](subpool_en_wa.html)
 * [Air and indoor dust (EN.AI)](subpool_en_ai.html)
 
 ## Massebalanse

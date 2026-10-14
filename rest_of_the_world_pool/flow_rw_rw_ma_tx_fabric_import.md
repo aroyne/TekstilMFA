@@ -76,6 +76,6 @@ Hovedfiberen fra HS-koden (metervare, FA).
 
 ## Beregning i koden
 
-Beregnes i `_fabric_import_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L177). Dokumentasjonen i koden:
+Beregnes i `_fabric_import_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L178). Dokumentasjonen i koden:
 
 > Registered imports of fabric, SSB 08801 (woven fabric in HS 50-55, HS 58 and 60).

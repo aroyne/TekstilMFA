@@ -88,11 +88,11 @@ INSTITUTIONAL_SALES = 'DI.RT-US.IC-Sales to institutions and businesses-TOT'
 # Goods in US.IC discarded by a cohort model; sacks are discarded in the year
 # supplied and retail yarn is not sold to the sector.
 INSTITUTIONAL_COHORT_PRODUCTS = [p for p in PRODUCTS if p not in ('SA', 'YA')]
-INSTITUTIONAL_RELEASE = 'US.IC-WM.WW-Fibre release in industrial laundry-TOT'
+INSTITUTIONAL_RELEASE = 'US.IC-EN.WA-Fibre release in industrial laundry-TOT'
 # Fibres released from household textiles in use, with the fibre groups of
 # the textile stock of the household cohort model.
 RELEASE_FLOWS = [
-    'US.HH-WM.WW-Fibre release in laundry-TOT',
+    'US.HH-EN.WA-Fibre release in laundry-TOT',
     'US.HH-EN.AI-Fibre release to air and dust-TOT',
 ]
 UNSOLD_DONATED = 'DI.RT-CO.CO-Unsold goods donated-TOT'
@@ -116,7 +116,7 @@ MIXED_SOURCE = 'WM.RS'
 RAW_WOOL = 'PS.WO-MA.FI-Norwegian raw wool-TOT'
 FIBRE_YARN_IMPORT = 'RW.RW-MA.FI-Fibre and yarn import-TOT'
 FIBRE_YARN_EXPORT = 'MA.FI-RW.RW-Fibre and yarn export-TOT'
-SCOURING_LOSS = 'MA.FI-WM.WW-Wool scouring loss-TOT'
+SCOURING_LOSS = 'MA.FI-EN.WA-Wool scouring loss-TOT'
 YARN_TO_MANUFACTURING = 'MA.FI-MA.TX-Yarn to textile manufacturing-TOT'
 HAND_KNITTING_YARN = 'MA.FI-DI.RT-Domestic hand knitting yarn-TOT'
 FABRIC_IMPORT = 'RW.RW-MA.TX-Fabric import-TOT'

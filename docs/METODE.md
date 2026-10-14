@@ -67,9 +67,11 @@ Oppsettet er det samme som i NitrogenBudsjett:
 * Stykk og verdi brukes til kontroll: kg per plagg over tid, og NOK/kg for å regne om privatimport fra kroner til masse.
 * Første kontroll (2022): Import minus eksport for CL+HT+FW er ≈ 94,7 kt, mot 105,9 kt satt på markedet ifølge NORSUS (2023). Differansen (≈ 11 kt) er av den størrelsen vi venter for privatimport, direkte netthandel og norsk produksjon.
 
-## 7. Mikrofibre (WM.WW, EN)
+## 7. Mikrofibre (EN)
 
-Massemessig er dette små flyter, men de er viktige for miljøet. Frigjøringen modelleres som lageret i bruk × frigjøringsrate per år, deretter fordelt med renseanleggets tilbakeholdelse (andel primær- og sekundærrensing i Norge, SSB) og slambruk. Egen prioritet (P2), og flytene skal kunne vises separat i resultatene.
+Massemessig er dette små flyter, men de er viktige for miljøet. Utslippet ved vask er tekstillageret i årgangsmodellen × utslipp per kt, kalibrert slik at det syntetiske utslippet fra husholdningsvask i 2014 er 600 t (Mepex/Sundt m.fl. 2014). Naturfibre har samme utslipp per kt, og fiberlaget skiller syntetisk fra naturfibre. Utslipp til luft og støv er satt til samme nivå som ved vask. Industrivask har samme utslipp per kt som husholdningsvask, brukt på lageret i US.IC (D28, D29).
+
+Flytene går ut av systemet til EN, som er systemgrense: EN.WA (avløp og vann) og EN.AI (luft og støv). Rensing i renseanlegg, slam og videre spredning i miljøet behandles ikke (D35), fordi usikkerheten i tilbakeholdelse og slambruk er stor og mengdene små (omtrent 1,7 kt fiber per år). Det hører hjemme i en egen mikroplastmodell. Relevante norske data er SSB 05273 (innbyggere per rensemetode), SSB 05279 (disponering av avløpsslam) og Sundt m.fl. (2016).
 
 ## 8. Implementering
 

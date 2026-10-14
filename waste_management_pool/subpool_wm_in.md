@@ -19,7 +19,6 @@ Type: sink. Lager: no.
 ## Flyter inn
 
 * [Domestic incineration](../waste_management_pool/flow_wm_rs_wm_in_domestic_incineration.html) ← WM.RS
-* [Fibres in sludge to other treatment](../waste_management_pool/flow_wm_ww_wm_in_fibres_in_sludge_to_other_treatment.html) ← WM.WW *(planlagt)*
 
 ## Massebalanse
 

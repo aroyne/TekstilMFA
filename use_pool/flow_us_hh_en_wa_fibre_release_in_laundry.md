@@ -10,29 +10,29 @@ nav_order: 4
 
 | | |
 |---|---|
-| Flytkode | `US.HH-WM.WW-Fibre release in laundry-TOT` |
+| Flytkode | `US.HH-EN.WA-Fibre release in laundry-TOT` |
 | Fra | [Households (US.HH)](../use_pool/subpool_us_hh.html) |
-| Til | [Wastewater treatment (WM.WW)](../waste_management_pool/subpool_wm_ww.html) |
+| Til | [Wastewater and water (not followed) (EN.WA)](../environment_pool/subpool_en_wa.html) |
 | Tekstilform | MFR – mikrofibre |
 | Dimensjoner | år × produktgruppe |
 | Metode | data+parameter |
 | Status | implemented |
 | Prioritet | 2 |
 | Kandidatdata | Mepex 2014 (Sundt et al. 2014; cited in Sundt et al. 2016, M545): about 600 t synthetic microfibres a year from household laundry; scaled with the textile stock of the household cohort model |
-| Merknad | Synthetic and natural fibres, split in the fibre layer; natural fibres at the same release per kg as synthetic |
+| Merknad | Synthetic and natural fibres, split in the fibre layer; natural fibres at the same release per kg as synthetic. Released to wastewater; treatment is not modelled (D35) |
 
 ## Tidsserie
 
-<iframe src="../output_files/plots/pages/us_hh_wm_ww_fibre_release_in_laundry.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+<iframe src="../output_files/plots/pages/us_hh_en_wa_fibre_release_in_laundry.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beskrivelse
 
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- **US.HH-WM.WW-Fibre release in laundry-TOT** er fibre som løsner fra tekstiler når de vaskes i husholdningenes vaskemaskiner, og som går med avløpsvannet til avløpsrensing.
+- **US.HH-EN.WA-Fibre release in laundry-TOT** er fibre som løsner fra tekstiler når de vaskes i husholdningenes vaskemaskiner, og som går med avløpsvannet.
 - Flyten omfatter både syntetiske fibre (mikroplast) og naturfibre og regenerert cellulose. De to typene skilles i fiberlaget (se sammensetningen).
-- WM.WW har foreløpig et midlertidig lager som tar imot flyten, til utstrømmene fra avløpsrensingen er implementert (D24).
+- Flyten går ut av systemet til avløp. Rensing i renseanlegg, slam og videre spredning til vann og jord følges ikke (D35). Usikkerheten i tilbakeholdelse og slambruk er stor og mengdene små, så det hører hjemme i en egen mikroplastmodell. Se Sundt m.fl. (2016) for Miljødirektoratet.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
@@ -78,14 +78,15 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 | Syntetisk | 32 % | 32 % | 36 % | 42 % | 43 % | 43 % |
 | Ull | 7 % | 8 % | 6 % | 8 % | 8 % | 8 % |
 
-<iframe src="../output_files/plots/pages/us_hh_wm_ww_fibre_release_in_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+<iframe src="../output_files/plots/pages/us_hh_en_wa_fibre_release_in_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
 Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L133). Dokumentasjonen i koden:
 
-> Fibres released from household textiles in washing machines and sent to
-> wastewater treatment. Mepex (Sundt et al. 2014, cited in Sundt et al.
+> Fibres released from household textiles in washing machines to
+> wastewater, where the model stops following them: treatment, sludge and
+> spread in the environment are not modelled (D35). Mepex (Sundt et al. 2014, cited in Sundt et al.
 > 2016 for the Norwegian Environment Agency) estimated about 600 t
 > synthetic microfibres a year from household laundry. The release per kt
 > synthetic fibre in the household stock is set so that the synthetic

@@ -59,7 +59,7 @@ MANUFACTURING_RULES = {
     'PS.WO-MA.FI-Norwegian raw wool-TOT': 'Ull (WO). Uvasket ull regnes som ull, inkludert fett og smuss.',
     'RW.RW-MA.FI-Fibre and yarn import-TOT': 'Hovedfiberen fra HS-koden (fiber og garn, FY).',
     'MA.FI-RW.RW-Fibre and yarn export-TOT': 'Hovedfiberen fra HS-koden (fiber og garn, FY).',
-    'MA.FI-WM.WW-Wool scouring loss-TOT': 'Ull (WO), fordi uvasket ull regnes som ull inkludert fettet.',
+    'MA.FI-EN.WA-Wool scouring loss-TOT': 'Ull (WO), fordi uvasket ull regnes som ull inkludert fettet.',
     'MA.FI-DI.RT-Domestic hand knitting yarn-TOT': 'Ull (WO): Prodcom-koden og varenummeret gjelder ullgarn.',
     'MA.FI-MA.TX-Yarn to textile manufacturing-TOT': 'Balansen i MA.FI per materiale, klippet til 0.',
     'RW.RW-MA.TX-Fabric import-TOT': 'Hovedfiberen fra HS-koden (metervare, FA).',

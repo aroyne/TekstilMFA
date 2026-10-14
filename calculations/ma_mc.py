@@ -87,8 +87,9 @@ def _fibre_and_yarn_export_mc(mfa, preloaded_data, dataset_noise):
 
 def _wool_scouring_loss_mc(mfa, current_params, anchors):
     """
-    Grease, suint and dirt removed when greasy wool is scoured in Norway,
-    sent with the scouring water to wastewater treatment. The greasy wool
+    Grease, suint and dirt removed when greasy wool is scoured in Norway and
+    released with the scouring water to wastewater, where the model stops
+    following it (D35). The greasy wool
     scoured in Norway is Norwegian wool plus imports minus exports of greasy
     wool, as a mean over periods because the annual balance is dominated by
     the timing of shearing, storage and export (anchors derived by
@@ -100,7 +101,7 @@ def _wool_scouring_loss_mc(mfa, current_params, anchors):
     greasy weight.
     """
     scoured = interpolate(anchors['wool_scoured_domestic'])
-    mfa.flows['MA.FI-WM.WW-Wool scouring loss-TOT'].values[...] = (
+    mfa.flows['MA.FI-EN.WA-Wool scouring loss-TOT'].values[...] = (
         scoured * current_params['wool_scouring_loss_share'])
 
 
@@ -168,7 +169,7 @@ def _yarn_to_manufacturing_mc(mfa):
               + mfa.flows['RW.RW-MA.FI-Fibre and yarn import-TOT'].values
               + mfa.flows['WM.RC-MA.FI-Recycled fibre to domestic spinning-TOT'].values)
     removed = (mfa.flows['MA.FI-RW.RW-Fibre and yarn export-TOT'].values
-               + mfa.flows['MA.FI-WM.WW-Wool scouring loss-TOT'].values
+               + mfa.flows['MA.FI-EN.WA-Wool scouring loss-TOT'].values
                + mfa.flows['MA.FI-DI.RT-Domestic hand knitting yarn-TOT'].values.sum(axis=1))
     balance = supply - removed
     clip_negative(mfa, 'MA.FI-MA.TX-Yarn to textile manufacturing-TOT', balance)
