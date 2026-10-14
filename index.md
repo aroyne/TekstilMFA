@@ -15,6 +15,11 @@ Under arbeid
 
 Dynamisk, probabilistisk MFA (Monte Carlo, flodym) for klær, hjemmetekstiler, sko, garn og andre tekstilvarer i Norge, 1988–2025. Hver flyt har en egen side med tidsserie, usikkerhet, fibersammensetning og dokumentasjon fra koden. Systemdefinisjon, metode og plan står i [SYSTEMDEFINISJON](https://github.com/aroyne/TekstilMFA/blob/main/docs/SYSTEMDEFINISJON.md), [METODE](https://github.com/aroyne/TekstilMFA/blob/main/docs/METODE.md) og [PLAN](https://github.com/aroyne/TekstilMFA/blob/main/docs/PLAN.md).
 
+## Sankey-diagram
+
+<iframe id="sankey" src="output_files/plots/pages/sankey_national.html" width="100%" height="1000" style="border:0;" scrolling="no"></iframe>
+<script>window.addEventListener("message", function (e) { if (e.data && e.data.sankeyHeight) { document.getElementById("sankey").style.height = e.data.sankeyHeight + "px"; } });</script>
+
 ## Pools
 
 * [1. Rest of the world (RW)](rest_of_the_world_pool/pool_rest_of_the_world.html)

@@ -14,6 +14,11 @@ Subpooler:
 * [Landfill (WM.LF)](subpool_wm_lf.html)
 * [Material recycling (WM.RC)](subpool_wm_rc.html)
 
+## Sankey-diagram
+
+<iframe id="sankey" src="../output_files/plots/pages/sankey_WM.html" width="100%" height="800" style="border:0;" scrolling="no"></iframe>
+<script>window.addEventListener("message", function (e) { if (e.data && e.data.sankeyHeight) { document.getElementById("sankey").style.height = e.data.sankeyHeight + "px"; } });</script>
+
 ## Massebalanse
 
 <iframe src="../output_files/plots/pages/balance_pool_wm.html" width="100%" height="500px" frameborder="0" scrolling="no"></iframe>

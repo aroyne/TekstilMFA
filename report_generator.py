@@ -98,6 +98,13 @@ def _iframe(path, height):
     return f'<iframe src="../{path}" width="100%" height="{height}px" frameborder="0" scrolling="no"></iframe>'
 
 
+def _sankey_iframe(path, height):
+    """Iframe for a Sankey page, which reports its own height to the parent page."""
+    return (f'<iframe id="sankey" src="{path}" width="100%" height="{height}" style="border:0;" scrolling="no">'
+            '</iframe>\n<script>window.addEventListener("message", function (e) { if (e.data && e.data.sankeyHeight) '
+            '{ document.getElementById("sankey").style.height = e.data.sankeyHeight + "px"; } });</script>')
+
+
 # --- Code documentation ----------------------------------------------------
 
 def flow_functions(paths=None):
@@ -393,6 +400,9 @@ def write_pool_page(site, pool, nav_order):
     links = '\n'.join(f"* [{site.subpool_title(c)}]({site.subpool_file(c)[:-3]}.html)" for c in procs['code'])
     body = [f'# {site.pool_title(pool)}', '', 'Subpooler:', '', links, '']
     flows = site.flows[site.flows.apply(site.implemented, axis=1)]
+    sankey = f'{PLOT_DIR}/sankey_{pool}.html'
+    utils_stat.plot_pool_sankey(site.summary, site.fibre, flows, site.processes, pool, sankey)
+    body += ['## Sankey-diagram', '', _sankey_iframe('../' + sankey, 800), '']
     pool_of = lambda c: c.split('.')[0]
     inflows = flows[(flows['target'].map(pool_of) == pool) & (flows['source'].map(pool_of) != pool)]
     outflows = flows[(flows['source'].map(pool_of) == pool) & (flows['target'].map(pool_of) != pool)]
@@ -415,6 +425,8 @@ def write_pool_page(site, pool, nav_order):
 
 
 def write_index(site):
+    flows = site.flows[site.flows.apply(site.implemented, axis=1)]
+    utils_stat.plot_national_sankey(site.summary, site.fibre, flows, f'{PLOT_DIR}/sankey_national.html')
     pools = '\n'.join(f"* [{site.pool_title(p)}]({site.folder(p)}/pool_{_snake(site.pool_name[p])}.html)"
                       for p in site.pools)
     body = [
@@ -427,6 +439,7 @@ def write_index(site):
         'fibersammensetning og dokumentasjon fra koden. Systemdefinisjon, metode og plan står i '
         f'[SYSTEMDEFINISJON]({REPO_URL}/docs/SYSTEMDEFINISJON.md), [METODE]({REPO_URL}/docs/METODE.md) og '
         f'[PLAN]({REPO_URL}/docs/PLAN.md).', '',
+        '## Sankey-diagram', '', _sankey_iframe(f'{PLOT_DIR}/sankey_national.html', 1000), '',
         '## Pools', '', pools, '',
         '## Kjerneflyter i husholdningene', '',
         '![Kjerneflyter](output_files/plots/core_household_flows.png)', '',

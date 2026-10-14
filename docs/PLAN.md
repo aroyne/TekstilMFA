@@ -2,7 +2,7 @@
 
 *Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-10-12.*
 
-> **Her fortsetter vi:** Gjennomgangen flyt for flyt er ferdig for alle subpooler (D21–D35). Neste: åpne diskusjonspunkter (lageret i husholdningene, balansen i MA.TX), fase 4 (usikkerhet, også nivåene i D30) og fase 5 (Sankey, referanser). Når en flyt endres, oppdateres også beskrivelsen på flytsiden. Balansen i MA.TX beholdes inntil videre (kommentert som for høy). Notatene ligger i `claude_tekst/2026-10-12_gjennomgang_MA.FI.md` og `claude_tekst/2026-10-12_gjennomgang_MA.TX.md`. Arbeidsflyten for hver subpool er slik: kildene for hver flyt gås gjennom og diskuteres, deretter implementeres de, så kjøres MC (N = 1000 tar ca. 25 s), deretter genereres sidene på nytt (`report_generator.py`, `scripts/plot_core_flows.py`, `scripts/plot_stock_model.py`), og til slutt committes og pushes det.
+> **Her fortsetter vi:** Gjennomgangen flyt for flyt er ferdig for alle subpooler (D21–D35). Neste: åpne diskusjonspunkter (lageret i husholdningene, balansen i MA.TX), fase 4 (usikkerhet, også nivåene i D30) og fase 5 (referanser). Når en flyt endres, oppdateres også beskrivelsen på flytsiden. Balansen i MA.TX beholdes inntil videre (kommentert som for høy). Notatene ligger i `claude_tekst/2026-10-12_gjennomgang_MA.FI.md` og `claude_tekst/2026-10-12_gjennomgang_MA.TX.md`. Arbeidsflyten for hver subpool er slik: kildene for hver flyt gås gjennom og diskuteres, deretter implementeres de, så kjøres MC (N = 1000 tar ca. 25 s), deretter genereres sidene på nytt (`report_generator.py`, `scripts/plot_core_flows.py`, `scripts/plot_stock_model.py`), og til slutt committes og pushes det.
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
 
 **Mål:** En dynamisk, probabilistisk MFA for tekstiler i Norge 1990–2025. Den skal identifisere pools, subpools, flyter og lagre, kvantifisere dem med data og parametre, beregne tidsutviklingen med Monte Carlo og dokumentere hver flyt slik det er gjort i NitrogenBudsjett.
@@ -163,7 +163,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 ### Fase 5 – Resultater og dokumentasjon
 - [x] `utils_stat.py`: balanseplott per pool og subpool, tidsserie per flyt (per produkt, 95 % for summen), materialsammensetning per flyt (2026-10-05).
 - [x] `report_generator.py`: just-the-docs med 8 pool-, 18 subpool- og 41 flytsider, generert fra `system/*.csv`, resultatene og docstringene i koden. `MANUAL`-blokker bevares (2026-10-05).
-- [ ] Sankey med årsglider på forsiden.
+- [x] Sankey-diagrammer (2026-10-14): nasjonalt på pool-nivå på forsiden og ett per pool med subpoolene, med årsglider, farge etter tekstilform eller materiale, og valg for å skjule import og eksport av ferdigvarer. Malen er hentet fra NitrogenBudsjett (`templates/sankey_template.html`), og dataene lages i `utils_stat.py`.
 - [ ] `library.bib` og siteringer (`<!--cite:nøkkel-->`) som i NitrogenBudsjett.
 - [ ] Skrive manuelle beskrivelser per flyt i `MANUAL`-blokkene.
 - [ ] Slå på GitHub Pages for repoet (Settings → Pages, gren `main`, rotmappe) når grenen er merget.

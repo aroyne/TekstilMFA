@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tekstilstrømmer</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2933;
+    --muted: #616e7c;
+    --line: #d9dee3;
+    --panel: #f5f7f9;
+    --accent: #1a365d;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 8px 4px 12px; }
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-bottom: 6px; }
+  .year { font-size: 32px; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 80px; color: var(--accent); }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .seg button { border: 0; background: var(--bg); color: var(--muted); font: inherit; font-size: 13px;
+    padding: 6px 11px; cursor: pointer; }
+  .seg button + button { border-left: 1px solid var(--line); }
+  .seg button.on { background: var(--accent); color: #fff; }
+  .lbl { font-size: 12px; color: var(--muted); margin-right: 4px; }
+  .timeline { display: flex; align-items: center; gap: 10px; margin: 4px 0 2px; }
+  .timeline input[type=range] { flex: 1; accent-color: var(--accent); }
+  .play { border: 1px solid var(--line); background: var(--bg); border-radius: 50%; width: 34px; height: 34px;
+    cursor: pointer; font-size: 13px; color: var(--accent); flex: none; }
+  .ticks { position: relative; height: 16px; font-size: 11px; color: var(--muted); margin: 0 8px 4px 52px; }
+  .ticks span { position: absolute; transform: translateX(-50%); }
+  .scroll { overflow-x: auto; }
+  svg { width: 100%; min-width: 760px; height: auto; display: block; }
+  .node-label { font-size: 12px; fill: var(--text); paint-order: stroke; stroke: var(--bg); stroke-width: 3px;
+    stroke-linejoin: round; pointer-events: none; }
+  .node-label .v { fill: var(--muted); font-size: 11px; }
+  .scale { font-size: 11px; fill: var(--muted); }
+  .col-head { font-size: 11px; fill: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  path.link { fill: none; stroke-linecap: butt; transition: stroke-opacity .15s; }
+  .dim path.link { stroke-opacity: 0.08 !important; }
+  .dim path.link.hl { stroke-opacity: 1 !important; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .legend span.sw { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 5px; vertical-align: -2px; }
+  .note { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+  #tip { position: fixed; pointer-events: none; background: rgba(255,255,255,.97); border: 1px solid #b8c0c8;
+    border-radius: 5px; padding: 7px 10px; font-size: 12px; line-height: 1.45; box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    display: none; max-width: 360px; z-index: 10; }
+  #tip b { font-size: 13px; }
+  #tip table { border-collapse: collapse; margin-top: 3px; }
+  #tip td { padding: 0 6px 0 0; vertical-align: top; }
+  #tip td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  #tip .ci { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <div class="year" id="yearLabel"></div>
+    <div id="scopeBox"><span class="lbl">Flyter</span><span class="seg" id="segScope">
+      <button data-v="all" class="on">Alle flyter</button>
+      <button data-v="hide">Skjul import og eksport av ferdigvarer</button></span></div>
+    <div><span class="lbl">Farge etter</span><span class="seg" id="segColor">
+      <button data-v="form" class="on">Tekstilform</button>
+      <button data-v="material">Materiale</button></span></div>
+  </div>
+  <div class="timeline">
+    <button class="play" id="play" title="Spill av / pause">&#9654;</button>
+    <input type="range" id="slider" min="0" step="1">
+  </div>
+  <div class="ticks" id="ticks"></div>
+  <div class="scroll"><svg id="chart" role="img" ></svg></div>
+  <div class="legend" id="legend"></div>
+  <div class="note" id="note"></div>
+</div>
+<div id="tip"></div>
+<script>
+const DATA = {"forms":{"NEW":{"name":"Nye varer","color":"#2a78d6"},"FIB":{"name":"Fiber og garn","color":"#eda100"},"FAB":{"name":"Metervare","color":"#eb6834"},"MIX":{"name":"Brukte, usortert","color":"#4a3aa7"},"USE":{"name":"Brukte, ombrukbare","color":"#1baf7a"},"WRN":{"name":"Brukte, utslitte","color":"#e34948"},"PCW":{"name":"Produksjonsavfall","color":"#e87ba4"},"MFR":{"name":"Mikrofibre","color":"#008300"},"BYP":{"name":"Biprodukt, ikke tekstil","color":"#9a9893"}},"materials":{"SYN":{"name":"Syntetisk","color":"#2a78d6"},"CO":{"name":"Bomull","color":"#eb6834"},"WO":{"name":"Ull","color":"#1baf7a"},"CV":{"name":"Regenerert cellulose","color":"#eda100"},"OTH":{"name":"Andre fibre","color":"#e87ba4"},"NT":{"name":"Ikke-tekstil","color":"#008300"}},"hiddenNames":[],"title":"Sankey-diagram av tekstilstr\u00f8mmer i poolen Avl\u00f8p og luft","years":[1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],"layout":{"cols":[["MA_in","US_in"],["EN.AI","EN.WA"]],"colHeads":["Fra andre pooler","Subpooler"],"marginL":150,"marginR":150,"mainH":400,"nodeGap":34},"nodes":{"EN.AI":{"name":"Air and indoor dust","color":"#718096","role":"EN.AI"},"EN.WA":{"name":"Wastewater and water (not followed)","color":"#718096","role":"EN.WA"},"MA_in":{"name":"Industri","color":"#d69e2e","role":""},"US_in":{"name":"Bruk","color":"#2f855a","role":""}},"loopNote":"Flyter mellom subpooler som g\u00e5r tilbake til en tidligere kolonne, er tegnet som l\u00f8kker under diagrammet.","flows":[{"s":"MA_in","t":"EN.WA","name":"Wool scouring loss (fra MA.FI)","key":"BYP","hide":false,"v":[0.9206,0.9226,0.923,0.9221,0.9221,0.9236,0.734,0.7377,0.7401,0.7399,0.7403,0.4186,0.4193,0.4204,0.4204,0.4213,0.4201,0.0921,0.0927,0.0926,0.0924,0.0925,0.0925,0.0923,0.0925,0.0921,0.0921,0.0923,0.0926,0.0925,0.0927,0.0929,0.0927,0.0926,0.0925,0.0924],"lo":[0.6615,0.6594,0.6608,0.6641,0.6619,0.6602,0.5191,0.5166,0.5208,0.5286,0.5354,0.3029,0.3077,0.3063,0.3061,0.3051,0.3026,0.0644,0.0645,0.0653,0.0653,0.0648,0.0636,0.062,0.0607,0.0595,0.0582,0.06,0.0613,0.0626,0.0639,0.0647,0.0652,0.066,0.0655,0.065],"hi":[1.1841,1.1986,1.1981,1.1779,1.1655,1.1718,0.9681,0.9574,0.9562,0.9466,0.9494,0.5463,0.5449,0.5509,0.5504,0.5452,0.5408,0.1224,0.1229,0.1241,0.1251,0.1268,0.1283,0.1309,0.1348,0.1383,0.1428,0.1384,0.1346,0.132,0.1292,0.1275,0.1252,0.1233,0.1221,0.1211]},{"s":"US_in","t":"EN.AI","name":"Fibre release to air and dust (fra US.HH)","key":"MFR","hide":false,"v":[1.0222,1.035,1.0583,1.0835,1.121,1.1527,1.1765,1.214,1.2504,1.2802,1.3166,1.3408,1.3718,1.4123,1.4581,1.5081,1.5642,1.6299,1.6892,1.7105,1.7577,1.797,1.7921,1.8012,1.8064,1.8045,1.7991,1.7896,1.7795,1.7591,1.7338,1.7387,1.7475,1.7156,1.6974,1.7026],"lo":[0.3915,0.3969,0.405,0.4138,0.4298,0.4436,0.4534,0.4674,0.4811,0.492,0.5055,0.5147,0.5267,0.5433,0.5646,0.5874,0.6105,0.6391,0.6637,0.6719,0.6893,0.7043,0.7017,0.702,0.7032,0.7026,0.7002,0.6974,0.6924,0.6854,0.6761,0.6772,0.681,0.6696,0.6609,0.6592],"hi":[2.1508,2.1857,2.2363,2.3011,2.3744,2.4383,2.4899,2.5681,2.646,2.7071,2.7846,2.8384,2.9044,2.9942,3.0984,3.212,3.3324,3.473,3.6004,3.6561,3.7585,3.8441,3.8269,3.8415,3.8542,3.8441,3.8257,3.8076,3.7786,3.7398,3.6881,3.6977,3.7234,3.6579,3.6269,3.6396]},{"s":"US_in","t":"EN.WA","name":"Fibre release in laundry (fra US.HH)","key":"MFR","hide":false,"v":[0.9075,0.9213,0.9421,0.9673,1.0021,1.0314,1.0545,1.0872,1.1199,1.1448,1.1783,1.202,1.2325,1.2714,1.315,1.3635,1.414,1.4723,1.5255,1.5464,1.5883,1.6241,1.6151,1.6192,1.6264,1.6235,1.6156,1.6078,1.5943,1.5763,1.5531,1.5569,1.5695,1.5401,1.5218,1.5274],"lo":[0.5848,0.5937,0.6073,0.6242,0.6479,0.6676,0.6837,0.7039,0.723,0.7376,0.7574,0.7716,0.7914,0.818,0.848,0.8811,0.9159,0.9527,0.9864,0.9983,1.0242,1.0464,1.0408,1.0452,1.0489,1.0455,1.0373,1.0294,1.0189,1.009,0.9958,0.9979,1.0037,0.9865,0.976,0.978],"hi":[1.2439,1.258,1.2864,1.321,1.3678,1.4083,1.4399,1.4819,1.5247,1.5598,1.6041,1.6356,1.675,1.7279,1.7867,1.8499,1.9185,1.998,2.0679,2.0956,2.1512,2.2003,2.1889,2.2035,2.2063,2.2046,2.1948,2.1872,2.1667,2.1461,2.118,2.1241,2.1353,2.0964,2.0694,2.0858]},{"s":"US_in","t":"EN.WA","name":"Fibre release in industrial laundry (fra US.IC)","key":"MFR","hide":false,"v":[0.1173,0.1171,0.1178,0.1181,0.1195,0.1196,0.1186,0.119,0.1196,0.1189,0.12,0.1194,0.1203,0.1224,0.1259,0.1299,0.1338,0.139,0.1435,0.1423,0.1449,0.1475,0.1457,0.1459,0.1464,0.1467,0.1464,0.1465,0.1463,0.1458,0.1449,0.1478,0.1503,0.1448,0.1424,0.1397],"lo":[0.0679,0.0677,0.0678,0.0681,0.0688,0.0688,0.0682,0.0691,0.07,0.07,0.0708,0.0708,0.0715,0.073,0.0751,0.0775,0.08,0.0831,0.0858,0.0851,0.0868,0.0886,0.0873,0.0875,0.088,0.0881,0.0879,0.088,0.0879,0.0876,0.0872,0.089,0.0905,0.0868,0.0854,0.0837],"hi":[0.1971,0.1961,0.197,0.1974,0.1997,0.1991,0.1973,0.1979,0.199,0.1975,0.1985,0.1971,0.1985,0.2017,0.2075,0.2147,0.2204,0.2284,0.2355,0.2345,0.2389,0.2434,0.2415,0.2423,0.2431,0.2432,0.2422,0.2417,0.2414,0.2404,0.2389,0.2429,0.2459,0.2373,0.2339,0.2299]}],"materialFlows":[{"s":"MA_in","t":"EN.WA","name":"Wool scouring loss (fra MA.FI)","key":"WO","hide":false,"v":[0.9206,0.9226,0.923,0.9221,0.9221,0.9236,0.734,0.7377,0.7401,0.7399,0.7403,0.4186,0.4193,0.4204,0.4204,0.4213,0.4201,0.0921,0.0927,0.0926,0.0924,0.0925,0.0925,0.0923,0.0925,0.0921,0.0921,0.0923,0.0926,0.0925,0.0927,0.0929,0.0927,0.0926,0.0925,0.0924],"lo":[0.6615,0.6594,0.6608,0.6641,0.6619,0.6602,0.5191,0.5166,0.5208,0.5286,0.5354,0.3029,0.3077,0.3063,0.3061,0.3051,0.3026,0.0644,0.0645,0.0653,0.0653,0.0648,0.0636,0.062,0.0607,0.0595,0.0582,0.06,0.0613,0.0626,0.0639,0.0647,0.0652,0.066,0.0655,0.065],"hi":[1.1841,1.1986,1.1981,1.1779,1.1655,1.1718,0.9681,0.9574,0.9562,0.9466,0.9494,0.5463,0.5449,0.5509,0.5504,0.5452,0.5408,0.1224,0.1229,0.1241,0.1251,0.1268,0.1283,0.1309,0.1348,0.1383,0.1428,0.1384,0.1346,0.132,0.1292,0.1275,0.1252,0.1233,0.1221,0.1211]},{"s":"US_in","t":"EN.AI","name":"Fibre release to air and dust (fra US.HH)","key":"CO","hide":false,"v":[0.5763,0.5921,0.6047,0.6252,0.6499,0.6687,0.6842,0.7024,0.7157,0.7191,0.7304,0.7343,0.7478,0.7682,0.7942,0.8235,0.8539,0.8869,0.9149,0.9284,0.9498,0.9589,0.9432,0.9314,0.9152,0.8916,0.8653,0.8417,0.8148,0.7884,0.7652,0.759,0.7598,0.7426,0.7353,0.7404],"lo":[0.2204,0.2262,0.2309,0.2385,0.2486,0.2564,0.2627,0.2697,0.2741,0.2747,0.2794,0.2821,0.2878,0.2965,0.3077,0.3206,0.3342,0.3494,0.3609,0.3654,0.3735,0.3755,0.368,0.3607,0.3543,0.3448,0.3344,0.3257,0.3164,0.3059,0.2967,0.2945,0.293,0.2864,0.2828,0.2885],"hi":[1.202,1.2414,1.2771,1.3198,1.375,1.4142,1.4491,1.4884,1.5169,1.5244,1.5474,1.5583,1.5881,1.6356,1.6935,1.7579,1.8232,1.8969,1.9587,1.9861,2.03,2.0456,2.0094,1.9801,1.9434,1.8871,1.8278,1.7732,1.7167,1.6619,1.6133,1.6002,1.6016,1.5672,1.5485,1.559]},{"s":"US_in","t":"EN.AI","name":"Fibre release to air and dust (fra US.HH)","key":"CV","hide":false,"v":[0.0373,0.0364,0.0354,0.0344,0.0345,0.0347,0.0344,0.035,0.036,0.0368,0.0382,0.0391,0.0384,0.0383,0.0379,0.038,0.0385,0.0396,0.0408,0.0416,0.0432,0.0451,0.0454,0.0461,0.0467,0.0475,0.0485,0.0493,0.0496,0.0499,0.0495,0.049,0.0495,0.0487,0.0479,0.048],"lo":[0.014,0.0137,0.0134,0.013,0.0131,0.0133,0.0132,0.0133,0.0137,0.0141,0.0145,0.0146,0.0143,0.0143,0.0141,0.0139,0.0141,0.0146,0.0152,0.0154,0.0159,0.0165,0.0167,0.0169,0.0172,0.0175,0.0178,0.0181,0.0182,0.0183,0.0181,0.0179,0.0181,0.0178,0.0174,0.0174],"hi":[0.0796,0.0776,0.0754,0.0733,0.0733,0.0742,0.074,0.0749,0.0768,0.0787,0.0817,0.0836,0.0822,0.0819,0.0809,0.0814,0.0828,0.0855,0.088,0.0892,0.0925,0.0964,0.0971,0.0987,0.1004,0.1021,0.1036,0.1048,0.1053,0.1057,0.1048,0.1037,0.1048,0.103,0.1013,0.1017]},{"s":"US_in","t":"EN.AI","name":"Fibre release to air and dust (fra US.HH)","key":"OTH","hide":false,"v":[0.0083,0.0085,0.0084,0.0087,0.0094,0.0109,0.0122,0.0138,0.0152,0.0174,0.0192,0.0197,0.0207,0.0218,0.0227,0.0239,0.0245,0.0252,0.0266,0.0281,0.0296,0.0305,0.032,0.0337,0.0344,0.0357,0.0369,0.0388,0.0391,0.0397,0.0401,0.0406,0.0408,0.0389,0.0375,0.0363],"lo":[0.0033,0.0033,0.0033,0.0034,0.0036,0.0042,0.0047,0.0053,0.0058,0.0067,0.0074,0.0075,0.008,0.0085,0.0089,0.0094,0.0095,0.0097,0.0102,0.0109,0.0114,0.0117,0.0122,0.0128,0.013,0.0135,0.0139,0.0146,0.0147,0.0149,0.015,0.0151,0.0151,0.0141,0.0135,0.0132],"hi":[0.0181,0.0184,0.0182,0.0189,0.0201,0.0236,0.0266,0.0301,0.0331,0.0383,0.0422,0.0427,0.0447,0.0473,0.0494,0.0517,0.0532,0.0547,0.0576,0.0609,0.0641,0.0659,0.0691,0.0725,0.074,0.0766,0.079,0.0832,0.084,0.0856,0.0867,0.0882,0.0894,0.0858,0.0829,0.0809]},{"s":"US_in","t":"EN.AI","name":"Fibre release to air and dust (fra US.HH)","key":"SYN","hide":false,"v":[0.324,0.3231,0.3279,0.3312,0.339,0.3478,0.3536,0.3663,0.3832,0.4027,0.4256,0.4432,0.462,0.4822,0.5053,0.5286,0.5532,0.5802,0.6059,0.6135,0.6314,0.6568,0.6645,0.6781,0.6945,0.7098,0.7223,0.7332,0.7391,0.7455,0.7443,0.7506,0.7594,0.7482,0.7409,0.7409],"lo":[0.1251,0.1248,0.1263,0.1276,0.1305,0.1346,0.1364,0.1412,0.1479,0.1556,0.1644,0.1713,0.1782,0.186,0.1947,0.2038,0.2142,0.2254,0.2352,0.2384,0.2453,0.2549,0.2577,0.2636,0.2701,0.2762,0.2812,0.2852,0.2867,0.2875,0.2865,0.2891,0.2929,0.2889,0.2852,0.2861],"hi":[0.6773,0.6767,0.6841,0.6899,0.7071,0.7305,0.7416,0.7663,0.8,0.8396,0.885,0.922,0.9622,1.0067,1.0559,1.106,1.1583,1.217,1.2714,1.2867,1.3212,1.3749,1.3908,1.4233,1.4591,1.4945,1.5193,1.5437,1.5595,1.5725,1.567,1.581,1.6012,1.5758,1.5605,1.5539]},{"s":"US_in","t":"EN.AI","name":"Fibre release to air and dust (fra US.HH)","key":"WO","hide":false,"v":[0.0745,0.0739,0.0799,0.0842,0.0898,0.0922,0.095,0.0989,0.1026,0.1046,0.1042,0.1055,0.1054,0.1046,0.103,0.1021,0.1023,0.1029,0.1063,0.1065,0.1109,0.1149,0.1165,0.1191,0.1227,0.1256,0.1296,0.132,0.1364,0.137,0.1383,0.1422,0.1432,0.1425,0.1422,0.1423],"lo":[0.0277,0.0276,0.0304,0.0324,0.0346,0.0356,0.0365,0.0379,0.0392,0.04,0.0396,0.0399,0.0395,0.0392,0.0389,0.0388,0.039,0.0393,0.0404,0.0405,0.0424,0.0442,0.0447,0.0457,0.0472,0.0484,0.0501,0.051,0.0529,0.0529,0.0531,0.0549,0.0552,0.0548,0.0549,0.055],"hi":[0.161,0.1603,0.1717,0.1794,0.1892,0.1953,0.2027,0.2105,0.2179,0.2234,0.2225,0.2251,0.2253,0.2243,0.2207,0.219,0.2198,0.2212,0.2284,0.2283,0.2373,0.2448,0.2473,0.2517,0.2589,0.2642,0.2725,0.2774,0.2875,0.2889,0.2925,0.3016,0.3027,0.3003,0.3001,0.3005]},{"s":"US_in","t":"EN.WA","name":"Fibre release in laundry (fra US.HH)","key":"CO","hide":false,"v":[0.5135,0.5283,0.5404,0.5588,0.5803,0.5976,0.6126,0.629,0.6413,0.6463,0.6557,0.6606,0.6734,0.6924,0.7153,0.7403,0.7676,0.7984,0.8245,0.8364,0.8556,0.8629,0.8484,0.8391,0.8233,0.8009,0.7764,0.7539,0.73,0.7066,0.6861,0.68,0.681,0.666,0.6582,0.6645],"lo":[0.3303,0.3406,0.3476,0.3596,0.3745,0.3845,0.393,0.4026,0.4095,0.4106,0.4164,0.4185,0.4258,0.4387,0.4552,0.4739,0.4934,0.5152,0.5315,0.5378,0.5497,0.5537,0.5429,0.5335,0.5216,0.5084,0.4947,0.4816,0.4658,0.4511,0.4376,0.4341,0.4324,0.4237,0.4184,0.4249],"hi":[0.7044,0.7238,0.7388,0.7637,0.7941,0.8179,0.8381,0.8609,0.878,0.8833,0.896,0.9025,0.9188,0.9449,0.9748,1.0108,1.0475,1.0896,1.1243,1.1402,1.1679,1.1761,1.158,1.1428,1.1254,1.0967,1.0624,1.0308,0.9994,0.9675,0.9386,0.9312,0.9316,0.9121,0.9003,0.907]},{"s":"US_in","t":"EN.WA","name":"Fibre release in laundry (fra US.HH)","key":"CV","hide":false,"v":[0.0334,0.0326,0.0316,0.0307,0.0309,0.0314,0.0311,0.0316,0.0325,0.0334,0.0346,0.0353,0.0347,0.0345,0.0341,0.0341,0.0344,0.0355,0.0365,0.0373,0.0387,0.0405,0.0408,0.0415,0.0422,0.0429,0.0437,0.0444,0.0445,0.0446,0.0443,0.0439,0.0445,0.0438,0.043,0.043],"lo":[0.0208,0.0205,0.0199,0.0193,0.0195,0.0197,0.0194,0.0197,0.0203,0.0209,0.0218,0.0222,0.0219,0.0218,0.0214,0.0212,0.0216,0.0223,0.023,0.0234,0.0243,0.0254,0.0256,0.0259,0.0263,0.0268,0.0273,0.0278,0.0279,0.0279,0.0275,0.0272,0.0275,0.0269,0.0264,0.0264],"hi":[0.0477,0.0465,0.045,0.0439,0.044,0.0444,0.0438,0.0444,0.0455,0.0466,0.0483,0.0492,0.0484,0.0484,0.0482,0.0484,0.049,0.0505,0.0522,0.0534,0.0554,0.0582,0.0589,0.0599,0.061,0.0621,0.0631,0.0643,0.0649,0.0652,0.0647,0.0641,0.0647,0.0636,0.0627,0.0629]},{"s":"US_in","t":"EN.WA","name":"Fibre release in laundry (fra US.HH)","key":"OTH","hide":false,"v":[0.0075,0.0076,0.0075,0.0078,0.0083,0.0097,0.0109,0.0123,0.0135,0.0155,0.0172,0.0175,0.0184,0.0195,0.0203,0.0214,0.0219,0.0225,0.0237,0.0251,0.0264,0.0272,0.0286,0.03,0.0307,0.0319,0.0329,0.0346,0.0349,0.0355,0.0356,0.036,0.0363,0.0344,0.0331,0.0319],"lo":[0.0046,0.0047,0.0047,0.0049,0.0053,0.0062,0.0069,0.0079,0.0087,0.01,0.011,0.0112,0.0117,0.0123,0.0128,0.0135,0.0138,0.0142,0.0149,0.0158,0.0166,0.0171,0.0179,0.0189,0.0193,0.0199,0.0205,0.0216,0.0217,0.022,0.0221,0.0221,0.0221,0.0206,0.0195,0.0183],"hi":[0.011,0.0112,0.0111,0.0114,0.012,0.0137,0.0154,0.0174,0.0191,0.0218,0.0241,0.0248,0.0262,0.0278,0.0292,0.0308,0.0317,0.0327,0.0344,0.0365,0.0386,0.0399,0.042,0.0441,0.0452,0.0469,0.0486,0.0511,0.0517,0.0525,0.0531,0.0539,0.0545,0.0527,0.0514,0.0499]},{"s":"US_in","t":"EN.WA","name":"Fibre release in laundry (fra US.HH)","key":"SYN","hide":false,"v":[0.287,0.2866,0.2903,0.2932,0.3009,0.3099,0.3149,0.3259,0.3411,0.3594,0.3804,0.3963,0.4136,0.4327,0.4539,0.4751,0.4969,0.5218,0.5438,0.5513,0.5669,0.5888,0.5958,0.61,0.6244,0.6385,0.6488,0.6586,0.6642,0.6693,0.6684,0.674,0.6824,0.6708,0.6612,0.6602],"lo":[0.1839,0.1839,0.1866,0.1887,0.1938,0.1998,0.2032,0.2106,0.2208,0.2316,0.244,0.2545,0.2643,0.2774,0.2915,0.3056,0.3195,0.3347,0.3496,0.3523,0.3614,0.3758,0.3797,0.3883,0.3983,0.407,0.4137,0.4206,0.4237,0.4259,0.4244,0.4284,0.4334,0.4273,0.4234,0.4222],"hi":[0.3954,0.3945,0.3987,0.4022,0.4109,0.4228,0.4291,0.4425,0.4637,0.4861,0.5136,0.5359,0.5594,0.5846,0.6127,0.6419,0.6712,0.7052,0.7367,0.7477,0.7684,0.7998,0.8092,0.8271,0.8466,0.8642,0.8804,0.8958,0.9052,0.9129,0.9103,0.9201,0.9333,0.9159,0.9044,0.9035]},{"s":"US_in","t":"EN.WA","name":"Fibre release in laundry (fra US.HH)","key":"WO","hide":false,"v":[0.0669,0.0665,0.0722,0.0762,0.0808,0.083,0.0855,0.0889,0.0922,0.094,0.0938,0.0952,0.095,0.0941,0.0927,0.0919,0.0921,0.0929,0.096,0.0959,0.1002,0.1038,0.1052,0.1074,0.1108,0.1133,0.1169,0.1191,0.1234,0.1236,0.1245,0.1282,0.1288,0.1282,0.1281,0.1278],"lo":[0.0416,0.0415,0.0453,0.0481,0.051,0.0525,0.0544,0.0566,0.0589,0.0601,0.0599,0.0608,0.0607,0.0602,0.0593,0.0589,0.059,0.0595,0.0615,0.0615,0.0642,0.0664,0.0672,0.0686,0.0706,0.0722,0.0746,0.0761,0.0783,0.0782,0.0784,0.0807,0.0813,0.0812,0.0806,0.081],"hi":[0.0961,0.0952,0.1028,0.1079,0.1141,0.1169,0.1203,0.1248,0.1291,0.1316,0.1311,0.1327,0.1322,0.1307,0.1287,0.1277,0.1281,0.129,0.1331,0.133,0.1383,0.1433,0.1451,0.1478,0.1523,0.1554,0.1601,0.163,0.1686,0.1697,0.171,0.1761,0.177,0.177,0.1774,0.1779]},{"s":"US_in","t":"EN.WA","name":"Fibre release in industrial laundry (fra US.IC)","key":"CO","hide":false,"v":[0.0339,0.0357,0.0368,0.0385,0.0404,0.0415,0.0421,0.0431,0.0435,0.0426,0.0431,0.043,0.044,0.0458,0.0478,0.0497,0.0517,0.0539,0.055,0.054,0.0548,0.0545,0.0517,0.05,0.0484,0.0463,0.0444,0.0431,0.0418,0.0405,0.0399,0.0406,0.0413,0.0394,0.0388,0.0383],"lo":[0.0199,0.021,0.0217,0.0227,0.0238,0.0244,0.0247,0.0253,0.0255,0.0251,0.0254,0.0253,0.026,0.0272,0.0284,0.0296,0.0306,0.032,0.0326,0.0319,0.0322,0.0318,0.0301,0.0291,0.0282,0.0269,0.0258,0.0251,0.0243,0.0236,0.0232,0.0238,0.0244,0.023,0.0226,0.0224],"hi":[0.0562,0.0588,0.0607,0.0634,0.0664,0.0681,0.0694,0.0714,0.0725,0.0716,0.0723,0.0721,0.0736,0.0772,0.0804,0.0837,0.0869,0.0905,0.0927,0.0919,0.0934,0.093,0.0883,0.0855,0.083,0.0794,0.0762,0.074,0.0718,0.0697,0.0685,0.0696,0.071,0.0679,0.0669,0.0661]},{"s":"US_in","t":"EN.WA","name":"Fibre release in industrial laundry (fra US.IC)","key":"CV","hide":false,"v":[0.0039,0.0037,0.0035,0.0033,0.0033,0.0033,0.0032,0.0032,0.0033,0.0033,0.0035,0.0035,0.0033,0.0032,0.0031,0.0031,0.0032,0.0034,0.0036,0.0036,0.0038,0.004,0.004,0.004,0.004,0.0041,0.0042,0.0043,0.0043,0.0042,0.0042,0.0041,0.0042,0.0041,0.004,0.0038],"lo":[0.0023,0.0021,0.002,0.0019,0.0019,0.0019,0.0019,0.0019,0.002,0.002,0.0021,0.0021,0.0019,0.0019,0.0018,0.0018,0.0019,0.002,0.0021,0.0021,0.0022,0.0023,0.0023,0.0023,0.0023,0.0023,0.0024,0.0024,0.0024,0.0024,0.0024,0.0023,0.0024,0.0023,0.0022,0.0021],"hi":[0.0066,0.0063,0.006,0.0057,0.0057,0.0057,0.0055,0.0055,0.0056,0.0057,0.0059,0.006,0.0056,0.0055,0.0055,0.0055,0.0056,0.0059,0.0062,0.0064,0.0067,0.007,0.0071,0.0071,0.0072,0.0073,0.0075,0.0076,0.0076,0.0076,0.0075,0.0074,0.0075,0.0072,0.0071,0.0069]},{"s":"US_in","t":"EN.WA","name":"Fibre release in industrial laundry (fra US.IC)","key":"OTH","hide":false,"v":[0.0052,0.0053,0.0054,0.0056,0.0058,0.006,0.0062,0.0064,0.0065,0.0068,0.0069,0.0069,0.0069,0.0069,0.007,0.007,0.007,0.0071,0.0073,0.0073,0.0074,0.0074,0.0075,0.0077,0.0077,0.0077,0.0077,0.0078,0.0077,0.0077,0.0077,0.0077,0.0077,0.0072,0.007,0.0068],"lo":[0.0028,0.0029,0.0029,0.003,0.0032,0.0033,0.0034,0.0036,0.0036,0.0038,0.0039,0.0038,0.0038,0.0038,0.0039,0.0039,0.0039,0.0039,0.004,0.0041,0.0041,0.0041,0.0042,0.0043,0.0043,0.0043,0.0043,0.0043,0.0043,0.0042,0.0042,0.0042,0.0042,0.0039,0.0038,0.0037],"hi":[0.0094,0.0095,0.0097,0.0099,0.0103,0.0106,0.0108,0.0111,0.0114,0.0118,0.012,0.012,0.012,0.0121,0.0122,0.0123,0.0123,0.0124,0.0127,0.0128,0.013,0.013,0.0132,0.0134,0.0134,0.0134,0.0135,0.0136,0.0135,0.0134,0.0134,0.0134,0.0133,0.0127,0.0123,0.0121]},{"s":"US_in","t":"EN.WA","name":"Fibre release in industrial laundry (fra US.IC)","key":"SYN","hide":false,"v":[0.0661,0.0638,0.0623,0.0604,0.059,0.0576,0.0555,0.0545,0.0544,0.0544,0.055,0.0547,0.055,0.0557,0.0572,0.0592,0.0613,0.0636,0.0662,0.066,0.0678,0.0709,0.0719,0.0739,0.0763,0.0785,0.0799,0.0812,0.0822,0.083,0.0831,0.0854,0.0865,0.0838,0.0827,0.0807],"lo":[0.037,0.0359,0.0349,0.0338,0.0331,0.0324,0.0311,0.0304,0.0308,0.031,0.0312,0.031,0.0311,0.0318,0.033,0.0347,0.0359,0.0375,0.0393,0.0391,0.0402,0.0421,0.0426,0.0438,0.0451,0.0466,0.0474,0.0481,0.0486,0.049,0.0488,0.0501,0.0507,0.049,0.048,0.0468],"hi":[0.1147,0.1114,0.1089,0.1053,0.1025,0.1,0.0962,0.0944,0.0935,0.0929,0.0931,0.0925,0.0923,0.0927,0.0952,0.0977,0.101,0.105,0.1092,0.109,0.1117,0.1166,0.1183,0.1211,0.125,0.1287,0.1311,0.1332,0.1347,0.1361,0.1361,0.1397,0.1417,0.1375,0.1355,0.1328]},{"s":"US_in","t":"EN.WA","name":"Fibre release in industrial laundry (fra US.IC)","key":"WO","hide":false,"v":[0.0078,0.0079,0.009,0.0096,0.0102,0.0103,0.0106,0.011,0.0114,0.0115,0.0112,0.0113,0.0111,0.0108,0.0104,0.0102,0.0103,0.0104,0.0107,0.0105,0.0105,0.0106,0.0103,0.0102,0.0101,0.01,0.01,0.0099,0.01,0.0098,0.0096,0.0096,0.0097,0.0094,0.0093,0.0093],"lo":[0.0043,0.0044,0.0052,0.0056,0.006,0.006,0.0062,0.0064,0.0067,0.0067,0.0065,0.0066,0.0065,0.0063,0.006,0.0059,0.0059,0.0059,0.0062,0.006,0.006,0.0061,0.0059,0.0058,0.0058,0.0057,0.0057,0.0056,0.0057,0.0056,0.0055,0.0055,0.0056,0.0054,0.0054,0.0054],"hi":[0.0132,0.0134,0.0152,0.0161,0.0171,0.0174,0.0177,0.0185,0.0191,0.0192,0.0189,0.0191,0.0188,0.0183,0.0177,0.0173,0.0174,0.0175,0.0181,0.0176,0.0176,0.0176,0.0173,0.0171,0.017,0.0169,0.0169,0.0166,0.0169,0.0164,0.0162,0.0161,0.0163,0.0158,0.0157,0.0156]}]};
+
+// Page-specific layout: node columns (left to right), column headings, margins for the outer labels and the
+// height of the main diagram and the gap between nodes in a column come from DATA, so the same page draws the national and the pool diagrams.
+const W = 1160, TOP = 34, NODE_W = 14;
+const { cols: COLS, colHeads: COL_HEADS, marginL: M_L, marginR: M_R, mainH: MAIN_H, nodeGap: PAD } = DATA.layout;
+const LANE_GAP = 4, LOOP_TOP_GAP = 22, LEG_GAP = 4, ARC_R = 6;
+const colX = c => M_L + c * (W - M_L - M_R - NODE_W) / (COLS.length - 1);
+const nodeCol = {}, nodeOrder = {};
+COLS.forEach((ids, c) => ids.forEach((id, i) => { nodeCol[id] = c; nodeOrder[id] = i; }));
+const NODE_IDS = COLS.flat();
+const nodeRole = id => DATA.nodes[id].role;
+const nodeName = id => DATA.nodes[id].name + (nodeRole(id) ? ' (' + nodeRole(id) + ')' : '');
+
+const state = { scope: 'all', color: 'form', yi: DATA.years.length - 1, playing: null };
+const fmt = v => v >= 100 ? v.toFixed(0) : v >= 10 ? v.toFixed(1) : v.toFixed(2);
+
+// One drawn link per (source node, target node, colour key) in a given scope/colour mode. Colouring by
+// textile form uses the TOT flows (key: form); colouring by material uses the fibre layer, one record per
+// flow and material (key: material).
+function buildLinks(scope, color) {
+  const map = new Map();
+  (color === 'form' ? DATA.flows : DATA.materialFlows).forEach(f => {
+    if (scope === 'hide' && f.hide) return;
+    const s = f.s, t = f.t;
+    const key = f.key;
+    const id = s + '|' + t + '|' + key;
+    if (!map.has(id)) map.set(id, { id, s, t, key, flows: [] });
+    map.get(id).flows.push(f);
+  });
+  const links = [...map.values()];
+  links.forEach(l => {
+    l.v = DATA.years.map((_, yi) => l.flows.reduce((a, f) => a + f.v[yi], 0));
+    l.loop = nodeCol[l.t] <= nodeCol[l.s];
+  });
+  return links;
+}
+
+function nodeTotals(links, yi) {
+  const tin = {}, tout = {};
+  NODE_IDS.forEach(n => { tin[n] = 0; tout[n] = 0; });
+  links.forEach(l => { tout[l.s] += l.v[yi]; tin[l.t] += l.v[yi]; });
+  return { tin, tout };
+}
+
+// Scale (px per kt) is fixed across all years within a scope, chosen so the fullest column in any year fills MAIN_H.
+function scaleFor(links) {
+  let k = Infinity;
+  DATA.years.forEach((_, yi) => {
+    const { tin, tout } = nodeTotals(links, yi);
+    COLS.forEach(ids => {
+      const sum = ids.reduce((a, n) => a + Math.max(tin[n], tout[n]), 0);
+      if (sum > 0) k = Math.min(k, (MAIN_H - PAD * (ids.length - 1)) / sum);
+    });
+  });
+  return k;
+}
+
+// Backward links (to the same or an earlier column) run in fixed lanes below the diagram; each lane is as wide as
+// that link's largest value over all years, so the lanes never move when the year changes.
+function lanesFor(links, k) {
+  const loops = links.filter(l => l.loop);
+  loops.forEach(l => { l.wmax = Math.max(...l.v) * k; l.span = nodeCol[l.s] - nodeCol[l.t]; });
+  loops.sort((a, b) => a.span - b.span || nodeCol[b.s] - nodeCol[a.s] || b.wmax - a.wmax);
+  let y = TOP + MAIN_H + LOOP_TOP_GAP;
+  loops.forEach((l, i) => { l.lane = i; l.laneY = y + l.wmax / 2; y += l.wmax + LANE_GAP; });
+  // Vertical legs: the loop in the innermost lane leaves a node lowest and turns down closest to it, so loops
+  // sharing a node nest instead of crossing.
+  const legs = (end, sign) => {
+    const byNode = {};
+    loops.forEach(l => (byNode[l[end]] = byNode[l[end]] || []).push(l));
+    Object.values(byNode).forEach(ls => {
+      let off = LEG_GAP;
+      ls.sort((a, b) => a.lane - b.lane).forEach(l => {
+        const r = l.wmax / 2 + ARC_R;
+        off += r;
+        l[end + 'Leg'] = sign * off;
+        off += l.wmax / 2 + LANE_GAP;
+      });
+    });
+  };
+  legs('s', 1); legs('t', -1);
+  return y;
+}
+
+function layout(links, k, yi) {
+  const { tin, tout } = nodeTotals(links, yi);
+  const nodes = {};
+  COLS.forEach((ids, c) => {
+    const hs = ids.map(n => Math.max(tin[n], tout[n]) * k);
+    const total = hs.reduce((a, b) => a + b, 0) + PAD * (ids.length - 1);
+    let y = TOP + (MAIN_H - total) / 2;
+    ids.forEach((n, i) => {
+      nodes[n] = { id: n, x: colX(c), y, h: hs[i], tin: tin[n], tout: tout[n] };
+      y += hs[i] + PAD;
+    });
+  });
+  const geo = {};
+  NODE_IDS.forEach(n => {
+    const node = nodes[n];
+    const out = links.filter(l => l.s === n);
+    const inc = links.filter(l => l.t === n);
+    const byTarget = (a, b) => (a.loop - b.loop) || (a.loop ? b.lane - a.lane : (nodes[a.t].y - nodes[b.t].y) || nodeOrder[a.t] - nodeOrder[b.t]);
+    const bySource = (a, b) => (a.loop - b.loop) || (a.loop ? b.lane - a.lane : (nodes[a.s].y - nodes[b.s].y) || nodeOrder[a.s] - nodeOrder[b.s]);
+    let y = node.y;
+    out.sort(byTarget).forEach(l => { const w = l.v[yi] * k; const g = geo[l.id] || (geo[l.id] = {}); g.sy = y + w / 2; g.w = w; y += w; });
+    y = node.y;
+    inc.sort(bySource).forEach(l => { const w = l.v[yi] * k; const g = geo[l.id] || (geo[l.id] = {}); g.ty = y + w / 2; y += w; });
+  });
+  return { nodes, geo };
+}
+
+function linkPath(l, g) {
+  const x0 = colX(nodeCol[l.s]) + NODE_W, x1 = colX(nodeCol[l.t]);
+  if (!l.loop) {
+    const xm = (x0 + x1) / 2;
+    return `M${x0},${g.sy}C${xm},${g.sy} ${xm},${g.ty} ${x1},${g.ty}`;
+  }
+  // Racetrack loop: right from the source, down a vertical leg, left along its lane, up a leg, right into the target.
+  const r = g.w / 2 + ARC_R, ls = x0 + l.sLeg, lt = x1 + l.tLeg, y = l.laneY;
+  return `M${x0},${g.sy}H${ls - r}A${r},${r} 0 0 1 ${ls},${g.sy + r}V${y - r}A${r},${r} 0 0 1 ${ls - r},${y}` +
+         `H${lt + r}A${r},${r} 0 0 1 ${lt},${y - r}V${g.ty + r}A${r},${r} 0 0 1 ${lt + r},${g.ty}H${x1}`;
+}
+
+const svg = document.getElementById('chart');
+svg.setAttribute('aria-label', DATA.title);
+if (!DATA.hiddenNames.length) document.getElementById('scopeBox').style.display = 'none';
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const a in attrs) e.setAttribute(a, attrs[a]); parent && parent.appendChild(e); return e; };
+const tip = document.getElementById('tip');
+
+let cur = null;      // {links, k, bottom, lay}
+let drawn = null;    // element handles for the current scope/colour
+
+function colourOf(l) { return (state.color === 'form' ? DATA.forms : DATA.materials)[l.key].color; }
+
+function rebuild() {
+  const links = buildLinks(state.scope, state.color);
+  const k = scaleFor(links);
+  const bottom = lanesFor(links, k);
+  cur = { links, k, bottom };
+  svg.innerHTML = '';
+  const H = bottom + 40;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  COL_HEADS.forEach((t, c) => { if (t) el('text', { x: colX(c) + NODE_W / 2, y: 14, 'text-anchor': c === 0 ? 'start' : c === COLS.length - 1 ? 'end' : 'middle', class: 'col-head' }, svg).textContent = t; });
+  const gl = el('g', {}, svg), gn = el('g', {}, svg), gt = el('g', {}, svg);
+  drawn = { links: {}, nodes: {}, labels: {} };
+  links.sort((a, b) => Math.max(...b.v) - Math.max(...a.v)).forEach(l => {
+    const p = el('path', { class: 'link', stroke: colourOf(l), 'stroke-opacity': 1 }, gl);
+    p.addEventListener('mousemove', e => showLinkTip(e, l));
+    p.addEventListener('mouseleave', hideTip);
+    drawn.links[l.id] = p;
+  });
+  NODE_IDS.forEach(n => {
+    const r = el('rect', { width: NODE_W, fill: DATA.nodes[n].color, rx: 1.5 }, gn);
+    r.addEventListener('mousemove', e => showNodeTip(e, n));
+    r.addEventListener('mouseleave', hideTip);
+    drawn.nodes[n] = r;
+    const c = nodeCol[n];
+    const anchor = c === 0 ? 'end' : 'start';
+    const t = el('text', { class: 'node-label', 'text-anchor': anchor, 'dominant-baseline': 'middle' }, gt);
+    const a = el('tspan', {}, t); a.textContent = DATA.nodes[n].name;
+    const b = el('tspan', { class: 'v' }, t);
+    drawn.labels[n] = { t, b, anchor };
+  });
+  drawScaleBar(bottom);
+  drawLegend();
+  cur.lay = layout(links, k, state.yi);
+  apply(cur.lay);
+  postHeight();
+}
+
+function drawScaleBar(bottom) {
+  const steps = [1000, 500, 200, 100, 50, 20, 10, 5];
+  const kt = steps.find(s => s * cur.k <= 60) || 5;
+  const h = kt * cur.k, x = W - M_R + 30, y = bottom + 4;
+  const g = el('g', {}, svg);
+  el('rect', { x, y, width: NODE_W, height: h, fill: '#9aa5b1' }, g);
+  el('text', { x: x - 6, y: y + h / 2, 'text-anchor': 'end', 'dominant-baseline': 'middle', class: 'scale' }, g).textContent = kt + ' kt';
+}
+
+function drawLegend() {
+  const map = state.color === 'form' ? DATA.forms : DATA.materials;
+  const used = new Set(cur.links.map(l => l.key));
+  document.getElementById('legend').innerHTML = Object.entries(map).filter(([k]) => used.has(k))
+    .map(([k, c]) => `<span><span class="sw" style="background:${c.color}"></span>${c.name}</span>`).join('');
+  document.getElementById('note').innerHTML =
+    'Verdiene er medianer fra Monte Carlo-kjøringen i kt per år. Hold musen over en flyt for å se hva den består av, med 95 %-intervall. ' +
+    'Skalaen er den samme for alle år' + (state.scope === 'hide' ? ' i denne visningen (den er en annen enn i «Alle flyter»).' : '.') +
+    ' Lagerendringer vises ikke, så det som går inn og ut av en node, kan være ulikt.' +
+    (cur.links.some(l => l.loop) ? ' ' + DATA.loopNote : '') +
+    (state.color === 'material' ? ' Materiale er fra fiberlaget; «Ikke-tekstil» er knapper, glidelåser, såler, skum o.l.' : '') +
+    (state.scope === 'hide' ? '<br>Skjult: ' + DATA.hiddenNames.join(', ') + '.' : '');
+}
+
+function apply(lay) {
+  const { nodes, geo } = lay;
+  cur.links.forEach(l => {
+    const g = geo[l.id], p = drawn.links[l.id];
+    if (!g || g.w <= 0) { p.setAttribute('d', ''); return; }
+    p.setAttribute('d', linkPath(l, g));
+    p.setAttribute('stroke-width', Math.max(g.w, 0.6));
+  });
+  NODE_IDS.forEach(n => {
+    const nd = nodes[n], r = drawn.nodes[n], lab = drawn.labels[n];
+    r.setAttribute('x', nd.x); r.setAttribute('y', nd.y); r.setAttribute('height', Math.max(nd.h, 0.5));
+    const lx = lab.anchor === 'end' ? nd.x - 6 : nd.x + NODE_W + 6;
+    lab.t.setAttribute('x', lx); lab.t.setAttribute('y', nd.y + nd.h / 2);
+    [...lab.t.childNodes].forEach(ts => ts.setAttribute('x', lx));
+    lab.t.childNodes[1].setAttribute('dy', '1.2em');
+    lab.t.childNodes[0].setAttribute('dy', '-0.45em');
+    lab.b.textContent = (nodeRole(n) ? nodeRole(n) + ' · ' : '') + fmt(Math.max(nd.tin, nd.tout)) + ' kt';
+    lab.t.style.display = nd.h > 0 || nd.tin + nd.tout > 0 ? '' : 'none';
+  });
+}
+
+// Tween between two layouts so a year change reads as growth/shrinkage rather than a jump.
+let anim = null;
+function goToYear(yi, duration = 450) {
+  state.yi = yi;
+  document.getElementById('slider').value = yi;
+  document.getElementById('yearLabel').textContent = DATA.years[yi];
+  const from = cur.lay, to = layout(cur.links, cur.k, yi);
+  cur.lay = to;
+  if (anim) cancelAnimationFrame(anim);
+  if (!from || duration === 0) { apply(to); return; }
+  const t0 = performance.now();
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const step = now => {
+    let t = Math.min(1, (now - t0) / duration); t = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    const nodes = {}, geo = {};
+    for (const n in to.nodes) { const a = from.nodes[n], b = to.nodes[n];
+      nodes[n] = { ...b, y: lerp(a.y, b.y, t), h: lerp(a.h, b.h, t), tin: lerp(a.tin, b.tin, t), tout: lerp(a.tout, b.tout, t) }; }
+    for (const id in to.geo) { const a = from.geo[id] || to.geo[id], b = to.geo[id];
+      geo[id] = { sy: lerp(a.sy, b.sy, t), ty: lerp(a.ty, b.ty, t), w: lerp(a.w, b.w, t) }; }
+    apply({ nodes, geo });
+    if (t < 1) anim = requestAnimationFrame(step);
+  };
+  anim = requestAnimationFrame(step);
+  if (tip.style.display === 'block' && tip._refresh) tip._refresh();
+}
+
+function placeTip(e) {
+  const pad = 14, r = tip.getBoundingClientRect();
+  let x = e.clientX + pad, y = e.clientY + pad;
+  if (x + r.width > window.innerWidth - 4) x = e.clientX - r.width - pad;
+  if (y + r.height > window.innerHeight - 4) y = e.clientY - r.height - pad;
+  tip.style.left = Math.max(4, x) + 'px'; tip.style.top = Math.max(4, y) + 'px';
+}
+function highlight(ids) {
+  svg.classList.add('dim');
+  cur.links.forEach(l => drawn.links[l.id].classList.toggle('hl', ids.has(l.id)));
+}
+function hideTip() { tip.style.display = 'none'; tip._refresh = null; svg.classList.remove('dim'); }
+
+function showLinkTip(e, l) {
+  const yi = state.yi;
+  const rows = l.flows.filter(f => f.v[yi] > 0).sort((a, b) => b.v[yi] - a.v[yi])
+    .map(f => `<tr><td>${f.name}</td><td class="n">${fmt(f.v[yi])}</td><td class="n ci">[${fmt(f.lo[yi])}–${fmt(f.hi[yi])}]</td></tr>`).join('');
+  const keyName = (state.color === 'form' ? DATA.forms : DATA.materials)[l.key].name;
+  tip.innerHTML = `<b>${nodeName(l.s)} → ${nodeName(l.t)}</b><br>${keyName}: <b>${fmt(l.v[yi])} kt</b> (${DATA.years[yi]})<table>${rows}</table>`;
+  tip.style.display = 'block'; placeTip(e);
+  highlight(new Set([l.id]));
+}
+function showNodeTip(e, n) {
+  const nd = cur.lay.nodes[n];
+  tip.innerHTML = `<b>${nodeName(n)}</b> (${DATA.years[state.yi]})<br>Inn: ${fmt(nd.tin)} kt<br>Ut: ${fmt(nd.tout)} kt`;
+  tip.style.display = 'block'; placeTip(e);
+  highlight(new Set(cur.links.filter(l => l.s === n || l.t === n).map(l => l.id)));
+}
+
+// Height of the content itself: documentElement.scrollHeight is never less than the iframe, so the iframe could not shrink.
+function postHeight() {
+  if (window.parent !== window) window.parent.postMessage({ sankeyHeight: Math.ceil(document.querySelector('.wrap').getBoundingClientRect().height) }, '*');
+}
+window.addEventListener('resize', postHeight);
+window.addEventListener('load', postHeight);
+
+function seg(id, key) {
+  document.querySelectorAll('#' + id + ' button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#' + id + ' button').forEach(x => x.classList.toggle('on', x === b));
+    state[key] = b.dataset.v; rebuild();
+  }));
+}
+seg('segScope', 'scope'); seg('segColor', 'color');
+
+const slider = document.getElementById('slider');
+slider.max = DATA.years.length - 1;
+slider.addEventListener('input', () => goToYear(+slider.value, 250));
+const ticks = document.getElementById('ticks');
+DATA.years.forEach((y, i) => {
+  if (y % 5 !== 0 && i !== 0 && i !== DATA.years.length - 1) return;
+  const s = document.createElement('span'); s.textContent = y;
+  s.style.left = (100 * i / (DATA.years.length - 1)) + '%';
+  ticks.appendChild(s);
+});
+
+const playBtn = document.getElementById('play');
+playBtn.addEventListener('click', () => {
+  if (state.playing) { clearInterval(state.playing); state.playing = null; playBtn.innerHTML = '&#9654;'; return; }
+  if (state.yi === DATA.years.length - 1) goToYear(0, 0);
+  playBtn.innerHTML = '&#10074;&#10074;';
+  state.playing = setInterval(() => {
+    if (state.yi >= DATA.years.length - 1) { clearInterval(state.playing); state.playing = null; playBtn.innerHTML = '&#9654;'; return; }
+    goToYear(state.yi + 1, 550);
+  }, 700);
+});
+
+// Optional start view from the URL hash, e.g. #hide, #material or #1995 (combinable: #hide,1995).
+location.hash.slice(1).split(/[,&]/).forEach(h => {
+  if (h === 'hide') state.scope = 'hide';
+  if (h === 'material') state.color = 'material';
+  const yi = DATA.years.indexOf(+h); if (yi >= 0) state.yi = yi;
+});
+document.querySelectorAll('#segScope button').forEach(b => b.classList.toggle('on', b.dataset.v === state.scope));
+document.querySelectorAll('#segColor button').forEach(b => b.classList.toggle('on', b.dataset.v === state.color));
+rebuild();
+goToYear(state.yi, 0);
+</script>
+</body>
+</html>
