@@ -29,8 +29,12 @@ and flows. The TOT masses are never changed: they come from the statistics
             the textile stock of the household cohort model, and fibres from
             industrial laundry those of the US.IC cohort model.
   institutions
-            Goods discarded by institutions and businesses get the outflow
-            of a cohort model of the goods sold to them.
+            Goods discarded or recycled by institutions and businesses get
+            the outflow of a cohort model of the goods sold to them.
+  recycling Recycled fibre sold to Norwegian spinning has the fibre groups
+            of imported household textiles and clothing, weighted by the
+            plant's intake; the export for recycling is the balance of WM.RC
+            per material.
   mixed     Flows out of WM.RS get the composition of everything entering
             WM.RS that year.
   manufacturing
@@ -96,6 +100,7 @@ UNSOLD_DONATED = 'DI.RT-CO.CO-Unsold goods donated-TOT'
 # unsold clothing; imported used textiles are assumed to have the same mix.
 COLLECTED_FLOWS = [
     'RW.RW-CO.SO-Used textile import-TOT',
+    'CO.SO-WM.RC-Sorted for recycling-TOT',
     'CO.CO-RW.RW-Export of unsorted collected textiles-TOT',
     'CO.CO-CO.SO-Collected textiles to domestic sorting-TOT',
     'CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT',
@@ -118,8 +123,16 @@ FABRIC_IMPORT = 'RW.RW-MA.TX-Fabric import-TOT'
 TEXTILE_EXPORT = 'MA.TX-RW.RW-Textile export-TOT'
 PRECONSUMER_WASTE = 'MA.TX-WM.RS-Preconsumer production waste-TOT'
 DOMESTIC_GOODS = 'MA.TX-DI.RT-Domestic finished products-TOT'
+PRODUCTION_WASTE_RECYCLING = 'MA.TX-WM.RC-Production waste to recycling-TOT'
+RECYCLED_FIBRE = 'WM.RC-MA.FI-Recycled fibre to domestic spinning-TOT'
+# Share of industry (mainly hotel and hospital linen) in the intake of Norsk
+# Tekstilgjenvinning in 2025: 358 of 651 t (de Sadeleer & Rubach 2026).
+RECYCLED_FIBRE_LINEN_SHARE = 358 / 651
 MANUFACTURING_FLOWS = [RAW_WOOL, FIBRE_YARN_IMPORT, FIBRE_YARN_EXPORT, SCOURING_LOSS, HAND_KNITTING_YARN,
-                       YARN_TO_MANUFACTURING, FABRIC_IMPORT, TEXTILE_EXPORT, PRECONSUMER_WASTE, DOMESTIC_GOODS]
+                       YARN_TO_MANUFACTURING, FABRIC_IMPORT, TEXTILE_EXPORT, PRECONSUMER_WASTE, DOMESTIC_GOODS,
+                       PRODUCTION_WASTE_RECYCLING, RECYCLED_FIBRE]
+INSTITUTIONAL_RECYCLING = 'US.IC-WM.RC-Institutional textiles to recycling-TOT'
+RECYCLING_EXPORT = 'WM.RC-RW.RW-Export for recycling-TOT'
 FINISHED_IMPORT = 'RW.RW-DI.RT-Finished textile products import-TOT'
 TOLERANCE_KT = 1e-9
 
@@ -224,19 +237,21 @@ def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     material.
     """
     fibre.flows[HAND_KNITTING_YARN].values[...] = tot.flows[HAND_KNITTING_YARN].values[..., None] * _only('WO')
+    fibre.flows[RECYCLED_FIBRE].values[...] = tot.flows[RECYCLED_FIBRE].values[:, None] * recycled_fibre_composition(
+        preloaded_data, current_params, fibre_composition)
     fibre.flows[RAW_WOOL].values[...] = tot.flows[RAW_WOOL].values[:, None] * _only('WO')
     fibre.flows[SCOURING_LOSS].values[...] = tot.flows[SCOURING_LOSS].values[:, None] * _only('WO')
     for code, product, impeks in ((FIBRE_YARN_IMPORT, 'FY', 1), (FIBRE_YARN_EXPORT, 'FY', 2),
                                   (FABRIC_IMPORT, 'FA', 1), (TEXTILE_EXPORT, 'FA', 2)):
         shares = intermediate_composition(preloaded_data, current_params, fibre_composition, product, impeks)
         fibre.flows[code].values[...] = tot.flows[code].values[:, None] * shares
-    balance = sum(fibre.flows[c].values for c in (RAW_WOOL, FIBRE_YARN_IMPORT)) - sum(
+    balance = sum(fibre.flows[c].values for c in (RAW_WOOL, FIBRE_YARN_IMPORT, RECYCLED_FIBRE)) - sum(
         fibre.flows[c].values for c in (FIBRE_YARN_EXPORT, SCOURING_LOSS)) - fibre.flows[
         HAND_KNITTING_YARN].values.sum(axis=1)
     clip_negative(fibre, YARN_TO_MANUFACTURING, balance)
     inputs = fibre.flows[YARN_TO_MANUFACTURING].values + fibre.flows[FABRIC_IMPORT].values
-    fibre.flows[PRECONSUMER_WASTE].values[...] = (tot.flows[PRECONSUMER_WASTE].values[:, None]
-                                                  * inputs / inputs.sum(axis=1, keepdims=True))
+    for code in (PRECONSUMER_WASTE, PRODUCTION_WASTE_RECYCLING):
+        fibre.flows[code].values[...] = tot.flows[code].values[:, None] * inputs / inputs.sum(axis=1, keepdims=True)
     fibre.flows[DOMESTIC_GOODS].values[...] = (tot.flows[DOMESTIC_GOODS].values[..., None]
                                                * domestic_goods_composition(fibre)[:, None, :])
 
@@ -249,12 +264,29 @@ def domestic_goods_composition(fibre):
     Every product gets the same composition.
     """
     balance = (fibre.flows[YARN_TO_MANUFACTURING].values + fibre.flows[FABRIC_IMPORT].values
-               - fibre.flows[TEXTILE_EXPORT].values - fibre.flows[PRECONSUMER_WASTE].values)
+               - fibre.flows[TEXTILE_EXPORT].values - fibre.flows[PRECONSUMER_WASTE].values
+               - fibre.flows[PRODUCTION_WASTE_RECYCLING].values)
     clipped = np.clip(balance, 0.0, None)
     total = clipped.sum(axis=1, keepdims=True)
     # In a year where every material is negative, the TOT flow is clipped to
     # 0 too, so the composition does not matter.
     return np.divide(clipped, total, out=np.zeros_like(clipped), where=total > 0)
+
+
+def recycled_fibre_composition(preloaded_data, current_params, fibre_composition):
+    """
+    Material shares of recycled fibre sold to Norwegian spinning, array
+    (year, material): the fibre groups of imported household textiles and
+    clothing, weighted by the plant's intake in 2025 (industry, mainly
+    linen, 55 %; households and production waste 45 %), without
+    non-textile material. This is an assumption; the export for recycling
+    takes up the difference, so WM.RC still balances per material.
+    """
+    supply = supply_composition(preloaded_data, current_params, fibre_composition)
+    textile = (RECYCLED_FIBRE_LINEN_SHARE * supply[:, PRODUCTS.index('HT'), :]
+               + (1.0 - RECYCLED_FIBRE_LINEN_SHARE) * supply[:, PRODUCTS.index('CL'), :])
+    textile[:, MATERIALS.index('NT')] = 0.0
+    return textile / textile.sum(axis=1, keepdims=True)
 
 
 def retail_composition(tot, imported, domestic_goods):
@@ -410,7 +442,8 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     model and for the stock level of the statistics-based balance.
     """
     unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + COLLECTED_FLOWS + RELEASE_FLOWS + MIXED_FLOWS
-                                      + MANUFACTURING_FLOWS + [INSTITUTIONAL_WASTE, INSTITUTIONAL_RELEASE])
+                                      + MANUFACTURING_FLOWS + [INSTITUTIONAL_WASTE, INSTITUTIONAL_RELEASE,
+                                                               INSTITUTIONAL_RECYCLING, RECYCLING_EXPORT])
     if unassigned:
         raise KeyError(f"Flows without a fibre layer rule: {sorted(unassigned)}")
 
@@ -421,8 +454,9 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     for code in SUPPLY_FLOWS:
         shares = imported if code == FINISHED_IMPORT else supply
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * shares
-    fibre.flows[INSTITUTIONAL_WASTE].values[...] = tot.flows[INSTITUTIONAL_WASTE].values[..., None] * (
-        institutional_discard_composition(tot, supply, current_params))
+    institutional = institutional_discard_composition(tot, supply, current_params)
+    for code in (INSTITUTIONAL_WASTE, INSTITUTIONAL_RECYCLING):
+        fibre.flows[code].values[...] = tot.flows[code].values[..., None] * institutional
     fibre.flows[INSTITUTIONAL_RELEASE].values[...] = tot.flows[INSTITUTIONAL_RELEASE].values[..., None] * (
         institutional_release_composition(tot, supply, current_params))
     cohorts = household_cohort_model(tot, supply, current_params)
@@ -435,6 +469,10 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     released = release_composition(cohorts)
     for code in RELEASE_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * released[:, None, :]
+
+    recycling = sum(to_dims(fibre.flows[c], ('t', 'm')).values for c in (
+        'CO.SO-WM.RC-Sorted for recycling-TOT', INSTITUTIONAL_RECYCLING, PRODUCTION_WASTE_RECYCLING))
+    clip_negative(fibre, RECYCLING_EXPORT, recycling - fibre.flows[RECYCLED_FIBRE].values)
 
     mix = sum(to_dims(f, ('t', 'm')).values for f in fibre.flows.values() if f.to_process.name == MIXED_SOURCE)
     mix_shares = mix / mix.sum(axis=1, keepdims=True)
@@ -450,8 +488,14 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
         fibre.clipped.setdefault(code, clipped)
     close(fibre)
     for code, flow in tot.flows.items():
+        # A flow clipped again per material in the fibre layer sums to its
+        # unclipped TOT balance plus the mass clipped in the fibre layer.
         own = code in fibre.clipped and fibre.clipped[code] is not tot.clipped.get(code)
-        extra = fibre.clipped[code].values.sum(axis=-1) if own else 0.0
+        extra = 0.0
+        if own:
+            extra = fibre.clipped[code].values.sum(axis=-1)
+            if code in tot.clipped:
+                extra = extra - tot.clipped[code].values
         gap = np.abs(fibre.flows[code].values.sum(axis=-1) - extra - flow.values).max()
         if gap > TOLERANCE_KT:
             raise ValueError(f"Fibre layer of {code} does not add up to TOT (max gap {gap:.2e} kt)")

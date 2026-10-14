@@ -77,7 +77,7 @@ Hovedfiberen fra HS-koden (fiber og garn, FY).
 
 ## Beregning i koden
 
-Beregnes i `_fibre_and_yarn_export_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L74). Dokumentasjonen i koden:
+Beregnes i `_fibre_and_yarn_export_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L76). Dokumentasjonen i koden:
 
 > Registered exports of fibre and yarn, SSB 08801 (HS 50-55 except woven
 > fabric and retail yarn). Dominated by greasy Norwegian wool (HS 5101.11

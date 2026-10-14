@@ -77,9 +77,19 @@ def fibre_run(inputs):
 
 
 def test_fibre_layer_adds_up_to_tot(fibre_run):
+    # A flow clipped per material in the fibre layer exceeds TOT by exactly
+    # the mass clipped there.
     tot, fibre, _ = fibre_run
     for code, flow in tot.flows.items():
-        np.testing.assert_allclose(fibre.flows[code].values.sum(axis=-1), flow.values, atol=1e-9)
+        # A flow clipped again per material in the fibre layer sums to its
+        # unclipped TOT balance plus the mass clipped in the fibre layer.
+        own = code in fibre.clipped and fibre.clipped[code] is not tot.clipped.get(code)
+        extra = 0.0
+        if own:
+            extra = fibre.clipped[code].values.sum(axis=-1)
+            if code in tot.clipped:
+                extra = extra - tot.clipped[code].values
+        np.testing.assert_allclose(fibre.flows[code].values.sum(axis=-1) - extra, flow.values, atol=1e-9)
 
 
 def test_footwear_supply_has_the_non_textile_share(fibre_run):

@@ -65,11 +65,11 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 29 % | 32 % | 30 % | 24 % | 25 % | 24 % |
+| Bomull | 28 % | 32 % | 30 % | 24 % | 25 % | 24 % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 19 % | 16 % | 17 % | 15 % | 15 % | 15 % |
 | Andre fibre | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
-| Syntetisk | 41 % | 40 % | 44 % | 51 % | 50 % | 51 % |
+| Syntetisk | 42 % | 40 % | 43 % | 51 % | 50 % | 51 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_in_domestic_incineration_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -82,7 +82,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_domestic_incineration_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L51). Dokumentasjonen i koden:
+Beregnes i `_domestic_incineration_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L52). Dokumentasjonen i koden:
 
 > Balance of WM.RS. A negative balance (landfill and export shares
 > summing to more than 1) is not physical and is clipped at 0; the

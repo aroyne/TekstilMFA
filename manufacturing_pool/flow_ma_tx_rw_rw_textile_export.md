@@ -75,7 +75,7 @@ Hovedfiberen fra HS-koden (metervare, FA).
 
 ## Beregning i koden
 
-Beregnes i `_textile_export_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L165). Dokumentasjonen i koden:
+Beregnes i `_textile_export_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L183). Dokumentasjonen i koden:
 
 > Registered exports of fabric, SSB 08801 (woven fabric in HS 50-55, HS 58
 > and 60). Exports of finished goods are counted from DI.RT, because the

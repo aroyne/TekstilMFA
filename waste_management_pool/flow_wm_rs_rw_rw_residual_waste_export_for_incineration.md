@@ -68,16 +68,16 @@ Blandingen av alt som går inn i WM.RS samme år.
 |---|---|---|---|---|---|---|
 | Bomull | nan % | nan % | 30 % | 24 % | 25 % | 24 % |
 | Regenerert cellulose | nan % | nan % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | nan % | nan % | 17 % | 15 % | 15 % | 15 % |
+| Ikke-tekstil | nan % | nan % | 16 % | 15 % | 15 % | 15 % |
 | Andre fibre | nan % | nan % | 3 % | 3 % | 3 % | 3 % |
-| Syntetisk | nan % | nan % | 43 % | 51 % | 50 % | 52 % |
+| Syntetisk | nan % | nan % | 44 % | 51 % | 50 % | 51 % |
 | Ull | nan % | nan % | 5 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/wm_rs_rw_rw_residual_waste_export_for_incineration_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
 ## Beregning i koden
 
-Beregnes i `_residual_export_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L40). Dokumentasjonen i koden:
+Beregnes i `_residual_export_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L41). Dokumentasjonen i koden:
 
 > Share of residual waste exported, SSB 13035 (D11). The share is measured
 > for household residual waste and is applied to all textiles in WM.RS,

@@ -32,6 +32,7 @@ def execute_calculations_us(mfa, preloaded_data, current_params, dataset_noise, 
     _worn_residual_waste_mc(mfa, preloaded_data, current_params, anchors)
     _laundry_fibre_release_mc(mfa, preloaded_data, current_params, anchors)
     _air_and_dust_release_mc(mfa, current_params)
+    _institutional_recycling_mc(mfa, anchors)
     _institutional_waste_mc(mfa, current_params)
     _industrial_laundry_release_mc(mfa, preloaded_data, current_params, anchors)
 
@@ -166,6 +167,19 @@ def _air_and_dust_release_mc(mfa, current_params):
         laundry * current_params['air_release_relative_to_laundry'])
 
 
+def _institutional_recycling_mc(mfa, anchors):
+    """
+    Textiles from industry (mainly hotels and health care) recycled at Norsk
+    Tekstilgjenvinning: their share of the plant's intake (75 of 153 t in
+    2024, 358 of 651 t in 2025) times the mass recycled (93 and 364 t),
+    i.e. 46 and 200 t (de Sadeleer & Rubach 2026, fig. 3-8 and 3-9). Counted
+    as household textiles (linen) and zero before 2024 (D34).
+    """
+    flow = mfa.flows['US.IC-WM.RC-Institutional textiles to recycling-TOT']
+    flow.values[...] = 0.0
+    flow.values[:, PRODUCTS.index('HT')] = interpolate(anchors['recycling_institutional'])
+
+
 def _institutional_waste_mc(mfa, current_params):
     """
     Goods discarded by institutions and businesses: the outflow of a cohort
@@ -178,11 +192,14 @@ def _institutional_waste_mc(mfa, current_params):
     supplied (D13), and retail yarn is not sold to this sector.
     """
     sales = mfa.flows['DI.RT-US.IC-Sales to institutions and businesses-TOT'].values
-    flow = mfa.flows['US.IC-WM.RS-Institutional textile waste-TOT']
-    flow.values[...] = sales
+    discarded = sales.copy()
     cohort = [PRODUCTS.index(p) for p in INSTITUTIONAL_COHORT_PRODUCTS]
-    flow.values[:, cohort] = use_cohorts(sales[:, cohort, None], INSTITUTIONAL_COHORT_PRODUCTS, current_params,
-                                         stock='US.IC')['outflow'][:, :, 0]
+    discarded[:, cohort] = use_cohorts(sales[:, cohort, None], INSTITUTIONAL_COHORT_PRODUCTS, current_params,
+                                       stock='US.IC')['outflow'][:, :, 0]
+    # Textiles recycled at Norsk Tekstilgjenvinning are subtracted; a
+    # negative value is not physical and is clipped at 0.
+    recycled = mfa.flows['US.IC-WM.RC-Institutional textiles to recycling-TOT'].values
+    clip_negative(mfa, 'US.IC-WM.RS-Institutional textile waste-TOT', discarded - recycled)
 
 
 def _industrial_laundry_release_mc(mfa, preloaded_data, current_params, anchors):

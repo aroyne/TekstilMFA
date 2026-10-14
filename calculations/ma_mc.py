@@ -40,10 +40,12 @@ def execute_calculations_ma(mfa, preloaded_data, current_params, dataset_noise, 
     _fibre_and_yarn_export_mc(mfa, preloaded_data, dataset_noise)
     _wool_scouring_loss_mc(mfa, current_params, anchors)
     _domestic_hand_knitting_yarn_mc(mfa, preloaded_data, current_params, dataset_noise)
+    _recycled_fibre_to_spinning_mc(mfa, current_params, anchors)
     _yarn_to_manufacturing_mc(mfa)
     _fabric_import_mc(mfa, preloaded_data, dataset_noise)
     _textile_export_mc(mfa, preloaded_data, dataset_noise)
     _preconsumer_waste_mc(mfa, anchors)
+    _production_waste_to_recycling_mc(mfa, anchors)
     _domestic_finished_products_mc(mfa, preloaded_data, current_params)
 
 
@@ -140,15 +142,31 @@ def _domestic_hand_knitting_yarn_mc(mfa, preloaded_data, current_params, dataset
     flow.values[:, PRODUCTS.index('YA')] = kt * dataset_noise['vareproduksjon']
 
 
+def _recycled_fibre_to_spinning_mc(mfa, current_params, anchors):
+    """
+    Fibre from mechanical textile recycling at Norsk Tekstilgjenvinning
+    (Sandefjord), which can be spun to new yarn: 93 t in 2024 and 364 t in
+    2025, sold to Norwegian and European customers (de Sadeleer & Rubach
+    2026). The Norwegian share is unknown and set to 50 % (0-100 %); the
+    rest is exported (WM.RC-RW.RW-Export for recycling-TOT). There was no
+    textile-to-fibre recycling in Norway before 2024 (D34).
+    """
+    fibre = interpolate(anchors['recycling_ntg_fibre'])
+    mfa.flows['WM.RC-MA.FI-Recycled fibre to domestic spinning-TOT'].values[...] = (
+        fibre * current_params['ntg_fibre_domestic_share'])
+
+
 def _yarn_to_manufacturing_mc(mfa):
     """
-    Balance of MA.FI: Norwegian wool and imported fibre and yarn minus
-    exports, the scouring loss and hand knitting yarn sold through retail.
+    Balance of MA.FI: Norwegian wool, imported fibre and yarn and recycled
+    fibre minus exports, the scouring loss and hand knitting yarn sold
+    through retail.
     A negative balance is not physical and is clipped at 0; the clipped
     mass is recorded and reported on the flow page.
     """
     supply = (mfa.flows['PS.WO-MA.FI-Norwegian raw wool-TOT'].values
-              + mfa.flows['RW.RW-MA.FI-Fibre and yarn import-TOT'].values)
+              + mfa.flows['RW.RW-MA.FI-Fibre and yarn import-TOT'].values
+              + mfa.flows['WM.RC-MA.FI-Recycled fibre to domestic spinning-TOT'].values)
     removed = (mfa.flows['MA.FI-RW.RW-Fibre and yarn export-TOT'].values
                + mfa.flows['MA.FI-WM.WW-Wool scouring loss-TOT'].values
                + mfa.flows['MA.FI-DI.RT-Domestic hand knitting yarn-TOT'].values.sum(axis=1))
@@ -191,6 +209,18 @@ def _preconsumer_waste_mc(mfa, anchors):
     total_input = _manufacturing_input(mfa)
     ratio = interpolate({year: kt / total_input[YEARS.index(year)] for year, kt in waste.items()}, noise=waste)
     mfa.flows['MA.TX-WM.RS-Preconsumer production waste-TOT'].values[...] = ratio * total_input
+
+
+def _production_waste_to_recycling_mc(mfa, anchors):
+    """
+    Production waste (mainly from wool production) recycled at Norsk
+    Tekstilgjenvinning: its share of the plant's intake (20 of 153 t in
+    2024, 39 of 651 t in 2025) times the mass recycled (93 and 364 t),
+    i.e. 12 and 22 t (de Sadeleer & Rubach 2026, fig. 3-8 and 3-9). Zero
+    before 2024 (D34).
+    """
+    mfa.flows['MA.TX-WM.RC-Production waste to recycling-TOT'].values[...] = (
+        interpolate(anchors['recycling_production_waste']))
 
 
 def _domestic_product_shares(preloaded_data, current_params):
@@ -244,7 +274,8 @@ def _domestic_finished_products_mc(mfa, preloaded_data, current_params):
     """
     balance = (_manufacturing_input(mfa)
                - mfa.flows['MA.TX-RW.RW-Textile export-TOT'].values
-               - mfa.flows['MA.TX-WM.RS-Preconsumer production waste-TOT'].values)
+               - mfa.flows['MA.TX-WM.RS-Preconsumer production waste-TOT'].values
+               - mfa.flows['MA.TX-WM.RC-Production waste to recycling-TOT'].values)
     clip_negative(mfa, 'MA.TX-DI.RT-Domestic finished products-TOT',
                   balance[:, None] * _domestic_product_shares(preloaded_data, current_params))
 

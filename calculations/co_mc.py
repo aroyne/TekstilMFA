@@ -18,6 +18,7 @@ def execute_calculations_co(mfa, preloaded_data, current_params, dataset_noise, 
     _to_domestic_sorting_mc(mfa, anchors)
     _used_textile_import_mc(mfa, preloaded_data, dataset_noise)
     _sorted_for_secondhand_mc(mfa, preloaded_data, dataset_noise, anchors)
+    _sorted_for_recycling_mc(mfa, anchors)
     _sorting_residues_mc(mfa)
     _secondhand_sales_mc(mfa)
 
@@ -65,16 +66,31 @@ def _sorted_for_secondhand_mc(mfa, preloaded_data, dataset_noise, anchors):
         retained * reuse_fraction[:, None] + core_group_only(imported))
 
 
+def _sorted_for_recycling_mc(mfa, anchors):
+    """
+    Part of the rejects from domestic sorting (retained minus sold second
+    hand, imported clothing not counted) sent to material recycling: 93 of
+    467 t in 2018 (Watson et al. 2020, recycled abroad) and 142 of 364 t in
+    2025 (de Sadeleer & Rubach 2026, recycled at Norsk Tekstilgjenvinning).
+    The share is held at the 2018 level before 2018 (D34).
+    """
+    retained = mfa.flows['CO.CO-CO.SO-Collected textiles to domestic sorting-TOT'].values
+    reuse_fraction = interpolate(anchors['reuse_fraction_retained'], upper=1.0)
+    rejects = retained * (1.0 - reuse_fraction[:, None])
+    share = interpolate(anchors['recycling_share_sorting_rejects'], upper=1.0)
+    mfa.flows['CO.SO-WM.RC-Sorted for recycling-TOT'].values[...] = rejects * share[:, None]
+
+
 def _sorting_residues_mc(mfa):
     """
-    Balance of CO.SO: rejects from domestic sorting and imported rags, which
-    are used up and discarded. Material recycling is not yet separated
-    (it comes with WM.RC); it goes to residual waste here.
+    Balance of CO.SO: rejects from domestic sorting that are not recycled,
+    and imported rags, which are used up and discarded.
     """
     retained = mfa.flows['CO.CO-CO.SO-Collected textiles to domestic sorting-TOT'].values
     imported = mfa.flows['RW.RW-CO.SO-Used textile import-TOT'].values
     reuse = mfa.flows['CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT'].values
-    mfa.flows['CO.SO-WM.RS-Sorting residues-TOT'].values[...] = retained + imported - reuse
+    recycled = mfa.flows['CO.SO-WM.RC-Sorted for recycling-TOT'].values
+    mfa.flows['CO.SO-WM.RS-Sorting residues-TOT'].values[...] = retained + imported - reuse - recycled
 
 
 def _secondhand_sales_mc(mfa):

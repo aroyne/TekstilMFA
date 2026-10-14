@@ -67,7 +67,7 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 57 % | 56 % | 54 % | 46 % | 44 % | 44 % |
+| Bomull | 56 % | 55 % | 54 % | 46 % | 43 % | 43 % |
 | Regenerert cellulose | 4 % | 3 % | 2 % | 3 % | 3 % | 3 % |
 | Andre fibre | 1 % | 1 % | 2 % | 2 % | 2 % | 2 % |
 | Syntetisk | 32 % | 32 % | 36 % | 42 % | 43 % | 43 % |
@@ -77,7 +77,7 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 ## Beregning i koden
 
-Beregnes i `_air_and_dust_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L157). Dokumentasjonen i koden:
+Beregnes i `_air_and_dust_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L158). Dokumentasjonen i koden:
 
 > Fibres released to air and indoor dust while household textiles are worn
 > and used, set to the same level as the release in laundry, with a factor

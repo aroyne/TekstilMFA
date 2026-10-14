@@ -78,7 +78,7 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 |---|---|---|---|---|---|---|
 | Bomull | 41 % | 42 % | 39 % | 31 % | 29 % | 31 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 1 % | 1 % |
-| Ikke-tekstil | 18 % | 15 % | 14 % | 11 % | 14 % | 14 % |
+| Ikke-tekstil | 18 % | 15 % | 14 % | 12 % | 14 % | 14 % |
 | Andre fibre | 1 % | 3 % | 2 % | 3 % | 3 % | 2 % |
 | Syntetisk | 28 % | 31 % | 35 % | 42 % | 40 % | 35 % |
 | Ull | 9 % | 7 % | 9 % | 11 % | 13 % | 16 % |

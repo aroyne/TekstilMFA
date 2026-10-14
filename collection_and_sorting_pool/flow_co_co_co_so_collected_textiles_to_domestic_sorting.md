@@ -66,9 +66,9 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 51 % | 48 % | 44 % | 40 % | 37 % | 36 % |
+| Bomull | 50 % | 48 % | 44 % | 40 % | 37 % | 36 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 12 % | 15 % | 18 % | 17 % | 17 % | 17 % |
+| Ikke-tekstil | 13 % | 16 % | 18 % | 17 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
 | Syntetisk | 28 % | 27 % | 30 % | 33 % | 36 % | 37 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
@@ -77,7 +77,7 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 ## Beregning i koden
 
-Beregnes i `_to_domestic_sorting_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L35). Dokumentasjonen i koden:
+Beregnes i `_to_domestic_sorting_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L36). Dokumentasjonen i koden:
 
 > Collected textiles kept in Norway, as a share of the export. Anchors from
 > Watson 2020, Rubach 2023 and de Sadeleer & Rubach 2026.

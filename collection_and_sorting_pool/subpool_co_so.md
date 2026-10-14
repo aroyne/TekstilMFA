@@ -16,7 +16,7 @@ Type: process. Lager: no.
 
 * [Sorted for domestic secondhand sales](../collection_and_sorting_pool/flow_co_so_co_re_sorted_for_domestic_secondhand_sales.html) → CO.RE
 * [Export of sorted textiles](../collection_and_sorting_pool/flow_co_so_rw_rw_export_of_sorted_textiles.html) → RW.RW *(planlagt)*
-* [Sorted for recycling](../collection_and_sorting_pool/flow_co_so_wm_rc_sorted_for_recycling.html) → WM.RC *(planlagt)*
+* [Sorted for recycling](../collection_and_sorting_pool/flow_co_so_wm_rc_sorted_for_recycling.html) → WM.RC
 * [Sorting residues](../collection_and_sorting_pool/flow_co_so_wm_rs_sorting_residues.html) → WM.RS
 
 ## Flyter inn

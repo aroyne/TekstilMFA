@@ -34,7 +34,7 @@ nav_order: 1
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- Mengden er balansen i MA.TX: garn fra MA.FI og importert metervare, minus eksport av metervare og produksjonsavfall.
+- Mengden er balansen i MA.TX: garn fra MA.FI og importert metervare, minus eksport av metervare og produksjonsavfall (til restavfall og fra 2024 til gjenvinning).
 - Fordelingen på varetyper kommer fra SSBs varestatistikk for store bedrifter: Industristatistikk, Hefte II Varetall, 1988 og 1989 (lest manuelt fra skannede sider), og Prodcom (SSB 10455) for 2008, 2009 og 2011. Koblingen fra varekode til varetype og HS-kode står i `parameters/domestic_production_codes.csv`, og massen er regnet ut i `scripts/derive_domestic_product_mass.py`.
 - Varetallene oppgir mengde i tonn, kg, stykk eller par, og verdi i 1 000 kr. Mange celler er skjult av SSB.
 
@@ -65,8 +65,8 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 2 % | 1 % | 0 % | 0 % | 0 % | 0 % |
-| Klær | 27 % | 24 % | 21 % | 22 % | 22 % | 22 % |
-| Hjemmetekstiler | 40 % | 44 % | 49 % | 49 % | 49 % | 48 % |
+| Klær | 27 % | 24 % | 21 % | 21 % | 21 % | 21 % |
+| Hjemmetekstiler | 40 % | 45 % | 49 % | 49 % | 49 % | 49 % |
 | Andre konfeksjonerte varer | 7 % | 5 % | 3 % | 3 % | 3 % | 3 % |
 | Presenninger og telt | 24 % | 26 % | 27 % | 27 % | 27 % | 27 % |
 
@@ -76,11 +76,11 @@ Balansen i MA.TX per materiale (klippet til 0), lik for alle varetyper.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 48 % | 45 % | 20 % | 13 % | 11 % | 10 % |
+| Bomull | 48 % | 45 % | 20 % | 13 % | 11 % | 11 % |
 | Regenerert cellulose | 9 % | 9 % | 3 % | 2 % | 2 % | 1 % |
 | Andre fibre | 1 % | 4 % | 9 % | 4 % | 9 % | 9 % |
 | Syntetisk | 37 % | 37 % | 60 % | 71 % | 69 % | 71 % |
-| Ull | 4 % | 4 % | 8 % | 10 % | 10 % | 9 % |
+| Ull | 4 % | 4 % | 8 % | 10 % | 10 % | 8 % |
 
 <iframe src="../output_files/plots/pages/ma_tx_di_rt_domestic_finished_products_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -92,7 +92,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_domestic_finished_products_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L219). Dokumentasjonen i koden:
+Beregnes i `_domestic_finished_products_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L249). Dokumentasjonen i koden:
 
 > Balance of MA.TX: yarn and fabric in, minus fabric exports and
 > production waste, split over products by mass shares of finished goods

@@ -23,6 +23,7 @@ Type: process. Lager: clipping.
 
 * [Fibre and yarn import](../rest_of_the_world_pool/flow_rw_rw_ma_fi_fibre_and_yarn_import.html) ← RW.RW
 * [Norwegian raw wool](../primary_production_pool/flow_ps_wo_ma_fi_norwegian_raw_wool.html) ← PS.WO
+* [Recycled fibre to domestic spinning](../waste_management_pool/flow_wm_rc_ma_fi_recycled_fibre_to_domestic_spinning.html) ← WM.RC
 
 ## Massebalanse
 

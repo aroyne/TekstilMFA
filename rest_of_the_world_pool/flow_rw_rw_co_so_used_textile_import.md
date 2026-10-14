@@ -80,7 +80,7 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 ## Beregning i koden
 
-Beregnes i `_used_textile_import_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L46). Dokumentasjonen i koden:
+Beregnes i `_used_textile_import_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L47). Dokumentasjonen i koden:
 
 > Imports of used clothing (HS 6309) and rags (HS 6310), SSB 08801. The
 > used clothing is sold in second-hand and vintage shops, and the rags

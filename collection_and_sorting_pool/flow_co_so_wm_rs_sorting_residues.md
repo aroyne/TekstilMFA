@@ -16,10 +16,10 @@ nav_order: 4
 | Tekstilform | WRN – brukte, utslitte |
 | Dimensjoner | år × produktgruppe |
 | Metode | parameter |
-| Status | implemented (incl. recycling until WM.RC is split) |
+| Status | implemented |
 | Prioritet | 2 |
 | Kandidatdata | Reject share from collector reports |
-| Merknad | Rejects from domestic sorting and imported rags; includes recycling until WM.RC is split |
+| Merknad | Rejects from domestic sorting not recycled, and imported rags |
 
 ## Tidsserie
 
@@ -38,7 +38,7 @@ nav_order: 4
 
 #### Antakelser
 
-- Materialgjenvinning er ikke skilt ut ennå. Den implementeres sammen med WM.RC, med 93 t i 2018 (Watson m.fl. 2020) og 142 t fra husholdninger i 2025 (de Sadeleer & Rubach 2026: ett anlegg i Norge, 364 t i alt) (D32). Til da går alt til restavfall (WM.RS).
+- Det som går til materialgjenvinning, er skilt ut (CO.SO-WM.RC-Sorted for recycling-TOT, D34). Resten går til restavfall (WM.RS).
 
 #### Sammensetning (varetype og materiale)
 
@@ -65,7 +65,7 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 50 % | 48 % | 44 % | 40 % | 37 % | 36 % |
+| Bomull | 49 % | 48 % | 44 % | 40 % | 37 % | 36 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 14 % | 16 % | 18 % | 17 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
@@ -76,8 +76,7 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 ## Beregning i koden
 
-Beregnes i `_sorting_residues_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L68). Dokumentasjonen i koden:
+Beregnes i `_sorting_residues_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L84). Dokumentasjonen i koden:
 
-> Balance of CO.SO: rejects from domestic sorting and imported rags, which
-> are used up and discarded. Material recycling is not yet separated
-> (it comes with WM.RC); it goes to residual waste here.
+> Balance of CO.SO: rejects from domestic sorting that are not recycled,
+> and imported rags, which are used up and discarded.

@@ -67,9 +67,9 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 51 % | 48 % | 44 % | 40 % | 37 % | 36 % |
+| Bomull | 50 % | 48 % | 44 % | 40 % | 37 % | 36 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 13 % | 15 % | 18 % | 18 % | 17 % | 17 % |
+| Ikke-tekstil | 13 % | 16 % | 18 % | 17 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
 | Syntetisk | 28 % | 27 % | 30 % | 33 % | 36 % | 37 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
@@ -78,7 +78,7 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 ## Beregning i koden
 
-Beregnes i `_sorted_for_secondhand_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L56). Dokumentasjonen i koden:
+Beregnes i `_sorted_for_secondhand_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L57). Dokumentasjonen i koden:
 
 > Share of the retained textiles sold second-hand in Norway (same anchors
 > as the share retained), plus imported used clothing (HS 6309).

@@ -42,7 +42,7 @@ nav_order: 2
 - Weibull-levetider (form 2) per varetype i `parameters/lifetimes.csv`: arbeidsklær 3 år (2–4; ECAP 2017/WRAP 2015, van Oorschot m.fl. 2020), vernesko 2 år (1–3), institusjonstekstiler 2 år (1–4), tepper 10 år (5–15), presenninger og markiser 5 år (3–8) og andre konfeksjonerte varer 2 år (1–3). Alle unntatt arbeidsklær er antakelser.
 - Innstrømmen før 1988 holdes på 1988-nivå (D2).
 - Sekker er emballasje og kastes samme år (D13).
-- Alt går til restavfall (WM.RS). Innsamling fra institusjoner er ikke implementert.
+- Det som gjenvinnes hos NTG fra 2024 (0,05–0,2 kt hjemmetekstiler), trekkes fra (D34). Resten går til restavfall (WM.RS). Innsamling fra institusjoner er ikke implementert.
 
 #### Sammensetning (varetype og materiale)
 
@@ -66,7 +66,7 @@ Andel av summen i nøkkelår (median).
 | Tepper | 20 % | 11 % | 6 % | 6 % | 6 % | 6 % |
 | Klær | 31 % | 30 % | 31 % | 26 % | 23 % | 23 % |
 | Sko | 10 % | 8 % | 9 % | 7 % | 6 % | 7 % |
-| Hjemmetekstiler | 12 % | 11 % | 13 % | 11 % | 10 % | 9 % |
+| Hjemmetekstiler | 12 % | 11 % | 13 % | 11 % | 11 % | 9 % |
 | Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 4 % |
 | Sekker | 21 % | 34 % | 35 % | 44 % | 47 % | 47 % |
 | Presenninger og telt | 4 % | 3 % | 3 % | 4 % | 4 % | 4 % |
@@ -81,14 +81,20 @@ Utstrømmen av en årgangsmodell av salget til institusjoner og bedrifter. Sekke
 | Regenerert cellulose | 3 % | 2 % | 1 % | 2 % | 1 % | 1 % |
 | Ikke-tekstil | 16 % | 12 % | 12 % | 10 % | 10 % | 10 % |
 | Andre fibre | 2 % | 2 % | 3 % | 3 % | 3 % | 2 % |
-| Syntetisk | 48 % | 54 % | 55 % | 65 % | 68 % | 69 % |
+| Syntetisk | 48 % | 55 % | 55 % | 65 % | 68 % | 69 % |
 | Ull | 4 % | 4 % | 3 % | 3 % | 3 % | 3 % |
 
 <iframe src="../output_files/plots/pages/us_ic_wm_rs_institutional_textile_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
+## Klipping av negative verdier
+
+Flyten er en balanseflyt. Negative verdier er ikke-fysiske og klippes til 0. Massen som da oppstår, tas opp av klippelageret i prosessen flyten går ut fra (rapportert som «Clipping imbalance»), og flyttes ikke til andre flyter.
+
+I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministiske løpet.
+
 ## Beregning i koden
 
-Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L169). Dokumentasjonen i koden:
+Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L183). Dokumentasjonen i koden:
 
 > Goods discarded by institutions and businesses: the outflow of a cohort
 > model of the goods sold to them, with Weibull lifetimes per product

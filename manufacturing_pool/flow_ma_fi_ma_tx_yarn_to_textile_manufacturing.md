@@ -34,7 +34,7 @@ nav_order: 1
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- Flyten er balansen i MA.FI og har ingen egen datakilde. Inn går norsk ull (Totalkalkylen) og import av fiber og garn (SSB 08801). Ut går eksport av fiber og garn (08801), vaskesvinn og håndstrikkegarn (SSB varetall og Prodcom).
+- Flyten er balansen i MA.FI og har ingen egen datakilde. Inn går norsk ull (Totalkalkylen), import av fiber og garn (SSB 08801) og fra 2024 gjenvunnet fiber fra NTG. Ut går eksport av fiber og garn (08801), vaskesvinn og håndstrikkegarn (SSB varetall og Prodcom).
 - Til kontroll: Prodcom (SSB 10455) har noen år med produksjon av ikke-detaljpakket garn (13.10.50.10: 0,14–0,21 kt).
 
 #### Antakelser
@@ -67,11 +67,11 @@ Balansen i MA.FI per materiale, klippet til 0.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 32 % | 22 % | 5 % | 6 % | 3 % | 2 % |
+| Bomull | 32 % | 22 % | 5 % | 6 % | 3 % | 4 % |
 | Regenerert cellulose | 11 % | 10 % | 1 % | 2 % | 1 % | 1 % |
 | Andre fibre | 1 % | 5 % | 12 % | 7 % | 14 % | 12 % |
-| Syntetisk | 51 % | 58 % | 67 % | 59 % | 56 % | 62 % |
-| Ull | 6 % | 5 % | 15 % | 27 % | 25 % | 24 % |
+| Syntetisk | 51 % | 58 % | 67 % | 59 % | 57 % | 61 % |
+| Ull | 6 % | 5 % | 15 % | 27 % | 24 % | 23 % |
 
 <iframe src="../output_files/plots/pages/ma_fi_ma_tx_yarn_to_textile_manufacturing_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -85,14 +85,15 @@ I fiberlaget (per materiale):
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 1989 | 2 av 1000 | 0.000 | 0.048 | 0.000 |
-| 2000 | 19 av 1000 | 0.002 | 0.263 | 0.000 |
+| 1989 | 1 av 1000 | 0.000 | 0.035 | 0.000 |
+| 2000 | 20 av 1000 | 0.002 | 0.285 | 0.000 |
 
 ## Beregning i koden
 
-Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L143). Dokumentasjonen i koden:
+Beregnes i `_yarn_to_manufacturing_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L159). Dokumentasjonen i koden:
 
-> Balance of MA.FI: Norwegian wool and imported fibre and yarn minus
-> exports, the scouring loss and hand knitting yarn sold through retail.
+> Balance of MA.FI: Norwegian wool, imported fibre and yarn and recycled
+> fibre minus exports, the scouring loss and hand knitting yarn sold
+> through retail.
 > A negative balance is not physical and is clipped at 0; the clipped
 > mass is recorded and reported on the flow page.

@@ -18,3 +18,4 @@ air_release_relative_to_laundry,1.0,kg/kg,"Fibres released to air and indoor dus
 gap_cv_extrapolation,0.05,1/year,"Extra coefficient of variation per year outside the published points of a series (extrapolation, held values), D30",assumption,0,0,abs,,none,assumption
 gap_cv_interpolation,0.02,1/year,"Extra coefficient of variation per year of distance to the nearest published point inside a gap (interpolation), D30",assumption,0,0,abs,,none,assumption
 gap_cv_cap,1.0,-,Largest extra coefficient of variation for interpolated or extrapolated years (D30),assumption,0,0,abs,,none,assumption
+ntg_fibre_domestic_share,0.5,-,"Share of the recycled fibre from NTG sold to Norwegian customers (spinning in MA.FI); the rest is exported","assumption: the source says only Norwegian and European customers (de Sadeleer & Rubach 2026)",0.0,1.0,abs,assumption,PERT,assumption

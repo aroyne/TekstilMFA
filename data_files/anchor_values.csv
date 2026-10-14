@@ -27,3 +27,14 @@ unsold_discarded,2022,0.221,kt,"Unsold textiles handled by reporting producers a
 online_direct_CL,2019,0.0,kt,Before the VOEC scheme (from 2020) low-value parcels are assumed declared in 08801 or negligible; Watson et al. 2020 (3.3 kt in 2018) probably overlaps with declared parcels and is not used (A2),assumption,0,0,abs,,none,assumption
 online_direct_HT,2019,0.0,kt,Before the VOEC scheme (from 2020); see online_direct_CL,assumption,0,0,abs,,none,assumption
 laundry_release_synthetic,2014,0.6,kt,Synthetic microfibres released from household laundry to wastewater in Norway,"Mepex (Sundt et al. 2014) for the Norwegian Environment Agency, as cited in Sundt et al. 2016 (M545), ch. 8",50,50,perc,order-of-magnitude estimate,PERT,official (commissioned)
+recycling_share_sorting_rejects,2018,0.199,-,"Share of the rejects from domestic sorting (retained minus reused) sent to material recycling","Watson et al. 2020: 93 t recycling of 1016 - 549 = 467 t",50,50,perc,single survey,PERT,literature
+recycling_share_sorting_rejects,2025,0.390,-,"Share of the rejects from domestic sorting sent to material recycling at NTG","de Sadeleer & Rubach 2026: 142 t from households recycled of 1986 - 1622 = 364 t",50,50,perc,single survey,PERT,literature
+recycling_institutional,2023,0.0,kt,Before NTG started commercial operation in 2024 no recycling of institutional textiles is known,assumption,0,0,abs,,none,assumption
+recycling_institutional,2024,0.046,kt,"NTG intake from industry (hotels, health care) 75 of 153 t, times the 93 t recycled","de Sadeleer & Rubach 2026, fig. 3-8 and 3-9",50,50,perc,read from figures; split by intake share,PERT,literature
+recycling_institutional,2025,0.200,kt,"NTG intake from industry 358 of 651 t, times the 364 t recycled","de Sadeleer & Rubach 2026, fig. 3-8 and 3-9",50,50,perc,read from figures; split by intake share,PERT,literature
+recycling_production_waste,2023,0.0,kt,Before NTG started commercial operation in 2024 no recycling of production waste is known,assumption,0,0,abs,,none,assumption
+recycling_production_waste,2024,0.012,kt,"NTG intake of production waste 20 of 153 t, times the 93 t recycled","de Sadeleer & Rubach 2026, fig. 3-8 and 3-9",50,50,perc,read from figures; split by intake share,PERT,literature
+recycling_production_waste,2025,0.022,kt,"NTG intake of production waste 39 of 651 t, times the 364 t recycled","de Sadeleer & Rubach 2026, fig. 3-8 and 3-9",50,50,perc,read from figures; split by intake share,PERT,literature
+recycling_ntg_fibre,2023,0.0,kt,No textile-to-fibre recycling in Norway before NTG,assumption,0,0,abs,,none,assumption
+recycling_ntg_fibre,2024,0.093,kt,Textiles recycled mechanically to fibre at NTG,"de Sadeleer & Rubach 2026, ch. 3.2.9.7",20,20,perc,reported by the plant,PERT,literature
+recycling_ntg_fibre,2025,0.364,kt,Textiles recycled mechanically to fibre at NTG,"de Sadeleer & Rubach 2026, ch. 3.2.9.7",20,20,perc,reported by the plant,PERT,literature

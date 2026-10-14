@@ -151,11 +151,11 @@ DI.RT-US.IC-Sales to institutions and businesses-TOT,TOT,2022,1000,0,0.0,0.0,0.0
 DI.RT-US.IC-Sales to institutions and businesses-TOT,TOT,2023,1000,0,0.0,0.0,0.0
 DI.RT-US.IC-Sales to institutions and businesses-TOT,TOT,2024,1000,0,0.0,0.0,0.0
 DI.RT-US.IC-Sales to institutions and businesses-TOT,TOT,2025,1000,0,0.0,0.0,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1988,1000,223,0.09652505452486455,1.581606689577197,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1989,1000,112,0.042837325537762594,1.2563500908493248,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1990,1000,47,0.015458713800418172,0.9604975173142205,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1991,1000,75,0.0290587890770894,1.2350613761128129,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1992,1000,2,0.00036665997053664023,0.3495713919587513,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1988,1000,190,0.07808569092174587,1.8003328759783694,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1989,1000,82,0.033245386545545284,1.4704855195097908,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1990,1000,40,0.012944857490136899,1.185432773880201,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1991,1000,50,0.023395861150770345,1.4800416766558713,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1992,1000,2,0.0007747470207994582,0.5966209852679065,0.0
 US.HH-CO.CO-Separate collection from households-TOT,TOT,1993,1000,0,0.0,0.0,0.0
 US.HH-CO.CO-Separate collection from households-TOT,TOT,1994,1000,0,0.0,0.0,0.0
 US.HH-CO.CO-Separate collection from households-TOT,TOT,1995,1000,0,0.0,0.0,0.0
@@ -189,6 +189,82 @@ US.HH-CO.CO-Separate collection from households-TOT,TOT,2022,1000,0,0.0,0.0,0.0
 US.HH-CO.CO-Separate collection from households-TOT,TOT,2023,1000,0,0.0,0.0,0.0
 US.HH-CO.CO-Separate collection from households-TOT,TOT,2024,1000,0,0.0,0.0,0.0
 US.HH-CO.CO-Separate collection from households-TOT,TOT,2025,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1988,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1989,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1990,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1991,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1992,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1993,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1994,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1995,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1996,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1997,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1998,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,1999,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2000,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2001,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2002,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2003,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2004,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2005,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2006,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2007,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2008,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2009,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2010,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2011,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2012,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2013,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2014,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2015,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2016,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2017,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2018,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2019,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2020,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2021,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2022,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2023,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2024,1000,0,0.0,0.0,0.0
+US.IC-WM.RS-Institutional textile waste-TOT,TOT,2025,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1988,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1989,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1990,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1991,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1992,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1993,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1994,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1995,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1996,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1997,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1998,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,1999,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2000,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2001,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2002,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2003,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2004,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2005,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2006,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2007,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2008,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2009,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2010,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2011,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2012,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2013,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2014,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2015,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2016,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2017,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2018,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2019,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2020,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2021,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2022,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2023,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2024,1000,1,1.6401570142719756e-06,0.0016401570142719757,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2025,1000,30,0.0013163140999958212,0.11571141099727603,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,1988,1000,0,0.0,0.0,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,1989,1000,0,0.0,0.0,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,1990,1000,0,0.0,0.0,0.0
@@ -228,7 +304,7 @@ WM.RS-WM.IN-Domestic incineration-TOT,TOT,2023,1000,0,0.0,0.0,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,2024,1000,0,0.0,0.0,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,2025,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1988,1000,0,0.0,0.0,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1989,1000,2,9.641852582834099e-05,0.04827236641704746,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1989,1000,1,3.5143086441701276e-05,0.03514308644170128,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1990,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1991,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1992,1000,0,0.0,0.0,0.0
@@ -239,7 +315,7 @@ MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1996,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1997,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1998,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1999,1000,0,0.0,0.0,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2000,1000,19,0.0016076203777784718,0.2625253459926826,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2000,1000,20,0.0019455977423273028,0.284589690708136,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2001,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2002,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2003,1000,0,0.0,0.0,0.0
@@ -265,3 +341,41 @@ MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2022,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2023,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2024,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2025,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1988,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1989,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1990,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1991,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1992,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1993,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1994,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1995,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1996,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1997,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1998,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,1999,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2000,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2001,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2002,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2003,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2004,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2005,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2006,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2007,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2008,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2009,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2010,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2011,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2012,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2013,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2014,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2015,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2016,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2017,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2018,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2019,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2020,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2021,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2022,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2023,1000,0,0.0,0.0,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2024,1000,35,0.000166540591986718,0.016279728778672075,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2025,1000,247,0.005550079923963607,0.1480712451547814,0.0

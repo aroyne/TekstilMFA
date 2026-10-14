@@ -66,10 +66,10 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 29 % | 32 % | 30 % | nan % | nan % | nan % |
+| Bomull | 29 % | 31 % | 30 % | nan % | nan % | nan % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | nan % | nan % | nan % |
-| Ikke-tekstil | 19 % | 16 % | 17 % | nan % | nan % | nan % |
-| Andre fibre | 2 % | 3 % | 3 % | nan % | nan % | nan % |
+| Ikke-tekstil | 19 % | 16 % | 16 % | nan % | nan % | nan % |
+| Andre fibre | 3 % | 3 % | 3 % | nan % | nan % | nan % |
 | Syntetisk | 41 % | 40 % | 43 % | nan % | nan % | nan % |
 | Ull | 5 % | 6 % | 5 % | nan % | nan % | nan % |
 
@@ -77,6 +77,6 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 ## Beregning i koden
 
-Beregnes i `_landfilling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L34). Dokumentasjonen i koden:
+Beregnes i `_landfilling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L35). Dokumentasjonen i koden:
 
 > Landfilled share from SSB Avfallsregnskap tekstiler 1990-1998, SSB 05281 and 10513 (D15).

@@ -80,7 +80,7 @@ Hovedfiberen fra HS-koden (fiber og garn, FY).
 
 ## Beregning i koden
 
-Beregnes i `_fibre_and_yarn_import_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L64). Dokumentasjonen i koden:
+Beregnes i `_fibre_and_yarn_import_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L66). Dokumentasjonen i koden:
 
 > Registered imports of fibre and yarn, SSB 08801 (HS 50-55 except woven
 > fabric and retail yarn). Includes raw, scoured and carbonised wool and

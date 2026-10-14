@@ -77,7 +77,7 @@ Ull (WO). Uvasket ull regnes som ull, inkludert fett og smuss.
 
 ## Beregning i koden
 
-Beregnes i `_norwegian_raw_wool_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L50). Dokumentasjonen i koden:
+Beregnes i `_norwegian_raw_wool_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L52). Dokumentasjonen i koden:
 
 > Norwegian wool (greasy, as weighed in) from Totalkalkylen for
 > jordbrukssektoren (Budsjettnemnda for jordbruket, NIBIO), the official

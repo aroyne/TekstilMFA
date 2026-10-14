@@ -66,7 +66,7 @@ Andel av summen i nøkkelår (median).
 | Sko | 13 % | 13 % | 14 % | 13 % | 13 % | 12 % |
 | Hjemmetekstiler | 17 % | 18 % | 19 % | 19 % | 17 % | 16 % |
 | Andre konfeksjonerte varer | 2 % | 3 % | 3 % | 5 % | 7 % | 9 % |
-| Presenninger og telt | 6 % | 5 % | 5 % | 8 % | 8 % | 6 % |
+| Presenninger og telt | 6 % | 5 % | 5 % | 7 % | 8 % | 6 % |
 | Garn i detaljsalg | 2 % | 1 % | 1 % | 2 % | 1 % | 1 % |
 
 ### Materiale (fiberlag, D19)

@@ -22,6 +22,7 @@ INFLOWS_WM_RS = [
 
 
 def execute_calculations_wm(mfa, preloaded_data, current_params, dataset_noise, anchors):
+    _export_for_recycling_mc(mfa)
     _landfilling_mc(mfa, anchors)
     _residual_export_mc(mfa, anchors)
     _domestic_incineration_mc(mfa)
@@ -57,3 +58,20 @@ def _domestic_incineration_mc(mfa):
     landfill = mfa.flows['WM.RS-WM.LF-Landfilling of textiles-TOT'].values
     export = mfa.flows['WM.RS-RW.RW-Residual waste export for incineration-TOT'].values
     clip_negative(mfa, 'WM.RS-WM.IN-Domestic incineration-TOT', _total_wm_rs(mfa) - landfill - export)
+
+
+def _export_for_recycling_mc(mfa):
+    """
+    Balance of WM.RC: textiles sent to material recycling (from domestic
+    sorting, institutions and production) minus the recycled fibre sold to
+    Norwegian spinning. Before Norsk Tekstilgjenvinning started in 2024
+    everything was recycled abroad; from 2024 the part of the plant's fibre
+    sold to European customers is exported. A negative value is not
+    physical and is clipped at 0 (D34).
+    """
+    recycled = (mfa.flows['CO.SO-WM.RC-Sorted for recycling-TOT'].sum_to(('t',)).values
+                + mfa.flows['US.IC-WM.RC-Institutional textiles to recycling-TOT'].sum_to(('t',)).values
+                + mfa.flows['MA.TX-WM.RC-Production waste to recycling-TOT'].values)
+    domestic = mfa.flows['WM.RC-MA.FI-Recycled fibre to domestic spinning-TOT'].values
+    clip_negative(mfa, 'WM.RC-RW.RW-Export for recycling-TOT', recycled - domestic)
+
