@@ -39,7 +39,7 @@ nav_order: 2
 #### Antakelser
 
 - Andelen som gjelder husholdningenes restavfall, brukes for alle tekstiler i WM.RS, også fra institusjoner og produksjon.
-- Andelen er satt til 0 i 2005 og interpoleres til 2015-verdien.
+- Andelen er satt til 0 i 2005 og interpoleres til 2015-verdien, med usikkerhet som øker mot midten av perioden (D30). Det finnes ingen offisiell serie før 2015: SSB 05281 (1995–2011) har ikke eksport som behandlingsmåte, og Naturvårdsverket oppgir bare samlet import av avfall fra Norge (1,4 Mt av alle avfallstyper i 2018). Eksporten til Sverige økte kraftig rundt deponiforbudet i 2009, men startet trolig før 2005 (D33).
 
 #### Sammensetning (varetype og materiale)
 

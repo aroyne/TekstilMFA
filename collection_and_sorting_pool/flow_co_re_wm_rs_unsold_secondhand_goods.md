@@ -19,7 +19,7 @@ nav_order: 2
 | Status | planned |
 | Prioritet | 3 |
 | Kandidatdata | Collector reports |
-| Merknad | – |
+| Merknad | No data. The reuse anchors (909 t in 2022, 1622 t in 2025) are goods actually reused; unsold goods are re-sorted by the collectors and end up in export or sorting residues (2026-10-14) |
 
 *Flyten er ikke implementert ennå.*
 

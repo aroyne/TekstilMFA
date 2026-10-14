@@ -39,7 +39,7 @@ nav_order: 3
 
 #### Antakelser
 
-- Andelen gjelder alt som går inn i WM.RS: restavfall fra husholdninger, institusjoner og produksjon, og sorteringsrester.
+- Andelen gjelder alt som går inn i WM.RS: restavfall fra husholdninger, institusjoner og produksjon, sorteringsrester og usolgte varer (D33).
 - Andelen interpoleres mellom ankerpunktene og holdes på 1991-nivå før 1991.
 
 #### Sammensetning (varetype og materiale)
