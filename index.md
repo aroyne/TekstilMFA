@@ -31,14 +31,6 @@ Dynamisk, probabilistisk MFA (Monte Carlo, flodym) for klær, hjemmetekstiler, s
 * [7. Waste management (WM)](waste_management_pool/pool_waste_management.html)
 * [8. Environment (EN)](environment_pool/pool_environment.html)
 
-## Kjerneflyter i husholdningene
-
-![Kjerneflyter](output_files/plots/core_household_flows.png)
-
-## Statistikk mot parallell lagermodell
-
-![Lagermodell](output_files/plots/stock_model_comparison.png)
-
 <!-- MANUAL:INDEX_TEXT:START -->
 
 <!-- MANUAL:INDEX_TEXT:END -->

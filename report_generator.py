@@ -441,10 +441,6 @@ def write_index(site):
         f'[PLAN]({REPO_URL}/docs/PLAN.md).', '',
         '## Sankey-diagram', '', _sankey_iframe(f'{PLOT_DIR}/sankey_national.html', 1000), '',
         '## Pools', '', pools, '',
-        '## Kjerneflyter i husholdningene', '',
-        '![Kjerneflyter](output_files/plots/core_household_flows.png)', '',
-        '## Statistikk mot parallell lagermodell', '',
-        '![Lagermodell](output_files/plots/stock_model_comparison.png)', '',
     ]
     write_page('index.md', {'layout': 'default', 'title': 'Hjem', 'nav_order': 1}, '\n'.join(body),
                'INDEX_TEXT', '')
