@@ -73,11 +73,11 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 45 % | 47 % | 44 % | 40 % | 37 % | 36 % |
+| Bomull | 45 % | 48 % | 44 % | 40 % | 37 % | 36 % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 18 % | 17 % | 19 % | 18 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 27 % | 26 % | 29 % | 33 % | 36 % | 37 % |
+| Syntetisk | 27 % | 26 % | 30 % | 33 % | 36 % | 37 % |
 | Ull | 6 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_reusable_textiles_in_residual_and_bulky_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>

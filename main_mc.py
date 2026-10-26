@@ -120,7 +120,9 @@ def summarise(store):
     Median and 95 % interval over iterations 1..n, plus the deterministic
     value. Outputs split by product or product group also get rows with
     product 'TOTAL', summed per iteration, so their interval is exact rather
-    than a sum of percentiles.
+    than a sum of percentiles. Outputs that carry sacks (SA) also get
+    'TOTAL_EXCL_SA': sacks are packaging (D13) and make up close to half of
+    the supply to institutions and businesses, which hides the textile flow.
     """
     frames = []
     for name, arr, runs, label in _with_totals(store):
@@ -143,6 +145,13 @@ def _with_totals(store):
         if letter is not None:
             axis = arr.dims.letters.index(letter)
             yield name, arr.sum_over((letter,)), runs.sum(axis=axis + 1), 'TOTAL'
+            if 'SA' in arr.dims[letter].items:
+                sa = arr.dims[letter].items.index('SA')
+                excl = arr.copy()
+                excl.values[(slice(None),) * axis + (sa,)] = 0.0
+                excl_runs = runs.copy()
+                excl_runs[(slice(None),) * (axis + 1) + (sa,)] = 0.0
+                yield name, excl.sum_over((letter,)), excl_runs.sum(axis=axis + 1), 'TOTAL_EXCL_SA'
 
 
 def raw_table(store):

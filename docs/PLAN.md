@@ -77,6 +77,11 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Ny flyt MA.FI → DI.RT for norsk spunnet håndstrikkegarn (SSB 10455, Prodcom 13.10.50.50, 0,6–1,0 kt). Datafil: `SSB_10455_prodcom_garn_tau_nett_2008_2025.csv`.
 - [x] Eksport deklarert som karbonisert ull i 1996–2000 og 2002 er uvasket ull etter pris per kg. Den er regnet som uvasket, og ankerpunktet for 1996–2000 er rettet fra 3,7 til 2,2 kt. Usikkerheten er standardfeilen til periodesnittet.
 
+### 2026-10-26 – Systemdiagram og B2B/B2C (D36)
+- [x] Systemdiagrammet genereres fra registeret (`scripts/plot_system_diagram.py`): Mermaid i SYSTEMDEFINISJON med alle flytene, og PNG for en A4-side i portrett med flytene med prioritet 1 og 2.
+- [x] D36: B2B og B2C holdes ikke adskilt i egne noder ([notat](../claude_tekst/2026-10-26_b2b_og_b2c.md)). Nedre grense for `institutional_share` er 4 % (Eurostat ext_tec05: 3–4 % av klærne importeres direkte av næring og offentlig sektor). Flyter med sekker vises med og uten sekker på flytsidene (`TOTAL_EXCL_SA` i MC_summary).
+- [ ] Plukkanalyser av næringsavfall (tekstilandel) for US.IC → WM.RS: venter, årgangsmodellen (D29) beholdes foreløpig.
+
 ## Neste
 
 ### Fase 1 – Låse systemdefinisjonen (beslutningene D1–D13 er tatt 2026-09-29)

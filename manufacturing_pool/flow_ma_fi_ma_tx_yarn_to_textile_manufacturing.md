@@ -86,7 +86,7 @@ I fiberlaget (per materiale):
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
 | 1989 | 1 av 1000 | 0.000 | 0.035 | 0.000 |
-| 2000 | 20 av 1000 | 0.002 | 0.285 | 0.000 |
+| 2000 | 18 av 1000 | 0.002 | 0.285 | 0.000 |
 
 ## Beregning i koden
 

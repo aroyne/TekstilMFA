@@ -53,6 +53,19 @@ nav_order: 3
 - Eksport av garn i detaljopplegg økte fra 0,7 kt i 2018 til 2,1 kt i 2025.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
+## Med og uten sekker
+
+Sekker (SA) er emballasje (D13) og kan dominere flyten. Kt per år, median med 95 %-intervall i parentes. Summen uten sekker er regnet per iterasjon.
+
+| År | I alt | Sekker | Uten sekker | Sekkenes andel |
+|---|---|---|---|---|
+| 1990 | 4.57 (4.41–4.74) | 0.11 (0.11–0.12) | 4.46 (4.30–4.62) | 3 % |
+| 2000 | 6.51 (6.29–6.76) | 0.08 (0.08–0.09) | 6.43 (6.21–6.67) | 1 % |
+| 2010 | 6.99 (6.75–7.25) | 0.05 (0.05–0.05) | 6.94 (6.70–7.20) | 1 % |
+| 2018 | 9.69 (9.35–10.05) | 0.33 (0.32–0.34) | 9.36 (9.04–9.71) | 3 % |
+| 2022 | 12.32 (11.90–12.78) | 0.60 (0.58–0.63) | 11.72 (11.31–12.16) | 5 % |
+| 2025 | 13.03 (12.58–13.52) | 0.15 (0.14–0.16) | 12.88 (12.44–13.37) | 1 % |
+
 ## Sammensetning
 
 Andel av summen i nøkkelår (median).
@@ -78,7 +91,7 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 |---|---|---|---|---|---|---|
 | Bomull | 41 % | 42 % | 39 % | 31 % | 29 % | 31 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 1 % | 1 % |
-| Ikke-tekstil | 18 % | 15 % | 14 % | 12 % | 14 % | 14 % |
+| Ikke-tekstil | 18 % | 15 % | 14 % | 11 % | 14 % | 14 % |
 | Andre fibre | 1 % | 3 % | 2 % | 3 % | 3 % | 2 % |
 | Syntetisk | 28 % | 31 % | 35 % | 42 % | 40 % | 35 % |
 | Ull | 9 % | 7 % | 9 % | 11 % | 13 % | 16 % |

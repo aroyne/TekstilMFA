@@ -56,6 +56,19 @@ nav_order: 3
 - For klær, hjemmetekstiler og sko gir modellen 105,9 kt tilført markedet i 2022 (salg, privatimport og netthandel), det samme som NORSUS (Rubach m.fl. 2023).
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
+## Med og uten sekker
+
+Sekker (SA) er emballasje (D13) og kan dominere flyten. Kt per år, median med 95 %-intervall i parentes. Summen uten sekker er regnet per iterasjon.
+
+| År | I alt | Sekker | Uten sekker | Sekkenes andel |
+|---|---|---|---|---|
+| 1990 | 77.60 (74.93–80.53) | 2.87 (2.77–2.97) | 74.74 (72.17–77.55) | 4 % |
+| 2000 | 105.02 (101.41–108.97) | 6.55 (6.32–6.79) | 98.47 (95.09–102.18) | 6 % |
+| 2010 | 151.49 (146.28–157.19) | 8.50 (8.21–8.82) | 142.99 (138.07–148.37) | 6 % |
+| 2018 | 147.53 (142.45–153.08) | 12.85 (12.41–13.34) | 134.67 (130.04–139.74) | 9 % |
+| 2022 | 158.50 (153.05–164.47) | 14.50 (14.00–15.05) | 144.00 (139.05–149.42) | 9 % |
+| 2025 | 138.33 (133.57–143.53) | 13.32 (12.86–13.82) | 125.01 (120.70–129.71) | 10 % |
+
 ## Sammensetning
 
 Andel av summen i nøkkelår (median).

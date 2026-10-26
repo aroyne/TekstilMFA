@@ -55,6 +55,19 @@ nav_order: 2
 - Lageret i US.IC endrer seg lite (−1 til +1,4 kt per år), fordi levetidene er korte.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
+## Med og uten sekker
+
+Sekker (SA) er emballasje (D13) og kan dominere flyten. Kt per år, median med 95 %-intervall i parentes. Summen uten sekker er regnet per iterasjon.
+
+| År | I alt | Sekker | Uten sekker | Sekkenes andel |
+|---|---|---|---|---|
+| 1990 | 12.80 (8.72–15.67) | 2.75 (2.66–2.86) | 10.05 (6.03–12.86) | 21 % |
+| 2000 | 18.28 (13.52–21.64) | 6.46 (6.24–6.71) | 11.83 (7.03–15.14) | 35 % |
+| 2010 | 23.68 (17.63–27.90) | 8.45 (8.16–8.77) | 15.24 (9.06–19.39) | 36 % |
+| 2018 | 27.79 (21.77–32.10) | 12.53 (12.10–13.00) | 15.28 (9.07–19.38) | 45 % |
+| 2022 | 29.00 (23.08–33.28) | 13.90 (13.42–14.42) | 15.12 (8.93–19.25) | 48 % |
+| 2025 | 27.50 (21.76–31.59) | 13.17 (12.72–13.67) | 14.33 (8.49–18.22) | 48 % |
+
 ## Sammensetning
 
 Andel av summen i nøkkelår (median).
@@ -64,11 +77,11 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 20 % | 11 % | 6 % | 6 % | 6 % | 6 % |
-| Klær | 31 % | 30 % | 31 % | 26 % | 23 % | 23 % |
-| Sko | 10 % | 8 % | 9 % | 7 % | 6 % | 7 % |
-| Hjemmetekstiler | 12 % | 11 % | 13 % | 11 % | 11 % | 9 % |
+| Klær | 31 % | 30 % | 31 % | 25 % | 22 % | 23 % |
+| Sko | 10 % | 8 % | 9 % | 7 % | 6 % | 6 % |
+| Hjemmetekstiler | 12 % | 11 % | 13 % | 11 % | 10 % | 9 % |
 | Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 4 % |
-| Sekker | 21 % | 34 % | 35 % | 44 % | 47 % | 47 % |
+| Sekker | 21 % | 35 % | 36 % | 45 % | 48 % | 48 % |
 | Presenninger og telt | 4 % | 3 % | 3 % | 4 % | 4 % | 4 % |
 
 ### Materiale (fiberlag, D19)
@@ -77,12 +90,12 @@ Utstrømmen av en årgangsmodell av salget til institusjoner og bedrifter. Sekke
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 27 % | 26 % | 25 % | 18 % | 16 % | 16 % |
+| Bomull | 27 % | 26 % | 25 % | 17 % | 16 % | 16 % |
 | Regenerert cellulose | 3 % | 2 % | 1 % | 2 % | 1 % | 1 % |
-| Ikke-tekstil | 16 % | 12 % | 12 % | 10 % | 10 % | 10 % |
-| Andre fibre | 2 % | 2 % | 3 % | 3 % | 3 % | 2 % |
-| Syntetisk | 48 % | 55 % | 55 % | 65 % | 68 % | 69 % |
-| Ull | 4 % | 4 % | 3 % | 3 % | 3 % | 3 % |
+| Ikke-tekstil | 15 % | 12 % | 12 % | 10 % | 9 % | 9 % |
+| Andre fibre | 3 % | 2 % | 3 % | 3 % | 3 % | 2 % |
+| Syntetisk | 49 % | 55 % | 56 % | 66 % | 69 % | 69 % |
+| Ull | 4 % | 4 % | 3 % | 3 % | 2 % | 3 % |
 
 <iframe src="../output_files/plots/pages/us_ic_wm_rs_institutional_textile_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

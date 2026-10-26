@@ -76,7 +76,13 @@ def _sales_to_users_mc(mfa, current_params):
     and hand knitting yarn made in Norway minus exports and unsold goods,
     split between households and institutions/businesses. Sacks (SA) are packaging
     used by businesses (D13) and go entirely to US.IC; retail yarn (YA) goes
-    entirely to households. A negative balance is not physical and is
+    entirely to households. The institutional share of the other products is
+    12 % (4-15 %), the Danish split used by Watson et al. 2020 and Rubach et
+    al. 2023; no Norwegian statistic gives it. The lower bound is the share
+    of clothing imported directly by businesses and the public sector outside
+    wholesale and retail, 3-4 % of the import value in 2016-2024 (Eurostat
+    ext_tec05, D36); the rest of their purchases goes through wholesale and
+    cannot be separated. A negative balance is not physical and is
     clipped at 0; the clipped mass is recorded and reported on the flow
     pages.
     """

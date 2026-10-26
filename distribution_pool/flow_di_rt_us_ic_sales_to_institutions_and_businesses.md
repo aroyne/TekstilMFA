@@ -51,6 +51,19 @@ nav_order: 2
 - Flyten økte fra 13 kt i 1990 til 28–31 kt i 2018–2025, mest på grunn av importen av sekker.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
+## Med og uten sekker
+
+Sekker (SA) er emballasje (D13) og kan dominere flyten. Kt per år, median med 95 %-intervall i parentes. Summen uten sekker er regnet per iterasjon.
+
+| År | I alt | Sekker | Uten sekker | Sekkenes andel |
+|---|---|---|---|---|
+| 1990 | 12.62 (8.60–15.45) | 2.75 (2.66–2.86) | 9.87 (5.91–12.64) | 22 % |
+| 2000 | 18.48 (13.68–21.82) | 6.46 (6.24–6.71) | 12.02 (7.14–15.31) | 35 % |
+| 2010 | 24.60 (18.15–29.11) | 8.45 (8.16–8.77) | 16.16 (9.60–20.58) | 34 % |
+| 2018 | 27.76 (21.79–32.03) | 12.53 (12.10–13.00) | 15.23 (9.02–19.37) | 45 % |
+| 2022 | 29.90 (23.60–34.42) | 13.90 (13.42–14.42) | 16.00 (9.47–20.35) | 46 % |
+| 2025 | 26.69 (21.36–30.54) | 13.17 (12.72–13.67) | 13.56 (8.02–17.21) | 49 % |
+
 ## Sammensetning
 
 Andel av summen i nøkkelår (median).
@@ -59,12 +72,12 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Tepper | 16 % | 7 % | 7 % | 6 % | 6 % | 6 % |
-| Klær | 33 % | 33 % | 32 % | 25 % | 24 % | 23 % |
+| Tepper | 16 % | 7 % | 6 % | 6 % | 6 % | 6 % |
+| Klær | 33 % | 32 % | 32 % | 24 % | 24 % | 22 % |
 | Sko | 10 % | 9 % | 9 % | 7 % | 7 % | 6 % |
-| Hjemmetekstiler | 14 % | 12 % | 13 % | 11 % | 9 % | 8 % |
-| Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 5 % |
-| Sekker | 21 % | 34 % | 33 % | 44 % | 45 % | 48 % |
+| Hjemmetekstiler | 14 % | 12 % | 12 % | 10 % | 9 % | 8 % |
+| Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 4 % |
+| Sekker | 22 % | 35 % | 34 % | 45 % | 46 % | 49 % |
 | Presenninger og telt | 4 % | 3 % | 4 % | 4 % | 4 % | 3 % |
 
 ### Materiale (fiberlag, D19)
@@ -75,9 +88,9 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 |---|---|---|---|---|---|---|
 | Bomull | 31 % | 26 % | 25 % | 16 % | 16 % | 16 % |
 | Regenerert cellulose | 2 % | 2 % | 1 % | 2 % | 1 % | 1 % |
-| Ikke-tekstil | 15 % | 11 % | 12 % | 11 % | 10 % | 9 % |
+| Ikke-tekstil | 15 % | 11 % | 12 % | 10 % | 10 % | 9 % |
 | Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |
-| Syntetisk | 46 % | 55 % | 55 % | 66 % | 67 % | 69 % |
+| Syntetisk | 46 % | 55 % | 56 % | 67 % | 68 % | 69 % |
 | Ull | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
 
 <iframe src="../output_files/plots/pages/di_rt_us_ic_sales_to_institutions_and_businesses_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -96,6 +109,12 @@ Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aro
 > and hand knitting yarn made in Norway minus exports and unsold goods,
 > split between households and institutions/businesses. Sacks (SA) are packaging
 > used by businesses (D13) and go entirely to US.IC; retail yarn (YA) goes
-> entirely to households. A negative balance is not physical and is
+> entirely to households. The institutional share of the other products is
+> 12 % (4-15 %), the Danish split used by Watson et al. 2020 and Rubach et
+> al. 2023; no Norwegian statistic gives it. The lower bound is the share
+> of clothing imported directly by businesses and the public sector outside
+> wholesale and retail, 3-4 % of the import value in 2016-2024 (Eurostat
+> ext_tec05, D36); the rest of their purchases goes through wholesale and
+> cannot be separated. A negative balance is not physical and is
 > clipped at 0; the clipped mass is recorded and reported on the flow
 > pages.

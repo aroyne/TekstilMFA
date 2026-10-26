@@ -24,6 +24,8 @@ COLOR_OF_MATERIAL = dict(zip(['SYN', 'CO', 'WO', 'CV', 'OTH', 'NT'], SLOTS))
 PRODUCT_NAMES = {'CL': 'Klær', 'HT': 'Hjemmetekstiler', 'FW': 'Sko', 'CA': 'Tepper', 'SA': 'Sekker',
                  'TA': 'Presenninger og telt', 'OM': 'Andre konfeksjonerte varer', 'YA': 'Garn i detaljsalg',
                  'CORE': 'Klær, hjemmetekstiler og sko', 'ALL': 'Alle produkter'}
+# Product labels in the summaries that are sums over products, not products
+AGGREGATES = ['TOTAL', 'TOTAL_EXCL_SA', 'ALL']
 MATERIAL_NAMES = {'SYN': 'Syntetisk', 'CO': 'Bomull', 'WO': 'Ull', 'CV': 'Regenerert cellulose',
                   'OTH': 'Andre fibre', 'NT': 'Ikke-tekstil'}
 SURFACE = '#fcfcfb'
@@ -57,7 +59,7 @@ def plot_flow(summary, flow_code, title, path):
     median and 95 % interval of the total as a line and band.
     """
     rows = summary[summary['flow_name'] == flow_code]
-    parts = rows[~rows['product'].isin(['TOTAL'])]
+    parts = rows[~rows['product'].isin(AGGREGATES)]
     total = rows[rows['product'] == 'TOTAL'] if (rows['product'] == 'TOTAL').any() else parts
     fig = go.Figure()
     for product in COLOR_OF_PRODUCT:

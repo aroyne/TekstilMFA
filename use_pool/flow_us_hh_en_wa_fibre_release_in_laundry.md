@@ -72,7 +72,7 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 57 % | 55 % | 54 % | 46 % | 43 % | 44 % |
+| Bomull | 57 % | 56 % | 54 % | 46 % | 43 % | 44 % |
 | Regenerert cellulose | 4 % | 3 % | 2 % | 3 % | 3 % | 3 % |
 | Andre fibre | 1 % | 1 % | 2 % | 2 % | 2 % | 2 % |
 | Syntetisk | 32 % | 32 % | 36 % | 42 % | 43 % | 43 % |

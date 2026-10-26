@@ -65,8 +65,8 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 2 % | 1 % | 0 % | 0 % | 0 % | 0 % |
-| Klær | 27 % | 24 % | 21 % | 21 % | 21 % | 21 % |
-| Hjemmetekstiler | 40 % | 45 % | 49 % | 49 % | 49 % | 49 % |
+| Klær | 27 % | 24 % | 21 % | 22 % | 21 % | 21 % |
+| Hjemmetekstiler | 40 % | 45 % | 49 % | 48 % | 49 % | 49 % |
 | Andre konfeksjonerte varer | 7 % | 5 % | 3 % | 3 % | 3 % | 3 % |
 | Presenninger og telt | 24 % | 26 % | 27 % | 27 % | 27 % | 27 % |
 

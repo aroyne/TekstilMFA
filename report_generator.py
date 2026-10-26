@@ -245,7 +245,7 @@ def _share_table(rows, column, names, label):
 
 
 def _composition(site, code, name, fibre_plot):
-    products = site.summary[(site.summary['flow_name'] == code) & ~site.summary['product'].isin(['TOTAL', 'ALL'])]
+    products = site.summary[(site.summary['flow_name'] == code) & ~site.summary['product'].isin(utils_stat.AGGREGATES)]
     materials = site.fibre[(site.fibre['flow_name'] == code) & site.fibre['product'].isin(['TOTAL', 'ALL'])]
     lines = ['## Sammensetning', '', 'Andel av summen i nøkkelår (median).', '']
     by_product = _share_table(products, 'product', utils_stat.PRODUCT_NAMES, 'Varetype')
@@ -255,6 +255,27 @@ def _composition(site, code, name, fibre_plot):
     lines += _share_table(materials, 'material', utils_stat.MATERIAL_NAMES, 'Materiale') + ['']
     lines += [_iframe(fibre_plot, 420), '']
     return lines
+
+
+def _without_sacks(summary, code):
+    """
+    Table of the flow with and without sacks (SA) at KEY_YEARS, for flows
+    that carry sacks. Sacks are packaging (D13) and dominate the flows to and
+    from institutions and businesses.
+    """
+    rows = summary[(summary['flow_name'] == code) & summary['year'].isin(KEY_YEARS)].set_index(['product', 'year'])
+    if 'TOTAL_EXCL_SA' not in rows.index.get_level_values('product') or not (rows.loc['SA', 'median'] > 0).any():
+        return []
+    fmt = lambda r: f"{r['median']:.2f} ({r['p2_5']:.2f}–{r['p97_5']:.2f})"
+    lines = ['## Med og uten sekker', '',
+             'Sekker (SA) er emballasje (D13) og kan dominere flyten. Kt per år, median med 95 %-intervall '
+             'i parentes. Summen uten sekker er regnet per iterasjon.', '',
+             '| År | I alt | Sekker | Uten sekker | Sekkenes andel |', '|---|---|---|---|---|']
+    for year in KEY_YEARS:
+        total, sacks, rest = (rows.loc[(p, year)] for p in ('TOTAL', 'SA', 'TOTAL_EXCL_SA'))
+        share = f"{100 * sacks['median'] / total['median']:.0f} %" if total['median'] > 0 else '–'
+        lines.append(f'| {year} | {fmt(total)} | {fmt(sacks)} | {fmt(rest)} | {share} |')
+    return lines + ['']
 
 
 LAYER_NAMES = {'TOT': 'TOT', 'fibre': 'fiberlaget (per materiale)'}
@@ -328,7 +349,8 @@ def write_flow_page(site, row, nav_order):
         utils_stat.plot_flow(site.summary, code, f"{row['name']} – per produkt (median, 95 % for summen)", plot)
         utils_stat.plot_flow_materials(site.fibre, code, f"{row['name']} – per materiale (median)", fibre_plot)
         body += ['## Tidsserie', '', _iframe(plot, 420), '']
-        after = _composition(site, code, row['name'], fibre_plot) + _clipping(site.clipping, code)
+        after = (_without_sacks(site.summary, code) + _composition(site, code, row['name'], fibre_plot)
+                 + _clipping(site.clipping, code))
         if code in site.functions:
             file, func, line, doc = site.functions[code]
             quoted = '\n'.join('> ' + l if l else '>' for l in doc.splitlines())
