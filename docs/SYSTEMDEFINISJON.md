@@ -47,34 +47,92 @@
 | **EN** Environment | EN.WA | systemgrense | – | Avløp og vann: fibre og vaskesvinn til avløp, ikke fulgt videre (D35) |
 | | EN.AI | systemgrense | – | Fibre til luft og støv, ikke fulgt videre (D35) |
 
-## Systemdiagram (kjerneflyter P1 med tykk strek)
+## Systemdiagram
 
+Diagrammet genereres fra registeret med `python scripts/plot_system_diagram.py`. Boksene er pools. Tykk strek er prioritet 1, vanlig strek prioritet 2 og stiplet strek prioritet 3. Sylindre er prosesser med lager, sirkler er systemgrenser og sekskanten er et sluk. Resten av verden er tegnet to ganger, som import til venstre og eksport til høyre.
+
+<!-- SYSTEM_DIAGRAM:START -->
 ```mermaid
 flowchart LR
-  RW((RW)) ==> DI[DI.RT<br>Handel]
-  RW ==>|privatimport<br>netthandel| HH
-  PS[PS.WO] -.-> FI[MA.FI] -.-> TX[MA.TX] -.-> DI
-  FI -.->|vaskesvinn| ENW
-  FI -.->|håndstrikkegarn| DI
-  RW -.-> FI & TX
-  DI ==> HH[(US.HH<br>husholdninger)]
-  DI -.-> IC[(US.IC<br>institusjoner)]
-  DI ==>|eksport| RW
-  HH ==> CO[CO.CO<br>innsamling]
-  HH ==> RS[WM.RS<br>restavfall]
-  HH -.->|vask| ENW((EN.WA))
-  CO ==>|usortert eksport| RW
-  CO ==> SO[CO.SO<br>sortering]
-  SO ==> RE[CO.RE<br>bruktbutikk] ==> HH
-  SO -.-> RC[WM.RC] -.-> RW
-  SO -.-> RS
-  IC -.-> CO & RS
-  RS ==> IN{{WM.IN<br>forbrenning}}
-  RS ==> LF[(WM.LF<br>deponi)]
-  RS -.->|avfallseksport| RW
+  subgraph RW_import["Rest of the world (import)"]
+    RW_RW_in(("RW.RW<br>Rest of the world"))
+  end
+  subgraph RW_export["Rest of the world (export)"]
+    RW_RW_out(("RW.RW<br>Rest of the world"))
+  end
+  subgraph PS["Primary production (PS)"]
+    PS_WO(("PS.WO<br>Norwegian wool"))
+  end
+  subgraph MA["Manufacturing (MA)"]
+    MA_FI["MA.FI<br>Fibre and yarn production"]
+    MA_TX["MA.TX<br>Textile and apparel manufacturing"]
+  end
+  subgraph DI["Distribution (DI)"]
+    DI_RT["DI.RT<br>Wholesale and retail"]
+  end
+  subgraph US["Use (US)"]
+    US_HH[("US.HH<br>Households")]
+    US_IC[("US.IC<br>Institutions and businesses")]
+  end
+  subgraph CO["Collection and sorting (CO)"]
+    CO_CO["CO.CO<br>Separate collection"]
+    CO_SO["CO.SO<br>Sorting"]
+    CO_RE["CO.RE<br>Second-hand retail"]
+  end
+  subgraph WM["Waste management (WM)"]
+    WM_RS["WM.RS<br>Residual and mixed waste collection"]
+    WM_IN{{"WM.IN<br>Incineration"}}
+    WM_LF[("WM.LF<br>Landfill")]
+    WM_RC["WM.RC<br>Material recycling"]
+  end
+  subgraph EN["Environment (EN)"]
+    EN_WA(("EN.WA<br>Wastewater and water (not followed)"))
+    EN_AI(("EN.AI<br>Air and indoor dust"))
+  end
+  RW_RW_in -->|"Fibre and yarn import"| MA_FI
+  RW_RW_in -->|"Fabric import"| MA_TX
+  RW_RW_in ==>|"Finished textile products import"| DI_RT
+  RW_RW_in ==>|"Private imports + Direct online imports"| US_HH
+  RW_RW_in -.->|"Used textile import"| CO_SO
+  PS_WO -->|"Norwegian raw wool"| MA_FI
+  MA_FI -.->|"Yarn to textile manufacturing"| MA_TX
+  MA_FI -->|"Domestic hand knitting yarn"| DI_RT
+  MA_FI -->|"Fibre and yarn export"| RW_RW_out
+  MA_FI -.->|"Wool scouring loss"| EN_WA
+  MA_TX -->|"Domestic finished products"| DI_RT
+  MA_TX -->|"Textile export"| RW_RW_out
+  MA_TX -.->|"Preconsumer production waste"| WM_RS
+  MA_TX -.->|"Production waste to recycling"| WM_RC
+  DI_RT ==>|"Sales to households"| US_HH
+  DI_RT -->|"Sales to institutions and businesses"| US_IC
+  DI_RT ==>|"Export of finished textile products"| RW_RW_out
+  DI_RT -.->|"Unsold goods discarded"| WM_RS
+  DI_RT -.->|"Unsold goods donated"| CO_CO
+  US_HH ==>|"Separate collection from households"| CO_CO
+  US_HH ==>|"Reusable textiles in residual and bulky waste + Worn textiles in residual and bulky waste"| WM_RS
+  US_HH -->|"Fibre release in laundry"| EN_WA
+  US_HH -.->|"Fibre release to air and dust"| EN_AI
+  US_IC -.->|"Collection from institutions (planlagt)"| CO_CO
+  US_IC -->|"Institutional textile waste"| WM_RS
+  US_IC -.->|"Fibre release in industrial laundry"| EN_WA
+  US_IC -.->|"Institutional textiles to recycling"| WM_RC
+  CO_CO ==>|"Export of unsorted collected textiles"| RW_RW_out
+  CO_CO ==>|"Collected textiles to domestic sorting"| CO_SO
+  CO_SO ==>|"Sorted for domestic secondhand sales"| CO_RE
+  CO_SO -->|"Export of sorted textiles (planlagt)"| RW_RW_out
+  CO_SO -->|"Sorted for recycling"| WM_RC
+  CO_SO -->|"Sorting residues"| WM_RS
+  CO_RE ==>|"Secondhand sales to households"| US_HH
+  CO_RE -.->|"Unsold secondhand goods (planlagt)"| WM_RS
+  WM_RS ==>|"Domestic incineration"| WM_IN
+  WM_RS -->|"Residual waste export for incineration"| RW_RW_out
+  WM_RS ==>|"Landfilling of textiles"| WM_LF
+  WM_RC -.->|"Recycled fibre to domestic spinning"| MA_FI
+  WM_RC -->|"Export for recycling"| RW_RW_out
 ```
+<!-- SYSTEM_DIAGRAM:END -->
 
-Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [system/flows.csv](../system/flows.csv). Den har 43 flyter: 14 med prioritet 1, 17 med prioritet 2 og 12 med prioritet 3 (restavfall fra husholdningene er delt i brukbart og utslitt, D18, og vaskesvinnet fra ullvasking og norsk spunnet håndstrikkegarn er lagt til, D23 og D21). Flytnavn kan ikke inneholde bindestrek, fordi `-` skiller feltene i koden (sjekkes av `tests/test_system_register.py`).
+Den fullstendige flytlisten med prioritet, metode og kandidatdata ligger i [system/flows.csv](../system/flows.csv). Den har 42 flyter: 14 med prioritet 1, 15 med prioritet 2 og 13 med prioritet 3 (restavfall fra husholdningene er delt i brukbart og utslitt, D18, og vaskesvinnet fra ullvasking og norsk spunnet håndstrikkegarn er lagt til, D23 og D21). Flytnavn kan ikke inneholde bindestrek, fordi `-` skiller feltene i koden (sjekkes av `tests/test_system_register.py`).
 
 ## Metode per flyt (kolonnen `method`)
 

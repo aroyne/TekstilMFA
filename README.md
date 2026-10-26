@@ -46,5 +46,6 @@ python scripts/build_hs_main_fibre.py                   # hovedfiber per HS8-kod
 python scripts/build_fibre_composition.py               # fibergrupper for HS-koder uten oppgitt fiber
 python scripts/plot_core_flows.py                       # figur: kjerneflyter i husholdningene
 python scripts/plot_stock_model.py                      # figur: statistikk mot parallell lagermodell
+python scripts/plot_system_diagram.py                   # systemdiagram (Mermaid) i docs/SYSTEMDEFINISJON.md
 python report_generator.py                              # nettsidene (etter main_mc.py med --pool all)
 ```
