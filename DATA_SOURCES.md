@@ -27,6 +27,7 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 |---|---|---|
 | SSB 08801 | Import og eksport per HS8, 1988–2025 | har |
 | SSB 10455 (Prodcom, solgt produksjon i store foretak, 2008–2025) | Norsk produksjon per prodcomkode, mengde (kg, m² eller stk) og verdi. Mange celler er skjult | 13.10 og 13.94 har (`SSB_10455_prodcom_garn_tau_nett_2008_2025.csv`); andre koder for MA.TX hentes ved behov |
+| Eurostat ext_tec05, handel etter vare (CPA) og importørens næring (TEC), Norge 2016–2024 | Importverdi for klær, tekstiler og lærvarer etter næringen til importøren: klær 54–56 % detaljhandel, 35–37 % engros, ca. 5 % industri, 3–4 % andre næringer og offentlig. 2018, 2019 og 2021 delvis skjult. Se `claude_tekst/2026-10-26_b2b_og_b2c.md` | hent (mulig nedre grense for `institutional_share`) |
 | SSB 08604 (2008, 2015) og 14457 (2015, 2022), industriavfall etter næring og materialtype | Tekstilavfall fra NACE 13–15: 1 / 0 / 0 kt (avrundet til hele tusen tonn), blandet avfall 1–4 kt | ankerpunkter `preconsumer_waste_textile_industry` i `anchor_values.csv` |
 | SSB 12910, hovedtall for foretak og bedrifter etter næring (2017–2024) | Sysselsatte og produksjonsverdi per næring: 13.92 konfeksjonerte tekstilvarer ~2,1–3,1 mrd. kr, 14.1 klær ~2,7–3,1 mrd. kr, 13.94 tau og nett ~1,7–3,3 mrd. kr | kandidat for produktfordelingen i MA.TX (ikke hentet til data_files) |
 | SNL, «garn» og «Sandnes Garn» | Omtrent 1 000 t håndstrikkegarn produseres i Norge per år, og omsetningen er over 500 mill. kr (begge uten årstall). Sandnes Garn produserer ca. 600 t | brukes til usikkerheten på 10455 |
@@ -72,6 +73,7 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | Sundt m.fl. (2016), *Primary microplastic-pollution: Measures and reduction potentials in Norway*, Mepex for Miljødirektoratet (M545), som gjengir Sundt m.fl. (2014) | Ca. 600 t syntetiske mikrofibre per år fra husholdningsvask i Norge | ankerpunkt `laundry_release_synthetic` (D28) |
 | Lant m.fl. (2020), *Microfiber release from real soiled consumer laundry*, PLoS ONE | 114 mg fibre per kg tøy i ekte vask, mest naturfibre | begrunnelse for å ta med naturfibre (D28) |
 | De Falco m.fl. (2020), *Microfibers released into the air from synthetic textiles*, Scientific Reports | Utslipp til luft ved bruk av samme størrelse som ved vask | parameter `air_release_relative_to_laundry` (D28) |
+| SSB 07355 (2008–2022), 14342 (2020–2025) og 10514 (2012–2024), avfall etter næring og materialtype | Tekstiler fra tjenesteytende næringer er skjult i 07355 og 14342. I 10514 er de 0–1 kt (hele tusen tonn, bare separat sortert tekstilavfall). Ingen tekstilandel i blandet næringsavfall | sjekket, ikke brukbar som nivå for US.IC |
 | SSB husholdningsavfall | Mengder restavfall og grovavfall | hent/verifiser tabell |
 | Miljødirektoratet / SSB om avfallseksport | Restavfall eksportert til forbrenning (Sverige) | hent |
 
