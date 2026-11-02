@@ -113,6 +113,11 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] D38: medianen for destruksjon økt til 1,3 % (geometrisk snitt av 0,2 og 9 %), etter ønske.
 - [x] A5 og innsvingingstest (`structural_sensitivity.py`, `output_files/structural_sensitivity.csv`). Effekt på lageret i husholdningene 2025: destruksjon på EEA-nivå −176 kt, tilførsel før 1988 på 60 % −130 kt (konstant, startlageret), fiberutslipp på Mepex-nivå −86 kt, ingen returer +6 kt, Weibull-form 1,5 eller 3 ca. 0. Innsvingingen påvirker lagermodellen bare til ca. 2000 (kasseringer −19 kt i 1990, −1 kt i 2000).
 
+### 2026-11-02 – Fase B (rest) og fase C: diagnose
+- [x] Forslag for resten av fase B ([notat](../claude_tekst/2026-11-02_fase_B_resterende.md)): fjerne de tre planlagte flytene uten data, hente ext_tec05 for kap. 63 og 64, ta sekkespørsmålet med til SSB, la fiberandelene vente. Fire spørsmål venter på svar.
+- [x] Lagerdiagnose ([notat](../claude_tekst/2026-11-02_C_lagerdiagnose.md)): Avviket på ca. 1 030 kt mellom restledd og lagermodell i 2025 kommer fra 1988–2008 (553 kt, restavfallet holdt flatt per innbygger mens innsamlingen vokser), 2009–2017 (330 kt, lavt anker for 2018) og 2018–2025 (131 kt, 10–27 kt per år). Levetidene styrer ikke kasseringene når tilførselen er flat, bare lagernivået (× 1–1,75 mot garderobeanslagene). Forslag D40: substitusjon før 2009 (−183 kt), vurdere 2018-ankeret, rapportere det vedvarende gapet som funn.
+- [x] Rettelse: «110–140 kg klær etter SIFO» bygger på antatt 0,3–0,4 kg per plagg. Med importvekten (0,276 kg) blir det ca. 99 kg for voksne.
+
 ## Neste
 
 ### Veikart (besluttet 2026-11-02)
@@ -144,7 +149,7 @@ Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og
 6. Fiberlaget: matrise fra hovedfiber til fiberandeler, restposter (RES/UNK), ull (5 % mot 3 % målt).
 
 #### Fase C – Lagermodellen som diagnose
-1. Oppdatere [notatet om lagermodellen](../claude_tekst/2026-10-05_lagermodell_mot_statistikk.md) med dagens tall (2025: restledd ca. 275 kg per innbygger, lagermodell ca. 97 kg).
+1. ~~Oppdatere notatet om lagermodellen~~ (erstattet av [lagerdiagnosen](../claude_tekst/2026-11-02_C_lagerdiagnose.md) 2026-11-02).
 2. Bryte ned avviket per periode og produkt. Følsomhet: restavfall før 2009, innsamling før 2018, MA.TX, D38 (EEA-nivå), startlageret.
 3. Levetidene settes innenfor det litteraturen tillater, slik at lagermodellen treffer garderobedata (nivå) og statistikken der den er god (2018–2025). Der den ikke treffer, er det et diagnosefunn om inndata, ikke en grunn til å endre data.
 4. Uavhengig kontroll av nivået: garderobestudier (SIFO/OsloMet, Laitala & Klepp), og WRAP og WUR som referanse.
