@@ -1,6 +1,6 @@
 # D38 (forslag): Returer fra netthandel og destruksjon av usolgte varer
 
-*Notat 2026-11-02. Beslutningsgrunnlag, ikke implementert. Kildene er samlet i tillegget til [notatet om tiltak](2026-11-02_tiltak_sirkularitet_og_MFA.md). Gjelder `RW.RW-US.HH-Direct online imports`, `DI.RT-WM.RS-Unsold goods discarded` og `DI.RT-CO.CO-Unsold goods donated` ([calculations/di_mc.py](../calculations/di_mc.py), [calculations/rw_mc.py](../calculations/rw_mc.py)).*
+*Notat 2026-11-02. Besluttet og implementert samme dag (D38 i SYSTEMDEFINISJON): egen returflyt, median 1 % lognormal (95 %-intervall 0,2–5 %, ikke 0,2–9 %, se D38), gjelder klær, hjemmetekstiler og sko. Kildene er samlet i tillegget til [notatet om tiltak](2026-11-02_tiltak_sirkularitet_og_MFA.md). Gjelder `RW.RW-US.HH-Direct online imports`, `DI.RT-WM.RS-Unsold goods discarded` og `DI.RT-CO.CO-Unsold goods donated` ([calculations/di_mc.py](../calculations/di_mc.py), [calculations/rw_mc.py](../calculations/rw_mc.py)).*
 
 ## Problem
 

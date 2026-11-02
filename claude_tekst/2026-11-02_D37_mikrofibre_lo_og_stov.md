@@ -1,6 +1,6 @@
 # D37 (forslag): Fiberutslipp fra vask, tørketrommel og husstøv
 
-*Notat 2026-11-02. Beslutningsgrunnlag, ikke implementert. Gjelder `US.HH-EN.WA-Fibre release in laundry`, `US.HH-EN.AI-Fibre release to air and dust` og `US.IC-EN.WA-Fibre release in industrial laundry` ([calculations/us_mc.py](../calculations/us_mc.py)), og to nye flyter til WM.RS.*
+*Notat 2026-11-02. Besluttet og implementert samme dag (D37 i SYSTEMDEFINISJON): ja til husstøv, tøymengden følger folketallet, andel tørket 0,6 (0,4–0,8). Gjelder `US.HH-EN.WA-Fibre release in laundry`, `US.HH-EN.AI-Fibre release to air and dust` og `US.IC-EN.WA-Fibre release in industrial laundry` ([calculations/us_mc.py](../calculations/us_mc.py)), og to nye flyter til WM.RS.*
 
 ## Slik er det nå
 

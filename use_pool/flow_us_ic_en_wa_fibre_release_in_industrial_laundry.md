@@ -18,7 +18,7 @@ nav_order: 3
 | Metode | parameter |
 | Status | implemented |
 | Prioritet | 3 |
-| Kandidatdata | Same release per kt textile in use as in household laundry (Mepex 2014), applied to the textile stock of the US.IC cohort model |
+| Kandidatdata | Same release per kt textile in use as household laundry (D37), applied to the textile stock of the US.IC cohort model |
 | Merknad | No Norwegian data; more frequent washing and filters in industrial laundries pull in opposite directions (D29). Released to wastewater; treatment is not modelled (D35) |
 
 ## Tidsserie
@@ -32,26 +32,25 @@ nav_order: 3
 
 - **US.IC-EN.WA-Fibre release in industrial laundry-TOT** er fibre som løsner når tekstiler brukt av bedrifter og offentlig sektor vaskes (mest i industrivaskerier), og som går med avløpsvannet.
 - Både syntetiske fibre og naturfibre er med, og de skilles i fiberlaget.
-- Flyten går ut av systemet til avløp. Rensing i renseanlegg, slam og videre spredning til vann og jord følges ikke (D35). Usikkerheten i tilbakeholdelse og slambruk er stor og mengdene små, så det hører hjemme i en egen mikroplastmodell. Se Sundt m.fl. (2016) for Miljødirektoratet.
+- Flyten går ut av systemet til avløp (D35).
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- Det finnes ingen norske data for industrivask.
-- Utslippet per kt tekstil i bruk er det samme som for husholdningene, ankret i Mepex sitt anslag på 600 t syntetiske mikrofibre fra husholdningsvask i 2014 (se US.HH-WM.WW-Fibre release in laundry-TOT).
+- Det finnes ingen norske data for industrivask, og tøymengden i sektoren er ukjent.
+- Utslippet per kt tekstil i bruk er det samme som for husholdningene: utslippet fra husholdningsvask (Lant m.fl. 2020, se `US.HH-EN.WA-Fibre release in laundry`) delt på tekstillageret i husholdningenes årgangsmodell.
 
 #### Antakelser
 
-- Samme utslipp per kt tekstil som i husholdningene, brukt på tekstillageret i årgangsmodellen for US.IC (D29). Institusjonstekstiler vaskes oftere, men industrivaskerier filtrerer og renser ofte vannet. De to effektene trekker hver sin vei.
+- Samme utslipp per kt tekstil som i husholdningene, brukt på tekstillageret i årgangsmodellen for US.IC (D29, D37). Institusjonstekstiler vaskes oftere, men industrivaskerier filtrerer og renser ofte vannet. De to effektene trekker hver sin vei.
 - Sekker har ikke lager og slipper ikke fibre.
 
 #### Sammensetning (varetype og materiale)
 
-- Klær (arbeidsklær) er omtrent 43 % og tepper 25 % i 2022.
-- Materialet er fibergruppene i tekstillageret i US.IC: omtrent 57 % syntetisk og 28 % bomull.
+- Materialet er fibergruppene i tekstillageret i US.IC, vektet med utslipp per kg: ca. 50 % bomull og 10 % syntetisk i 2025.
 
 #### Tidsutvikling og sammenligninger
 
-- Utslippet er lite: 0,12 kt i 1990 og 0,14–0,15 kt etter 2008, omtrent en tidel av utslippet fra husholdningsvask.
+- Ca. 0,01 kt per år (0,004–0,026), mot 0,1–0,15 kt før D37.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
@@ -62,12 +61,12 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Tepper | 49 % | 31 % | 23 % | 25 % | 25 % | 28 % |
-| Klær | 33 % | 46 % | 50 % | 46 % | 44 % | 43 % |
+| Tepper | 48 % | 30 % | 23 % | 25 % | 25 % | 28 % |
+| Klær | 34 % | 47 % | 51 % | 46 % | 44 % | 43 % |
 | Sko | 1 % | 2 % | 2 % | 2 % | 2 % | 1 % |
-| Hjemmetekstiler | 9 % | 12 % | 14 % | 14 % | 13 % | 12 % |
+| Hjemmetekstiler | 9 % | 12 % | 14 % | 13 % | 13 % | 12 % |
 | Andre konfeksjonerte varer | 1 % | 2 % | 2 % | 3 % | 4 % | 5 % |
-| Presenninger og telt | 6 % | 7 % | 8 % | 11 % | 12 % | 11 % |
+| Presenninger og telt | 6 % | 8 % | 8 % | 11 % | 12 % | 11 % |
 
 ### Materiale (fiberlag, D19)
 
@@ -75,11 +74,11 @@ Fibergruppene i tekstillageret i årgangsmodellen for institusjoner og bedrifter
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 29 % | 36 % | 38 % | 29 % | 28 % | 28 % |
-| Regenerert cellulose | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
-| Andre fibre | 4 % | 6 % | 5 % | 5 % | 5 % | 5 % |
-| Syntetisk | 57 % | 46 % | 47 % | 56 % | 58 % | 58 % |
-| Ull | 7 % | 9 % | 7 % | 7 % | 6 % | 7 % |
+| Bomull | 45 % | 56 % | 61 % | 53 % | 51 % | 50 % |
+| Regenerert cellulose | 9 % | 6 % | 6 % | 7 % | 7 % | 7 % |
+| Andre fibre | 17 % | 14 % | 12 % | 15 % | 15 % | 15 % |
+| Syntetisk | 9 % | 5 % | 5 % | 8 % | 10 % | 10 % |
+| Ull | 21 % | 20 % | 16 % | 17 % | 17 % | 18 % |
 
 <iframe src="../output_files/plots/pages/us_ic_en_wa_fibre_release_in_industrial_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -89,31 +88,32 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `laundry_release_synthetic` | 38 % | 40 % | 40 % |
-| `institutional_share` | 37 % | 39 % | 39 % |
-| `lifetime_mean_US.HH_CL` | 9 % | 9 % | 9 % |
-| `lifetime_mean_US.IC_CL` | 3 % | 4 % | 4 % |
-| `lifetime_mean_US.IC_CA` | 6 % | 2 % | 3 % |
-| `lifetime_mean_US.HH_HT` | 2 % | 3 % | 3 % |
-| Halvt 95 %-intervall, førsteordens (kt) | 0.09 | 0.11 | 0.11 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.10 | 0.12 | 0.11 |
+| `institutional_share` | 45 % | 47 % | 45 % |
+| `laundry_kg_per_capita` | 15 % | 15 % | 15 % |
+| `lifetime_mean_US.HH_CL` | 12 % | 12 % | 13 % |
+| `laundry_release_ppm` | 11 % | 11 % | 11 % |
+| `lifetime_mean_US.HH_HT` | 3 % | 3 % | 4 % |
+| `lifetime_mean_US.IC_CL` | 4 % | 5 % | 4 % |
+| `lifetime_mean_US.IC_CA` | 8 % | 3 % | 3 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.01 | 0.01 | 0.01 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.01 | 0.01 | 0.01 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_industrial_laundry_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L206). Dokumentasjonen i koden:
+Beregnes i `_industrial_laundry_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L285). Dokumentasjonen i koden:
 
 > Fibres released when textiles used by institutions and businesses are
 > washed (mostly in industrial laundries) to wastewater, where the model
-> stops following them (D35). There are no Norwegian data, so the release per kt textile
-> fibre in use is the same as in household laundry, applied to the textile
+> stops following them (D35). There are no Norwegian data, and the laundry
+> washed in the sector is not known, so the release per kt textile fibre
+> in use is that of household laundry (the household release divided by
+> the textile stock of the household cohort model), applied to the textile
 > stock of the US.IC cohort model per product. Institutional textiles are
 > washed more often, but industrial laundries often filter and treat their
 > water; the two pull in opposite directions. Sacks have no stock and
 > release nothing.
->
-> `_laundry_release_per_kt`: Fibres released in laundry per kt textile fibre in use, from the synthetic release in 2014.
 >
 > `_household_textile_stock`: Stock of textile fibre in the CORE group of US.HH by fibre group, array
 > (year, fibre group), from the cohort model of new goods entering the

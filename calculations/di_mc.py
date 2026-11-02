@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-DI (distribution: wholesale and retail) pool. Unsold goods are clothing
-only and follow the clothing imports between and outside the years the
-surveys cover (D27).
+DI (distribution: wholesale and retail) pool. Unsold goods donated are
+clothing only and follow the clothing imports between and outside the
+years the surveys cover (D27). Unsold goods discarded are a share of the
+clothing, household textiles and footwear placed on the market (D38).
 """
 import numpy as np
 
@@ -12,11 +13,13 @@ from calculations.timeseries import interpolate
 from calculations.trade import trade_kt
 from calculations.utils import PRODUCTS, YEARS
 
+UNSOLD_DESTROYED_PRODUCTS = ['CL', 'HT', 'FW']
+
 
 def execute_calculations_di(mfa, preloaded_data, current_params, dataset_noise, anchors):
     _finished_products_export_mc(mfa, preloaded_data, dataset_noise)
     _unsold_goods_donated_mc(mfa, anchors)
-    _unsold_goods_discarded_mc(mfa, anchors)
+    _unsold_goods_discarded_mc(mfa, current_params)
     _sales_to_users_mc(mfa, current_params)
 
 
@@ -46,19 +49,33 @@ def _unsold_goods_donated_mc(mfa, anchors):
         _per_clothing_import(mfa, anchors['unsold_donated']))
 
 
-def _unsold_goods_discarded_mc(mfa, anchors):
+def _unsold_goods_discarded_mc(mfa, current_params):
     """
-    Unsold clothing that producers and retailers send to incineration or
-    recycling, as minimums from surveys where the largest retailers did not
-    report: 95 t incinerated in 2018 (Watson et al. 2020) and 221 t handled
-    other than by donation in 2022 (Rubach et al. 2023). Material recycling
-    is not split out yet, so all of it goes to WM.RS. The EEA (2024)
-    estimates that 4-9 % of textiles put on the market in Europe are
-    destroyed unused, which would be 4-10 kt a year in Norway; that is used
-    for sensitivity and discussion only.
+    Unsold clothing, household textiles and footwear that producers and
+    retailers send to incineration (D38): a share of what is placed on the
+    market (registered imports plus finished goods made in Norway minus
+    exports). The share is lognormal with median 1 % (an assumption close
+    to the overstock found by Samfunnsøkonomisk analyse (2022), at least
+    825 t or about 0.8 % of the clothing supply) and 95 % interval 0.2-5 %.
+    The lower end is the survey minimums where the largest retailers did
+    not report (95 t incinerated in 2018, Watson et al. 2020; 221 t in
+    2022, Rubach et al. 2023), and the upper end reaches the EEA (2024)
+    estimate that 4-9 % of textiles put on the market in Europe are
+    destroyed unused. Destroyed goods are commercial waste and are not in
+    the pick analyses of household waste, so they are not counted twice.
+    Material recycling is not split out, so all of it goes to WM.RS. Large
+    enterprises may not destroy unsold clothing and footwear from 19 July
+    2026 (ESPR), which matters only for scenarios.
     """
-    mfa.flows['DI.RT-WM.RS-Unsold goods discarded-TOT'].values[...] = (
-        _per_clothing_import(mfa, anchors['unsold_discarded']))
+    imports = mfa.flows['RW.RW-DI.RT-Finished textile products import-TOT'].values
+    domestic_goods = mfa.flows['MA.TX-DI.RT-Domestic finished products-TOT'].values
+    exports = mfa.flows['DI.RT-RW.RW-Export of finished textile products-TOT'].values
+    on_market = imports + domestic_goods - exports
+    flow = mfa.flows['DI.RT-WM.RS-Unsold goods discarded-TOT']
+    flow.values[...] = 0.0
+    for product in UNSOLD_DESTROYED_PRODUCTS:
+        j = PRODUCTS.index(product)
+        flow.values[:, j] = on_market[:, j] * current_params['unsold_destroyed_share']
 
 
 def _finished_products_export_mc(mfa, preloaded_data, dataset_noise):

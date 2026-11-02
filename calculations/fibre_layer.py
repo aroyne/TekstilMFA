@@ -25,9 +25,11 @@ and flows. The TOT masses are never changed: they come from the statistics
             Reusable and worn residual textiles share one composition.
   collected Flows through CO get the mix of what is collected from
             households and unsold clothing donated by retailers.
-  release   Fibres released in laundry and to air have the fibre groups of
-            the textile stock of the household cohort model, and fibres from
-            industrial laundry those of the US.IC cohort model.
+  release   Fibres released in laundry, tumble drying and wear have the
+            fibre groups of the textile stock of the household cohort model,
+            and fibres from industrial laundry those of the US.IC cohort
+            model, weighted by release per kg: natural and cellulosic fibres
+            release about 20 times more than synthetic (D37).
   institutions
             Goods discarded or recycled by institutions and businesses get
             the outflow of a cohort model of the goods sold to them.
@@ -67,8 +69,11 @@ NEW_GOODS_TO_HOUSEHOLDS = [
     'RW.RW-US.HH-Private imports-TOT',
     'RW.RW-US.HH-Direct online imports-TOT',
 ]
+# Goods bought directly from foreign web shops and sent back (D38).
+ONLINE_RETURNS = 'US.HH-RW.RW-Returns of direct online purchases-TOT'
 SUPPLY_FLOWS = [
     'RW.RW-DI.RT-Finished textile products import-TOT',
+    ONLINE_RETURNS,
     'DI.RT-RW.RW-Export of finished textile products-TOT',
     'DI.RT-US.IC-Sales to institutions and businesses-TOT',
     'DI.RT-CO.CO-Unsold goods donated-TOT',
@@ -90,10 +95,12 @@ INSTITUTIONAL_SALES = 'DI.RT-US.IC-Sales to institutions and businesses-TOT'
 INSTITUTIONAL_COHORT_PRODUCTS = [p for p in PRODUCTS if p not in ('SA', 'YA')]
 INSTITUTIONAL_RELEASE = 'US.IC-EN.WA-Fibre release in industrial laundry-TOT'
 # Fibres released from household textiles in use, with the fibre groups of
-# the textile stock of the household cohort model.
+# the textile stock of the household cohort model weighted by release per kg.
 RELEASE_FLOWS = [
     'US.HH-EN.WA-Fibre release in laundry-TOT',
     'US.HH-EN.AI-Fibre release to air and dust-TOT',
+    'US.HH-WM.RS-Tumble dryer lint-TOT',
+    'US.HH-WM.RS-Household dust fibres-TOT',
 ]
 UNSOLD_DONATED = 'DI.RT-CO.CO-Unsold goods donated-TOT'
 # Flows through CO, with the mix of collected used textiles and donated
@@ -332,6 +339,23 @@ CORE_STOCK_DIMS = fd.DimensionSet(dim_list=[
 ])
 
 
+def new_goods_to_households(flows):
+    """New goods entering US.HH, array (year, product): sales, private and direct online imports, minus returns."""
+    return sum(flows[code].values for code in NEW_GOODS_TO_HOUSEHOLDS) - flows[ONLINE_RETURNS].values
+
+
+def release_weights(current_params):
+    """
+    Release per kg of each material relative to synthetic fibre, array
+    (material,). Natural and cellulosic fibres release about 20 times more
+    (7-60): about 96 % of what real laundry releases is natural (Lant et al.
+    2020), and 83-96 % of the lint from a 48 % cotton fabric is cotton (Lant
+    et al. 2022). Non-textile material releases nothing.
+    """
+    ratio = current_params['natural_release_relative_to_synthetic']
+    return np.array([1.0 if m == 'SYN' else 0.0 if m == 'NT' else ratio for m in MATERIALS])
+
+
 def household_cohort_model(tot, supply, current_params):
     """
     Inflow-driven cohort model of the CORE group (CL+HT+FW and retail yarn)
@@ -342,7 +366,7 @@ def household_cohort_model(tot, supply, current_params):
     array (product, material); the stock includes the spin-up cohorts.
     """
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
-    new_goods = sum(tot.flows[code].values for code in NEW_GOODS_TO_HOUSEHOLDS)[:, core]
+    new_goods = new_goods_to_households(tot.flows)[:, core]
     cohorts = use_cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS, current_params)
     stock = np.concatenate([cohorts['stock_1987'][None], cohorts['stock']], axis=0)
     return {
@@ -398,27 +422,27 @@ def institutional_release_composition(tot, supply, current_params):
     """
     Material shares of fibres released in industrial laundry, array (year,
     product, material): the fibre groups of the textile stock of the US.IC
-    cohort model per product, without non-textile material. Products
-    without a stock keep the supply composition (their flows are zero).
+    cohort model per product, weighted by release per kg (release_weights).
+    Products without a stock keep the supply composition (their flows are
+    zero).
     """
     sales = tot.flows[INSTITUTIONAL_SALES].values
     cohort = [PRODUCTS.index(p) for p in INSTITUTIONAL_COHORT_PRODUCTS]
     stock = use_cohorts(sales[:, cohort, None] * supply[:, cohort, :], INSTITUTIONAL_COHORT_PRODUCTS,
                         current_params, stock='US.IC')['stock']
-    stock[:, :, MATERIALS.index('NT')] = 0.0
+    stock = stock * release_weights(current_params)
     composition = supply.copy()
     composition[:, cohort, :] = stock / stock.sum(axis=2, keepdims=True)
     return composition
 
 
-def release_composition(cohorts):
+def release_composition(cohorts, current_params):
     """
     Material shares of fibres released from household textiles, array (year,
     material): the fibre groups of the textile stock of the cohort model,
-    without non-textile material.
+    weighted by release per kg (release_weights).
     """
-    stock = cohorts['stock'].values.sum(axis=1)
-    stock[:, MATERIALS.index('NT')] = 0.0
+    stock = cohorts['stock'].values.sum(axis=1) * release_weights(current_params)
     return stock / stock.sum(axis=1, keepdims=True)
 
 
@@ -466,7 +490,7 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     collected = collected_composition(fibre)
     for code in COLLECTED_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * collected
-    released = release_composition(cohorts)
+    released = release_composition(cohorts, current_params)
     for code in RELEASE_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * released[:, None, :]
 

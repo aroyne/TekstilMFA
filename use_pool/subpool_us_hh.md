@@ -19,6 +19,9 @@ Type: process. Lager: yes.
 * [Worn textiles in residual and bulky waste](../use_pool/flow_us_hh_wm_rs_worn_textiles_in_residual_and_bulky_waste.html) → WM.RS
 * [Fibre release in laundry](../use_pool/flow_us_hh_en_wa_fibre_release_in_laundry.html) → EN.WA
 * [Fibre release to air and dust](../use_pool/flow_us_hh_en_ai_fibre_release_to_air_and_dust.html) → EN.AI
+* [Tumble dryer lint](../use_pool/flow_us_hh_wm_rs_tumble_dryer_lint.html) → WM.RS
+* [Household dust fibres](../use_pool/flow_us_hh_wm_rs_household_dust_fibres.html) → WM.RS
+* [Returns of direct online purchases](../use_pool/flow_us_hh_rw_rw_returns_of_direct_online_purchases.html) → RW.RW
 
 ## Flyter inn
 

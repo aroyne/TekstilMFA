@@ -77,7 +77,7 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 | Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 22 % | 20 % | 19 % | 19 % | 18 % | 18 % |
 | Andre fibre | 3 % | 4 % | 4 % | 4 % | 4 % | 4 % |
-| Syntetisk | 43 % | 38 % | 40 % | 46 % | 47 % | 48 % |
+| Syntetisk | 43 % | 38 % | 40 % | 46 % | 47 % | 47 % |
 | Ull | 6 % | 8 % | 6 % | 6 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_worn_textiles_in_residual_and_bulky_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -103,7 +103,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L90). Dokumentasjonen i koden:
+Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L95). Dokumentasjonen i koden:
 
 > CORE: residual textiles that are not reusable. CA, TA and OM: the
 > outflow of a cohort model of the goods sold to households, with Weibull

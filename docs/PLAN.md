@@ -103,6 +103,11 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
   - Separat innsamling: eksport av brukte tekstiler (årlig og klassifisering) ca. 85 %, `retained_share_collected` ca. 16 %.
   - Lagermodellen: levetiden for klær ca. 66 % og hjemmetekstiler ca. 23 %.
 
+### 2026-11-02 – D37 og D38 implementert
+- [x] D37: Vask = 280 kg tøy per innbygger × folketall × 114 mg/kg (Lant 2020): 0,16 kt i 2025 (0,11–0,22), mot 1,56 kt med Mepex-kalibreringen. Naturfibre slipper ca. 20 ganger mer per kg, så ca. 3–4 % av utslippet er syntetisk. Nye flyter til WM.RS: lo fra tørketrommel (0,11 kt) og fibre i husstøv (0,12 kt). Luft og støv faller fra 1,4 til 0,06 kt.
+- [x] D38: Ny flyt med returer fra direkte netthandel (3,2 kt i 2025, 1,0–7,1). Destruksjon av usolgte varer er lognormal med median 1 % av klær, hjemmetekstiler og sko på markedet: 0,8 kt i 2025 (0,2–4,5), mot 0,3 kt. Lagermodellen får nye varer minus returer.
+- [x] Effekt på lageret i husholdningene (restledd) 2025: 1 638 kt mot 1 591 kt. Lavere fiberutslipp løfter lageret mer enn returer og destruksjon trekker det ned.
+
 ## Neste
 
 ### Veikart (besluttet 2026-11-02)
@@ -126,8 +131,8 @@ Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og
 7. Konvergenstest og innsvingingstest (D2).
 
 #### Fase B – Strømmer uten bestemt data eller metode
-1. D37: fiberutslipp, lo og husstøv (tre spørsmål i notatet).
-2. D38: returer og destruksjon (tre spørsmål i notatet).
+1. ~~D37: fiberutslipp, lo og husstøv~~ (gjort 2026-11-02).
+2. ~~D38: returer og destruksjon~~ (gjort 2026-11-02).
 3. Planlagte flyter: `US.IC-CO.CO` innsamling fra institusjoner, `CO.SO-RW.RW` eksport av sortert, `CO.RE-WM.RS` usolgte bruktvarer.
 4. Parameterforslagene i avsnitt 5.4 i litteraturnotatet fra 2026-10-05, og `institutional_share` per produkt.
 5. Om kasserte sekker registreres som plastemballasje eller tekstil.

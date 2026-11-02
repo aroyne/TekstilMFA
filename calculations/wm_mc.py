@@ -18,6 +18,8 @@ INFLOWS_WM_RS = [
     'CO.SO-WM.RS-Sorting residues-TOT',
     'MA.TX-WM.RS-Preconsumer production waste-TOT',
     'DI.RT-WM.RS-Unsold goods discarded-TOT',
+    'US.HH-WM.RS-Tumble dryer lint-TOT',
+    'US.HH-WM.RS-Household dust fibres-TOT',
 ]
 
 

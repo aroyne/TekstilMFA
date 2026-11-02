@@ -113,7 +113,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_finished_products_export_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L64). Dokumentasjonen i koden:
+Beregnes i `_finished_products_export_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L81). Dokumentasjonen i koden:
 
 > Registered exports of finished goods, SSB 08801. Export from DI.RT covers
 > both re-export and export of domestically manufactured products (D6).

@@ -92,7 +92,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_institutional_recycling_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L171). Dokumentasjonen i koden:
+Beregnes i `_institutional_recycling_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L250). Dokumentasjonen i koden:
 
 > Textiles from industry (mainly hotels and health care) recycled at Norsk
 > Tekstilgjenvinning: their share of the plant's intake (75 of 153 t in

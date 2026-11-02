@@ -99,7 +99,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L79). Dokumentasjonen i koden:
+Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L84). Dokumentasjonen i koden:
 
 > Part of the CORE residual textiles that could have been reused (D18),
 > share from the pick analyses. The analyses cover CL+HT+FW only, so the

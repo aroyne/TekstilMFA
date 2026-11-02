@@ -66,11 +66,11 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 29 % | 31 % | 29 % | nan % | nan % | nan % |
+| Bomull | 29 % | 32 % | 30 % | nan % | nan % | nan % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | nan % | nan % | nan % |
 | Ikke-tekstil | 20 % | 17 % | 17 % | nan % | nan % | nan % |
-| Andre fibre | 3 % | 3 % | 3 % | nan % | nan % | nan % |
-| Syntetisk | 41 % | 40 % | 43 % | nan % | nan % | nan % |
+| Andre fibre | 2 % | 3 % | 3 % | nan % | nan % | nan % |
+| Syntetisk | 40 % | 40 % | 43 % | nan % | nan % | nan % |
 | Ull | 5 % | 6 % | 5 % | nan % | nan % | nan % |
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_lf_landfilling_of_textiles_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -81,19 +81,20 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 |
 |---|---|---|
-| `residual_core` | 14 % | 57 % |
+| `residual_core` | 14 % | 55 % |
 | `landfill_share_residual` | 5 % | 27 % |
 | `institutional_share` | 2 % | 13 % |
+| `unsold_destroyed_share` | – | 2 % |
 | `08801_classification:import:finished` | – | 2 % |
 | `gap: residual_core` | 78 % | 1 % |
 | `lifetime_mean_US.HH_CA` | 1 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 21.23 | 3.14 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 20.30 | 3.19 |
+| Halvt 95 %-intervall, førsteordens (kt) | 21.28 | 3.19 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 20.44 | 3.29 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_landfilling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L35). Dokumentasjonen i koden:
+Beregnes i `_landfilling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L37). Dokumentasjonen i koden:
 
 > Landfilled share from SSB Avfallsregnskap tekstiler 1990-1998, SSB 05281 and 10513 (D15).

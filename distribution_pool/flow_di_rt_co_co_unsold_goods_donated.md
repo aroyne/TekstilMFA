@@ -88,8 +88,7 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `unsold_donated` | 2 % | 9 % | 42 % |
-| `unsold_survey (shared method)` | 2 % | 9 % | 42 % |
+| `unsold_donated` | 3 % | 17 % | 85 % |
 | `gap: unsold_donated` | 97 % | 82 % | 14 % |
 | `08801:import:finished` | – | 1 % | 1 % |
 | Halvt 95 %-intervall, førsteordens (kt) | 1.12 | 0.65 | 0.13 |
@@ -99,7 +98,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_unsold_goods_donated_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L36). Dokumentasjonen i koden:
+Beregnes i `_unsold_goods_donated_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L39). Dokumentasjonen i koden:
 
 > Unsold clothing that producers and retailers give to collectors. One
 > collector received about 600 t in 2018, including from some of the

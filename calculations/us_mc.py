@@ -12,9 +12,11 @@ institutions and businesses have no discard statistics and are discarded
 by a cohort model with lifetimes per product, an exception to D8. Sacks
 (SA) are packaging and are discarded in the year they are supplied (D13).
 """
+import numpy as np
+
 from calculations.cohorts import use_cohorts
-from calculations.fibre_layer import (INSTITUTIONAL_COHORT_PRODUCTS, NEW_GOODS_TO_HOUSEHOLDS, OTHER_HOUSEHOLD_GOODS,
-                                      supply_composition)
+from calculations.fibre_layer import (INSTITUTIONAL_COHORT_PRODUCTS, OTHER_HOUSEHOLD_GOODS,
+                                      new_goods_to_households, supply_composition)
 from calculations.system import clip_negative
 from calculations.timeseries import interpolate
 from calculations.utils import (CORE_GROUP_PRODUCTS, FIBRE_GROUPS, MATERIALS, PRODUCT_GROUPS, PRODUCTS, YEARS,
@@ -30,11 +32,14 @@ def execute_calculations_us(mfa, preloaded_data, current_params, dataset_noise, 
     _separate_collection_mc(mfa)
     _reusable_residual_waste_mc(mfa, preloaded_data, anchors)
     _worn_residual_waste_mc(mfa, preloaded_data, current_params, anchors)
-    _laundry_fibre_release_mc(mfa, preloaded_data, current_params, anchors)
-    _air_and_dust_release_mc(mfa, current_params)
+    _online_returns_mc(mfa, current_params)
+    _laundry_fibre_release_mc(mfa, preloaded_data, current_params)
+    _tumble_dryer_lint_mc(mfa, preloaded_data, current_params, anchors)
+    _household_dust_fibres_mc(mfa, current_params)
+    _air_and_dust_release_mc(mfa, preloaded_data, current_params, anchors)
     _institutional_recycling_mc(mfa, anchors)
     _institutional_waste_mc(mfa, current_params)
-    _industrial_laundry_release_mc(mfa, preloaded_data, current_params, anchors)
+    _industrial_laundry_release_mc(mfa, preloaded_data, current_params)
 
 
 def _separate_collection_mc(mfa):
@@ -124,48 +129,122 @@ def _household_textile_stock(mfa, preloaded_data, current_params):
     """
     supply = _supply(preloaded_data, current_params)
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
-    new_goods = sum(mfa.flows[code].values for code in NEW_GOODS_TO_HOUSEHOLDS)[:, core]
+    new_goods = new_goods_to_households(mfa.flows)[:, core]
     stock = use_cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS,
                               current_params)['stock'].sum(axis=1)
     return stock[:, [MATERIALS.index(g) for g in FIBRE_GROUPS]]
 
 
-def _laundry_fibre_release_mc(mfa, preloaded_data, current_params, anchors):
+def _online_returns_mc(mfa, current_params):
+    """
+    Goods bought directly from foreign web shops and sent back (D38). The
+    VOEC figures are deliveries to Norway, and returns to the web shop leave
+    the country. Return share 0.2 (0.05-0.5): the EEA (2024) gives about
+    20 % for clothing bought online, Zalando about 50 % and a German study
+    (Bamberg) 24 % of parcels; Temu and Shein, which dominate the VOEC
+    figures from 2024, are probably lower.
+    """
+    mfa.flows['US.HH-RW.RW-Returns of direct online purchases-TOT'].values[...] = (
+        mfa.flows['RW.RW-US.HH-Direct online imports-TOT'].values * current_params['online_return_share'])
+
+
+def _laundry_kt(preloaded_data, current_params):
+    """
+    Laundry washed in households per year (kt), array (year,): 280 kg per
+    inhabitant (200-350; 70 loads of 4 kg, Mepex 2014 after Pakula &
+    Stamminger 2010) times the population. It follows the population, not
+    the textile stock: washing habits, not how much textile people own,
+    set how much is washed (D37).
+    """
+    # 'population' <- data_files/SSB_05803_befolkning_1985_2026.csv:
+    # population on 1 January (SSB 05803), as the mean of the year
+    population = np.array([preloaded_data['population'][year] for year in YEARS])
+    return current_params['laundry_kg_per_capita'] * population / 1e6
+
+
+def _laundry_fibre_release_mc(mfa, preloaded_data, current_params):
     """
     Fibres released from household textiles in washing machines to
     wastewater, where the model stops following them: treatment, sludge and
-    spread in the environment are not modelled (D35). Mepex (Sundt et al. 2014, cited in Sundt et al.
-    2016 for the Norwegian Environment Agency) estimated about 600 t
-    synthetic microfibres a year from household laundry. The release per kt
-    synthetic fibre in the household stock is set so that the synthetic
-    release in 2014 matches that estimate, and the other fibre groups
-    (cotton, wool, regenerated cellulose, other) release the same per kt
-    (Lant et al. 2020 found that most fibres released in real laundry are
-    natural). The stock is that of the household cohort model, because the
-    residual stock of the balance is probably too high. The fibre layer
-    splits the flow into synthetic and other fibres.
+    spread in the environment are not modelled (D35). The laundry washed per
+    year times the release from real soiled laundry, 114 mg per kg (66-132;
+    Lant et al. 2020, 79 loads from British households). About 96 % of what
+    is released is natural or cellulosic fibre, so the fibre layer gives
+    those fibres about 20 times the release per kg of synthetic fibre (D37).
+
+    Mepex (Sundt et al. 2014) estimated 600 t synthetic microfibres a year,
+    from single garments in laboratory tests, above their own two
+    calculations (276 and 315 t); it is about ten times what real laundry
+    gives and is kept for sensitivity only.
     """
-    stock = _household_textile_stock(mfa, preloaded_data, current_params)
-    mfa.flows['US.HH-EN.WA-Fibre release in laundry-TOT'].values[...] = core_group_only(
-        _laundry_release_per_kt(stock, anchors) * stock.sum(axis=1))
+    release = _laundry_kt(preloaded_data, current_params) * current_params['laundry_release_ppm'] * 1e-6
+    mfa.flows['US.HH-EN.WA-Fibre release in laundry-TOT'].values[...] = core_group_only(release)
 
 
-def _laundry_release_per_kt(household_stock, anchors):
-    """Fibres released in laundry per kt textile fibre in use, from the synthetic release in 2014."""
-    synthetic = household_stock[:, FIBRE_GROUPS.index('SYN')]
-    return anchors['laundry_release_synthetic'][2014] / synthetic[YEARS.index(2014)]
-
-
-def _air_and_dust_release_mc(mfa, current_params):
+def _tumble_drying_release(preloaded_data, current_params, anchors):
     """
-    Fibres released to air and indoor dust while household textiles are worn
-    and used, set to the same level as the release in laundry, with a factor
-    of 1 (0.3-3): De Falco et al. (2020) found a release during wear of the
-    same order as in washing. There are no Norwegian data.
+    Fibres released in tumble drying (kt), array (year,): laundry times the
+    share of households with a tumble dryer (44 % in 1996 and 47 % in 2012,
+    SSB via Store norske leksikon; held before and after) times the share of
+    their loads that are dried (0.6, 0.4-0.8, assumption) times the release
+    in drying, 300 mg per kg (256 for vented and 342 for condenser dryers,
+    Cummins et al. 2023, real soiled laundry).
+    """
+    owners = interpolate(anchors['dryer_ownership_share'], upper=1.0)
+    return (_laundry_kt(preloaded_data, current_params) * owners * current_params['tumble_dried_share']
+            * current_params['drying_release_ppm'] * 1e-6)
+
+
+def _tumble_dryer_lint_mc(mfa, preloaded_data, current_params, anchors):
+    """
+    Lint caught on the filter of tumble dryers, 88 % (86-91 %, Cummins et
+    al. 2023) of the fibres released in drying (D37). The filter is emptied
+    into residual waste, so the lint goes to WM.RS. Pick analyses count it
+    as fines, not textile, so it is not in the residual waste anchors. It
+    is mostly cotton (83-96 % on the filter from a 48 % cotton fabric, Lant
+    et al. 2022), which the fibre layer gives through the higher release per
+    kg of natural fibres. The rest goes to air (vented dryers) and is added
+    to the release to air.
+    """
+    caught = _tumble_drying_release(preloaded_data, current_params, anchors) * current_params['lint_filter_share']
+    mfa.flows['US.HH-WM.RS-Tumble dryer lint-TOT'].values[...] = core_group_only(caught)
+
+
+def _wear_release(mfa, current_params):
+    """
+    Fibres shed while household textiles are worn and used, array (year,
+    group): the release in laundry times a factor of 1 (0.3-3). De Falco et
+    al. (2020) found a release during wear of the same order as in washing.
+    There are no Norwegian data.
     """
     laundry = mfa.flows['US.HH-EN.WA-Fibre release in laundry-TOT'].values
+    return laundry * current_params['air_release_relative_to_laundry']
+
+
+def _household_dust_fibres_mc(mfa, current_params):
+    """
+    Fibres shed during wear that end up in house dust and are vacuumed:
+    80 % (50-95 %, assumption) of the release during wear (D37). Mepex
+    (2014) notes that the larger particles are vacuumed and go with residual
+    waste to incineration. No measurements of textile fibre mass in vacuum
+    cleaner bags have been found.
+    """
+    mfa.flows['US.HH-WM.RS-Household dust fibres-TOT'].values[...] = (
+        _wear_release(mfa, current_params) * current_params['vacuumed_dust_share'])
+
+
+def _air_and_dust_release_mc(mfa, preloaded_data, current_params, anchors):
+    """
+    Fibres to air and indoor dust that are not vacuumed (the rest of the
+    release during wear, D37), plus the fibres from tumble drying that pass
+    the lint filter and leave with the exhaust of vented dryers. In
+    condenser dryers they go to the condensate, which is not split out.
+    """
+    exhaust = _tumble_drying_release(preloaded_data, current_params, anchors) * (
+        1.0 - current_params['lint_filter_share'])
     mfa.flows['US.HH-EN.AI-Fibre release to air and dust-TOT'].values[...] = (
-        laundry * current_params['air_release_relative_to_laundry'])
+        _wear_release(mfa, current_params) * (1.0 - current_params['vacuumed_dust_share'])
+        + core_group_only(exhaust))
 
 
 def _institutional_recycling_mc(mfa, anchors):
@@ -203,12 +282,14 @@ def _institutional_waste_mc(mfa, current_params):
     clip_negative(mfa, 'US.IC-WM.RS-Institutional textile waste-TOT', discarded - recycled)
 
 
-def _industrial_laundry_release_mc(mfa, preloaded_data, current_params, anchors):
+def _industrial_laundry_release_mc(mfa, preloaded_data, current_params):
     """
     Fibres released when textiles used by institutions and businesses are
     washed (mostly in industrial laundries) to wastewater, where the model
-    stops following them (D35). There are no Norwegian data, so the release per kt textile
-    fibre in use is the same as in household laundry, applied to the textile
+    stops following them (D35). There are no Norwegian data, and the laundry
+    washed in the sector is not known, so the release per kt textile fibre
+    in use is that of household laundry (the household release divided by
+    the textile stock of the household cohort model), applied to the textile
     stock of the US.IC cohort model per product. Institutional textiles are
     washed more often, but industrial laundries often filter and treat their
     water; the two pull in opposite directions. Sacks have no stock and
@@ -220,8 +301,9 @@ def _industrial_laundry_release_mc(mfa, preloaded_data, current_params, anchors)
     stock = use_cohorts(sales[:, cohort, None] * supply[:, cohort, :], INSTITUTIONAL_COHORT_PRODUCTS,
                         current_params, stock='US.IC')['stock']
     textile = stock[:, :, [MATERIALS.index(g) for g in FIBRE_GROUPS]].sum(axis=2)
-    release_per_kt = _laundry_release_per_kt(_household_textile_stock(mfa, preloaded_data, current_params), anchors)
+    household_release = mfa.flows['US.HH-EN.WA-Fibre release in laundry-TOT'].values.sum(axis=1)
+    release_per_kt = household_release / _household_textile_stock(mfa, preloaded_data, current_params).sum(axis=1)
     flow = mfa.flows['US.IC-EN.WA-Fibre release in industrial laundry-TOT']
     flow.values[...] = 0.0
-    flow.values[:, cohort] = release_per_kt * textile
+    flow.values[:, cohort] = release_per_kt[:, None] * textile
 

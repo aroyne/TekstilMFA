@@ -64,7 +64,7 @@ Andel av summen i nøkkelår (median).
 | Tepper | 20 % | 11 % | 10 % | 11 % | 11 % | 12 % |
 | Klær | 41 % | 49 % | 48 % | 43 % | 44 % | 44 % |
 | Sko | 13 % | 13 % | 14 % | 13 % | 13 % | 12 % |
-| Hjemmetekstiler | 17 % | 18 % | 19 % | 19 % | 17 % | 16 % |
+| Hjemmetekstiler | 17 % | 18 % | 19 % | 19 % | 16 % | 15 % |
 | Andre konfeksjonerte varer | 2 % | 3 % | 3 % | 5 % | 7 % | 9 % |
 | Presenninger og telt | 6 % | 5 % | 5 % | 8 % | 8 % | 6 % |
 | Garn i detaljsalg | 2 % | 1 % | 1 % | 2 % | 1 % | 1 % |
@@ -79,7 +79,7 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 18 % | 17 % | 18 % | 18 % | 18 % | 18 % |
 | Andre fibre | 2 % | 3 % | 2 % | 3 % | 3 % | 2 % |
-| Syntetisk | 32 % | 32 % | 35 % | 42 % | 42 % | 41 % |
+| Syntetisk | 32 % | 33 % | 35 % | 42 % | 42 % | 41 % |
 | Ull | 5 % | 6 % | 5 % | 6 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/di_rt_us_hh_sales_to_households_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -90,13 +90,13 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `institutional_share` | 43 % | 42 % | 40 % |
-| `08801:import:finished` | 26 % | 30 % | 31 % |
-| `08801_classification:import:finished` | 24 % | 27 % | 28 % |
-| `gap: preconsumer_waste_textile_industry` | 2 % | – | – |
-| `08801_classification:import:intermediate` | 1 % | – | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 8.45 | 11.50 | 9.91 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 9.16 | 12.82 | 10.42 |
+| `institutional_share` | 41 % | 40 % | 38 % |
+| `08801:import:finished` | 25 % | 28 % | 30 % |
+| `08801_classification:import:finished` | 23 % | 26 % | 27 % |
+| `unsold_destroyed_share` | 5 % | 4 % | 3 % |
+| `gap: preconsumer_waste_textile_industry` | 1 % | – | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 8.58 | 11.67 | 10.01 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 9.30 | 13.01 | 10.38 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
@@ -108,7 +108,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L73). Dokumentasjonen i koden:
+Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L90). Dokumentasjonen i koden:
 
 > Balance of DI.RT per product: registered imports plus finished goods
 > and hand knitting yarn made in Norway minus exports and unsold goods,

@@ -30,6 +30,7 @@ Type: boundary. Lager: no.
 * [Export of sorted textiles](../collection_and_sorting_pool/flow_co_so_rw_rw_export_of_sorted_textiles.html) ← CO.SO *(planlagt)*
 * [Residual waste export for incineration](../waste_management_pool/flow_wm_rs_rw_rw_residual_waste_export_for_incineration.html) ← WM.RS
 * [Export for recycling](../waste_management_pool/flow_wm_rc_rw_rw_export_for_recycling.html) ← WM.RC
+* [Returns of direct online purchases](../use_pool/flow_us_hh_rw_rw_returns_of_direct_online_purchases.html) ← US.HH
 
 ## Massebalanse
 

@@ -65,11 +65,11 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 28 % | 31 % | 29 % | 24 % | 25 % | 24 % |
+| Bomull | 28 % | 31 % | 30 % | 24 % | 25 % | 24 % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 19 % | 17 % | 17 % | 16 % | 16 % | 16 % |
-| Andre fibre | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
-| Syntetisk | 42 % | 40 % | 43 % | 50 % | 50 % | 51 % |
+| Andre fibre | 2 % | 3 % | 3 % | 3 % | 3 % | 3 % |
+| Syntetisk | 41 % | 40 % | 43 % | 50 % | 50 % | 51 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_in_domestic_incineration_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -80,17 +80,16 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `residual_core` | 13 % | 74 % | 82 % |
-| `institutional_share` | 1 % | 17 % | 11 % |
+| `residual_core` | 13 % | 72 % | 80 % |
+| `institutional_share` | 1 % | 16 % | 11 % |
 | `08801_classification:import:finished` | – | 2 % | 3 % |
+| `unsold_destroyed_share` | – | 3 % | 1 % |
 | `gap: domestic_share_TA` | – | – | 1 % |
-| `residual_export_share` | – | – | 1 % |
-| `landfill_share_residual` | 14 % | 3 % | – |
-| `gap: residual_export_share` | – | 2 % | – |
+| `landfill_share_residual` | 15 % | 3 % | – |
 | `gap: residual_core` | 70 % | 1 % | – |
 | `lifetime_mean_US.HH_CA` | 1 % | 1 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 12.73 | 10.04 | 13.05 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 12.25 | 9.97 | 13.95 |
+| Halvt 95 %-intervall, førsteordens (kt) | 12.77 | 10.20 | 13.14 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 12.23 | 10.45 | 13.76 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
@@ -102,7 +101,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_domestic_incineration_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L52). Dokumentasjonen i koden:
+Beregnes i `_domestic_incineration_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L54). Dokumentasjonen i koden:
 
 > Balance of WM.RS. A negative balance (landfill and export shares
 > summing to more than 1) is not physical and is clipped at 0; the

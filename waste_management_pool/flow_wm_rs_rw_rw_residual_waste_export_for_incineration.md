@@ -81,20 +81,20 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2010 | 2025 |
 |---|---|---|
-| `residual_core` | 28 % | 54 % |
+| `residual_core` | 27 % | 54 % |
 | `residual_export_share` | 13 % | 34 % |
 | `institutional_share` | 6 % | 7 % |
 | `08801_classification:import:finished` | 1 % | 2 % |
-| `gap: domestic_share_TA` | – | 1 % |
+| `unsold_destroyed_share` | 1 % | 1 % |
 | `gap: residual_export_share` | 51 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 1.82 | 2.11 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 1.75 | 2.15 |
+| Halvt 95 %-intervall, førsteordens (kt) | 1.85 | 2.12 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 1.79 | 2.12 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_residual_export_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L41). Dokumentasjonen i koden:
+Beregnes i `_residual_export_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L43). Dokumentasjonen i koden:
 
 > Share of residual waste exported, SSB 13035 (D11). The share is measured
 > for household residual waste and is applied to all textiles in WM.RS,

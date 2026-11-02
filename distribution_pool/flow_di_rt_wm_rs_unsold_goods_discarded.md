@@ -18,8 +18,8 @@ nav_order: 4
 | Metode | data+parameter |
 | Status | implemented |
 | Prioritet | 3 |
-| Kandidatdata | Watson et al. 2020 (retailers reported 95 t incinerated in 2018); Rubach et al. 2023 (retailers reported 337 t handled in 2022, of which 116 t donated); EEA 2024 (4-9 % of textiles put on the market destroyed) for sensitivity only |
-| Merknad | Clothing only. Survey minimums, as the large chains did not report; per kt of clothing imports in the anchor years (D27) |
+| Kandidatdata | Share of clothing, household textiles and footwear placed on the market: lognormal, median 1 % (assumption near SOA 2022, 0.8 %), 95 % interval 0.2-5 %: survey minimums (Watson et al. 2020, Rubach et al. 2023) at the lower end, EEA 2024 (4-9 %) at the upper end |
+| Merknad | Clothing, household textiles and footwear (D38). Destroyed goods are commercial waste and not in the pick analyses of household waste, so there is no double counting |
 
 ## Tidsserie
 
@@ -30,30 +30,33 @@ nav_order: 4
 <!-- MANUAL:FLOW_DESCRIPTION:START -->
 #### Hva flyten omfatter
 
-- **DI.RT-WM.RS-Unsold goods discarded-TOT** er usolgte klær som produsenter og forhandlere sender til forbrenning eller materialgjenvinning, i stedet for å selge eller gi dem bort.
+- **DI.RT-WM.RS-Unsold goods discarded-TOT** er usolgte klær, hjemmetekstiler og sko som produsenter og forhandlere sender til forbrenning, i stedet for å selge eller gi dem bort.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
 - 2018: forhandlerne som oppga mengder (16 av 44 som svarte), sendte 95 t til forbrenning (Watson m.fl. 2020).
-- 2022: produsenter og forhandlere rapporterte 337 t usolgte tekstiler, hvorav 116 t donert. Resten (221 t) gikk til materialgjenvinning (93 t), annet (110 t) og forbrenning (Rubach m.fl. 2023).
-- Tallene er minimum, fordi de største kjedene ikke ville oppgi mengder.
-- Til sammenligning anslår EEA (2024) at 4–9 % av tekstilene som settes på markedet i Europa, destrueres uten å ha vært brukt. For Norge ville det tilsvare 4–10 kt per år. Det anslaget brukes bare til følsomhetsanalyse og diskusjon.
+- 2022: produsenter og forhandlere rapporterte 221 t usolgte tekstiler som ikke ble donert (Rubach m.fl. 2023).
+- Tallene fra undersøkelsene er minimum, fordi de største kjedene ikke oppga mengder.
+- Samfunnsøkonomisk analyse (2022) fant et overskuddslager på minst 825 t klær, ca. 0,8 % av klestilførselen. Én kjede sto for nesten 430 t.
+- EEA (2024) anslår at 4–9 % av tekstilene som settes på markedet i Europa, destrueres uten å ha vært brukt.
 
 #### Antakelser
 
-- Minimumstallene fra undersøkelsene er hovedresultatet (D27). Mengden uttrykkes per kt klesimport i ankerårene, på samme måte som donasjonene.
-- Usikkerheten er skjevfordelt oppover (−20 / +200 %).
-- Materialgjenvinning er ikke skilt ut ennå (WM.RC er ikke implementert), så alt går til WM.RS.
+- Flyten er en andel av det som settes på markedet (import + norsk produksjon − eksport) av klær, hjemmetekstiler og sko (D38).
+- Andelen er lognormal med median 1 % og 95 %-intervall 0,2–5 %. Nedre grense tilsvarer minimum fra undersøkelsene. EEA-anslaget ligger i øvre hale.
+- Destruerte varer er næringsavfall og er ikke med i plukkanalysene for husholdningsavfall, så de telles ikke to ganger.
+- Materialgjenvinning er ikke skilt ut, så alt går til WM.RS.
 
 #### Sammensetning (varetype og materiale)
 
-- Bare klær.
-- Materialet er sammensetningen til tilførselen av klær samme år.
+- Klær ca. 62 %, hjemmetekstiler 21 % og sko 17 % i 2025.
+- Materialet er sammensetningen til tilførselen samme år.
 
 #### Tidsutvikling og sammenligninger
 
-- Flyten er 0,06–0,13 kt per år fram til 2018 og omtrent 0,25 kt fra 2022. Det reelle nivået er trolig høyere.
-- EUs økodesignforordning (ESPR) forbyr store virksomheter å destruere usolgte klær og sko. Det kan redusere flyten framover.
+- 0,6 kt i 1988, ca. 1 kt rundt 2012–2022 og 0,8 kt i 2025 (0,2–4,5). Flyten følger det som settes på markedet.
+- Før D38 var flyten 0,1–0,3 kt (minimum fra undersøkelsene).
+- EUs økodesignforordning (ESPR) forbyr store virksomheter å destruere usolgte klær og sko fra 19. juli 2026. Det er bare relevant for scenarier.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
@@ -64,7 +67,9 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Klær | 100 % | 100 % | 100 % | 100 % | 100 % | 100 % |
+| Klær | 58 % | 61 % | 60 % | 58 % | 60 % | 62 % |
+| Sko | 18 % | 16 % | 17 % | 17 % | 18 % | 17 % |
+| Hjemmetekstiler | 24 % | 22 % | 23 % | 25 % | 22 % | 21 % |
 
 ### Materiale (fiberlag, D19)
 
@@ -72,12 +77,12 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 62 % | 52 % | 57 % | 45 % | 46 % | 47 % |
-| Regenerert cellulose | 3 % | 3 % | 3 % | 4 % | 4 % | 3 % |
-| Ikke-tekstil | 2 % | 2 % | 2 % | 2 % | 2 % | 2 % |
-| Andre fibre | 0 % | 1 % | 1 % | 0 % | 1 % | 1 % |
-| Syntetisk | 30 % | 37 % | 32 % | 42 % | 42 % | 41 % |
-| Ull | 4 % | 5 % | 6 % | 7 % | 6 % | 7 % |
+| Bomull | 50 % | 45 % | 44 % | 35 % | 36 % | 37 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 3 % | 3 % | 2 % |
+| Ikke-tekstil | 18 % | 16 % | 18 % | 18 % | 18 % | 17 % |
+| Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
+| Syntetisk | 26 % | 31 % | 30 % | 38 % | 37 % | 36 % |
+| Ull | 3 % | 4 % | 4 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/di_rt_wm_rs_unsold_goods_discarded_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -87,27 +92,28 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `unsold_discarded` | 12 % | 34 % | 47 % |
-| `unsold_survey (shared method)` | 12 % | 34 % | 47 % |
-| `gap: unsold_discarded` | 75 % | 31 % | 5 % |
-| Halvt 95 %-intervall, førsteordens (kt) | 0.20 | 0.17 | 0.24 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.30 | 0.20 | 0.23 |
+| `unsold_destroyed_share` | 100 % | 100 % | 100 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 2.08 | 2.80 | 2.09 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 2.11 | 2.84 | 2.14 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_unsold_goods_discarded_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L49). Dokumentasjonen i koden:
+Beregnes i `_unsold_goods_discarded_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L52). Dokumentasjonen i koden:
 
-> Unsold clothing that producers and retailers send to incineration or
-> recycling, as minimums from surveys where the largest retailers did not
-> report: 95 t incinerated in 2018 (Watson et al. 2020) and 221 t handled
-> other than by donation in 2022 (Rubach et al. 2023). Material recycling
-> is not split out yet, so all of it goes to WM.RS. The EEA (2024)
-> estimates that 4-9 % of textiles put on the market in Europe are
-> destroyed unused, which would be 4-10 kt a year in Norway; that is used
-> for sensitivity and discussion only.
->
-> `_per_clothing_import`: Array (year, product) with the anchored mass (kt) in clothing: the mass
-> per kt of clothing imports in the anchor years, interpolated, times the
-> clothing imports of each year.
+> Unsold clothing, household textiles and footwear that producers and
+> retailers send to incineration (D38): a share of what is placed on the
+> market (registered imports plus finished goods made in Norway minus
+> exports). The share is lognormal with median 1 % (an assumption close
+> to the overstock found by Samfunnsøkonomisk analyse (2022), at least
+> 825 t or about 0.8 % of the clothing supply) and 95 % interval 0.2-5 %.
+> The lower end is the survey minimums where the largest retailers did
+> not report (95 t incinerated in 2018, Watson et al. 2020; 221 t in
+> 2022, Rubach et al. 2023), and the upper end reaches the EEA (2024)
+> estimate that 4-9 % of textiles put on the market in Europe are
+> destroyed unused. Destroyed goods are commercial waste and are not in
+> the pick analyses of household waste, so they are not counted twice.
+> Material recycling is not split out, so all of it goes to WM.RS. Large
+> enterprises may not destroy unsold clothing and footwear from 19 July
+> 2026 (ESPR), which matters only for scenarios.

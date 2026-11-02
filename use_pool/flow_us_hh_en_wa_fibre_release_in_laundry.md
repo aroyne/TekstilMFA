@@ -18,8 +18,8 @@ nav_order: 4
 | Metode | data+parameter |
 | Status | implemented |
 | Prioritet | 2 |
-| Kandidatdata | Mepex 2014 (Sundt et al. 2014; cited in Sundt et al. 2016, M545): about 600 t synthetic microfibres a year from household laundry; scaled with the textile stock of the household cohort model |
-| Merknad | Synthetic and natural fibres, split in the fibre layer; natural fibres at the same release per kg as synthetic. Released to wastewater; treatment is not modelled (D35) |
+| Kandidatdata | Laundry mass per inhabitant (Mepex 2014 after Pakula & Stamminger 2010) x SSB population x release from real soiled laundry (Lant et al. 2020, 114 ppm); Mepex 2014 (600 t synthetic) for sensitivity only |
+| Merknad | Natural fibres release about 20 times more per kg than synthetic (Lant et al. 2020, 2022), split in the fibre layer (D37). Released to wastewater; treatment is not modelled (D35) |
 
 ## Tidsserie
 
@@ -31,29 +31,30 @@ nav_order: 4
 #### Hva flyten omfatter
 
 - **US.HH-EN.WA-Fibre release in laundry-TOT** er fibre som løsner fra tekstiler når de vaskes i husholdningenes vaskemaskiner, og som går med avløpsvannet.
-- Flyten omfatter både syntetiske fibre (mikroplast) og naturfibre og regenerert cellulose. De to typene skilles i fiberlaget (se sammensetningen).
-- Flyten går ut av systemet til avløp. Rensing i renseanlegg, slam og videre spredning til vann og jord følges ikke (D35). Usikkerheten i tilbakeholdelse og slambruk er stor og mengdene små, så det hører hjemme i en egen mikroplastmodell. Se Sundt m.fl. (2016) for Miljødirektoratet.
+- Flyten omfatter både syntetiske fibre (mikroplast) og naturfibre og regenerert cellulose. De skilles i fiberlaget.
+- Flyten går ut av systemet til avløp. Rensing, slam og videre spredning følges ikke (D35).
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- Mepex (Sundt m.fl. 2014) anslo for Miljødirektoratet at husholdningsvask slipper ut omtrent 600 t syntetiske mikrofibre per år i Norge. Tallet gjengis i Sundt m.fl. (2016, M545). Anslaget bygger på utslipp per vask fra laboratorieforsøk, ganget opp med antall vasker og andelen syntetiske tekstiler.
-- Lant m.fl. (2020) målte 114 mg fibre per kg tøy i ekte husholdningsvask, og de fleste fibrene var naturfibre.
+- Tøymengden er 280 kg per innbygger per år (70 vasker à 4 kg), fra Mepex (Sundt m.fl. 2014) etter Pakula & Stamminger (2010). Folketallet er fra SSB 05803.
+- Lant m.fl. (2020) målte 114 mg fibre per kg tøy i 79 vasker med ekte skittentøy fra britiske husholdninger (66 mg/kg i store og 132 mg/kg i små vasker). 96 % av fibrene var naturfibre (bomull, ull, viskose).
+- Mepex (Sundt m.fl. 2014) anslo 600 t syntetiske mikrofibre per år. Anslaget bygger på laboratorieforsøk med enkeltplagg og ligger over deres egne to beregninger (276 og 315 t). Det er omtrent ti ganger det ekte skittentøy gir, og brukes bare til følsomhet (D37).
 
 #### Antakelser
 
-- Utslippet per kt syntetisk fiber i husholdningenes lager settes slik at det syntetiske utslippet i 2014 blir 0,6 kt (±50 %).
-- Naturfibre og regenerert cellulose slipper like mye per kt som syntetisk.
-- Lageret er tekstillageret i årgangsmodellen for husholdningene (klær, hjemmetekstiler, sko og garn), ikke restleddet i balansen, fordi restleddet trolig er for høyt.
+- Tøymengden følger folketallet, ikke tekstillageret: det er vaskevaner som styrer hvor mye som vaskes (D37).
+- Britiske målinger gjelder for Norge.
+- Naturfibre og cellulose slipper ca. 20 ganger mer per kg enn syntetiske fibre (7–60, lognormal).
 
 #### Sammensetning (varetype og materiale)
 
 - Flyten er i produktgruppen CORE.
-- Materialet er fibergruppene i tekstillageret i årgangsmodellen. Syntetisk utgjør omtrent 32 % i 1990 og 38–43 % etter 2014, og resten er mest bomull.
+- Materialet er fibergruppene i tekstillageret i årgangsmodellen, vektet med utslipp per kg. I 2025 er ca. 74 % bomull, 15 % ull, 5 % viskose og under 4 % syntetisk.
 
 #### Tidsutvikling og sammenligninger
 
-- Utslippet øker fra 0,9 kt i 1988 til 1,6 kt i 2014 og ligger på 1,5–1,6 kt siden, i takt med lageret i årgangsmodellen.
-- Det syntetiske utslippet øker fra omtrent 0,3 kt i 1990 til 0,6–0,7 kt etter 2014.
+- Utslippet øker med folketallet, fra 0,12 kt i 1988 til 0,16 kt i 2025 (0,11–0,22).
+- Med Mepex-kalibreringen var flyten 1,5–1,6 kt, hvorav 0,6–0,7 kt syntetisk. Nå er det syntetiske utslippet under 0,01 kt.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
@@ -72,11 +73,11 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 56 % | 55 % | 54 % | 46 % | 44 % | 44 % |
-| Regenerert cellulose | 4 % | 3 % | 3 % | 3 % | 3 % | 3 % |
-| Andre fibre | 1 % | 1 % | 2 % | 2 % | 2 % | 2 % |
-| Syntetisk | 32 % | 32 % | 35 % | 41 % | 43 % | 43 % |
-| Ull | 8 % | 8 % | 7 % | 8 % | 8 % | 9 % |
+| Bomull | 80 % | 80 % | 81 % | 75 % | 73 % | 73 % |
+| Regenerert cellulose | 5 % | 4 % | 4 % | 5 % | 5 % | 5 % |
+| Andre fibre | 1 % | 2 % | 2 % | 3 % | 4 % | 3 % |
+| Syntetisk | 2 % | 2 % | 3 % | 3 % | 4 % | 4 % |
+| Ull | 11 % | 12 % | 10 % | 13 % | 14 % | 15 % |
 
 <iframe src="../output_files/plots/pages/us_hh_en_wa_fibre_release_in_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -86,31 +87,32 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `laundry_release_synthetic` | 99 % | 100 % | 98 % |
-| Halvt 95 %-intervall, førsteordens (kt) | 0.56 | 0.75 | 0.73 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.57 | 0.76 | 0.75 |
+| `laundry_kg_per_capita` | 58 % | 58 % | 58 % |
+| `laundry_release_ppm` | 42 % | 42 % | 42 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.05 | 0.05 | 0.06 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.05 | 0.05 | 0.06 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L133). Dokumentasjonen i koden:
+Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L165). Dokumentasjonen i koden:
 
 > Fibres released from household textiles in washing machines to
 > wastewater, where the model stops following them: treatment, sludge and
-> spread in the environment are not modelled (D35). Mepex (Sundt et al. 2014, cited in Sundt et al.
-> 2016 for the Norwegian Environment Agency) estimated about 600 t
-> synthetic microfibres a year from household laundry. The release per kt
-> synthetic fibre in the household stock is set so that the synthetic
-> release in 2014 matches that estimate, and the other fibre groups
-> (cotton, wool, regenerated cellulose, other) release the same per kt
-> (Lant et al. 2020 found that most fibres released in real laundry are
-> natural). The stock is that of the household cohort model, because the
-> residual stock of the balance is probably too high. The fibre layer
-> splits the flow into synthetic and other fibres.
+> spread in the environment are not modelled (D35). The laundry washed per
+> year times the release from real soiled laundry, 114 mg per kg (66-132;
+> Lant et al. 2020, 79 loads from British households). About 96 % of what
+> is released is natural or cellulosic fibre, so the fibre layer gives
+> those fibres about 20 times the release per kg of synthetic fibre (D37).
 >
-> `_household_textile_stock`: Stock of textile fibre in the CORE group of US.HH by fibre group, array
-> (year, fibre group), from the cohort model of new goods entering the
-> households, with the composition of registered imports.
+> Mepex (Sundt et al. 2014) estimated 600 t synthetic microfibres a year,
+> from single garments in laboratory tests, above their own two
+> calculations (276 and 315 t); it is about ten times what real laundry
+> gives and is kept for sensitivity only.
 >
-> `_laundry_release_per_kt`: Fibres released in laundry per kt textile fibre in use, from the synthetic release in 2014.
+> `_laundry_kt`: Laundry washed in households per year (kt), array (year,): 280 kg per
+> inhabitant (200-350; 70 loads of 4 kg, Mepex 2014 after Pakula &
+> Stamminger 2010) times the population. It follows the population, not
+> the textile stock: washing habits, not how much textile people own,
+> set how much is washed (D37).

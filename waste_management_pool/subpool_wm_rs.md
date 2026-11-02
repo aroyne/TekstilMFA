@@ -8,7 +8,7 @@ has_children: true
 
 # Residual and mixed waste collection (WM.RS)
 
-Textiles in household residual waste, bulky waste and mixed commercial waste. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0
+Textiles in household residual waste, bulky waste and mixed commercial waste, and fibres from tumble dryer lint and vacuumed house dust. Clipping stock: its change is the mass created where a negative balance flow is clipped at 0
 
 Type: process. Lager: clipping.
 
@@ -27,6 +27,8 @@ Type: process. Lager: clipping.
 * [Institutional textile waste](../use_pool/flow_us_ic_wm_rs_institutional_textile_waste.html) ← US.IC
 * [Sorting residues](../collection_and_sorting_pool/flow_co_so_wm_rs_sorting_residues.html) ← CO.SO
 * [Unsold secondhand goods](../collection_and_sorting_pool/flow_co_re_wm_rs_unsold_secondhand_goods.html) ← CO.RE *(planlagt)*
+* [Tumble dryer lint](../use_pool/flow_us_hh_wm_rs_tumble_dryer_lint.html) ← US.HH
+* [Household dust fibres](../use_pool/flow_us_hh_wm_rs_household_dust_fibres.html) ← US.HH
 
 ## Massebalanse
 

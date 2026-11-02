@@ -92,6 +92,7 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 | `retained_share_collected` | 1 % | 4 % | 16 % |
 | `gap: unsold_donated` | 61 % | 14 % | – |
 | `gap: retained_share_collected` | 18 % | 10 % | – |
+| `unsold_donated` | 2 % | 3 % | – |
 | Halvt 95 %-intervall, førsteordens (kt) | 1.42 | 1.59 | 2.73 |
 | Halvt 95 %-intervall, Monte Carlo (kt) | 1.57 | 1.65 | 2.94 |
 
@@ -114,7 +115,7 @@ I TOT:
 
 ## Beregning i koden
 
-Beregnes i `_separate_collection_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L40). Dokumentasjonen i koden:
+Beregnes i `_separate_collection_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L45). Dokumentasjonen i koden:
 
 > Separately collected from households = exported used textiles + the part
 > kept in Norway (D17) - unsold clothing donated by retailers, which is

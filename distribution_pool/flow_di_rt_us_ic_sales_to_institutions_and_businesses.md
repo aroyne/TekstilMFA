@@ -57,12 +57,12 @@ Sekker (SA) er emballasje (D13) og kan dominere flyten. Kt per år, median med 9
 
 | År | I alt | Sekker | Uten sekker | Sekkenes andel |
 |---|---|---|---|---|
-| 1990 | 11.07 (6.52–15.83) | 2.76 (2.55–2.97) | 8.31 (3.77–12.97) | 25 % |
-| 2000 | 16.61 (11.02–22.23) | 6.47 (6.00–6.95) | 10.10 (4.60–15.61) | 39 % |
-| 2010 | 21.89 (14.54–29.88) | 8.45 (7.82–9.09) | 13.50 (6.17–21.08) | 39 % |
-| 2018 | 25.32 (18.14–32.97) | 12.50 (11.64–13.55) | 12.71 (5.82–19.97) | 49 % |
-| 2022 | 27.34 (19.88–35.36) | 13.90 (12.88–14.98) | 13.49 (6.05–20.95) | 51 % |
-| 2025 | 24.58 (17.99–31.47) | 13.16 (12.23–14.19) | 11.37 (5.16–17.93) | 54 % |
+| 1990 | 10.99 (6.49–15.74) | 2.76 (2.55–2.97) | 8.25 (3.73–12.90) | 25 % |
+| 2000 | 16.50 (10.98–22.12) | 6.47 (6.00–6.95) | 9.98 (4.54–15.47) | 39 % |
+| 2010 | 21.75 (14.50–29.59) | 8.45 (7.82–9.09) | 13.37 (6.07–20.95) | 39 % |
+| 2018 | 25.18 (18.12–32.78) | 12.50 (11.64–13.55) | 12.63 (5.81–19.81) | 50 % |
+| 2022 | 27.23 (19.79–35.33) | 13.90 (12.88–14.98) | 13.38 (5.99–20.82) | 51 % |
+| 2025 | 24.43 (17.98–31.39) | 13.16 (12.23–14.19) | 11.28 (5.09–17.77) | 54 % |
 
 ## Sammensetning
 
@@ -72,12 +72,12 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Tepper | 15 % | 7 % | 6 % | 6 % | 5 % | 6 % |
-| Klær | 31 % | 30 % | 30 % | 22 % | 22 % | 21 % |
+| Tepper | 15 % | 7 % | 6 % | 6 % | 6 % | 6 % |
+| Klær | 31 % | 30 % | 30 % | 22 % | 22 % | 20 % |
 | Sko | 10 % | 8 % | 8 % | 7 % | 6 % | 6 % |
 | Hjemmetekstiler | 13 % | 11 % | 12 % | 10 % | 8 % | 7 % |
 | Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 3 % | 4 % |
-| Sekker | 25 % | 39 % | 39 % | 49 % | 51 % | 54 % |
+| Sekker | 25 % | 39 % | 39 % | 50 % | 51 % | 54 % |
 | Presenninger og telt | 4 % | 3 % | 3 % | 4 % | 4 % | 3 % |
 
 ### Materiale (fiberlag, D19)
@@ -103,9 +103,9 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 |---|---|---|---|
 | `institutional_share` | 95 % | 95 % | 91 % |
 | `08801:import:finished` | 3 % | 3 % | 5 % |
-| `08801_classification:import:finished` | 2 % | 2 % | 4 % |
-| Halvt 95 %-intervall, førsteordens (kt) | 5.71 | 7.66 | 6.54 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 5.61 | 7.67 | 6.74 |
+| `08801_classification:import:finished` | 2 % | 3 % | 4 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 5.67 | 7.62 | 6.50 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 5.57 | 7.55 | 6.70 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
@@ -117,7 +117,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L73). Dokumentasjonen i koden:
+Beregnes i `_sales_to_users_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L90). Dokumentasjonen i koden:
 
 > Balance of DI.RT per product: registered imports plus finished goods
 > and hand knitting yarn made in Norway minus exports and unsold goods,

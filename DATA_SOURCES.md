@@ -62,7 +62,9 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 | NORSUS (2023), *Kunnskapsstatus for tekstiler og tekstilavfall i Norge* (= Rubach m.fl. 2023, OR.07.23) | 2022: 105,9 kt satt på markedet (19,3 kg/pers), 78,5 kt avfall, 48,8 kt i restavfall, 29,6 kt separat innsamlet, ca. 85 % eksportert | hent (tallene finnes i TekstilEOL `config/market_volumes.csv`) |
 | Årsrapporter fra Fretex, UFF, Kirkens Bymisjon m.fl. | Innsamlede mengder, sortering, ombruk i Norge | hent |
 | de Sadeleer & Rubach (2026), kap. 3.2.9.7, fig. 3-8 og 3-9 (lest fra figurene) | Norsk Tekstilgjenvinning (Sandefjord): inn fra industri 75/358 t, husholdninger 58/254 t, produksjonsavfall 20/39 t; gjenvunnet 93/364 t; ombruk 0/52 t; avfall 60/234 t (2024/2025) | ankerpunkter `recycling_*` i `anchor_values.csv` (D34) |
-| EEA (2024), *The destruction of returned and unsold textiles in Europe's circular economy*, og ETC CE Report 2024/4 | 4–9 % av tekstilene som settes på markedet i Europa, destrueres ubrukt (264–594 kt per år i EU) | bare følsomhetsanalyse (D27) |
+| EEA (2024), *The destruction of returned and unsold textiles in Europe's circular economy*, og ETC CE Report 2024/4 | 4–9 % av tekstilene som settes på markedet i Europa, destrueres ubrukt (264–594 kt per år i EU); ca. 20 % retur av klær kjøpt på nett | øvre hale for `unsold_destroyed_share` og kilde for `online_return_share` (D38) |
+| Samfunnsøkonomisk analyse (2022), overskuddslager av klær | Minst 825 t overskudd (ca. 0,8 % av klestilførselen), én kjede ca. 430 t | grunnlag for medianen 1 % i `unsold_destroyed_share` (D38) |
+| Zalando (årsrapporter) og Bamberg-undersøkelsen (Asdecker) | Returandel ca. 50 % (Zalando) og 24 % av pakkene (Bamberg) | spenn for `online_return_share` (D38) |
 | Watson, Trzepacz, Rubach & Johnsen (2020), *Kartlegging av brukte tekstiler og tekstilavfall i Norge*, NORSUS/PlanMiljø OR 52.20, for Miljødirektoratet | Ankerår 2018: satt på markedet 74 340 t, netthandel 3 300 t, innsamlet 31 690 t, restavfall 25 400 t + gjenbruksstasjoner 6 130 t, usolgt ≥ 714 t (600 t donert til én innsamler, 95 t forbrent hos forhandlere som svarte) | har (litteratur/, lokalt); usolgt brukt i `anchor_values.csv` (D27) |
 | Mepex-rapporter for Miljødirektoratet om brukte tekstiler og tekstilavfall | Mengder og flyter, flere årganger | verifiser |
 | Miljødirektoratets utredning av produsentansvar for tekstiler | Mengder og kanaler | verifiser |
@@ -89,7 +91,11 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 ### Mikrofibre
 | Kilde | Innhold | Status |
 |---|---|---|
-| Sundt, Schulze & Syversen (2014), Mepex for Miljødirektoratet: *Sources of microplastic-pollution to the marine environment* | Norske anslag for fibre fra klesvask | hent |
+| Sundt, Schulze & Syversen (2014), Mepex for Miljødirektoratet: *Sources of microplastic-pollution to the marine environment* (M321) | 600 t syntetiske fibre fra klesvask (anslag over egne beregninger på 276 og 315 t); 280 kg tøy per innbygger per år (`laundry_kg_per_capita`) | brukt (D37); 600 t bare følsomhet |
+| Lant m.fl. (2020), *PLOS ONE* 15(6): e0233332 | 114 ppm fibre fra ekte skittentøy (66–132), 96 % naturfibre (`laundry_release_ppm`, `natural_release_relative_to_synthetic`) | brukt (D37) |
+| Lant m.fl. (2022), *PLOS ONE* 17(4): e0265912 | Tørketrommel: 106 ppm på lofilteret, 83–96 % bomull fra 48 % bomullsstoff | brukt (D37) |
+| Cummins m.fl. (2023), *PLOS ONE* 18(5): e0285548 | Tørking av ekte skittentøy: 256/342 ppm (avtrekk/kondens), 86/91 % på lofilteret (`drying_release_ppm`, `lint_filter_share`) | brukt (D37) |
+| SSB via Store norske leksikon, «tørketrommel» | Andel husholdninger med tørketrommel: 44 % (1996), 47 % (2012) (`dryer_ownership_share`) | brukt (D37); nyere tall mangler |
 | SSB 05280 (avløp) | Rensegrad og slamdisponering | har i NitrogenBudsjett – kopier |
 
 ### Fibersammensetning (fase 3)
