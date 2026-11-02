@@ -1,6 +1,6 @@
 # Fase D: utforming av fremtidsmodulen (forslag)
 
-*Notat 2026-11-02. Beslutningsgrunnlag, ingenting er implementert. Bygger på D12, lagerdiagnosen ([D40](2026-11-02_C_lagerdiagnose.md)), [tiltaksnotatet](2026-11-02_tiltak_sirkularitet_og_MFA.md) og [Weijenberg m.fl. 2026](2026-11-02_Weijenberg_robust_tiltaksvurdering.md).*
+*Notat 2026-11-02. Besvart samme dag: horisont 2050, start fra medianen, tiltaksrekkefølgen er godkjent, og E1 og E2 er gjort først. Skaleringen i spørsmål 2 er ikke besvart, og anbefalingen (skalert) brukes. Bygger på D12, lagerdiagnosen ([D40](2026-11-02_C_lagerdiagnose.md)), [tiltaksnotatet](2026-11-02_tiltak_sirkularitet_og_MFA.md) og [Weijenberg m.fl. 2026](2026-11-02_Weijenberg_robust_tiltaksvurdering.md).*
 
 ## Hva som endrer seg etter 2025
 

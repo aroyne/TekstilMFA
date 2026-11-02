@@ -9,8 +9,10 @@ them, and closes the system (flow check, stocks, mass balance). The fibre
 layer (D19) then distributes the closed TOT system over materials in a
 second system. Results are kept as one array per flow and written as
 per-flow, per-product, per-year summary statistics to output_files/
-(MC_summary.csv for TOT, MC_summary_fibre.csv per material) and how
-often and how much negative flows were clipped (clipping_summary.csv).
+(MC_summary.csv for TOT, MC_summary_fibre.csv per material), indicators
+computed per iteration (MC_indicators.csv: EPR basis and collection rate,
+calculations/indicators.py) and how often and how much negative flows were
+clipped (clipping_summary.csv).
 
 Usage: python main_mc.py --pool all --nsim 1000 [--seed 1] [--export-raw-mc]
 """
@@ -21,7 +23,10 @@ import time
 import numpy as np
 import pandas as pd
 
+import flodym as fd
+
 from calculations.fibre_layer import compute_fibre_layer
+from calculations.indicators import indicators
 from calculations.params import Parameters
 from calculations.sampling import DEFAULT_SEED
 from calculations.system import close, load_register, make_system, reset, stock_change
@@ -181,6 +186,7 @@ def main():
     fibre_store = {}
     clip_store = {}
     fibre_clip_store = {}
+    indicator_store = {}
     start = time.time()
     for sim_id in range(n_runs):
         current_params, dataset_noise, anchors = params.draw(args.seed, sim_id)
@@ -194,6 +200,8 @@ def main():
             record(fibre_clip_store, {c: d for c, d in fibre.clipped.items() if d is not mfa.clipped.get(c)},
                    sim_id, n_runs)
             record(store, {name: arr.sum_over(('m',)) for name, arr in stock_model.items()}, sim_id, n_runs)
+            record(indicator_store, {name: fd.FlodymArray(dims=mfa.dims[('t',)], values=values)
+                                     for name, values in indicators(mfa, preloaded_data).items()}, sim_id, n_runs)
         record(clip_store, mfa.clipped, sim_id, n_runs)
         record(store, outputs(mfa, closed), sim_id, n_runs)
     print(f"[INFO] {args.nsim} MC iterations + baseline in {time.time() - start:.1f} s")
@@ -208,6 +216,8 @@ def main():
         pd.concat([clipping_summary(clip_store, 'TOT'), clipping_summary(fibre_clip_store, 'fibre')]).to_csv(
             'output_files/clipping_summary.csv', index=False)
         print("[INFO] Wrote output_files/clipping_summary.csv")
+        summarise(indicator_store).to_csv('output_files/MC_indicators.csv', index=False)
+        print("[INFO] Wrote output_files/MC_indicators.csv")
     if args.export_raw_mc:
         raw_table(store).to_csv('output_files/MC_Raw_Simulations.csv.gz', index=False)
 

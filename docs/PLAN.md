@@ -127,6 +127,10 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] D41: Matrise for fiberandeler i ferdigvarer (hovedfiber 0,89, Ward m.fl. 2013). Ull i innsamlet masse går fra 6,1 til 5,7 %.
 - [x] B: De tre planlagte flytene uten data er fjernet (42 flyter). Ext_tec05 gir ingen ny nedre grense per produkt (D36). Spørsmål til SSB samles i [HENVENDELSER.md](HENVENDELSER.md).
 
+### 2026-11-02 – Fase D besluttet, E1 og E2 gjort
+- [x] Fase D: horisont 2050, fremtiden starter fra medianen i 2025 (historisk usikkerhet som egne faktorer), lagermodellen skaleres til statistikken i 2025, tiltak i rekkefølgen produsentansvar med innsamlingsmål, sortering før eksport, holdbarhet ([designnotat](../claude_tekst/2026-11-02_D_fremtidsmodul_design.md)).
+- [x] E1 og E2 ([notat](../claude_tekst/2026-11-02_E1_E2_produsentansvar_og_innsamlingsgrad.md), `calculations/indicators.py`, `output_files/MC_indicators.csv`): grunnlaget for produsentansvaret etter vedlegg 1 i forskriftsforslaget er 104 kt brutto (95–113) og 95 kt netto (87–103) i 2025. Innsamlingsgraden fra husholdningene er 45 % (38–55) i 2025, 50 % i 2018 og 40 % i 2022.
+
 ## Neste
 
 ### Veikart (besluttet 2026-11-02)
@@ -174,8 +178,8 @@ Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og
 
 #### Fase E – Tiltak
 Rekkefølge fra [notatet om tiltak](../claude_tekst/2026-11-02_tiltak_sirkularitet_og_MFA.md):
-1. Grunnlaget for produsentansvaret med usikkerhet. Kan gjøres for historikken før fase D.
-2. Innsamlingsgrad målt som innsamlet ÷ kassert, og etterkontroll av kravet om separat innsamling fra 2025. Kan også gjøres før fase D.
+1. ~~Grunnlaget for produsentansvaret med usikkerhet~~ (gjort 2026-11-02, E1).
+2. ~~Innsamlingsgrad~~ (gjort 2026-11-02, E2). Etterkontroll av kravet fra 2025 krever kartlegginger i 2026–2028.
 3. Scenarier for eksport og sortering.
 4. Tiltak på tilførsel og levetid (avgift, rask mote, holdbarhet), med forsinkelse.
 

@@ -166,3 +166,10 @@ def test_anchor_method_group_correlates_and_annual_trade_varies():
     trade = draws[0][1].factor('08801', 'import:finished')
     assert len(set(trade)) == len(trade)
     assert len(set(draws[0][1].factor('vareproduksjon'))) == 1
+
+
+def test_epr_scope_excludes_duvets_but_keeps_clothing(inputs):
+    shares = inputs[0]['epr_scope_share']
+    assert (shares[(1, 'CL')] > 0.99).all()
+    assert (shares[(1, 'HT')] < 0.95).all() and (shares[(1, 'HT')] > 0.5).all()
+    assert ((shares['used'] > 0) & (shares['used'] <= 1)).all()
