@@ -61,12 +61,12 @@ Sekker (SA) er emballasje (D13) og kan dominere flyten. Kt per år, median med 9
 
 | År | I alt | Sekker | Uten sekker | Sekkenes andel |
 |---|---|---|---|---|
-| 1990 | 11.20 (6.64–16.06) | 2.76 (2.55–2.97) | 8.47 (3.86–13.17) | 25 % |
-| 2000 | 16.46 (11.01–21.97) | 6.47 (6.00–6.95) | 9.95 (4.56–15.47) | 39 % |
-| 2010 | 21.23 (14.24–28.58) | 8.45 (7.82–9.09) | 12.81 (5.81–19.92) | 40 % |
-| 2018 | 25.35 (18.18–32.68) | 12.50 (11.64–13.55) | 12.79 (5.78–19.84) | 49 % |
-| 2022 | 26.67 (19.51–33.92) | 13.90 (12.88–14.98) | 12.73 (5.77–19.65) | 52 % |
-| 2025 | 25.18 (18.31–32.35) | 13.16 (12.23–14.19) | 12.05 (5.33–18.76) | 52 % |
+| 1990 | 11.20 (6.60–15.99) | 2.76 (2.55–2.97) | 8.41 (3.86–13.16) | 25 % |
+| 2000 | 16.45 (10.97–22.00) | 6.47 (6.00–6.95) | 9.97 (4.50–15.49) | 39 % |
+| 2010 | 21.24 (14.20–28.61) | 8.45 (7.82–9.09) | 12.81 (5.81–19.89) | 40 % |
+| 2018 | 25.34 (18.18–32.59) | 12.50 (11.64–13.55) | 12.83 (5.77–19.80) | 49 % |
+| 2022 | 26.73 (19.53–33.99) | 13.90 (12.88–14.98) | 12.74 (5.77–19.67) | 52 % |
+| 2025 | 25.17 (18.30–32.35) | 13.16 (12.23–14.19) | 12.03 (5.33–18.76) | 52 % |
 
 ## Sammensetning
 
@@ -77,9 +77,9 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 19 % | 10 % | 6 % | 5 % | 5 % | 5 % |
-| Klær | 30 % | 28 % | 29 % | 23 % | 21 % | 21 % |
+| Klær | 30 % | 28 % | 29 % | 23 % | 20 % | 21 % |
 | Sko | 10 % | 8 % | 9 % | 7 % | 6 % | 6 % |
-| Hjemmetekstiler | 12 % | 10 % | 12 % | 10 % | 9 % | 8 % |
+| Hjemmetekstiler | 11 % | 10 % | 12 % | 10 % | 9 % | 8 % |
 | Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 2 % | 3 % | 4 % |
 | Sekker | 25 % | 39 % | 40 % | 49 % | 52 % | 52 % |
 | Presenninger og telt | 4 % | 3 % | 3 % | 3 % | 4 % | 4 % |
@@ -91,13 +91,28 @@ Utstrømmen av en årgangsmodell av salget til institusjoner og bedrifter. Sekke
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Bomull | 26 % | 24 % | 23 % | 16 % | 14 % | 14 % |
-| Regenerert cellulose | 3 % | 2 % | 1 % | 1 % | 1 % | 1 % |
+| Regenerert cellulose | 3 % | 1 % | 1 % | 1 % | 1 % | 1 % |
 | Ikke-tekstil | 15 % | 12 % | 12 % | 11 % | 10 % | 10 % |
 | Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |
 | Syntetisk | 50 % | 57 % | 58 % | 67 % | 70 % | 71 % |
 | Ull | 3 % | 4 % | 3 % | 2 % | 2 % | 2 % |
 
 <iframe src="../output_files/plots/pages/us_ic_wm_rs_institutional_textile_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `institutional_share` | 96 % | 97 % | 95 % |
+| `08801_classification:import:finished` | 2 % | 3 % | 4 % |
+| `08801:import:finished` | 1 % | 1 % | 1 % |
+| `lifetime_mean_US.IC_CA` | 1 % | – | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 5.60 | 7.16 | 6.87 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 5.51 | 7.21 | 7.02 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Klipping av negative verdier
 

@@ -71,9 +71,27 @@ Balansen i MA.FI per materiale, klippet til 0.
 | Regenerert cellulose | 11 % | 10 % | 1 % | 2 % | 1 % | 1 % |
 | Andre fibre | 1 % | 5 % | 12 % | 7 % | 15 % | 12 % |
 | Syntetisk | 51 % | 58 % | 68 % | 59 % | 57 % | 62 % |
-| Ull | 5 % | 5 % | 14 % | 26 % | 24 % | 22 % |
+| Ull | 5 % | 5 % | 14 % | 27 % | 24 % | 22 % |
 
 <iframe src="../output_files/plots/pages/ma_fi_ma_tx_yarn_to_textile_manufacturing_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `08801:import:intermediate` | 33 % | 25 % | 28 % |
+| `08801_classification:import:intermediate` | 30 % | 23 % | 25 % |
+| `vareproduksjon` | 7 % | 13 % | 13 % |
+| `ntg_fibre_domestic_share` | – | – | 9 % |
+| `08801:export:intermediate` | 6 % | 13 % | 7 % |
+| `totalkalkylen` | 6 % | 12 % | 6 % |
+| `gap: hand_knitting_yarn` | 8 % | – | 5 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 1.03 | 0.62 | 0.58 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 1.10 | 0.65 | 0.63 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Klipping av negative verdier
 
@@ -86,18 +104,16 @@ I fiberlaget (per materiale):
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
 | 1988 | 19 av 1000 | 0.001 | 0.310 | 0.000 |
-| 1989 | 43 av 1000 | 0.004 | 0.473 | 0.000 |
-| 1990 | 23 av 1000 | 0.003 | 0.375 | 0.000 |
+| 1989 | 38 av 1000 | 0.004 | 0.425 | 0.000 |
+| 1990 | 19 av 1000 | 0.002 | 0.351 | 0.000 |
 | 1992 | 2 av 1000 | 0.000 | 0.002 | 0.000 |
-| 2000 | 100 av 1000 | 0.020 | 0.669 | 0.000 |
-| 2002 | 1 av 1000 | 0.000 | 0.017 | 0.000 |
-| 2003 | 3 av 1000 | 0.000 | 0.034 | 0.000 |
-| 2004 | 18 av 1000 | 0.002 | 0.314 | 0.000 |
-| 2005 | 2 av 1000 | 0.000 | 0.085 | 0.000 |
-| 2009 | 26 av 1000 | 0.002 | 0.235 | 0.000 |
-| 2010 | 1 av 1000 | 0.000 | 0.002 | 0.000 |
-| 2011 | 1 av 1000 | 0.000 | 0.002 | 0.000 |
-| 2015 | 5 av 1000 | 0.000 | 0.084 | 0.000 |
+| 2000 | 99 av 1000 | 0.018 | 0.752 | 0.000 |
+| 2003 | 4 av 1000 | 0.000 | 0.085 | 0.000 |
+| 2004 | 17 av 1000 | 0.002 | 0.368 | 0.000 |
+| 2005 | 2 av 1000 | 0.000 | 0.076 | 0.000 |
+| 2009 | 25 av 1000 | 0.002 | 0.226 | 0.000 |
+| 2014 | 1 av 1000 | 0.000 | 0.064 | 0.000 |
+| 2015 | 7 av 1000 | 0.000 | 0.112 | 0.000 |
 | 2016 | 1 av 1000 | 0.000 | 0.002 | 0.000 |
 
 ## Beregning i koden

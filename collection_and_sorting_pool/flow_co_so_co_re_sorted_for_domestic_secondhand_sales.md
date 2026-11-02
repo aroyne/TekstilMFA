@@ -76,6 +76,22 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 <iframe src="../output_files/plots/pages/co_so_co_re_sorted_for_domestic_secondhand_sales_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `retained_share_collected` | 5 % | 16 % | 63 % |
+| `reuse_fraction_retained` | 6 % | 21 % | 36 % |
+| `08801:export:used` | – | – | 1 % |
+| `gap: retained_share_collected` | 78 % | 37 % | – |
+| `gap: reuse_fraction_retained` | 11 % | 26 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.37 | 0.45 | 1.11 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.49 | 0.52 | 0.97 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
+
 ## Beregning i koden
 
 Beregnes i `_sorted_for_secondhand_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L57). Dokumentasjonen i koden:

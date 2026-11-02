@@ -67,13 +67,26 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 56 % | 55 % | 54 % | 46 % | 43 % | 44 % |
+| Bomull | 56 % | 55 % | 54 % | 46 % | 44 % | 44 % |
 | Regenerert cellulose | 4 % | 3 % | 3 % | 3 % | 3 % | 3 % |
 | Andre fibre | 1 % | 1 % | 2 % | 2 % | 2 % | 2 % |
 | Syntetisk | 32 % | 32 % | 36 % | 41 % | 43 % | 43 % |
-| Ull | 8 % | 8 % | 7 % | 8 % | 8 % | 9 % |
+| Ull | 8 % | 8 % | 6 % | 8 % | 8 % | 9 % |
 
 <iframe src="../output_files/plots/pages/us_hh_en_ai_fibre_release_to_air_and_dust_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `air_release_relative_to_laundry` | 90 % | 90 % | 90 % |
+| `laundry_release_synthetic` | 10 % | 10 % | 10 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 1.77 | 2.38 | 2.29 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 2.11 | 2.86 | 2.72 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 

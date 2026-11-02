@@ -66,14 +66,31 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 28 % | 31 % | 29 % | nan % | nan % | nan % |
+| Bomull | 29 % | 31 % | 29 % | nan % | nan % | nan % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | nan % | nan % | nan % |
 | Ikke-tekstil | 20 % | 17 % | 17 % | nan % | nan % | nan % |
 | Andre fibre | 3 % | 3 % | 3 % | nan % | nan % | nan % |
-| Syntetisk | 41 % | 41 % | 43 % | nan % | nan % | nan % |
+| Syntetisk | 41 % | 40 % | 43 % | nan % | nan % | nan % |
 | Ull | 5 % | 6 % | 5 % | nan % | nan % | nan % |
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_lf_landfilling_of_textiles_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 |
+|---|---|---|
+| `residual_core` | 14 % | 57 % |
+| `landfill_share_residual` | 5 % | 27 % |
+| `institutional_share` | 2 % | 13 % |
+| `08801_classification:import:finished` | – | 2 % |
+| `gap: residual_core` | 78 % | 1 % |
+| `lifetime_mean_US.HH_CA` | 1 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 21.23 | 3.14 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 20.30 | 3.19 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 

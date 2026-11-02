@@ -57,12 +57,12 @@ Sekker (SA) er emballasje (D13) og kan dominere flyten. Kt per år, median med 9
 
 | År | I alt | Sekker | Uten sekker | Sekkenes andel |
 |---|---|---|---|---|
-| 1990 | 11.09 (6.53–15.87) | 2.76 (2.55–2.97) | 8.34 (3.77–12.98) | 25 % |
-| 2000 | 16.60 (11.01–22.15) | 6.47 (6.00–6.95) | 10.08 (4.63–15.61) | 39 % |
-| 2010 | 21.89 (14.55–29.89) | 8.45 (7.82–9.09) | 13.49 (6.18–21.11) | 39 % |
+| 1990 | 11.07 (6.52–15.83) | 2.76 (2.55–2.97) | 8.31 (3.77–12.97) | 25 % |
+| 2000 | 16.61 (11.02–22.23) | 6.47 (6.00–6.95) | 10.10 (4.60–15.61) | 39 % |
+| 2010 | 21.89 (14.54–29.88) | 8.45 (7.82–9.09) | 13.50 (6.17–21.08) | 39 % |
 | 2018 | 25.32 (18.14–32.97) | 12.50 (11.64–13.55) | 12.71 (5.82–19.97) | 49 % |
 | 2022 | 27.34 (19.88–35.36) | 13.90 (12.88–14.98) | 13.49 (6.05–20.95) | 51 % |
-| 2025 | 24.59 (17.99–31.44) | 13.16 (12.23–14.19) | 11.35 (5.15–17.89) | 54 % |
+| 2025 | 24.58 (17.99–31.47) | 13.16 (12.23–14.19) | 11.37 (5.16–17.93) | 54 % |
 
 ## Sammensetning
 
@@ -77,7 +77,7 @@ Andel av summen i nøkkelår (median).
 | Sko | 10 % | 8 % | 8 % | 7 % | 6 % | 6 % |
 | Hjemmetekstiler | 13 % | 11 % | 12 % | 10 % | 8 % | 7 % |
 | Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 3 % | 4 % |
-| Sekker | 25 % | 39 % | 39 % | 50 % | 51 % | 54 % |
+| Sekker | 25 % | 39 % | 39 % | 49 % | 51 % | 54 % |
 | Presenninger og telt | 4 % | 3 % | 3 % | 4 % | 4 % | 3 % |
 
 ### Materiale (fiberlag, D19)
@@ -94,6 +94,20 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 | Ull | 3 % | 3 % | 3 % | 2 % | 2 % | 2 % |
 
 <iframe src="../output_files/plots/pages/di_rt_us_ic_sales_to_institutions_and_businesses_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `institutional_share` | 95 % | 95 % | 91 % |
+| `08801:import:finished` | 3 % | 3 % | 5 % |
+| `08801_classification:import:finished` | 2 % | 2 % | 4 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 5.71 | 7.66 | 6.54 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 5.61 | 7.67 | 6.74 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Klipping av negative verdier
 

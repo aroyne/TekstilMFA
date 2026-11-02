@@ -73,13 +73,27 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Bomull | 62 % | 52 % | 57 % | 45 % | 46 % | 47 % |
-| Regenerert cellulose | 3 % | 3 % | 3 % | 4 % | 4 % | 4 % |
+| Regenerert cellulose | 3 % | 3 % | 3 % | 4 % | 4 % | 3 % |
 | Ikke-tekstil | 2 % | 2 % | 2 % | 2 % | 2 % | 2 % |
 | Andre fibre | 0 % | 1 % | 1 % | 0 % | 1 % | 1 % |
-| Syntetisk | 29 % | 37 % | 32 % | 42 % | 41 % | 40 % |
-| Ull | 4 % | 6 % | 6 % | 7 % | 6 % | 7 % |
+| Syntetisk | 30 % | 37 % | 32 % | 42 % | 42 % | 41 % |
+| Ull | 4 % | 5 % | 6 % | 7 % | 6 % | 7 % |
 
 <iframe src="../output_files/plots/pages/di_rt_wm_rs_unsold_goods_discarded_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `unsold_discarded` | 12 % | 34 % | 47 % |
+| `unsold_survey (shared method)` | 12 % | 34 % | 47 % |
+| `gap: unsold_discarded` | 75 % | 31 % | 5 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.20 | 0.17 | 0.24 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.30 | 0.20 | 0.23 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 

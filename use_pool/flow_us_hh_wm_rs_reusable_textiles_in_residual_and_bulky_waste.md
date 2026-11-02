@@ -82,6 +82,21 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_reusable_textiles_in_residual_and_bulky_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `residual_core` | 6 % | 67 % | 67 % |
+| `reusable_share_residual` | 2 % | 27 % | 33 % |
+| `gap: reusable_share_residual` | 56 % | 5 % | – |
+| `gap: residual_core` | 36 % | 1 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 13.58 | 4.02 | 6.49 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 14.66 | 3.81 | 6.35 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
+
 ## Beregning i koden
 
 Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L79). Dokumentasjonen i koden:

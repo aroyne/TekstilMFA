@@ -62,8 +62,8 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Tepper | 47 % | 36 % | 25 % | 28 % | 23 % | 23 % |
-| Klær, hjemmetekstiler og sko | 40 % | 47 % | 52 % | 42 % | 47 % | 46 % |
+| Tepper | 47 % | 36 % | 25 % | 27 % | 23 % | 23 % |
+| Klær, hjemmetekstiler og sko | 40 % | 47 % | 52 % | 43 % | 47 % | 46 % |
 | Andre konfeksjonerte varer | 4 % | 6 % | 9 % | 12 % | 15 % | 15 % |
 | Presenninger og telt | 9 % | 11 % | 14 % | 18 % | 16 % | 16 % |
 
@@ -74,13 +74,32 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Bomull | 23 % | 29 % | 29 % | 23 % | 24 % | 23 % |
-| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 22 % | 20 % | 19 % | 19 % | 18 % | 18 % |
 | Andre fibre | 3 % | 4 % | 4 % | 4 % | 4 % | 4 % |
-| Syntetisk | 43 % | 38 % | 40 % | 46 % | 47 % | 47 % |
+| Syntetisk | 43 % | 38 % | 40 % | 46 % | 47 % | 48 % |
 | Ull | 6 % | 8 % | 6 % | 6 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_worn_textiles_in_residual_and_bulky_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `residual_core` | 12 % | 88 % | 72 % |
+| `reusable_share_residual` | 1 % | 5 % | 16 % |
+| `gap: domestic_share_TA` | – | – | 4 % |
+| `institutional_share` | – | 2 % | 4 % |
+| `08801_classification:import:finished` | – | 1 % | 2 % |
+| `lifetime_mean_US.HH_CA` | 1 % | 1 % | – |
+| `gap: residual_core` | 69 % | 1 % | – |
+| `gap: reusable_share_residual` | 16 % | 1 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 25.65 | 9.23 | 9.45 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 25.09 | 9.40 | 9.39 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 

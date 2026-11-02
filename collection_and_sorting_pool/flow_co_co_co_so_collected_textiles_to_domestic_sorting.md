@@ -66,14 +66,29 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 51 % | 48 % | 44 % | 40 % | 37 % | 36 % |
+| Bomull | 52 % | 47 % | 44 % | 40 % | 37 % | 36 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 3 % |
-| Ikke-tekstil | 12 % | 16 % | 18 % | 18 % | 18 % | 17 % |
+| Ikke-tekstil | 11 % | 16 % | 18 % | 18 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
 | Syntetisk | 28 % | 27 % | 29 % | 33 % | 35 % | 36 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/co_co_co_so_collected_textiles_to_domestic_sorting_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `retained_share_collected` | 6 % | 30 % | 98 % |
+| `08801:export:used` | – | – | 1 % |
+| `08801_classification:export:used` | – | – | 1 % |
+| `gap: retained_share_collected` | 94 % | 70 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.62 | 0.61 | 1.08 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.61 | 0.61 | 1.02 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 

@@ -20,19 +20,23 @@ in one draw of a thousand, which no extrapolation supports.
 """
 import numpy as np
 
-from calculations.sampling import item_rng
+from calculations.sampling import normal_score
 from calculations.utils import YEARS
 
 MAX_Z = 2.0
 
 
 class GapNoise:
-    """Gap factors for one MC iteration; all factors are 1 in the deterministic run."""
+    """
+    Gap factors for one MC iteration; all factors are 1 in the deterministic
+    run unless a probe (sampling.Probe) sets one gap.
+    """
 
-    def __init__(self, seed, sim_id, r_interp, r_extrap, cap):
+    def __init__(self, seed, sim_id, r_interp, r_extrap, cap, probe=None):
         self.seed = seed
         self.sim_id = sim_id
-        self.deterministic = sim_id == 0
+        self.probe = probe
+        self.deterministic = sim_id == 0 and probe is None
         self.r_interp = r_interp
         self.r_extrap = r_extrap
         self.cap = cap
@@ -41,8 +45,8 @@ class GapNoise:
     def _draw(self, name, segment):
         key = (name, segment)
         if key not in self._z:
-            rng = item_rng(self.seed, self.sim_id, 'gap', f'{name}:{segment}')
-            self._z[key] = float(np.clip(rng.standard_normal(), -MAX_Z, MAX_Z))
+            z = normal_score(self.seed, self.sim_id, 'gap', f'{name}:{segment}', self.probe)
+            self._z[key] = float(np.clip(z, -MAX_Z, MAX_Z))
         return self._z[key]
 
     def factor(self, name, anchor_years, years=YEARS):

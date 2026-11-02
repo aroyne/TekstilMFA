@@ -70,9 +70,22 @@ Andel av summen i nøkkelår (median).
 | Regenerert cellulose | nan % | nan % | nan % | nan % | nan % | 1 % |
 | Andre fibre | nan % | nan % | nan % | nan % | nan % | 7 % |
 | Syntetisk | nan % | nan % | nan % | nan % | nan % | 71 % |
-| Ull | nan % | nan % | nan % | nan % | nan % | 13 % |
+| Ull | nan % | nan % | nan % | nan % | nan % | 12 % |
 
 <iframe src="../output_files/plots/pages/ma_tx_wm_rc_production_waste_to_recycling_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2025 |
+|---|---|
+| `recycling_production_waste` | 50 % |
+| `ntg_figures (shared method)` | 50 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.01 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.01 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 

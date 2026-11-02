@@ -66,14 +66,33 @@ Andel av summen i nøkkelår (median).
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 52 % | 47 % | 44 % | 40 % | 37 % | 26 % |
-| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 1 % |
-| Ikke-tekstil | 11 % | 16 % | 18 % | 18 % | 17 % | 24 % |
+| Bomull | 52 % | 47 % | 44 % | 40 % | 37 % | 25 % |
+| Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 1 % |
+| Ikke-tekstil | 10 % | 16 % | 18 % | 18 % | 17 % | 24 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 4 % |
-| Syntetisk | 28 % | 27 % | 29 % | 33 % | 35 % | 40 % |
+| Syntetisk | 29 % | 27 % | 29 % | 33 % | 35 % | 40 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 5 % |
 
 <iframe src="../output_files/plots/pages/wm_rc_rw_rw_export_for_recycling_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `reuse_fraction_retained` | 5 % | 17 % | 57 % |
+| `ntg_fibre_domestic_share` | – | – | 25 % |
+| `recycling_institutional` | – | – | 5 % |
+| `retained_share_collected` | 3 % | 9 % | 5 % |
+| `recycling_share_sorting_rejects` | 2 % | 8 % | 4 % |
+| `gap: retained_share_collected` | 41 % | 22 % | – |
+| `gap: recycling_share_sorting_rejects` | 41 % | 22 % | – |
+| `gap: reuse_fraction_retained` | 8 % | 21 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.09 | 0.10 | 0.34 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.10 | 0.09 | 0.41 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Klipping av negative verdier
 
@@ -83,15 +102,15 @@ I TOT:
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 2024 | 3 av 1000 | 0.000 | 0.045 | 0.000 |
+| 2024 | 2 av 1000 | 0.000 | 0.018 | 0.000 |
 | 2025 | 61 av 1000 | 0.004 | 0.180 | 0.000 |
 
 I fiberlaget (per materiale):
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 2024 | 33 av 1000 | 0.000 | 0.049 | 0.000 |
-| 2025 | 221 av 1000 | 0.009 | 0.197 | 0.000 |
+| 2024 | 32 av 1000 | 0.000 | 0.024 | 0.000 |
+| 2025 | 228 av 1000 | 0.009 | 0.199 | 0.000 |
 
 ## Beregning i koden
 

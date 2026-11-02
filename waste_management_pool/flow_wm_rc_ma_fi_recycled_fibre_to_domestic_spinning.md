@@ -75,6 +75,20 @@ Andel av summen i nøkkelår (median).
 
 <iframe src="../output_files/plots/pages/wm_rc_ma_fi_recycled_fibre_to_domestic_spinning_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2025 |
+|---|---|
+| `ntg_fibre_domestic_share` | 96 % |
+| `recycling_ntg_fibre` | 2 % |
+| `ntg_figures (shared method)` | 2 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.18 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.18 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
+
 ## Beregning i koden
 
 Beregnes i `_recycled_fibre_to_spinning_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L146). Dokumentasjonen i koden:

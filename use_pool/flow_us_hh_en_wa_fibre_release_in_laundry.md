@@ -80,6 +80,18 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 <iframe src="../output_files/plots/pages/us_hh_en_wa_fibre_release_in_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `laundry_release_synthetic` | 99 % | 100 % | 98 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.56 | 0.75 | 0.73 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.57 | 0.76 | 0.75 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
+
 ## Beregning i koden
 
 Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L133). Dokumentasjonen i koden:

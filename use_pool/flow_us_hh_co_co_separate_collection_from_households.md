@@ -81,6 +81,22 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 <iframe src="../output_files/plots/pages/us_hh_co_co_separate_collection_from_households_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `08801:export:used` | 9 % | 36 % | 44 % |
+| `08801_classification:export:used` | 9 % | 33 % | 40 % |
+| `retained_share_collected` | 1 % | 4 % | 16 % |
+| `gap: unsold_donated` | 61 % | 14 % | – |
+| `gap: retained_share_collected` | 18 % | 10 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 1.42 | 1.59 | 2.73 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 1.57 | 1.65 | 2.94 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
+
 ## Klipping av negative verdier
 
 Flyten er en balanseflyt. Negative verdier er ikke-fysiske og klippes til 0. Massen som da oppstår, tas opp av klippelageret i prosessen flyten går ut fra (rapportert som «Clipping imbalance»), og flyttes ikke til andre flyter.
@@ -89,13 +105,12 @@ I TOT:
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 1988 | 238 av 1000 | 0.106 | 1.934 | 0.000 |
-| 1989 | 115 av 1000 | 0.050 | 1.628 | 0.000 |
-| 1990 | 60 av 1000 | 0.021 | 1.202 | 0.000 |
-| 1991 | 77 av 1000 | 0.036 | 1.613 | 0.000 |
-| 1992 | 7 av 1000 | 0.002 | 0.740 | 0.000 |
-| 1993 | 1 av 1000 | 0.000 | 0.123 | 0.000 |
-| 1994 | 1 av 1000 | 0.000 | 0.001 | 0.000 |
+| 1988 | 258 av 1000 | 0.113 | 2.036 | 0.000 |
+| 1989 | 120 av 1000 | 0.053 | 1.648 | 0.000 |
+| 1990 | 63 av 1000 | 0.022 | 1.390 | 0.000 |
+| 1991 | 80 av 1000 | 0.038 | 1.656 | 0.000 |
+| 1992 | 6 av 1000 | 0.003 | 0.893 | 0.000 |
+| 1993 | 2 av 1000 | 0.000 | 0.273 | 0.000 |
 
 ## Beregning i koden
 

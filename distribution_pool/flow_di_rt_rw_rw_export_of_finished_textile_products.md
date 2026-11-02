@@ -93,10 +93,23 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 1 % | 1 % |
 | Ikke-tekstil | 19 % | 15 % | 14 % | 12 % | 15 % | 14 % |
 | Andre fibre | 1 % | 3 % | 2 % | 3 % | 3 % | 2 % |
-| Syntetisk | 27 % | 30 % | 34 % | 41 % | 39 % | 35 % |
-| Ull | 9 % | 7 % | 9 % | 11 % | 13 % | 16 % |
+| Syntetisk | 27 % | 30 % | 34 % | 41 % | 39 % | 34 % |
+| Ull | 9 % | 7 % | 9 % | 10 % | 13 % | 16 % |
 
 <iframe src="../output_files/plots/pages/di_rt_rw_rw_export_of_finished_textile_products_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `08801:export:finished` | 53 % | 53 % | 53 % |
+| `08801_classification:export:finished` | 47 % | 47 % | 47 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.45 | 0.48 | 0.90 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.49 | 0.53 | 0.94 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 

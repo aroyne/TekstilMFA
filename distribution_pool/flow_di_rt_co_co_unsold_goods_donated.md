@@ -82,6 +82,21 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 <iframe src="../output_files/plots/pages/di_rt_co_co_unsold_goods_donated_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `unsold_donated` | 2 % | 9 % | 42 % |
+| `unsold_survey (shared method)` | 2 % | 9 % | 42 % |
+| `gap: unsold_donated` | 97 % | 82 % | 14 % |
+| `08801:import:finished` | – | 1 % | 1 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 1.12 | 0.65 | 0.13 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 1.15 | 0.70 | 0.13 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
+
 ## Beregning i koden
 
 Beregnes i `_unsold_goods_donated_mc` i [calculations/di_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/di_mc.py#L36). Dokumentasjonen i koden:

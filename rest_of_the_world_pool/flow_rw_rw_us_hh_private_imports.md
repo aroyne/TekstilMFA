@@ -75,12 +75,27 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 |---|---|---|---|---|---|---|
 | Bomull | 46 % | 40 % | 44 % | 35 % | 36 % | 36 % |
 | Regenerert cellulose | 2 % | 3 % | 3 % | 3 % | 3 % | 3 % |
-| Ikke-tekstil | 23 % | 19 % | 20 % | 21 % | 20 % | 20 % |
+| Ikke-tekstil | 23 % | 20 % | 20 % | 21 % | 20 % | 20 % |
 | Andre fibre | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % |
 | Syntetisk | 26 % | 32 % | 28 % | 36 % | 35 % | 35 % |
 | Ull | 3 % | 5 % | 5 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/rw_rw_us_hh_private_imports_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `retail_markup` | 36 % | 83 % | 91 % |
+| `grensehandel` | 4 % | 8 % | 9 % |
+| `crossborder_clothing_share` | 4 % | 8 % | – |
+| `gap: crossborder` | 57 % | – | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.49 | 0.35 | 0.14 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.54 | 0.38 | 0.15 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 

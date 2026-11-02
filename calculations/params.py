@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-from calculations.sampling import is_perturbed, item_rng, quantile
+from calculations.sampling import is_perturbed, normal_score, quantile
 from calculations.timeseries import AnchorSeries, GapNoise
 from calculations.utils import YEARS
 
@@ -37,7 +37,7 @@ class Parameters:
         # Main fibre stated by each HS8 code, built by scripts/build_hs_main_fibre.py.
         self.hs_main_fibre = pd.read_csv(f'{param_dir}/hs_main_fibre.csv', dtype=str)
 
-    def draw(self, seed, sim_id):
+    def draw(self, seed, sim_id, probe=None):
         """
         Returns (params, dataset_noise, anchors) for MC iteration sim_id;
         iteration 0 is the deterministic baseline, where every input has its
@@ -56,15 +56,21 @@ class Parameters:
 
         params also holds 'gap_noise', the GapNoise of the iteration, for
         series built from yearly data with gaps.
+
+        probe (sampling.Probe) sets one source to a fixed score in the
+        deterministic iteration, for the contribution analysis.
         """
         deterministic = sim_id == 0
 
-        def value(group, item_id, val, row, z_common=None, common_share=0.0):
-            if deterministic or not is_perturbed(row):
+        def value(group, item_id, val, row, method_group=None, common_share=0.0):
+            if not is_perturbed(row):
                 return val
-            z = stats.norm.ppf(item_rng(seed, sim_id, group, item_id).random())
-            if z_common is not None:
+            z = normal_score(seed, sim_id, group, item_id, probe)
+            if method_group:
+                z_common = normal_score(seed, sim_id, 'anchor_group', method_group, probe)
                 z = np.sqrt(common_share) * z_common + np.sqrt(1 - common_share) * z
+            if deterministic and z == 0:
+                return val
             return quantile(stats.norm.cdf(z), val, row)
 
         params = {}
@@ -80,22 +86,16 @@ class Parameters:
             params[f'lifetime_mean_{key}'] = value('lifetime', key, float(row['mean_years']), mean_row)
             params[f'lifetime_shape_{key}'] = float(row['shape'])
 
-        dataset_noise = DatasetNoise(self.datasets, seed, sim_id)
+        dataset_noise = DatasetNoise(self.datasets, seed, sim_id, probe)
 
-        z_groups = {}
         points = {}
         for _, row in self.anchor_table.dropna(subset=['value']).iterrows():
-            group = row['method_group']
-            z_common = None
-            if isinstance(group, str) and group and not deterministic:
-                if group not in z_groups:
-                    z_groups[group] = stats.norm.ppf(item_rng(seed, sim_id, 'anchor_group', group).random())
-                z_common = z_groups[group]
+            group = row['method_group'] if isinstance(row['method_group'], str) else None
             anchor_id = f"{row['parameter_id']}@{int(row['year'])}"
             points.setdefault(row['parameter_id'], {})[int(row['year'])] = value(
-                'anchor', anchor_id, float(row['value']), row, z_common, row['common_share'])
+                'anchor', anchor_id, float(row['value']), row, group, row['common_share'])
         gap_noise = GapNoise(seed, sim_id, params['gap_cv_interpolation'], params['gap_cv_extrapolation'],
-                             params['gap_cv_cap'])
+                             params['gap_cv_cap'], probe)
         anchors = {name: AnchorSeries(name, values, gap_noise) for name, values in points.items()}
         params['gap_noise'] = gap_noise
 
@@ -116,16 +116,20 @@ class DatasetNoise:
     not forced to be identical.
     """
 
-    def __init__(self, table, seed, sim_id):
+    def __init__(self, table, seed, sim_id, probe=None):
         self.rows = {str(row['dataset_name']).strip(): row for _, row in table.iterrows()}
         self.seed = seed
         self.sim_id = sim_id
+        self.probe = probe
 
     def _draw(self, name, item_id):
         row = self.rows[name]
-        if self.sim_id == 0 or not is_perturbed(row):
+        if not is_perturbed(row):
             return 1.0
-        return quantile(item_rng(self.seed, self.sim_id, 'dataset', item_id).random(), 1.0, row)
+        z = normal_score(self.seed, self.sim_id, 'dataset', item_id, self.probe)
+        if self.sim_id == 0 and z == 0:
+            return 1.0
+        return quantile(stats.norm.cdf(z), 1.0, row)
 
     def factor(self, name, part='', years=YEARS):
         if self.rows[name]['annual_draw'] == 'yes':

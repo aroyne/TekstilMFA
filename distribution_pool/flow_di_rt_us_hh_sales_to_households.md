@@ -77,12 +77,28 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 |---|---|---|---|---|---|---|
 | Bomull | 39 % | 39 % | 37 % | 28 % | 29 % | 31 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 19 % | 17 % | 18 % | 18 % | 18 % | 18 % |
+| Ikke-tekstil | 18 % | 17 % | 18 % | 18 % | 18 % | 18 % |
 | Andre fibre | 2 % | 3 % | 2 % | 3 % | 3 % | 2 % |
 | Syntetisk | 32 % | 32 % | 35 % | 42 % | 42 % | 41 % |
 | Ull | 5 % | 6 % | 5 % | 6 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/di_rt_us_hh_sales_to_households_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `institutional_share` | 43 % | 42 % | 40 % |
+| `08801:import:finished` | 26 % | 30 % | 31 % |
+| `08801_classification:import:finished` | 24 % | 27 % | 28 % |
+| `gap: preconsumer_waste_textile_industry` | 2 % | – | – |
+| `08801_classification:import:intermediate` | 1 % | – | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 8.45 | 11.50 | 9.91 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 9.16 | 12.82 | 10.42 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Klipping av negative verdier
 

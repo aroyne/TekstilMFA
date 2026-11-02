@@ -31,6 +31,10 @@ FLOWS_CSV = 'system/flows.csv'
 SUMMARY = 'output_files/MC_summary.csv'
 FIBRE_SUMMARY = 'output_files/MC_summary_fibre.csv'
 CLIPPING_SUMMARY = 'output_files/clipping_summary.csv'
+CONTRIBUTIONS = 'output_files/MC_uncertainty_contributions.csv'
+CONTRIBUTION_YEARS = [2000, 2010, 2025]
+# Sources shown per year on a flow page, by share of the variance.
+TOP_SOURCES = 5
 PLOT_DIR = 'output_files/plots/pages'
 KEY_YEARS = [1990, 2000, 2010, 2018, 2022, 2025]
 REPO_URL = 'https://github.com/aroyne/TekstilMFA/blob/main'
@@ -186,6 +190,7 @@ class Site:
         self.summary = pd.read_csv(SUMMARY)
         self.fibre = pd.read_csv(FIBRE_SUMMARY)
         self.clipping = pd.read_csv(CLIPPING_SUMMARY)
+        self.contributions = pd.read_csv(CONTRIBUTIONS)
         self.functions = flow_functions()
         self.pools = list(dict.fromkeys(self.processes['pool']))
         self.pool_name = dict(zip(self.processes['pool'], self.processes['pool_name']))
@@ -309,6 +314,42 @@ def _clipping(clipping, code):
     return lines
 
 
+def _uncertainty(site, code):
+    """
+    Section on which sources drive the uncertainty of a flow (first-order
+    analysis, uncertainty_contributions.py, D39): share of the variance for
+    the largest sources in a few years, and the first-order half-width of the
+    95 % interval against the Monte Carlo one.
+    """
+    rows = site.contributions[(site.contributions['flow_name'] == code)
+                              & site.contributions['year'].isin(CONTRIBUTION_YEARS)]
+    if rows.empty:
+        return []
+    years = [y for y in CONTRIBUTION_YEARS if y in set(rows['year'])]
+    top = rows.sort_values('share', ascending=False).groupby('year').head(TOP_SOURCES)
+    sources = list(dict.fromkeys(top.sort_values(['year', 'share'], ascending=[False, False])['source']))
+    shares = rows.pivot_table(index='source', columns='year', values='share', aggfunc='first')
+    lines = ['## Usikkerhetsbidrag', '',
+             'Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og '
+             '97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). '
+             'Årlige datasett (for eksempel `08801:import:finished`) er summert over år.', '',
+             '| Kilde | ' + ' | '.join(str(y) for y in years) + ' |', '|---' * (len(years) + 1) + '|']
+    for source in sources:
+        cells = [f"{100 * shares.loc[source, y]:.0f} %" if pd.notna(shares.loc[source].get(y)) else '–'
+                 for y in years]
+        lines.append(f"| `{source}` | " + ' | '.join(cells) + ' |')
+    linear = rows.groupby('year')['linear_half_width'].first()
+    mc = site.summary[(site.summary['flow_name'] == code) & site.summary['product'].isin(['TOTAL', 'ALL'])]
+    mc = mc.drop_duplicates('year', keep='last').set_index('year')
+    lines.append('| Halvt 95 %-intervall, førsteordens (kt) | '
+                 + ' | '.join(f'{linear[y]:.2f}' for y in years) + ' |')
+    lines.append('| Halvt 95 %-intervall, Monte Carlo (kt) | '
+                 + ' | '.join(f"{(mc.loc[y, 'p97_5'] - mc.loc[y, 'p2_5']) / 2:.2f}" for y in years) + ' |')
+    lines += ['', 'Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, '
+              'klipping, skjeve kilder eller produkter av usikre faktorer).', '']
+    return lines
+
+
 def _fibre_rule(code):
     from calculations import fibre_layer
     if code in MANUFACTURING_RULES:
@@ -350,7 +391,7 @@ def write_flow_page(site, row, nav_order):
         utils_stat.plot_flow_materials(site.fibre, code, f"{row['name']} – per materiale (median)", fibre_plot)
         body += ['## Tidsserie', '', _iframe(plot, 420), '']
         after = (_without_sacks(site.summary, code) + _composition(site, code, row['name'], fibre_plot)
-                 + _clipping(site.clipping, code))
+                 + _uncertainty(site, code) + _clipping(site.clipping, code))
         if code in site.functions:
             file, func, line, doc = site.functions[code]
             quoted = '\n'.join('> ' + l if l else '>' for l in doc.splitlines())

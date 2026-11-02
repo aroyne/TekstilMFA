@@ -65,8 +65,8 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 2 % | 1 % | 0 % | 0 % | 0 % | 0 % |
-| Klær | 27 % | 24 % | 21 % | 21 % | 21 % | 21 % |
-| Hjemmetekstiler | 40 % | 45 % | 49 % | 49 % | 49 % | 49 % |
+| Klær | 27 % | 24 % | 21 % | 22 % | 22 % | 22 % |
+| Hjemmetekstiler | 40 % | 44 % | 49 % | 48 % | 48 % | 48 % |
 | Andre konfeksjonerte varer | 7 % | 5 % | 3 % | 3 % | 3 % | 3 % |
 | Presenninger og telt | 24 % | 26 % | 27 % | 27 % | 27 % | 27 % |
 
@@ -83,6 +83,24 @@ Balansen i MA.TX per materiale (klippet til 0), lik for alle varetyper.
 | Ull | 4 % | 4 % | 7 % | 9 % | 9 % | 8 % |
 
 <iframe src="../output_files/plots/pages/ma_tx_di_rt_domestic_finished_products_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `08801:import:intermediate` | 25 % | 33 % | 35 % |
+| `08801_classification:import:intermediate` | 26 % | 33 % | 33 % |
+| `08801:export:intermediate` | 5 % | 11 % | 8 % |
+| `08801_classification:export:intermediate` | 5 % | 11 % | 7 % |
+| `vareproduksjon` | 2 % | 4 % | 5 % |
+| `gap: preconsumer_waste_textile_industry` | 28 % | – | 1 % |
+| `preconsumer_waste_textile_industry` | 6 % | 4 % | 4 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 2.24 | 1.07 | 0.96 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 2.40 | 1.13 | 1.03 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Klipping av negative verdier
 

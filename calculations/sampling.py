@@ -43,6 +43,35 @@ def item_rng(seed, sim_id, group, item_id):
     return np.random.default_rng(np.random.SeedSequence(seed, spawn_key=(key, sim_id)))
 
 
+class Probe:
+    """
+    One uncertainty source set to a fixed standard-normal score z in an
+    otherwise deterministic run (iteration 0), for the contribution analysis.
+    Every source the model asks for is recorded in `requested`, so a probe
+    without a target traces which sources a run uses.
+    """
+
+    def __init__(self, group=None, item_id=None, z=0.0):
+        self.target = (group, item_id)
+        self.z_value = z
+        self.requested = set()
+
+    def z(self, group, item_id):
+        self.requested.add((group, item_id))
+        return self.z_value if (group, item_id) == self.target else 0.0
+
+
+def normal_score(seed, sim_id, group, item_id, probe=None):
+    """
+    Standard-normal score of one item: drawn from the item's own stream in
+    iterations 1..n; 0 in the deterministic iteration, or the probe's value
+    for the probed item.
+    """
+    if sim_id == 0:
+        return probe.z(group, item_id) if probe is not None else 0.0
+    return float(stats.norm.ppf(item_rng(seed, sim_id, group, item_id).random()))
+
+
 def is_perturbed(row):
     """A row is perturbed unless its distribution is 'none'; a perturbed row without bounds is an error."""
     dist = str(row['distribution_type']).strip().lower()

@@ -78,6 +78,19 @@ Hovedfiberen fra HS-koden (fiber og garn, FY).
 
 <iframe src="../output_files/plots/pages/rw_rw_ma_fi_fibre_and_yarn_import_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `08801:import:intermediate` | 53 % | 53 % | 53 % |
+| `08801_classification:import:intermediate` | 47 % | 47 % | 47 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.82 | 0.43 | 0.43 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.90 | 0.45 | 0.44 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
+
 ## Beregning i koden
 
 Beregnes i `_fibre_and_yarn_import_mc` i [calculations/ma_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/ma_mc.py#L66). Dokumentasjonen i koden:

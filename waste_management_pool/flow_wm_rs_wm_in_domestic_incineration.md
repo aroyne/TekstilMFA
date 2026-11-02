@@ -69,10 +69,30 @@ Blandingen av alt som går inn i WM.RS samme år.
 | Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 19 % | 17 % | 17 % | 16 % | 16 % | 16 % |
 | Andre fibre | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
-| Syntetisk | 42 % | 41 % | 43 % | 50 % | 50 % | 51 % |
+| Syntetisk | 42 % | 40 % | 43 % | 50 % | 50 % | 51 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_in_domestic_incineration_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `residual_core` | 13 % | 74 % | 82 % |
+| `institutional_share` | 1 % | 17 % | 11 % |
+| `08801_classification:import:finished` | – | 2 % | 3 % |
+| `gap: domestic_share_TA` | – | – | 1 % |
+| `residual_export_share` | – | – | 1 % |
+| `landfill_share_residual` | 14 % | 3 % | – |
+| `gap: residual_export_share` | – | 2 % | – |
+| `gap: residual_core` | 70 % | 1 % | – |
+| `lifetime_mean_US.HH_CA` | 1 % | 1 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 12.73 | 10.04 | 13.05 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 12.25 | 9.97 | 13.95 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Klipping av negative verdier
 

@@ -151,13 +151,13 @@ DI.RT-US.IC-Sales to institutions and businesses-TOT,TOT,2022,1000,0,0.0,0.0,0.0
 DI.RT-US.IC-Sales to institutions and businesses-TOT,TOT,2023,1000,0,0.0,0.0,0.0
 DI.RT-US.IC-Sales to institutions and businesses-TOT,TOT,2024,1000,0,0.0,0.0,0.0
 DI.RT-US.IC-Sales to institutions and businesses-TOT,TOT,2025,1000,0,0.0,0.0,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1988,1000,238,0.10611821549488076,1.9336341565563255,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1989,1000,115,0.04970051631940497,1.6278330808668393,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1990,1000,60,0.020541581007055356,1.2024158723591871,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1991,1000,77,0.03625825169644464,1.6133864502475643,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1992,1000,7,0.0023696099209995778,0.7404634257581408,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1993,1000,1,0.00012345263502382586,0.12345263502382586,0.0
-US.HH-CO.CO-Separate collection from households-TOT,TOT,1994,1000,1,9.571920977395897e-07,0.0009571920977395898,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1988,1000,258,0.11304346634507095,2.035567327034677,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1989,1000,120,0.05270072814977408,1.6478475720887618,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1990,1000,63,0.02205173681993565,1.3899918182145914,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1991,1000,80,0.037840880696566756,1.6555765009935781,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1992,1000,6,0.002717370810671931,0.8934769516246526,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1993,1000,2,0.0003576115219595657,0.27300722602398286,0.0
+US.HH-CO.CO-Separate collection from households-TOT,TOT,1994,1000,0,0.0,0.0,0.0
 US.HH-CO.CO-Separate collection from households-TOT,TOT,1995,1000,0,0.0,0.0,0.0
 US.HH-CO.CO-Separate collection from households-TOT,TOT,1996,1000,0,0.0,0.0,0.0
 US.HH-CO.CO-Separate collection from households-TOT,TOT,1997,1000,0,0.0,0.0,0.0
@@ -263,7 +263,7 @@ WM.RC-RW.RW-Export for recycling-TOT,TOT,2020,1000,0,0.0,0.0,0.0
 WM.RC-RW.RW-Export for recycling-TOT,TOT,2021,1000,0,0.0,0.0,0.0
 WM.RC-RW.RW-Export for recycling-TOT,TOT,2022,1000,0,0.0,0.0,0.0
 WM.RC-RW.RW-Export for recycling-TOT,TOT,2023,1000,0,0.0,0.0,0.0
-WM.RC-RW.RW-Export for recycling-TOT,TOT,2024,1000,3,7.612250760707877e-05,0.0454058285436591,0.0
+WM.RC-RW.RW-Export for recycling-TOT,TOT,2024,1000,2,3.271793865464857e-05,0.01783159390767073,0.0
 WM.RC-RW.RW-Export for recycling-TOT,TOT,2025,1000,61,0.0035856657145818616,0.17957100574305376,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,1988,1000,0,0.0,0.0,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,1989,1000,0,0.0,0.0,0.0
@@ -303,9 +303,9 @@ WM.RS-WM.IN-Domestic incineration-TOT,TOT,2022,1000,0,0.0,0.0,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,2023,1000,0,0.0,0.0,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,2024,1000,0,0.0,0.0,0.0
 WM.RS-WM.IN-Domestic incineration-TOT,TOT,2025,1000,0,0.0,0.0,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1988,1000,19,0.0014566977793954135,0.3100066474782892,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1989,1000,43,0.004277757258420412,0.47340121913438415,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1990,1000,23,0.002721687757360659,0.3753238303966562,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1988,1000,19,0.0014566977793954113,0.3100066474782892,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1989,1000,38,0.003929494281945541,0.42483020541974503,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1990,1000,19,0.002301597069641611,0.35135091931233275,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1991,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1992,1000,2,1.9635936607005424e-06,0.001821539602358778,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1993,1000,0,0.0,0.0,0.0
@@ -315,23 +315,23 @@ MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1996,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1997,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1998,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,1999,1000,0,0.0,0.0,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2000,1000,100,0.01967704449154904,0.6685107072343057,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2000,1000,99,0.0183270045627846,0.752305635235399,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2001,1000,0,0.0,0.0,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2002,1000,1,1.7054303308800645e-05,0.017054303308800645,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2003,1000,3,5.081786026748092e-05,0.03445812529570036,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2004,1000,18,0.002390305936557092,0.31427777044964045,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2005,1000,2,0.00011757540133661626,0.08469122970886522,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2002,1000,0,0.0,0.0,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2003,1000,4,0.000192970998915865,0.08517485418250437,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2004,1000,17,0.0023218402443841856,0.36813209320269724,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2005,1000,2,0.0001498355297517967,0.075681800102391,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2006,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2007,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2008,1000,0,0.0,0.0,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2009,1000,26,0.001759615526384563,0.23500506000028554,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2010,1000,1,1.5261789452336583e-06,0.0015261789452336583,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2011,1000,1,2.3071917785424388e-06,0.002307191778542439,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2009,1000,25,0.0017297703059876188,0.22598550730650202,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2010,1000,0,0.0,0.0,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2011,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2012,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2013,1000,0,0.0,0.0,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2014,1000,0,0.0,0.0,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2015,1000,5,0.0002192570795103248,0.0843167989968272,0.0
-MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2016,1000,1,2.3874658366638267e-06,0.002387465836663827,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2014,1000,1,6.432664431717239e-05,0.06432664431717239,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2015,1000,7,0.0003481200289297809,0.11194683629614444,0.0
+MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2016,1000,1,1.8627395165455862e-06,0.0018627395165455862,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2017,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2018,1000,0,0.0,0.0,0.0
 MA.FI-MA.TX-Yarn to textile manufacturing-TOT,fibre,2019,1000,0,0.0,0.0,0.0
@@ -377,5 +377,5 @@ WM.RC-RW.RW-Export for recycling-TOT,fibre,2020,1000,0,0.0,0.0,0.0
 WM.RC-RW.RW-Export for recycling-TOT,fibre,2021,1000,0,0.0,0.0,0.0
 WM.RC-RW.RW-Export for recycling-TOT,fibre,2022,1000,0,0.0,0.0,0.0
 WM.RC-RW.RW-Export for recycling-TOT,fibre,2023,1000,0,0.0,0.0,0.0
-WM.RC-RW.RW-Export for recycling-TOT,fibre,2024,1000,33,0.0002261050124192446,0.04903309520384445,0.0
-WM.RC-RW.RW-Export for recycling-TOT,fibre,2025,1000,221,0.009097733961785473,0.197456740466519,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2024,1000,32,0.00019652357780914687,0.024464905014333873,0.0
+WM.RC-RW.RW-Export for recycling-TOT,fibre,2025,1000,228,0.008993254423216917,0.1988573952218142,0.0

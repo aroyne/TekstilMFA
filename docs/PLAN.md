@@ -96,6 +96,12 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Plan for fase A ([notat](../claude_tekst/2026-11-02_PLAN_usikkerhet_fase_A.md)) og vurdering av Weijenberg m.fl. 2026 ([notat](../claude_tekst/2026-11-02_Weijenberg_robust_tiltaksvurdering.md)). Alle fire beslutninger er tatt.
 - [x] A0: Én tilfallsstrøm per element (`item_rng`). Konvergenstest med to frø: medianene ligger 0,4 % fra hverandre og bredden 2–8 %. Seks ubrukte rader er fjernet fra parametertabellene (`lowvalue_undercoverage_CL` er beholdt for følsomhet, D14).
 - [x] A1–A3 (D39): 95 %-intervall og fordelingsregelen fra NitrogenBudsjett. Kildetype per rad, flat fordeling for type 4, årlige trekk for 08801, grensehandel og totalkalkylen, egen faktor for klassifisering av handelsdata, og felles metodefaktor for ankerpunkter. Tabellene er konvertert med `claude_tekst/_convert_uncertainty_D39.py`. Handelsflytene går fra ±3,6 % til ±7 %, innsamlingen fra ±4 % til ±8 % og lageret i husholdningene 2025 fra ±53 % til ±56 %.
+- [x] Bidragsanalyse (`uncertainty_contributions.py`, 485 kilder, ca. 80 s), vist på flytsidene. Hovedfunn:
+  - Lageret i husholdningene (restledd): gap-støy i restavfallet (år uten anker, i praksis før 2009) 75–84 %, restavfallsankrene 11–14 %, institusjonsandelen 2–5 %. Usikkerheten i lageret er altså nesten bare at vi ikke vet restavfallet før 2009.
+  - Lagerendringen: restavfallsankrene ca. 55 %, import av ferdigvarer (årlig og klassifisering) 15–25 %, institusjonsandelen 6–15 %, VOEC ca. 17 % i 2025.
+  - Salg til husholdningene: institusjonsandelen ca. 40 %, import av ferdigvarer ca. 60 %.
+  - Separat innsamling: eksport av brukte tekstiler (årlig og klassifisering) ca. 85 %, `retained_share_collected` ca. 16 %.
+  - Lagermodellen: levetiden for klær ca. 66 % og hjemmetekstiler ca. 23 %.
 
 ## Neste
 
@@ -110,7 +116,7 @@ Prinsipper:
 Fasene A og B går parallelt. Bidragsanalysen i A brukes til å prioritere i B.
 
 #### Fase A – Robust usikkerhet (prinsippene fra NitrogenBudsjett)
-Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og fire beslutninger: [notat 2026-11-02](../claude_tekst/2026-11-02_PLAN_usikkerhet_fase_A.md). Punkt 1–3 og konvergenstesten er gjort (D39). Gjenstår: bidragsanalysen (A0), skjøter (A4), strukturkjøringer (A5) og innsvingingstesten.
+Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og fire beslutninger: [notat 2026-11-02](../claude_tekst/2026-11-02_PLAN_usikkerhet_fase_A.md). Punkt 1–3, bidragsanalysen og konvergenstesten er gjort (D39). Gjenstår: skjøter og nivåene i D30 (A4), strukturkjøringer (A5) og innsvingingstesten. **A4 er nå viktigst:** gap-støyen i restavfallsserien (ekstrapolering før 2009, 5 % per år) står for 75–84 % av variansen i lageret i husholdningene.
 1. Én tolkning av grensene. Anbefalt: alle grenser er 95 %-intervall, også for PERT (problem P1 i N-planen).
 2. Usikkerhet per datasett og periode etter **hvordan tallet er laget**, ikke hvem som publiserer det: registrert eller tellet, utvalgsundersøkelse, modellbasert statistikk, ekspertanslag (en lett pedigree, AP3 og P9 i N-planen). Begrunnelse i en egen kolonne.
 3. Systematisk og årlig del av datasettstøyen, og egne faktorer for uavhengige deler av samme datasett (AP2).
