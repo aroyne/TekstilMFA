@@ -141,7 +141,7 @@ def aggregate_by_fibre_class(trade, hs_main_fibre, impeks, category, products):
     """
     Net weight (kg) of in-scope trade in one direction (1 import, 2 export)
     and category, array (year, product, fibre class). Summed once before the
-    MC loop; the 08801 noise factor cancels out in the shares.
+    MC loop; the 08801 noise factors cancel out in the shares.
     """
     sel = trade[(trade['impeks'] == impeks) & (trade['category'] == category) & (trade['in_scope'] == 'yes')
                 & trade['product'].isin(products)]

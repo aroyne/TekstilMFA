@@ -6,10 +6,13 @@ values per iteration. Parameters whose value is still blank (status 'todo')
 are left out of the drawn set, so any calculation that uses one crashes with
 a KeyError instead of silently running on a missing value.
 """
+import numpy as np
 import pandas as pd
+from scipy import stats
 
-from calculations.sampling import draw_perturbed_value
+from calculations.sampling import is_perturbed, item_rng, quantile
 from calculations.timeseries import AnchorSeries, GapNoise
+from calculations.utils import YEARS
 
 PARAM_DIR = 'parameters'
 ANCHOR_VALUES = 'data_files/anchor_values.csv'
@@ -34,59 +37,97 @@ class Parameters:
         # Main fibre stated by each HS8 code, built by scripts/build_hs_main_fibre.py.
         self.hs_main_fibre = pd.read_csv(f'{param_dir}/hs_main_fibre.csv', dtype=str)
 
-    def draw(self, rng, deterministic):
+    def draw(self, seed, sim_id):
         """
-        Returns (params, dataset_noise, anchors) for one MC iteration.
+        Returns (params, dataset_noise, anchors) for MC iteration sim_id;
+        iteration 0 is the deterministic baseline, where every input has its
+        base value. Every item is drawn from its own random-number stream
+        (item_rng), so a draw depends only on the seed, the iteration and the
+        item, and through its quantile function (D39).
 
         params        : {parameter_id: value} for every global parameter with
                         a value, plus 'lifetime_mean_<stock>_<product>' and
                         'lifetime_shape_<stock>_<product>' for every lifetime
                         with a mean (the mean is drawn, the shape is fixed).
-        dataset_noise : {dataset_name: multiplicative factor}, 1.0 in the
-                        deterministic round. One factor per dataset and
-                        iteration, i.e. fully correlated across years.
-        anchors       : {parameter_id: AnchorSeries}; every anchor point is
-                        drawn independently of the others, and the years
-                        between and outside them get gap noise (D30).
+        dataset_noise : DatasetNoise of the iteration.
+        anchors       : {parameter_id: AnchorSeries}; anchor points with the
+                        same method_group share part of their draw (D39), and
+                        the years between and outside them get gap noise (D30).
 
         params also holds 'gap_noise', the GapNoise of the iteration, for
         series built from yearly data with gaps.
         """
+        deterministic = sim_id == 0
+
+        def value(group, item_id, val, row, z_common=None, common_share=0.0):
+            if deterministic or not is_perturbed(row):
+                return val
+            z = stats.norm.ppf(item_rng(seed, sim_id, group, item_id).random())
+            if z_common is not None:
+                z = np.sqrt(common_share) * z_common + np.sqrt(1 - common_share) * z
+            return quantile(stats.norm.cdf(z), val, row)
+
         params = {}
         for _, row in self.global_params.dropna(subset=['value']).iterrows():
-            val = float(row['value'])
-            if not deterministic:
-                val = draw_perturbed_value(rng, val, row['lower_bound'], row['upper_bound'],
-                                           row['uncertainty_type'], row['distribution_type'])
-            params[row['parameter_id']] = val
+            params[row['parameter_id']] = value('global', row['parameter_id'], float(row['value']), row)
 
         for _, row in self.lifetimes.dropna(subset=['mean_years']).iterrows():
-            mean = float(row['mean_years'])
-            if not deterministic:
-                mean = draw_perturbed_value(rng, mean, row['lower_bound'], row['upper_bound'],
-                                            row['uncertainty_type'], 'PERT')
             key = f"{row['stock']}_{row['product']}"
-            params[f'lifetime_mean_{key}'] = mean
+            # The lifetime table's distribution_type is the lifetime
+            # distribution itself; the mean is drawn by mean_distribution.
+            mean_row = row.rename({'distribution_type': 'lifetime_distribution',
+                                   'mean_distribution': 'distribution_type'})
+            params[f'lifetime_mean_{key}'] = value('lifetime', key, float(row['mean_years']), mean_row)
             params[f'lifetime_shape_{key}'] = float(row['shape'])
 
-        dataset_noise = {}
-        for _, row in self.datasets.iterrows():
-            factor = 1.0
-            if not deterministic:
-                factor = draw_perturbed_value(rng, 1.0, row['lower_bound'], row['upper_bound'],
-                                              row['uncertainty_type'], row['distribution_type'])
-            dataset_noise[str(row['dataset_name']).strip()] = factor
+        dataset_noise = DatasetNoise(self.datasets, seed, sim_id)
 
+        z_groups = {}
         points = {}
         for _, row in self.anchor_table.dropna(subset=['value']).iterrows():
-            val = float(row['value'])
-            if not deterministic:
-                val = draw_perturbed_value(rng, val, row['lower_bound'], row['upper_bound'],
-                                           row['uncertainty_type'], row['distribution_type'])
-            points.setdefault(row['parameter_id'], {})[int(row['year'])] = val
-        gap_noise = GapNoise(rng, deterministic, params['gap_cv_interpolation'], params['gap_cv_extrapolation'],
+            group = row['method_group']
+            z_common = None
+            if isinstance(group, str) and group and not deterministic:
+                if group not in z_groups:
+                    z_groups[group] = stats.norm.ppf(item_rng(seed, sim_id, 'anchor_group', group).random())
+                z_common = z_groups[group]
+            anchor_id = f"{row['parameter_id']}@{int(row['year'])}"
+            points.setdefault(row['parameter_id'], {})[int(row['year'])] = value(
+                'anchor', anchor_id, float(row['value']), row, z_common, row['common_share'])
+        gap_noise = GapNoise(seed, sim_id, params['gap_cv_interpolation'], params['gap_cv_extrapolation'],
                              params['gap_cv_cap'])
         anchors = {name: AnchorSeries(name, values, gap_noise) for name, values in points.items()}
         params['gap_noise'] = gap_noise
 
         return params, dataset_noise, anchors
+
+
+class DatasetNoise:
+    """
+    Multiplicative uncertainty factors for the datasets in one iteration
+    (dataset_uncertainties.csv), 1 in the deterministic baseline.
+
+    factor(name, part) is an array with one factor per year. A dataset with
+    annual_draw = 'yes' (registered data and surveys, whose errors are mostly
+    new each year) gets an independent factor for each year; the others one
+    factor for all years, since their errors are mostly systematic. Each part
+    of a dataset (e.g. import and export of one goods category) is drawn
+    independently from the same row, so that errors in different parts are
+    not forced to be identical.
+    """
+
+    def __init__(self, table, seed, sim_id):
+        self.rows = {str(row['dataset_name']).strip(): row for _, row in table.iterrows()}
+        self.seed = seed
+        self.sim_id = sim_id
+
+    def _draw(self, name, item_id):
+        row = self.rows[name]
+        if self.sim_id == 0 or not is_perturbed(row):
+            return 1.0
+        return quantile(item_rng(self.seed, self.sim_id, 'dataset', item_id).random(), 1.0, row)
+
+    def factor(self, name, part='', years=YEARS):
+        if self.rows[name]['annual_draw'] == 'yes':
+            return np.array([self._draw(name, f'{name}:{part}@{year}') for year in years])
+        return np.full(len(years), self._draw(name, f'{name}:{part}'))

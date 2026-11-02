@@ -4,13 +4,17 @@
 Foreign trade flows from SSB table 08801 (HS8 codes, net weight in kg),
 split by product group through parameters/hs_mapping.csv. The table is
 summed once per direction, category, product and year before the MC loop;
-each iteration only applies the 08801 noise factor.
+each iteration only applies the noise factors (D39): a yearly factor for
+registration errors and a systematic factor for codes that do not match the
+product group (e.g. non-textile goods under a textile code), each drawn
+independently for import and export of each goods category.
 """
 import pandas as pd
 
 from calculations.utils import YEARS
 
 TRADE_DATASET = '08801'
+CLASSIFICATION_DATASET = '08801_classification'
 
 
 def map_hs_to_product(df_trade, df_mapping):
@@ -53,16 +57,18 @@ def _by_product_and_year(preloaded_data, column, is_import, category, products):
 
 
 def trade_kt(preloaded_data, dataset_noise, is_import, category, products):
-    """Trade in kt, array (year, product), with the 08801 noise factor of the iteration."""
+    """Trade in kt, array (year, product), with the 08801 noise factors of the iteration."""
     kg = _by_product_and_year(preloaded_data, 'amount', is_import, category, products)
-    return kg / 1e6 * dataset_noise[TRADE_DATASET]
+    part = f"{'import' if is_import else 'export'}:{category}"
+    noise = dataset_noise.factor(TRADE_DATASET, part) * dataset_noise.factor(CLASSIFICATION_DATASET, part)
+    return kg / 1e6 * noise[:, None]
 
 
 def import_unit_value(preloaded_data, products):
     """
     Customs import value per kg (NOK/kg) per year for the given finished
     products together, array (year,). A ratio of two quantities from the same
-    records, so the 08801 noise factor cancels out and is not applied.
+    records, so the 08801 noise factors cancel out and are not applied.
     """
     nok = _by_product_and_year(preloaded_data, 'value_nok', True, 'finished', products).sum(axis=1)
     kg = _by_product_and_year(preloaded_data, 'amount', True, 'finished', products).sum(axis=1)

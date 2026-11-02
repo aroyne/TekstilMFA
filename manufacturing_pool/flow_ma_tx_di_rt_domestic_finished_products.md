@@ -65,8 +65,8 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 2 % | 1 % | 0 % | 0 % | 0 % | 0 % |
-| Klær | 27 % | 24 % | 21 % | 22 % | 21 % | 21 % |
-| Hjemmetekstiler | 40 % | 45 % | 49 % | 48 % | 49 % | 49 % |
+| Klær | 27 % | 24 % | 21 % | 21 % | 21 % | 21 % |
+| Hjemmetekstiler | 40 % | 45 % | 49 % | 49 % | 49 % | 49 % |
 | Andre konfeksjonerte varer | 7 % | 5 % | 3 % | 3 % | 3 % | 3 % |
 | Presenninger og telt | 24 % | 26 % | 27 % | 27 % | 27 % | 27 % |
 
@@ -76,11 +76,11 @@ Balansen i MA.TX per materiale (klippet til 0), lik for alle varetyper.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 48 % | 45 % | 20 % | 13 % | 11 % | 11 % |
+| Bomull | 48 % | 46 % | 20 % | 13 % | 11 % | 11 % |
 | Regenerert cellulose | 9 % | 9 % | 3 % | 2 % | 2 % | 1 % |
 | Andre fibre | 1 % | 4 % | 9 % | 4 % | 9 % | 9 % |
-| Syntetisk | 37 % | 37 % | 60 % | 71 % | 69 % | 71 % |
-| Ull | 4 % | 4 % | 8 % | 10 % | 10 % | 8 % |
+| Syntetisk | 38 % | 37 % | 60 % | 71 % | 69 % | 71 % |
+| Ull | 4 % | 4 % | 7 % | 9 % | 9 % | 8 % |
 
 <iframe src="../output_files/plots/pages/ma_tx_di_rt_domestic_finished_products_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

@@ -62,12 +62,12 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Tepper | 49 % | 31 % | 23 % | 25 % | 26 % | 28 % |
-| Klær | 34 % | 47 % | 51 % | 46 % | 44 % | 43 % |
-| Sko | 1 % | 2 % | 2 % | 2 % | 2 % | 2 % |
-| Hjemmetekstiler | 8 % | 11 % | 13 % | 12 % | 12 % | 10 % |
-| Andre konfeksjonerte varer | 1 % | 2 % | 2 % | 3 % | 5 % | 5 % |
-| Presenninger og telt | 6 % | 8 % | 8 % | 11 % | 12 % | 11 % |
+| Tepper | 49 % | 31 % | 23 % | 25 % | 25 % | 28 % |
+| Klær | 33 % | 46 % | 50 % | 46 % | 44 % | 43 % |
+| Sko | 1 % | 2 % | 2 % | 2 % | 2 % | 1 % |
+| Hjemmetekstiler | 9 % | 12 % | 14 % | 14 % | 13 % | 12 % |
+| Andre konfeksjonerte varer | 1 % | 2 % | 2 % | 3 % | 4 % | 5 % |
+| Presenninger og telt | 6 % | 7 % | 8 % | 11 % | 12 % | 11 % |
 
 ### Materiale (fiberlag, D19)
 
@@ -78,7 +78,7 @@ Fibergruppene i tekstillageret i årgangsmodellen for institusjoner og bedrifter
 | Bomull | 29 % | 36 % | 38 % | 29 % | 28 % | 28 % |
 | Regenerert cellulose | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
 | Andre fibre | 4 % | 6 % | 5 % | 5 % | 5 % | 5 % |
-| Syntetisk | 57 % | 46 % | 47 % | 56 % | 58 % | 58 % |
+| Syntetisk | 56 % | 46 % | 47 % | 56 % | 57 % | 58 % |
 | Ull | 7 % | 9 % | 7 % | 7 % | 6 % | 7 % |
 
 <iframe src="../output_files/plots/pages/us_ic_en_wa_fibre_release_in_industrial_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>

@@ -72,8 +72,8 @@ Blandingen av garn og metervare som går inn i MA.TX samme år.
 | Bomull | 49 % | 43 % | 21 % | 13 % | 11 % | 9 % |
 | Regenerert cellulose | 8 % | 7 % | 2 % | 2 % | 2 % | 1 % |
 | Andre fibre | 1 % | 3 % | 7 % | 4 % | 8 % | 7 % |
-| Syntetisk | 38 % | 43 % | 61 % | 67 % | 65 % | 70 % |
-| Ull | 4 % | 4 % | 9 % | 14 % | 14 % | 13 % |
+| Syntetisk | 38 % | 43 % | 61 % | 67 % | 66 % | 71 % |
+| Ull | 4 % | 4 % | 8 % | 14 % | 13 % | 12 % |
 
 <iframe src="../output_files/plots/pages/ma_tx_wm_rs_preconsumer_production_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

@@ -38,7 +38,7 @@ nav_order: 2
 
 #### Antakelser
 
-- 12 % (8–15 %, PERT) av tilførselen av klær, hjemmetekstiler, sko, tepper, presenninger og andre konfeksjonerte varer. Sekker (SA) er emballasje og går helt hit (D13), og garn i detaljopplegg går ikke hit.
+- 12 % (4–15 %, flat fordeling fordi andelen er et ekspertanslag; MC-medianen blir derfor ca. 9,5 %) av tilførselen av klær, hjemmetekstiler, sko, tepper, presenninger og andre konfeksjonerte varer. Sekker (SA) er emballasje og går helt hit (D13), og garn i detaljopplegg går ikke hit.
 - Samme andel i alle år.
 
 #### Sammensetning (varetype og materiale)
@@ -57,12 +57,12 @@ Sekker (SA) er emballasje (D13) og kan dominere flyten. Kt per år, median med 9
 
 | År | I alt | Sekker | Uten sekker | Sekkenes andel |
 |---|---|---|---|---|
-| 1990 | 12.62 (8.60–15.45) | 2.75 (2.66–2.86) | 9.87 (5.91–12.64) | 22 % |
-| 2000 | 18.48 (13.68–21.82) | 6.46 (6.24–6.71) | 12.02 (7.14–15.31) | 35 % |
-| 2010 | 24.60 (18.15–29.11) | 8.45 (8.16–8.77) | 16.16 (9.60–20.58) | 34 % |
-| 2018 | 27.76 (21.79–32.03) | 12.53 (12.10–13.00) | 15.23 (9.02–19.37) | 45 % |
-| 2022 | 29.90 (23.60–34.42) | 13.90 (13.42–14.42) | 16.00 (9.47–20.35) | 46 % |
-| 2025 | 26.69 (21.36–30.54) | 13.17 (12.72–13.67) | 13.56 (8.02–17.21) | 49 % |
+| 1990 | 11.09 (6.53–15.87) | 2.76 (2.55–2.97) | 8.34 (3.77–12.98) | 25 % |
+| 2000 | 16.60 (11.01–22.15) | 6.47 (6.00–6.95) | 10.08 (4.63–15.61) | 39 % |
+| 2010 | 21.89 (14.55–29.89) | 8.45 (7.82–9.09) | 13.49 (6.18–21.11) | 39 % |
+| 2018 | 25.32 (18.14–32.97) | 12.50 (11.64–13.55) | 12.71 (5.82–19.97) | 49 % |
+| 2022 | 27.34 (19.88–35.36) | 13.90 (12.88–14.98) | 13.49 (6.05–20.95) | 51 % |
+| 2025 | 24.59 (17.99–31.44) | 13.16 (12.23–14.19) | 11.35 (5.15–17.89) | 54 % |
 
 ## Sammensetning
 
@@ -72,13 +72,13 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Tepper | 16 % | 7 % | 6 % | 6 % | 6 % | 6 % |
-| Klær | 33 % | 32 % | 32 % | 24 % | 24 % | 22 % |
-| Sko | 10 % | 9 % | 9 % | 7 % | 7 % | 6 % |
-| Hjemmetekstiler | 14 % | 12 % | 12 % | 10 % | 9 % | 8 % |
-| Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 4 % | 4 % |
-| Sekker | 22 % | 35 % | 34 % | 45 % | 46 % | 49 % |
-| Presenninger og telt | 4 % | 3 % | 4 % | 4 % | 4 % | 3 % |
+| Tepper | 15 % | 7 % | 6 % | 6 % | 5 % | 6 % |
+| Klær | 31 % | 30 % | 30 % | 22 % | 22 % | 21 % |
+| Sko | 10 % | 8 % | 8 % | 7 % | 6 % | 6 % |
+| Hjemmetekstiler | 13 % | 11 % | 12 % | 10 % | 8 % | 7 % |
+| Andre konfeksjonerte varer | 2 % | 2 % | 2 % | 3 % | 3 % | 4 % |
+| Sekker | 25 % | 39 % | 39 % | 50 % | 51 % | 54 % |
+| Presenninger og telt | 4 % | 3 % | 3 % | 4 % | 4 % | 3 % |
 
 ### Materiale (fiberlag, D19)
 
@@ -86,12 +86,12 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 31 % | 26 % | 25 % | 16 % | 16 % | 16 % |
-| Regenerert cellulose | 2 % | 2 % | 1 % | 2 % | 1 % | 1 % |
-| Ikke-tekstil | 15 % | 11 % | 12 % | 10 % | 10 % | 9 % |
+| Bomull | 30 % | 24 % | 23 % | 15 % | 15 % | 14 % |
+| Regenerert cellulose | 2 % | 2 % | 1 % | 1 % | 1 % | 1 % |
+| Ikke-tekstil | 15 % | 11 % | 12 % | 11 % | 10 % | 10 % |
 | Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |
-| Syntetisk | 46 % | 55 % | 56 % | 67 % | 68 % | 69 % |
-| Ull | 3 % | 3 % | 3 % | 3 % | 3 % | 3 % |
+| Syntetisk | 48 % | 57 % | 58 % | 68 % | 69 % | 71 % |
+| Ull | 3 % | 3 % | 3 % | 2 % | 2 % | 2 % |
 
 <iframe src="../output_files/plots/pages/di_rt_us_ic_sales_to_institutions_and_businesses_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

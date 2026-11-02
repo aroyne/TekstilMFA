@@ -72,11 +72,11 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 57 % | 56 % | 54 % | 46 % | 43 % | 44 % |
-| Regenerert cellulose | 4 % | 3 % | 2 % | 3 % | 3 % | 3 % |
+| Bomull | 56 % | 55 % | 54 % | 46 % | 44 % | 44 % |
+| Regenerert cellulose | 4 % | 3 % | 3 % | 3 % | 3 % | 3 % |
 | Andre fibre | 1 % | 1 % | 2 % | 2 % | 2 % | 2 % |
-| Syntetisk | 32 % | 32 % | 36 % | 42 % | 43 % | 43 % |
-| Ull | 7 % | 8 % | 6 % | 8 % | 8 % | 8 % |
+| Syntetisk | 32 % | 32 % | 35 % | 41 % | 43 % | 43 % |
+| Ull | 8 % | 8 % | 7 % | 8 % | 8 % | 9 % |
 
 <iframe src="../output_files/plots/pages/us_hh_en_wa_fibre_release_in_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

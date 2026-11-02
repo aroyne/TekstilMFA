@@ -23,6 +23,7 @@ import pandas as pd
 
 from calculations.fibre_layer import compute_fibre_layer
 from calculations.params import Parameters
+from calculations.sampling import DEFAULT_SEED
 from calculations.system import close, load_register, make_system, reset, stock_change
 from data_loader import load_all_data
 
@@ -35,7 +36,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Monte Carlo framework for the textile MFA.")
     parser.add_argument('--pool', type=str, required=True, help="Pool(s) to run, e.g. 'rw,di' or 'all'")
     parser.add_argument('--nsim', type=int, default=100, help="Number of MC iterations")
-    parser.add_argument('--seed', type=int, default=None, help="RNG seed for reproducible runs")
+    parser.add_argument('--seed', type=int, default=DEFAULT_SEED, help="Master seed of the random-number streams")
     parser.add_argument('--export-raw-mc', action='store_true',
                         help="Also write every iteration to output_files/MC_Raw_Simulations.csv.gz")
     return parser.parse_args()
@@ -169,7 +170,6 @@ def main():
     # With a subset of pools some flows stay unset, so the system cannot be
     # closed and only the flows that were assigned are reported.
     closed = pools == ALL_POOLS
-    rng = np.random.default_rng(args.seed)
 
     params = Parameters()
     preloaded_data = load_all_data(pools, params)
@@ -183,7 +183,7 @@ def main():
     fibre_clip_store = {}
     start = time.time()
     for sim_id in range(n_runs):
-        current_params, dataset_noise, anchors = params.draw(rng, deterministic=(sim_id == 0))
+        current_params, dataset_noise, anchors = params.draw(args.seed, sim_id)
         run_pools(mfa, pools, preloaded_data, current_params, dataset_noise, anchors)
         if closed:
             close(mfa)

@@ -39,7 +39,7 @@ nav_order: 1
 
 #### Antakelser
 
-- Den norske andelen er 50 % (0–100 %, PERT), resten eksporteres (D34).
+- Den norske andelen er 50 % (0–100 %, flat fordeling), resten eksporteres (D34).
 - Ingen fiber-til-fiber-gjenvinning i Norge før 2024.
 - Flyten tas med som innsatsvare i balansen til MA.FI.
 

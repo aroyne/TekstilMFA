@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import pytest
 
 from calculations.params import Parameters
@@ -20,7 +21,7 @@ def test_interpolate_linear_between_and_constant_outside():
 def inputs():
     params = Parameters()
     preloaded_data = load_all_data(ALL_POOLS, params)
-    return (preloaded_data,) + params.draw(np.random.default_rng(0), deterministic=True)
+    return (preloaded_data,) + params.draw(seed=1, sim_id=0)
 
 
 def _run(inputs, pools=ALL_POOLS):
@@ -109,12 +110,54 @@ def test_gap_noise_grows_with_distance_and_is_one_at_anchors():
     from calculations.timeseries import GapNoise
     years = list(range(1988, 2026))
     anchors = [2010, 2020]
-    assert (GapNoise(np.random.default_rng(0), True, 0.02, 0.05, 1.0).factor('x', anchors, years) == 1).all()
-    draws = np.array([GapNoise(np.random.default_rng(i), False, 0.02, 0.05, 1.0).factor('x', anchors, years)
-                      for i in range(2000)])
+    assert (GapNoise(1, 0, 0.02, 0.05, 1.0).factor('x', anchors, years) == 1).all()
+    draws = np.array([GapNoise(1, i, 0.02, 0.05, 1.0).factor('x', anchors, years)
+                      for i in range(1, 2001)])
     spread = draws.std(axis=0)
     at = [years.index(a) for a in anchors]
     assert (spread[at] == 0).all()
     assert spread[years.index(1990)] > spread[years.index(2005)] > spread[years.index(2009)]
     assert spread[years.index(2015)] > spread[years.index(2012)]
     assert abs(np.median(draws, axis=0)[years.index(2015)] - 1) < 0.02
+
+
+def test_draws_do_not_depend_on_other_items():
+    params = Parameters()
+    full, _, _ = params.draw(seed=1, sim_id=5)
+    params.global_params = params.global_params.iloc[::-1].iloc[1:]
+    reduced, _, _ = params.draw(seed=1, sim_id=5)
+    shared = [k for k in reduced if k != 'gap_noise']
+    assert all(full[k] == reduced[k] for k in shared)
+
+
+def _row(dist, low, high, unc='perc', bounds=''):
+    return pd.Series({'distribution_type': dist, 'lower_bound': low, 'upper_bound': high,
+                      'uncertainty_type': unc, 'bounds': bounds})
+
+
+@pytest.mark.parametrize('row', [_row('normal', 20, 20), _row('lognormal', 50, 100),
+                                 _row('triangular', 20, 60), _row('uniform', 30, 30)])
+def test_bounds_are_95_percent_interval(row):
+    from calculations.sampling import absolute_bounds, quantile
+    low, high = absolute_bounds(10.0, row)
+    assert quantile(0.025, 10.0, row) == pytest.approx(low, rel=1e-3)
+    assert quantile(0.975, 10.0, row) == pytest.approx(high, rel=1e-3)
+
+
+def test_minmax_bounds_are_the_range():
+    from calculations.sampling import quantile
+    row = _row('triangular', 0.1, 0.5, unc='abs', bounds='minmax')
+    assert quantile(0.0, 0.3, row) == pytest.approx(0.1)
+    assert quantile(1.0, 0.3, row) == pytest.approx(0.5)
+
+
+def test_anchor_method_group_correlates_and_annual_trade_varies():
+    params = Parameters()
+    draws = [params.draw(seed=1, sim_id=i) for i in range(1, 401)]
+    core = np.array([[d[2]['residual_core'][y] for y in (2018, 2022)] for d in draws])
+    wool = np.array([[d[2]['wool_scoured_domestic'][y] for y in (1988, 1995)] for d in draws])
+    assert 0.3 < np.corrcoef(core.T)[0, 1] < 0.7
+    assert np.allclose(wool[:, 0], wool[:, 1])
+    trade = draws[0][1].factor('08801', 'import:finished')
+    assert len(set(trade)) == len(trade)
+    assert len(set(draws[0][1].factor('vareproduksjon'))) == 1

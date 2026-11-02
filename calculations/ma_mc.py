@@ -60,7 +60,7 @@ def _norwegian_raw_wool_mc(mfa, preloaded_data, dataset_noise):
     # wool, tonnes, NOK/kg and value per year from Totalkalkylen (NIBIO API)
     tonnes = preloaded_data['wool_production']
     kt = np.array([tonnes[year] for year in YEARS]) / 1000
-    mfa.flows['PS.WO-MA.FI-Norwegian raw wool-TOT'].values[...] = kt * dataset_noise['totalkalkylen']
+    mfa.flows['PS.WO-MA.FI-Norwegian raw wool-TOT'].values[...] = kt * dataset_noise.factor('totalkalkylen')
 
 
 def _fibre_and_yarn_import_mc(mfa, preloaded_data, dataset_noise):
@@ -140,7 +140,7 @@ def _domestic_hand_knitting_yarn_mc(mfa, preloaded_data, current_params, dataset
                                   current_params['gap_noise']))
     flow = mfa.flows['MA.FI-DI.RT-Domestic hand knitting yarn-TOT']
     flow.values[...] = 0.0
-    flow.values[:, PRODUCTS.index('YA')] = kt * dataset_noise['vareproduksjon']
+    flow.values[:, PRODUCTS.index('YA')] = kt * dataset_noise.factor('vareproduksjon')
 
 
 def _recycled_fibre_to_spinning_mc(mfa, current_params, anchors):

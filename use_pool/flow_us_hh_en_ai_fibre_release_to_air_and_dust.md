@@ -39,7 +39,7 @@ nav_order: 5
 
 #### Antakelser
 
-- Utslippet settes til samme nivå som utslippet ved vask, med en faktor 1 (0,3–3, PERT). Usikkerheten er stor.
+- Utslippet settes til samme nivå som utslippet ved vask, med en faktor 1 (0,3–3, lognormal, 95 %-intervall). Usikkerheten er stor.
 - EN.AI er en systemgrense. Fibrene følges ikke videre, for eksempel til støvsugerposer og restavfall (D35).
 
 #### Sammensetning (varetype og materiale)
@@ -67,11 +67,11 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 56 % | 55 % | 54 % | 46 % | 43 % | 43 % |
-| Regenerert cellulose | 4 % | 3 % | 2 % | 3 % | 3 % | 3 % |
+| Bomull | 56 % | 55 % | 54 % | 46 % | 43 % | 44 % |
+| Regenerert cellulose | 4 % | 3 % | 3 % | 3 % | 3 % | 3 % |
 | Andre fibre | 1 % | 1 % | 2 % | 2 % | 2 % | 2 % |
-| Syntetisk | 32 % | 32 % | 36 % | 42 % | 43 % | 43 % |
-| Ull | 7 % | 8 % | 6 % | 8 % | 8 % | 8 % |
+| Syntetisk | 32 % | 32 % | 36 % | 41 % | 43 % | 43 % |
+| Ull | 8 % | 8 % | 7 % | 8 % | 8 % | 9 % |
 
 <iframe src="../output_files/plots/pages/us_hh_en_ai_fibre_release_to_air_and_dust_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

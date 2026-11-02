@@ -69,7 +69,7 @@ Andel av summen i nøkkelår (median).
 | Bomull | nan % | nan % | nan % | nan % | nan % | 9 % |
 | Regenerert cellulose | nan % | nan % | nan % | nan % | nan % | 1 % |
 | Andre fibre | nan % | nan % | nan % | nan % | nan % | 7 % |
-| Syntetisk | nan % | nan % | nan % | nan % | nan % | 70 % |
+| Syntetisk | nan % | nan % | nan % | nan % | nan % | 71 % |
 | Ull | nan % | nan % | nan % | nan % | nan % | 13 % |
 
 <iframe src="../output_files/plots/pages/ma_tx_wm_rc_production_waste_to_recycling_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>

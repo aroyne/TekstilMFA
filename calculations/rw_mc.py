@@ -36,7 +36,7 @@ def _private_imports_mc(mfa, preloaded_data, current_params, dataset_noise):
     # day-trip shopping in total (mill. NOK, 2004-2022) and for clothing and
     # shoes (mill. NOK, 2023-2025)
     crossborder = preloaded_data['crossborder']
-    noise_val = dataset_noise['grensehandel']
+    noise_val = dataset_noise.factor('grensehandel')
     clothing_share = current_params['crossborder_clothing_share']
     markup = current_params['retail_markup']
 

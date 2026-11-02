@@ -1,8 +1,6 @@
-dataset_name,source,lower_bound,upper_bound,uncertainty_type,uncertainty_source,distribution_type,status
-08801,SSB,5,5,perc,placeholder - official trade statistics (net weight); to be set from data quality assessment,PERT,placeholder
-10513,SSB,,,perc,,PERT,todo
-05281,SSB,,,perc,,PERT,todo
-trend interpolation,assumption,,,perc,,PERT,todo
-grensehandel,SSB,10,10,perc,placeholder - survey-based statistic,PERT,placeholder
-totalkalkylen,NIBIO,5,5,perc,placeholder - weighed-in wool at the wool stations plus an estimate for wool sold outside them,PERT,placeholder
-vareproduksjon,SSB,10,50,perc,"Industristatistikk varetall (1988-1989) and Prodcom 10455 (2008-) cover large establishments or enterprises only; SNL gives about 1000 t hand knitting yarn per year against 0.6-1.0 kt in the statistics",PERT,placeholder
+dataset_name,source,lower_bound,upper_bound,uncertainty_type,uncertainty_source,distribution_type,bounds,source_type,annual_draw,status
+08801,SSB,5,5,perc,registered customs declarations; errors mostly new each year,normal,,1,yes,placeholder
+grensehandel,SSB,10,10,perc,quarterly survey,normal,,2,yes,placeholder
+totalkalkylen,NIBIO,5,5,perc,weighed-in wool at the wool stations,normal,,1,yes,placeholder
+vareproduksjon,SSB,10,50,perc,large units only; the coverage error is systematic,triangular,,2,no,placeholder
+08801_classification,assumption,5,5,perc,assumption: goods under a code that do not belong to its product group,uniform,minmax,4,no,assumption

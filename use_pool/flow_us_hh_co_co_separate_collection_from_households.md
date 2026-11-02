@@ -72,11 +72,11 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 46 % | 47 % | 44 % | 40 % | 37 % | 36 % |
-| Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 18 % | 16 % | 19 % | 18 % | 17 % | 17 % |
+| Bomull | 45 % | 47 % | 44 % | 40 % | 37 % | 36 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 18 % | 17 % | 19 % | 18 % | 18 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 27 % | 26 % | 30 % | 33 % | 36 % | 37 % |
+| Syntetisk | 27 % | 26 % | 29 % | 33 % | 35 % | 36 % |
 | Ull | 6 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_co_co_separate_collection_from_households_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -89,11 +89,13 @@ I TOT:
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 1988 | 192 av 1000 | 0.082 | 1.800 | 0.000 |
-| 1989 | 87 av 1000 | 0.037 | 1.470 | 0.000 |
-| 1990 | 43 av 1000 | 0.015 | 1.185 | 0.000 |
-| 1991 | 55 av 1000 | 0.026 | 1.480 | 0.000 |
-| 1992 | 3 av 1000 | 0.001 | 0.597 | 0.000 |
+| 1988 | 238 av 1000 | 0.106 | 1.934 | 0.000 |
+| 1989 | 115 av 1000 | 0.050 | 1.628 | 0.000 |
+| 1990 | 60 av 1000 | 0.021 | 1.202 | 0.000 |
+| 1991 | 77 av 1000 | 0.036 | 1.613 | 0.000 |
+| 1992 | 7 av 1000 | 0.002 | 0.740 | 0.000 |
+| 1993 | 1 av 1000 | 0.000 | 0.123 | 0.000 |
+| 1994 | 1 av 1000 | 0.000 | 0.001 | 0.000 |
 
 ## Beregning i koden
 

@@ -92,6 +92,11 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] D38 (forslag): Returer fra direkte netthandel (returandel ca. 20 %, 5–50 %) og destruksjon av usolgte varer (median ca. 1 %, opp til EEA 4–9 %) mangler eller er minimumstall.
 - [x] Tiltak for sirkularitet i Norge og EU, og hva MFA-en kan si om dem ([notat](../claude_tekst/2026-11-02_tiltak_sirkularitet_og_MFA.md)).
 
+### 2026-11-02 – Fase A: usikkerhet, første runde (D39)
+- [x] Plan for fase A ([notat](../claude_tekst/2026-11-02_PLAN_usikkerhet_fase_A.md)) og vurdering av Weijenberg m.fl. 2026 ([notat](../claude_tekst/2026-11-02_Weijenberg_robust_tiltaksvurdering.md)). Alle fire beslutninger er tatt.
+- [x] A0: Én tilfallsstrøm per element (`item_rng`). Konvergenstest med to frø: medianene ligger 0,4 % fra hverandre og bredden 2–8 %. Seks ubrukte rader er fjernet fra parametertabellene (`lowvalue_undercoverage_CL` er beholdt for følsomhet, D14).
+- [x] A1–A3 (D39): 95 %-intervall og fordelingsregelen fra NitrogenBudsjett. Kildetype per rad, flat fordeling for type 4, årlige trekk for 08801, grensehandel og totalkalkylen, egen faktor for klassifisering av handelsdata, og felles metodefaktor for ankerpunkter. Tabellene er konvertert med `claude_tekst/_convert_uncertainty_D39.py`. Handelsflytene går fra ±3,6 % til ±7 %, innsamlingen fra ±4 % til ±8 % og lageret i husholdningene 2025 fra ±53 % til ±56 %.
+
 ## Neste
 
 ### Veikart (besluttet 2026-11-02)
@@ -105,6 +110,7 @@ Prinsipper:
 Fasene A og B går parallelt. Bidragsanalysen i A brukes til å prioritere i B.
 
 #### Fase A – Robust usikkerhet (prinsippene fra NitrogenBudsjett)
+Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og fire beslutninger: [notat 2026-11-02](../claude_tekst/2026-11-02_PLAN_usikkerhet_fase_A.md). Punkt 1–3 og konvergenstesten er gjort (D39). Gjenstår: bidragsanalysen (A0), skjøter (A4), strukturkjøringer (A5) og innsvingingstesten.
 1. Én tolkning av grensene. Anbefalt: alle grenser er 95 %-intervall, også for PERT (problem P1 i N-planen).
 2. Usikkerhet per datasett og periode etter **hvordan tallet er laget**, ikke hvem som publiserer det: registrert eller tellet, utvalgsundersøkelse, modellbasert statistikk, ekspertanslag (en lett pedigree, AP3 og P9 i N-planen). Begrunnelse i en egen kolonne.
 3. Systematisk og årlig del av datasettstøyen, og egne faktorer for uavhengige deler av samme datasett (AP2).
@@ -133,6 +139,7 @@ Fasene A og B går parallelt. Bidragsanalysen i A brukes til å prioritere i B.
 1. Utforming: tilførsel (befolkning × kg per innbygger per produkt, med baner), overføringskoeffisienter fra 2026 (innsamling, sortering, eksport, gjenvinning) og kasseringer fra den kalibrerte lagermodellen.
 2. Referansebane 2026–2040 med usikkerhet.
 3. Regimeskifter som harde brudd: produsentansvar 2027, eksportregler 2027, destruksjonsforbud 2026.
+4. Usikkerheten om framtiden er dyp: flate, vide plausible spenn og mange scenarier (EMA), ikke MC med fordelinger som for historikken. Avkuttet Dirichlet for koeffisienter med sum lik 1 ([Weijenberg m.fl. 2026](../claude_tekst/2026-11-02_Weijenberg_robust_tiltaksvurdering.md)).
 
 #### Fase E – Tiltak
 Rekkefølge fra [notatet om tiltak](../claude_tekst/2026-11-02_tiltak_sirkularitet_og_MFA.md):
@@ -140,6 +147,8 @@ Rekkefølge fra [notatet om tiltak](../claude_tekst/2026-11-02_tiltak_sirkularit
 2. Innsamlingsgrad målt som innsamlet ÷ kassert, og etterkontroll av kravet om separat innsamling fra 2025. Kan også gjøres før fase D.
 3. Scenarier for eksport og sortering.
 4. Tiltak på tilførsel og levetid (avgift, rask mote, holdbarhet), med forsinkelse.
+
+Metode: XLRM-struktur og robusthetsmål (tilfredsstillelse, anger, feilrate) etter Weijenberg m.fl. (2026). Tiltakseffekten begrunnes fra kilder og er selv en usikker faktor.
 
 #### Fase F – Dokumentasjon og publisering
 1. Artikkel om avstemmingen av lageret (restledd, lagermodell, garderober). Mulig etter fase C ([notat](../claude_tekst/2026-11-02_nytt_mot_NORSUS.md)).

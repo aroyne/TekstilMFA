@@ -66,11 +66,11 @@ Andel av summen i nøkkelår (median).
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 51 % | 48 % | 44 % | 40 % | 37 % | 22 % |
+| Bomull | 52 % | 47 % | 44 % | 40 % | 37 % | 26 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 1 % |
-| Ikke-tekstil | 11 % | 16 % | 18 % | 17 % | 17 % | 24 % |
-| Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 5 % |
-| Syntetisk | 28 % | 27 % | 30 % | 33 % | 36 % | 43 % |
+| Ikke-tekstil | 11 % | 16 % | 18 % | 18 % | 17 % | 24 % |
+| Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 4 % |
+| Syntetisk | 28 % | 27 % | 29 % | 33 % | 35 % | 40 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 5 % |
 
 <iframe src="../output_files/plots/pages/wm_rc_rw_rw_export_for_recycling_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -83,15 +83,15 @@ I TOT:
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 2024 | 2 av 1000 | 0.000 | 0.005 | 0.000 |
-| 2025 | 28 av 1000 | 0.001 | 0.116 | 0.000 |
+| 2024 | 3 av 1000 | 0.000 | 0.045 | 0.000 |
+| 2025 | 61 av 1000 | 0.004 | 0.180 | 0.000 |
 
 I fiberlaget (per materiale):
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 2024 | 34 av 1000 | 0.000 | 0.017 | 0.000 |
-| 2025 | 247 av 1000 | 0.006 | 0.148 | 0.000 |
+| 2024 | 33 av 1000 | 0.000 | 0.049 | 0.000 |
+| 2025 | 221 av 1000 | 0.009 | 0.197 | 0.000 |
 
 ## Beregning i koden
 

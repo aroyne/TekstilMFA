@@ -62,8 +62,8 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Tepper | 47 % | 36 % | 25 % | 27 % | 22 % | 23 % |
-| Klær, hjemmetekstiler og sko | 40 % | 48 % | 53 % | 43 % | 47 % | 47 % |
+| Tepper | 47 % | 36 % | 25 % | 28 % | 23 % | 23 % |
+| Klær, hjemmetekstiler og sko | 40 % | 47 % | 52 % | 42 % | 47 % | 46 % |
 | Andre konfeksjonerte varer | 4 % | 6 % | 9 % | 12 % | 15 % | 15 % |
 | Presenninger og telt | 9 % | 11 % | 14 % | 18 % | 16 % | 16 % |
 
@@ -74,10 +74,10 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Bomull | 23 % | 29 % | 29 % | 23 % | 24 % | 23 % |
-| Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 21 % | 19 % | 19 % | 18 % | 17 % | 17 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 22 % | 20 % | 19 % | 19 % | 18 % | 18 % |
 | Andre fibre | 3 % | 4 % | 4 % | 4 % | 4 % | 4 % |
-| Syntetisk | 43 % | 38 % | 40 % | 47 % | 47 % | 48 % |
+| Syntetisk | 43 % | 38 % | 40 % | 46 % | 47 % | 47 % |
 | Ull | 6 % | 8 % | 6 % | 6 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_worn_textiles_in_residual_and_bulky_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>

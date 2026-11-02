@@ -41,7 +41,7 @@ nav_order: 4
 #### Antakelser
 
 - Årsbalansen svinger mye fordi klipping, lagring og eksport faller i ulike år (den er negativ i 2017). Derfor brukes snitt over perioder med stabil eksportandel: 2,8 kt (1988–1995), 2,2 kt (1996–2000), 1,3 kt (2001–2006) og 0,3 kt (2007–2025) uvasket ull. Usikkerheten er standardfeilen til snittet (6–18 %).
-- Svinnandelen er 0,33 (0,20–0,45, PERT).
+- Svinnandelen er 0,33 (0,20–0,45, triangulær fordeling med spennet i litteraturen som minimum og maksimum).
 - I fiberlaget regnes uvasket ull som ull inkludert fettet, så svinnet er WO.
 
 #### Sammensetning (varetype og materiale)
