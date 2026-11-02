@@ -1,5 +1,7 @@
 # Lagermodellen mot statistikken (D8)
 
+> **Status 2026-11-02: tallene er utdatert.** Etter D21–D28 ligger kasseringene i statistikken 12–40 kt under lagermodellen i alle år (2025: 81 mot 93 kt), og lageret er ca. 275 kg per innbygger (restledd) mot ca. 97 kg (lagermodell). Se PLAN, punkt 4 og 6 i listen over åpne tråder.
+
 *Notat 2026-10-05. Figur: [output_files/plots/stock_model_comparison.png](../output_files/plots/stock_model_comparison.png) (`scripts/plot_stock_model.py`). Tall: `output_files/MC_summary.csv`, 1 000 iterasjoner, frø 1.*
 
 ## Hva som sammenlignes

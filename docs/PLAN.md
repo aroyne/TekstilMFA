@@ -1,8 +1,8 @@
 # PLAN – TekstilMFA
 
-*Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-10-12.*
+*Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-11-02.*
 
-> **Her fortsetter vi:** Gjennomgangen flyt for flyt er ferdig for alle subpooler (D21–D35). Neste: åpne diskusjonspunkter (lageret i husholdningene, balansen i MA.TX), fase 4 (usikkerhet, også nivåene i D30) og fase 5 (referanser). Når en flyt endres, oppdateres også beskrivelsen på flytsiden. Balansen i MA.TX beholdes inntil videre (kommentert som for høy). Notatene ligger i `claude_tekst/2026-10-12_gjennomgang_MA.FI.md` og `claude_tekst/2026-10-12_gjennomgang_MA.TX.md`. Arbeidsflyten for hver subpool er slik: kildene for hver flyt gås gjennom og diskuteres, deretter implementeres de, så kjøres MC (N = 1000 tar ca. 25 s), deretter genereres sidene på nytt (`report_generator.py`, `scripts/plot_core_flows.py`, `scripts/plot_stock_model.py`), og til slutt committes og pushes det.
+> **Her fortsetter vi:** Gjennomgangen flyt for flyt er ferdig (D21–D36). To beslutningsnotater venter på svar: D37 om fiberutslipp, lo og husstøv ([notat](../claude_tekst/2026-11-02_D37_mikrofibre_lo_og_stov.md)) og D38 om returer og destruksjon ([notat](../claude_tekst/2026-11-02_D38_returer_og_destruksjon.md)). Den samlede listen over åpne tråder står først under «Neste». Det viktigste faglige problemet er at lageret i husholdningene (restledd, ca. 275 kg per innbygger) er nesten tre ganger lagermodellen (ca. 97 kg). Næringstallene peker ikke lenger på MA.TX som hovedforklaring. Kasseringer før 2018 og destruksjon og returer (D38) er de viktigste kandidatene. Arbeidsflyten for endringer er slik: kildene gås gjennom og diskuteres, deretter implementeres de, så kjøres MC (N = 1000 tar ca. 25 s), deretter genereres sidene på nytt (`report_generator.py`, `scripts/plot_core_flows.py`, `scripts/plot_stock_model.py`), og til slutt committes og pushes det. Når en flyt endres, oppdateres også beskrivelsen på flytsiden.
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
 
 **Mål:** En dynamisk, probabilistisk MFA for tekstiler i Norge 1990–2025. Den skal identifisere pools, subpools, flyter og lagre, kvantifisere dem med data og parametre, beregne tidsutviklingen med Monte Carlo og dokumentere hver flyt slik det er gjort i NitrogenBudsjett.
@@ -82,7 +82,66 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] D36: B2B og B2C holdes ikke adskilt i egne noder ([notat](../claude_tekst/2026-10-26_b2b_og_b2c.md)). Nedre grense for `institutional_share` er 4 % (Eurostat ext_tec05: 3–4 % av klærne importeres direkte av næring og offentlig sektor). Flyter med sekker vises med og uten sekker på flytsidene (`TOTAL_EXCL_SA` i MC_summary).
 - [ ] Plukkanalyser av næringsavfall (tekstilandel) for US.IC → WM.RS: venter, årgangsmodellen (D29) beholdes foreløpig.
 
+### 2026-11-02 – Posisjonering, kontrolldata, D37 og D38 (ingen modellendringer)
+- [x] Vurdering av hva som er nytt sammenlignet med NORSUS 2026 ([notat](../claude_tekst/2026-11-02_nytt_mot_NORSUS.md)). Det sterkeste bidraget er gapet mellom det som settes på markedet og det som kasseres. Det meste av NORSUS' gap på 25 kt er gjeneksport (ca. 10 kt) og institusjoner (ca. 10 kt). Lageret i husholdningene står for ca. 10 kt. Forutsetningen er at lageravviket løses.
+- [x] Litteratursøk om lagermodeller i tekstil-MFA ([notat](../claude_tekst/2026-11-02_litteratur_lagermodell_tekstil.md)): Napolano 2025 (EU), Zhou 2025 (Kina 1978–2022), WUR 2026 (NL, garderobelager), Millward-Hopkins 2023 (UK, restledd mot WRAP-garderober). Ingen avstemming over flere tiår mellom restledd, lagermodell og garderober er funnet.
+- [x] Aktører per node fra Brønnøysundregistrene (`scripts/fetch_brreg_actors.py`, 19 117 enheter og regnskap for 2023–2025). SN2025-koder. API-et støtter ikke regnskap for ideelle organisasjoner (UFF m.fl.).
+- [x] Næringstall fra SSB 1999–2024 og varehandelsindeksen 2000–2025 (`scripts/fetch_ssb_industry_series.py`) ([notat](../claude_tekst/2026-11-02_naeringstall_mot_modellen.md)). Produksjonsverdien gir 2–4 ganger importprisen per kg for massen i MA.TX → DI.RT, så den gir ikke grunnlag for å si at MA.TX er for høy. Varehandelsindeksen er en volumindeks deflatert med prisindeks, ikke masse, og kan ikke kontrollere massen.
+- [x] Regnskapsdatabasen til SNF og NHH (1992–2024, næringskode per år) er kartlagt: regnskapsdatabasen@snf.no, SNF-rapport 02/26. Tilgang gis «primarily» til forhåndsdefinerte institusjoner.
+- [x] D37 (forslag): Fiberutslippene er trolig ca. 10 ganger for høye (Mepex' 600 t er et anslag basert på laboratorieforsøk; Lant 2020 målte 114 ppm og 96 % naturfibre i ekte vask). Lo fra tørketrommel (ca. 0,1 kt) og støvsuget støv bør gå til WM.RS.
+- [x] D38 (forslag): Returer fra direkte netthandel (returandel ca. 20 %, 5–50 %) og destruksjon av usolgte varer (median ca. 1 %, opp til EEA 4–9 %) mangler eller er minimumstall.
+- [x] Tiltak for sirkularitet i Norge og EU, og hva MFA-en kan si om dem ([notat](../claude_tekst/2026-11-02_tiltak_sirkularitet_og_MFA.md)).
+
 ## Neste
+
+### Åpne tråder, samlet og prioritert (2026-11-02)
+
+**Venter på beslutning**
+1. D37: fiberutslipp, lo og husstøv (tre spørsmål i notatet).
+2. D38: returer og destruksjon (tre spørsmål i notatet).
+3. Parameterforslagene i avsnitt 5.4 i litteraturnotatet fra 2026-10-05 (punktet under 2026-10-05).
+
+**Lageret i husholdningene** (viktigst for publisering)
+
+4. Bryte ned avviket mellom restleddet (ca. 275 kg per innbygger) og lagermodellen (ca. 97 kg) og garderobestudiene. Følsomhet:
+   - MA.TX halvert og doblet
+   - restavfall før 2009
+   - innsamling før 2018
+   - D38 med EEA-nivå
+   - lengre levetider for CL
+5. Spørre SSB om tekstiltallene i 05281 (1995–2011) og tekstilregnskapet 1990–1998 er beregnet ut fra tilførselen.
+6. Oppdatere [notatet om lagermodellen](../claude_tekst/2026-10-05_lagermodell_mot_statistikk.md). Tallene der er fra før D21–D28, og de to anslagene er ikke lenger enige fra 2019.
+
+**Usikkerhet (fase 4)**
+
+7. Følsomhetsanalyse (Spearman), pedigree, konvergens og innsvinging.
+8. Nivåene i D30.
+
+**Data å skaffe**
+
+9. Tilgang til SNFs regnskapsdatabase (skille merkevarer fra produksjon i 14.x).
+10. Om kasserte sekker registreres som plastemballasje eller tekstil.
+11. Plukkanalyser av næringsavfall (US.IC).
+12. Andel husholdninger med tørketrommel etter 2012 (D37).
+13. EEA-rapporten om destruksjon (D38).
+14. PostNords returtall (D38).
+
+**Fiberlaget**
+
+15. Matrise fra hovedfiber til fiberandeler.
+16. Restposter (RES/UNK).
+17. Fiberspesifikke levetider.
+18. Ull i kasseringer er 5 % mot 3 % målt.
+19. Utslipp per fiber (D37).
+
+**Mulige analyser og artikler**
+
+20. Grunnlaget for produsentansvaret med usikkerhet. Innsamlingsgrad målt som innsamlet ÷ kassert.
+21. Framtidsmodul for tiltak (D12). Rekkefølgen står i notatet om tiltak.
+
+**Dokumentasjon (fase 5)**
+
+22. `library.bib` og siteringer, og GitHub Pages.
 
 ### Fase 1 – Låse systemdefinisjonen (beslutningene D1–D13 er tatt 2026-09-29)
 - [x] Litteraturgjennomgang ([notat](../claude_tekst/2026-09-29_litteraturgjennomgang_tekstil-MFA.md)): norske kartlegginger, nasjonale MFA-er (DK, SE, FI, NL, UK, CH), dynamiske og probabilistiske MFA-er (EU DPMFA 2024, Kina, Abbasi 2023 for norsk plast) og levetidsstudier (Laitala & Klepp). Nytt ankerår 2021 (Syversen m.fl. 2023). Ingen norsk tekstil-MFA har tidsserier.
@@ -108,12 +167,12 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 ### Fase 2 – Kjerneflyter (P1)
 - [x] 2026-09-29: Alle 13 P1-flyter er implementert og kjører i MC for 1988–2025, med massebalansesjekk i hver iterasjon. Nye moduler: `co_mc`, `us_mc`, `wm_mc`, `timeseries`, `balances`. Ankerpunkter ligger i `data_files/anchor_values.csv` og `parameters/time_dependent_parameters.csv`. 11 tester.
 - [x] P2: Eksport av restavfall til forbrenning i utlandet (D11) med eksportandel fra SSB 13035 (KOSTRA, 2015–2025).
-- [ ] **Åpne spørsmål (A1–D3) i [claude_tekst/2026-09-29_sporsmal_fase2.md](../claude_tekst/2026-09-29_sporsmal_fase2.md).** Viktigst: restavfall før 2018 (A1), 2018-ankeret for netthandel (A2) og formelen for innsamling (A3).
+- [x] Åpne spørsmål (A1–D3) i [claude_tekst/2026-09-29_sporsmal_fase2.md](../claude_tekst/2026-09-29_sporsmal_fase2.md): A2 er løst med D28, A3 med D31, A4 med D33, B2 med D28 og D29, og C1–C2 med levetidene og startlageret. Spørsmålet til SSB om A1 står igjen (punkt 5 i listen over åpne tråder).
 - [x] Privatimport og direkte netthandel (D7).
 - [x] DI.RT-balanse, som gir salg til husholdninger.
 - [x] Kasseringer fra offisiell statistikk: innsamling, restavfall, deponi og forbrenning, eksport av usortert. Hull interpoleres mellom ankerpunkter.
 - [x] Lagerendring i bruk (US.HH, US.IC) som restledd. Lagernivået er akkumulert fra 0 i 1988. Startlageret (D2) mangler.
-- [ ] Parallell lagermodell per produktgruppe (innsvinging og levetider), og sammenligning per år med restleddet og kasseringene. Dette er diskusjonsgrunnlaget.
+- [x] Parallell lagermodell per produktgruppe (innsvinging og levetider), og sammenligning per år med restleddet og kasseringene (se fase 3).
 - [x] CO-balanser (sortering, bruktbutikk og tilbake til US.HH).
 - [ ] Validering: 2022 mot NORSUS, lager per innbygger mot garderobestudier, kg per plagg over tid fra 08801.
 
@@ -127,7 +186,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Flytsidene har fått ny struktur (2026-10-13): manuell beskrivelse etter malen fra NitrogenBudsjett, med fem overskrifter (hva flyten omfatter, datakilder, antakelser, sammensetning, tidsutvikling), og genererte tabeller for sammensetning per varetype og materiale. Prøve: de 11 flytene inn til og ut av MA er skrevet.
 - [x] Beskrivelser er skrevet for alle 29 implementerte flyter (2026-10-13). Nøkkeltallstabellen er fjernet, fordi plottet viser de samme verdiene. De 14 planlagte flytene får beskrivelse når de implementeres.
 - [x] DI.RT er gjennomgått (D27, 2026-10-13): usolgte klær gitt til innsamlere og kastet er implementert og følger klesimporten. Donerte varer trekkes fra innsamlingen fra husholdningene. Andelen til institusjoner, gjeneksport og små varelinjer beholdes.
-- [ ] Følsomhetsanalyse (fase 4): usolgte varer etter EEA (4–9 % av det som settes på markedet).
+- [ ] Følsomhetsanalyse (fase 4): usolgte varer etter EEA (4–9 % av det som settes på markedet). Tas nå med D38.
 - [x] US.HH er gjennomgått (D28, 2026-10-13): restavfall fast per innbygger før 2009, netthandel fra VOEC 2023–2025, årgangsmodell for tepper, presenninger og andre konfeksjonerte varer, fiberutslipp ved vask (Mepex 2014) og til luft (samme nivå). Lageret (restledd) er nå ca. 275 kg per innbygger i 2018–2025, mot 98–119 kg i lagermodellen og ca. 110–140 kg klær etter SIFOs garderobestudier.
 - [x] US.IC (D29, 2026-10-13): kasseringer med årgangsmodell og levetider per varetype (arbeidsklær 3, vernesko 2, institusjonstekstiler 2, tepper 10, presenninger 5, andre 2 år; alle unntatt arbeidsklær er antakelser). Fiberutslipp fra industrivask med samme utslipp per kt som husholdningsvask (0,12–0,15 kt). Innsamling fra institusjoner står som planlagt.
 - [x] D30 (2026-10-13): år uten publiserte tall får usikkerhet som vokser med avstanden til nærmeste tall (2 %/år mellom, 5 %/år utenfor, tak 100 %, ±2 sd). Medianene er uendret. CO.CO har fått klippelager.
@@ -137,12 +196,12 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] WM.RC er gjennomgått (D34, 2026-10-14): gjenvinning fra sortering, institusjoner og produksjon, NTGs fiber til norsk spinning og eksport til gjenvinning er implementert.
 - [x] WM.WW og EN (D35, 2026-10-14): WM.WW og EN.SO er fjernet, EN er systemgrense, og mikrofibre og vaskesvinn går ut av systemet til avløp og luft. Rensing og slam behandles ikke. Gjennomgangen flyt for flyt er dermed ferdig.
 - [ ] **Til senere (fase 4):** se nærmere på nivåene i D30 (2 %/år, 5 %/år, tak 100 %). Lageret i husholdningene får 95 %-intervall fra under 0 til 290 kg per innbygger i 2005, og innsamlingen klippes i opptil 22 % av trekkene i 1988–1992. Mulig: lavere tak eller lavere økning per år utenfor dataene.
-- [ ] Diskusjon: lageret i husholdningene er høyt. Mulige bidrag: restavfallet før 2009, balansen i MA.TX, møbelputer i HT, innsamlingen fra husholdningene.
-- [ ] Balansen i MA.TX beholdes inntil videre. Det er kommentert i docstringen og på flytsiden at den ser for høy ut. Ferdigvarer fra MA.TX er 8–18 kt per år, og lageret i husholdningene øker fra ca. 135 til ca. 206 kg per innbygger (2018–2025). Trolig går en del av metervaren og garnet til produkter utenfor omfanget eller til andre næringer (møbeltrekk, madrasser, bil- og båtinteriør, tekniske formål). Prodcom og varetall gir 4–8 kt i store foretak. Se notatet om MA.TX.
+- [ ] Diskusjon: lageret i husholdningene er høyt. Mulige bidrag: restavfallet før 2009, balansen i MA.TX, møbelputer i HT, innsamlingen fra husholdningene, og destruksjon og returer (D38). Samlet i punkt 4 i listen over åpne tråder.
+- [ ] Balansen i MA.TX beholdes inntil videre. *2026-11-02: Produksjonsverdien fra SSBs industristatistikk gir en pris per kg 2–4 ganger importprisen, så den gir ikke grunnlag for å si at MA.TX er for høy ([notat](../claude_tekst/2026-11-02_naeringstall_mot_modellen.md)). Forbeholdet er at merkevarer som produserer i utlandet, kan ligge i produksjonsverdien.* Det er kommentert i docstringen og på flytsiden at den ser for høy ut. Ferdigvarer fra MA.TX er 8–18 kt per år, og lageret i husholdningene øker fra ca. 135 til ca. 206 kg per innbygger (2018–2025). Trolig går en del av metervaren og garnet til produkter utenfor omfanget eller til andre næringer (møbeltrekk, madrasser, bil- og båtinteriør, tekniske formål). Prodcom og varetall gir 4–8 kt i store foretak. Se notatet om MA.TX.
 - [x] Soveposer (9404.30, TA) og møbelputer (9404.90, HT, materiale NT) er med (2026-10-13). Lageret i husholdningene er da ca. 220 kg per innbygger i 2018–2025.
-- [ ] Deretter fortsetter gjennomgangen med DI.RT, US.HH, US.IC, CO.CO, CO.SO, CO.RE, WM.RS, WM.RC og WM.WW/EN. Det midlertidige lageret i WM.WW fjernes med mikrofibre- og slamflytene.
-- [ ] US.IC, sorteringsdetaljer, avfallseksport, materialgjenvinning.
-- [ ] Mikrofibre: vask → avløpsrensing → vann og jord.
+- [x] Gjennomgangen av DI.RT, US.HH, US.IC, CO.CO, CO.SO, CO.RE, WM.RS, WM.RC og WM.WW/EN er gjort (D27–D35). WM.WW er fjernet (D35).
+- [x] US.IC, sortering, avfallseksport og materialgjenvinning (D29, D32–D34).
+- [x] Mikrofibre: avløpsrensing, vann og jord behandles ikke (D35). Nivå og fordeling på fiber vurderes på nytt i D37.
 - [x] Fiberlag: D18 og D19 er besluttet og implementert.
 - [ ] Fiberlag: Matrise for restposter og koder uten fiber (RES/UNK) per produkt, fra plukkanalyser med fibersortering eller JRC. Sko trenger egen behandling.
 - [ ] Fiberlag: Sammensetningsmatrise hovedfiber → fiberandeler (et «bomullsplagg» er ikke 100 % bomull).
@@ -153,9 +212,9 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Andel SYN i HS-klassen MMF: `mmf_synthetic_share` = 0,92 (Textile Exchange 2024).
 - [x] Fiberlaget er flyttet inn i modellen som dimensjon `m`.
 - [x] `calculations/stock_model.py` er erstattet av flodyms `InflowDrivenDSM` (i fiberlaget).
-- [x] Den parallelle lagermodellen rapporteres (utstrøm, lager, lagerendring) og er sammenlignet med statistikken ([notat](../claude_tekst/2026-10-05_lagermodell_mot_statistikk.md)). Anslagene er enige fra 2019. I 2008–2017 ligger lagermodellen 20–25 kt over statistikken, og i 1988–2000 ligger statistikken over tilførselen.
+- [x] Den parallelle lagermodellen rapporteres (utstrøm, lager, lagerendring) og er sammenlignet med statistikken ([notat](../claude_tekst/2026-10-05_lagermodell_mot_statistikk.md)). Anslagene var enige fra 2019. I 2008–2017 lå lagermodellen 20–25 kt over statistikken, og i 1988–2000 lå statistikken over tilførselen. *2026-11-02: utdatert. Etter D21–D28 ligger statistikken 12–40 kt under lagermodellen i alle år (2025: 81 mot 93 kt kassert).*
 - [x] Ankerpunkt for restavfall 2009 (33,5 kt, Laitala m.fl. 2012). Avviket mot lagermodellen i 2005–2017 øker (51 mot 77 kt i 2009). Restavfallet forklarer det ikke.
-- [x] Startlager i 1988 (D2) fra lagermodellen. Lagernivået rapporteres (`US.HH-US.HH-Stock-TOT`): ca. 120 kg per innbygger i 2018–2025, mot 84–96 kg i lagermodellen.
+- [x] Startlager i 1988 (D2) fra lagermodellen. Lagernivået rapporteres (`US.HH-US.HH-Stock-TOT`): ca. 120 kg per innbygger i 2018–2025, mot 84–96 kg i lagermodellen. *2026-11-02: nå ca. 275 kg (restledd) mot ca. 97 kg (lagermodell) i 2025.*
 - [ ] Sammenligne lagernivået med garderobestudier (SIFO). Følsomhet: lengre levetider for CL i 2005–2015 (dvalelager).
 - [ ] Fiberlag: fiberspesifikke levetider (syntetisk lengre enn bomull), matrise hovedfiber → fiberandeler, usikkerhet på `fibre_composition.csv`, og egen sammensetning for brukbart og utslitt i restavfall.
 - [ ] Ull i kasseringer blir ca. 5 %, mot 3 % målt. Undersøk hvilke HS-koder som gir ull.
