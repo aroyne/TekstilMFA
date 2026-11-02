@@ -96,7 +96,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L175). Dokumentasjonen i koden:
+Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L179). Dokumentasjonen i koden:
 
 > Fibres released from household textiles in washing machines to
 > wastewater, where the model stops following them: treatment, sludge and

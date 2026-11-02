@@ -66,12 +66,12 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | nan % | nan % | 29 % | 25 % | 26 % | 25 % |
+| Bomull | nan % | nan % | 30 % | 26 % | 26 % | 25 % |
 | Regenerert cellulose | nan % | nan % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | nan % | nan % | 17 % | 16 % | 16 % | 16 % |
 | Andre fibre | nan % | nan % | 3 % | 3 % | 3 % | 3 % |
-| Syntetisk | nan % | nan % | 44 % | 50 % | 49 % | 50 % |
-| Ull | nan % | nan % | 5 % | 4 % | 5 % | 5 % |
+| Syntetisk | nan % | nan % | 43 % | 49 % | 49 % | 50 % |
+| Ull | nan % | nan % | 5 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/wm_rs_rw_rw_residual_waste_export_for_incineration_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -81,14 +81,14 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2010 | 2025 |
 |---|---|---|
-| `residual_core` | 34 % | 53 % |
-| `residual_export_share` | 17 % | 34 % |
-| `institutional_share` | 8 % | 7 % |
-| `unsold_destroyed_share` | 5 % | 3 % |
+| `residual_core` | 40 % | 53 % |
+| `residual_export_share` | 16 % | 34 % |
+| `institutional_share` | 6 % | 7 % |
+| `unsold_destroyed_share` | 4 % | 3 % |
 | `08801_classification:import:finished` | 1 % | 2 % |
-| `gap: residual_export_share` | 33 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 1.64 | 2.14 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 1.66 | 2.14 |
+| `gap: residual_export_share` | 31 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 1.84 | 2.14 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 1.86 | 2.14 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

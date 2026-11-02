@@ -1,6 +1,6 @@
 # Fase C: Hvor kommer lageravviket fra?
 
-*Notat 2026-11-02. Beslutninger samme dag (D40): punkt 1 og 3 er besluttet og punkt 1 implementert, punkt 2 er vurdert (se D40) og venter på beslutning, og for punkt 4 er det søkt etter garderobedata (se under). Deterministisk kjøring etter D37, D38 og fase A. Erstatter tallene i [notatet fra 2026-10-05](2026-10-05_lagermodell_mot_statistikk.md). Utforskende kjøringer er ikke en del av modellen.*
+*Notat 2026-11-02. Beslutninger samme dag (D40): punkt 1 og 3 er besluttet og punkt 1 implementert, punkt 2 er besluttet og implementert (2018-ankeret 38,3 kt og 2009-ankeret 40,7 kt), og for punkt 4 er det søkt etter garderobedata (se under). Deterministisk kjøring etter D37, D38 og fase A. Erstatter tallene i [notatet fra 2026-10-05](2026-10-05_lagermodell_mot_statistikk.md). Utforskende kjøringer er ikke en del av modellen.*
 
 ## Utgangspunkt (CL+HT+FW, 2025)
 

@@ -96,7 +96,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_online_returns_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L148). Dokumentasjonen i koden:
+Beregnes i `_online_returns_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L152). Dokumentasjonen i koden:
 
 > Goods bought directly from foreign web shops and sent back (D38). The
 > VOEC figures are deliveries to Norway, and returns to the web shop leave

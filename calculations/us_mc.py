@@ -61,7 +61,11 @@ def _residual_core(mfa, preloaded_data, anchors):
     """
     CL+HT+FW in household residual and bulky waste from pick analyses: 2009
     (Laitala et al. 2012), 2018, 2022 and 2025 (Mepex, via Watson et al. 2020
-    and NORSUS 2023 and 2026), interpolated between them. SSB's textile
+    and NORSUS 2023 and 2026), interpolated between them. Waste delivered at
+    recycling stations in 2018 and 2009 is set at its 2022-2025 ratio to
+    kerbside waste (0.51): the 2018 figure (6.1 kt) rests on three pick
+    analyses, and NORSUS (Rubach et al. 2023) considers it too low (D40).
+    SSB's textile
     accounts for 1998 (58.5 kt) are not used as a level: the clothing in the
     waste in 1991 and 1998 (34.8 and 47.2 kt) is nearly equal to net
     clothing imports those years (34.5 and 46.6 kt), so it was probably

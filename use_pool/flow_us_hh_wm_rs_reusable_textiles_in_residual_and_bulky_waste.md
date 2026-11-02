@@ -54,7 +54,7 @@ nav_order: 2
 
 - Flyten var 7,9–9,2 kt per år fram til 2011 og økte til 21,9 kt i 2022 og 17,8 kt i 2025.
 - Økningen etter 2011 kommer både fra mer tekstiler i restavfallet og fra høyere andel brukbart i de nye plukkanalysene.
-- Med fyllregelen fra D40 er lagerendringen i husholdningene 10–26 kt per år på 1990-tallet, og lageret (restleddet) blir 1 433 kt i 2025 (807–2 032), ca. 255 kg per innbygger. Med fast restavfall per innbygger (før D40) var det 1 617 kt. Se [lagerdiagnosen](https://github.com/aroyne/TekstilMFA/blob/main/claude_tekst/2026-11-02_C_lagerdiagnose.md).
+- Med fyllregelen fra D40 er lagerendringen i husholdningene 10–26 kt per år på 1990-tallet, og lageret (restleddet) blir 1 220 kt i 2025 (495–1 871), ca. 218 kg per innbygger, når også 2018- og 2009-ankrene har forholdet for gjenvinningsstasjoner fra 2022–2025 (D40). Med fast restavfall per innbygger og de gamle ankrene var det 1 617 kt. Se [lagerdiagnosen](https://github.com/aroyne/TekstilMFA/blob/main/claude_tekst/2026-11-02_C_lagerdiagnose.md).
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
@@ -88,18 +88,18 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `residual_core` | 19 % | 65 % | 67 % |
+| `residual_core` | 20 % | 65 % | 67 % |
 | `reusable_share_residual` | 8 % | 23 % | 33 % |
-| `gap: reusable_share_residual` | 49 % | 10 % | – |
-| `gap: residual_core` | 24 % | 2 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 7.90 | 4.07 | 6.49 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 7.96 | 4.02 | 6.26 |
+| `gap: reusable_share_residual` | 47 % | 10 % | – |
+| `gap: residual_core` | 25 % | 2 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 9.41 | 4.95 | 6.49 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 9.50 | 4.89 | 6.26 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L94). Dokumentasjonen i koden:
+Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L98). Dokumentasjonen i koden:
 
 > Part of the CORE residual textiles that could have been reused (D18),
 > share from the pick analyses. The analyses cover CL+HT+FW only, so the
@@ -107,7 +107,11 @@ Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://githu
 >
 > `_residual_core`: CL+HT+FW in household residual and bulky waste from pick analyses: 2009
 > (Laitala et al. 2012), 2018, 2022 and 2025 (Mepex, via Watson et al. 2020
-> and NORSUS 2023 and 2026), interpolated between them. SSB's textile
+> and NORSUS 2023 and 2026), interpolated between them. Waste delivered at
+> recycling stations in 2018 and 2009 is set at its 2022-2025 ratio to
+> kerbside waste (0.51): the 2018 figure (6.1 kt) rests on three pick
+> analyses, and NORSUS (Rubach et al. 2023) considers it too low (D40).
+> SSB's textile
 > accounts for 1998 (58.5 kt) are not used as a level: the clothing in the
 > waste in 1991 and 1998 (34.8 and 47.2 kt) is nearly equal to net
 > clothing imports those years (34.5 and 46.6 kt), so it was probably
