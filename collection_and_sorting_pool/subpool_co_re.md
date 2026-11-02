@@ -15,7 +15,6 @@ Type: process. Lager: no.
 ## Flyter ut
 
 * [Secondhand sales to households](../collection_and_sorting_pool/flow_co_re_us_hh_secondhand_sales_to_households.html) → US.HH
-* [Unsold secondhand goods](../collection_and_sorting_pool/flow_co_re_wm_rs_unsold_secondhand_goods.html) → WM.RS *(planlagt)*
 
 ## Flyter inn
 

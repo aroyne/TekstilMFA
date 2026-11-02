@@ -69,11 +69,11 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 80 % | 80 % | 81 % | 75 % | 73 % | 73 % |
-| Regenerert cellulose | 5 % | 4 % | 4 % | 5 % | 5 % | 5 % |
+| Bomull | 80 % | 79 % | 80 % | 75 % | 73 % | 73 % |
+| Regenerert cellulose | 6 % | 4 % | 4 % | 5 % | 5 % | 5 % |
 | Andre fibre | 1 % | 2 % | 2 % | 3 % | 4 % | 3 % |
-| Syntetisk | 2 % | 2 % | 3 % | 3 % | 3 % | 3 % |
-| Ull | 11 % | 12 % | 10 % | 13 % | 14 % | 15 % |
+| Syntetisk | 3 % | 3 % | 3 % | 4 % | 4 % | 4 % |
+| Ull | 11 % | 12 % | 10 % | 13 % | 14 % | 14 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_household_dust_fibres_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -94,7 +94,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_household_dust_fibres_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L224). Dokumentasjonen i koden:
+Beregnes i `_household_dust_fibres_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L234). Dokumentasjonen i koden:
 
 > Fibres shed during wear that end up in house dust and are vacuumed:
 > 80 % (50-95 %, assumption) of the release during wear (D37). Mepex

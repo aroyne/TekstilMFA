@@ -3,6 +3,8 @@
 *Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-11-02.*
 
 > **Her fortsetter vi:** Gjennomgangen flyt for flyt er ferdig (D21–D36). Veikartet fra 2026-11-02 står først under «Neste», med fasene A–F: A usikkerhet og B strømmer uten bestemt data eller metode (parallelt), C lagermodellen som diagnose, D fremtidsmodul, E tiltak og F dokumentasjon og publisering. Første steg er fase A og D37 og D38 i fase B. Beslutningsnotatene: D37 om fiberutslipp, lo og husstøv ([notat](../claude_tekst/2026-11-02_D37_mikrofibre_lo_og_stov.md)) og D38 om returer og destruksjon ([notat](../claude_tekst/2026-11-02_D38_returer_og_destruksjon.md)). Det viktigste faglige problemet er at lageret i husholdningene (restledd, ca. 275 kg per innbygger) er nesten tre ganger lagermodellen (ca. 97 kg). Arbeidsflyten for endringer er slik: kildene gås gjennom og diskuteres, deretter implementeres de, så kjøres MC (N = 1000 tar ca. 25 s), deretter genereres sidene på nytt (`report_generator.py`, `scripts/plot_core_flows.py`, `scripts/plot_stock_model.py`), og til slutt committes og pushes det. Når en flyt endres, oppdateres også beskrivelsen på flytsiden.
+> **Påminnelse:** Spørsmål til SSB samles i [SSB_SPORSMAAL.md](SSB_SPORSMAAL.md) og er **ikke sendt** ennå (4 spørsmål per 2026-11-02).
+
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
 
 **Mål:** En dynamisk, probabilistisk MFA for tekstiler i Norge 1990–2025. Den skal identifisere pools, subpools, flyter og lagre, kvantifisere dem med data og parametre, beregne tidsutviklingen med Monte Carlo og dokumentere hver flyt slik det er gjort i NitrogenBudsjett. Deretter skal den forlenges med en fremtidsmodul som bygger på den kalibrerte lagermodellen, og brukes til å analysere foreslåtte tiltak for sirkulære tekstiler (beslutning 2026-11-02).
@@ -118,6 +120,13 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Lagerdiagnose ([notat](../claude_tekst/2026-11-02_C_lagerdiagnose.md)): Avviket på ca. 1 030 kt mellom restledd og lagermodell i 2025 kommer fra 1988–2008 (553 kt, restavfallet holdt flatt per innbygger mens innsamlingen vokser), 2009–2017 (330 kt, lavt anker for 2018) og 2018–2025 (131 kt, 10–27 kt per år). Levetidene styrer ikke kasseringene når tilførselen er flat, bare lagernivået (× 1–1,75 mot garderobeanslagene). Forslag D40: substitusjon før 2009 (−183 kt), vurdere 2018-ankeret, rapportere det vedvarende gapet som funn.
 - [x] Rettelse: «110–140 kg klær etter SIFO» bygger på antatt 0,3–0,4 kg per plagg. Med importvekten (0,276 kg) blir det ca. 99 kg for voksne.
 
+### 2026-11-02 – D40, D41 og resten av fase B
+- [x] D40 (1): Restavfallet før 2009 får det som ennå ikke ble samlet inn. Lageret som restledd 2025: 1 433 kt (807–2 032), mot 1 617 kt. Restavfall med utslitte tekstiler i 1990: 56 kt, mot 47 kt.
+- [x] D40 (2) vurdert, ikke endret: Ankeret for gjenvinningsstasjonene i 2018 (tre analyser) er trolig for lavt (NORSUS 2023 sier det selv). Med forholdet fra 2022–2025 blir ankrene 38,3 (2018) og 40,7 kt (2009), og lageret 218 kt lavere. **Venter på beslutning.**
+- [x] D40 (3, 4): Gapet i 2018–2025 rapporteres som funn. Garderobedata: 200–400 plagg per voksen (Haugrønning, OsloMet), 55–110 kg med importvekten per plagg. Lagermodellen gir 56 kg per innbygger. Vekt per plagg og tall for barn mangler. Neste steg er å spørre OsloMet.
+- [x] D41: Matrise for fiberandeler i ferdigvarer (hovedfiber 0,89, Ward m.fl. 2013). Ull i innsamlet masse går fra 6,1 til 5,7 %.
+- [x] B: De tre planlagte flytene uten data er fjernet (42 flyter). Ext_tec05 gir ingen ny nedre grense per produkt (D36). Spørsmål til SSB samles i [SSB_SPORSMAAL.md](SSB_SPORSMAAL.md).
+
 ## Neste
 
 ### Veikart (besluttet 2026-11-02)
@@ -143,10 +152,10 @@ Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og
 #### Fase B – Strømmer uten bestemt data eller metode
 1. ~~D37: fiberutslipp, lo og husstøv~~ (gjort 2026-11-02).
 2. ~~D38: returer og destruksjon~~ (gjort 2026-11-02).
-3. Planlagte flyter: `US.IC-CO.CO` innsamling fra institusjoner, `CO.SO-RW.RW` eksport av sortert, `CO.RE-WM.RS` usolgte bruktvarer.
-4. Parameterforslagene i avsnitt 5.4 i litteraturnotatet fra 2026-10-05, og `institutional_share` per produkt.
-5. Om kasserte sekker registreres som plastemballasje eller tekstil.
-6. Fiberlaget: matrise fra hovedfiber til fiberandeler, restposter (RES/UNK), ull (5 % mot 3 % målt).
+3. ~~Planlagte flyter~~ (fjernet 2026-11-02).
+4. ~~Parameterforslag og institusjonsandel per produkt~~ (levetidene flyttet til fase C, ext_tec05 vurdert 2026-11-02).
+5. ~~Sekker~~ (lagt i SSB_SPORSMAAL.md).
+6. ~~Fiberlaget~~ (D41, 2026-11-02). Ull er fortsatt ca. 7 % av tekstildelen mot 3 % målt.
 
 #### Fase C – Lagermodellen som diagnose
 1. ~~Oppdatere notatet om lagermodellen~~ (erstattet av [lagerdiagnosen](../claude_tekst/2026-11-02_C_lagerdiagnose.md) 2026-11-02).
@@ -190,7 +199,7 @@ Punktene under fra fase 1–3 er beholdt som historikk. Åpne punkter der er tat
 - [x] Datainventar for P1-flytene ([notat](../claude_tekst/2026-09-29_datainventar_P1-flyter.md)). Handelsflytene er ferdige for 1988–2025. Kasseringene har ankerpunkter 2018, 2022 og 2025.
 - [x] Bruddet i SSBs avfallsregnskap i 2012 er bekreftet i SSBs dokumentasjon: blandet avfall ble en egen materialtype, og før 2012 ble noen materialer beregnet med varetilførsel og levetid. SSBs tekstilregnskap 1990–1998 gir ankerår 1991 og 1998. Forslag til kildekjede står i datainventaren.
 - [x] D15 er besluttet: kildekjede for tekstiler i restavfall og behandlingsmåte (se SYSTEMDEFINISJON).
-- [ ] Spørre SSB om «Tekstiler» i 05281 (1995–2011) ble beregnet med varetilførselsmetoden (nivået kan være modellbasert).
+- [ ] Spørre SSB om «Tekstiler» i 05281 (1995–2011) ble beregnet med varetilførselsmetoden (nivået kan være modellbasert). Samlet i [SSB_SPORSMAAL.md](SSB_SPORSMAAL.md).
 - [x] Grensehandel: SSB 05678 (2004–2022) og 14221 (klær og sko 2023–2025). Flyten er liten (≈ 0,2–0,5 kt per år). Metode foreslått i [notat](../claude_tekst/2026-09-29_grensehandel_og_innsamling_for_2018.md).
 - [x] Innsamling før 2018: eksport av 6309+6310 fra 08801 ÷ eksportandel (ankerpunkter). Serien stemmer med innsamlingen i 2018, 2022 og 2025.
 - [x] D16 og D17 er besluttet: metodene for grensehandel og for innsamling før 2018 er godkjent.
@@ -198,7 +207,7 @@ Punktene under fra fase 1–3 er beholdt som historikk. Åpne punkter der er tat
 - [x] Kontroll mot Watson m.fl. (2020): Netto import CL+HT 2018 er 74,0 kt, mot 74,3 kt satt på markedet der.
 - [x] NORSUS 2026 (OR.18.26) er gjennomgått. Brutto import stemmer med våre tall (≈ 2 kt lavere i alle år). Ankerår 2025 for kasseringer er hentet ut.
 - [x] NORSUS 2023 (OR.07.23) er hentet. Ankeråret 2022 er lagt inn, og alle ankerårene (1991, 1998, 2018, 2022, 2025) er samlet i datainventaren.
-- [ ] Spørre SSB om de detaljerte tabellene i tekstilregnskapet 1990–1998 (kan tas sammen med spørsmålet om 05281).
+- [ ] Spørre SSB om de detaljerte tabellene i tekstilregnskapet 1990–1998 (kan tas sammen med spørsmålet om 05281). Samlet i [SSB_SPORSMAAL.md](SSB_SPORSMAAL.md).
 - [x] Klesandelen i 99.60.1000 er verifisert: 23,6 % av **verdien** i 2024 (SSB). Varelinjene var utelatt før mai 2025. Det gir ca. 3,5 mrd NOK, som tilsvarer ca. 7 kt med gjennomsnittlig NOK/kg for klær. Prisen per kg for små varelinjer er ukjent. Lagt inn som forslag til parameter `lowvalue_undercoverage_CL` (status `proposal`).
 - [x] D14 er besluttet: Underdekningen for varelinjer under 1 000 kr holdes utenfor hovedresultatet. Den brukes som diskusjonspunkt og i følsomhetsanalyse.
 - [x] 08801 er oppdatert med 2023–2025 fra SSB API (`scripts/update_trade_ssb_api.py`). 2023 er uendret og 2024 marginalt revidert. Modellperioden er utvidet til 2025.

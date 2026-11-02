@@ -49,6 +49,7 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 ### Bruk og lager
 | Kilde | Innhold | Status |
 |---|---|---|
+| Haugrønning (OsloMet), garderobestudier, via forskning.no og OsloMet klesforskning | 200–400 plagg per person (upublisert); kvinner ca. 500, menn ca. 260 i 15 husholdninger | kontroll av lagernivået (D40); vekt per plagg og barn mangler |
 | SIFO/OsloMet (Klepp, Laitala m.fl.): garderobestudier, klesforbruk og levetid | Levetid, lager per person, dvalende klær | hent/verifiser |
 | WRAP (UK), *Valuing our clothes* | Levetid og lager (sammenligning) | hent |
 | Litteratur om institusjonstekstiler, vaskerier | Levetid og mengder i US.IC | hent |
@@ -101,6 +102,7 @@ Koden kommenterer hvert oppslag i `preloaded_data` med filnavn og en beskrivelse
 ### Fibersammensetning (fase 3)
 | Kilde | Innhold | Status |
 |---|---|---|
+| Ward, Hewitt & Russell (2013), *Fibre composition of donated post-consumer clothing in the UK*, Proc. ICE Waste and Resource Management 166(1): 29–37, doi:10.1680/warm.12.00014 | 36,2 % av 34 635 brukte plagg er blandinger; bomull 54,7 %, polyester 22,6 % (`main_fibre_share`) | brukt (D41) |
 | Plukkanalyser med fibersortering; JRC (Köhler et al. 2021; Huygens et al. 2023) | Fiberandeler i EU-forbruk og -avfall | hent |
 | Textile Exchange, *Materials Market Report* | Globale fiberandeler (polyester 59 % i 2024) | har (via TekstilEOL) |
 | SSB 08801 på HS6-nivå | Mange HS-koder angir hovedfiber (for eksempel 6109.10 bomull, 6109.90 annet) | har |

@@ -1,6 +1,6 @@
 # Fase B: resterende punkter (forslag)
 
-*Notat 2026-11-02. Beslutningsgrunnlag, ikke implementert. D37 og D38 er gjort.*
+*Notat 2026-11-02. Besluttet samme dag: (1) de tre flytene er fjernet, (2) ext_tec05 er vurdert og gir ingen ny nedre grense per produkt (se D36), (3) sekkespørsmålet er lagt i [SSB_SPORSMAAL.md](../docs/SSB_SPORSMAAL.md), (4) fibermatrisen er implementert (D41).*
 
 ## 1. Tre planlagte flyter uten data
 

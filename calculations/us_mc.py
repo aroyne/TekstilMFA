@@ -24,7 +24,7 @@ from calculations.utils import (CORE_GROUP_PRODUCTS, FIBRE_GROUPS, MATERIALS, PR
 
 COHORT_PRODUCTS = OTHER_HOUSEHOLD_GOODS
 # Pick analyses of residual waste exist from 2009; before that the waste per
-# inhabitant is held at the 2009 level.
+# inhabitant is held at the 2009 level plus what was not yet collected (D40).
 FIRST_RESIDUAL_ANCHOR = 2009
 
 
@@ -57,27 +57,37 @@ def _separate_collection_mc(mfa):
                   exported + retained - core_group_only(donated), balance_of='target')
 
 
-def _residual_core(preloaded_data, anchors):
+def _residual_core(mfa, preloaded_data, anchors):
     """
     CL+HT+FW in household residual and bulky waste from pick analyses: 2009
     (Laitala et al. 2012), 2018, 2022 and 2025 (Mepex, via Watson et al. 2020
-    and NORSUS 2023 and 2026), interpolated between them. Before 2009 the
-    waste per inhabitant is held at the 2009 level. SSB's textile accounts
-    for 1998 (58.5 kt) are not used as a level: the clothing in the waste in
-    1991 and 1998 (34.8 and 47.2 kt) is nearly equal to net clothing imports
-    those years (34.5 and 46.6 kt), so it was probably calculated from the
-    supply, and it would make the stock shrink in the early 1990s.
+    and NORSUS 2023 and 2026), interpolated between them. SSB's textile
+    accounts for 1998 (58.5 kt) are not used as a level: the clothing in the
+    waste in 1991 and 1998 (34.8 and 47.2 kt) is nearly equal to net
+    clothing imports those years (34.5 and 46.6 kt), so it was probably
+    calculated from the supply, and it would make the stock shrink in the
+    early 1990s.
+
+    Before 2009 there are no pick analyses. The waste per inhabitant is held
+    at the 2009 level, plus what was not yet collected separately: the
+    separate collection per inhabitant in 2009 minus that of the year, times
+    the population (D40). Textiles that were later collected went to residual
+    waste before collection grew, so households did not discard less per
+    inhabitant in 1990 than in 2009.
     """
     # 'population' <- data_files/SSB_05803_befolkning_1985_2026.csv:
     # population on 1 January (SSB 05803); the mean of two years is used
     population = preloaded_data['population']
     residual = interpolate(anchors['residual_core'])
+    collection = mfa.flows['US.HH-CO.CO-Separate collection from households-TOT'].values[:, 0]
     first = YEARS.index(FIRST_RESIDUAL_ANCHOR)
     per_inhabitant = residual[first] / population[FIRST_RESIDUAL_ANCHOR]
+    collected_per_inhabitant = collection[first] / population[FIRST_RESIDUAL_ANCHOR]
     for i, year in enumerate(YEARS[:first]):
         # residual[i] / residual[first] is the gap factor of the held value
-        # (D30), so the extrapolation keeps its growing uncertainty.
-        residual[i] = per_inhabitant * population[year] * residual[i] / residual[first]
+        # (D30), so the held level keeps its growing uncertainty.
+        not_yet_collected = collected_per_inhabitant * population[year] - collection[i]
+        residual[i] = per_inhabitant * population[year] * residual[i] / residual[first] + not_yet_collected
     return residual
 
 
@@ -89,7 +99,7 @@ def _reusable_residual_waste_mc(mfa, preloaded_data, anchors):
     """
     reusable_share = interpolate(anchors['reusable_share_residual'], upper=1.0)
     mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values[...] = (
-        core_group_only(_residual_core(preloaded_data, anchors) * reusable_share))
+        core_group_only(_residual_core(mfa, preloaded_data, anchors) * reusable_share))
 
 
 def _worn_residual_waste_mc(mfa, preloaded_data, current_params, anchors):
@@ -102,7 +112,7 @@ def _worn_residual_waste_mc(mfa, preloaded_data, current_params, anchors):
     """
     flow = mfa.flows['US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT']
     reusable = mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values
-    flow.values[...] = core_group_only(_residual_core(preloaded_data, anchors)) - reusable
+    flow.values[...] = core_group_only(_residual_core(mfa, preloaded_data, anchors)) - reusable
     discards = _other_goods_discards(mfa, current_params)
     for j, product in enumerate(COHORT_PRODUCTS):
         flow.values[:, PRODUCT_GROUPS.index(product)] = discards[:, j]

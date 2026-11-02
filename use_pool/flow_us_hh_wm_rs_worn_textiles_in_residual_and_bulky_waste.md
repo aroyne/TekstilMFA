@@ -40,7 +40,7 @@ nav_order: 3
 #### Antakelser
 
 - Tepper, presenninger og andre konfeksjonerte varer har ikke kasseringsstatistikk, så kasseringene beregnes med årgangsmodellen. Det er et unntak fra D8 (D28). Innstrømmen før 1988 holdes på 1988-nivå (D2).
-- Restavfallet for CORE holdes fast per innbygger før 2009 (se US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT).
+- Før 2009 er restavfallet for CORE 2009-nivået per innbygger pluss det som ennå ikke ble samlet inn separat (D40, se US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT). Det gir 56 kt utslitte tekstiler i 1990, mot 47 kt med fast nivå per innbygger.
 - Sekker brukes ikke av husholdninger (D13).
 
 #### Sammensetning (varetype og materiale)
@@ -62,10 +62,10 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Tepper | 44 % | 35 % | 25 % | 27 % | 23 % | 23 % |
-| Klær, hjemmetekstiler og sko | 44 % | 49 % | 52 % | 42 % | 47 % | 46 % |
-| Andre konfeksjonerte varer | 4 % | 6 % | 9 % | 12 % | 15 % | 15 % |
-| Presenninger og telt | 8 % | 11 % | 14 % | 18 % | 16 % | 16 % |
+| Tepper | 36 % | 31 % | 25 % | 27 % | 23 % | 23 % |
+| Klær, hjemmetekstiler og sko | 53 % | 54 % | 52 % | 42 % | 47 % | 46 % |
+| Andre konfeksjonerte varer | 3 % | 5 % | 9 % | 12 % | 15 % | 15 % |
+| Presenninger og telt | 7 % | 10 % | 14 % | 18 % | 16 % | 16 % |
 
 ### Materiale (fiberlag, D19)
 
@@ -73,12 +73,12 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 25 % | 30 % | 29 % | 23 % | 24 % | 23 % |
+| Bomull | 28 % | 31 % | 28 % | 23 % | 24 % | 24 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 21 % | 19 % | 19 % | 19 % | 18 % | 18 % |
-| Andre fibre | 3 % | 4 % | 4 % | 4 % | 4 % | 4 % |
-| Syntetisk | 42 % | 37 % | 40 % | 46 % | 47 % | 47 % |
-| Ull | 6 % | 8 % | 6 % | 6 % | 6 % | 6 % |
+| Andre fibre | 2 % | 3 % | 4 % | 4 % | 4 % | 4 % |
+| Syntetisk | 40 % | 37 % | 41 % | 47 % | 47 % | 48 % |
+| Ull | 5 % | 7 % | 6 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_worn_textiles_in_residual_and_bulky_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -88,22 +88,22 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `residual_core` | 37 % | 86 % | 76 % |
-| `reusable_share_residual` | 1 % | 4 % | 16 % |
+| `residual_core` | 35 % | 86 % | 76 % |
+| `reusable_share_residual` | 2 % | 4 % | 16 % |
 | `institutional_share` | 1 % | 2 % | 4 % |
 | `08801_classification:import:finished` | – | 1 % | 2 % |
 | `gap: domestic_share_TA` | – | – | 1 % |
-| `gap: residual_core` | 47 % | 3 % | – |
-| `gap: reusable_share_residual` | 9 % | 2 % | – |
+| `gap: residual_core` | 44 % | 3 % | – |
+| `gap: reusable_share_residual` | 13 % | 2 % | – |
 | `lifetime_mean_US.HH_CA` | 4 % | 1 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 14.91 | 9.34 | 9.23 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 15.22 | 9.76 | 9.26 |
+| Halvt 95 %-intervall, førsteordens (kt) | 15.34 | 9.34 | 9.23 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 15.67 | 9.76 | 9.26 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L95). Dokumentasjonen i koden:
+Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L105). Dokumentasjonen i koden:
 
 > CORE: residual textiles that are not reusable. CA, TA and OM: the
 > outflow of a cohort model of the goods sold to households, with Weibull
@@ -115,9 +115,16 @@ Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.co
 >
 > `_residual_core`: CL+HT+FW in household residual and bulky waste from pick analyses: 2009
 > (Laitala et al. 2012), 2018, 2022 and 2025 (Mepex, via Watson et al. 2020
-> and NORSUS 2023 and 2026), interpolated between them. Before 2009 the
-> waste per inhabitant is held at the 2009 level. SSB's textile accounts
-> for 1998 (58.5 kt) are not used as a level: the clothing in the waste in
-> 1991 and 1998 (34.8 and 47.2 kt) is nearly equal to net clothing imports
-> those years (34.5 and 46.6 kt), so it was probably calculated from the
-> supply, and it would make the stock shrink in the early 1990s.
+> and NORSUS 2023 and 2026), interpolated between them. SSB's textile
+> accounts for 1998 (58.5 kt) are not used as a level: the clothing in the
+> waste in 1991 and 1998 (34.8 and 47.2 kt) is nearly equal to net
+> clothing imports those years (34.5 and 46.6 kt), so it was probably
+> calculated from the supply, and it would make the stock shrink in the
+> early 1990s.
+>
+> Before 2009 there are no pick analyses. The waste per inhabitant is held
+> at the 2009 level, plus what was not yet collected separately: the
+> separate collection per inhabitant in 2009 minus that of the year, times
+> the population (D40). Textiles that were later collected went to residual
+> waste before collection grew, so households did not discard less per
+> inhabitant in 1990 than in 2009.

@@ -26,7 +26,6 @@ Type: process. Lager: clipping.
 * [Worn textiles in residual and bulky waste](../use_pool/flow_us_hh_wm_rs_worn_textiles_in_residual_and_bulky_waste.html) ← US.HH
 * [Institutional textile waste](../use_pool/flow_us_ic_wm_rs_institutional_textile_waste.html) ← US.IC
 * [Sorting residues](../collection_and_sorting_pool/flow_co_so_wm_rs_sorting_residues.html) ← CO.SO
-* [Unsold secondhand goods](../collection_and_sorting_pool/flow_co_re_wm_rs_unsold_secondhand_goods.html) ← CO.RE *(planlagt)*
 * [Tumble dryer lint](../use_pool/flow_us_hh_wm_rs_tumble_dryer_lint.html) ← US.HH
 * [Household dust fibres](../use_pool/flow_us_hh_wm_rs_household_dust_fibres.html) ← US.HH
 

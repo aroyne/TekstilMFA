@@ -3,7 +3,7 @@ layout: default
 title: Sorting residues
 parent: Sorting (CO.SO)
 grand_parent: 6. Collection and sorting (CO)
-nav_order: 4
+nav_order: 3
 ---
 
 # Sorting residues
@@ -65,12 +65,12 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 50 % | 48 % | 44 % | 40 % | 37 % | 36 % |
-| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 3 % |
-| Ikke-tekstil | 14 % | 16 % | 18 % | 18 % | 17 % | 17 % |
-| Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 28 % | 27 % | 30 % | 33 % | 35 % | 36 % |
-| Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
+| Bomull | 47 % | 45 % | 42 % | 38 % | 35 % | 35 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 14 % | 16 % | 18 % | 18 % | 18 % | 17 % |
+| Andre fibre | 1 % | 1 % | 1 % | 1 % | 2 % | 2 % |
+| Syntetisk | 31 % | 30 % | 33 % | 36 % | 38 % | 38 % |
+| Ull | 5 % | 6 % | 5 % | 5 % | 5 % | 6 % |
 
 <iframe src="../output_files/plots/pages/co_so_wm_rs_sorting_residues_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

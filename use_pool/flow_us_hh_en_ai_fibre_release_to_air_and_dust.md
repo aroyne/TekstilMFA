@@ -70,11 +70,11 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 80 % | 79 % | 81 % | 75 % | 73 % | 74 % |
-| Regenerert cellulose | 5 % | 4 % | 4 % | 5 % | 5 % | 5 % |
+| Bomull | 79 % | 79 % | 80 % | 75 % | 73 % | 73 % |
+| Regenerert cellulose | 6 % | 5 % | 4 % | 5 % | 5 % | 5 % |
 | Andre fibre | 1 % | 2 % | 2 % | 3 % | 4 % | 3 % |
-| Syntetisk | 2 % | 2 % | 3 % | 3 % | 4 % | 3 % |
-| Ull | 11 % | 12 % | 10 % | 13 % | 14 % | 15 % |
+| Syntetisk | 3 % | 3 % | 3 % | 4 % | 4 % | 4 % |
+| Ull | 11 % | 12 % | 10 % | 13 % | 14 % | 14 % |
 
 <iframe src="../output_files/plots/pages/us_hh_en_ai_fibre_release_to_air_and_dust_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -97,7 +97,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_air_and_dust_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L236). Dokumentasjonen i koden:
+Beregnes i `_air_and_dust_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L246). Dokumentasjonen i koden:
 
 > Fibres to air and indoor dust that are not vacuumed (the rest of the
 > release during wear, D37), plus the fibres from tumble drying that pass

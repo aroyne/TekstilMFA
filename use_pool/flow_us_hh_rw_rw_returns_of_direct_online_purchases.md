@@ -71,11 +71,11 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | nan % | nan % | nan % | nan % | 46 % | 46 % |
+| Bomull | nan % | nan % | nan % | nan % | 43 % | 44 % |
 | Regenerert cellulose | nan % | nan % | nan % | nan % | 4 % | 3 % |
 | Ikke-tekstil | nan % | nan % | nan % | nan % | 2 % | 3 % |
 | Andre fibre | nan % | nan % | nan % | nan % | 1 % | 1 % |
-| Syntetisk | nan % | nan % | nan % | nan % | 42 % | 41 % |
+| Syntetisk | nan % | nan % | nan % | nan % | 45 % | 44 % |
 | Ull | nan % | nan % | nan % | nan % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_rw_rw_returns_of_direct_online_purchases_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -96,7 +96,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_online_returns_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L138). Dokumentasjonen i koden:
+Beregnes i `_online_returns_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L148). Dokumentasjonen i koden:
 
 > Goods bought directly from foreign web shops and sent back (D38). The
 > VOEC figures are deliveries to Norway, and returns to the web shop leave

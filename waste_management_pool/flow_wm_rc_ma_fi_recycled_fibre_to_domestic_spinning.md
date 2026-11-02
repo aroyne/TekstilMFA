@@ -67,10 +67,10 @@ Andel av summen i nøkkelår (median).
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | nan % | nan % | nan % | nan % | nan % | 51 % |
+| Bomull | nan % | nan % | nan % | nan % | nan % | 49 % |
 | Regenerert cellulose | nan % | nan % | nan % | nan % | nan % | 2 % |
 | Andre fibre | nan % | nan % | nan % | nan % | nan % | 3 % |
-| Syntetisk | nan % | nan % | nan % | nan % | nan % | 40 % |
+| Syntetisk | nan % | nan % | nan % | nan % | nan % | 43 % |
 | Ull | nan % | nan % | nan % | nan % | nan % | 4 % |
 
 <iframe src="../output_files/plots/pages/wm_rc_ma_fi_recycled_fibre_to_domestic_spinning_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>

@@ -3,7 +3,7 @@ layout: default
 title: Institutional textiles to recycling
 parent: Institutions and businesses (US.IC)
 grand_parent: 5. Use (US)
-nav_order: 4
+nav_order: 3
 ---
 
 # Institutional textiles to recycling
@@ -68,11 +68,11 @@ Andel av summen i nøkkelår (median).
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | nan % | nan % | nan % | nan % | nan % | 37 % |
+| Bomull | nan % | nan % | nan % | nan % | nan % | 36 % |
 | Regenerert cellulose | nan % | nan % | nan % | nan % | nan % | 1 % |
 | Ikke-tekstil | nan % | nan % | nan % | nan % | nan % | 12 % |
-| Andre fibre | nan % | nan % | nan % | nan % | nan % | 6 % |
-| Syntetisk | nan % | nan % | nan % | nan % | nan % | 43 % |
+| Andre fibre | nan % | nan % | nan % | nan % | nan % | 5 % |
+| Syntetisk | nan % | nan % | nan % | nan % | nan % | 44 % |
 | Ull | nan % | nan % | nan % | nan % | nan % | 2 % |
 
 <iframe src="../output_files/plots/pages/us_ic_wm_rc_institutional_textiles_to_recycling_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -92,7 +92,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_institutional_recycling_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L250). Dokumentasjonen i koden:
+Beregnes i `_institutional_recycling_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L260). Dokumentasjonen i koden:
 
 > Textiles from industry (mainly hotels and health care) recycled at Norsk
 > Tekstilgjenvinning: their share of the plant's intake (75 of 153 t in

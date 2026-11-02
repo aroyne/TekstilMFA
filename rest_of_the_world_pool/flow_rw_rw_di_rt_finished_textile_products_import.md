@@ -92,12 +92,12 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 37 % | 36 % | 36 % | 28 % | 28 % | 29 % |
+| Bomull | 35 % | 35 % | 35 % | 28 % | 28 % | 29 % |
 | Regenerert cellulose | 1 % | 2 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 22 % | 18 % | 18 % | 18 % | 18 % | 17 % |
-| Andre fibre | 2 % | 3 % | 2 % | 3 % | 2 % | 2 % |
-| Syntetisk | 33 % | 36 % | 37 % | 44 % | 45 % | 44 % |
-| Ull | 4 % | 5 % | 5 % | 5 % | 5 % | 6 % |
+| Andre fibre | 2 % | 2 % | 2 % | 2 % | 2 % | 2 % |
+| Syntetisk | 35 % | 38 % | 39 % | 45 % | 45 % | 45 % |
+| Ull | 3 % | 5 % | 4 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/rw_rw_di_rt_finished_textile_products_import_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

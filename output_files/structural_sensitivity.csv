@@ -1,20 +1,20 @@
 variant,description,output,year,baseline,value,difference
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,1990,398.08152174019006,268.2077527945562,-129.87376894563386
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2000,727.9379621778082,598.0641932321744,-129.87376894563386
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2010,1197.9857741548208,1068.112005209187,-129.87376894563386
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2025,1561.5655787978217,1431.6918098521878,-129.87376894563386
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,1990,22.088526550370297,31.116150006575197,9.0276234562049
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2000,32.62535726625024,34.99070138699823,2.3653441207479915
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,1990,356.2155350643868,226.34176611875301,-129.8737689456338
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2000,581.7456753570349,451.871906411401,-129.87376894563386
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2010,1015.3308990086823,885.4571300630485,-129.87376894563386
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2025,1378.910703651683,1249.0369347060491,-129.87376894563386
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,1990,8.500003755022075,17.527627211226967,9.027623456204893
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2000,25.28958400481499,27.654928125562982,2.3653441207479915
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2010,53.72194396366916,53.87327697640121,0.1513330127320458
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,8.060650910805172,0.0001288507295527097
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,255.67401192466028,-68.33329139835504
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,413.97394477634793,-1.3333976393703892
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,565.9665878214706,-0.0026625311094221615
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341713,528.7542909232678,-1.090347723220475e-08
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,255.67401192466033,-68.33329139835499
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,413.973944776348,-1.3333976393703324
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,565.9665878214705,-0.0026625311095358484
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341714,528.754290923268,-1.090347723220475e-08
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,36.08709013866206,-18.844320317244552
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,64.65709120386748,-0.8893780751290308
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.56646323660149,-0.002686634113757691
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861256,90.70058963111877,-1.749378952808911e-08
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861258,90.70058963111879,-1.749378952808911e-08
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-US.HH-Sales to households-TOT,1990,77.81517571104271,77.81517571104271,0.0
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-US.HH-Sales to households-TOT,2000,93.76479852725848,93.76479852725848,0.0
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-US.HH-Sales to households-TOT,2010,126.00121165243047,126.00121165243047,0.0
@@ -27,22 +27,22 @@ spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-WM.RS-Unsold 
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,1990,398.08152174019006,333.1446372673731,-64.93688447281693
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2000,727.9379621778082,663.0010777049913,-64.93688447281693
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2010,1197.9857741548208,1133.0488896820038,-64.93688447281693
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2025,1561.5655787978217,1496.6286943250045,-64.93688447281716
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,1990,22.088526550370297,26.60233827847275,4.5138117281024535
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2000,32.62535726625024,33.808029326624236,1.1826720603739957
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,1990,356.2155350643868,291.2786505915699,-64.93688447281693
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2000,581.7456753570349,516.8087908842178,-64.93688447281704
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2010,1015.3308990086823,950.3940145358653,-64.93688447281704
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2025,1378.910703651683,1313.973819178866,-64.93688447281693
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,1990,8.500003755022075,13.013815483124521,4.513811728102446
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2000,25.28958400481499,26.472256065188986,1.1826720603739957
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2010,53.72194396366916,53.79761047003518,0.07566650636601935
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,8.060586485440396,6.442536477635485e-05
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,289.8406576238378,-34.166645699177536
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,414.6406435960331,-0.666698819685223
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,565.9679190870252,-0.001331265554881611
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341713,528.7542909287196,-5.451738616102375e-09
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,414.64064359603316,-0.6666988196851662
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,565.9679190870253,-0.0013312655547679242
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341714,528.7542909287196,-5.451852302940097e-09
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,45.50925029728434,-9.422160158622276
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,65.10178024143198,-0.4446890375645296
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.56780655365837,-0.0013433170568788455
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861256,90.70058963986567,-8.746894764044555e-09
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,65.101780241432,-0.4446890375645154
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.56780655365839,-0.0013433170568646347
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861258,90.70058963986567,-8.74690897489927e-09
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-US.HH-Sales to households-TOT,1990,77.81517571104271,77.81517571104271,0.0
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-US.HH-Sales to households-TOT,2000,93.76479852725848,93.76479852725848,0.0
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-US.HH-Sales to households-TOT,2010,126.00121165243047,126.00121165243047,0.0
@@ -55,22 +55,22 @@ spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-WM.RS-Unsold 
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,1990,398.08152174019006,398.0212097075182,-0.06031203267184537
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2000,727.9379621778082,727.8776501451364,-0.06031203267184537
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2010,1197.9857741548208,1197.925462122149,-0.06031203267184537
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2025,1561.5655787978217,1561.5052667651494,-0.06031203267230012
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,1990,22.088526550370297,22.18549627689524,0.09696972652494296
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,2000,32.62535726625024,33.01940532733409,0.3940480610838506
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,1990,356.2155350643868,356.15522303171497,-0.06031203267184537
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2000,581.7456753570349,581.6853633243629,-0.06031203267195906
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2010,1015.3308990086823,1015.2705869760105,-0.06031203267184537
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2025,1378.910703651683,1378.8503916190111,-0.06031203267184537
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,1990,8.500003755022075,8.596973481547012,0.09696972652493763
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,2000,25.28958400481499,25.68363206589884,0.3940480610838506
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,2010,53.72194396366916,53.176975300695965,-0.5449686629731971
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,8.320298507972646,0.2597764478970266
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,324.0809004853169,0.073597162301553
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,324.08090048531693,0.07359716230160984
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,409.96389349253974,-5.343448923178585
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,556.4444289319174,-9.524821420662647
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341713,530.7476225589313,1.9933316247600033
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,54.84427116632894,-0.08713928957767791
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,65.81798195777766,0.27151267878114993
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.45591208448894,-0.11323778622630698
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861256,90.43449202696334,-0.266097621649223
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,556.4444289319175,-9.524821420662533
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341714,530.7476225589312,1.9933316247597759
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,54.844271166328944,-0.08713928957767081
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,65.81798195777765,0.2715126787811357
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.45591208448896,-0.11323778622629277
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861258,90.43449202696334,-0.2660976216492372
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",DI.RT-US.HH-Sales to households-TOT,1990,77.81517571104271,77.81517571104271,0.0
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",DI.RT-US.HH-Sales to households-TOT,2000,93.76479852725848,93.76479852725848,0.0
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",DI.RT-US.HH-Sales to households-TOT,2010,126.00121165243047,126.00121165243047,0.0
@@ -83,22 +83,22 @@ weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same mean
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,1990,398.08152174019006,398.0833002497965,0.0017785096064244499
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2000,727.9379621778082,727.9397406874147,0.0017785096064244499
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2010,1197.9857741548208,1197.987552664427,0.001778509606310763
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2025,1561.5655787978217,1561.5673573074278,0.0017785096060833894
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,1990,22.088526550370297,22.052364203583373,-0.03616234678692365
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,2000,32.62535726625024,32.249087213128576,-0.37627005312166517
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,1990,356.2155350643868,356.21731357399324,0.0017785096064244499
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2000,581.7456753570349,581.7474538666411,0.0017785096061970762
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2010,1015.3308990086823,1015.3326775182886,0.001778509606310763
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2025,1378.910703651683,1378.912482161289,0.0017785096060833894
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,1990,8.500003755022075,8.463841408235147,-0.0361623467869272
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,2000,25.28958400481499,24.913313951693326,-0.37627005312166517
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,2010,53.72194396366916,54.26691804386854,0.5449740801993812
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,7.771876989669003,-0.28864507040661636
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,323.90169646560264,-0.10560685741268117
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,323.9016964656027,-0.10560685741262432
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,419.9074791866261,4.600136770907795
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,574.3471499691443,8.377899616564264
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341713,527.3354149447694,-1.418875989401954
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,55.02234636875751,0.0909359128508953
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,574.3471499691444,8.377899616564378
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341714,527.3354149447692,-1.4188759894021814
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,55.02234636875752,0.09093591285090241
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,65.66176587573823,0.11529659674171455
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.61999325694238,0.05084338622712892
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861256,90.62681533717937,-0.07377431143319768
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.6199932569424,0.05084338622714313
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861258,90.62681533717937,-0.07377431143321189
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",DI.RT-US.HH-Sales to households-TOT,1990,77.81517571104271,77.81517571104271,0.0
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",DI.RT-US.HH-Sales to households-TOT,2000,93.76479852725848,93.76479852725848,0.0
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",DI.RT-US.HH-Sales to households-TOT,2010,126.00121165243047,126.00121165243047,0.0
@@ -111,22 +111,22 @@ weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,1990,398.08152174019006,398.08152174019006,0.0
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2000,727.9379621778082,727.9379621778082,0.0
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2010,1197.9857741548208,1197.9857741548208,0.0
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2025,1561.5655787978217,1567.5262787978213,5.960699999999633
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,1990,22.088526550370297,22.088526550370297,0.0
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,2000,32.62535726625024,32.62535726625024,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,1990,356.2155350643868,356.2155350643868,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2000,581.7456753570349,581.7456753570349,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2010,1015.3308990086823,1015.3308990086823,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2025,1378.910703651683,1384.871403651683,5.960700000000088
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,1990,8.500003755022075,8.500003755022075,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,2000,25.28958400481499,25.28958400481499,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,2010,53.72194396366916,53.72194396366916,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,10.85292206007562,2.7924000000000007
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,324.0073033230153,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,415.3073424157183,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,565.96925035258,0.0
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341713,534.0916631424349,5.3373722082635595
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341714,534.091663142435,5.3373722082635595
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,54.931410455906615,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,65.54646927899651,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.56914987071525,0.0
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861256,90.98763865050145,0.2870490018888887
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861258,90.98763865050145,0.2870490018888745
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",DI.RT-US.HH-Sales to households-TOT,1990,77.81517571104271,77.81517571104271,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",DI.RT-US.HH-Sales to households-TOT,2000,93.76479852725848,93.76479852725848,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",DI.RT-US.HH-Sales to households-TOT,2010,126.00121165243047,126.00121165243047,0.0
@@ -139,22 +139,22 @@ no_online_returns,"No returns of direct online purchases (VOEC as net, before D3
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,1990,398.08152174019006,373.52732172616834,-24.554200014021717
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2000,727.9379621778082,668.6256150322058,-59.312347145602416
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2010,1197.9857741548208,1091.2652622853075,-106.7205118695133
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2025,1561.5655787978217,1385.4794939162798,-176.08608488154186
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,1990,22.088526550370297,19.198937749802695,-2.8895888005676014
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,2000,32.62535726625024,28.693391323083922,-3.9319659431663183
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,1990,356.2155350643868,331.66133505036515,-24.55420001402166
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2000,581.7456753570349,522.4333282114321,-59.31234714560276
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2010,1015.3308990086823,908.6103871391689,-106.72051186951342
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2025,1378.910703651683,1202.8246187701413,-176.08608488154164
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,1990,8.500003755022075,5.610414954454473,-2.8895888005676014
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,2000,25.28958400481499,21.357618061648672,-3.9319659431663183
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,2010,53.72194396366916,48.419989055420785,-5.301954908248376
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,4.111201595375952,-3.9493204646996674
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,307.7764301614809,-16.23087316153442
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,394.19593220302147,-21.111410212696853
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,307.77643016148085,-16.230873161534475
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,394.1959322030215,-21.111410212696796
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,536.9390802720446,-29.030170080535413
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341713,503.07182399786143,-25.68246693630988
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,52.16109003800872,-2.770320417897892
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,62.20960254427494,-3.336866734721575
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341714,503.0718239978615,-25.682466936309936
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,52.16109003800873,-2.770320417897885
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,62.209602544274944,-3.3368667347215677
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,84.96180145462966,-4.6073484160855855
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861256,86.12866809412836,-4.571921554484206
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861258,86.12866809412836,-4.57192155448422
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",DI.RT-US.HH-Sales to households-TOT,1990,77.81517571104271,74.92558691047512,-2.8895888005675943
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",DI.RT-US.HH-Sales to households-TOT,2000,93.76479852725848,89.83283258409216,-3.9319659431663183
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",DI.RT-US.HH-Sales to households-TOT,2010,126.00121165243047,120.6992567441821,-5.301954908248376
@@ -167,22 +167,22 @@ unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,5.628474856981382,4.468143117234451
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,7.58956723564451,6.02494875937318
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,5.653317261396207,4.487864164431451
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,1990,398.08152174019006,392.11075608815,-5.970765652040029
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2000,727.9379621778082,701.3736439909683,-26.564318186839955
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2010,1197.9857741548208,1149.4332832588207,-48.55249089600011
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2025,1561.5655787978217,1475.5718929417017,-85.99368585612001
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,1990,22.088526550370297,20.090962426290297,-1.9975641240800002
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,2000,32.62535726625024,30.510291683410244,-2.1150655828399962
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,1990,356.2155350643868,350.24476941234684,-5.970765652039972
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2000,581.7456753570349,555.1813571701948,-26.56431818684007
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2010,1015.3308990086823,966.7784081126823,-48.552490895999995
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2025,1378.910703651683,1292.917017795563,-85.99368585612001
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,1990,8.500003755022075,6.5024396309420744,-1.9975641240800002
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,2000,25.28958400481499,23.174518421974994,-2.1150655828399962
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,2010,53.72194396366916,51.41930184174917,-2.3026421219199946
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,5.418026724875624,-2.642495335199996
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,324.0073033230153,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,415.3073424157183,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,565.96925035258,0.0
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341713,528.7542909341713,0.0
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341714,528.7542909341714,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,54.931410455906615,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,65.54646927899651,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.56914987071525,0.0
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861256,90.70058964861256,0.0
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861258,90.70058964861258,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),DI.RT-US.HH-Sales to households-TOT,1990,77.81517571104271,77.81517571104271,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),DI.RT-US.HH-Sales to households-TOT,2000,93.76479852725848,93.76479852725848,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),DI.RT-US.HH-Sales to households-TOT,2010,126.00121165243047,126.00121165243047,0.0

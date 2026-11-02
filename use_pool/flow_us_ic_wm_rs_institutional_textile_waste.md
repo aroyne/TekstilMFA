@@ -3,7 +3,7 @@ layout: default
 title: Institutional textile waste
 parent: Institutions and businesses (US.IC)
 grand_parent: 5. Use (US)
-nav_order: 2
+nav_order: 1
 ---
 
 # Institutional textile waste
@@ -90,12 +90,12 @@ Utstrømmen av en årgangsmodell av salget til institusjoner og bedrifter. Sekke
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 26 % | 24 % | 23 % | 16 % | 14 % | 14 % |
+| Bomull | 28 % | 27 % | 25 % | 20 % | 19 % | 19 % |
 | Regenerert cellulose | 3 % | 1 % | 1 % | 1 % | 1 % | 1 % |
 | Ikke-tekstil | 15 % | 11 % | 12 % | 10 % | 10 % | 10 % |
-| Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |
-| Syntetisk | 50 % | 57 % | 58 % | 67 % | 70 % | 71 % |
-| Ull | 3 % | 4 % | 3 % | 2 % | 2 % | 2 % |
+| Andre fibre | 2 % | 2 % | 2 % | 2 % | 3 % | 2 % |
+| Syntetisk | 49 % | 55 % | 56 % | 64 % | 66 % | 66 % |
+| Ull | 3 % | 3 % | 3 % | 2 % | 2 % | 2 % |
 
 <iframe src="../output_files/plots/pages/us_ic_wm_rs_institutional_textile_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -123,7 +123,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L263). Dokumentasjonen i koden:
+Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L273). Dokumentasjonen i koden:
 
 > Goods discarded by institutions and businesses: the outflow of a cohort
 > model of the goods sold to them, with Weibull lifetimes per product

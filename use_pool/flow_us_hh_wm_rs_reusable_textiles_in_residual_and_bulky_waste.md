@@ -41,7 +41,7 @@ nav_order: 2
 #### Antakelser
 
 - Mengden og andelen interpoleres mellom ankerpunktene. Andelen holdes fast før 2011.
-- **Før 2009 holdes restavfallet per innbygger fast på 2009-nivået** (befolkning fra SSB 05803). SSBs avfallsregnskap for tekstiler for 1998 (58,5 kt) brukes ikke som nivå: klærne i avfallet i 1991 og 1998 (34,8 og 47,2 kt) er nesten like store som nettoimporten av klær de samme årene (34,5 og 46,6 kt), så tallene er trolig beregnet ut fra tilførselen og ikke målt. De ville også gitt et krympende lager tidlig på 1990-tallet. Fast mengde per innbygger er den enkleste antakelsen uten målinger, men gir et høyt lager (se tidsutviklingen).
+- **Før 2009 er restavfallet per innbygger 2009-nivået pluss det som ennå ikke ble samlet inn separat** (innsamling per innbygger i 2009 minus innsamlingen det året, D40; befolkning fra SSB 05803). Det som senere ble samlet inn, gikk i restavfallet før innsamlingen vokste. SSBs avfallsregnskap for tekstiler for 1998 (58,5 kt) brukes ikke som nivå: klærne i avfallet i 1991 og 1998 (34,8 og 47,2 kt) er nesten like store som nettoimporten av klær de samme årene (34,5 og 46,6 kt), så tallene er trolig beregnet ut fra tilførselen og ikke målt. De ville også gitt et krympende lager tidlig på 1990-tallet. Fast mengde per innbygger er den enkleste antakelsen uten målinger, men gir et høyt lager (se tidsutviklingen).
 - Usikkerhet: 30–40 % på mengden og 0,2–0,6 (absolutt) på andelen.
 - Andre varetyper (tepper, presenninger, andre konfeksjonerte varer) regnes som utslitte.
 
@@ -54,7 +54,7 @@ nav_order: 2
 
 - Flyten var 7,9–9,2 kt per år fram til 2011 og økte til 21,9 kt i 2022 og 17,8 kt i 2025.
 - Økningen etter 2011 kommer både fra mer tekstiler i restavfallet og fra høyere andel brukbart i de nye plukkanalysene.
-- Med fast restavfall per innbygger før 2009 blir lagerendringen i husholdningene 24–36 kt per år på 1990-tallet, og lageret (restleddet) blir omtrent 275 kg per innbygger i 2018–2025. Det er mer enn garderobestudiene tilsier, og et diskusjonspunkt.
+- Med fyllregelen fra D40 er lagerendringen i husholdningene 10–26 kt per år på 1990-tallet, og lageret (restleddet) blir 1 433 kt i 2025 (807–2 032), ca. 255 kg per innbygger. Med fast restavfall per innbygger (før D40) var det 1 617 kt. Se [lagerdiagnosen](https://github.com/aroyne/TekstilMFA/blob/main/claude_tekst/2026-11-02_C_lagerdiagnose.md).
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
@@ -73,12 +73,12 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 45 % | 47 % | 44 % | 40 % | 37 % | 36 % |
+| Bomull | 43 % | 44 % | 41 % | 38 % | 35 % | 34 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 18 % | 17 % | 19 % | 18 % | 18 % | 17 % |
-| Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 27 % | 26 % | 29 % | 33 % | 35 % | 36 % |
-| Ull | 6 % | 6 % | 5 % | 5 % | 6 % | 6 % |
+| Andre fibre | 1 % | 1 % | 1 % | 1 % | 2 % | 2 % |
+| Syntetisk | 30 % | 29 % | 32 % | 35 % | 38 % | 39 % |
+| Ull | 6 % | 6 % | 5 % | 5 % | 5 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_reusable_textiles_in_residual_and_bulky_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -88,18 +88,18 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `residual_core` | 23 % | 65 % | 67 % |
-| `reusable_share_residual` | 7 % | 23 % | 33 % |
-| `gap: reusable_share_residual` | 40 % | 10 % | – |
-| `gap: residual_core` | 30 % | 2 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 7.08 | 4.07 | 6.49 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 7.20 | 4.02 | 6.26 |
+| `residual_core` | 19 % | 65 % | 67 % |
+| `reusable_share_residual` | 8 % | 23 % | 33 % |
+| `gap: reusable_share_residual` | 49 % | 10 % | – |
+| `gap: residual_core` | 24 % | 2 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 7.90 | 4.07 | 6.49 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 7.96 | 4.02 | 6.26 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L84). Dokumentasjonen i koden:
+Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L94). Dokumentasjonen i koden:
 
 > Part of the CORE residual textiles that could have been reused (D18),
 > share from the pick analyses. The analyses cover CL+HT+FW only, so the
@@ -107,9 +107,16 @@ Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://githu
 >
 > `_residual_core`: CL+HT+FW in household residual and bulky waste from pick analyses: 2009
 > (Laitala et al. 2012), 2018, 2022 and 2025 (Mepex, via Watson et al. 2020
-> and NORSUS 2023 and 2026), interpolated between them. Before 2009 the
-> waste per inhabitant is held at the 2009 level. SSB's textile accounts
-> for 1998 (58.5 kt) are not used as a level: the clothing in the waste in
-> 1991 and 1998 (34.8 and 47.2 kt) is nearly equal to net clothing imports
-> those years (34.5 and 46.6 kt), so it was probably calculated from the
-> supply, and it would make the stock shrink in the early 1990s.
+> and NORSUS 2023 and 2026), interpolated between them. SSB's textile
+> accounts for 1998 (58.5 kt) are not used as a level: the clothing in the
+> waste in 1991 and 1998 (34.8 and 47.2 kt) is nearly equal to net
+> clothing imports those years (34.5 and 46.6 kt), so it was probably
+> calculated from the supply, and it would make the stock shrink in the
+> early 1990s.
+>
+> Before 2009 there are no pick analyses. The waste per inhabitant is held
+> at the 2009 level, plus what was not yet collected separately: the
+> separate collection per inhabitant in 2009 minus that of the year, times
+> the population (D40). Textiles that were later collected went to residual
+> waste before collection grew, so households did not discard less per
+> inhabitant in 1990 than in 2009.

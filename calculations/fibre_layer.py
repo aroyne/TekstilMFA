@@ -45,9 +45,10 @@ and flows. The TOT masses are never changed: they come from the statistics
             MA.FI per material, and production waste has the mix of MA.TX
             inputs (see manufacturing_layer).
 
-The main fibre is taken as the whole textile part of a good (a garment
-classified as cotton counts as 100 % cotton); a main fibre to fibre shares
-matrix is not yet part of the layer.
+A finished good whose HS code states a main fibre counts that fibre as
+main_fibre_share (about 0.89) of its textile part and the rest as the usual
+blend partner (supply_composition); fibre, yarn and fabric count the main
+fibre as the whole.
 """
 import flodym as fd
 import numpy as np
@@ -174,12 +175,19 @@ def _fallback_composition(fibre_composition, product):
     return row / row.sum()
 
 
-def _class_to_group(fibre_composition, product, synthetic):
-    """Matrix (fibre class, fibre group) for one product."""
+def _class_to_group(fibre_composition, product, synthetic, main_share):
+    """
+    Matrix (fibre class, fibre group) for one product. A code that states a
+    main fibre gets the share main_share of it; the rest is the most common
+    blend partner: synthetic fibre (polyester, elastane, polyamide) for
+    natural and cellulosic main fibres, cotton for synthetic ones.
+    """
     to_group = np.zeros((len(FIBRE_CLASSES), len(FIBRE_GROUPS)))
     for c, fibre_class in enumerate(FIBRE_CLASSES):
         if fibre_class in DIRECT_CLASSES:
-            to_group[c, FIBRE_GROUPS.index(DIRECT_CLASSES[fibre_class])] = 1.0
+            main = DIRECT_CLASSES[fibre_class]
+            to_group[c, FIBRE_GROUPS.index(main)] = main_share
+            to_group[c, FIBRE_GROUPS.index('CO' if main == 'SYN' else 'SYN')] += 1.0 - main_share
         elif fibre_class == 'MMF':
             to_group[c, FIBRE_GROUPS.index('SYN')] = synthetic
             to_group[c, FIBRE_GROUPS.index('CV')] = 1.0 - synthetic
@@ -189,7 +197,7 @@ def _class_to_group(fibre_composition, product, synthetic):
     return to_group
 
 
-def _shares_with_nontextile(kg, products, current_params, fibre_composition, nontextile):
+def _shares_with_nontextile(kg, products, current_params, fibre_composition, nontextile, main_share):
     """
     Material shares, array (year, product, material), from kg per fibre
     class. Codes of class NT are non-textile as a whole; the rest is split
@@ -198,7 +206,7 @@ def _shares_with_nontextile(kg, products, current_params, fibre_composition, non
     """
     class_shares = kg / kg.sum(axis=2, keepdims=True)
     synthetic = current_params['mmf_synthetic_share']
-    to_group = np.stack([_class_to_group(fibre_composition, p, synthetic) for p in products])
+    to_group = np.stack([_class_to_group(fibre_composition, p, synthetic, main_share) for p in products])
     fibres = np.einsum('tpc,pcg->tpg', class_shares, to_group)
     nt_class = class_shares[:, :, FIBRE_CLASSES.index('NT')]
     nt = nt_class + (1.0 - nt_class) * nontextile[None, :]
@@ -206,26 +214,35 @@ def _shares_with_nontextile(kg, products, current_params, fibre_composition, non
 
 
 def supply_composition(preloaded_data, current_params, fibre_composition):
-    """Material shares of goods supplied, array (year, product, material)."""
+    """
+    Material shares of goods supplied, array (year, product, material).
+    Finished goods are classified by the fibre that is largest by weight, so
+    blends count under their main fibre. In donated clothing in the UK, 36 %
+    of the items were blends of two or more fibres (Ward et al. 2013, 34 635
+    items). With the main fibre at 0.5-0.95 of a blend, the main fibre is
+    about 0.89 (0.82-0.98) of the textile weight on average
+    (main_fibre_share).
+    """
     # 'imports_by_fibre_class' <- data_files/Tab_08801_textiles.csv (SSB 08801,
     # HS 50-64 and 9404) and parameters/hs_main_fibre.csv, summed when the
     # data is loaded
     nontextile = np.array([current_params[f'nontextile_share_{p}'] for p in PRODUCTS])
     return _shares_with_nontextile(preloaded_data['imports_by_fibre_class'], PRODUCTS, current_params,
-                                   fibre_composition, nontextile)
+                                   fibre_composition, nontextile, current_params['main_fibre_share'])
 
 
 def intermediate_composition(preloaded_data, current_params, fibre_composition, product, impeks):
     """
     Material shares of traded fibre and yarn ('FY') or fabric ('FA'), import
     (1) or export (2), array (year, material): the main fibre stated by the
-    HS code, no non-textile part.
+    HS code as the whole fibre content (raw fibre is pure, and yarn and
+    fabric are counted the same way), no non-textile part.
     """
     # 'intermediate_by_fibre_class' <- data_files/Tab_08801_textiles.csv (SSB
     # 08801, HS 50-60 fibre, yarn and fabric) and parameters/hs_main_fibre.csv,
     # summed when the data is loaded
     kg = preloaded_data['intermediate_by_fibre_class'][(product, impeks)]
-    return _shares_with_nontextile(kg, [product], current_params, fibre_composition, np.zeros(1))[:, 0, :]
+    return _shares_with_nontextile(kg, [product], current_params, fibre_composition, np.zeros(1), 1.0)[:, 0, :]
 
 
 def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_composition):

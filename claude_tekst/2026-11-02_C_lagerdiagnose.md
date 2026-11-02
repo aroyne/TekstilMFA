@@ -1,6 +1,6 @@
 # Fase C: Hvor kommer lageravviket fra?
 
-*Notat 2026-11-02. Deterministisk kjøring etter D37, D38 og fase A. Erstatter tallene i [notatet fra 2026-10-05](2026-10-05_lagermodell_mot_statistikk.md). Utforskende kjøringer er ikke en del av modellen.*
+*Notat 2026-11-02. Beslutninger samme dag (D40): punkt 1 og 3 er besluttet og punkt 1 implementert, punkt 2 er vurdert (se D40) og venter på beslutning, og for punkt 4 er det søkt etter garderobedata (se under). Deterministisk kjøring etter D37, D38 og fase A. Erstatter tallene i [notatet fra 2026-10-05](2026-10-05_lagermodell_mot_statistikk.md). Utforskende kjøringer er ikke en del av modellen.*
 
 ## Utgangspunkt (CL+HT+FW, 2025)
 
@@ -50,6 +50,13 @@ Tilførselen har vært omtrent flat siden 2005. Da blir kasseringene i lagermode
 
 * Innsvingingen flytter begge lagrene likt og endrer ikke avviket.
 * Lageret som restledd i 2025 er 1 617 kt med 95 %-intervall 997–2 210. Selv nedre grense er over 1,7 ganger lagermodellen. Avviket er altså ikke et usikkerhetsspørsmål.
+
+## Garderobedata funnet (punkt 4)
+
+* Haugrønning (OsloMet, upublisert, via [forskning.no/ScienceNorway](https://sciencenorway.no/clothing-consumption-sustainability/do-you-have-more-or-less-clothes-in-your-closet-than-the-average-norwegian/2267682)): de fleste nordmenn har 200–400 plagg, inkludert sokker, undertøy og tilbehør, men uten sko. I 15 husholdninger hadde kvinnene i snitt ca. 500 plagg og mennene ca. 260 ([OsloMet klesforskning](https://uni.oslomet.no/klesforskning/category/forfatter/vilde-haugronning)).
+* Utvalgene er små og domineres av unge kvinner og studenter. Det finnes ingen vekt per plagg eller tall for barn.
+* Med importvekten 0,276 kg per plagg blir det 55–110 kg klær per voksen. Lagermodellen gir 56 kg per innbygger (med barn), altså i nedre del av spennet.
+* Neste steg er å be OsloMet (Laitala, Klepp, Haugrønning) om antall og vekt per plagg per person, med alder.
 
 ## Konklusjon
 
