@@ -69,7 +69,7 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 3 % |
 | Ikke-tekstil | 14 % | 16 % | 18 % | 18 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 28 % | 27 % | 29 % | 33 % | 35 % | 36 % |
+| Syntetisk | 28 % | 27 % | 30 % | 33 % | 35 % | 36 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/co_so_wm_rs_sorting_residues_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -80,15 +80,15 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `reuse_fraction_retained` | 7 % | 21 % | 80 % |
-| `retained_share_collected` | 4 % | 12 % | 7 % |
-| `08801:import:used` | 6 % | 5 % | 5 % |
-| `08801_classification:import:used` | 5 % | 5 % | 5 % |
-| `recycling_share_sorting_rejects` | – | 1 % | 2 % |
-| `gap: retained_share_collected` | 62 % | 28 % | – |
-| `gap: reuse_fraction_retained` | 12 % | 27 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 0.28 | 0.35 | 0.45 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.33 | 0.36 | 0.59 |
+| `reuse_fraction_retained` | 18 % | 35 % | 80 % |
+| `retained_share_collected` | 10 % | 19 % | 7 % |
+| `08801:import:used` | 15 % | 9 % | 5 % |
+| `08801_classification:import:used` | 13 % | 8 % | 5 % |
+| `recycling_share_sorting_rejects` | 1 % | 1 % | 2 % |
+| `gap: reuse_fraction_retained` | 22 % | 16 % | – |
+| `gap: retained_share_collected` | 20 % | 11 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.17 | 0.28 | 0.45 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.19 | 0.29 | 0.59 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

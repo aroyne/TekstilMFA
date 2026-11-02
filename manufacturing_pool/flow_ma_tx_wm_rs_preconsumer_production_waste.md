@@ -73,7 +73,7 @@ Blandingen av garn og metervare som går inn i MA.TX samme år.
 | Regenerert cellulose | 8 % | 7 % | 2 % | 2 % | 2 % | 1 % |
 | Andre fibre | 1 % | 3 % | 7 % | 4 % | 8 % | 7 % |
 | Syntetisk | 38 % | 43 % | 61 % | 67 % | 66 % | 71 % |
-| Ull | 4 % | 4 % | 8 % | 13 % | 13 % | 12 % |
+| Ull | 4 % | 4 % | 8 % | 14 % | 13 % | 12 % |
 
 <iframe src="../output_files/plots/pages/ma_tx_wm_rs_preconsumer_production_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -83,11 +83,11 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `preconsumer_waste_textile_industry` | 18 % | 91 % | 86 % |
-| `gap: preconsumer_waste_textile_industry` | 81 % | 4 % | 13 % |
-| `08801:import:intermediate` | 1 % | 4 % | 1 % |
-| Halvt 95 %-intervall, førsteordens (kt) | 1.31 | 0.23 | 0.21 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 1.31 | 0.24 | 0.22 |
+| `preconsumer_waste_textile_industry` | 46 % | 90 % | 91 % |
+| `gap: preconsumer_waste_textile_industry` | 52 % | 5 % | 8 % |
+| `08801:import:intermediate` | 2 % | 4 % | 1 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.82 | 0.23 | 0.20 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.85 | 0.24 | 0.21 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

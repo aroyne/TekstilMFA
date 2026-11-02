@@ -57,12 +57,12 @@ Sekker (SA) er emballasje (D13) og kan dominere flyten. Kt per år, median med 9
 
 | År | I alt | Sekker | Uten sekker | Sekkenes andel |
 |---|---|---|---|---|
-| 1990 | 10.99 (6.49–15.74) | 2.76 (2.55–2.97) | 8.25 (3.73–12.90) | 25 % |
-| 2000 | 16.50 (10.98–22.12) | 6.47 (6.00–6.95) | 9.98 (4.54–15.47) | 39 % |
-| 2010 | 21.75 (14.50–29.59) | 8.45 (7.82–9.09) | 13.37 (6.07–20.95) | 39 % |
-| 2018 | 25.18 (18.12–32.78) | 12.50 (11.64–13.55) | 12.63 (5.81–19.81) | 50 % |
-| 2022 | 27.23 (19.79–35.33) | 13.90 (12.88–14.98) | 13.38 (5.99–20.82) | 51 % |
-| 2025 | 24.43 (17.98–31.39) | 13.16 (12.23–14.19) | 11.28 (5.09–17.77) | 54 % |
+| 1990 | 10.98 (6.49–15.70) | 2.76 (2.55–2.97) | 8.23 (3.71–12.86) | 25 % |
+| 2000 | 16.45 (10.98–22.03) | 6.47 (6.00–6.95) | 9.95 (4.52–15.43) | 39 % |
+| 2010 | 21.70 (14.49–29.54) | 8.45 (7.82–9.09) | 13.30 (6.01–20.90) | 39 % |
+| 2018 | 25.06 (18.09–32.70) | 12.50 (11.64–13.55) | 12.55 (5.70–19.77) | 50 % |
+| 2022 | 27.19 (19.75–35.32) | 13.90 (12.88–14.98) | 13.32 (5.98–20.76) | 51 % |
+| 2025 | 24.34 (17.97–31.33) | 13.16 (12.23–14.19) | 11.21 (5.07–17.70) | 54 % |
 
 ## Sammensetning
 
@@ -88,7 +88,7 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 |---|---|---|---|---|---|---|
 | Bomull | 30 % | 24 % | 23 % | 15 % | 15 % | 14 % |
 | Regenerert cellulose | 2 % | 2 % | 1 % | 1 % | 1 % | 1 % |
-| Ikke-tekstil | 15 % | 11 % | 12 % | 11 % | 10 % | 10 % |
+| Ikke-tekstil | 14 % | 11 % | 12 % | 11 % | 10 % | 9 % |
 | Andre fibre | 3 % | 2 % | 3 % | 2 % | 3 % | 2 % |
 | Syntetisk | 48 % | 57 % | 58 % | 68 % | 69 % | 71 % |
 | Ull | 3 % | 3 % | 3 % | 2 % | 2 % | 2 % |
@@ -101,11 +101,12 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `institutional_share` | 95 % | 95 % | 91 % |
+| `institutional_share` | 94 % | 94 % | 91 % |
 | `08801:import:finished` | 3 % | 3 % | 5 % |
-| `08801_classification:import:finished` | 2 % | 3 % | 4 % |
-| Halvt 95 %-intervall, førsteordens (kt) | 5.67 | 7.62 | 6.50 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 5.57 | 7.55 | 6.70 |
+| `08801_classification:import:finished` | 2 % | 2 % | 4 % |
+| `unsold_destroyed_share` | 1 % | 1 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 5.67 | 7.61 | 6.50 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 5.52 | 7.53 | 6.68 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

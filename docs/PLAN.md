@@ -105,8 +105,13 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 
 ### 2026-11-02 – D37 og D38 implementert
 - [x] D37: Vask = 280 kg tøy per innbygger × folketall × 114 mg/kg (Lant 2020): 0,16 kt i 2025 (0,11–0,22), mot 1,56 kt med Mepex-kalibreringen. Naturfibre slipper ca. 20 ganger mer per kg, så ca. 3–4 % av utslippet er syntetisk. Nye flyter til WM.RS: lo fra tørketrommel (0,11 kt) og fibre i husstøv (0,12 kt). Luft og støv faller fra 1,4 til 0,06 kt.
-- [x] D38: Ny flyt med returer fra direkte netthandel (3,2 kt i 2025, 1,0–7,1). Destruksjon av usolgte varer er lognormal med median 1 % av klær, hjemmetekstiler og sko på markedet: 0,8 kt i 2025 (0,2–4,5), mot 0,3 kt. Lagermodellen får nye varer minus returer.
+- [x] D38: Ny flyt med returer fra direkte netthandel (3,2 kt i 2025, 1,0–7,1). Destruksjon av usolgte varer er lognormal med median 1,3 % (95 %-intervall 0,2–9 %) av klær, hjemmetekstiler og sko på markedet: 1,1 kt i 2025 (0,2–8,1), mot 0,3 kt. Lagermodellen får nye varer minus returer.
 - [x] Effekt på lageret i husholdningene (restledd) 2025: 1 638 kt mot 1 591 kt. Lavere fiberutslipp løfter lageret mer enn returer og destruksjon trekker det ned.
+
+### 2026-11-02 – Fase A avsluttet: skjøter, utfylte år og strukturkjøringer
+- [x] A4: Nivåene i D30 følger `fill_uncertainties` i NitrogenBudsjett (95 %-grense 5 % + 2 % per år ved interpolasjon, 10 % + 5 % per år for verdier som holdes flatt, uten tak og uten avkutting). Ankerserier med skjøt mellom kilder har egne metodegrupper på hver side (deponiandelen, brukbart i restavfall). Lageret i husholdningene 2025 går fra 1 638 kt (389–2 265) til 1 617 kt (997–2 210), og intervallet rundt 2000 er ikke lenger negativt. Bidrag 2025: restavfallsankrene 37 %, restavfallet før 2009 33 %, institusjonsandelen 12 %.
+- [x] D38: medianen for destruksjon økt til 1,3 % (geometrisk snitt av 0,2 og 9 %), etter ønske.
+- [x] A5 og innsvingingstest (`structural_sensitivity.py`, `output_files/structural_sensitivity.csv`). Effekt på lageret i husholdningene 2025: destruksjon på EEA-nivå −176 kt, tilførsel før 1988 på 60 % −130 kt (konstant, startlageret), fiberutslipp på Mepex-nivå −86 kt, ingen returer +6 kt, Weibull-form 1,5 eller 3 ca. 0. Innsvingingen påvirker lagermodellen bare til ca. 2000 (kasseringer −19 kt i 1990, −1 kt i 2000).
 
 ## Neste
 
@@ -121,7 +126,7 @@ Prinsipper:
 Fasene A og B går parallelt. Bidragsanalysen i A brukes til å prioritere i B.
 
 #### Fase A – Robust usikkerhet (prinsippene fra NitrogenBudsjett)
-Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og fire beslutninger: [notat 2026-11-02](../claude_tekst/2026-11-02_PLAN_usikkerhet_fase_A.md). Punkt 1–3, bidragsanalysen og konvergenstesten er gjort (D39). Gjenstår: skjøter og nivåene i D30 (A4), strukturkjøringer (A5) og innsvingingstesten. **A4 er nå viktigst:** gap-støyen i restavfallsserien (ekstrapolering før 2009, 5 % per år) står for 75–84 % av variansen i lageret i husholdningene.
+Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og fire beslutninger: [notat 2026-11-02](../claude_tekst/2026-11-02_PLAN_usikkerhet_fase_A.md). **Fase A er ferdig** (D39, D30 revidert, `uncertainty_contributions.py`, `structural_sensitivity.py`). Videre arbeid med usikkerhet følger av diagnosen i fase C: restavfallet før 2009 og startlageret er de største kildene til usikkerhet i lageret.
 1. Én tolkning av grensene. Anbefalt: alle grenser er 95 %-intervall, også for PERT (problem P1 i N-planen).
 2. Usikkerhet per datasett og periode etter **hvordan tallet er laget**, ikke hvem som publiserer det: registrert eller tellet, utvalgsundersøkelse, modellbasert statistikk, ekspertanslag (en lett pedigree, AP3 og P9 i N-planen). Begrunnelse i en egen kolonne.
 3. Systematisk og årlig del av datasettstøyen, og egne faktorer for uavhengige deler av samme datasett (AP2).

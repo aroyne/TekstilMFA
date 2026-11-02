@@ -87,14 +87,14 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `08801:export:used` | 9 % | 36 % | 44 % |
-| `08801_classification:export:used` | 9 % | 33 % | 40 % |
-| `retained_share_collected` | 1 % | 4 % | 16 % |
-| `gap: unsold_donated` | 61 % | 14 % | – |
-| `gap: retained_share_collected` | 18 % | 10 % | – |
-| `unsold_donated` | 2 % | 3 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 1.42 | 1.59 | 2.73 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 1.57 | 1.65 | 2.94 |
+| `08801:export:used` | 31 % | 44 % | 44 % |
+| `08801_classification:export:used` | 28 % | 40 % | 40 % |
+| `retained_share_collected` | 4 % | 5 % | 16 % |
+| `gap: unsold_donated` | 24 % | 4 % | – |
+| `unsold_donated` | 6 % | 4 % | – |
+| `gap: retained_share_collected` | 7 % | 3 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.79 | 1.44 | 2.73 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.86 | 1.45 | 2.94 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
@@ -106,12 +106,11 @@ I TOT:
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 1988 | 258 av 1000 | 0.113 | 2.036 | 0.000 |
-| 1989 | 120 av 1000 | 0.053 | 1.648 | 0.000 |
-| 1990 | 63 av 1000 | 0.022 | 1.390 | 0.000 |
-| 1991 | 80 av 1000 | 0.038 | 1.656 | 0.000 |
-| 1992 | 6 av 1000 | 0.003 | 0.893 | 0.000 |
-| 1993 | 2 av 1000 | 0.000 | 0.273 | 0.000 |
+| 1988 | 124 av 1000 | 0.029 | 1.973 | 0.000 |
+| 1989 | 24 av 1000 | 0.006 | 1.546 | 0.000 |
+| 1990 | 4 av 1000 | 0.002 | 0.996 | 0.000 |
+| 1991 | 6 av 1000 | 0.003 | 1.209 | 0.000 |
+| 1992 | 1 av 1000 | 0.001 | 0.561 | 0.000 |
 
 ## Beregning i koden
 

@@ -54,14 +54,14 @@ def _unsold_goods_discarded_mc(mfa, current_params):
     Unsold clothing, household textiles and footwear that producers and
     retailers send to incineration (D38): a share of what is placed on the
     market (registered imports plus finished goods made in Norway minus
-    exports). The share is lognormal with median 1 % (an assumption close
-    to the overstock found by Samfunnsøkonomisk analyse (2022), at least
-    825 t or about 0.8 % of the clothing supply) and 95 % interval 0.2-5 %.
-    The lower end is the survey minimums where the largest retailers did
-    not report (95 t incinerated in 2018, Watson et al. 2020; 221 t in
-    2022, Rubach et al. 2023), and the upper end reaches the EEA (2024)
-    estimate that 4-9 % of textiles put on the market in Europe are
-    destroyed unused. Destroyed goods are commercial waste and are not in
+    exports). The share is lognormal with 95 % interval 0.2-9 % and median
+    1.3 %, the geometric mean of the bounds (an assumption). The lower end
+    is the survey minimums where the largest retailers did not report (95 t
+    incinerated in 2018, Watson et al. 2020; 221 t in 2022, Rubach et al.
+    2023), and the upper end the EEA (2024) estimate that 4-9 % of textiles
+    put on the market in Europe are destroyed unused. Samfunnsøkonomisk
+    analyse (2022) found an overstock of at least 825 t of clothing, about
+    0.8 % of the clothing supply. Destroyed goods are commercial waste and are not in
     the pick analyses of household waste, so they are not counted twice.
     Material recycling is not split out, so all of it goes to WM.RS. Large
     enterprises may not destroy unsold clothing and footwear from 19 July

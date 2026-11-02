@@ -73,11 +73,11 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 80 % | 80 % | 81 % | 75 % | 73 % | 74 % |
+| Bomull | 80 % | 80 % | 81 % | 75 % | 73 % | 73 % |
 | Regenerert cellulose | 5 % | 4 % | 4 % | 5 % | 5 % | 5 % |
 | Andre fibre | 1 % | 2 % | 2 % | 3 % | 4 % | 3 % |
 | Syntetisk | 2 % | 2 % | 3 % | 3 % | 4 % | 4 % |
-| Ull | 11 % | 12 % | 10 % | 13 % | 14 % | 15 % |
+| Ull | 11 % | 12 % | 10 % | 13 % | 15 % | 15 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_tumble_dryer_lint_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -87,13 +87,13 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `gap: dryer_ownership_share` | 11 % | 3 % | 80 % |
-| `tumble_dried_share` | 44 % | 48 % | 10 % |
-| `laundry_kg_per_capita` | 32 % | 34 % | 7 % |
-| `drying_release_ppm` | 9 % | 10 % | 2 % |
-| `dryer_ownership_share` | 4 % | 4 % | 1 % |
-| Halvt 95 %-intervall, førsteordens (kt) | 0.04 | 0.05 | 0.12 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.05 | 0.05 | 0.14 |
+| `gap: dryer_ownership_share` | 7 % | 4 % | 63 % |
+| `tumble_dried_share` | 46 % | 48 % | 18 % |
+| `laundry_kg_per_capita` | 33 % | 34 % | 13 % |
+| `drying_release_ppm` | 10 % | 10 % | 4 % |
+| `dryer_ownership_share` | 4 % | 4 % | 2 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.04 | 0.05 | 0.09 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.04 | 0.05 | 0.09 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

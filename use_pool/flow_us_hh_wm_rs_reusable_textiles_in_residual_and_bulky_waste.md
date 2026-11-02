@@ -74,7 +74,7 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Bomull | 45 % | 47 % | 44 % | 40 % | 37 % | 36 % |
-| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 3 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 18 % | 17 % | 19 % | 18 % | 18 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
 | Syntetisk | 27 % | 26 % | 29 % | 33 % | 35 % | 36 % |
@@ -88,12 +88,12 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `residual_core` | 6 % | 67 % | 67 % |
-| `reusable_share_residual` | 2 % | 27 % | 33 % |
-| `gap: reusable_share_residual` | 56 % | 5 % | – |
-| `gap: residual_core` | 36 % | 1 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 13.58 | 4.02 | 6.49 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 14.66 | 3.81 | 6.35 |
+| `residual_core` | 23 % | 65 % | 67 % |
+| `reusable_share_residual` | 7 % | 23 % | 33 % |
+| `gap: reusable_share_residual` | 40 % | 10 % | – |
+| `gap: residual_core` | 30 % | 2 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 7.08 | 4.07 | 6.49 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 7.20 | 4.02 | 6.26 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

@@ -94,8 +94,8 @@ class Parameters:
             anchor_id = f"{row['parameter_id']}@{int(row['year'])}"
             points.setdefault(row['parameter_id'], {})[int(row['year'])] = value(
                 'anchor', anchor_id, float(row['value']), row, group, row['common_share'])
-        gap_noise = GapNoise(seed, sim_id, params['gap_cv_interpolation'], params['gap_cv_extrapolation'],
-                             params['gap_cv_cap'], probe)
+        fill = {kind: (params[f'gap_u0_{kind}'], params[f'gap_k_{kind}']) for kind in ('interpolation', 'carry')}
+        gap_noise = GapNoise(seed, sim_id, fill, probe)
         anchors = {name: AnchorSeries(name, values, gap_noise) for name, values in points.items()}
         params['gap_noise'] = gap_noise
 

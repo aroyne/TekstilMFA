@@ -72,7 +72,7 @@ Andel av summen i nøkkelår (median).
 | Regenerert cellulose | nan % | nan % | nan % | nan % | nan % | 1 % |
 | Ikke-tekstil | nan % | nan % | nan % | nan % | nan % | 12 % |
 | Andre fibre | nan % | nan % | nan % | nan % | nan % | 6 % |
-| Syntetisk | nan % | nan % | nan % | nan % | nan % | 42 % |
+| Syntetisk | nan % | nan % | nan % | nan % | nan % | 43 % |
 | Ull | nan % | nan % | nan % | nan % | nan % | 2 % |
 
 <iframe src="../output_files/plots/pages/us_ic_wm_rc_institutional_textiles_to_recycling_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>

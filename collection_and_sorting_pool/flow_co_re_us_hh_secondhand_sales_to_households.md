@@ -66,9 +66,9 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 51 % | 48 % | 44 % | 40 % | 37 % | 36 % |
+| Bomull | 50 % | 48 % | 44 % | 40 % | 37 % | 36 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 3 % | 3 % |
-| Ikke-tekstil | 12 % | 15 % | 18 % | 18 % | 18 % | 17 % |
+| Ikke-tekstil | 13 % | 16 % | 18 % | 18 % | 18 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
 | Syntetisk | 28 % | 27 % | 29 % | 33 % | 35 % | 36 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
@@ -81,13 +81,13 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `retained_share_collected` | 5 % | 16 % | 63 % |
-| `reuse_fraction_retained` | 6 % | 21 % | 36 % |
+| `retained_share_collected` | 17 % | 29 % | 63 % |
+| `reuse_fraction_retained` | 22 % | 37 % | 36 % |
 | `08801:export:used` | – | – | 1 % |
-| `gap: retained_share_collected` | 78 % | 37 % | – |
-| `gap: reuse_fraction_retained` | 11 % | 26 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 0.37 | 0.45 | 1.11 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.49 | 0.52 | 0.97 |
+| `gap: retained_share_collected` | 33 % | 17 % | – |
+| `gap: reuse_fraction_retained` | 27 % | 17 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.20 | 0.33 | 1.11 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.23 | 0.40 | 0.97 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

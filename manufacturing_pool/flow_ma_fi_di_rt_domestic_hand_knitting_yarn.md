@@ -82,10 +82,10 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `vareproduksjon` | 47 % | 98 % | 70 % |
-| `gap: hand_knitting_yarn` | 53 % | 2 % | 30 % |
-| Halvt 95 %-intervall, førsteordens (kt) | 0.40 | 0.23 | 0.25 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.41 | 0.22 | 0.26 |
+| `vareproduksjon` | 71 % | 95 % | 73 % |
+| `gap: hand_knitting_yarn` | 29 % | 5 % | 27 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.32 | 0.23 | 0.24 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.34 | 0.23 | 0.26 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

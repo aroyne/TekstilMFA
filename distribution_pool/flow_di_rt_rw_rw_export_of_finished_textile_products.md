@@ -93,8 +93,8 @@ Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 1 % | 1 % |
 | Ikke-tekstil | 19 % | 15 % | 14 % | 12 % | 15 % | 14 % |
 | Andre fibre | 1 % | 3 % | 2 % | 3 % | 3 % | 2 % |
-| Syntetisk | 27 % | 30 % | 34 % | 41 % | 39 % | 34 % |
-| Ull | 9 % | 7 % | 9 % | 10 % | 13 % | 16 % |
+| Syntetisk | 27 % | 30 % | 34 % | 41 % | 39 % | 35 % |
+| Ull | 9 % | 7 % | 9 % | 11 % | 13 % | 16 % |
 
 <iframe src="../output_files/plots/pages/di_rt_rw_rw_export_of_finished_textile_products_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 

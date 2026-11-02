@@ -78,9 +78,9 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `wool_scouring_loss_share` | 82 % | 65 % | 73 % |
-| `wool_scoured_domestic` | 18 % | 24 % | 27 % |
-| `gap: wool_scoured_domestic` | – | 10 % | – |
+| `wool_scouring_loss_share` | 82 % | 67 % | 73 % |
+| `wool_scoured_domestic` | 18 % | 25 % | 27 % |
+| `gap: wool_scoured_domestic` | – | 8 % | – |
 | Halvt 95 %-intervall, førsteordens (kt) | 0.24 | 0.03 | 0.03 |
 | Halvt 95 %-intervall, Monte Carlo (kt) | 0.24 | 0.03 | 0.03 |
 

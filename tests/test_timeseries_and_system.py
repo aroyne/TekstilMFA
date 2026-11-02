@@ -111,10 +111,11 @@ def test_every_product_has_imports_every_year(inputs):
 
 def test_gap_noise_grows_with_distance_and_is_one_at_anchors():
     from calculations.timeseries import GapNoise
+    FILL = {'interpolation': (0.05, 0.02), 'carry': (0.10, 0.05)}
     years = list(range(1988, 2026))
     anchors = [2010, 2020]
-    assert (GapNoise(1, 0, 0.02, 0.05, 1.0).factor('x', anchors, years) == 1).all()
-    draws = np.array([GapNoise(1, i, 0.02, 0.05, 1.0).factor('x', anchors, years)
+    assert (GapNoise(1, 0, FILL).factor('x', anchors, years) == 1).all()
+    draws = np.array([GapNoise(1, i, FILL).factor('x', anchors, years)
                       for i in range(1, 2001)])
     spread = draws.std(axis=0)
     at = [years.index(a) for a in anchors]
@@ -127,7 +128,8 @@ def test_gap_noise_grows_with_distance_and_is_one_at_anchors():
 def test_draws_do_not_depend_on_other_items():
     params = Parameters()
     full, _, _ = params.draw(seed=1, sim_id=5)
-    params.global_params = params.global_params.iloc[::-1].iloc[1:]
+    table = params.global_params
+    params.global_params = table[table['parameter_id'] != 'ntg_fibre_domestic_share'].iloc[::-1]
     reduced, _, _ = params.draw(seed=1, sim_id=5)
     shared = [k for k in reduced if k != 'gap_noise']
     assert all(full[k] == reduced[k] for k in shared)

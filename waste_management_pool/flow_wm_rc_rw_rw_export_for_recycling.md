@@ -66,11 +66,11 @@ Andel av summen i nøkkelår (median).
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 52 % | 47 % | 44 % | 40 % | 37 % | 25 % |
-| Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 1 % |
-| Ikke-tekstil | 10 % | 16 % | 18 % | 18 % | 17 % | 24 % |
+| Bomull | 50 % | 48 % | 44 % | 40 % | 37 % | 25 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 1 % |
+| Ikke-tekstil | 13 % | 16 % | 18 % | 18 % | 17 % | 24 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 4 % |
-| Syntetisk | 29 % | 27 % | 29 % | 33 % | 35 % | 40 % |
+| Syntetisk | 28 % | 27 % | 30 % | 33 % | 35 % | 40 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 5 % |
 
 <iframe src="../output_files/plots/pages/wm_rc_rw_rw_export_for_recycling_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -81,16 +81,16 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `reuse_fraction_retained` | 5 % | 17 % | 57 % |
+| `reuse_fraction_retained` | 19 % | 32 % | 57 % |
 | `ntg_fibre_domestic_share` | – | – | 25 % |
 | `recycling_institutional` | – | – | 5 % |
-| `retained_share_collected` | 3 % | 9 % | 5 % |
-| `recycling_share_sorting_rejects` | 2 % | 8 % | 4 % |
-| `gap: retained_share_collected` | 41 % | 22 % | – |
-| `gap: recycling_share_sorting_rejects` | 41 % | 22 % | – |
-| `gap: reuse_fraction_retained` | 8 % | 21 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 0.09 | 0.10 | 0.34 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.10 | 0.09 | 0.41 |
+| `retained_share_collected` | 10 % | 18 % | 5 % |
+| `recycling_share_sorting_rejects` | 9 % | 15 % | 4 % |
+| `gap: reuse_fraction_retained` | 22 % | 14 % | – |
+| `gap: retained_share_collected` | 20 % | 10 % | – |
+| `gap: recycling_share_sorting_rejects` | 20 % | 10 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.04 | 0.07 | 0.34 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.04 | 0.07 | 0.41 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
@@ -109,8 +109,8 @@ I fiberlaget (per materiale):
 
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
-| 2024 | 32 av 1000 | 0.000 | 0.024 | 0.000 |
-| 2025 | 228 av 1000 | 0.009 | 0.199 | 0.000 |
+| 2024 | 40 av 1000 | 0.000 | 0.023 | 0.000 |
+| 2025 | 224 av 1000 | 0.009 | 0.198 | 0.000 |
 
 ## Beregning i koden
 

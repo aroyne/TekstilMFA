@@ -88,11 +88,11 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `unsold_donated` | 3 % | 17 % | 85 % |
-| `gap: unsold_donated` | 97 % | 82 % | 14 % |
-| `08801:import:finished` | – | 1 % | 1 % |
-| Halvt 95 %-intervall, førsteordens (kt) | 1.12 | 0.65 | 0.13 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 1.15 | 0.70 | 0.13 |
+| `unsold_donated` | 20 % | 45 % | 90 % |
+| `gap: unsold_donated` | 79 % | 54 % | 9 % |
+| `08801:import:finished` | 1 % | 2 % | 1 % |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.43 | 0.40 | 0.13 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.48 | 0.44 | 0.13 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

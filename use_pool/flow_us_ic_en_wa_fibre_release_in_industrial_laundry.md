@@ -76,7 +76,7 @@ Fibergruppene i tekstillageret i årgangsmodellen for institusjoner og bedrifter
 |---|---|---|---|---|---|---|
 | Bomull | 45 % | 56 % | 61 % | 53 % | 51 % | 50 % |
 | Regenerert cellulose | 9 % | 6 % | 6 % | 7 % | 7 % | 7 % |
-| Andre fibre | 17 % | 14 % | 12 % | 15 % | 15 % | 15 % |
+| Andre fibre | 17 % | 13 % | 12 % | 15 % | 15 % | 15 % |
 | Syntetisk | 9 % | 5 % | 5 % | 8 % | 10 % | 10 % |
 | Ull | 21 % | 20 % | 16 % | 17 % | 17 % | 18 % |
 
@@ -90,11 +90,11 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 |---|---|---|---|
 | `institutional_share` | 45 % | 47 % | 45 % |
 | `laundry_kg_per_capita` | 15 % | 15 % | 15 % |
-| `lifetime_mean_US.HH_CL` | 12 % | 12 % | 13 % |
+| `lifetime_mean_US.HH_CL` | 12 % | 12 % | 14 % |
 | `laundry_release_ppm` | 11 % | 11 % | 11 % |
 | `lifetime_mean_US.HH_HT` | 3 % | 3 % | 4 % |
 | `lifetime_mean_US.IC_CL` | 4 % | 5 % | 4 % |
-| `lifetime_mean_US.IC_CA` | 8 % | 3 % | 3 % |
+| `lifetime_mean_US.IC_CA` | 8 % | 3 % | 4 % |
 | Halvt 95 %-intervall, førsteordens (kt) | 0.01 | 0.01 | 0.01 |
 | Halvt 95 %-intervall, Monte Carlo (kt) | 0.01 | 0.01 | 0.01 |
 

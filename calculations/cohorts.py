@@ -5,8 +5,9 @@ Inflow-driven cohort model of goods in use, in households (US.HH) or
 institutions and businesses (US.IC) (D20): Weibull lifetimes per stock and
 product from parameters/lifetimes.csv, inflow counted as
 arriving in the middle of the year (flodym's default). The inflow before
-1988 is held at the 1988 level and composition from 1950 (D2), so the
-stock in 1988 includes the spin-up cohorts.
+1988 is held at the 1988 composition and at the 1988 level times
+spinup_inflow_factor (1 in the main run) from 1950 (D2), so the stock in
+1988 includes the spin-up cohorts.
 """
 import math
 
@@ -27,7 +28,8 @@ def use_cohorts(inflow, products, current_params, stock='US.HH'):
     {'outflow', 'stock'} as arrays (year, product, material) over YEARS, and
     'stock_1987' as an array (product, material).
     """
-    inflow = np.concatenate([np.repeat(inflow[:1], N_SPINUP, axis=0), inflow], axis=0)
+    spinup = inflow[:1] * current_params['spinup_inflow_factor']
+    inflow = np.concatenate([np.repeat(spinup, N_SPINUP, axis=0), inflow], axis=0)
     dims = fd.DimensionSet(dim_list=[
         fd.Dimension(letter='t', name='Time', dtype=int, items=DSM_YEARS),
         fd.Dimension(letter='p', name='Product', dtype=str, items=products),

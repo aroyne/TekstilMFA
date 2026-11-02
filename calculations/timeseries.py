@@ -6,25 +6,21 @@ interpolated between anchors and held constant before the first and after
 the last anchor. Regime shifts (e.g. the 2009 landfill ban) are expressed by
 placing two anchors in adjacent years rather than by special-casing here.
 
-Years without published values are less certain than the anchors (D30).
-GapNoise adds a multiplicative, lognormal factor with median 1 (so the
-central value stays at what the data say) whose coefficient of variation
-grows with the distance to the nearest anchor:
-r_interp per year inside a gap (zero at the anchors, largest mid-way) and
-r_extrap per year outside the anchors, capped. One standard normal draw per
-series and gap (or side) is used for all years in it, so the error is
-systematic within a gap rather than jumping from year to year. The draw is
-limited to two standard deviations: a lognormal factor with a coefficient
-of variation of 100 % would otherwise reach more than ten times the median
-in one draw of a thousand, which no extrapolation supports.
+Years without published values are less certain than the anchors (D30,
+revised in phase A). GapNoise adds a multiplicative, lognormal factor with
+median 1 (so the central value stays at what the data say). Its upper 95 %
+bound is 1 + u(d), with u(d) = u0 + k * d growing with the distance d to the
+nearest anchor, as in the fill uncertainties of NitrogenBudsjett:
+interpolation between anchors (u0 5 %, k 2 % per year) and values held flat
+before the first or after the last anchor (u0 10 %, k 5 % per year). One
+standard normal draw per series and gap (or side) is used for all years in
+it, so the error is systematic within a gap: the filled period gets an
+uncertain level and trend, not noise from year to year.
 """
 import numpy as np
 
-from calculations.sampling import normal_score
+from calculations.sampling import Z95, normal_score
 from calculations.utils import YEARS
-
-MAX_Z = 2.0
-
 
 class GapNoise:
     """
@@ -32,21 +28,19 @@ class GapNoise:
     run unless a probe (sampling.Probe) sets one gap.
     """
 
-    def __init__(self, seed, sim_id, r_interp, r_extrap, cap, probe=None):
+    def __init__(self, seed, sim_id, fill, probe=None):
+        """fill: {'interpolation': (u0, k), 'carry': (u0, k)}, u as a fraction of the value."""
         self.seed = seed
         self.sim_id = sim_id
         self.probe = probe
         self.deterministic = sim_id == 0 and probe is None
-        self.r_interp = r_interp
-        self.r_extrap = r_extrap
-        self.cap = cap
+        self.fill = fill
         self._z = {}
 
     def _draw(self, name, segment):
         key = (name, segment)
         if key not in self._z:
-            z = normal_score(self.seed, self.sim_id, 'gap', f'{name}:{segment}', self.probe)
-            self._z[key] = float(np.clip(z, -MAX_Z, MAX_Z))
+            self._z[key] = normal_score(self.seed, self.sim_id, 'gap', f'{name}:{segment}', self.probe)
         return self._z[key]
 
     def factor(self, name, anchor_years, years=YEARS):
@@ -57,16 +51,17 @@ class GapNoise:
         factors = np.ones(len(years))
         for i, year in enumerate(years):
             if year < anchor_years[0]:
-                cv, segment = min(self.r_extrap * (anchor_years[0] - year), self.cap), 'before'
+                kind, d, segment = 'carry', anchor_years[0] - year, 'before'
             elif year > anchor_years[-1]:
-                cv, segment = min(self.r_extrap * (year - anchor_years[-1]), self.cap), 'after'
+                kind, d, segment = 'carry', year - anchor_years[-1], 'after'
             elif year in anchor_years:
                 continue
             else:
                 after = next(a for a in anchor_years if a > year)
                 before = max(a for a in anchor_years if a < year)
-                cv, segment = min(self.r_interp * min(year - before, after - year), self.cap), (before, after)
-            sigma = np.sqrt(np.log(1.0 + cv ** 2))
+                kind, d, segment = 'interpolation', min(year - before, after - year), (before, after)
+            u0, k = self.fill[kind]
+            sigma = np.log(1.0 + u0 + k * d) / Z95
             factors[i] = np.exp(sigma * self._draw(name, segment))
         return factors
 

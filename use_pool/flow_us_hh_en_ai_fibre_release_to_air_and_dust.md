@@ -70,10 +70,10 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 80 % | 80 % | 81 % | 75 % | 74 % | 74 % |
+| Bomull | 80 % | 79 % | 81 % | 75 % | 73 % | 74 % |
 | Regenerert cellulose | 5 % | 4 % | 4 % | 5 % | 5 % | 5 % |
 | Andre fibre | 1 % | 2 % | 2 % | 3 % | 4 % | 3 % |
-| Syntetisk | 2 % | 2 % | 3 % | 3 % | 3 % | 3 % |
+| Syntetisk | 2 % | 2 % | 3 % | 3 % | 4 % | 3 % |
 | Ull | 11 % | 12 % | 10 % | 13 % | 14 % | 15 % |
 
 <iframe src="../output_files/plots/pages/us_hh_en_ai_fibre_release_to_air_and_dust_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -84,14 +84,14 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `air_release_relative_to_laundry` | 60 % | 60 % | 57 % |
-| `vacuumed_dust_share` | 34 % | 34 % | 32 % |
-| `gap: dryer_ownership_share` | – | – | 5 % |
+| `air_release_relative_to_laundry` | 60 % | 60 % | 58 % |
+| `vacuumed_dust_share` | 34 % | 34 % | 33 % |
 | `laundry_kg_per_capita` | 4 % | 4 % | 4 % |
+| `gap: dryer_ownership_share` | – | – | 2 % |
 | `laundry_release_ppm` | 2 % | 2 % | 1 % |
 | `tumble_dried_share` | 1 % | 1 % | 1 % |
 | Halvt 95 %-intervall, førsteordens (kt) | 0.05 | 0.06 | 0.07 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.08 | 0.08 | 0.10 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.08 | 0.08 | 0.09 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

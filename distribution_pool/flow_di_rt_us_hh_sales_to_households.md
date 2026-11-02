@@ -62,9 +62,9 @@ Andel av summen i nøkkelår (median).
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
 | Tepper | 20 % | 11 % | 10 % | 11 % | 11 % | 12 % |
-| Klær | 41 % | 49 % | 48 % | 43 % | 44 % | 44 % |
+| Klær | 41 % | 48 % | 48 % | 43 % | 44 % | 44 % |
 | Sko | 13 % | 13 % | 14 % | 13 % | 13 % | 12 % |
-| Hjemmetekstiler | 17 % | 18 % | 19 % | 19 % | 16 % | 15 % |
+| Hjemmetekstiler | 17 % | 18 % | 19 % | 19 % | 16 % | 16 % |
 | Andre konfeksjonerte varer | 2 % | 3 % | 3 % | 5 % | 7 % | 9 % |
 | Presenninger og telt | 6 % | 5 % | 5 % | 8 % | 8 % | 6 % |
 | Garn i detaljsalg | 2 % | 1 % | 1 % | 2 % | 1 % | 1 % |
@@ -90,13 +90,13 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `institutional_share` | 41 % | 40 % | 38 % |
-| `08801:import:finished` | 25 % | 28 % | 30 % |
-| `08801_classification:import:finished` | 23 % | 26 % | 27 % |
-| `unsold_destroyed_share` | 5 % | 4 % | 3 % |
-| `gap: preconsumer_waste_textile_industry` | 1 % | – | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 8.58 | 11.67 | 10.01 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 9.30 | 13.01 | 10.38 |
+| `institutional_share` | 38 % | 36 % | 36 % |
+| `08801:import:finished` | 23 % | 26 % | 28 % |
+| `08801_classification:import:finished` | 21 % | 23 % | 25 % |
+| `unsold_destroyed_share` | 14 % | 14 % | 11 % |
+| `08801_classification:import:intermediate` | 1 % | – | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 8.92 | 12.23 | 10.38 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 9.78 | 13.57 | 11.13 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

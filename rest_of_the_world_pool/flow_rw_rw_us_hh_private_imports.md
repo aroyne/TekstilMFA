@@ -88,12 +88,12 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `retail_markup` | 36 % | 83 % | 91 % |
-| `grensehandel` | 4 % | 8 % | 9 % |
-| `crossborder_clothing_share` | 4 % | 8 % | – |
-| `gap: crossborder` | 57 % | – | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 0.49 | 0.35 | 0.14 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.54 | 0.38 | 0.15 |
+| `retail_markup` | 53 % | 83 % | 91 % |
+| `grensehandel` | 5 % | 8 % | 9 % |
+| `crossborder_clothing_share` | 5 % | 8 % | – |
+| `gap: crossborder` | 37 % | – | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.41 | 0.35 | 0.14 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.45 | 0.38 | 0.15 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

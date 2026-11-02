@@ -68,11 +68,11 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 52 % | 47 % | 44 % | 40 % | 37 % | 36 % |
-| Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 3 % |
-| Ikke-tekstil | 10 % | 16 % | 18 % | 18 % | 17 % | 17 % |
+| Bomull | 50 % | 48 % | 44 % | 40 % | 37 % | 36 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 3 % |
+| Ikke-tekstil | 13 % | 16 % | 18 % | 18 % | 17 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 2 % | 2 % | 2 % |
-| Syntetisk | 29 % | 27 % | 29 % | 33 % | 35 % | 36 % |
+| Syntetisk | 28 % | 27 % | 30 % | 33 % | 35 % | 36 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 6 % | 6 % |
 
 <iframe src="../output_files/plots/pages/co_so_wm_rc_sorted_for_recycling_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -83,14 +83,14 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `reuse_fraction_retained` | 5 % | 17 % | 86 % |
-| `retained_share_collected` | 3 % | 9 % | 7 % |
-| `recycling_share_sorting_rejects` | 2 % | 8 % | 6 % |
-| `gap: recycling_share_sorting_rejects` | 41 % | 22 % | – |
-| `gap: retained_share_collected` | 41 % | 22 % | – |
-| `gap: reuse_fraction_retained` | 8 % | 21 % | – |
-| Halvt 95 %-intervall, førsteordens (kt) | 0.09 | 0.10 | 0.28 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 0.10 | 0.09 | 0.38 |
+| `reuse_fraction_retained` | 19 % | 32 % | 86 % |
+| `retained_share_collected` | 10 % | 18 % | 7 % |
+| `recycling_share_sorting_rejects` | 9 % | 15 % | 6 % |
+| `gap: reuse_fraction_retained` | 22 % | 14 % | – |
+| `gap: retained_share_collected` | 20 % | 10 % | – |
+| `gap: recycling_share_sorting_rejects` | 20 % | 10 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.04 | 0.07 | 0.28 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.04 | 0.07 | 0.38 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 

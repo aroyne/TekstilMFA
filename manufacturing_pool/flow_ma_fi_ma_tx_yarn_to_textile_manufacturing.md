@@ -81,15 +81,14 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 
 | Kilde | 2000 | 2010 | 2025 |
 |---|---|---|---|
-| `08801:import:intermediate` | 33 % | 25 % | 28 % |
-| `08801_classification:import:intermediate` | 30 % | 23 % | 25 % |
+| `08801:import:intermediate` | 34 % | 25 % | 28 % |
+| `08801_classification:import:intermediate` | 31 % | 23 % | 26 % |
 | `vareproduksjon` | 7 % | 13 % | 13 % |
 | `ntg_fibre_domestic_share` | – | – | 9 % |
 | `08801:export:intermediate` | 6 % | 13 % | 7 % |
 | `totalkalkylen` | 6 % | 12 % | 6 % |
-| `gap: hand_knitting_yarn` | 8 % | – | 5 % |
-| Halvt 95 %-intervall, førsteordens (kt) | 1.03 | 0.62 | 0.58 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 1.10 | 0.65 | 0.63 |
+| Halvt 95 %-intervall, førsteordens (kt) | 1.01 | 0.63 | 0.58 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 1.07 | 0.66 | 0.62 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
@@ -104,17 +103,18 @@ I fiberlaget (per materiale):
 | År | Iterasjoner med klipping | Snitt klippet (kt) | Maks klippet (kt) | Deterministisk (kt) |
 |---|---|---|---|---|
 | 1988 | 19 av 1000 | 0.001 | 0.310 | 0.000 |
-| 1989 | 38 av 1000 | 0.004 | 0.425 | 0.000 |
-| 1990 | 19 av 1000 | 0.002 | 0.351 | 0.000 |
+| 1989 | 35 av 1000 | 0.004 | 0.409 | 0.000 |
+| 1990 | 19 av 1000 | 0.002 | 0.354 | 0.000 |
 | 1992 | 2 av 1000 | 0.000 | 0.002 | 0.000 |
-| 2000 | 99 av 1000 | 0.018 | 0.752 | 0.000 |
-| 2003 | 4 av 1000 | 0.000 | 0.085 | 0.000 |
-| 2004 | 17 av 1000 | 0.002 | 0.368 | 0.000 |
-| 2005 | 2 av 1000 | 0.000 | 0.076 | 0.000 |
+| 2000 | 81 av 1000 | 0.013 | 0.711 | 0.000 |
+| 2003 | 3 av 1000 | 0.000 | 0.079 | 0.000 |
+| 2004 | 18 av 1000 | 0.002 | 0.348 | 0.000 |
+| 2005 | 2 av 1000 | 0.000 | 0.084 | 0.000 |
 | 2009 | 25 av 1000 | 0.002 | 0.226 | 0.000 |
-| 2014 | 1 av 1000 | 0.000 | 0.064 | 0.000 |
-| 2015 | 7 av 1000 | 0.000 | 0.112 | 0.000 |
+| 2014 | 1 av 1000 | 0.000 | 0.071 | 0.000 |
+| 2015 | 6 av 1000 | 0.000 | 0.117 | 0.000 |
 | 2016 | 1 av 1000 | 0.000 | 0.002 | 0.000 |
+| 2024 | 1 av 1000 | 0.000 | 0.004 | 0.000 |
 
 ## Beregning i koden
 
