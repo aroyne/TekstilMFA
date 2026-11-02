@@ -2,10 +2,10 @@
 
 *Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-11-02.*
 
-> **Her fortsetter vi:** Gjennomgangen flyt for flyt er ferdig (D21–D36). To beslutningsnotater venter på svar: D37 om fiberutslipp, lo og husstøv ([notat](../claude_tekst/2026-11-02_D37_mikrofibre_lo_og_stov.md)) og D38 om returer og destruksjon ([notat](../claude_tekst/2026-11-02_D38_returer_og_destruksjon.md)). Den samlede listen over åpne tråder står først under «Neste». Det viktigste faglige problemet er at lageret i husholdningene (restledd, ca. 275 kg per innbygger) er nesten tre ganger lagermodellen (ca. 97 kg). Næringstallene peker ikke lenger på MA.TX som hovedforklaring. Kasseringer før 2018 og destruksjon og returer (D38) er de viktigste kandidatene. Arbeidsflyten for endringer er slik: kildene gås gjennom og diskuteres, deretter implementeres de, så kjøres MC (N = 1000 tar ca. 25 s), deretter genereres sidene på nytt (`report_generator.py`, `scripts/plot_core_flows.py`, `scripts/plot_stock_model.py`), og til slutt committes og pushes det. Når en flyt endres, oppdateres også beskrivelsen på flytsiden.
+> **Her fortsetter vi:** Gjennomgangen flyt for flyt er ferdig (D21–D36). Veikartet fra 2026-11-02 står først under «Neste», med fasene A–F: A usikkerhet og B strømmer uten bestemt data eller metode (parallelt), C lagermodellen som diagnose, D fremtidsmodul, E tiltak og F dokumentasjon og publisering. Første steg er fase A og D37 og D38 i fase B. Beslutningsnotatene: D37 om fiberutslipp, lo og husstøv ([notat](../claude_tekst/2026-11-02_D37_mikrofibre_lo_og_stov.md)) og D38 om returer og destruksjon ([notat](../claude_tekst/2026-11-02_D38_returer_og_destruksjon.md)). Det viktigste faglige problemet er at lageret i husholdningene (restledd, ca. 275 kg per innbygger) er nesten tre ganger lagermodellen (ca. 97 kg). Arbeidsflyten for endringer er slik: kildene gås gjennom og diskuteres, deretter implementeres de, så kjøres MC (N = 1000 tar ca. 25 s), deretter genereres sidene på nytt (`report_generator.py`, `scripts/plot_core_flows.py`, `scripts/plot_stock_model.py`), og til slutt committes og pushes det. Når en flyt endres, oppdateres også beskrivelsen på flytsiden.
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
 
-**Mål:** En dynamisk, probabilistisk MFA for tekstiler i Norge 1990–2025. Den skal identifisere pools, subpools, flyter og lagre, kvantifisere dem med data og parametre, beregne tidsutviklingen med Monte Carlo og dokumentere hver flyt slik det er gjort i NitrogenBudsjett.
+**Mål:** En dynamisk, probabilistisk MFA for tekstiler i Norge 1990–2025. Den skal identifisere pools, subpools, flyter og lagre, kvantifisere dem med data og parametre, beregne tidsutviklingen med Monte Carlo og dokumentere hver flyt slik det er gjort i NitrogenBudsjett. Deretter skal den forlenges med en fremtidsmodul som bygger på den kalibrerte lagermodellen, og brukes til å analysere foreslåtte tiltak for sirkulære tekstiler (beslutning 2026-11-02).
 
 ---
 
@@ -94,54 +94,65 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 
 ## Neste
 
-### Åpne tråder, samlet og prioritert (2026-11-02)
+### Veikart (besluttet 2026-11-02)
 
-**Venter på beslutning**
+Prinsipper:
+* **Data er fasit (D8 står).** Kasseringene kommer fra statistikken. Lagermodellen kalibreres ikke slik at den overstyrer data, og strømmer justeres ikke for å passe modellen.
+* **Lagermodellen er et diagnoseverktøy.** Avvik mellom restleddet, lagermodellen og garderobedata brukes til å finne åpenbare problemer i hvordan inndata er valgt og behandlet (feil avgrensning, dobbelttelling, manglende strømmer, ankerpunkter som ikke er representative). Arbeidet er iterativt: diagnose → gjennomgang av inndata → ny kjøring. Det som endres, er valg og behandling av data, med kilde. Tallene justeres ikke mot modellen.
+* **Usikkerheten følger prinsippene fra NitrogenBudsjett** ([plan for usikkerhetshåndtering](../../NitrogenBudsjett/claude_tekst/2026-10-14_PLAN_usikkerhetshaandtering.md)). Koden skrives her og deles ikke med nitrogenprosjektet.
+* **Fremtidsmodulen bygges fra grunnen.** Nitrogenprosjektet har ingen modell for dette. Den bygger på den kalibrerte lagermodellen og eksplisitte antakelser.
+
+Fasene A og B går parallelt. Bidragsanalysen i A brukes til å prioritere i B.
+
+#### Fase A – Robust usikkerhet (prinsippene fra NitrogenBudsjett)
+1. Én tolkning av grensene. Anbefalt: alle grenser er 95 %-intervall, også for PERT (problem P1 i N-planen).
+2. Usikkerhet per datasett og periode etter **hvordan tallet er laget**, ikke hvem som publiserer det: registrert eller tellet, utvalgsundersøkelse, modellbasert statistikk, ekspertanslag (en lett pedigree, AP3 og P9 i N-planen). Begrunnelse i en egen kolonne.
+3. Systematisk og årlig del av datasettstøyen, og egne faktorer for uavhengige deler av samme datasett (AP2).
+4. Usikkerhet i skjøter mellom datakilder (for eksempel 05281 → plukkanalyser, VOEC-bruddet, SN2002 → SN2007) og i utfylte år. Nivåene i D30 vurderes på nytt i samme runde.
+5. Strukturusikkerhet (avgrensninger og metodevalg) som egne følsomhetskjøringer, ikke inne i MC.
+6. Bidragsanalyse: hvilke kilder driver usikkerheten per flyt, i lageret, i innsamlingsgraden og i grunnlaget for produsentansvaret (som `uncertainty_contributions.py` og `aggregate_uncertainty.py` i N). Krever at trekkene lagres.
+7. Konvergenstest og innsvingingstest (D2).
+
+#### Fase B – Strømmer uten bestemt data eller metode
 1. D37: fiberutslipp, lo og husstøv (tre spørsmål i notatet).
 2. D38: returer og destruksjon (tre spørsmål i notatet).
-3. Parameterforslagene i avsnitt 5.4 i litteraturnotatet fra 2026-10-05 (punktet under 2026-10-05).
+3. Planlagte flyter: `US.IC-CO.CO` innsamling fra institusjoner, `CO.SO-RW.RW` eksport av sortert, `CO.RE-WM.RS` usolgte bruktvarer.
+4. Parameterforslagene i avsnitt 5.4 i litteraturnotatet fra 2026-10-05, og `institutional_share` per produkt.
+5. Om kasserte sekker registreres som plastemballasje eller tekstil.
+6. Fiberlaget: matrise fra hovedfiber til fiberandeler, restposter (RES/UNK), ull (5 % mot 3 % målt).
 
-**Lageret i husholdningene** (viktigst for publisering)
+#### Fase C – Lagermodellen som diagnose
+1. Oppdatere [notatet om lagermodellen](../claude_tekst/2026-10-05_lagermodell_mot_statistikk.md) med dagens tall (2025: restledd ca. 275 kg per innbygger, lagermodell ca. 97 kg).
+2. Bryte ned avviket per periode og produkt. Følsomhet: restavfall før 2009, innsamling før 2018, MA.TX, D38 (EEA-nivå), startlageret.
+3. Levetidene settes innenfor det litteraturen tillater, slik at lagermodellen treffer garderobedata (nivå) og statistikken der den er god (2018–2025). Der den ikke treffer, er det et diagnosefunn om inndata, ikke en grunn til å endre data.
+4. Uavhengig kontroll av nivået: garderobestudier (SIFO/OsloMet, Laitala & Klepp), og WRAP og WUR som referanse.
+5. Fiberspesifikke levetider (syntetisk lengre enn bomull), hvis diagnosen tilsier det.
+6. Resultat: kalibrerte levetidsfordelinger med usikkerhet, og en liste over endringer i inndata med begrunnelse.
 
-4. Bryte ned avviket mellom restleddet (ca. 275 kg per innbygger) og lagermodellen (ca. 97 kg) og garderobestudiene. Følsomhet:
-   - MA.TX halvert og doblet
-   - restavfall før 2009
-   - innsamling før 2018
-   - D38 med EEA-nivå
-   - lengre levetider for CL
-5. Spørre SSB om tekstiltallene i 05281 (1995–2011) og tekstilregnskapet 1990–1998 er beregnet ut fra tilførselen.
-6. Oppdatere [notatet om lagermodellen](../claude_tekst/2026-10-05_lagermodell_mot_statistikk.md). Tallene der er fra før D21–D28, og de to anslagene er ikke lenger enige fra 2019.
+#### Fase D – Fremtidsmodul (D12)
+1. Utforming: tilførsel (befolkning × kg per innbygger per produkt, med baner), overføringskoeffisienter fra 2026 (innsamling, sortering, eksport, gjenvinning) og kasseringer fra den kalibrerte lagermodellen.
+2. Referansebane 2026–2040 med usikkerhet.
+3. Regimeskifter som harde brudd: produsentansvar 2027, eksportregler 2027, destruksjonsforbud 2026.
 
-**Usikkerhet (fase 4)**
+#### Fase E – Tiltak
+Rekkefølge fra [notatet om tiltak](../claude_tekst/2026-11-02_tiltak_sirkularitet_og_MFA.md):
+1. Grunnlaget for produsentansvaret med usikkerhet. Kan gjøres for historikken før fase D.
+2. Innsamlingsgrad målt som innsamlet ÷ kassert, og etterkontroll av kravet om separat innsamling fra 2025. Kan også gjøres før fase D.
+3. Scenarier for eksport og sortering.
+4. Tiltak på tilførsel og levetid (avgift, rask mote, holdbarhet), med forsinkelse.
 
-7. Følsomhetsanalyse (Spearman), pedigree, konvergens og innsvinging.
-8. Nivåene i D30.
+#### Fase F – Dokumentasjon og publisering
+1. Artikkel om avstemmingen av lageret (restledd, lagermodell, garderober). Mulig etter fase C ([notat](../claude_tekst/2026-11-02_nytt_mot_NORSUS.md)).
+2. `library.bib` og siteringer, og GitHub Pages.
 
-**Data å skaffe**
+#### Startes nå (lang ledetid)
+* Spørre SSB om tekstiltallene i 05281 (1995–2011) og tekstilregnskapet 1990–1998 er beregnet ut fra tilførselen.
+* Garderobedata fra SIFO/OsloMet (lagernivå i kg per innbygger).
+* Søke tilgang til SNFs regnskapsdatabase (skille merkevarer fra produksjon i 14.x).
+* EEA-rapporten om destruksjon og PostNords returtall (D38). Andel husholdninger med tørketrommel etter 2012 (D37). Plukkanalyser av næringsavfall (US.IC).
 
-9. Tilgang til SNFs regnskapsdatabase (skille merkevarer fra produksjon i 14.x).
-10. Om kasserte sekker registreres som plastemballasje eller tekstil.
-11. Plukkanalyser av næringsavfall (US.IC).
-12. Andel husholdninger med tørketrommel etter 2012 (D37).
-13. EEA-rapporten om destruksjon (D38).
-14. PostNords returtall (D38).
-
-**Fiberlaget**
-
-15. Matrise fra hovedfiber til fiberandeler.
-16. Restposter (RES/UNK).
-17. Fiberspesifikke levetider.
-18. Ull i kasseringer er 5 % mot 3 % målt.
-19. Utslipp per fiber (D37).
-
-**Mulige analyser og artikler**
-
-20. Grunnlaget for produsentansvaret med usikkerhet. Innsamlingsgrad målt som innsamlet ÷ kassert.
-21. Framtidsmodul for tiltak (D12). Rekkefølgen står i notatet om tiltak.
-
-**Dokumentasjon (fase 5)**
-
-22. `library.bib` og siteringer, og GitHub Pages.
+#### Eldre punkter
+Punktene under fra fase 1–3 er beholdt som historikk. Åpne punkter der er tatt inn i fasene A–F over.
 
 ### Fase 1 – Låse systemdefinisjonen (beslutningene D1–D13 er tatt 2026-09-29)
 - [x] Litteraturgjennomgang ([notat](../claude_tekst/2026-09-29_litteraturgjennomgang_tekstil-MFA.md)): norske kartlegginger, nasjonale MFA-er (DK, SE, FI, NL, UK, CH), dynamiske og probabilistiske MFA-er (EU DPMFA 2024, Kina, Abbasi 2023 for norsk plast) og levetidsstudier (Laitala & Klepp). Nytt ankerår 2021 (Syversen m.fl. 2023). Ingen norsk tekstil-MFA har tidsserier.
@@ -219,7 +230,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [ ] Fiberlag: fiberspesifikke levetider (syntetisk lengre enn bomull), matrise hovedfiber → fiberandeler, usikkerhet på `fibre_composition.csv`, og egen sammensetning for brukbart og utslitt i restavfall.
 - [ ] Ull i kasseringer blir ca. 5 %, mot 3 % målt. Undersøk hvilke HS-koder som gir ull.
 
-### Fase 4 – Usikkerhet
+### Fase 4 – Usikkerhet (erstattet av fase A i veikartet)
 - [ ] Pedigree-basert usikkerhet for alle datasett og parametre.
 - [ ] Lagre MC-trekk og gjøre følsomhetsanalyse (Spearman).
 - [ ] Konvergenstest og innsvingingstest (D2).
@@ -232,7 +243,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [ ] Skrive manuelle beskrivelser per flyt i `MANUAL`-blokkene.
 - [ ] Slå på GitHub Pages for repoet (Settings → Pages, gren `main`, rotmappe) når grenen er merget.
 
-### Fase 6 (valgfritt) – Scenarier
+### Fase 6 – Scenarier (erstattet av fase D og E i veikartet; ikke lenger valgfritt)
 - [ ] Framskriving 2025–2035 med produsentansvar, innsamlingsmål og tiltak mot fast fashion (D12).
 
 ## Løse tråder
