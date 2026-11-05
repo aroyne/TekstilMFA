@@ -6,5 +6,6 @@ data_files/Tab_08801_textiles.csv
 output_files/MC_Raw_Simulations.csv.gz
 # One row per scenario, year and metric; rebuilt by future_scenarios.py in about a minute
 output_files/future_scenarios.csv
+output_files/future_policies.csv
 # Literature PDFs are kept locally only
 litteratur/*.pdf

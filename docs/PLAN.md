@@ -2,7 +2,7 @@
 
 *Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-11-05.*
 
-> **Her fortsetter vi (2026-11-05):** Fase D, trinn 1 og 2 og D42 er gjort. Det er 1 000 scenarier uten nye tiltak (`future_scenarios.py`, [notat](../claude_tekst/2026-11-05_D2_scenarier_forslag.md)). Innsamlingsgraden ligger på ca. 40 % (32–50 %) uten tiltak, og spennet styres av usikkerheten i dagens kasseringer. **Neste er trinn 3:** tiltakene (produsentansvar med innsamlingsmål, sortering før eksport, holdbarhet) i de samme scenariene, med tilfredsstillelse, anger og feilrate (Weijenberg m.fl. 2026). Svar fra Mepex om sko og næringsavfall kan endre 2018-ankeret og D42-flyten.
+> **Her fortsetter vi (2026-11-05):** Fase D er ferdig: referansebanen, 1 000 scenarier og fem ambisiøse tiltak (`future_policies.py`, [notat](../claude_tekst/2026-11-05_D3_tiltak_forslag.md)). Bare produsentansvaret løfter innsamlingsgraden over 50 %. Sortering i Norge fjerner den usorterte eksporten, men øker forbrenningen i Norge. Ingen kombinasjon halverer forbrenningen. Vurdering for ISIE 2027 er i [notatet](../claude_tekst/2026-11-05_ISIE2027_vurdering.md). **Neste:** avklare ankrene med Mepex (sko, næringsavfall), velge vinkling for ISIE og eventuelt fase F (artikkel).
 > **Påminnelse:** Usendte henvendelser (SSB, OsloMet, SNF, PostNord, Tolletaten) samles i [HENVENDELSER.md](HENVENDELSER.md). **Ingenting er sendt** per 2026-11-02.
 
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
@@ -137,6 +137,7 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] `calculations/future.py` og `main_future.py`. `make_system(years=...)` og `use_cohorts` tar nå vilkårlige år. Historikken er uendret (MC_summary identisk). Fire nye tester (29 i alt).
 - [x] Fiberlaget forlenget til 2050: tilførselen beholder sammensetningen fra 2025, og lagermodellene får historikken per materiale. Fiberlaget for historikken er identisk med før.
 - [x] Opphopning hos forbruker ([notat](../claude_tekst/2026-11-05_opphopning_hos_forbruker.md)): Danmark 2018 (Watson m.fl.) hadde et gap på 10 kt (1,8 kg per innbygger) og mener det meste er dataproblemer (grovavfall, videresalg), ikke lagervekst. Kandidater i Norge: sko i plukkanalysene, grovavfall og næringsavfall fra husholdningene, institusjonsandelen, privat utførsel.
+- [x] Trinn 3: fem ambisiøse tiltak (L1–L5) og kombinasjonen av dem i de 1 000 scenariene, med effektene som usikre faktorer (8 min). Ny flyt for eksport av sortert ombruk og ny faktor X13 (bruktmarkedet i Norge). Lagervekst under tiltak følger lagermodellen. Resultater i notatet. 34 tester.
 - [x] Trinn 2: 1 000 scenarier med latin hypercube over 13 faktorer med fiberlaget (64 s). Innsamlingsgrad 2035: 39 % i referansebanen (32–52 %), styrt av X7 og X6. Mengdene styres av forbruk og befolkning, ombruk og gjenvinning av sorteringen i Norge. Lagerendringen er −8 til +6 kt per år. Scenariene avdekket tre regler som måtte endres for oppstrøms og fiberlaget i fremtiden (notatet). Levetid per årgang i `use_cohorts`. 33 tester.
 - [x] D42: Sko lagt til 2018-ankeret (7,5 kt, 5–10). Restlageret i 2025 er 1 169 kt (440–1 816). Ny flyt for husholdningstekstiler i næringsavfall og grovavfall: 0 i hovedresultatet og 1 kg per innbygger i strukturkjøringen (−183 kt i lageret, innsamlingsgrad 41,9 %). I fremtiden vokser lageret med 0,5 kg per innbygger per år, og resten går til flyten (10–11 kt per år). Innstrømmene til WM.RS hentes nå fra registeret, og fremtidssystemet nullstilles før flytene settes.
 - [x] Resultat (før D42): Kassert CL+HT+FW 80,6 kt (2025) → 85,6 kt (2050), innsamling 36 → 38 kt, netto grunnlag for produsentansvaret 95 → 106 kt. Restlageret 1 160 → 1 502 kt, lagermodellen 529 → 576 kt. Plott: `output_files/plots/future_reference.png`.
@@ -183,7 +184,7 @@ Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og
 0. Designnotat med fem spørsmål: [notat 2026-11-02](../claude_tekst/2026-11-02_D_fremtidsmodul_design.md).
 1. ~~Utforming og referansebane 2026–2050~~ (gjort 2026-11-05, deterministisk). Åpent: hvor gapet (1 − s) går.
 2. ~~Usikkerhet i referansebanen som scenarier (trinn 2)~~ (gjort 2026-11-05).
-3. Regimeskifter som harde brudd: produsentansvar 2027, eksportregler 2027, destruksjonsforbud 2026.
+3. ~~Regimeskifter som harde brudd~~ (gjort som tiltak L1–L4 i trinn 3, 2026-11-05).
 4. Usikkerheten om framtiden er dyp: flate, vide plausible spenn og mange scenarier (EMA), ikke MC med fordelinger som for historikken. Avkuttet Dirichlet for koeffisienter med sum lik 1 ([Weijenberg m.fl. 2026](../claude_tekst/2026-11-02_Weijenberg_robust_tiltaksvurdering.md)).
 
 #### Fase E – Tiltak

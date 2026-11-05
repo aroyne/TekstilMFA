@@ -23,7 +23,7 @@ import pandas as pd
 import flodym as fd
 
 from calculations.fibre_layer import compute_fibre_layer
-from calculations.future import FUTURE_YEARS, Reference, Scenario, execute_future, future_composition_data
+from calculations.future import FUTURE_YEARS, Policy, Reference, Scenario, execute_future, future_composition_data
 from calculations.indicators import indicators
 from calculations.params import Parameters
 from calculations.sampling import DEFAULT_SEED
@@ -63,9 +63,10 @@ def prepare_history(seed=DEFAULT_SEED):
             'params': params, 'current_params': current_params}
 
 
-def run_future(history, scenario, fibre=True):
+def run_future(history, scenario, policy=None, fibre=True):
     """
-    Runs one scenario from the prepared history. Returns (closed future
+    Runs one scenario with one policy (Policy.none() if not given) from the
+    prepared history. Returns (closed future
     system, Reference, closed future fibre system and its stock model
     outputs, or (None, None) without the fibre layer).
     """
@@ -76,7 +77,8 @@ def run_future(history, scenario, fibre=True):
     # SSB's 2026 population projection, as the mean of the year
     population = {**{YEARS[-1]: preloaded_data['population'][YEARS[-1]]},
                   **preloaded_data['population_projection'][scenario.population]}
-    ref = Reference(history['hist'], population, history['current_params'], scenario)
+    ref = Reference(history['hist'], population, history['current_params'], scenario,
+                    Policy.none() if policy is None else policy)
     fut = make_system(years=FUTURE_YEARS)
     reset(fut)
     execute_future(fut, ref)

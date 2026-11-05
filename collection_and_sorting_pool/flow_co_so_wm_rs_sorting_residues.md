@@ -94,7 +94,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_sorting_residues_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L84). Dokumentasjonen i koden:
+Beregnes i `_sorting_residues_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L96). Dokumentasjonen i koden:
 
 > Balance of CO.SO: rejects from domestic sorting that are not recycled,
 > and imported rags, which are used up and discarded.

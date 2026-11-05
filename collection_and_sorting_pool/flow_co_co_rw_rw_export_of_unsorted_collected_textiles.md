@@ -93,7 +93,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_export_unsorted_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L26). Dokumentasjonen i koden:
+Beregnes i `_export_unsorted_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L27). Dokumentasjonen i koden:
 
 > Export of used textiles and rags (HS 6309+6310), SSB 08801. In 2025,
 > 95.7 % was used clothing and other used textile articles (6309) and 4.3 %

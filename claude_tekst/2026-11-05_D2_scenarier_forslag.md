@@ -92,10 +92,10 @@ Rapporteres for 2030, 2035, 2040 og 2050:
 |---|---|---|---|---|---|
 | Innsamlingsgrad | 39 % | 32–52 % | 40 % | 32–50 % | X7 +0,74, X6 +0,55 |
 | Kassert fra husholdningene (kt) | 92 | 74–112 | 96 | 69–124 | X2 +0,85, befolkning +0,54 |
-| Ombruk i Norge (kt) | 2,0 | 1,8–8,4 | 2,2 | 1,8–8,6 | X8 +0,66, ombruksandel +0,66 |
+| Ombruk i Norge (kt) | 2,0 | 1,7–6,6 | 2,2 | 1,7–6,8 | X8, ombruksandel, X13 (bruktmarkedet) |
 | Andel eksportert usortert | 95 % | 71–94 % | 95 % | 71–94 % | X8 −1,00 |
 | Materialgjenvinning (kt) | 0,37 | 0,5–4,2 | 0,38 | 0,5–4,3 | gjenvinningsandel +0,88, X8 +0,39 |
-| Til forbrenning (kt) | 118 | 98–139 | 124 | 96–154 | befolkning +0,66, X2 +0,63 |
+| Til forbrenning (kt) | 118 | 98–138 | 124 | 94–155 | befolkning +0,66, X2 +0,63 |
 | Produsentansvar, netto (kt) | 101 | 75–121 | 106 | 74–135 | X2 +0,84, befolkning +0,56 |
 | Lagerendring (kt/år) | 3,0 | −8,4–5,6 | 3,1 | 1,9–6,1 | X5 +0,85 |
 | Andel syntetisk i kasseringer | 45,8 % | 46,0–47,5 % | 45,6 % | 45,7–50,1 % | X12 +1,00 |
@@ -108,3 +108,5 @@ Hovedpunkter:
 * **Lagernivået** styres av X4, fordi startlageret (D2) avhenger av levetidene. Plottet viser derfor endringen.
 
 Neste er trinn 3: tiltakene (produsentansvar med innsamlingsmål, krav om sortering før eksport, holdbarhet) kjørt i de samme 1 000 scenariene, med tilfredsstillelse, anger og feilrate.
+
+**Kjørt på nytt 2026-11-05 med X13** (bruktmarkedet i Norge, 1,6–10 kt i 2035, lagt til i trinn 3). Det som sorteres til ombruk ut over markedet, eksporteres sortert. Ombruk i Norge 2035 er nå 1,7–6,6 kt (5–95 %). Resten av tabellen er så godt som uendret.

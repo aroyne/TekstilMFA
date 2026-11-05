@@ -96,7 +96,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_sorted_for_recycling_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L69). Dokumentasjonen i koden:
+Beregnes i `_sorted_for_recycling_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L70). Dokumentasjonen i koden:
 
 > Part of the rejects from domestic sorting (retained minus sold second
 > hand, imported clothing not counted) sent to material recycling: 93 of

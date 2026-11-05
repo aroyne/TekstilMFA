@@ -78,3 +78,25 @@ def test_sampled_scenarios_close_with_fibre_layer():
     history = prepare_history()
     for scenario in sample_scenarios(20):
         run_future(history, scenario)
+
+
+def test_policies_act_where_they_should():
+    from calculations.future import FUTURE_YEARS, Scenario
+    from calculations.future_policies import policy, sample_effects
+    from main_future import prepare_history, run_future
+    history = prepare_history()
+    scenario = Scenario.reference(history['hist'])
+    effects = sample_effects(1)[0]
+    base, _, _ = run_future(history, scenario, fibre=False)
+    i2032 = FUTURE_YEARS.index(2032)
+    l2, _, _ = run_future(history, scenario, policy('L2', effects), fibre=False)
+    assert l2.flows['CO.CO-RW.RW-Export of unsorted collected textiles-TOT'].values[i2032:].max() == pytest.approx(0)
+    l4, _, _ = run_future(history, scenario, policy('L4', effects), fibre=False)
+    assert l4.flows['DI.RT-WM.RS-Unsold goods discarded-TOT'].values[FUTURE_YEARS.index(2030):].max() == 0
+    l1, _, _ = run_future(history, scenario, policy('L1', effects), fibre=False)
+    code = 'US.HH-CO.CO-Separate collection from households-TOT'
+    assert (l1.flows[code].values[i2032:, CORE] > base.flows[code].values[i2032:, CORE]).all()
+    l0, _, _ = run_future(history, scenario, policy('L0', effects), fibre=False)
+    for name, flow in base.flows.items():
+        np.testing.assert_array_equal(l0.flows[name].values, flow.values)
+    run_future(history, scenario, policy('Lall', effects))

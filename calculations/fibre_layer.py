@@ -113,6 +113,7 @@ COLLECTED_FLOWS = [
     'CO.CO-RW.RW-Export of unsorted collected textiles-TOT',
     'CO.CO-CO.SO-Collected textiles to domestic sorting-TOT',
     'CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT',
+    'CO.SO-RW.RW-Export of sorted textiles for reuse-TOT',
     'CO.SO-WM.RS-Sorting residues-TOT',
     'CO.RE-US.HH-Secondhand sales to households-TOT',
 ]

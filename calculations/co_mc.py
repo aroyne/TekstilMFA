@@ -19,6 +19,7 @@ def execute_calculations_co(mfa, preloaded_data, current_params, dataset_noise, 
     _used_textile_import_mc(mfa, preloaded_data, dataset_noise)
     _sorted_for_secondhand_mc(mfa, preloaded_data, dataset_noise, anchors)
     _sorted_for_recycling_mc(mfa, anchors)
+    _sorted_reuse_export_mc(mfa)
     _sorting_residues_mc(mfa)
     _secondhand_sales_mc(mfa)
 
@@ -81,6 +82,17 @@ def _sorted_for_recycling_mc(mfa, anchors):
     mfa.flows['CO.SO-WM.RC-Sorted for recycling-TOT'].values[...] = rejects * share[:, None]
 
 
+def _sorted_reuse_export_mc(mfa):
+    """
+    Textiles sorted in Norway for reuse and exported: 0 in the history.
+    Exports of used textiles (HS 6309+6310) are counted as unsorted export
+    (D17), and what is kept in Norway is sold here or rejected. The flow is
+    used by the future module, where sorting in Norway can exceed what the
+    Norwegian second-hand market takes (phase D, step 3).
+    """
+    mfa.flows['CO.SO-RW.RW-Export of sorted textiles for reuse-TOT'].values[...] = 0.0
+
+
 def _sorting_residues_mc(mfa):
     """
     Balance of CO.SO: rejects from domestic sorting that are not recycled,
@@ -90,7 +102,8 @@ def _sorting_residues_mc(mfa):
     imported = mfa.flows['RW.RW-CO.SO-Used textile import-TOT'].values
     reuse = mfa.flows['CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT'].values
     recycled = mfa.flows['CO.SO-WM.RC-Sorted for recycling-TOT'].values
-    mfa.flows['CO.SO-WM.RS-Sorting residues-TOT'].values[...] = retained + imported - reuse - recycled
+    exported = mfa.flows['CO.SO-RW.RW-Export of sorted textiles for reuse-TOT'].values
+    mfa.flows['CO.SO-WM.RS-Sorting residues-TOT'].values[...] = retained + imported - reuse - recycled - exported
 
 
 def _secondhand_sales_mc(mfa):

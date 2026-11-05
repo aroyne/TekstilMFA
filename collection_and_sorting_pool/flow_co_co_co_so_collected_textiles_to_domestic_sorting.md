@@ -92,7 +92,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_to_domestic_sorting_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L36). Dokumentasjonen i koden:
+Beregnes i `_to_domestic_sorting_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L37). Dokumentasjonen i koden:
 
 > Collected textiles kept in Norway, as a share of the export. Anchors from
 > Watson 2020, Rubach 2023 and de Sadeleer & Rubach 2026.

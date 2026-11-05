@@ -94,7 +94,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_sorted_for_secondhand_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L57). Dokumentasjonen i koden:
+Beregnes i `_sorted_for_secondhand_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L58). Dokumentasjonen i koden:
 
 > Share of the retained textiles sold second-hand in Norway (same anchors
 > as the share retained), plus imported used clothing (HS 6309).

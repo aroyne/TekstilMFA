@@ -12,11 +12,13 @@ shares. The stock in use grows by a realistic amount only; the rest of the
 gap between supply and recorded discards leaves as household textiles in
 commercial and bulky waste (D42).
 
-A Scenario holds every uncertain factor (X) of step 2. The reference path
-(Scenario.reference) carries the 2025 values on and has today's policy
-only: the ban on destroying unsold goods (2026), EPR (2027) and the waste
-shipment rules (2027) are measures for step 3, so that their effect is
-measured against the same scenarios. Factors that change over time move
+A Scenario holds every uncertain factor (X) of step 2 and a Policy the
+measures (L) of step 3 with their drawn effects. The reference path
+(Scenario.reference with Policy.none) carries the 2025 values on and has
+today's policy only: the ban on destroying unsold goods (2026), EPR (2027),
+sorting before export, durability requirements and a tax on new textiles
+are measures, so that their effect is measured against the same
+scenarios. Factors that change over time move
 linearly from their 2025 value to their value in TARGET_YEAR and are held
 after it.
 
@@ -71,6 +73,12 @@ INCINERATION = 'WM.RS-WM.IN-Domestic incineration-TOT'
 RESIDUAL_EXPORT = 'WM.RS-RW.RW-Residual waste export for incineration-TOT'
 LANDFILL = 'WM.RS-WM.LF-Landfilling of textiles-TOT'
 SORTING_OUTCOMES = (SORTED_REUSE, SORTED_RECYCLING, SORTING_RESIDUES)
+SORTED_REUSE_EXPORT = 'CO.SO-RW.RW-Export of sorted textiles for reuse-TOT'
+UNSOLD_DISCARDED = 'DI.RT-WM.RS-Unsold goods discarded-TOT'
+UNSOLD_DONATED = 'DI.RT-CO.CO-Unsold goods donated-TOT'
+# Products taxed by L5 and covered by the first durability act (L3: clothing).
+TAXED_PRODUCTS = ['CL', 'HT', 'FW']
+DURABLE_PRODUCTS = ['CL']
 
 # Flows that follow the population: the 2025 value per inhabitant times
 # the consumption trend of the scenario for flows split by product.
@@ -139,6 +147,7 @@ class Scenario:
     recycled_fibre_capacity_2035: float  # X10: recycled fibre spun in Norway, kt
     residual_export_share_2035: float  # X11: share of residual waste incinerated abroad
     synthetic_shift_2035: float     # X12: change in the synthetic share of new goods (fibre layer)
+    reuse_market_2035: float        # X13: second-hand sales in Norway of textiles sorted here, kt
 
     @classmethod
     def reference(cls, hist):
@@ -158,7 +167,38 @@ class Scenario:
             recycled_fibre_capacity_2035=base(RECYCLED_FIBRE),
             residual_export_share_2035=base(RESIDUAL_EXPORT) / residual,
             synthetic_shift_2035=0.0,
+            # No limit: second-hand sales in Norway follow what is sorted
+            # for reuse, as in 2025.
+            reuse_market_2035=float('inf'),
         )
+
+
+@dataclasses.dataclass(frozen=True)
+class Policy:
+    """
+    The measures (L) of one alternative in step 3
+    (claude_tekst/2026-11-05_D3_tiltak_forslag.md), with their effects, which
+    are uncertain factors drawn per scenario. Policy.none() is L0.
+    """
+    name: str
+    collection_increase: float      # L1: share points added to separate collection, full in 2032
+    collection_from_reusable: float  # L1: part of the increase taken from reusable residual textiles
+    domestic_sorting: bool          # L2: everything collected is sorted in Norway from 2032
+    durability_increase: float      # L3: longer lifetime of clothing cohorts from 2029
+    destruction_ban: bool           # L4: unsold goods are donated instead of discarded
+    destruction_ban_share_2027: float  # L4: share of unsold goods covered in 2027, all from 2030
+    consumption_reduction: float    # L5: lower consumption per inhabitant of CL+HT+FW, full in 2030
+
+    @classmethod
+    def none(cls):
+        return cls(name='L0', collection_increase=0.0, collection_from_reusable=0.0, domestic_sorting=False,
+                   durability_increase=0.0, destruction_ban=False, destruction_ban_share_2027=0.0,
+                   consumption_reduction=0.0)
+
+
+def ramp(start, end, years=FUTURE_YEARS):
+    """0 up to start, linear to 1 in end, 1 after; array (year,)."""
+    return np.clip((np.array(years) - start) / (end - start), 0.0, 1.0)
 
 
 def path(start, end, years=FUTURE_YEARS):
@@ -170,15 +210,16 @@ def path(start, end, years=FUTURE_YEARS):
 class Reference:
     """
     The closed historical system (iteration 0), the scenario, the
-    population and the parameters of iteration 0 with the scenario's
-    lifetimes and stock growth, shared by the flow functions. The cohort
-    models are run once and kept here.
+    measures, the population and the parameters of iteration 0 with the
+    scenario's lifetimes and stock growth, shared by the flow functions.
+    The cohort models are run once and kept here.
     """
 
-    def __init__(self, hist, population, current_params, scenario):
+    def __init__(self, hist, population, current_params, scenario, policy):
         """population: {year: mean population} for 2025 and FUTURE_YEARS, in the scenario's alternative."""
         self.hist = hist
         self.scenario = scenario
+        self.policy = policy
         self.current_params = dict(current_params)
         for product in CORE_GROUP_PRODUCTS:
             self.current_params[f'lifetime_mean_US.HH_{product}'] *= scenario.lifetime_level
@@ -189,11 +230,21 @@ class Reference:
         rate = np.array([scenario.consumption_trend_core if p in CORE_GROUP_PRODUCTS
                          else scenario.consumption_trend_other for p in PRODUCTS])
         self.consumption_trend = (1.0 + rate[None, :]) ** years[:, None]
+        # L5: a tax on new textiles or measures against ultra fast fashion,
+        # phased in from 2028 to 2030.
+        taxed = np.array([p in TAXED_PRODUCTS for p in PRODUCTS], dtype=float)
+        self.policy_consumption = 1.0 - policy.consumption_reduction * ramp(2027, 2030)[:, None] * taxed[None, :]
+        self.consumption_trend = self.consumption_trend * self.policy_consumption
         # Lifetime of each CORE cohort relative to the parameters: 1 for the
         # history, the scenario's path for cohorts entering from 2026.
-        self.household_lifetime_factor = np.concatenate([
-            np.ones((len(YEARS), len(CORE_GROUP_PRODUCTS))),
-            np.repeat(path(1.0, scenario.lifetime_new_cohorts_2035)[:, None], len(CORE_GROUP_PRODUCTS), axis=1)])
+        # L3 adds the durability requirement for clothing cohorts from 2029.
+        durable = np.array([p in DURABLE_PRODUCTS for p in CORE_GROUP_PRODUCTS], dtype=float)
+        scenario_factor = np.repeat(path(1.0, scenario.lifetime_new_cohorts_2035)[:, None],
+                                    len(CORE_GROUP_PRODUCTS), axis=1)
+        durability = 1.0 + policy.durability_increase * (np.array(FUTURE_YEARS) >= 2029)[:, None] * durable[None, :]
+        history_factor = np.ones((len(YEARS), len(CORE_GROUP_PRODUCTS)))
+        self.household_lifetime_factor = np.concatenate([history_factor, scenario_factor * durability])
+        self.household_lifetime_factor_without_policy = np.concatenate([history_factor, scenario_factor])
 
     def base(self, code):
         return self.hist.flows[code].values[BASE]
@@ -245,6 +296,7 @@ def future_composition_data(preloaded_data, synthetic_shift_2035=0.0):
 
 def execute_future(fut, ref):
     _per_capita_flows(fut, ref)
+    _destruction_ban(fut, ref)
     _manufacturing_flows(fut, ref)
     _held_flows(fut, ref)
     _online_returns(fut, ref)
@@ -270,10 +322,32 @@ def _per_capita_flows(fut, ref):
     scenario's alternative), for every flow in PER_CAPITA_FLOWS. Flows split
     by product also follow the scenario's consumption trend per inhabitant
     (X2 for CL+HT+FW+YA, X3 for the other goods; 0 in the reference path),
-    compounded to 2035 and held after.
+    compounded to 2035 and held after, and the reduction of L5 for CL+HT+FW
+    (-10 to -30 %, phased in 2028-2030; a tax on new textiles as the expert
+    group recommends, Ikke rett fram 2025, or measures against ultra fast
+    fashion as in France, law 2026-602; the effect is an assumption).
     """
     for code in PER_CAPITA_FLOWS:
         fut.flows[code].values[...] = ref.per_capita(code, fut.flows[code].dims.letters)
+
+
+def _destruction_ban(fut, ref):
+    """
+    Under L4 (ban on destroying unsold clothing and footwear, ESPR art. 25:
+    large firms from 19 July 2026, medium-sized from 2030) unsold goods that
+    would be discarded are donated instead: the share covered is half of
+    the 2027 share in 2026, the drawn share (50-90 %) in 2027 and all of
+    them from 2030. Without L4 both flows keep their 2025 ratio to the
+    market (_per_capita_flows).
+    """
+    if ref.policy.destruction_ban:
+        years = np.array(FUTURE_YEARS)
+        share_2027 = ref.policy.destruction_ban_share_2027
+        covered = np.where(years == 2026, share_2027 / 2,
+                           share_2027 + (1.0 - share_2027) * ramp(2027, 2030))
+        moved = fut.flows[UNSOLD_DISCARDED].values * covered[:, None]
+        fut.flows[UNSOLD_DISCARDED].values[...] -= moved
+        fut.flows[UNSOLD_DONATED].values[...] += moved
 
 
 def _manufacturing_flows(fut, ref):
@@ -332,6 +406,21 @@ def household_cohorts(hist, fut, current_params, lifetime_factor):
             'stock_1987': cohorts['stock_1987'][:, 0].sum()}
 
 
+def _policy_stock_change(fut, ref, cohorts):
+    """
+    Change of the CORE stock in use per year that the measures cause in the
+    cohort model (longer lifetimes under L3 add to the stock, lower
+    consumption under L5 takes from it), relative to the same scenario
+    without measures, array (year,) over FUTURE_YEARS; 0 under L0.
+    """
+    core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
+    inflow = np.concatenate([new_goods_to_households(ref.hist.flows),
+                             new_goods_to_households(fut.flows) / ref.policy_consumption])[:, core]
+    without = use_cohorts(inflow[:, :, None], CORE_GROUP_PRODUCTS, ref.current_params,
+                          cohort_factor=ref.household_lifetime_factor_without_policy)['stock'][:, :, 0].sum(axis=1)
+    return np.diff(cohorts['stock'] - without)[-len(FUTURE_YEARS):]
+
+
 def _household_discards(fut, ref):
     """
     CORE discards from households: the outflow of the cohort model of the
@@ -352,19 +441,31 @@ def _household_discards(fut, ref):
 
     Separate collection is the scenario's share of the scaled discards (X7,
     the 2025 share in the reference path, about 45 %), held: any increase
-    comes from measures in step 3. The rest is split between reusable and
-    worn textiles in residual waste by their 2025 ratio.
+    comes from measures. The rest is split between reusable and worn
+    textiles in residual waste by their 2025 ratio. Under L1 (EPR with a
+    collection target, WFD 2025/1892, Norwegian regulation proposed from
+    2027) the share rises by the drawn increase (+10 to +35 share points,
+    ambitious; Norway already collects about 45 %), phased in 2027-2032,
+    taken 50-90 % from reusable textiles in residual waste and the rest from
+    worn ones. Textiles in commercial and bulky waste (D42) are not reached.
     """
     cohorts = household_cohorts(ref.hist, fut, ref.current_params, ref.household_lifetime_factor)
+    ref.policy_stock_change = _policy_stock_change(fut, ref, cohorts)
     recorded = {code: ref.base(code)[CORE] for code in (COLLECTION, REUSABLE, WORN)}
     statistics = sum(recorded.values())
     ref.scale = statistics / cohorts['outflow'][BASE] * ref.scenario.discard_level
     ref.cohorts = cohorts
     discards = ref.scale * cohorts['outflow'][len(YEARS):]
     ref.core_discards = discards
-    collected = ref.scenario.collection_share
-    ref.reusable_share = (1.0 - collected) * recorded[REUSABLE] / (recorded[REUSABLE] + recorded[WORN])
-    fut.flows[COLLECTION].values[...] = core_group_only(discards * collected)
+    base_collected = ref.scenario.collection_share
+    base_reusable = (1.0 - base_collected) * recorded[REUSABLE] / (recorded[REUSABLE] + recorded[WORN])
+    increase = ref.policy.collection_increase * ramp(2026, 2032)
+    # What L1 takes from reusable textiles cannot exceed what is there; the
+    # rest of the increase comes from worn textiles.
+    from_reusable = np.minimum(ref.policy.collection_from_reusable * increase, base_reusable)
+    ref.collection_share = base_collected + increase
+    ref.reusable_share = base_reusable - from_reusable
+    fut.flows[COLLECTION].values[...] = core_group_only(discards * ref.collection_share)
     fut.flows[REUSABLE].values[...] = core_group_only(discards * ref.reusable_share)
 
 
@@ -376,7 +477,7 @@ def _worn_residual_waste(fut, ref):
     1988 to 2050, as in the history (an exception to D8). Sacks are not used
     by households (D13).
     """
-    worn_share = 1.0 - ref.scenario.collection_share - ref.reusable_share
+    worn_share = 1.0 - ref.collection_share - ref.reusable_share
     flow = fut.flows[WORN]
     flow.values[...] = core_group_only(ref.core_discards * worn_share)
     sales = np.concatenate([ref.hist.flows[SALES_HH].values, fut.flows[SALES_HH].values])
@@ -434,11 +535,17 @@ def _collected_textiles(fut, ref):
     retailers) is sorted in Norway at the scenario's share (X8, 5.5 % in
     2025, moving to its 2035 value) and the rest exported unsorted. The
     collected textiles are all in the CORE group, so the other groups are
-    0. Sorting before export (WSR, 2027) is a measure in step 3.
+    0. Under L2 (sorting before export, WFD 2025/1892) everything collected
+    is sorted in Norway by 2032, phased in from 2028. About 92 % of the
+    unsorted export goes to sorters in other EU countries (SSB 08801, 2025),
+    so a requirement met by sorting elsewhere in the EEA would hardly change
+    the Norwegian flows; L2 is the strict variant.
     """
     collected = _process_inflow(fut, 'CO.CO', ('t', 'g'))[:, CORE]
     base_share = ref.base(TO_DOMESTIC_SORTING)[CORE] / _process_inflow(ref.hist, 'CO.CO', ('t', 'g'))[BASE, CORE]
     share = path(base_share, ref.scenario.domestic_sorting_share_2035)
+    if ref.policy.domestic_sorting:
+        share = share + (1.0 - share) * ramp(2027, 2032)
     fut.flows[TO_DOMESTIC_SORTING].values[...] = core_group_only(collected * share)
     fut.flows[UNSORTED_EXPORT].values[...] = core_group_only(collected * (1.0 - share))
 
@@ -446,16 +553,24 @@ def _collected_textiles(fut, ref):
 def _domestic_sorting(fut, ref):
     """
     What is sorted in Norway (collected textiles and imported used
-    textiles) goes to second-hand sale in Norway, to recycling and to
-    residues by the scenario's shares (X9, a truncated flat Dirichlet;
-    about 37, 6 and 57 % in 2025), moving from the 2025 shares to their
-    2035 values.
+    textiles) goes to reuse, to recycling and to residues by the scenario's
+    shares (X9, a truncated flat Dirichlet; about 37, 6 and 57 % in 2025),
+    moving from the 2025 shares to their 2035 values. What is sorted for
+    reuse is sold second-hand in Norway up to the size of the market (X13,
+    1.6 kt in 2025, moving to its 2035 value), and the rest is exported as
+    sorted textiles for reuse.
     """
     sorted_in = _process_inflow(fut, 'CO.SO', ('t', 'g'))[:, CORE]
     base_in = _process_inflow(ref.hist, 'CO.SO', ('t', 'g'))[BASE, CORE]
-    for code, target in zip(SORTING_OUTCOMES, ref.scenario.sorting_outcome_2035):
-        share = path(ref.base(code)[CORE] / base_in, target)
-        fut.flows[code].values[...] = core_group_only(sorted_in * share)
+    shares = {code: path(ref.base(code)[CORE] / base_in, target)
+              for code, target in zip(SORTING_OUTCOMES, ref.scenario.sorting_outcome_2035)}
+    reuse = sorted_in * shares[SORTED_REUSE]
+    market = path(ref.base(SORTED_REUSE)[CORE], ref.scenario.reuse_market_2035)
+    domestic = np.minimum(reuse, market)
+    fut.flows[SORTED_REUSE].values[...] = core_group_only(domestic)
+    fut.flows[SORTED_REUSE_EXPORT].values[...] = core_group_only(reuse - domestic)
+    for code in (SORTED_RECYCLING, SORTING_RESIDUES):
+        fut.flows[code].values[...] = core_group_only(sorted_in * shares[code])
 
 
 def _secondhand_sales(fut):
@@ -472,7 +587,10 @@ def _commercial_and_bulky_waste(fut, ref):
     kg growing 0.5-1 % a year, cf. Watson et al. 2018). Without it the
     residual stock would grow by 12-14 kt a year to 2050, which the
     wardrobe studies do not support; in Denmark the same gap was judged to
-    be mostly discards that are not measured (Watson et al. 2018). A
+    be mostly discards that are not measured (Watson et al. 2018). Measures
+    that change the stock in the cohort model (L3, L5) add that change to
+    the growth (_policy_stock_change), so that longer lifetimes fill the
+    stock and do not show up as commercial waste. A
     negative value (supply below discards plus growth) is not physical and
     is clipped at 0.
     """
@@ -480,7 +598,8 @@ def _commercial_and_bulky_waste(fut, ref):
     inflow = sum(to_dims(f, core).values for f in fut.flows.values() if f.to_process.name == 'US.HH')
     outflow = sum(to_dims(f, core).values for code, f in fut.flows.items()
                   if f.from_process.name == 'US.HH' and code != COMMERCIAL_BULKY)
-    growth = ref.current_params['future_stock_growth_kg_per_capita'] * ref.population / 1e6
+    growth = (ref.current_params['future_stock_growth_kg_per_capita'] * ref.population / 1e6
+              + ref.policy_stock_change)
     clip_negative(fut, COMMERCIAL_BULKY, core_group_only(inflow[:, CORE] - outflow[:, CORE] - growth))
 
 

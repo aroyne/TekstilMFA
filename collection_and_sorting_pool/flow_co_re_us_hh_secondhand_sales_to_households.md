@@ -93,6 +93,6 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_secondhand_sales_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L96). Dokumentasjonen i koden:
+Beregnes i `_secondhand_sales_mc` i [calculations/co_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/co_mc.py#L109). Dokumentasjonen i koden:
 
 > Balance of CO.RE: everything sorted for second-hand sale is sold.

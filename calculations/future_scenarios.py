@@ -38,6 +38,7 @@ CONTINUOUS = [
     ('recycled_fibre_capacity_2035', 0.4, 5.0),  # X10, limited by WM.RC inflow and by spinning in Norway
     ('residual_export_share_2035', 0.05, 0.25),  # X11
     ('synthetic_shift_2035', 0.0, 0.10),         # X12
+    ('reuse_market_2035', 1.6, 10.0),            # X13: kt; 1.6 in 2025
 ]
 # X9: shares of what is sorted in Norway (reuse, recycling, residues),
 # flat on the simplex and truncated to these bounds.
