@@ -12,9 +12,11 @@ baseline, variant value, difference).
 
 Usage: python structural_sensitivity.py
 """
+import flodym as fd
 import pandas as pd
 
 from calculations.fibre_layer import compute_fibre_layer
+from calculations.indicators import indicators
 from calculations.params import Parameters
 from calculations.sampling import DEFAULT_SEED
 from calculations.system import close, make_system
@@ -31,6 +33,8 @@ OUTPUTS = [
     'DI.RT-US.HH-Sales to households-TOT',
     'US.HH-EN.WA-Fibre release in laundry-TOT',
     'DI.RT-WM.RS-Unsold goods discarded-TOT',
+    'US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT',
+    'Separate collection rate, households, CORE (share)',
 ]
 
 
@@ -53,6 +57,11 @@ VARIANTS = {
     'laundry_mepex': ('Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all '
                       'fibres (before D37)',
                       lambda params: {'laundry_release_ppm': 955.0, 'natural_release_relative_to_synthetic': 1.0}),
+    'commercial_bulky_1kg': ('Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per '
+                             'inhabitant (Danish analogy, Watson et al. 2018; D42)',
+                             lambda params: {'commercial_bulky_kg_per_capita': 1.0}),
+    'no_footwear_2018': ('No footwear added to the 2018 residual waste anchor (before D42)',
+                         lambda params: {'footwear_residual_2018': 0.0}),
 }
 
 
@@ -63,7 +72,9 @@ def run_variant(params, preloaded_data, mfa, fibre, overrides):
     run_pools(mfa, ALL_POOLS, preloaded_data, current_params, dataset_noise, anchors)
     close(mfa)
     stock_model = compute_fibre_layer(fibre, mfa, preloaded_data, current_params, params.fibre_composition)
-    arrays = {**outputs(mfa, True), **stock_model}
+    arrays = {**outputs(mfa, True), **stock_model,
+              **{name: fd.FlodymArray(dims=mfa.dims[('t',)], values=values)
+                 for name, values in indicators(mfa, preloaded_data).items()}}
     years = list(mfa.dims['t'].items)
     result = {}
     for name in OUTPUTS:

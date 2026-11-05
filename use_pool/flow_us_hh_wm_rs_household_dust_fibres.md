@@ -94,7 +94,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_household_dust_fibres_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L238). Dokumentasjonen i koden:
+Beregnes i `_household_dust_fibres_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L271). Dokumentasjonen i koden:
 
 > Fibres shed during wear that end up in house dust and are vacuumed:
 > 80 % (50-95 %, assumption) of the release during wear (D37). Mepex

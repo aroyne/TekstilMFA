@@ -11,16 +11,6 @@ not product specific, so these flows have no product dimension.
 from calculations.system import clip_negative
 from calculations.timeseries import interpolate
 
-INFLOWS_WM_RS = [
-    'US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT',
-    'US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT',
-    'US.IC-WM.RS-Institutional textile waste-TOT',
-    'CO.SO-WM.RS-Sorting residues-TOT',
-    'MA.TX-WM.RS-Preconsumer production waste-TOT',
-    'DI.RT-WM.RS-Unsold goods discarded-TOT',
-    'US.HH-WM.RS-Tumble dryer lint-TOT',
-    'US.HH-WM.RS-Household dust fibres-TOT',
-]
 
 
 def execute_calculations_wm(mfa, preloaded_data, current_params, dataset_noise, anchors):
@@ -31,7 +21,9 @@ def execute_calculations_wm(mfa, preloaded_data, current_params, dataset_noise, 
 
 
 def _total_wm_rs(mfa):
-    return sum(mfa.flows[code].sum_to(('t',)).values for code in INFLOWS_WM_RS)
+    # Every flow into WM.RS in the register; WM runs after the other pools,
+    # so they are all set.
+    return sum(f.sum_to(('t',)).values for f in mfa.flows.values() if f.to_process.name == 'WM.RS')
 
 
 def _landfilling_mc(mfa, anchors):

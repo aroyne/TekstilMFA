@@ -65,12 +65,12 @@ Blandingen av alt som går inn i WM.RS samme år.
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 32 % | 34 % | 30 % | 26 % | 26 % | 25 % |
+| Bomull | 32 % | 34 % | 31 % | 27 % | 26 % | 25 % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 19 % | 17 % | 17 % | 16 % | 16 % | 16 % |
+| Ikke-tekstil | 19 % | 17 % | 17 % | 17 % | 16 % | 16 % |
 | Andre fibre | 2 % | 2 % | 3 % | 3 % | 3 % | 3 % |
 | Syntetisk | 39 % | 39 % | 43 % | 48 % | 49 % | 50 % |
-| Ull | 5 % | 6 % | 5 % | 4 % | 5 % | 5 % |
+| Ull | 5 % | 6 % | 5 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/wm_rs_wm_in_domestic_incineration_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -88,7 +88,7 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 | `gap: residual_core` | 36 % | 3 % | – |
 | `landfill_share_residual` | 31 % | 2 % | – |
 | Halvt 95 %-intervall, førsteordens (kt) | 10.39 | 12.24 | 13.25 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 10.35 | 12.36 | 13.65 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 10.35 | 12.40 | 13.65 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
@@ -100,7 +100,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_domestic_incineration_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L54). Dokumentasjonen i koden:
+Beregnes i `_domestic_incineration_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L46). Dokumentasjonen i koden:
 
 > Balance of WM.RS. A negative balance (landfill and export shares
 > summing to more than 1) is not physical and is clipped at 0; the

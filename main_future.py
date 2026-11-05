@@ -26,7 +26,7 @@ from calculations.future import FUTURE_YEARS, Reference, execute_reference, futu
 from calculations.indicators import indicators
 from calculations.params import Parameters
 from calculations.sampling import DEFAULT_SEED
-from calculations.system import close, make_system
+from calculations.system import close, make_system, reset
 from calculations.utils import PRODUCT_GROUPS, YEARS
 from data_loader import load_all_data
 from main_mc import ALL_POOLS, _with_totals, outputs, run_pools, to_long
@@ -66,6 +66,7 @@ def run_reference(alternative='MMM', seed=DEFAULT_SEED):
                   **preloaded_data['population_projection'][alternative]}
     ref = Reference(hist, population, current_params)
     fut = make_system(years=FUTURE_YEARS)
+    reset(fut)
     execute_reference(fut, ref)
     close(fut)
 

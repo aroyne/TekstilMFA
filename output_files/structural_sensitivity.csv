@@ -1,11 +1,11 @@
 variant,description,output,year,baseline,value,difference
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,1990,337.33812648421383,207.46435753858,-129.87376894563383
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2000,497.7588774669912,367.8851085213572,-129.87376894563397
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2010,861.9677720947815,732.0940031491475,-129.87376894563397
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2025,1160.2453545155597,1030.3715855699259,-129.87376894563386
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2010,861.1344387614481,731.2606698158143,-129.87376894563386
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2025,1111.4953545155597,981.6215855699261,-129.87376894563363
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,1990,2.184426100007297,11.212049556212191,9.027623456204894
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2000,18.602509095504026,20.967853216252017,2.3653441207479915
-spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2010,46.584166185891384,46.73549919862343,0.1513330127320458
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2010,45.75083285255805,45.902165865290094,0.1513330127320458
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,8.060650910805172,0.0001288507295527097
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,255.67401192466033,-68.33329139835499
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,413.973944776348,-1.3333976393703324
@@ -27,13 +27,21 @@ spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-WM.RS-Unsold 
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,1990,0.0,0.0,0.0
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2000,0.0,0.0,0.0
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2010,0.0,0.0,0.0
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2025,0.0,0.0,0.0
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),"Separate collection rate, households, CORE (share)",1990,0.022055260016337147,0.022055260016337147,0.0
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),"Separate collection rate, households, CORE (share)",2000,0.15409250564729282,0.15409250564729282,0.0
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),"Separate collection rate, households, CORE (share)",2010,0.30912918082853863,0.30912918082853863,0.0
+spinup_0.6,Inflow before 1988 at 60 % of the 1988 level (D2),"Separate collection rate, households, CORE (share)",2025,0.44844754829228667,0.44844754829228667,0.0
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,1990,337.33812648421383,272.40124201139696,-64.93688447281687
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2000,497.7588774669912,432.82199299417425,-64.93688447281693
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2010,861.9677720947815,797.0308876219646,-64.93688447281693
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2025,1160.2453545155597,1095.308470042743,-64.9368844728167
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2010,861.1344387614481,796.1975542886312,-64.93688447281693
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock-TOT,2025,1111.4953545155597,1046.558470042743,-64.9368844728167
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,1990,2.184426100007297,6.698237828109744,4.513811728102447
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2000,18.602509095504026,19.78518115587802,1.1826720603739957
-spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2010,46.584166185891384,46.6598326922574,0.07566650636601935
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2010,45.75083285255805,45.82649935892407,0.07566650636601935
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,8.060586485440396,6.442536477635485e-05
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,289.8406576238378,-34.166645699177536
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,414.64064359603316,-0.6666988196851662
@@ -55,13 +63,21 @@ spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-WM.RS-Unsold 
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,1990,0.0,0.0,0.0
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2000,0.0,0.0,0.0
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2010,0.0,0.0,0.0
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2025,0.0,0.0,0.0
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),"Separate collection rate, households, CORE (share)",1990,0.022055260016337147,0.022055260016337147,0.0
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),"Separate collection rate, households, CORE (share)",2000,0.15409250564729282,0.15409250564729282,0.0
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),"Separate collection rate, households, CORE (share)",2010,0.30912918082853863,0.30912918082853863,0.0
+spinup_0.8,Inflow before 1988 at 80 % of the 1988 level (D2),"Separate collection rate, households, CORE (share)",2025,0.44844754829228667,0.44844754829228667,0.0
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,1990,337.33812648421383,337.27781445154204,-0.06031203267178853
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2000,497.7588774669912,497.6985654343192,-0.06031203267195906
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2010,861.9677720947815,861.9074600621095,-0.06031203267195906
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2025,1160.2453545155597,1160.185042482888,-0.060312032671618
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2010,861.1344387614481,861.0741267287763,-0.06031203267184537
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock-TOT,2025,1111.4953545155597,1111.4350424828879,-0.06031203267184537
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,1990,2.184426100007297,2.2813958265322345,0.09696972652493763
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,2000,18.602509095504026,18.996557156587876,0.3940480610838506
-weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,2010,46.584166185891384,46.03919752291819,-0.5449686629731971
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,2010,45.75083285255805,45.20586418958485,-0.5449686629731971
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,8.320298507972646,0.2597764478970266
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,324.08090048531693,0.07359716230160984
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,409.96389349253974,-5.343448923178585
@@ -83,13 +99,21 @@ weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same mean
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,1990,0.0,0.0,0.0
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2000,0.0,0.0,0.0
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2010,0.0,0.0,0.0
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2025,0.0,0.0,0.0
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means","Separate collection rate, households, CORE (share)",1990,0.022055260016337147,0.022055260016337147,0.0
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means","Separate collection rate, households, CORE (share)",2000,0.15409250564729282,0.15409250564729282,0.0
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means","Separate collection rate, households, CORE (share)",2010,0.30912918082853863,0.30912918082853863,0.0
+weibull_shape_1.5,"Weibull shape 1.5 for all lifetimes (wider spread), same means","Separate collection rate, households, CORE (share)",2025,0.44844754829228667,0.44844754829228667,0.0
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,1990,337.33812648421383,337.3399049938202,0.0017785096063676065
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2000,497.7588774669912,497.76065597659743,0.0017785096062539196
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2010,861.9677720947815,861.9695506043878,0.001778509606310763
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2025,1160.2453545155597,1160.2471330251662,0.0017785096065381367
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2010,861.1344387614481,861.1362172710545,0.0017785096064244499
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock-TOT,2025,1111.4953545155597,1111.4971330251662,0.0017785096065381367
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,1990,2.184426100007297,2.1482637532203688,-0.03616234678692809
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,2000,18.602509095504026,18.22623904238236,-0.37627005312166517
-weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,2010,46.584166185891384,47.12914026609077,0.5449740801993883
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,2010,45.75083285255805,46.29580693275743,0.5449740801993812
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,7.771876989669003,-0.28864507040661636
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,323.9016964656027,-0.10560685741262432
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,419.9074791866261,4.600136770907795
@@ -111,13 +135,21 @@ weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,1990,0.0,0.0,0.0
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2000,0.0,0.0,0.0
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2010,0.0,0.0,0.0
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2025,0.0,0.0,0.0
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means","Separate collection rate, households, CORE (share)",1990,0.022055260016337147,0.022055260016337147,0.0
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means","Separate collection rate, households, CORE (share)",2000,0.15409250564729282,0.15409250564729282,0.0
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means","Separate collection rate, households, CORE (share)",2010,0.30912918082853863,0.30912918082853863,0.0
+weibull_shape_3,"Weibull shape 3 for all lifetimes (narrower spread), same means","Separate collection rate, households, CORE (share)",2025,0.44844754829228667,0.44844754829228667,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,1990,337.33812648421383,337.33812648421383,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2000,497.7588774669912,497.7588774669912,0.0
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2010,861.9677720947815,861.9677720947815,0.0
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2025,1160.2453545155597,1166.2060545155596,5.960699999999861
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2010,861.1344387614481,861.1344387614481,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock-TOT,2025,1111.4953545155597,1117.45605451556,5.960700000000315
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,1990,2.184426100007297,2.184426100007297,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,2000,18.602509095504026,18.602509095504026,0.0
-no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,2010,46.584166185891384,46.584166185891384,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,2010,45.75083285255805,45.75083285255805,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,10.85292206007562,2.7924000000000007
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,324.0073033230153,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,415.3073424157183,0.0
@@ -139,13 +171,21 @@ no_online_returns,"No returns of direct online purchases (VOEC as net, before D3
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,1990,0.0,0.0,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2000,0.0,0.0,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2010,0.0,0.0,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2025,0.0,0.0,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)","Separate collection rate, households, CORE (share)",1990,0.022055260016337147,0.022055260016337147,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)","Separate collection rate, households, CORE (share)",2000,0.15409250564729282,0.15409250564729282,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)","Separate collection rate, households, CORE (share)",2010,0.30912918082853863,0.30912918082853863,0.0
+no_online_returns,"No returns of direct online purchases (VOEC as net, before D38)","Separate collection rate, households, CORE (share)",2025,0.44844754829228667,0.44844754829228667,0.0
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,1990,337.33812648421383,312.7839264701922,-24.554200014021603
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2000,497.7588774669912,438.4465303213885,-59.3123471456027
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2010,861.9677720947815,755.2472602252681,-106.72051186951342
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2025,1160.2453545155597,984.1592696340182,-176.08608488154152
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2010,861.1344387614481,754.4139268919348,-106.7205118695133
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock-TOT,2025,1111.4953545155597,935.4092696340185,-176.08608488154118
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,1990,2.184426100007297,-0.7051627005603045,-2.8895888005676014
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,2000,18.602509095504026,14.670543152337709,-3.9319659431663165
-unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,2010,46.584166185891384,41.28221127764301,-5.301954908248376
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,2010,45.75083285255805,40.44887794430967,-5.301954908248376
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,4.111201595375952,-3.9493204646996674
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,307.77643016148085,-16.230873161534475
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,394.1959322030215,-21.111410212696796
@@ -167,13 +207,21 @@ unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,5.628474856981382,4.468143117234451
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,7.58956723564451,6.02494875937318
 unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,5.653317261396207,4.487864164431451
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,1990,0.0,0.0,0.0
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2000,0.0,0.0,0.0
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2010,0.0,0.0,0.0
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2025,0.0,0.0,0.0
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)","Separate collection rate, households, CORE (share)",1990,0.022055260016337147,0.022055260016337147,0.0
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)","Separate collection rate, households, CORE (share)",2000,0.15409250564729282,0.15409250564729282,0.0
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)","Separate collection rate, households, CORE (share)",2010,0.30912918082853863,0.30912918082853863,0.0
+unsold_eea,"Unsold goods destroyed at 6.5 % of what is placed on the market (EEA 2024 midpoint, D38)","Separate collection rate, households, CORE (share)",2025,0.44844754829228667,0.44844754829228667,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,1990,337.33812648421383,331.36736083217386,-5.970765652039972
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2000,497.7588774669912,471.19455928015117,-26.564318186840012
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2010,861.9677720947815,813.4152811987815,-48.552490895999995
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2025,1160.2453545155597,1074.2516686594397,-85.99368585612001
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2010,861.1344387614481,812.5819478654482,-48.55249089599988
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock-TOT,2025,1111.4953545155597,1025.5016686594397,-85.99368585612001
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,1990,2.184426100007297,0.1868619759272967,-1.9975641240800002
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,2000,18.602509095504026,16.48744351266403,-2.1150655828399962
-laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,2010,46.584166185891384,44.28152406397139,-2.3026421219199946
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,2010,45.75083285255805,43.44819073063805,-2.3026421219199946
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,5.418026724875624,-2.642495335199996
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,324.0073033230153,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,415.3073424157183,0.0
@@ -195,3 +243,83 @@ laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the sa
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
 laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,1990,0.0,0.0,0.0
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2000,0.0,0.0,0.0
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2010,0.0,0.0,0.0
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2025,0.0,0.0,0.0
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),"Separate collection rate, households, CORE (share)",1990,0.022055260016337147,0.022055260016337147,0.0
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),"Separate collection rate, households, CORE (share)",2000,0.15409250564729282,0.15409250564729282,0.0
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),"Separate collection rate, households, CORE (share)",2010,0.30912918082853863,0.30912918082853863,0.0
+laundry_mepex,Laundry release at the Mepex 2014 level (about 1.5 kt) with the same release per kg for all fibres (before D37),"Separate collection rate, households, CORE (share)",2025,0.44844754829228667,0.44844754829228667,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock-TOT,1990,337.33812648421383,324.6602649842139,-12.677861499999949
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock-TOT,2000,497.7588774669912,441.35426096699115,-56.40461650000003
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock-TOT,2010,861.1344387614481,758.0418387614482,-103.09259999999995
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock-TOT,2025,1111.4953545155597,928.9030200155598,-182.59233449999988
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock change-TOT,1990,2.184426100007297,-2.0570468999927023,-4.241472999999999
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock change-TOT,2000,18.602509095504026,14.111542595504028,-4.490966499999997
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock change-TOT,2010,45.75083285255805,40.86158085255805,-4.889251999999999
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,2.449652060075614,-5.610870000000006
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,324.0073033230153,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,415.3073424157183,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,565.96925035258,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341714,528.7542909341714,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,54.931410455906615,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,65.54646927899651,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.56914987071525,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861258,90.70058964861258,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",DI.RT-US.HH-Sales to households-TOT,1990,77.81517571104271,77.81517571104271,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",DI.RT-US.HH-Sales to households-TOT,2000,93.76479852725848,93.76479852725848,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",DI.RT-US.HH-Sales to households-TOT,2010,126.00121165243047,126.00121165243047,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",DI.RT-US.HH-Sales to households-TOT,2025,105.59676714537665,105.59676714537665,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-EN.WA-Fibre release in laundry-TOT,1990,0.13538781816,0.13538781816,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-EN.WA-Fibre release in laundry-TOT,2000,0.14335165068000003,0.14335165068000003,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-EN.WA-Fibre release in laundry-TOT,2010,0.15606492384,0.15606492384,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-EN.WA-Fibre release in laundry-TOT,2025,0.17909897039999997,0.17909897039999997,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",DI.RT-WM.RS-Unsold goods discarded-TOT,1990,0.8527239677503062,0.8527239677503062,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,1990,0.0,4.241473,4.241473
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2000,0.0,4.4909665,4.4909665
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2010,0.0,4.889252,4.889252
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)",US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2025,0.0,5.61087,5.61087
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)","Separate collection rate, households, CORE (share)",1990,0.022055260016337147,0.02034457890484399,-0.001710681111493157
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)","Separate collection rate, households, CORE (share)",2000,0.15409250564729282,0.14214056589966728,-0.01195193974762554
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)","Separate collection rate, households, CORE (share)",2010,0.30912918082853863,0.2857337986832977,-0.02339538214524095
+commercial_bulky_1kg,"Household textiles in commercial and bulky waste outside the pick analyses at 1 kg per inhabitant (Danish analogy, Watson et al. 2018; D42)","Separate collection rate, households, CORE (share)",2025,0.44844754829228667,0.41926479922771753,-0.029182749064569136
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock-TOT,1990,337.33812648421383,337.33812648421383,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock-TOT,2000,497.7588774669912,497.7588774669912,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock-TOT,2010,861.1344387614481,861.9677720947815,0.8333333333333712
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock-TOT,2025,1111.4953545155597,1160.2453545155597,48.75
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock change-TOT,1990,2.184426100007297,2.184426100007297,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock change-TOT,2000,18.602509095504026,18.602509095504026,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock change-TOT,2010,45.75083285255805,46.584166185891384,0.8333333333333357
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock change-TOT,2025,8.06052206007562,8.06052206007562,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock model stock-TOT,1990,324.0073033230153,324.0073033230153,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock model stock-TOT,2000,415.3073424157183,415.3073424157183,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock model stock-TOT,2010,565.96925035258,565.96925035258,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock model stock-TOT,2025,528.7542909341714,528.7542909341714,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock model discards-TOT,1990,54.931410455906615,54.931410455906615,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock model discards-TOT,2000,65.54646927899651,65.54646927899651,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock model discards-TOT,2010,89.56914987071525,89.56914987071525,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-US.HH-Stock model discards-TOT,2025,90.70058964861258,90.70058964861258,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),DI.RT-US.HH-Sales to households-TOT,1990,77.81517571104271,77.81517571104271,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),DI.RT-US.HH-Sales to households-TOT,2000,93.76479852725848,93.76479852725848,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),DI.RT-US.HH-Sales to households-TOT,2010,126.00121165243047,126.00121165243047,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),DI.RT-US.HH-Sales to households-TOT,2025,105.59676714537665,105.59676714537665,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-EN.WA-Fibre release in laundry-TOT,1990,0.13538781816,0.13538781816,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-EN.WA-Fibre release in laundry-TOT,2000,0.14335165068000003,0.14335165068000003,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-EN.WA-Fibre release in laundry-TOT,2010,0.15606492384,0.15606492384,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-EN.WA-Fibre release in laundry-TOT,2025,0.17909897039999997,0.17909897039999997,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),DI.RT-WM.RS-Unsold goods discarded-TOT,1990,0.8527239677503062,0.8527239677503062,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),DI.RT-WM.RS-Unsold goods discarded-TOT,2000,1.160331739746931,1.160331739746931,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),DI.RT-WM.RS-Unsold goods discarded-TOT,2010,1.5646184762713298,1.5646184762713298,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),DI.RT-WM.RS-Unsold goods discarded-TOT,2025,1.1654530969647565,1.1654530969647565,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,1990,0.0,0.0,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2000,0.0,0.0,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2010,0.0,0.0,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT,2025,0.0,0.0,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),"Separate collection rate, households, CORE (share)",1990,0.022055260016337147,0.022055260016337147,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),"Separate collection rate, households, CORE (share)",2000,0.15409250564729282,0.15409250564729282,0.0
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),"Separate collection rate, households, CORE (share)",2010,0.30912918082853863,0.3135042844226191,0.004375103594080443
+no_footwear_2018,No footwear added to the 2018 residual waste anchor (before D42),"Separate collection rate, households, CORE (share)",2025,0.44844754829228667,0.44844754829228667,0.0

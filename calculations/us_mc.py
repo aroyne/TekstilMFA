@@ -26,12 +26,15 @@ COHORT_PRODUCTS = OTHER_HOUSEHOLD_GOODS
 # Pick analyses of residual waste exist from 2009; before that the waste per
 # inhabitant is held at the 2009 level plus what was not yet collected (D40).
 FIRST_RESIDUAL_ANCHOR = 2009
+# The 2018 pick analyses (Watson et al. 2020) left footwear out (D42).
+FOOTWEAR_MISSING_YEAR = 2018
 
 
 def execute_calculations_us(mfa, preloaded_data, current_params, dataset_noise, anchors):
     _separate_collection_mc(mfa)
-    _reusable_residual_waste_mc(mfa, preloaded_data, anchors)
+    _reusable_residual_waste_mc(mfa, preloaded_data, current_params, anchors)
     _worn_residual_waste_mc(mfa, preloaded_data, current_params, anchors)
+    _commercial_and_bulky_waste_mc(mfa, preloaded_data, current_params)
     _online_returns_mc(mfa, current_params)
     _laundry_fibre_release_mc(mfa, preloaded_data, current_params)
     _tumble_dryer_lint_mc(mfa, preloaded_data, current_params, anchors)
@@ -57,7 +60,7 @@ def _separate_collection_mc(mfa):
                   exported + retained - core_group_only(donated), balance_of='target')
 
 
-def _residual_core(mfa, preloaded_data, anchors):
+def _residual_core(mfa, preloaded_data, current_params, anchors):
     """
     CL+HT+FW in household residual and bulky waste from pick analyses: 2009
     (Laitala et al. 2012), 2018, 2022 and 2025 (Mepex, via Watson et al. 2020
@@ -72,6 +75,14 @@ def _residual_core(mfa, preloaded_data, anchors):
     calculated from the supply, and it would make the stock shrink in the
     early 1990s.
 
+    The 2018 study left footwear and leather clothing out of its scope,
+    while the 2022 and 2025 pick analyses include footwear, and the
+    separate collection (exports of 6309+6310) includes it in every year.
+    Footwear thrown away in residual waste in 2018 is therefore added to
+    the 2018 anchor: 7.5 kt (5-10, uniform), estimated from about 13 kt of
+    footwear supplied per year minus 3-4 kt collected, with the 12.3 kt
+    non-recyclable category of 2025 as upper bound (D42).
+
     Before 2009 there are no pick analyses. The waste per inhabitant is held
     at the 2009 level, plus what was not yet collected separately: the
     separate collection per inhabitant in 2009 minus that of the year, times
@@ -82,7 +93,10 @@ def _residual_core(mfa, preloaded_data, anchors):
     # 'population' <- data_files/SSB_05803_befolkning_1985_2026.csv:
     # population on 1 January (SSB 05803); the mean of two years is used
     population = preloaded_data['population']
-    residual = interpolate(anchors['residual_core'])
+    points = anchors['residual_core']
+    with_footwear = {**points, FOOTWEAR_MISSING_YEAR: points[FOOTWEAR_MISSING_YEAR]
+                     + current_params['footwear_residual_2018']}
+    residual = interpolate(with_footwear, noise=points)
     collection = mfa.flows['US.HH-CO.CO-Separate collection from households-TOT'].values[:, 0]
     first = YEARS.index(FIRST_RESIDUAL_ANCHOR)
     per_inhabitant = residual[first] / population[FIRST_RESIDUAL_ANCHOR]
@@ -95,7 +109,7 @@ def _residual_core(mfa, preloaded_data, anchors):
     return residual
 
 
-def _reusable_residual_waste_mc(mfa, preloaded_data, anchors):
+def _reusable_residual_waste_mc(mfa, preloaded_data, current_params, anchors):
     """
     Part of the CORE residual textiles that could have been reused (D18),
     share from the pick analyses. The analyses cover CL+HT+FW only, so the
@@ -103,7 +117,7 @@ def _reusable_residual_waste_mc(mfa, preloaded_data, anchors):
     """
     reusable_share = interpolate(anchors['reusable_share_residual'], upper=1.0)
     mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values[...] = (
-        core_group_only(_residual_core(mfa, preloaded_data, anchors) * reusable_share))
+        core_group_only(_residual_core(mfa, preloaded_data, current_params, anchors) * reusable_share))
 
 
 def _worn_residual_waste_mc(mfa, preloaded_data, current_params, anchors):
@@ -116,10 +130,29 @@ def _worn_residual_waste_mc(mfa, preloaded_data, current_params, anchors):
     """
     flow = mfa.flows['US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT']
     reusable = mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values
-    flow.values[...] = core_group_only(_residual_core(mfa, preloaded_data, anchors)) - reusable
+    flow.values[...] = core_group_only(_residual_core(mfa, preloaded_data, current_params, anchors)) - reusable
     discards = _other_goods_discards(mfa, current_params)
     for j, product in enumerate(COHORT_PRODUCTS):
         flow.values[:, PRODUCT_GROUPS.index(product)] = discards[:, j]
+
+
+def _commercial_and_bulky_waste_mc(mfa, preloaded_data, current_params):
+    """
+    CL+HT+FW from households collected as commercial waste: moving, estates,
+    skips and bulky waste picked up by private firms, which is not in the
+    pick analyses of household waste (D42). There are no Norwegian data. In
+    Denmark, textiles in bulky waste taken directly to incineration or to
+    private sorting were about 1 kg per inhabitant (Watson et al. 2018,
+    MST). The flow is 0 in the main result, where discards come from the
+    statistics (D8), and set to 1 kg per inhabitant in the structural run
+    (structural_sensitivity.py), where it lowers the residual stock and the
+    collection rate.
+    """
+    # 'population' <- data_files/SSB_05803_befolkning_1985_2026.csv:
+    # population on 1 January (SSB 05803), as the mean of the year
+    population = np.array([preloaded_data['population'][year] for year in YEARS])
+    mfa.flows['US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT'].values[...] = core_group_only(
+        current_params['commercial_bulky_kg_per_capita'] * population / 1e6)
 
 
 def _other_goods_discards(mfa, current_params):

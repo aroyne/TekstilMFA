@@ -93,3 +93,8 @@ Andelene holdes på 2025-nivået: eksport av usortert, andelen som blir i Norge,
 
 ### Opphopningen
 Se [notatet om opphopning hos forbruker](2026-11-05_opphopning_hos_forbruker.md). Litteraturen (særlig Danmark 2018) tilsier at gapet stort sett er kasseringer som ikke fanges opp, ikke lagervekst. Det foreslås å dele gapet i referansebanen.
+
+### D42 (samme dag)
+Restlageret vokser ikke lenger med gapet. Lageret vokser med 0,5 kg per innbygger per år, og resten går til en ny flyt for husholdningstekstiler i næringsavfall og grovavfall (7,5 kt i 2026, 10–11 kt i 2030–2050). Restlageret i 2050 blir 1 186 kt, ikke 1 502 kt. Innsamlingsgraden er 41 % i 2026 og 40 % i 2050, fordi nevneren nå tar med den nye flyten. Tabellen over gjelder før D42.
+
+Fremtidssystemet ble ikke nullstilt med `reset()` før flytene ble satt, så flyter som ingen funksjon satte, ble 0 i stedet for å gi feil. Det er rettet. Alle flytene var satt før D42.

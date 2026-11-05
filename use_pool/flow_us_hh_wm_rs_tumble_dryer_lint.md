@@ -99,7 +99,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_tumble_dryer_lint_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L212). Dokumentasjonen i koden:
+Beregnes i `_tumble_dryer_lint_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L245). Dokumentasjonen i koden:
 
 > Lint caught on the filter of tumble dryers, 88 % (86-91 %, Cummins et
 > al. 2023) of the fibres released in drying (D37). The filter is emptied

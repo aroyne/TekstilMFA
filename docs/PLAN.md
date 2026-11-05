@@ -2,7 +2,7 @@
 
 *Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-11-05.*
 
-> **Her fortsetter vi (2026-11-05):** Fase D, trinn 1 er gjort: referansebanen 2026–2050 med fiberlaget (`main_future.py`, [notat](../claude_tekst/2026-11-05_D1_referansebane.md)). **Først må vi avklare opphopningen hos forbruker** ([notat](../claude_tekst/2026-11-05_opphopning_hos_forbruker.md)). Restlageret vokser med 12–14 kt per år i referansebanen, mens Danmark 2018 anslår lagervekst til høyst ca. 0,2 kg per innbygger per år og mener resten er kasseringer som ikke fanges opp. Første sjekk er om sko er med i plukkanalysene for 2018, 2022 og 2025 (ca. 13 kt per år). Deretter følger grovavfall og næringsavfall fra husholdningene, og et forslag om å dele gapet i referansebanen. **Så trinn 2:** scenarier (XLRM/EMA).
+> **Her fortsetter vi (2026-11-05):** Fase D, trinn 1 og D42 er gjort. Referansebanen 2026–2050 har fiberlaget med, og lageret i husholdningene vokser med 0,5 kg per innbygger per år, mens resten av gapet går til en ny flyt for næringsavfall og grovavfall ([notat](../claude_tekst/2026-11-05_opphopning_hos_forbruker.md)). **Neste er trinn 2:** scenarier og robusthet (XLRM/EMA, latin hypercube over X). Fordelingen mellom lagervekst og næringsavfall er en av faktorene. Svar fra Mepex om sko og næringsavfall kan endre 2018-ankeret og flyten.
 > **Påminnelse:** Usendte henvendelser (SSB, OsloMet, SNF, PostNord, Tolletaten) samles i [HENVENDELSER.md](HENVENDELSER.md). **Ingenting er sendt** per 2026-11-02.
 
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
@@ -137,7 +137,8 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] `calculations/future.py` og `main_future.py`. `make_system(years=...)` og `use_cohorts` tar nå vilkårlige år. Historikken er uendret (MC_summary identisk). Fire nye tester (29 i alt).
 - [x] Fiberlaget forlenget til 2050: tilførselen beholder sammensetningen fra 2025, og lagermodellene får historikken per materiale. Fiberlaget for historikken er identisk med før.
 - [x] Opphopning hos forbruker ([notat](../claude_tekst/2026-11-05_opphopning_hos_forbruker.md)): Danmark 2018 (Watson m.fl.) hadde et gap på 10 kt (1,8 kg per innbygger) og mener det meste er dataproblemer (grovavfall, videresalg), ikke lagervekst. Kandidater i Norge: sko i plukkanalysene, grovavfall og næringsavfall fra husholdningene, institusjonsandelen, privat utførsel.
-- [x] Resultat: Kassert CL+HT+FW 80,6 kt (2025) → 85,6 kt (2050), innsamling 36 → 38 kt, netto grunnlag for produsentansvaret 95 → 106 kt. Restlageret 1 160 → 1 502 kt, lagermodellen 529 → 576 kt. Plott: `output_files/plots/future_reference.png`.
+- [x] D42: Sko lagt til 2018-ankeret (7,5 kt, 5–10). Restlageret i 2025 er 1 169 kt (440–1 816). Ny flyt for husholdningstekstiler i næringsavfall og grovavfall: 0 i hovedresultatet og 1 kg per innbygger i strukturkjøringen (−183 kt i lageret, innsamlingsgrad 41,9 %). I fremtiden vokser lageret med 0,5 kg per innbygger per år, og resten går til flyten (10–11 kt per år). Innstrømmene til WM.RS hentes nå fra registeret, og fremtidssystemet nullstilles før flytene settes.
+- [x] Resultat (før D42): Kassert CL+HT+FW 80,6 kt (2025) → 85,6 kt (2050), innsamling 36 → 38 kt, netto grunnlag for produsentansvaret 95 → 106 kt. Restlageret 1 160 → 1 502 kt, lagermodellen 529 → 576 kt. Plott: `output_files/plots/future_reference.png`.
 
 ## Neste
 

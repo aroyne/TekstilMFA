@@ -18,7 +18,8 @@ included.
 
 E2, the separate collection rate: textiles collected separately from
 households divided by all textiles discarded by households (collection plus
-reusable and worn textiles in residual and bulky waste), for the CORE group.
+reusable and worn textiles in residual and bulky waste, and household
+textiles in commercial waste, D42), for the CORE group.
 """
 import numpy as np
 
@@ -78,7 +79,8 @@ def indicators(mfa, preloaded_data):
 
     collection = mfa.flows['US.HH-CO.CO-Separate collection from households-TOT'].values[:, 0]
     residual = (mfa.flows['US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT'].values[:, 0]
-                + mfa.flows['US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT'].values[:, 0])
+                + mfa.flows['US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT'].values[:, 0]
+                + mfa.flows['US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT'].values[:, 0])
     return {
         'EPR basis, placed on market, gross (kt)': gross,
         'EPR basis, net of re-export and online returns (kt)': net,

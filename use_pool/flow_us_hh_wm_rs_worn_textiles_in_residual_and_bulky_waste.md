@@ -62,10 +62,10 @@ Andel av summen i nøkkelår (median).
 
 | Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Tepper | 34 % | 29 % | 23 % | 25 % | 23 % | 23 % |
-| Klær, hjemmetekstiler og sko | 57 % | 58 % | 57 % | 47 % | 47 % | 46 % |
-| Andre konfeksjonerte varer | 3 % | 5 % | 8 % | 11 % | 15 % | 15 % |
-| Presenninger og telt | 6 % | 9 % | 12 % | 16 % | 16 % | 16 % |
+| Tepper | 34 % | 29 % | 23 % | 23 % | 23 % | 23 % |
+| Klær, hjemmetekstiler og sko | 57 % | 58 % | 57 % | 52 % | 47 % | 46 % |
+| Andre konfeksjonerte varer | 3 % | 5 % | 8 % | 10 % | 15 % | 15 % |
+| Presenninger og telt | 6 % | 9 % | 12 % | 15 % | 16 % | 16 % |
 
 ### Materiale (fiberlag, D19)
 
@@ -73,11 +73,11 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 29 % | 32 % | 29 % | 24 % | 24 % | 24 % |
+| Bomull | 29 % | 32 % | 29 % | 25 % | 24 % | 24 % |
 | Regenerert cellulose | 3 % | 2 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 21 % | 19 % | 19 % | 19 % | 18 % | 18 % |
-| Andre fibre | 2 % | 3 % | 4 % | 4 % | 4 % | 4 % |
-| Syntetisk | 39 % | 37 % | 40 % | 46 % | 47 % | 48 % |
+| Andre fibre | 2 % | 3 % | 3 % | 4 % | 4 % | 4 % |
+| Syntetisk | 39 % | 37 % | 40 % | 45 % | 47 % | 48 % |
 | Ull | 5 % | 7 % | 6 % | 5 % | 5 % | 5 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_worn_textiles_in_residual_and_bulky_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -97,13 +97,13 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 | `gap: reusable_share_residual` | 12 % | 2 % | – |
 | `lifetime_mean_US.HH_CA` | 3 % | 1 % | – |
 | Halvt 95 %-intervall, førsteordens (kt) | 18.36 | 11.26 | 9.23 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 18.75 | 11.53 | 9.26 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 18.75 | 11.44 | 9.26 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L109). Dokumentasjonen i koden:
+Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L123). Dokumentasjonen i koden:
 
 > CORE: residual textiles that are not reusable. CA, TA and OM: the
 > outflow of a cohort model of the goods sold to households, with Weibull
@@ -125,6 +125,14 @@ Beregnes i `_worn_residual_waste_mc` i [calculations/us_mc.py](https://github.co
 > clothing imports those years (34.5 and 46.6 kt), so it was probably
 > calculated from the supply, and it would make the stock shrink in the
 > early 1990s.
+>
+> The 2018 study left footwear and leather clothing out of its scope,
+> while the 2022 and 2025 pick analyses include footwear, and the
+> separate collection (exports of 6309+6310) includes it in every year.
+> Footwear thrown away in residual waste in 2018 is therefore added to
+> the 2018 anchor: 7.5 kt (5-10, uniform), estimated from about 13 kt of
+> footwear supplied per year minus 3-4 kt collected, with the 12.3 kt
+> non-recyclable category of 2025 as upper bound (D42).
 >
 > Before 2009 there are no pick analyses. The waste per inhabitant is held
 > at the 2009 level, plus what was not yet collected separately: the

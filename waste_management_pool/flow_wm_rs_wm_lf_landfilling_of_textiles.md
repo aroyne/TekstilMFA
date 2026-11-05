@@ -87,12 +87,12 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 | `unsold_destroyed_share` | 2 % | 6 % |
 | `gap: residual_core` | 45 % | 2 % |
 | Halvt 95 %-intervall, førsteordens (kt) | 16.22 | 3.76 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 16.33 | 3.97 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 16.33 | 4.01 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_landfilling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L37). Dokumentasjonen i koden:
+Beregnes i `_landfilling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L29). Dokumentasjonen i koden:
 
 > Landfilled share from SSB Avfallsregnskap tekstiler 1990-1998, SSB 05281 and 10513 (D15).

@@ -34,7 +34,7 @@ nav_order: 2
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- Tekstiler i restavfall og grovavfall (CORE): plukkanalyser fra Mepex og kommunene, via Watson m.fl. (2020) for 2018 (31,6 kt), Rubach m.fl. (2023) for 2022 (48,8 kt) og de Sadeleer & Rubach (2026) for 2025 (44,5 kt). For 2009 brukes Laitala m.fl. (2012), 5,6 kg per innbygger i restavfallet (33,5 kt med gjenbruksstasjoner).
+- Tekstiler i restavfall og grovavfall (CORE): plukkanalyser fra Mepex og kommunene, via Watson m.fl. (2020) for 2018 (31,6 kt, i modellen 38,3 kt med gjenvinningsstasjonene etter D40 og + 7,5 kt sko etter D42, fordi studien holdt sko utenfor), Rubach m.fl. (2023) for 2022 (48,8 kt) og de Sadeleer & Rubach (2026) for 2025 (44,5 kt). For 2009 brukes Laitala m.fl. (2012), 5,6 kg per innbygger i restavfallet (33,5 kt med gjenbruksstasjoner).
 - I en plukkanalyse sorteres et utvalg restavfall fra husholdninger, og andelen tekstiler skaleres opp med kommunenes avfallsmengder.
 - Andel brukbart: Laitala m.fl. (2012) for Oslo 2010–2011 (27,5 %), Rubach m.fl. (2023) for 2022 (45 %, bare hentet restavfall) og de Sadeleer & Rubach (2026) for 2025 (40 %).
 
@@ -54,7 +54,7 @@ nav_order: 2
 
 - Flyten var 7,9–9,2 kt per år fram til 2011 og økte til 21,9 kt i 2022 og 17,8 kt i 2025.
 - Økningen etter 2011 kommer både fra mer tekstiler i restavfallet og fra høyere andel brukbart i de nye plukkanalysene.
-- Med fyllregelen fra D40 er lagerendringen i husholdningene 10–26 kt per år på 1990-tallet, og lageret (restleddet) blir 1 220 kt i 2025 (495–1 871), ca. 218 kg per innbygger, når også 2018- og 2009-ankrene har forholdet for gjenvinningsstasjoner fra 2022–2025 (D40). Med fast restavfall per innbygger og de gamle ankrene var det 1 617 kt. Se [lagerdiagnosen](https://github.com/aroyne/TekstilMFA/blob/main/claude_tekst/2026-11-02_C_lagerdiagnose.md).
+- Med fyllregelen fra D40 er lagerendringen i husholdningene 10–26 kt per år på 1990-tallet, og lageret (restleddet) blir 1 220 kt i 2025 (495–1 871), ca. 218 kg per innbygger, når også 2018- og 2009-ankrene har forholdet for gjenvinningsstasjoner fra 2022–2025 (D40). Med sko i 2018-ankeret (D42) er det 1 169 kt (440–1 816). Med fast restavfall per innbygger og de gamle ankrene var det 1 617 kt. Se [lagerdiagnosen](https://github.com/aroyne/TekstilMFA/blob/main/claude_tekst/2026-11-02_C_lagerdiagnose.md).
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
@@ -93,13 +93,13 @@ Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alen
 | `gap: reusable_share_residual` | 47 % | 10 % | – |
 | `gap: residual_core` | 25 % | 2 % | – |
 | Halvt 95 %-intervall, førsteordens (kt) | 9.41 | 4.95 | 6.49 |
-| Halvt 95 %-intervall, Monte Carlo (kt) | 9.50 | 4.89 | 6.26 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 9.50 | 4.93 | 6.26 |
 
 Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
 
 ## Beregning i koden
 
-Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L98). Dokumentasjonen i koden:
+Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L112). Dokumentasjonen i koden:
 
 > Part of the CORE residual textiles that could have been reused (D18),
 > share from the pick analyses. The analyses cover CL+HT+FW only, so the
@@ -117,6 +117,14 @@ Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://githu
 > clothing imports those years (34.5 and 46.6 kt), so it was probably
 > calculated from the supply, and it would make the stock shrink in the
 > early 1990s.
+>
+> The 2018 study left footwear and leather clothing out of its scope,
+> while the 2022 and 2025 pick analyses include footwear, and the
+> separate collection (exports of 6309+6310) includes it in every year.
+> Footwear thrown away in residual waste in 2018 is therefore added to
+> the 2018 anchor: 7.5 kt (5-10, uniform), estimated from about 13 kt of
+> footwear supplied per year minus 3-4 kt collected, with the 12.3 kt
+> non-recyclable category of 2025 as upper bound (D42).
 >
 > Before 2009 there are no pick analyses. The waste per inhabitant is held
 > at the 2009 level, plus what was not yet collected separately: the

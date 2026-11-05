@@ -51,3 +51,10 @@ def test_fibre_layer_adds_up_and_continues(reference):
     gap = stock_model[level].values[0].sum() - hist_stock[level].values[-1].sum()
     change = fut.stocks['US.HH'].inflow.values[0, CORE] - fut.stocks['US.HH'].outflow.values[0, CORE]
     assert gap == pytest.approx(change)
+
+
+def test_household_stock_grows_by_the_set_amount(reference):
+    _, fut, ref, _, _ = reference
+    change = fut.stocks['US.HH'].inflow.values[:, CORE] - fut.stocks['US.HH'].outflow.values[:, CORE]
+    np.testing.assert_allclose(change, ref.current_params['future_stock_growth_kg_per_capita']
+                               * ref.population / 1e6)

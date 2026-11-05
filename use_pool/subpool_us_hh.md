@@ -22,6 +22,7 @@ Type: process. Lager: yes.
 * [Tumble dryer lint](../use_pool/flow_us_hh_wm_rs_tumble_dryer_lint.html) → WM.RS
 * [Household dust fibres](../use_pool/flow_us_hh_wm_rs_household_dust_fibres.html) → WM.RS
 * [Returns of direct online purchases](../use_pool/flow_us_hh_rw_rw_returns_of_direct_online_purchases.html) → RW.RW
+* [Household textiles in commercial and bulky waste](../use_pool/flow_us_hh_wm_rs_household_textiles_in_commercial_and_bulky_waste.html) → WM.RS
 
 ## Flyter inn
 

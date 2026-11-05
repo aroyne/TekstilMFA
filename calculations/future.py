@@ -8,7 +8,9 @@ There are no statistics for the future, so the model is turned around
 (design note 2026-11-02): supply is the 2025 level per inhabitant times
 SSB's population projection, household discards come from the cohort
 model of the stock in use, and the flows after discarding keep their 2025
-shares. The reference path has today's policy only: the ban on destroying
+shares. The stock in use grows by a realistic amount only; the rest of the
+gap between supply and recorded discards leaves as household textiles in
+commercial and bulky waste (D42). The reference path has today's policy only: the ban on destroying
 unsold goods (2026), EPR (2027) and the waste shipment rules (2027) are
 measures for steps 2 and 3, so that their effect is measured against one
 reference.
@@ -43,6 +45,7 @@ WORN = 'US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT'
 INSTITUTIONAL_RECYCLING = 'US.IC-WM.RC-Institutional textiles to recycling-TOT'
 INSTITUTIONAL_RELEASE = 'US.IC-EN.WA-Fibre release in industrial laundry-TOT'
 RECYCLED_FIBRE = 'WM.RC-MA.FI-Recycled fibre to domestic spinning-TOT'
+COMMERCIAL_BULKY = 'US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT'
 
 # Flows that follow the population: the 2025 value per inhabitant is held.
 PER_CAPITA_FLOWS = [
@@ -106,7 +109,8 @@ class Reference:
         """population: {year: mean population} for 2025 and FUTURE_YEARS."""
         self.hist = hist
         self.current_params = current_params
-        self.growth = np.array([population[year] / population[BASE_YEAR] for year in FUTURE_YEARS])
+        self.population = np.array([population[year] for year in FUTURE_YEARS])
+        self.growth = self.population / population[BASE_YEAR]
 
     def base(self, code):
         return self.hist.flows[code].values[BASE]
@@ -150,6 +154,7 @@ def execute_reference(fut, ref):
     _industrial_laundry_release(fut, ref)
     for process in ('CO.CO', 'CO.SO', 'CO.RE'):
         _split_by_2025_shares(fut, ref, process)
+    _commercial_and_bulky_waste(fut, ref)
     _export_for_recycling(fut)
     _split_by_2025_shares(fut, ref, 'WM.RS')
     _fabric_import(fut)
@@ -214,11 +219,10 @@ def _household_discards(fut, ref):
     CORE discards from households: the outflow of the cohort model of the
     stock in use, scaled so that it equals the statistics in 2025
     (separate collection plus reusable and worn textiles in residual
-    waste). The scale factor s (about 0.87) is held: the gap between the
+    waste). The scale factor s (about 0.89) is held. The gap between the
     cohort model and the statistics in 2018-2025 (10-27 kt per year, D40)
-    is carried on as growth of the stock that is the residual of the
-    balance, as in the history (D8). Where the gap goes is an uncertain
-    factor in step 2.
+    is not carried on as a growing stock: most of it is discards that the
+    statistics do not capture (D42), see _commercial_and_bulky_waste.
 
     The discards are split between separate collection, reusable and worn
     textiles in residual waste by their 2025 shares (collection rate about
@@ -288,6 +292,27 @@ def _industrial_laundry_release(fut, ref):
     flow = fut.flows[INSTITUTIONAL_RELEASE]
     flow.values[...] = 0.0
     flow.values[:, cohort] = per_kt * stock[len(YEARS):]
+
+
+def _commercial_and_bulky_waste(fut, ref):
+    """
+    CL+HT+FW from households that leave as commercial or bulky waste
+    outside the pick analyses (D42): the balance of the CORE group in US.HH
+    after a realistic growth of the stock in use, 0.5 kg per inhabitant
+    per year (0.3-1; a wardrobe of 50-100 kg growing 0.5-1 % a year, cf.
+    Watson et al. 2018). Without it the residual stock would grow by 12-14
+    kt a year to 2050, which the wardrobe studies do not support; in
+    Denmark the same gap was judged to be mostly discards that are not
+    measured (Watson et al. 2018). How the gap splits between stock growth
+    and these discards is an uncertain factor in step 2. A negative value
+    (supply below discards plus growth) is not physical and is clipped at 0.
+    """
+    core = ('t', 'g')
+    inflow = sum(to_dims(f, core).values for f in fut.flows.values() if f.to_process.name == 'US.HH')
+    outflow = sum(to_dims(f, core).values for code, f in fut.flows.items()
+                  if f.from_process.name == 'US.HH' and code != COMMERCIAL_BULKY)
+    growth = ref.current_params['future_stock_growth_kg_per_capita'] * ref.population / 1e6
+    clip_negative(fut, COMMERCIAL_BULKY, core_group_only(inflow[:, CORE] - outflow[:, CORE] - growth))
 
 
 def _process_inflow(mfa, process, letters):

@@ -114,7 +114,7 @@ I TOT:
 
 ## Beregning i koden
 
-Beregnes i `_separate_collection_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L45). Dokumentasjonen i koden:
+Beregnes i `_separate_collection_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L48). Dokumentasjonen i koden:
 
 > Separately collected from households = exported used textiles + the part
 > kept in Norway (D17) - unsold clothing donated by retailers, which is

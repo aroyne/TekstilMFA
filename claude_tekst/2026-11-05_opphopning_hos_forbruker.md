@@ -65,7 +65,21 @@ Med s = 0,889 og gapet i restlageret antar referansebanen 12–14 kt opphopning 
 ### Samlet bilde for 2025 (ca. 10 kt å forklare)
 Grovavfall og næringsavfall ca. 5 kt (3–11), lagervekst 2–6 kt, privat utførsel og andre fraksjoner liten. **Gapet i 2025 kan altså forklares uten en urealistisk opphopning.** For 2018 kommer sko i tillegg.
 
-## Forslag til beslutning (D42)
+## Beslutning (D42)
+
+**Besluttet 2026-11-05:** punkt 1 og 3 som foreslått. Punkt 2 er ikke i hovedresultatet, men en strukturkjøring (`commercial_bulky_1kg` i `structural_sensitivity.py`). Implementert samme dag:
+
+| | 2025 før D42 | 2025 med D42 | Strukturkjøring 1 kg |
+|---|---|---|---|
+| Restlager CL+HT+FW, iterasjon 0 (kt) | 1 160 | 1 111 | 929 |
+| Restlager, MC-median (95 %) (kt) | – | 1 169 (440–1 816) | – |
+| Innsamlingsgrad, iterasjon 0 | 0,448 | 0,448 | 0,419 |
+| Referansebanen: restlager 2050 (kt) | 1 502 | 1 186 | – |
+| Referansebanen: næringsavfall og grovavfall 2030–2050 (kt/år) | – | 10–11 | – |
+
+Innsamlingsgraden i referansebanen faller fra 45 % (2025) til 41 % (2026). Det kommer av at nevneren endres, ikke av en reell endring. For en sammenlignbar historikk kan strukturkjøringen brukes.
+
+### Forslaget slik det ble lagt fram
 
 1. **2018-ankeret får sko:** + sko i restavfallet. Til vi har svar fra Mepex, brukes en parameter (5–10 kt, flat fordeling) eller en strukturkjøring.
 2. **Ny flyt `US.HH-WM.RS-Household textiles in commercial and bulky waste`:** kg per innbygger × folketall, 1 kg (0,5–2, flat), analogi fra Danmark (Watson m.fl. 2018). Den bryter med «data er fasit» (D8), fordi det er en strøm uten norsk statistikk. Det er et valg om den skal i hovedresultatet eller som strukturkjøring (A5).

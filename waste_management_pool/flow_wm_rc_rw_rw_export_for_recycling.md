@@ -114,7 +114,7 @@ I fiberlaget (per materiale):
 
 ## Beregning i koden
 
-Beregnes i `_export_for_recycling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L65). Dokumentasjonen i koden:
+Beregnes i `_export_for_recycling_mc` i [calculations/wm_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/wm_mc.py#L57). Dokumentasjonen i koden:
 
 > Balance of WM.RC: textiles sent to material recycling (from domestic
 > sorting, institutions and production) minus the recycled fibre sold to

@@ -84,6 +84,7 @@ DISCARD_FLOWS = [
     'US.HH-CO.CO-Separate collection from households-TOT',
     'US.HH-WM.RS-Reusable textiles in residual and bulky waste-TOT',
     'US.HH-WM.RS-Worn textiles in residual and bulky waste-TOT',
+    'US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT',
 ]
 COLLECTION = 'US.HH-CO.CO-Separate collection from households-TOT'
 # Household goods without discard statistics, discarded by a cohort model
