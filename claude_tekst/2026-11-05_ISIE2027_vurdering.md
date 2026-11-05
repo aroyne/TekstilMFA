@@ -9,7 +9,7 @@ Ja, under **Material and Resource Systems**. Det sterkeste bidraget er avstemmin
 ## Hva som er sterkt
 
 1. **Avstemming over 37 år.** Lager som restledd (tilført − kassert etter statistikken), lagermodell og garderobedata over 1988–2025. Danmark (Watson m.fl. 2018) og UK (Millward-Hopkins m.fl. 2023) har bare enkeltår. Vi har ikke funnet noen som har gjort dette over flere tiår (søket er ikke systematisk).
-2. **Et tydelig funn som er vanskelig å avvise.** Lageret som restledd blir urimelig stort (ca. 200 kg per innbygger mot 55–110 kg klær i garderobene). Lagervekst kan bare forklare en liten del, så gapet på ca. 10–27 kt per år (2–5 kg per innbygger) er trolig kasseringer som statistikken ikke fanger. Det kan være næringsavfall, grovavfall og sko, som falt ut av 2018-ankeret. Det motsier NORSUS' tolkning (oppmagasinering) og stemmer med den danske.
+2. **Et tydelig, men ikke sikkert funn.** Lageret som restledd er trolig urimelig stort (ca. 210 kg per innbygger, 79–325, mot 101 kg i lagermodellen og 55–110 kg klær i garderobene). Intervallene overlapper, og gapet i hvert av årene med ankre er ikke signifikant på 95 %-nivå ([datagrunnlaget](2026-11-05_lagerets_datagrunnlag_og_nevnerproblemet.md)). Lagervekst kan bare forklare en liten del, så gapet på ca. 10–27 kt per år (2–5 kg per innbygger) er trolig kasseringer som statistikken ikke fanger. Det kan være næringsavfall, grovavfall og sko, som falt ut av 2018-ankeret. Det motsier NORSUS' tolkning (oppmagasinering) og stemmer med den danske.
 3. **Direkte politisk relevant.** Innsamlingsgraden avhenger av en nevner ingen måler. Den er 45 % målt og ca. 41 % hvis gapet er kasseringer. Det treffer oppfølgingen av produsentansvaret (WFD 2025/1892) direkte, og poenget kan overføres til andre land.
 4. **Metode med to typer usikkerhet.**
    * Historikken bruker MC med pedigree og fordelinger etter hvordan tallet er laget.
@@ -25,7 +25,7 @@ Ja, under **Material and Resource Systems**. Det sterkeste bidraget er avstemmin
 
 1. **Sirkularitet i tiltaksanalysen.** L1 er modellert som +10–35 prosentpoeng på innsamlingsandelen, og når da 50 % i 90–100 % av scenariene. Det følger av antakelsen. Det som er informativt, er hva som skal til (X7 og effektstørrelsen) og at D42-flyten setter et tak. Effektspennene er skjønn. Vi har ikke empiriske effektstørrelser fra Frankrike eller Nederland.
 2. **D42-flyten er ikke observert.** Den er en analogi fra Danmark (ca. 1 kg per innbygger) og restleddet i fremtiden. Resultatene «med D42» står og faller med den. Hovedresultatet for historikken holder den riktignok utenfor, og det er en styrke.
-3. **Få ankre.** Restavfallet har ankre i 2009, 2018, 2022 og 2025 (±30 %). Før 2009 er det fylt ut. Lagernivået styres av levetidene og startlageret (D2), som ikke er kalibrert. Garderobedataene er tynne (små utvalg, ingen vekt, ingen barn).
+3. **Få ankre.** Restavfallet har ankre i 2009, 2018, 2022 og 2025 (±30 %). Lagernivået kan ikke fastslås, og perioden før 2009 sier i praksis ingenting (−161 til +910 kt). Før 2009 er det fylt ut. Lagernivået styres av levetidene og startlageret (D2), som ikke er kalibrert. Garderobedataene er tynne (små utvalg, ingen vekt, ingen barn).
 4. **Lagermodellen har to roller.** I historikken er den diagnose. I fremtiden lager den kasseringene (skalert til 2025). Det må forklares godt. Ellers kan det se ut som om modellen kalibreres mot seg selv.
 5. **Systemgrensen ved eksporten.** Det som skjer i mottakerlandene, er ikke modellert. Funnet om mer forbrenning med sortering i Norge gjelder forbrenning i Norge. Globalt kan det være nøytralt eller positivt. Det må formuleres forsiktig.
 6. **Ingen miljøindikatorer.** Det er bare masse, ikke klima, biologisk mangfold eller ressursknapphet. Konferansetemaet handler om samspillet mellom mennesker og natur. Uten en kobling til miljøpåvirkning blir bidraget smalt for temaet, selv om det passer fint i sporet for materialer.
@@ -49,7 +49,7 @@ Ja, under **Material and Resource Systems**. Det sterkeste bidraget er avstemmin
 * *Problem:* Nasjonale tekstilkartlegginger tolker gapet mellom det som settes på markedet og det som kasseres, som oppmagasinering i hjemmene. Produsentansvaret skal følges opp med innsamlingsmål.
 * *Metode:* En dynamisk, probabilistisk MFA for Norge 1988–2025 der offisiell statistikk er fasit og en lagermodell brukes til diagnose, sammen med garderobedata. Resultatet kobles til en fremtidsmodul med dyp usikkerhet (1 000 scenarier, fem tiltak).
 * *Funn:*
-  1. Lageret som restledd kan ikke forenes med garderobedata, og gapet er trolig kasseringer som ikke måles.
+  1. Restleddet er trolig 1,5–3 ganger det lagermodellen og garderobedataene tilsier. Gapet i nyere tid er positivt i 88–96 % av iterasjonene og større enn en realistisk lagervekst i 67–88 %, noe som er mer forenlig med kasseringer som ikke måles, enn med oppmagasinering.
   2. Innsamlingsgraden avhenger av nevneren (45 % mot ca. 41 %).
   3. Ambisiøse tiltak når innsamlingsmålet, men halverer ikke forbrenningen. Sortering i Norge flytter rester hjem.
 * *Betydning:* Hvordan målene i produsentansvaret bør måles, og behovet for data om næringsavfall og grovavfall.
