@@ -26,3 +26,5 @@
 | SNF/NHH (regnskapsdatabasen@snf.no) | Tilgang til regnskapsdatabasen 1992–2024 | Skille merkevarer fra produksjon i næring 14.x (MA.TX) | 2026-11-02 |
 | PostNord | Returandel for klær kjøpt på nett i Norge (*E-handel i Norden*) | Returandelen i D38 | 2026-11-02 |
 | Tolletaten | Er VOEC-tallene brutto (ikke justert for returer)? | D38 | 2026-11-02 |
+| Mepex (Frode Syversen) | Er sko og lær med i tekstilfraksjonen i plukkanalysene bak 2018 (Watson 2020), 2022 (Rubach 2023) og 2025 (de Sadeleer & Rubach 2026)? Hvor stor er andelen sko i tekstilene i restavfallet, og er tekstilene veid tørre? | Ankrene for restavfallet. Watson 2020 holder sko utenfor, mens 2025 tar dem med. Det kan forklare en del av gapet i 2018–2021 ([notat](../claude_tekst/2026-11-05_opphopning_hos_forbruker.md)). | 2026-11-05 |
+| Mepex / Avfall Norge | Plukkanalyser av blandet næringsavfall og av grovavfall som private firmaer henter hos husholdninger (flytting, dødsbo, containere): andelen tekstiler | Kasseringer fra husholdningene som ikke er med i plukkanalysene for husholdningsavfall (opphopningen hos forbruker). | 2026-11-05 |

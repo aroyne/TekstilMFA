@@ -41,12 +41,42 @@ Med s = 0,889 og gapet i restlageret antar referansebanen 12–14 kt opphopning 
 * Dette endrer innsamlingsgraden. Hvis nevneren (alt som kasseres) er større enn statistikken viser, er dagens innsamlingsgrad lavere enn 45 %. Det betyr mye for målene i produsentansvaret.
 * I historikken (D8) kan den samme flyten legges inn som en strukturkjøring (A5), ikke som hovedresultat, inntil punkt 1 og 2 er sjekket.
 
+## Sjekket 2026-11-05
+
+### Sko i plukkanalysene
+| Anker | Kilde | Sko med? |
+|---|---|---|
+| 2025 (44,5 kt) | de Sadeleer & Rubach 2026, tab. 3-10 og s. 31 | **Ja.** Sko som ikke kan ombrukes, regnes som «ikke-gjenvinnbare» (12,3 kt i alt i den kategorien). |
+| 2022 (48,8 kt) | Rubach m.fl. 2023, tab. 3.17 (Mepex-databasen) | **Trolig.** Omfanget tar med fottøy, og Syversen m.fl. (2023, med sko og lær) gir samme total for 2021. Det er ikke uttrykkelig sagt for plukkanalysene. |
+| 2018 (25,4 kt hentet + 6,1 kt brakt, i modellen 38,3 kt etter D40) | Watson m.fl. 2020, s. 7 (2.1.1) og s. 28 | **Nei, i utgangspunktet.** Studien holder sko og alle lærklær utenfor. Definisjonen av tekstiler i de åtte plukkanalysene er «uklar» og «kan ha inkludert lær». Innsamlingen er 31,7 kt uten og 35,3 kt med sko, vesker og annet (litt over 10 %). |
+| 2009 (40,7 kt) | Laitala m.fl. 2012 | Ikke sjekket. Kommunale plukkanalyser 2006–2011. |
+
+**Konsekvens:** Innsamlingen i modellen er eksporten av 6309+6310, som har sko med i alle år. Restavfallet i 2018 er trolig uten sko, mens 2022 og 2025 har dem. 2018-ankeret er da for lavt med det som kastes av sko i restavfallet. Det kan grovt anslås til 5–10 kt: Det tilføres ca. 13 kt sko per år, ca. 3–4 kt samles inn, og 2025-kategorien «ikke-gjenvinnbare» (12,3 kt) er en øvre grense. Siden 2009-ankeret er laget med forholdet fra 2022–2025 til henteordningen i 2018, arver det ikke 2018-feilen direkte, men definisjonen i Laitala 2012 er ukjent.
+
+* Gapet i 2018 (27 kt) kan da gå ned til ca. 17–22 kt, og avviket summert over 2009–2021 med ca. 50–100 kt.
+* **Sko forklarer ikke gapet i 2025** (ca. 10 kt), fordi sko er med i det ankeret.
+
+### Grovavfall og næringsavfall fra husholdningene
+* SSB 10513 har bare «Tekstiler» som egen materialtype (ca. 4 kt). Tekstiler i blandet næringsavfall er ikke skilt ut.
+* KOSTRA (12241, 13035) dekker avfall som kommunene håndterer. Brakt avfall fra gjenvinningsstasjonene er allerede med i Mepex-ankrene (16 kt i 2025). Husholdningsavfall som private firmaer henter (flytting, dødsbo, storsekker, containere), er næringsavfall og finnes ikke som egen størrelse.
+* Den danske analogien er grovavfall utenom de kommunale gjenvinningsstasjonene: 5,6 kt for 5,8 millioner innbyggere, ca. 1 kg per innbygger. For Norge gir det **ca. 5–6 kt per år**, med et vidt spenn (0,5–2 kg per innbygger, 3–11 kt).
+* Spørsmålet er lagt i HENVENDELSER (Mepex og Avfall Norge).
+
+### Samlet bilde for 2025 (ca. 10 kt å forklare)
+Grovavfall og næringsavfall ca. 5 kt (3–11), lagervekst 2–6 kt, privat utførsel og andre fraksjoner liten. **Gapet i 2025 kan altså forklares uten en urealistisk opphopning.** For 2018 kommer sko i tillegg.
+
+## Forslag til beslutning (D42)
+
+1. **2018-ankeret får sko:** + sko i restavfallet. Til vi har svar fra Mepex, brukes en parameter (5–10 kt, flat fordeling) eller en strukturkjøring.
+2. **Ny flyt `US.HH-WM.RS-Household textiles in commercial and bulky waste`:** kg per innbygger × folketall, 1 kg (0,5–2, flat), analogi fra Danmark (Watson m.fl. 2018). Den bryter med «data er fasit» (D8), fordi det er en strøm uten norsk statistikk. Det er et valg om den skal i hovedresultatet eller som strukturkjøring (A5).
+3. **I fremtiden:** Restlageret vokser med høyst en realistisk lagervekst (0,3–1 kg per innbygger per år). Resten av gapet (1 − s) går til den nye flyten. Fordelingen er en usikker faktor i trinn 2.
+
 ## Neste steg
 
-1. Sjekke i Watson m.fl. (2020), Rubach m.fl. (2023) og de Sadeleer & Rubach (2026) om sko er med i tekstilfraksjonen i plukkanalysene.
+1. ~~Sko i plukkanalysene~~ (sjekket: 2018 uten, 2025 med).
 2. Lese Brouwer & Maaskant (2026) i fulltekst: garderobelager og eventuelt gap i Nederland.
-3. Hente SSB-tall for grovavfall og blandet næringsavfall, og anslå tekstilinnholdet.
-4. Beslutte hvordan gapet skal håndteres i referansebanen (forslaget over).
+3. ~~SSB-tall for grovavfall~~ (finnes ikke for avfall som private firmaer henter; anslag fra Danmark).
+4. Beslutte D42 (punkt 1–3 over).
 
 ## Kilder
 
