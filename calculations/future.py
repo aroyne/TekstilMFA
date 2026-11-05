@@ -214,7 +214,7 @@ class Policy:
     destruction_ban_share_2027: float  # L4: share of unsold goods covered in 2027, all from 2030
     consumption_reduction: float    # L5: lower consumption per inhabitant of CL+HT+FW, full in 2030
     reuse_market_increase: float    # L6: factor on the Norwegian second-hand market, full in 2032
-    repair_increase: float          # L7: longer lifetime of CORE cohorts from 2027 (repair)
+    repair_increase: float          # L7: longer lifetime of all CORE goods in use (repair), full in 2032
     sharing_reduction: float        # L8: lower need for clothing through rental and sharing, full in 2030
     recycled_content_2035: float    # L9: recycled share of the fibre in new goods (metric only)
 
@@ -289,17 +289,24 @@ class Reference:
         # Lifetime of each CORE cohort relative to the parameters: 1 for the
         # history, the scenario's path for cohorts entering from 2026.
         # L3 adds the durability requirement for clothing cohorts from 2029,
-        # of which the share X18 is used, and L7 repair for all CORE cohorts
-        # from 2027 (existing cohorts are not reached, an approximation).
+        # of which the share X18 is used.
         durable = np.array([p in DURABLE_PRODUCTS for p in CORE_GROUP_PRODUCTS], dtype=float)
         scenario_factor = np.repeat(path(1.0, scenario.lifetime_new_cohorts_2035)[:, None],
                                     len(CORE_GROUP_PRODUCTS), axis=1)
         future_years = np.array(FUTURE_YEARS)
         durability = 1.0 + (policy.durability_increase * scenario.durability_realised
                             * (future_years >= 2029)[:, None] * durable[None, :])
-        repair = 1.0 + policy.repair_increase * (future_years >= 2027)[:, None]
         history_factor = np.ones((len(YEARS), len(CORE_GROUP_PRODUCTS)))
-        self.household_lifetime_factor = np.concatenate([history_factor, scenario_factor * durability * repair])
+        self.household_lifetime_factor = np.concatenate([history_factor, scenario_factor * durability])
+        # L7 repair (support for repair services, right to repair) lengthens
+        # the remaining life of all CORE goods in use, also those bought
+        # before 2027: a period effect on the lifetimes, phased in 2027-2032
+        # as repair services grow. None without it, so that the cohort model
+        # stays the plain Weibull model.
+        self.household_period_factor = None
+        if policy.repair_increase > 0.0:
+            self.household_period_factor = np.concatenate([
+                history_factor, 1.0 + policy.repair_increase * ramp(2026, 2032)[:, None] * np.ones_like(durability)])
         self.household_lifetime_factor_without_policy = np.concatenate([history_factor, scenario_factor])
 
     def base(self, code):
@@ -459,7 +466,7 @@ def _finished_products_import(fut):
     clip_negative(fut, 'RW.RW-DI.RT-Finished textile products import-TOT', out - domestic)
 
 
-def household_cohorts(hist, fut, current_params, lifetime_factor, secondhand=None):
+def household_cohorts(hist, fut, current_params, lifetime_factor, secondhand=None, period_factor=None):
     """
     Cohort model of the CORE group in US.HH over the historical and the
     future years: new goods entering the households from 1988 (iteration 0)
@@ -467,7 +474,8 @@ def household_cohorts(hist, fut, current_params, lifetime_factor, secondhand=Non
     in current_params and lifetime_factor per cohort (array (year,
     product)). secondhand (array (future year, product)) is added to the
     future inflow under the stock-driven demand, where second-hand goods are
-    part of the stock households hold. Returns the use_cohorts result over
+    part of the stock households hold, and period_factor (array (year,
+    product) over YEARS + FUTURE_YEARS) is the period effect of repair. Returns the use_cohorts result over
     YEARS + FUTURE_YEARS, summed over the products, as arrays (year,).
     """
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
@@ -475,7 +483,8 @@ def household_cohorts(hist, fut, current_params, lifetime_factor, secondhand=Non
     if secondhand is not None:
         future = future + secondhand
     inflow = np.concatenate([new_goods_to_households(hist.flows)[:, core], future])
-    cohorts = use_cohorts(inflow[:, :, None], CORE_GROUP_PRODUCTS, current_params, cohort_factor=lifetime_factor)
+    cohorts = use_cohorts(inflow[:, :, None], CORE_GROUP_PRODUCTS, current_params, cohort_factor=lifetime_factor,
+                          period_factor=period_factor)
     return {'outflow': cohorts['outflow'][:, :, 0].sum(axis=1), 'stock': cohorts['stock'][:, :, 0].sum(axis=1),
             'stock_1987': cohorts['stock_1987'][:, 0].sum()}
 
@@ -502,7 +511,8 @@ def stock_driven_purchases(fut, ref):
     (which follows the lifetime level X4), times the population, the trend
     of the scenario (X15) and the measures that lower the need (L5, L8). In
     each year they buy what is needed to reach it, given what survives of
-    earlier cohorts (lifetimes with X4b, L3 and L7), minus the new goods
+    earlier cohorts (lifetimes with X4b and L3 per cohort, and L7 as a
+    period effect on all goods in use), minus the new goods
     that second-hand purchases replace (displacement X16, 0.1-0.85: Farrant
     et al. 2010 estimate 60-85 %, consumer surveys 10-60 %). What
     second-hand purchases do not replace adds to the stock. A share X17 of
@@ -518,7 +528,8 @@ def stock_driven_purchases(fut, ref):
     """
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
     n_hist, n_full = len(YEARS), len(YEARS) + len(FUTURE_YEARS)
-    sf = survival(n_full, CORE_GROUP_PRODUCTS, ref.current_params, cohort_factor=ref.household_lifetime_factor)
+    sf = survival(n_full, CORE_GROUP_PRODUCTS, ref.current_params, cohort_factor=ref.household_lifetime_factor,
+                  period_factor=ref.household_period_factor)
     history = new_goods_to_households(ref.hist.flows)[:, core]
     inflow = np.zeros((N_SPINUP + n_full, len(core)))
     inflow[:N_SPINUP] = history[0] * ref.current_params['spinup_inflow_factor']
@@ -587,7 +598,8 @@ def _household_discards(fut, ref):
     worn ones. Textiles in commercial and bulky waste (D42) are not reached.
     """
     cohorts = household_cohorts(ref.hist, fut, ref.current_params, ref.household_lifetime_factor,
-                                secondhand_by_product(fut, ref) if ref.demand == 'stock' else None)
+                                secondhand_by_product(fut, ref) if ref.demand == 'stock' else None,
+                                ref.household_period_factor)
     if ref.demand == 'supply':
         ref.policy_stock_change = _policy_stock_change(fut, ref, cohorts)
     recorded = {code: ref.base(code)[CORE] for code in (COLLECTION, REUSABLE, WORN)}

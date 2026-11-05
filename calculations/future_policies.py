@@ -39,7 +39,7 @@ EFFECTS = [
     ('destruction_ban_share_2027', 0.5, 0.9),    # L4
     ('consumption_reduction', 0.10, 0.30),       # L5, CL+HT+FW in 2030
     ('reuse_market_increase', 1.5, 3.0),         # L6, factor on the second-hand market in 2032
-    ('repair_increase', 0.05, 0.20),             # L7, CORE cohorts from 2027
+    ('repair_increase', 0.05, 0.20),             # L7, all CORE goods in use, full in 2032
     ('sharing_reduction', 0.05, 0.15),           # L8, clothing in 2030
     ('recycled_content_2035', 0.05, 0.25),       # L9, recycled share of fibre in new goods
 ]

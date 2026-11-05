@@ -126,3 +126,19 @@ def test_stock_driven_demand_starts_at_2025_level_and_responds_to_lifetimes():
         assert (new < old - 1.0) == lower
     for sampled in sample_scenarios(10):
         run_future(history, sampled, fibre=False, demand='stock')
+
+
+def test_period_effect_survival_matches_weibull_and_extends_existing_stock():
+    from calculations.cohorts import survival, use_cohorts
+    params = {'spinup_inflow_factor': 1.0, 'lifetime_shape_US.HH_CL': 2.0, 'lifetime_mean_US.HH_CL': 6.0}
+    n = 63
+    np.testing.assert_allclose(survival(n, ['CL'], params), survival(n, ['CL'], params, period_factor=np.ones((n, 1))),
+                               atol=1e-12)
+    inflow = np.ones((n, 1, 1))
+    period = np.ones((n, 1))
+    period[45:] = 1.2
+    base = use_cohorts(inflow, ['CL'], params)
+    repaired = use_cohorts(inflow, ['CL'], params, period_factor=period)
+    # Goods bought before the measure stay longer too.
+    assert repaired['stock'][46, 0, 0] > base['stock'][46, 0, 0]
+    np.testing.assert_allclose(repaired['stock'][:45], base['stock'][:45])

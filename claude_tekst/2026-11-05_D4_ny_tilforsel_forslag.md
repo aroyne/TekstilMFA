@@ -173,3 +173,11 @@ Hovedpunkter:
 * L7 når bare nye årganger fra 2027. Reparasjon av plagg som allerede er i bruk, er ikke med, så effekten er undervurdert.
 * Institusjonene og varene utenom CORE er fortsatt tilførselsdrevne. Eksport, usolgte varer og norsk produksjon skaleres med husholdningsmarkedet (en tilnærming).
 * Det er bare masse. Klima kan kobles på etterpå (vurdert i [eget notat](2026-11-05_LCA_kobling_vurdering.md)).
+
+### Reparasjon som periodeeffekt (endret samme dag)
+* L7 gjaldt først bare nye årganger fra 2027. Nå senker reparasjonen risikoen for å kassere i en gitt alder for **alle plagg i bruk**, også de som er kjøpt tidligere. Effekten fases inn i 2027–2032. Overlevelsen bygges opp år for år i `cohorts.survival(period_factor=...)`. Med faktor 1 er den lik Weibull-modellen (test, avvik 10⁻¹⁵).
+* **Effekt på ny tilførsel med lagerdrevet etterspørsel:** −7 % i 2030, **−10 % i 2035 (−17 til −2)** og −9 % i 2050, mot −7 % i 2035 tidligere. Med tilførselsdrevet etterspørsel er det fortsatt ingen effekt på kjøpene. Registrerte kasseringer går ned med ca. 10 % i 2030 og 7 % i 2035.
+* Alle tiltakene samlet gir −35 % (−50 til −5) i 2035 med lagerdrevet etterspørsel og −26 % med tilførselsdrevet. Målet om −30 % per innbygger nås i ca. 50 % av scenariene i begge formuleringene.
+
+### Kjent svakhet: overgangen i 2028–2030 med lagerdrevet etterspørsel
+Når L5 og L8 senker det ønskede lageret med 10–30 % over 2028–2030, slutter husholdningene nesten å kjøpe til lageret har krympet. Ny tilførsel faller med −35 % i 2030 (L5) og −46 % for alle tiltakene, med 5-persentil −83 %. Det henger sammen fysisk, men er urealistisk som atferd. Effekten i 2035 og 2050 påvirkes lite. **Forslag:** La reduksjonen i ønsket lager fases inn over 2027–2035 med lagerdrevet etterspørsel, slik at garderoben krymper gjennom naturlig avgang.

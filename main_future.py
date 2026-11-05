@@ -109,7 +109,8 @@ def run_future(history, scenario, policy=None, fibre=True, demand='supply', base
                                                                             scenario.synthetic_shift_2035),
                                     ref.current_params, history['params'].fibre_composition,
                                     history=history['hist_fibre'],
-                                    household_lifetime_factor=ref.household_lifetime_factor)
+                                    household_lifetime_factor=ref.household_lifetime_factor,
+                                    household_period_factor=ref.household_period_factor)
     return fut, ref, (fut_fibre, fut_stock)
 
 

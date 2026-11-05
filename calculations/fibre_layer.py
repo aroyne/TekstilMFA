@@ -395,7 +395,8 @@ def release_weights(current_params):
     return np.array([1.0 if m == 'SYN' else 0.0 if m == 'NT' else ratio for m in MATERIALS])
 
 
-def _cohorts(inflow, products, current_params, history_inflow, stock='US.HH', cohort_factor=None):
+def _cohorts(inflow, products, current_params, history_inflow, stock='US.HH', cohort_factor=None,
+             period_factor=None):
     """
     use_cohorts for the years of the system that inflow (year, product,
     material) covers. In the future module (D12) history_inflow holds the
@@ -408,13 +409,14 @@ def _cohorts(inflow, products, current_params, history_inflow, stock='US.HH', co
     """
     n = inflow.shape[0]
     full = inflow if history_inflow is None else np.concatenate([history_inflow, inflow])
-    cohorts = use_cohorts(full, products, current_params, stock=stock, cohort_factor=cohort_factor)
+    cohorts = use_cohorts(full, products, current_params, stock=stock, cohort_factor=cohort_factor,
+                          period_factor=period_factor)
     stock_all = np.concatenate([cohorts['stock_1987'][None], cohorts['stock']], axis=0)
     return {'outflow': cohorts['outflow'][-n:], 'stock': cohorts['stock'][-n:], 'stock_before': stock_all[-n - 1],
             'stock_1987': cohorts['stock_1987']}
 
 
-def household_cohort_model(tot, supply, current_params, history=None, lifetime_factor=None):
+def household_cohort_model(tot, supply, current_params, history=None, lifetime_factor=None, period_factor=None):
     """
     Inflow-driven cohort model of the CORE group (CL+HT+FW and retail yarn)
     in US.HH (D8, D20): new goods entering US.HH by material, Weibull
@@ -430,7 +432,7 @@ def household_cohort_model(tot, supply, current_params, history=None, lifetime_f
     new_goods = new_goods_to_households(tot.flows)[:, core]
     past = None if history is None else new_goods_to_households(history.flows)[:, core, :]
     cohorts = _cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS, current_params, past,
-                       cohort_factor=lifetime_factor)
+                       cohort_factor=lifetime_factor, period_factor=period_factor)
     stock = np.concatenate([cohorts['stock_before'][None], cohorts['stock']], axis=0)
     dims = _cohort_dims(tot.dims['t'].items)
     return {
@@ -528,7 +530,7 @@ def collected_composition(fibre):
 
 
 def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_composition, history=None,
-                        household_lifetime_factor=None):
+                        household_lifetime_factor=None, household_period_factor=None):
     """
     Fills the fibre system from the closed TOT system and closes it. Returns
     {output name: FlodymArray with material dimension} for the parallel stock
@@ -540,7 +542,8 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     then holds the trade by fibre class of the future years
     (calculations/future.future_composition_data), and
     household_lifetime_factor the lifetime of each CORE cohort in US.HH
-    relative to the parameters (calculations/future.Reference).
+    relative to the parameters and household_period_factor the period effect
+    of repair on them (calculations/future.Reference).
     """
     unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + COLLECTED_FLOWS + RELEASE_FLOWS + MIXED_FLOWS
                                       + MANUFACTURING_FLOWS + [INSTITUTIONAL_WASTE, INSTITUTIONAL_RELEASE,
@@ -561,7 +564,8 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * institutional
     fibre.flows[INSTITUTIONAL_RELEASE].values[...] = tot.flows[INSTITUTIONAL_RELEASE].values[..., None] * (
         institutional_release_composition(tot, supply, current_params, history))
-    cohorts = household_cohort_model(tot, supply, current_params, history, household_lifetime_factor)
+    cohorts = household_cohort_model(tot, supply, current_params, history, household_lifetime_factor,
+                                     household_period_factor)
     discards = household_discard_composition(tot, cohorts, supply, current_params, history)
     for code in DISCARD_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * discards
