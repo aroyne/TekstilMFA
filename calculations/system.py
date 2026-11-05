@@ -27,12 +27,18 @@ from calculations.utils import GROUP_OF_PRODUCT, MATERIALS, PRODUCT_GROUPS, PROD
 PROCESSES_CSV = 'system/processes.csv'
 FLOWS_CSV = 'system/flows.csv'
 
-DIMENSIONS = fd.DimensionSet(dim_list=[
-    fd.Dimension(letter='t', name='Time', dtype=int, items=YEARS),
-    fd.Dimension(letter='p', name='Product', dtype=str, items=PRODUCTS),
-    fd.Dimension(letter='g', name='Product group', dtype=str, items=PRODUCT_GROUPS),
-    fd.Dimension(letter='m', name='Material', dtype=str, items=MATERIALS),
-])
+
+
+def dimensions(years=YEARS):
+    return fd.DimensionSet(dim_list=[
+        fd.Dimension(letter='t', name='Time', dtype=int, items=list(years)),
+        fd.Dimension(letter='p', name='Product', dtype=str, items=PRODUCTS),
+        fd.Dimension(letter='g', name='Product group', dtype=str, items=PRODUCT_GROUPS),
+        fd.Dimension(letter='m', name='Material', dtype=str, items=MATERIALS),
+    ])
+
+
+DIMENSIONS = dimensions()
 
 PRODUCT_TO_GROUP = fd.Parameter(
     dims=DIMENSIONS[('p', 'g')],
@@ -50,12 +56,14 @@ def load_register():
     return processes, flows[flows['status'].str.startswith('implemented')]
 
 
-def make_system(fibre=False):
+def make_system(fibre=False, years=YEARS):
     """
     An MFASystem with every implemented flow and all stocks, values unset.
     With fibre=True every flow and stock also has the material dimension 'm'
-    (the fibre layer, D19).
+    (the fibre layer, D19). years is the time dimension: the historical
+    model years, or the years of the future module (D12).
     """
+    dims = dimensions(years)
     extra = ('m',) if fibre else ()
     processes, flows = load_register()
     boundary = set(processes.loc[processes['type'] == 'boundary', 'code'])
@@ -67,7 +75,7 @@ def make_system(fibre=False):
 
     fd_processes = fd.make_processes(['sysenv'] + codes)
     fd_flows = fd.make_empty_flows(
-        processes=fd_processes, dims=DIMENSIONS,
+        processes=fd_processes, dims=dims,
         flow_definitions=[
             fd.FlowDefinition(from_process_name=node(r['source']), to_process_name=node(r['target']),
                               dim_letters=_letters(r['dims']) + extra, name_override=r['flow_code'])
@@ -75,13 +83,13 @@ def make_system(fibre=False):
         ])
     with_stock = processes[processes['code'].isin(codes) & processes['stock_dims'].notna()]
     fd_stocks = fd.make_empty_stocks(
-        processes=fd_processes, dims=DIMENSIONS,
+        processes=fd_processes, dims=dims,
         stock_definitions=[
             fd.StockDefinition(name=r['code'], process=r['code'], dim_letters=_letters(r['stock_dims']) + extra,
                                subclass=fd.SimpleFlowDrivenStock)
             for _, r in with_stock.iterrows()
         ])
-    mfa = fd.MFASystem(dims=DIMENSIONS, parameters={}, processes=fd_processes, flows=fd_flows, stocks=fd_stocks)
+    mfa = fd.MFASystem(dims=dims, parameters={}, processes=fd_processes, flows=fd_flows, stocks=fd_stocks)
     mfa.clipped = {}
     mfa.clipped_inflows = set()
     mfa.clipped_at_target = set()

@@ -40,6 +40,6 @@ def core_group_only(series):
     Array (year, product group) with series in the CORE group and 0 in the
     others, for flows whose statistics cover CL+HT+FW only.
     """
-    arr = np.zeros((len(YEARS), len(PRODUCT_GROUPS)))
+    arr = np.zeros((len(series), len(PRODUCT_GROUPS)))
     arr[:, PRODUCT_GROUPS.index('CORE')] = series
     return arr

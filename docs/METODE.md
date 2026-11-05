@@ -110,6 +110,18 @@ Flytene går ut av systemet til EN, som er systemgrense: EN.WA (avløp og vann) 
 * **Resultat:** `output_files/MC_summary_fibre.csv` (flyt × produkt × materiale × år).
 * **Validering:** Syntetisk andel av tekstilet i det som kastes er ca. 40 % (2021), 41 % (2022) og 42 % (2025), mot målt 44 % (Syversen 2023, 2021) og 38 % (Mepex via Rubach 2023, 2022). Syntetisk + NT er 51 % i 2025, mot 48,3 % fossilbasert målt (de Sadeleer & Rubach 2026). NT omfatter også lær og naturgummi. Ull blir ca. 5 %, mot 3 % målt.
 
+## 10. Fremtidsmodul (fase D, D12)
+
+Fremtiden har ingen statistikk, så modellen snus ([designnotat](../claude_tekst/2026-11-02_D_fremtidsmodul_design.md), [trinn 1](../claude_tekst/2026-11-05_D1_referansebane.md)). `main_future.py` kjører først den deterministiske historikken (iterasjon 0, et lukket system) og deretter et eget flodym-system for 2026–2050 med samme register og samme `close()` ([calculations/future.py](../calculations/future.py)).
+
+* **Tilførsel:** 2025-nivået per innbygger × SSBs framskriving (14740, MMM). Det gjelder salg til husholdninger og institusjoner, netthandel, privatimport, gjeneksport, usolgte varer, innenlandsk produksjon, import av brukte tekstiler og fiberutslipp. Import av ferdigvarer, metervare og fiber/garn er balanseflyter.
+* **Holdt på 2025:** norsk ull, vasketap, eksport av fiber og garn, og gjenvinningen ved NTG (kapasitet).
+* **Kasseringer fra husholdningene (CORE):** utstrømmen fra lagermodellen med tilførsel fra 1950 til 2050, skalert med s = statistikk ÷ lagermodell i 2025 (0,889 i iterasjon 0). Kasseringene fordeles på innsamling, brukbart og utslitt i restavfall etter andelene i 2025. Gapet (1 − s) går til restlageret som i historikken (D8). Det skal utforskes nærmere.
+* **Andre varer og US.IC:** egne lagermodeller med forlenget tilførsel, som i historikken.
+* **Etter kassering:** CO.CO, CO.SO, CO.RE og WM.RS fordeler det som kommer inn, etter andelene i 2025.
+* **Referansebanen** har bare dagens politikk. Destruksjonsforbudet, produsentansvaret og eksportreglene er tiltak i trinn 2 og 3.
+* **Resultat:** `output_files/future_reference.csv` (historikk og fremtid, deterministisk) og `output_files/plots/future_reference.png`.
+
 ## Referanser (metode)
 
 * Brunner, P. H. & Rechberger, H. (2016). *Handbook of Material Flow Analysis*, 2nd ed. CRC Press.

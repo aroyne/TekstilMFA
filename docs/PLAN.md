@@ -1,8 +1,8 @@
 # PLAN – TekstilMFA
 
-*Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-11-02.*
+*Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-11-05.*
 
-> **Her fortsetter vi (2026-11-02):** Fase A (usikkerhet), B (åpne flyter), C (lagerdiagnose, D40) og E1–E2 (grunnlaget for produsentansvaret og innsamlingsgraden) er ferdige. **Neste er fase D, trinn 1:** forlenge årene til 2050 og lage referansebanen (tilførsel = folketall × kg per innbygger per produkt; kasseringer fra lagermodellen skalert til statistikken i 2025). Deretter trinn 2 (scenarier og robusthet, XLRM/EMA) og trinn 3 (tiltak: produsentansvar med innsamlingsmål, sortering før eksport, holdbarhet). Beslutningene står i [designnotatet](../claude_tekst/2026-11-02_D_fremtidsmodul_design.md) og D12.
+> **Her fortsetter vi (2026-11-05):** Fase D, trinn 1 er gjort: referansebanen 2026–2050 (`main_future.py`, [notat](../claude_tekst/2026-11-05_D1_referansebane.md)). **Først må vi avklare hvor gapet mellom lagermodellen og statistikken går i fremtiden.** Med s = 0,889 vokser restlageret med ca. 340 kt til 2050. Alternativene er en egen flyt for uregistrerte kasseringer, eller at s går mot 1. **Deretter trinn 2:** scenarier og robusthet (XLRM/EMA, latin hypercube over X), og så trinn 3, tiltakene: produsentansvar med innsamlingsmål, sortering før eksport og holdbarhet.
 > **Påminnelse:** Usendte henvendelser (SSB, OsloMet, SNF, PostNord, Tolletaten) samles i [HENVENDELSER.md](HENVENDELSER.md). **Ingenting er sendt** per 2026-11-02.
 
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
@@ -131,6 +131,12 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Fase D: horisont 2050, fremtiden starter fra medianen i 2025 (historisk usikkerhet som egne faktorer), lagermodellen skaleres til statistikken i 2025, tiltak i rekkefølgen produsentansvar med innsamlingsmål, sortering før eksport, holdbarhet ([designnotat](../claude_tekst/2026-11-02_D_fremtidsmodul_design.md)).
 - [x] E1 og E2 ([notat](../claude_tekst/2026-11-02_E1_E2_produsentansvar_og_innsamlingsgrad.md), `calculations/indicators.py`, `output_files/MC_indicators.csv`): grunnlaget for produsentansvaret etter vedlegg 1 i forskriftsforslaget er 104 kt brutto (95–113) og 95 kt netto (87–103) i 2025. Innsamlingsgraden fra husholdningene er 45 % (38–55) i 2025, 50 % i 2018 og 40 % i 2022.
 
+### 2026-11-05 – Fase D, trinn 1: referansebane 2026–2050
+- [x] Forslag og beslutninger ([notat](../claude_tekst/2026-11-05_D1_referansebane.md)): egen fremtidsmodul på samme register, start fra iterasjon 0, kg per innbygger fra 2025, gapet går til restlageret inntil videre, ingen nye regimer.
+- [x] SSBs befolkningsframskriving 2026 (tabell 14740, MMM/LLL/HHH) i `data_files/SSB_14740_befolkningsframskriving_2026_2051.csv` (`scripts/fetch_population_projection.py`). 6,22 mill. i 2050 (MMM).
+- [x] `calculations/future.py` og `main_future.py`. `make_system(years=...)` og `use_cohorts` tar nå vilkårlige år. Historikken er uendret (MC_summary identisk). Fire nye tester (29 i alt).
+- [x] Resultat: Kassert CL+HT+FW 80,6 kt (2025) → 85,6 kt (2050), innsamling 36 → 38 kt, netto grunnlag for produsentansvaret 95 → 106 kt. Restlageret 1 160 → 1 502 kt, lagermodellen 529 → 576 kt. Plott: `output_files/plots/future_reference.png`.
+
 ## Neste
 
 ### Veikart (besluttet 2026-11-02)
@@ -171,8 +177,8 @@ Detaljert plan med dagens oppsett, problemer (T1–T9), arbeidspakker A0–A5 og
 
 #### Fase D – Fremtidsmodul (D12)
 0. Designnotat med fem spørsmål: [notat 2026-11-02](../claude_tekst/2026-11-02_D_fremtidsmodul_design.md).
-1. Utforming: tilførsel (befolkning × kg per innbygger per produkt, med baner), overføringskoeffisienter fra 2026 (innsamling, sortering, eksport, gjenvinning) og kasseringer fra den kalibrerte lagermodellen.
-2. Referansebane 2026–2040 med usikkerhet.
+1. ~~Utforming og referansebane 2026–2050~~ (gjort 2026-11-05, deterministisk). Åpent: hvor gapet (1 − s) går.
+2. Usikkerhet i referansebanen som scenarier (trinn 2).
 3. Regimeskifter som harde brudd: produsentansvar 2027, eksportregler 2027, destruksjonsforbud 2026.
 4. Usikkerheten om framtiden er dyp: flate, vide plausible spenn og mange scenarier (EMA), ikke MC med fordelinger som for historikken. Avkuttet Dirichlet for koeffisienter med sum lik 1 ([Weijenberg m.fl. 2026](../claude_tekst/2026-11-02_Weijenberg_robust_tiltaksvurdering.md)).
 

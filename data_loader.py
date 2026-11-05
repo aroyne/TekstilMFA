@@ -63,7 +63,18 @@ def _load_population(path, hs_mapping):
     return {year: (df[year] + df[year + 1]) / 2 for year in df.index[:-1]}
 
 
-# key: (pools that need it, path, loader)
+def _load_population_projection(path, hs_mapping):
+    """{alternative: {year: mean population}}, the mean of 1 January of the year and of the next year."""
+    df = pd.read_csv(path)
+    result = {}
+    for alternative, rows in df.groupby('alternative'):
+        series = rows.set_index('year')['population_1_january']
+        result[alternative] = {year: (series[year] + series[year + 1]) / 2 for year in series.index[:-1]}
+    return result
+
+
+# key: (pools that need it, path, loader); 'future' is the future module
+# (main_future.py), which is not a pool of the historical model.
 DATA_MAP = {
     'trade_textiles': ({'rw', 'di', 'ma', 'co'}, 'data_files/Tab_08801_textiles.csv', _load_trade_textiles),
     'crossborder': ({'rw'}, 'data_files/SSB_grensehandel_05678_14221.csv', _load_crossborder),
@@ -71,7 +82,9 @@ DATA_MAP = {
     'prodcom': ({'ma'}, 'data_files/SSB_10455_prodcom_garn_tau_nett_2008_2025.csv', _load_prodcom),
     'varetall': ({'ma'}, 'data_files/SSB_industristatistikk_varetall_1988_1989.csv', _load_varetall),
     'domestic_production': ({'ma'}, 'data_files/domestic_production_mass.csv', _load_domestic_production),
-    'population': ({'us'}, 'data_files/SSB_05803_befolkning_1985_2026.csv', _load_population),
+    'population': ({'us', 'future'}, 'data_files/SSB_05803_befolkning_1985_2026.csv', _load_population),
+    'population_projection': ({'future'}, 'data_files/SSB_14740_befolkningsframskriving_2026_2051.csv',
+                              _load_population_projection),
 }
 
 
