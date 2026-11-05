@@ -246,7 +246,8 @@ def intermediate_composition(preloaded_data, current_params, fibre_composition, 
     return _shares_with_nontextile(kg, [product], current_params, fibre_composition, np.zeros(1), 1.0)[:, 0, :]
 
 
-def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_composition):
+def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_composition,
+                        exports_from_inputs=False):
     """
     Fills the MA flows of the fibre system. Norwegian raw wool is WO;
     greasy wool is counted as WO including its grease, so the scouring loss
@@ -260,22 +261,35 @@ def manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     fibre of its HS codes, production waste the mix of yarn and fabric
     entering MA.TX, and finished goods to DI.RT the rest of MA.TX per
     material.
+
+    With exports_from_inputs (the future module, which has no trade data)
+    the export of fibre and yarn has the mix of what enters MA.FI (raw
+    wool, import and recycled fibre) and the export of fabric the mix of
+    what enters MA.TX, so that more recycled fibre and less import change
+    what is sent out and no material turns negative.
     """
     fibre.flows[HAND_KNITTING_YARN].values[...] = tot.flows[HAND_KNITTING_YARN].values[..., None] * _only('WO')
     fibre.flows[RECYCLED_FIBRE].values[...] = tot.flows[RECYCLED_FIBRE].values[:, None] * recycled_fibre_composition(
         preloaded_data, current_params, fibre_composition)
     fibre.flows[RAW_WOOL].values[...] = tot.flows[RAW_WOOL].values[:, None] * _only('WO')
     fibre.flows[SCOURING_LOSS].values[...] = tot.flows[SCOURING_LOSS].values[:, None] * _only('WO')
-    for code, product, impeks in ((FIBRE_YARN_IMPORT, 'FY', 1), (FIBRE_YARN_EXPORT, 'FY', 2),
-                                  (FABRIC_IMPORT, 'FA', 1), (TEXTILE_EXPORT, 'FA', 2)):
+    traded = [(FIBRE_YARN_IMPORT, 'FY', 1), (FABRIC_IMPORT, 'FA', 1)]
+    if not exports_from_inputs:
+        traded += [(FIBRE_YARN_EXPORT, 'FY', 2), (TEXTILE_EXPORT, 'FA', 2)]
+    for code, product, impeks in traded:
         shares = intermediate_composition(preloaded_data, current_params, fibre_composition, product, impeks)
         fibre.flows[code].values[...] = tot.flows[code].values[:, None] * shares
+    if exports_from_inputs:
+        spun = sum(fibre.flows[c].values for c in (RAW_WOOL, FIBRE_YARN_IMPORT, RECYCLED_FIBRE))
+        fibre.flows[FIBRE_YARN_EXPORT].values[...] = (tot.flows[FIBRE_YARN_EXPORT].values[:, None]
+                                                     * spun / spun.sum(axis=1, keepdims=True))
     balance = sum(fibre.flows[c].values for c in (RAW_WOOL, FIBRE_YARN_IMPORT, RECYCLED_FIBRE)) - sum(
         fibre.flows[c].values for c in (FIBRE_YARN_EXPORT, SCOURING_LOSS)) - fibre.flows[
         HAND_KNITTING_YARN].values.sum(axis=1)
     clip_negative(fibre, YARN_TO_MANUFACTURING, balance)
     inputs = fibre.flows[YARN_TO_MANUFACTURING].values + fibre.flows[FABRIC_IMPORT].values
-    for code in (PRECONSUMER_WASTE, PRODUCTION_WASTE_RECYCLING):
+    mixed = (PRECONSUMER_WASTE, PRODUCTION_WASTE_RECYCLING) + ((TEXTILE_EXPORT,) if exports_from_inputs else ())
+    for code in mixed:
         fibre.flows[code].values[...] = tot.flows[code].values[:, None] * inputs / inputs.sum(axis=1, keepdims=True)
     fibre.flows[DOMESTIC_GOODS].values[...] = (tot.flows[DOMESTIC_GOODS].values[..., None]
                                                * domestic_goods_composition(fibre)[:, None, :])
@@ -380,7 +394,7 @@ def release_weights(current_params):
     return np.array([1.0 if m == 'SYN' else 0.0 if m == 'NT' else ratio for m in MATERIALS])
 
 
-def _cohorts(inflow, products, current_params, history_inflow, stock='US.HH'):
+def _cohorts(inflow, products, current_params, history_inflow, stock='US.HH', cohort_factor=None):
     """
     use_cohorts for the years of the system that inflow (year, product,
     material) covers. In the future module (D12) history_inflow holds the
@@ -388,17 +402,18 @@ def _cohorts(inflow, products, current_params, history_inflow, stock='US.HH'):
     so that the cohorts still in use in 2025 are carried on; it is None for
     the historical system. Returns 'outflow' and 'stock' over the system's
     years, 'stock_before' (the stock at the end of the year before them)
-    and 'stock_1987'.
+    and 'stock_1987'. cohort_factor multiplies the lifetime per cohort over
+    the history and the system's years (use_cohorts).
     """
     n = inflow.shape[0]
     full = inflow if history_inflow is None else np.concatenate([history_inflow, inflow])
-    cohorts = use_cohorts(full, products, current_params, stock=stock)
+    cohorts = use_cohorts(full, products, current_params, stock=stock, cohort_factor=cohort_factor)
     stock_all = np.concatenate([cohorts['stock_1987'][None], cohorts['stock']], axis=0)
     return {'outflow': cohorts['outflow'][-n:], 'stock': cohorts['stock'][-n:], 'stock_before': stock_all[-n - 1],
             'stock_1987': cohorts['stock_1987']}
 
 
-def household_cohort_model(tot, supply, current_params, history=None):
+def household_cohort_model(tot, supply, current_params, history=None, lifetime_factor=None):
     """
     Inflow-driven cohort model of the CORE group (CL+HT+FW and retail yarn)
     in US.HH (D8, D20): new goods entering US.HH by material, Weibull
@@ -406,12 +421,15 @@ def household_cohort_model(tot, supply, current_params, history=None):
     left out. Returns {'discards', 'stock', 'stock_change'} as FlodymArrays
     (year, product, material) over the system's years, and 'stock_1987' as
     an array (product, material); the stock includes the spin-up cohorts.
-    history is the closed historical fibre system in the future module.
+    history is the closed historical fibre system in the future module, and
+    lifetime_factor the lifetime of each cohort relative to the parameters
+    there (array (year, product) over the history and the future years).
     """
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
     new_goods = new_goods_to_households(tot.flows)[:, core]
     past = None if history is None else new_goods_to_households(history.flows)[:, core, :]
-    cohorts = _cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS, current_params, past)
+    cohorts = _cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS, current_params, past,
+                       cohort_factor=lifetime_factor)
     stock = np.concatenate([cohorts['stock_before'][None], cohorts['stock']], axis=0)
     dims = _cohort_dims(tot.dims['t'].items)
     return {
@@ -508,7 +526,8 @@ def collected_composition(fibre):
     return np.divide(mix, total, out=np.zeros_like(mix), where=total > 0)
 
 
-def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_composition, history=None):
+def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_composition, history=None,
+                        household_lifetime_factor=None):
     """
     Fills the fibre system from the closed TOT system and closes it. Returns
     {output name: FlodymArray with material dimension} for the parallel stock
@@ -518,7 +537,9 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     system: the cohort models then run over the historical and the future
     years, and the stock level continues from that of 2025. preloaded_data
     then holds the trade by fibre class of the future years
-    (calculations/future.future_composition_data).
+    (calculations/future.future_composition_data), and
+    household_lifetime_factor the lifetime of each CORE cohort in US.HH
+    relative to the parameters (calculations/future.Reference).
     """
     unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + COLLECTED_FLOWS + RELEASE_FLOWS + MIXED_FLOWS
                                       + MANUFACTURING_FLOWS + [INSTITUTIONAL_WASTE, INSTITUTIONAL_RELEASE,
@@ -528,7 +549,8 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
 
     reset(fibre)
     imported = supply_composition(preloaded_data, current_params, fibre_composition)
-    manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_composition)
+    manufacturing_layer(fibre, tot, preloaded_data, current_params, fibre_composition,
+                        exports_from_inputs=history is not None)
     supply = retail_composition(tot, imported, domestic_goods_composition(fibre))
     for code in SUPPLY_FLOWS:
         shares = imported if code == FINISHED_IMPORT else supply
@@ -538,7 +560,7 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * institutional
     fibre.flows[INSTITUTIONAL_RELEASE].values[...] = tot.flows[INSTITUTIONAL_RELEASE].values[..., None] * (
         institutional_release_composition(tot, supply, current_params, history))
-    cohorts = household_cohort_model(tot, supply, current_params, history)
+    cohorts = household_cohort_model(tot, supply, current_params, history, household_lifetime_factor)
     discards = household_discard_composition(tot, cohorts, supply, current_params, history)
     for code in DISCARD_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * discards

@@ -20,13 +20,18 @@ SPINUP_START = 1950
 N_SPINUP = START_YEAR - SPINUP_START
 
 
-def use_cohorts(inflow, products, current_params, stock='US.HH'):
+def use_cohorts(inflow, products, current_params, stock='US.HH', cohort_factor=None):
     """
     inflow: array (year, product, material) over the years from START_YEAR
     on: YEARS, or YEARS followed by the years of the future module (D12);
     stock: 'US.HH' or 'US.IC', which selects the lifetimes. Returns
     {'outflow', 'stock'} as arrays (year, product, material) over the same
     years, and 'stock_1987' as an array (product, material).
+
+    cohort_factor (array (year, product) over the same years as inflow)
+    multiplies the mean lifetime of each cohort, for lifetimes that change
+    in the future module (phase D, X4b); None keeps the lifetimes of the
+    parameters for every cohort.
     """
     dsm_years = list(range(SPINUP_START, START_YEAR + inflow.shape[0]))
     spinup = inflow[:1] * current_params['spinup_inflow_factor']
@@ -39,10 +44,15 @@ def use_cohorts(inflow, products, current_params, stock='US.HH'):
     shape = np.array([current_params[f'lifetime_shape_{stock}_{p}'] for p in products])
     mean = np.array([current_params[f'lifetime_mean_{stock}_{p}'] for p in products])
     scale = mean / np.array([math.gamma(1.0 + 1.0 / k) for k in shape])
+    if cohort_factor is None:
+        scale_dims, scale = dims[('p',)], scale
+    else:
+        factor = np.concatenate([np.ones((N_SPINUP, len(products))), cohort_factor], axis=0)
+        scale_dims, scale = dims[('t', 'p')], scale[None, :] * factor
     lifetime = fd.WeibullLifetime(
         dims=dims,
         weibull_shape=fd.Parameter(dims=dims[('p',)], values=shape),
-        weibull_scale=fd.Parameter(dims=dims[('p',)], values=scale),
+        weibull_scale=fd.Parameter(dims=scale_dims, values=scale),
     )
     dsm = fd.InflowDrivenDSM(name=f'{stock} cohorts', dims=dims, lifetime_model=lifetime,
                              inflow=fd.StockArray(dims=dims, values=inflow))

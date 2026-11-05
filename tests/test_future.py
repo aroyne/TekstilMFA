@@ -58,3 +58,23 @@ def test_household_stock_grows_by_the_set_amount(reference):
     change = fut.stocks['US.HH'].inflow.values[:, CORE] - fut.stocks['US.HH'].outflow.values[:, CORE]
     np.testing.assert_allclose(change, ref.current_params['future_stock_growth_kg_per_capita']
                                * ref.population / 1e6)
+
+
+def test_scenarios_are_reproducible_and_within_bounds():
+    from calculations.future_scenarios import CONTINUOUS, SORTING_BOUNDS, sample_scenarios
+    first, second = sample_scenarios(50), sample_scenarios(50)
+    assert first == second
+    for scenario in first:
+        for name, low, high in CONTINUOUS:
+            assert low <= getattr(scenario, name) <= high
+        assert sum(scenario.sorting_outcome_2035) == pytest.approx(1.0)
+        assert all(lo <= x <= hi for x, (lo, hi) in zip(scenario.sorting_outcome_2035, SORTING_BOUNDS))
+    assert {s.population for s in first} == {'LLL', 'MMM', 'HHH'}
+
+
+def test_sampled_scenarios_close_with_fibre_layer():
+    from calculations.future_scenarios import sample_scenarios
+    from main_future import prepare_history, run_future
+    history = prepare_history()
+    for scenario in sample_scenarios(20):
+        run_future(history, scenario)

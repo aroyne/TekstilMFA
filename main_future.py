@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Runs the reference path of the future module (phase D, D12): the
+Runs the reference path of the future module (phase D, D12; the 2025
+values carried on, Scenario.reference): the
 deterministic historical run (iteration 0) is closed first, and the
 future system (2026-2050, same register) starts from it
 (calculations/future.py). Both are written to
@@ -12,7 +13,7 @@ the balance and in the cohort model, and the indicators (EPR basis,
 collection rate). The fibre layer (D19) of both is written to
 output_files/future_reference_fibre.csv with a material column.
 
-Usage: python main_future.py [--alternative MMM] [--seed 1]
+Usage: python main_future.py [--seed 1]
 """
 import argparse
 
@@ -22,7 +23,7 @@ import pandas as pd
 import flodym as fd
 
 from calculations.fibre_layer import compute_fibre_layer
-from calculations.future import FUTURE_YEARS, Reference, execute_reference, future_composition_data
+from calculations.future import FUTURE_YEARS, Reference, Scenario, execute_future, future_composition_data
 from calculations.indicators import indicators
 from calculations.params import Parameters
 from calculations.sampling import DEFAULT_SEED
@@ -40,16 +41,15 @@ COHORT_DISCARDS = 'US.HH-US.HH-Stock model discards-TOT'
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Reference path of the future module.")
-    parser.add_argument('--alternative', default='MMM', help="SSB population projection alternative (14740)")
     parser.add_argument('--seed', type=int, default=DEFAULT_SEED, help="Seed of the historical run")
     return parser.parse_args()
 
 
-def run_reference(alternative='MMM', seed=DEFAULT_SEED):
+def prepare_history(seed=DEFAULT_SEED):
     """
-    Returns (closed historical system, closed future system, Reference,
-    preloaded data, {'history', 'future'}: (closed fibre system, stock
-    model outputs)).
+    The closed historical system (iteration 0) and its fibre layer, run
+    once for all scenarios: {'hist', 'hist_fibre', 'hist_stock',
+    'preloaded_data', 'params', 'current_params'}.
     """
     params = Parameters()
     preloaded_data = load_all_data(ALL_POOLS + ['future'], params)
@@ -57,26 +57,51 @@ def run_reference(alternative='MMM', seed=DEFAULT_SEED):
     hist = make_system()
     run_pools(hist, ALL_POOLS, preloaded_data, current_params, dataset_noise, anchors)
     close(hist)
+    hist_fibre = make_system(fibre=True)
+    hist_stock = compute_fibre_layer(hist_fibre, hist, preloaded_data, current_params, params.fibre_composition)
+    return {'hist': hist, 'hist_fibre': hist_fibre, 'hist_stock': hist_stock, 'preloaded_data': preloaded_data,
+            'params': params, 'current_params': current_params}
 
+
+def run_future(history, scenario, fibre=True):
+    """
+    Runs one scenario from the prepared history. Returns (closed future
+    system, Reference, closed future fibre system and its stock model
+    outputs, or (None, None) without the fibre layer).
+    """
+    preloaded_data = history['preloaded_data']
     # 'population' <- data_files/SSB_05803_befolkning_1985_2026.csv:
     # population on 1 January (SSB 05803), as the mean of the year (2025)
     # 'population_projection' <- data_files/SSB_14740_befolkningsframskriving_2026_2051.csv:
     # SSB's 2026 population projection, as the mean of the year
     population = {**{YEARS[-1]: preloaded_data['population'][YEARS[-1]]},
-                  **preloaded_data['population_projection'][alternative]}
-    ref = Reference(hist, population, current_params)
+                  **preloaded_data['population_projection'][scenario.population]}
+    ref = Reference(history['hist'], population, history['current_params'], scenario)
     fut = make_system(years=FUTURE_YEARS)
     reset(fut)
-    execute_reference(fut, ref)
+    execute_future(fut, ref)
     close(fut)
-
-    hist_fibre = make_system(fibre=True)
-    hist_stock = compute_fibre_layer(hist_fibre, hist, preloaded_data, current_params, params.fibre_composition)
+    if not fibre:
+        return fut, ref, (None, None)
     fut_fibre = make_system(fibre=True, years=FUTURE_YEARS)
-    fut_stock = compute_fibre_layer(fut_fibre, fut, future_composition_data(preloaded_data), current_params,
-                                    params.fibre_composition, history=hist_fibre)
-    layers = {'history': (hist_fibre, hist_stock), 'future': (fut_fibre, fut_stock)}
-    return hist, fut, ref, preloaded_data, layers
+    fut_stock = compute_fibre_layer(fut_fibre, fut, future_composition_data(preloaded_data,
+                                                                            scenario.synthetic_shift_2035),
+                                    ref.current_params, history['params'].fibre_composition,
+                                    history=history['hist_fibre'],
+                                    household_lifetime_factor=ref.household_lifetime_factor)
+    return fut, ref, (fut_fibre, fut_stock)
+
+
+def run_reference(seed=DEFAULT_SEED):
+    """
+    The reference path (Scenario.reference). Returns (closed historical
+    system, closed future system, Reference, preloaded data, {'history',
+    'future'}: (closed fibre system, stock model outputs)).
+    """
+    history = prepare_history(seed)
+    fut, ref, fut_layer = run_future(history, Scenario.reference(history['hist']))
+    layers = {'history': (history['hist_fibre'], history['hist_stock']), 'future': fut_layer}
+    return history['hist'], fut, ref, history['preloaded_data'], layers
 
 
 def _future_indicators(fut, preloaded_data):
@@ -132,7 +157,7 @@ def fibre_table(layers):
 
 def main():
     args = parse_arguments()
-    hist, fut, ref, preloaded_data, layers = run_reference(args.alternative, args.seed)
+    hist, fut, ref, preloaded_data, layers = run_reference(args.seed)
     print(f"[INFO] Cohort model scaled to the 2025 statistics: s = {ref.scale:.3f}")
     table(hist, fut, ref, preloaded_data).to_csv(TARGET, index=False)
     print(f"[INFO] Wrote {TARGET}")
