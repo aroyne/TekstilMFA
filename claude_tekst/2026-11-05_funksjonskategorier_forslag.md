@@ -62,20 +62,52 @@ Grunnlag:
 * **Sammensetning av lageret:** Garderobestudiene (Klepp, Laitala og Haugrønning, antall plagg per type) begrenser de relative levetidene sterkere, fordi lageret av en kategori er tilførsel × levetid. Det krever vekt per plagg per kategori (08801 har stykk og kg per HS-kode) og tallene fra OsloMet (henvendelsen er allerede listet).
 * **Historikken:** Tilførselsmiksen har endret seg, for eksempel med mer trikotasje og sportstøy. Den gjennomsnittlige levetiden for klær kan derfor endre seg over tid uten at en trend legges inn. Effekten på lagerdiagnosen rapporteres.
 
+## 5b. Tilstanden til kasseringene: brukbart eller ødelagt (lagt til etter innspill)
+
+Årsaken til kasseringen bestemmer om plagget kan brukes igjen:
+* **Kassert på grunn av opplevd levetid** (umoderne, lei, vokst ut av, passer ikke) er **brukbart**.
+* **Kassert på grunn av teknisk levetid** (slitt ut, skadet) er **brukbart bare hvis det repareres**. Den delen som kan repareres, er brukbar (Mepex regner «litt slitt, feil som enkelt kan fikses» som brukbart, tilstand 2). Resten er **ødelagt** og går til gjenvinning eller restavfall.
+
+Andelen ødelagt per kategori er da: andel kassert på grunn av slitasje × (1 − andel som kan repareres).
+
+**Data (Syversen m.fl. 2023, tabell 23, andel brukbart, vektet, alle strømmene):**
+
+| Kategori hos Mepex | Brukbart | Ødelagt | Vår kategori |
+|---|---|---|---|
+| Overdeler A (tynn) og B (tykk) | 80 % og 86 % | 14–20 % | K2 |
+| Underdeler | 77 % | 23 % | K3 |
+| Yttertøy | 71 % | 29 % | K4 |
+| Sport, fritid, overall, arbeidstøy | 72 % | 28 % | K4 |
+| Barn og baby | 85 % | 15 % | K5 |
+| Klær annet (intimplagg, sokker, regntøy) | 58 % | 42 % | K1 |
+| Sko | 56 % | 44 % | S1–S4 |
+| Tekstilboks / restavfall HH / restavfall GVS | 81 / 66 / 64 % | | Utvalget ved innsamling |
+
+**Konsekvenser for parametrene i avsnitt 3:** Andelen kassert på grunn av slitasje blir bundet av data. For overdeler, med 17 % ødelagt og 10–30 % som kan repareres, er den bare ca. 0,2–0,25. Spennet i avsnitt 3 (0,3–0,6) er for høyt og må strammes inn mot Mepex. Holdbarhet (L3) betyr da mindre for overdeler. Undertøy og sokker (ca. 0,45–0,5) og sko (ca. 0,5–0,6) har høyere andel kassert på grunn av slitasje, og der virker holdbarhet og reparasjon mer.
+
+**Bruk i modellen:**
+* **Historikken:** Tilstanden regnes per kategori og år og kontrolleres mot Mepex 2021–2022 og mot andelen brukbart i restavfallet for 2018, 2022 og 2025 (D18). Flytene er fortsatt fra data (D8). Tilstanden er kalibrering og diagnose.
+* **Fremtiden:**
+  * Andelen brukbart i restavfallet (brukbart mot slitt) og det maksimale ombruket fra sorteringen følger tilstanden. X9 for ombruk blir begrenset av andelen brukbart i det som samles inn, og X13 er fortsatt grensen for markedet.
+  * Innsamlingen tar bare litt mer av det brukbare (81 % mot 64–66 %). Den forskjellen holdes fra data.
+* **Tiltak som endrer tilstanden:** Reparasjon (L7) gjør at færre plagg kasseres som ødelagte, og at flere blir værende i bruk. Holdbarhet (L3) gir færre utslitte. Kortere opplevd levetid (X4b) gir flere brukbare kasseringer. Det øker potensialet for ombruk, men ikke nødvendigvis ombruket.
+* At noe er brukbart, betyr ikke at det blir brukt igjen. Det faktiske ombruket bestemmes av sorteringen og markedet.
+
 ## 6. Kostnad og rekkefølge
 
 1. Koblingen fra HS8 til kategori og andelene av tilførselen per år (en ny datafunksjon, test på at andelene summerer til 1).
 2. Overlevelse med to risikoer per kategori i `cohorts.py` (test på at én kategori med opplevd levetid uendelig gir dagens Weibull).
 3. Undergrupper i lagermodellen for CL og FW, i historikken (us_mc og fiberlaget) og i fremtiden (future.py, lagerdrevne kjøp per kategori).
 4. Tiltak per kategori og nye usikre faktorer (spennene over, trukket med latin hypercube).
-5. Kontroll mot Mepex og eventuelt garderobedata, dokumentasjon og ny kjøring.
+5. Tilstanden til kasseringene (5b) og kalibrering av andelen kassert på grunn av slitasje mot Mepex tabell 23.
+6. Kontroll mot Mepex og eventuelt garderobedata, dokumentasjon og ny kjøring.
 
 Anslått arbeid er 1–2 økter.
 
 ## Spørsmål
 
 1. **Kategoriene og HS-koblingen:** Er det greit at tilbehør legges i K4, og at barneklær bare fanges via 6111 og 6209?
-2. **Spennene i avsnitt 3:** Er de rimelige, særlig andelen kasseringer som skyldes slitasje, siden den avgjør effekten av holdbarhet og reparasjon?
+2. **Spennene i avsnitt 3:** Er de rimelige? Andelen kasseringer som skyldes slitasje kalibreres nå mot andelen ødelagt hos Mepex (5b), gitt andelen som kan repareres. Er det riktig at den bindes slik, og ikke settes fritt?
 3. **Nivået:** Er det greit at kategoriene skaleres til dagens gjennomsnittlige levetid per produkt, så de endrer fordelingen og ikke nivået?
 4. **Usikkerheten:** Skal parametrene per kategori være usikre faktorer i fremtidsscenariene (ca. 36 nye) og ha fordelinger i MC for historikken? Alternativet er faste midtverdier med en strukturkjøring.
 
