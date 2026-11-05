@@ -128,3 +128,69 @@ def _cohorts_from_survival(inflow, products, current_params, stock, cohort_facto
         'stock': stock_all[N_SPINUP:],
         'stock_1987': stock_all[N_SPINUP - 1],
     }
+
+
+def competing_survival(n_years, technical, perceived, technical_shape, perceived_shape, technical_factor=None,
+                       perceived_factor=None, period_factor=None):
+    """
+    Survival of cohorts with two competing reasons to discard, technical
+    (worn out, damaged) and perceived (no longer wanted), each Weibull, over
+    the spin-up years and n_years from START_YEAR. technical and perceived
+    are the scales per unit (array (unit,); perceived may be infinite);
+    technical_factor and perceived_factor (arrays (year, unit) over n_years)
+    multiply the scales of each cohort, and period_factor multiplies the
+    technical scale of all cohorts in a year (repair). Inflow arrives in the
+    middle of the year. Returns (sf, technical share): sf (year, cohort,
+    unit) is the share of a cohort still in use at the end of a year, and
+    technical share (year, cohort, unit) the share of the goods leaving in
+    that year that leave for technical reasons.
+    """
+    n = N_SPINUP + n_years
+    units = len(technical)
+
+    def full(factor):
+        if factor is None:
+            return np.ones((n, units))
+        return np.concatenate([np.ones((N_SPINUP, units)), factor], axis=0)
+
+    lam_t = technical[None, :] * full(technical_factor)
+    lam_p = perceived[None, :] * full(perceived_factor)
+    period = full(period_factor)
+    sf = np.zeros((n, n, units))
+    share = np.zeros((n, n, units))
+    for t in range(n):
+        age = (t - np.arange(t + 1) + 0.5)[:, None]
+        before = np.clip(age - 1.0, 0.0, None)
+        lt = lam_t[:t + 1] * period[t][None, :]
+        d_tech = (age / lt) ** technical_shape - (before / lt) ** technical_shape
+        d_perc = (age / lam_p[:t + 1]) ** perceived_shape - (before / lam_p[:t + 1]) ** perceived_shape
+        previous = np.ones((t + 1, units))
+        if t > 0:
+            previous[:t] = sf[t - 1, :t]
+        sf[t, :t + 1] = previous * np.exp(-d_tech - d_perc)
+        share[t, :t + 1] = d_tech / (d_tech + d_perc)
+    return sf, share
+
+
+def unit_cohorts(inflow, sf, technical_share, repairable, spinup_inflow_factor):
+    """
+    Stock and outflow of cohorts from survival factors (competing_survival).
+    inflow: array (year, unit, material) over the years from START_YEAR.
+    Returns {'outflow', 'stock', 'broken'} as arrays (year, unit, material)
+    over the same years, with 'broken' the outflow damaged beyond easy
+    repair (technical outflow times one minus the repairable share per
+    unit), and 'stock_1987' as an array (unit, material).
+    """
+    spinup = inflow[:1] * spinup_inflow_factor
+    full = np.concatenate([np.repeat(spinup, N_SPINUP, axis=0), inflow], axis=0)
+    previous = np.concatenate([np.ones((1,) + sf.shape[1:]), sf[:-1]], axis=0)
+    # A cohort enters during its year, so before that year nothing of it is
+    # in use and nothing leaves.
+    entered = np.tril(np.ones(sf.shape[:2]))[:, :, None]
+    leaving = np.clip(previous * entered - sf, 0.0, None) * entered
+    leaving[np.arange(sf.shape[0]), np.arange(sf.shape[0])] = 1.0 - sf[np.arange(sf.shape[0]), np.arange(sf.shape[0])]
+    stock = np.einsum('tcu,cum->tum', sf, full)
+    outflow = np.einsum('tcu,cum->tum', leaving, full)
+    broken = np.einsum('tcu,cum->tum', leaving * technical_share * (1.0 - repairable)[None, None, :], full)
+    return {'outflow': outflow[N_SPINUP:], 'stock': stock[N_SPINUP:], 'broken': broken[N_SPINUP:],
+            'stock_1987': stock[N_SPINUP - 1]}

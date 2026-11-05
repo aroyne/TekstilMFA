@@ -9,6 +9,7 @@ described in DATA_SOURCES.md.
 import pandas as pd
 
 from calculations.fibre_layer import aggregate_by_fibre_class
+from calculations.categories import category_shares
 from calculations.indicators import epr_scope_shares
 from calculations.trade import aggregate_trade, map_hs_to_product
 from calculations.utils import PRODUCTS
@@ -98,6 +99,9 @@ def load_all_data(selected_pools, params):
     if 'trade_textiles' in preloaded:
         preloaded['trade_aggregated'] = aggregate_trade(preloaded['trade_textiles'])
         preloaded['epr_scope_share'] = epr_scope_shares(preloaded['trade_textiles'])
+        # Function categories of clothing and footwear in the household
+        # cohort model, from the import mass of their HS codes.
+        preloaded['category_shares'] = category_shares(preloaded['trade_textiles'])
         trade = preloaded['trade_textiles']
         preloaded['imports_by_fibre_class'] = aggregate_by_fibre_class(
             trade, params.hs_main_fibre, 1, 'finished', PRODUCTS)

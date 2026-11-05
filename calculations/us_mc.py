@@ -14,6 +14,7 @@ by a cohort model with lifetimes per product, an exception to D8. Sacks
 """
 import numpy as np
 
+from calculations.categories import history_units, household_core_cohorts
 from calculations.cohorts import use_cohorts
 from calculations.fibre_layer import (INSTITUTIONAL_COHORT_PRODUCTS, OTHER_HOUSEHOLD_GOODS,
                                       new_goods_to_households, supply_composition)
@@ -172,13 +173,16 @@ def _household_textile_stock(mfa, preloaded_data, current_params):
     """
     Stock of textile fibre in the CORE group of US.HH by fibre group, array
     (year, fibre group), from the cohort model of new goods entering the
-    households, with the composition of registered imports.
+    households (with the function categories of clothing and footwear), with
+    the composition of registered imports.
     """
     supply = _supply(preloaded_data, current_params)
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
     new_goods = new_goods_to_households(mfa.flows)[:, core]
-    stock = use_cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS,
-                              current_params)['stock'].sum(axis=1)
+    # 'category_shares' <- data_files/Tab_08801_textiles.csv (SSB 08801):
+    # import mass of the function categories of CL and FW per year
+    stock = household_core_cohorts(new_goods[:, :, None] * supply[:, core, :],
+                                   history_units(preloaded_data['category_shares']), current_params)['stock'].sum(axis=1)
     return stock[:, [MATERIALS.index(g) for g in FIBRE_GROUPS]]
 
 

@@ -54,6 +54,7 @@ import flodym as fd
 import numpy as np
 import pandas as pd
 
+from calculations.categories import history_units, household_core_cohorts
 from calculations.cohorts import use_cohorts
 from calculations.system import clip_negative, close, reset, to_dims
 from calculations.utils import (CORE_GROUP_PRODUCTS, FIBRE_GROUPS, MATERIALS, PRODUCT_GROUPS, PRODUCTS, START_YEAR,
@@ -364,6 +365,7 @@ STOCK_MODEL_OUTPUTS = {
     'discards': 'US.HH-US.HH-Stock model discards-TOT',
     'stock': 'US.HH-US.HH-Stock model stock-TOT',
     'stock_change': 'US.HH-US.HH-Stock model stock change-TOT',
+    'broken': 'US.HH-US.HH-Stock model broken discards-TOT',
 }
 # Stock level of the statistics-based balance: the residual stock changes
 # accumulated from the stock model's stock at the end of 1987 (D2).
@@ -416,29 +418,34 @@ def _cohorts(inflow, products, current_params, history_inflow, stock='US.HH', co
             'stock_1987': cohorts['stock_1987']}
 
 
-def household_cohort_model(tot, supply, current_params, history=None, lifetime_factor=None, period_factor=None):
+def household_cohort_model(tot, supply, current_params, units, history=None):
     """
     Inflow-driven cohort model of the CORE group (CL+HT+FW and retail yarn)
-    in US.HH (D8, D20): new goods entering US.HH by material, Weibull
-    lifetimes per product. Second-hand purchases (1-2 % of the inflow) are
-    left out. Returns {'discards', 'stock', 'stock_change'} as FlodymArrays
-    (year, product, material) over the system's years, and 'stock_1987' as
-    an array (product, material); the stock includes the spin-up cohorts.
-    history is the closed historical fibre system in the future module, and
-    lifetime_factor the lifetime of each cohort relative to the parameters
-    there (array (year, product) over the history and the future years).
+    in US.HH (D8, D20): new goods entering US.HH by material, split into the
+    function categories of clothing and footwear (calculations/categories.py),
+    each with a technical and a perceived lifetime. Second-hand purchases
+    (1-2 % of the inflow) are left out. units is the unit setup (shares and
+    lifetime factors) over the system's years, or over the history and the
+    future years when history (the closed historical fibre system) is given
+    in the future module. Returns {'discards', 'stock', 'stock_change',
+    'broken'} as FlodymArrays (year, product, material) over the system's
+    years, 'broken' being the discards damaged beyond easy repair, and
+    'stock_1987' as an array (product, material); the stock includes the
+    spin-up cohorts.
     """
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
-    new_goods = new_goods_to_households(tot.flows)[:, core]
-    past = None if history is None else new_goods_to_households(history.flows)[:, core, :]
-    cohorts = _cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS, current_params, past,
-                       cohort_factor=lifetime_factor, period_factor=period_factor)
-    stock = np.concatenate([cohorts['stock_before'][None], cohorts['stock']], axis=0)
+    new_goods = new_goods_to_households(tot.flows)[:, core, None] * supply[:, core, :]
+    n = new_goods.shape[0]
+    if history is not None:
+        new_goods = np.concatenate([new_goods_to_households(history.flows)[:, core, :], new_goods])
+    cohorts = household_core_cohorts(new_goods, units, current_params)
+    stock_all = np.concatenate([cohorts['stock_1987'][None], cohorts['stock']], axis=0)
     dims = _cohort_dims(tot.dims['t'].items)
     return {
-        'discards': fd.FlodymArray(dims=dims, values=cohorts['outflow']),
-        'stock': fd.FlodymArray(dims=dims, values=cohorts['stock']),
-        'stock_change': fd.FlodymArray(dims=dims, values=np.diff(stock, axis=0)),
+        'discards': fd.FlodymArray(dims=dims, values=cohorts['outflow'][-n:]),
+        'stock': fd.FlodymArray(dims=dims, values=cohorts['stock'][-n:]),
+        'stock_change': fd.FlodymArray(dims=dims, values=np.diff(stock_all, axis=0)[-n:]),
+        'broken': fd.FlodymArray(dims=dims, values=cohorts['broken'][-n:]),
         'stock_1987': cohorts['stock_1987'],
     }
 
@@ -530,7 +537,7 @@ def collected_composition(fibre):
 
 
 def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_composition, history=None,
-                        household_lifetime_factor=None, household_period_factor=None):
+                        household_units=None):
     """
     Fills the fibre system from the closed TOT system and closes it. Returns
     {output name: FlodymArray with material dimension} for the parallel stock
@@ -540,10 +547,10 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     system: the cohort models then run over the historical and the future
     years, and the stock level continues from that of 2025. preloaded_data
     then holds the trade by fibre class of the future years
-    (calculations/future.future_composition_data), and
-    household_lifetime_factor the lifetime of each CORE cohort in US.HH
-    relative to the parameters and household_period_factor the period effect
-    of repair on them (calculations/future.Reference).
+    (calculations/future.future_composition_data), and household_units the
+    unit setup of the household cohort model over the history and the
+    future years (calculations/future.Reference). Without it the historical
+    unit setup is used.
     """
     unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + COLLECTED_FLOWS + RELEASE_FLOWS + MIXED_FLOWS
                                       + MANUFACTURING_FLOWS + [INSTITUTIONAL_WASTE, INSTITUTIONAL_RELEASE,
@@ -564,8 +571,11 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * institutional
     fibre.flows[INSTITUTIONAL_RELEASE].values[...] = tot.flows[INSTITUTIONAL_RELEASE].values[..., None] * (
         institutional_release_composition(tot, supply, current_params, history))
-    cohorts = household_cohort_model(tot, supply, current_params, history, household_lifetime_factor,
-                                     household_period_factor)
+    if household_units is None:
+        # 'category_shares' <- data_files/Tab_08801_textiles.csv (SSB 08801):
+        # import mass of the function categories of CL and FW per year
+        household_units = history_units(preloaded_data['category_shares'])
+    cohorts = household_cohort_model(tot, supply, current_params, household_units, history)
     discards = household_discard_composition(tot, cohorts, supply, current_params, history)
     for code in DISCARD_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * discards
