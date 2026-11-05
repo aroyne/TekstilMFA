@@ -36,7 +36,7 @@ import dataclasses
 
 import numpy as np
 
-from calculations.cohorts import use_cohorts
+from calculations.cohorts import N_SPINUP, survival, use_cohorts
 from calculations.fibre_layer import (FIBRE_CLASSES, INSTITUTIONAL_COHORT_PRODUCTS, OTHER_HOUSEHOLD_GOODS,
                                       new_goods_to_households)
 from calculations.system import clip_negative, to_dims
@@ -79,6 +79,23 @@ UNSOLD_DONATED = 'DI.RT-CO.CO-Unsold goods donated-TOT'
 # Products taxed by L5 and covered by the first durability act (L3: clothing).
 TAXED_PRODUCTS = ['CL', 'HT', 'FW']
 DURABLE_PRODUCTS = ['CL']
+# Clothing is what is rented or shared (L8).
+SHARED_PRODUCTS = ['CL']
+PRIVATE_IMPORTS = 'RW.RW-US.HH-Private imports-TOT'
+ONLINE_RETURNS = 'US.HH-RW.RW-Returns of direct online purchases-TOT'
+HAND_YARN = 'MA.FI-DI.RT-Domestic hand knitting yarn-TOT'
+FINISHED_EXPORT = 'DI.RT-RW.RW-Export of finished textile products-TOT'
+# Demand of CL+HT+FW in households (step 4): 'supply' holds the 2025 supply
+# per inhabitant (steps 1-3), 'stock' derives purchases from the stock in
+# use that households need (stock-driven).
+DEMAND_MODES = ('supply', 'stock')
+# Flows that make up the household market for new goods; in the
+# stock-driven demand their CORE products follow the purchases. Exports and
+# unsold goods keep their ratio to the market and domestic manufacturing its
+# share of it (institutions buy a small part of the market, which this
+# approximation scales too).
+HOUSEHOLD_MARKET_FLOWS = [SALES_HH, ONLINE, PRIVATE_IMPORTS, FINISHED_EXPORT, UNSOLD_DISCARDED, UNSOLD_DONATED,
+                          'MA.TX-DI.RT-Domestic finished products-TOT', HAND_YARN]
 
 # Flows that follow the population: the 2025 value per inhabitant times
 # the consumption trend of the scenario for flows split by product.
@@ -148,6 +165,12 @@ class Scenario:
     residual_export_share_2035: float  # X11: share of residual waste incinerated abroad
     synthetic_shift_2035: float     # X12: change in the synthetic share of new goods (fibre layer)
     reuse_market_2035: float        # X13: second-hand sales in Norway of textiles sorted here, kt
+    # Step 4 (stock-driven demand). The desired stock in 2025 (X14) is the
+    # stock of the cohort model in 2025, so it follows the lifetime level X4.
+    desired_stock_trend: float      # X15: change per year to 2035 of the desired stock per inhabitant
+    displacement: float             # X16: new purchases replaced per kg bought second-hand
+    rebound: float                  # X17: share of a reduction in purchases that comes back
+    durability_realised: float      # X18: share of a longer technical lifetime that is used
 
     @classmethod
     def reference(cls, hist):
@@ -170,6 +193,8 @@ class Scenario:
             # No limit: second-hand sales in Norway follow what is sorted
             # for reuse, as in 2025.
             reuse_market_2035=float('inf'),
+            # The middle of the spans of step 4.
+            desired_stock_trend=0.0, displacement=0.475, rebound=0.5, durability_realised=0.6,
         )
 
 
@@ -188,12 +213,17 @@ class Policy:
     destruction_ban: bool           # L4: unsold goods are donated instead of discarded
     destruction_ban_share_2027: float  # L4: share of unsold goods covered in 2027, all from 2030
     consumption_reduction: float    # L5: lower consumption per inhabitant of CL+HT+FW, full in 2030
+    reuse_market_increase: float    # L6: factor on the Norwegian second-hand market, full in 2032
+    repair_increase: float          # L7: longer lifetime of CORE cohorts from 2027 (repair)
+    sharing_reduction: float        # L8: lower need for clothing through rental and sharing, full in 2030
+    recycled_content_2035: float    # L9: recycled share of the fibre in new goods (metric only)
 
     @classmethod
     def none(cls):
         return cls(name='L0', collection_increase=0.0, collection_from_reusable=0.0, domestic_sorting=False,
                    durability_increase=0.0, destruction_ban=False, destruction_ban_share_2027=0.0,
-                   consumption_reduction=0.0)
+                   consumption_reduction=0.0, reuse_market_increase=1.0, repair_increase=0.0,
+                   sharing_reduction=0.0, recycled_content_2035=0.0)
 
 
 def ramp(start, end, years=FUTURE_YEARS):
@@ -215,11 +245,22 @@ class Reference:
     The cohort models are run once and kept here.
     """
 
-    def __init__(self, hist, population, current_params, scenario, policy):
-        """population: {year: mean population} for 2025 and FUTURE_YEARS, in the scenario's alternative."""
+    def __init__(self, hist, population, current_params, scenario, policy, demand='supply',
+                 baseline_purchases=None):
+        """
+        population: {year: mean population} for 2025 and FUTURE_YEARS, in
+        the scenario's alternative. demand: one of DEMAND_MODES.
+        baseline_purchases: the stock-driven purchases of the same scenario
+        without measures, array (year, CORE product), for the rebound.
+        """
+        if demand not in DEMAND_MODES:
+            raise ValueError(f"Unknown demand {demand!r}")
         self.hist = hist
         self.scenario = scenario
         self.policy = policy
+        self.demand = demand
+        self.baseline_purchases = baseline_purchases
+        self.purchases = None
         self.current_params = dict(current_params)
         for product in CORE_GROUP_PRODUCTS:
             self.current_params[f'lifetime_mean_US.HH_{product}'] *= scenario.lifetime_level
@@ -230,20 +271,35 @@ class Reference:
         rate = np.array([scenario.consumption_trend_core if p in CORE_GROUP_PRODUCTS
                          else scenario.consumption_trend_other for p in PRODUCTS])
         self.consumption_trend = (1.0 + rate[None, :]) ** years[:, None]
-        # L5: a tax on new textiles or measures against ultra fast fashion,
-        # phased in from 2028 to 2030.
+        # L5 (a tax on new textiles or measures against ultra fast fashion)
+        # and L8 (rental and sharing), phased in from 2028 to 2030: lower
+        # purchases under the supply-driven demand, a lower desired stock
+        # under the stock-driven demand.
         taxed = np.array([p in TAXED_PRODUCTS for p in PRODUCTS], dtype=float)
-        self.policy_consumption = 1.0 - policy.consumption_reduction * ramp(2027, 2030)[:, None] * taxed[None, :]
-        self.consumption_trend = self.consumption_trend * self.policy_consumption
+        shared = np.array([p in SHARED_PRODUCTS for p in PRODUCTS], dtype=float)
+        self.policy_consumption = 1.0 - ramp(2027, 2030)[:, None] * (
+            policy.consumption_reduction * taxed[None, :] + policy.sharing_reduction * shared[None, :])
+        if demand == 'supply':
+            self.consumption_trend = self.consumption_trend * self.policy_consumption
+        # The household market follows the consumption trend; under the
+        # stock-driven demand its CORE products are set to the purchases
+        # (set_purchases).
+        self.market_factor = self.consumption_trend.copy()
+        self.desired_stock_trend = (1.0 + scenario.desired_stock_trend) ** years
         # Lifetime of each CORE cohort relative to the parameters: 1 for the
         # history, the scenario's path for cohorts entering from 2026.
-        # L3 adds the durability requirement for clothing cohorts from 2029.
+        # L3 adds the durability requirement for clothing cohorts from 2029,
+        # of which the share X18 is used, and L7 repair for all CORE cohorts
+        # from 2027 (existing cohorts are not reached, an approximation).
         durable = np.array([p in DURABLE_PRODUCTS for p in CORE_GROUP_PRODUCTS], dtype=float)
         scenario_factor = np.repeat(path(1.0, scenario.lifetime_new_cohorts_2035)[:, None],
                                     len(CORE_GROUP_PRODUCTS), axis=1)
-        durability = 1.0 + policy.durability_increase * (np.array(FUTURE_YEARS) >= 2029)[:, None] * durable[None, :]
+        future_years = np.array(FUTURE_YEARS)
+        durability = 1.0 + (policy.durability_increase * scenario.durability_realised
+                            * (future_years >= 2029)[:, None] * durable[None, :])
+        repair = 1.0 + policy.repair_increase * (future_years >= 2027)[:, None]
         history_factor = np.ones((len(YEARS), len(CORE_GROUP_PRODUCTS)))
-        self.household_lifetime_factor = np.concatenate([history_factor, scenario_factor * durability])
+        self.household_lifetime_factor = np.concatenate([history_factor, scenario_factor * durability * repair])
         self.household_lifetime_factor_without_policy = np.concatenate([history_factor, scenario_factor])
 
     def base(self, code):
@@ -252,9 +308,22 @@ class Reference:
     def per_capita(self, code, letters):
         base = self.base(code)
         values = self.growth.reshape((-1,) + (1,) * base.ndim) * base
-        if 'p' in letters:
+        if code in HOUSEHOLD_MARKET_FLOWS:
+            values = values * self.market_factor
+        elif 'p' in letters:
             values = values * self.consumption_trend
         return values
+
+    def base_new_goods(self):
+        """New goods entering US.HH in 2025, array (CORE product,)."""
+        core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
+        return new_goods_to_households(self.hist.flows)[BASE, core]
+
+    def set_purchases(self, purchases):
+        """Sets the CORE household market to the stock-driven purchases, array (year, CORE product)."""
+        self.purchases = purchases
+        core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
+        self.market_factor[:, core] = purchases / (self.base_new_goods()[None, :] * self.growth[:, None])
 
     def held(self, code):
         return np.repeat(self.base(code)[None], len(FUTURE_YEARS), axis=0)
@@ -390,20 +459,88 @@ def _finished_products_import(fut):
     clip_negative(fut, 'RW.RW-DI.RT-Finished textile products import-TOT', out - domestic)
 
 
-def household_cohorts(hist, fut, current_params, lifetime_factor):
+def household_cohorts(hist, fut, current_params, lifetime_factor, secondhand=None):
     """
     Cohort model of the CORE group in US.HH over the historical and the
     future years: new goods entering the households from 1988 (iteration 0)
     and from 2026 (this module), with the spin-up from 1950, the lifetimes
     in current_params and lifetime_factor per cohort (array (year,
-    product)). Returns the use_cohorts result over YEARS + FUTURE_YEARS,
-    summed over the products, as arrays (year,).
+    product)). secondhand (array (future year, product)) is added to the
+    future inflow under the stock-driven demand, where second-hand goods are
+    part of the stock households hold. Returns the use_cohorts result over
+    YEARS + FUTURE_YEARS, summed over the products, as arrays (year,).
     """
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
-    inflow = np.concatenate([new_goods_to_households(hist.flows), new_goods_to_households(fut.flows)])[:, core]
+    future = new_goods_to_households(fut.flows)[:, core]
+    if secondhand is not None:
+        future = future + secondhand
+    inflow = np.concatenate([new_goods_to_households(hist.flows)[:, core], future])
     cohorts = use_cohorts(inflow[:, :, None], CORE_GROUP_PRODUCTS, current_params, cohort_factor=lifetime_factor)
     return {'outflow': cohorts['outflow'][:, :, 0].sum(axis=1), 'stock': cohorts['stock'][:, :, 0].sum(axis=1),
             'stock_1987': cohorts['stock_1987'][:, 0].sum()}
+
+
+def secondhand_by_product(fut, ref):
+    """
+    Second-hand sales to households split over the CORE products by their
+    shares of new goods in 2025, array (future year, product). In the first
+    pass of the stock-driven demand the flow is not set yet; the 2025 value
+    per inhabitant is used then.
+    """
+    values = fut.flows[SECONDHAND_SALES].values[:, CORE]
+    if np.isnan(values).any():
+        values = ref.base(SECONDHAND_SALES)[CORE] * ref.growth
+    split = ref.base_new_goods() / ref.base_new_goods().sum()
+    return values[:, None] * split[None, :]
+
+
+def stock_driven_purchases(fut, ref):
+    """
+    New CL+HT+FW+YA bought by households under the stock-driven demand
+    (step 4), array (future year, CORE product). Households hold a desired
+    stock in use: the stock of the cohort model in 2025 per inhabitant
+    (which follows the lifetime level X4), times the population, the trend
+    of the scenario (X15) and the measures that lower the need (L5, L8). In
+    each year they buy what is needed to reach it, given what survives of
+    earlier cohorts (lifetimes with X4b, L3 and L7), minus the new goods
+    that second-hand purchases replace (displacement X16, 0.1-0.85: Farrant
+    et al. 2010 estimate 60-85 %, consumer surveys 10-60 %). What
+    second-hand purchases do not replace adds to the stock. A share X17 of
+    the reduction relative to the same scenario without measures comes back
+    as purchases (rebound). Purchases cannot be negative.
+
+    The cohort model's stock was shrinking slightly in 2025 (supply below its
+    outflow), so holding the desired stock would make purchases jump in
+    2026. The need is therefore multiplied by a factor per product (about
+    0.96 in the reference path) that makes 2026 purchases equal the 2025
+    level per inhabitant, as the supply-driven demand does. In 2026 no
+    measure acts yet, so the factor is the same with and without measures.
+    """
+    core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
+    n_hist, n_full = len(YEARS), len(YEARS) + len(FUTURE_YEARS)
+    sf = survival(n_full, CORE_GROUP_PRODUCTS, ref.current_params, cohort_factor=ref.household_lifetime_factor)
+    history = new_goods_to_households(ref.hist.flows)[:, core]
+    inflow = np.zeros((N_SPINUP + n_full, len(core)))
+    inflow[:N_SPINUP] = history[0] * ref.current_params['spinup_inflow_factor']
+    inflow[N_SPINUP:N_SPINUP + n_hist] = history
+    end_2025 = N_SPINUP + n_hist - 1
+    stock_2025 = (sf[end_2025, :end_2025 + 1] * inflow[:end_2025 + 1]).sum(axis=0)
+    desired = (stock_2025[None, :] * ref.growth[:, None] * ref.desired_stock_trend[:, None]
+               * ref.policy_consumption[:, core])
+    secondhand = secondhand_by_product(fut, ref)
+    purchases = np.zeros((len(FUTURE_YEARS), len(core)))
+    for j in range(len(FUTURE_YEARS)):
+        t = end_2025 + 1 + j
+        surviving = (sf[t, :t] * inflow[:t]).sum(axis=0)
+        need = (desired[j] - surviving) / sf[t, t] - ref.scenario.displacement * secondhand[j]
+        if j == 0:
+            calibration = ref.base_new_goods() * ref.growth[0] / need
+        bought = np.clip(calibration * need, 0.0, None)
+        if ref.baseline_purchases is not None:
+            bought = bought + ref.scenario.rebound * np.clip(ref.baseline_purchases[j] - bought, 0.0, None)
+        purchases[j] = bought
+        inflow[t] = bought + secondhand[j]
+    return purchases
 
 
 def _policy_stock_change(fut, ref, cohorts):
@@ -449,8 +586,10 @@ def _household_discards(fut, ref):
     taken 50-90 % from reusable textiles in residual waste and the rest from
     worn ones. Textiles in commercial and bulky waste (D42) are not reached.
     """
-    cohorts = household_cohorts(ref.hist, fut, ref.current_params, ref.household_lifetime_factor)
-    ref.policy_stock_change = _policy_stock_change(fut, ref, cohorts)
+    cohorts = household_cohorts(ref.hist, fut, ref.current_params, ref.household_lifetime_factor,
+                                secondhand_by_product(fut, ref) if ref.demand == 'stock' else None)
+    if ref.demand == 'supply':
+        ref.policy_stock_change = _policy_stock_change(fut, ref, cohorts)
     recorded = {code: ref.base(code)[CORE] for code in (COLLECTION, REUSABLE, WORN)}
     statistics = sum(recorded.values())
     ref.scale = statistics / cohorts['outflow'][BASE] * ref.scenario.discard_level
@@ -557,15 +696,17 @@ def _domestic_sorting(fut, ref):
     shares (X9, a truncated flat Dirichlet; about 37, 6 and 57 % in 2025),
     moving from the 2025 shares to their 2035 values. What is sorted for
     reuse is sold second-hand in Norway up to the size of the market (X13,
-    1.6 kt in 2025, moving to its 2035 value), and the rest is exported as
-    sorted textiles for reuse.
+    1.6 kt in 2025, moving to its 2035 value; L6 support for reuse
+    multiplies it by 1.5-3, phased in 2027-2032), and the rest is exported
+    as sorted textiles for reuse.
     """
     sorted_in = _process_inflow(fut, 'CO.SO', ('t', 'g'))[:, CORE]
     base_in = _process_inflow(ref.hist, 'CO.SO', ('t', 'g'))[BASE, CORE]
     shares = {code: path(ref.base(code)[CORE] / base_in, target)
               for code, target in zip(SORTING_OUTCOMES, ref.scenario.sorting_outcome_2035)}
     reuse = sorted_in * shares[SORTED_REUSE]
-    market = path(ref.base(SORTED_REUSE)[CORE], ref.scenario.reuse_market_2035)
+    market = (path(ref.base(SORTED_REUSE)[CORE], ref.scenario.reuse_market_2035)
+              * (1.0 + (ref.policy.reuse_market_increase - 1.0) * ramp(2026, 2032)))
     domestic = np.minimum(reuse, market)
     fut.flows[SORTED_REUSE].values[...] = core_group_only(domestic)
     fut.flows[SORTED_REUSE_EXPORT].values[...] = core_group_only(reuse - domestic)
@@ -593,7 +734,18 @@ def _commercial_and_bulky_waste(fut, ref):
     stock and do not show up as commercial waste. A
     negative value (supply below discards plus growth) is not physical and
     is clipped at 0.
+
+    Under the stock-driven demand (step 4) the cohort model holds the stock
+    households need, so the stock grows as that model says, and this flow
+    is the share of its outflow that the statistics do not see: (1 - s)
+    times the outflow, with s the scaling of the cohort model to the 2025
+    statistics. It is clipped at 0 where X6 makes s exceed 1.
     """
+    if ref.demand == 'stock':
+        # The cohort model holds the stock households need, so the share of
+        # its outflow that the statistics do not see leaves here.
+        clip_negative(fut, COMMERCIAL_BULKY, core_group_only((1.0 - ref.scale) * ref.cohorts['outflow'][len(YEARS):]))
+        return
     core = ('t', 'g')
     inflow = sum(to_dims(f, core).values for f in fut.flows.values() if f.to_process.name == 'US.HH')
     outflow = sum(to_dims(f, core).values for code, f in fut.flows.items()

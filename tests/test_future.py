@@ -100,3 +100,29 @@ def test_policies_act_where_they_should():
     for name, flow in base.flows.items():
         np.testing.assert_array_equal(l0.flows[name].values, flow.values)
     run_future(history, scenario, policy('Lall', effects))
+
+
+def test_stock_driven_demand_starts_at_2025_level_and_responds_to_lifetimes():
+    import dataclasses
+    from calculations.fibre_layer import new_goods_to_households
+    from calculations.future import FUTURE_YEARS, Policy, Scenario
+    from calculations.future_scenarios import sample_scenarios
+    from calculations.utils import CORE_GROUP_PRODUCTS, PRODUCTS
+    from main_future import prepare_history, run_future
+    history = prepare_history()
+    scenario = Scenario.reference(history['hist'])
+    core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
+    supply, _, _ = run_future(history, scenario, fibre=False)
+    stock, ref, _ = run_future(history, scenario, fibre=False, demand='stock')
+    np.testing.assert_allclose(new_goods_to_households(stock.flows)[0, core],
+                               new_goods_to_households(supply.flows)[0, core])
+    durable = dataclasses.replace(Policy.none(), name='L3', durability_increase=0.3)
+    i2040 = FUTURE_YEARS.index(2040)
+    for demand, lower in (('supply', False), ('stock', True)):
+        fut, _, _ = run_future(history, scenario, durable, fibre=False, demand=demand,
+                               baseline_purchases=ref.purchases if demand == 'stock' else None)
+        base = supply if demand == 'supply' else stock
+        new, old = (new_goods_to_households(f.flows)[i2040, core].sum() for f in (fut, base))
+        assert (new < old - 1.0) == lower
+    for sampled in sample_scenarios(10):
+        run_future(history, sampled, fibre=False, demand='stock')

@@ -20,6 +20,37 @@ SPINUP_START = 1950
 N_SPINUP = START_YEAR - SPINUP_START
 
 
+def _weibull(dims, products, current_params, stock, cohort_factor):
+    """Weibull lifetime model over dims (t from SPINUP_START), mean per product times cohort_factor."""
+    shape = np.array([current_params[f'lifetime_shape_{stock}_{p}'] for p in products])
+    mean = np.array([current_params[f'lifetime_mean_{stock}_{p}'] for p in products])
+    scale = mean / np.array([math.gamma(1.0 + 1.0 / k) for k in shape])
+    if cohort_factor is None:
+        scale_dims, scale = dims[('p',)], scale
+    else:
+        factor = np.concatenate([np.ones((N_SPINUP, len(products))), cohort_factor], axis=0)
+        scale_dims, scale = dims[('t', 'p')], scale[None, :] * factor
+    return fd.WeibullLifetime(
+        dims=dims,
+        weibull_shape=fd.Parameter(dims=dims[('p',)], values=shape),
+        weibull_scale=fd.Parameter(dims=scale_dims, values=scale),
+    )
+
+
+def survival(n_years, products, current_params, stock='US.HH', cohort_factor=None):
+    """
+    Survival factors of the cohort model, array (year, cohort, product) over
+    the spin-up years and n_years from START_YEAR: the share of the inflow of
+    a cohort still in use at the end of a year, with the same lifetimes as
+    use_cohorts. Used by the stock-driven demand of the future module.
+    """
+    dims = fd.DimensionSet(dim_list=[
+        fd.Dimension(letter='t', name='Time', dtype=int, items=list(range(SPINUP_START, START_YEAR + n_years))),
+        fd.Dimension(letter='p', name='Product', dtype=str, items=products),
+    ])
+    return _weibull(dims, products, current_params, stock, cohort_factor).sf
+
+
 def use_cohorts(inflow, products, current_params, stock='US.HH', cohort_factor=None):
     """
     inflow: array (year, product, material) over the years from START_YEAR
@@ -41,19 +72,7 @@ def use_cohorts(inflow, products, current_params, stock='US.HH', cohort_factor=N
         fd.Dimension(letter='p', name='Product', dtype=str, items=products),
         fd.Dimension(letter='m', name='Material', dtype=int, items=list(range(inflow.shape[2]))),
     ])
-    shape = np.array([current_params[f'lifetime_shape_{stock}_{p}'] for p in products])
-    mean = np.array([current_params[f'lifetime_mean_{stock}_{p}'] for p in products])
-    scale = mean / np.array([math.gamma(1.0 + 1.0 / k) for k in shape])
-    if cohort_factor is None:
-        scale_dims, scale = dims[('p',)], scale
-    else:
-        factor = np.concatenate([np.ones((N_SPINUP, len(products))), cohort_factor], axis=0)
-        scale_dims, scale = dims[('t', 'p')], scale[None, :] * factor
-    lifetime = fd.WeibullLifetime(
-        dims=dims,
-        weibull_shape=fd.Parameter(dims=dims[('p',)], values=shape),
-        weibull_scale=fd.Parameter(dims=scale_dims, values=scale),
-    )
+    lifetime = _weibull(dims, products, current_params, stock, cohort_factor)
     dsm = fd.InflowDrivenDSM(name=f'{stock} cohorts', dims=dims, lifetime_model=lifetime,
                              inflow=fd.StockArray(dims=dims, values=inflow))
     dsm.compute()

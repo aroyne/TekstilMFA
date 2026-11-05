@@ -39,6 +39,11 @@ CONTINUOUS = [
     ('residual_export_share_2035', 0.05, 0.25),  # X11
     ('synthetic_shift_2035', 0.0, 0.10),         # X12
     ('reuse_market_2035', 1.6, 10.0),            # X13: kt; 1.6 in 2025
+    # Step 4, used by the stock-driven demand (X14 follows X4).
+    ('desired_stock_trend', -0.01, 0.01),        # X15: per year to 2035
+    ('displacement', 0.1, 0.85),                 # X16: Farrant et al. 2010 60-85 %, surveys 10-60 %
+    ('rebound', 0.0, 1.0),                       # X17
+    ('durability_realised', 0.2, 1.0),           # X18
 ]
 # X9: shares of what is sorted in Norway (reuse, recycling, residues),
 # flat on the simplex and truncated to these bounds.

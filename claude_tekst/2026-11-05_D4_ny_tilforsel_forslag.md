@@ -1,6 +1,6 @@
 # Fase D, trinn 4: lavere tilførsel av nytt materiale som mål (forslag og vurdering av nyhet)
 
-*Notat 2026-11-05. Bygger på trinn 1–3, [lagerdiagnosen](2026-11-02_C_lagerdiagnose.md), [opphopningen](2026-11-05_opphopning_hos_forbruker.md) og [datagrunnlaget](2026-11-05_lagerets_datagrunnlag_og_nevnerproblemet.md). Nettsøk, ikke systematisk. Funn om nyhet er derfor foreløpige. Ingenting er implementert.*
+*Notat 2026-11-05. Bygger på trinn 1–3, [lagerdiagnosen](2026-11-02_C_lagerdiagnose.md), [opphopningen](2026-11-05_opphopning_hos_forbruker.md) og [datagrunnlaget](2026-11-05_lagerets_datagrunnlag_og_nevnerproblemet.md). Nettsøk, ikke systematisk. Funn om nyhet er derfor foreløpige.* **Besluttet og implementert samme dag** (punkt 1–5 ja, alle tiltakene L6–L9 med, klimaindikatoren venter), se resultatene i avsnitt 8.
 
 ## 1. Hvorfor modellen må endres
 
@@ -122,3 +122,54 @@ Ingen enkeltdel er en ny metode. Det sterkeste nye er sammenligningen av de to f
 * Agentbasert modell av ombruk og rebound i tekstiler. https://link.springer.com/chapter/10.1007/978-3-032-31712-4_49
 * Hot or Cool Institute (2022), Unfit, Unfair, Unfashionable. https://hotorcool.org/unfit-unfair-unfashionable
 * Zink, T. & Geyer, R. (2017), Circular Economy Rebound, J. Ind. Ecol. 21(3) (ikke hentet i dette søket).
+
+## 8. Implementering og resultater (2026-11-05)
+
+### Hva som er gjort
+* `DEMAND_MODES = ('supply', 'stock')` i `calculations/future.py`. Den tilførselsdrevne formuleringen er uendret (referansebanen er lik trinn 1).
+* Under den lagerdrevne formuleringen (`stock_driven_purchases`) regnes kjøpene av CL+HT+FW+YA år for år. Ønsket lager er lagermodellens lager i 2025 per innbygger × befolkning × X15 × (L5, L8). Overlevelsen kommer fra `cohorts.survival` med X4b, L3 × X18 og L7. Bruktkjøp × X16 trekkes fra, og X17 legger til rebound sammenlignet med samme scenario uten tiltak. Bruktkjøpene inngår i lagermodellen. Kjøp og bruktsalg løses iterativt (toleranse 10⁻⁶ kt).
+* **Kalibrering:** Lagermodellens lager krympet litt i 2025, så det ønskede lageret ville gitt et hopp i kjøpene i 2026 (92 mot 89 kt). En faktor per produkt (ca. 0,96) gjør at kjøpene i 2026 er lik 2025-nivået per innbygger. Faktoren er den samme med og uten tiltak, fordi ingen tiltak virker i 2026.
+* **X14 (ønsket lager i 2025)** følger av X4 og er ikke en egen faktor. Det må være lik lagermodellens lager i 2025, ellers hopper kjøpene i 2026. X4 gir ca. 100–175 kg per innbygger.
+* **D42** er (1 − s) × utstrømmen under den lagerdrevne formuleringen.
+* **Hvordan tiltakene virker i de to formuleringene:**
+  * L5 og L8 senker kjøpene med tilførselsdrevet etterspørsel og det ønskede lageret med lagerdrevet.
+  * L3 og L7 endrer levetiden i begge formuleringene. Bare med lagerdrevet etterspørsel påvirker det kjøpene.
+  * L6 ganger bruktmarkedet i Norge (X13) med 1,5–3.
+  * L9 påvirker bare jomfruelig fiber.
+* **X2 (forbrukstrenden) brukes ikke for CORE med lagerdrevet etterspørsel.** X15 er det tilsvarende.
+* `future_policies.py` kjører 1 001 scenarier × 11 alternativer × 2 formuleringer over 8 prosesser (ca. 6 min, uten fiberlaget). Jomfruelig fiber regnes fra tekstilandelen per produkt i 2025. Råtabellen har bare nøkkelårene 2030, 2035, 2040 og 2050.
+* Trinn 2 er kjørt på nytt med X15–X18 i utvalget. Det endrer alle trekkene, men ikke bildet (417 av 1 000 scenarier med lagervekst under X5).
+
+### Resultater (1 000 scenarier)
+
+**Endring i ny tilførsel per innbygger sammenlignet med L0 i samme scenario og samme formulering (median, 2035):**
+
+| | L1 | L2 | L3 | L5 | L6 | L7 | L8 | L9 | Alle |
+|---|---|---|---|---|---|---|---|---|---|
+| Tilførselsdrevet | 0 % | 0 % | 0 % | −20 % | 0 % | 0 % | −6 % | 0 % | −26 % |
+| Lagerdrevet | −0,3 % | −0,7 % | **−4 %** (−10 til −1) | −14 % | 0 % | **−7 %** (−14 til −1) | −4 % | 0 % | −32 % (**−47 til −5**) |
+
+Jomfruelig fiber: L9 −15 %, alle tiltakene −38 % (tilførselsdrevet) og −43 % (lagerdrevet) i 2035.
+
+**Andel scenarier som når målet (−30 % per innbygger i 2035 sammenlignet med 2025):**
+
+| | L0 | L5 | L8 | L9 | Alle |
+|---|---|---|---|---|---|
+| Ny tilførsel, tilførselsdrevet | 0 % | 32 % | 3 % | 0 % | 49 % |
+| Ny tilførsel, lagerdrevet | 0 % | 1 % | 0 % | 0 % | 44 % |
+| Jomfruelig fiber, tilførselsdrevet | 0 % | 32 % | 6 % | 22 % | 82 % |
+| Jomfruelig fiber, lagerdrevet | 0 % | 1 % | 0 % | 2 % | 75 % |
+
+Hovedpunkter:
+1. **Tiltakene for sirkularitet senker ikke ny tilførsel.** Produsentansvaret (L1) løfter innsamlingsgraden over 50 % i ca. 88 % av scenariene. Sortering i Norge (L2) fjerner den usorterte eksporten i alle scenarier. Ombruk (L6) øker bruktsalget. Effekten på ny tilførsel er under 1 %, også når bruktkjøp erstatter nytt. Bruktsalget i Norge (2–6 kt) er lite sammenlignet med kjøpene (ca. 90 kt). **Sirkularitetsmålene kan altså nås uten at målet i sirkulærøkonomien nås.**
+2. **Holdbarhet (L3) og reparasjon (L7) virker bare i den lagerdrevne formuleringen,** og moderat: ca. −4 og −7 % i 2035 og −6 og −9 % i 2050. Holdbarhetskravet gjelder bare klær fra 2029, og bare en del av den tekniske levetiden brukes (X18). **Formuleringen av etterspørselen avgjør om dette er et tiltak eller ikke.** Når tilførselen er gitt, ser holdbarhet virkningsløs ut. Når kjøpene følger behovet, virker det, men forsinket.
+3. **Avgift og suffisiens (L5, L8) virker i begge formuleringene**, men mindre i den lagerdrevne, der rebound tar igjen noe (−14 mot −20 %).
+4. **Bare kombinasjonen kan nå −30 %**, i ca. halvparten av scenariene. Med lagerdrevet etterspørsel er **rebound den viktigste faktoren** (ρ = −0,69), foran trenden i ønsket lager (−0,39) og effekten av avgiften (+0,21). Spennet er −47 til −5 %. Med full rebound forsvinner nesten hele effekten.
+5. **Uten tiltak avhenger utgangspunktet av formuleringen.** I den lagerdrevne gir kortere levetid for nye årganger (X4b, ultrarask mote) flere kjøp (16,7 mot 15,0 kg per innbygger i 2035). Uten tiltak er ny tilførsel i den lagerdrevne formuleringen styrt av trenden i ønsket lager (ρ = −0,86) og av X4b (+0,38).
+6. **Krav til resirkulert innhold (L9)** senker jomfruelig fiber med ca. 15 %, men ikke ny tilførsel.
+
+### Forbehold
+* Erstatningsgrad, rebound og X18 er antakelser med vide spenn. Bidraget er å vise hvilke av dem som avgjør utfallet, ikke å anslå selve effekten.
+* L7 når bare nye årganger fra 2027. Reparasjon av plagg som allerede er i bruk, er ikke med, så effekten er undervurdert.
+* Institusjonene og varene utenom CORE er fortsatt tilførselsdrevne. Eksport, usolgte varer og norsk produksjon skaleres med husholdningsmarkedet (en tilnærming).
+* Det er bare masse. Klima kan kobles på etterpå (vurdert i [eget notat](2026-11-05_LCA_kobling_vurdering.md)).

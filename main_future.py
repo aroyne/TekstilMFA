@@ -23,7 +23,8 @@ import pandas as pd
 import flodym as fd
 
 from calculations.fibre_layer import compute_fibre_layer
-from calculations.future import FUTURE_YEARS, Policy, Reference, Scenario, execute_future, future_composition_data
+from calculations.future import (FUTURE_YEARS, Policy, Reference, Scenario, execute_future, future_composition_data,
+                                 stock_driven_purchases)
 from calculations.indicators import indicators
 from calculations.params import Parameters
 from calculations.sampling import DEFAULT_SEED
@@ -63,10 +64,18 @@ def prepare_history(seed=DEFAULT_SEED):
             'params': params, 'current_params': current_params}
 
 
-def run_future(history, scenario, policy=None, fibre=True):
+# The stock-driven purchases and the second-hand sales they depend on are
+# solved by repeating the future run until the purchases no longer change.
+STOCK_DRIVEN_TOLERANCE_KT = 1e-6
+STOCK_DRIVEN_MAX_PASSES = 30
+
+
+def run_future(history, scenario, policy=None, fibre=True, demand='supply', baseline_purchases=None):
     """
-    Runs one scenario with one policy (Policy.none() if not given) from the
-    prepared history. Returns (closed future
+    Runs one scenario with one policy (Policy.none() if not given) and one
+    demand (DEMAND_MODES) from the prepared history. baseline_purchases are
+    the stock-driven purchases of the same scenario without measures, for
+    the rebound. Returns (closed future
     system, Reference, closed future fibre system and its stock model
     outputs, or (None, None) without the fibre layer).
     """
@@ -78,10 +87,20 @@ def run_future(history, scenario, policy=None, fibre=True):
     population = {**{YEARS[-1]: preloaded_data['population'][YEARS[-1]]},
                   **preloaded_data['population_projection'][scenario.population]}
     ref = Reference(history['hist'], population, history['current_params'], scenario,
-                    Policy.none() if policy is None else policy)
+                    Policy.none() if policy is None else policy, demand, baseline_purchases)
     fut = make_system(years=FUTURE_YEARS)
     reset(fut)
     execute_future(fut, ref)
+    if demand == 'stock':
+        for _ in range(STOCK_DRIVEN_MAX_PASSES):
+            purchases = stock_driven_purchases(fut, ref)
+            if ref.purchases is not None and np.abs(purchases - ref.purchases).max() < STOCK_DRIVEN_TOLERANCE_KT:
+                break
+            ref.set_purchases(purchases)
+            reset(fut)
+            execute_future(fut, ref)
+        else:
+            raise RuntimeError(f"Stock-driven purchases did not converge in {STOCK_DRIVEN_MAX_PASSES} passes")
     close(fut)
     if not fibre:
         return fut, ref, (None, None)

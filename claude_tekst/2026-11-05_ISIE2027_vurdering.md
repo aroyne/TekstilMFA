@@ -28,7 +28,8 @@ Avstemmingen av lageret over 37 år er **metoden og diagnosen**, ikke et sikkert
    * Det norske bruktmarkedet begrenser ombruken, ikke sorteringen.
    * Ingen kombinasjon av ambisiøse tiltak halverer forbrenningen innen 2035.
    * **Lengre levetid uten færre kjøp gir fullere garderober** (+110 kt i 2050) og bare en midlertidig nedgang i kasseringene (−12 % i 2035, −1 % i 2050).
-6. **Ny tilførsel som mål (trinn 4, planlagt).** En lagerdrevet modell der kjøpene følger ønsket lager, med erstatningsgrad for brukt og rebound som usikre faktorer, og begge formuleringene av etterspørselen side om side. Vi har ikke funnet en lagerdrevet MFA for tekstiler, og heller ikke en studie som sammenligner de to formuleringene for tiltak. Det er et nytt bruksområde og et nytt oppsett, ikke en ny metode.
+6. **Ny tilførsel som mål (trinn 4, implementert 2026-11-05).** Resultatene bekrefter konflikten. Produsentansvar, sortering og ombruk når sine egne mål, men senker ny tilførsel med under 1 %. Holdbarhet (−4 %) og reparasjon (−7 %) virker bare med lagerdrevet etterspørsel. Bare kombinasjonen av alle tiltakene når −30 % per innbygger, i ca. halvparten av scenariene, og rebound er den viktigste faktoren ([resultater](2026-11-05_D4_ny_tilforsel_forslag.md)).
+   Opprinnelig beskrivelse: En lagerdrevet modell der kjøpene følger ønsket lager, med erstatningsgrad for brukt og rebound som usikre faktorer, og begge formuleringene av etterspørselen side om side. Vi har ikke funnet en lagerdrevet MFA for tekstiler, og heller ikke en studie som sammenligner de to formuleringene for tiltak. Det er et nytt bruksområde og et nytt oppsett, ikke en ny metode.
 7. **Klima kan kobles på uten at det gir «hva som helst»** ([vurderingen](2026-11-05_LCA_kobling_vurdering.md)). Produksjonen av nye varer dominerer klimaregnskapet med en faktor 10–20. Med samme faktor for alle tiltakene i et scenario blir forskjellene mellom tiltakene robuste, selv om de absolutte tallene er usikre med en faktor 2–3. Det kan kontrolleres mot EEA (270 kg CO₂e per person). Det styrker koblingen til konferansetemaet og begrunner ny tilførsel som mål.
 
 ## Svakheter en fagfelle vil se
@@ -61,7 +62,7 @@ Avstemmingen av lageret over 37 år er **metoden og diagnosen**, ikke et sikkert
 
 **Ett abstract under Material and Resource Systems.** Kjernen avhenger av om trinn 4 er ferdig før fristen.
 
-**A. Hvis trinn 4 er gjort (anbefalt):** «Sirkularitetsmål og ny tilførsel: en nasjonal tekstil-MFA med avstemming, dyp usikkerhet og to formuleringer av etterspørselen»
+**A. Trinn 4 er gjort (anbefalt):** «Sirkularitetsmål og ny tilførsel: en nasjonal tekstil-MFA med avstemming, dyp usikkerhet og to formuleringer av etterspørselen»
 * *Problem:* Produsentansvaret i EU måles på innsamling og behandling. Målet i sirkulærøkonomien er lavere tilførsel av nytt materiale.
 * *Metode:* Dynamisk MFA for Norge 1988–2025 der offisiell statistikk er fasit og lagermodellen brukes til diagnose. Fremtiden 2026–2050 har 1 000 scenarier og ni tiltak med usikre effekter, og den kjøres med både tilførselsdrevet og lagerdrevet etterspørsel. Klima kobles på som en enkel indikator.
 * *Funn (formulert betinget):*
@@ -71,7 +72,7 @@ Avstemmingen av lageret over 37 år er **metoden og diagnosen**, ikke et sikkert
   4. Hvilke konklusjoner som avhenger av formuleringen av etterspørselen.
 * *Betydning:* Hvilke mål produsentansvaret bør ha, og hvilke data som mangler (næringsavfall, garderober, erstatningsgrad).
 
-**B. Hvis trinn 4 ikke rekkes:** «Nevnerproblemet: hva en 37-årig avstemming av et nasjonalt tekstilsystem betyr for oppfølgingen av innsamlingsmål»
+**B. Smalere alternativ:** «Nevnerproblemet: hva en 37-årig avstemming av et nasjonalt tekstilsystem betyr for oppfølgingen av innsamlingsmål»
 * Funnene er nevnerproblemet, gapet i nyere tid (trolig kasseringer som ikke måles, odds 2:1 til 7:1) og tiltaksfunnene fra trinn 3 som støtte.
 
 I begge tilfellene gjelder dette:
@@ -89,7 +90,7 @@ I begge tilfellene gjelder dette:
 
 1. Sjekk frist, sesjoner og om det kreves utvidet abstract.
 2. Send henvendelsene til Mepex (sko i ankrene, næringsavfall) og OsloMet (garderober). Svarene kan endre gapet.
-3. Gjør trinn 4 (lagerdrevet etterspørsel, ny tilførsel som mål), og eventuelt klimaindikatoren etter [oppsettet](2026-11-05_LCA_kobling_vurdering.md).
+3. ~~Trinn 4~~ (gjort 2026-11-05). Legg eventuelt på klimaindikatoren etter [oppsettet](2026-11-05_LCA_kobling_vurdering.md).
 4. Kjør en strukturkjøring for D42 i historikken med 0,5 og 2 kg per innbygger, slik at nevnerproblemet kan oppgis som et spenn.
 5. Gjør et systematisk søk (Scopus) etter lagerdrevne tekstilmodeller og etter sammenligninger av formuleringer av etterspørselen før påstandene om nyhet brukes.
 6. Sjekk årstall og innhold i regelverket mot rettsteksten (WFD 2025/1892, ESPR, WSR) og tallene fra Hot or Cool, Farrant m.fl. (2010) og EEA mot originalene.
