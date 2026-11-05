@@ -73,8 +73,8 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 80 % | 79 % | 81 % | 75 % | 73 % | 73 % |
-| Regenerert cellulose | 6 % | 4 % | 4 % | 5 % | 5 % | 5 % |
+| Bomull | 79 % | 79 % | 80 % | 75 % | 74 % | 74 % |
+| Regenerert cellulose | 6 % | 5 % | 4 % | 5 % | 5 % | 5 % |
 | Andre fibre | 1 % | 2 % | 2 % | 3 % | 4 % | 3 % |
 | Syntetisk | 3 % | 3 % | 3 % | 4 % | 4 % | 4 % |
 | Ull | 11 % | 12 % | 10 % | 13 % | 14 % | 14 % |
@@ -96,7 +96,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L212). Dokumentasjonen i koden:
+Beregnes i `_laundry_fibre_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L216). Dokumentasjonen i koden:
 
 > Fibres released from household textiles in washing machines to
 > wastewater, where the model stops following them: treatment, sludge and

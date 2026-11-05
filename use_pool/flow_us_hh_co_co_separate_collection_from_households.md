@@ -72,9 +72,9 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 43 % | 44 % | 41 % | 38 % | 35 % | 35 % |
+| Bomull | 43 % | 44 % | 41 % | 37 % | 35 % | 35 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 18 % | 17 % | 19 % | 18 % | 18 % | 17 % |
+| Ikke-tekstil | 18 % | 17 % | 19 % | 18 % | 18 % | 18 % |
 | Andre fibre | 1 % | 1 % | 1 % | 1 % | 2 % | 2 % |
 | Syntetisk | 30 % | 30 % | 32 % | 36 % | 38 % | 38 % |
 | Ull | 6 % | 6 % | 5 % | 5 % | 5 % | 6 % |
@@ -114,7 +114,7 @@ I TOT:
 
 ## Beregning i koden
 
-Beregnes i `_separate_collection_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L48). Dokumentasjonen i koden:
+Beregnes i `_separate_collection_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L49). Dokumentasjonen i koden:
 
 > Separately collected from households = exported used textiles + the part
 > kept in Norway (D17) - unsold clothing donated by retailers, which is

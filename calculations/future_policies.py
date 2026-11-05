@@ -35,11 +35,11 @@ CORE_PRODUCTS_INDEX = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
 EFFECTS = [
     ('collection_increase', 0.10, 0.35),         # L1, share points in 2032
     ('collection_from_reusable', 0.5, 0.9),      # L1
-    ('durability_increase', 0.10, 0.50),         # L3, clothing cohorts from 2029 (times X18)
+    ('durability_increase', 0.10, 0.50),         # L3, technical lifetime of clothing cohorts from 2029
     ('destruction_ban_share_2027', 0.5, 0.9),    # L4
     ('consumption_reduction', 0.10, 0.30),       # L5, CL+HT+FW in 2030
     ('reuse_market_increase', 1.5, 3.0),         # L6, factor on the second-hand market in 2032
-    ('repair_increase', 0.05, 0.20),             # L7, all CORE goods in use, full in 2032
+    ('repair_increase', 0.2, 0.8),               # L7, share of repairable failures repaired, full in 2032
     ('sharing_reduction', 0.05, 0.15),           # L8, clothing in 2030
     ('recycled_content_2035', 0.05, 0.25),       # L9, recycled share of fibre in new goods
 ]

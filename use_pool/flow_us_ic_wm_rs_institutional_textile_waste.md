@@ -123,7 +123,7 @@ I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministisk
 
 ## Beregning i koden
 
-Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L310). Dokumentasjonen i koden:
+Beregnes i `_institutional_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L314). Dokumentasjonen i koden:
 
 > Goods discarded by institutions and businesses: the outflow of a cohort
 > model of the goods sold to them, with Weibull lifetimes per product

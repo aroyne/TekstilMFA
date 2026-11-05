@@ -197,7 +197,17 @@ def history_units(category_shares_by_product):
             'technical_factor': None, 'perceived_factor': None, 'period_factor': None}
 
 
-def household_core_cohorts(new_goods, units, current_params):
+def unit_survival(units, current_params, n_years):
+    """Survival factors and technical shares (competing_survival) of the units in a unit setup."""
+    technical, perceived, repairable = unit_lifetimes(current_params, units['shares_2025'])
+    technical_shape = np.array([TECHNICAL_SHAPE if PRODUCT_OF_UNIT[u] in CATEGORIES
+                                else current_params[f'lifetime_shape_US.HH_{u}'] for u in UNITS])
+    sf, share = competing_survival(n_years, technical, perceived, technical_shape, PERCEIVED_SHAPE,
+                                   units['technical_factor'], units['perceived_factor'], units['period_factor'])
+    return sf, share, repairable
+
+
+def household_core_cohorts(new_goods, units, current_params, extra_inflow=None):
     """
     Cohort model of the CORE group in US.HH by unit (D20 with the function
     categories). new_goods: array (year, CORE product, material) over the
@@ -205,15 +215,15 @@ def household_core_cohorts(new_goods, units, current_params):
     future module's, with shares and lifetime factors over the same years).
     Returns per product {'outflow', 'stock', 'broken'} as arrays (year,
     product, material) and 'stock_1987' (product, material), and the same
-    per unit under 'units'.
+    per unit under 'units'. extra_inflow (array (year, unit, material))
+    is added to the inflow by unit (second-hand goods under the
+    stock-driven demand of the future module).
     """
     product_index = [CORE_GROUP_PRODUCTS.index(PRODUCT_OF_UNIT[u]) for u in UNITS]
     inflow = new_goods[:, product_index, :] * units['shares'][:, :, None]
-    technical, perceived, repairable = unit_lifetimes(current_params, units['shares_2025'])
-    technical_shape = np.array([TECHNICAL_SHAPE if PRODUCT_OF_UNIT[u] in CATEGORIES
-                                else current_params[f'lifetime_shape_US.HH_{u}'] for u in UNITS])
-    sf, share = competing_survival(new_goods.shape[0], technical, perceived, technical_shape, PERCEIVED_SHAPE,
-                                   units['technical_factor'], units['perceived_factor'], units['period_factor'])
+    if extra_inflow is not None:
+        inflow = inflow + extra_inflow
+    sf, share, repairable = unit_survival(units, current_params, new_goods.shape[0])
     per_unit = unit_cohorts(inflow, sf, share, repairable, current_params['spinup_inflow_factor'])
     aggregate = np.zeros((len(UNITS), len(CORE_GROUP_PRODUCTS)))
     aggregate[np.arange(len(UNITS)), product_index] = 1.0

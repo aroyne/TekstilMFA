@@ -1,6 +1,6 @@
 # Funksjonskategorier for klær og sko i lagermodellen (forslag)
 
-*Notat 2026-11-05. Beslutninger samme dag: 5 kategorier for klær og 4 for sko, også i historikken, impulskjøp som følsomhet for tiltak, hjemmetekstiler venter. Totalen for skapet rapporteres, og en grense for hele skapet er en senere strukturvariant. Bygger på [notatet om lagermodellen](2026-11-05_lagermodellen_hvordan_og_hvor_finkornet.md) og [tidligere arbeid med sko](2026-11-05_tidligere_arbeid_sko_B2B_relevans.md). Spennene er forslag. Ingenting er implementert.*
+*Notat 2026-11-05. Beslutninger samme dag: 5 kategorier for klær og 4 for sko, også i historikken, impulskjøp som følsomhet for tiltak, hjemmetekstiler venter. Totalen for skapet rapporteres, og en grense for hele skapet er en senere strukturvariant. Bygger på [notatet om lagermodellen](2026-11-05_lagermodellen_hvordan_og_hvor_finkornet.md) og [tidligere arbeid med sko](2026-11-05_tidligere_arbeid_sko_B2B_relevans.md). Spennene er forslag.* **Besluttet (alle fire spørsmål ok) og implementert samme dag**, se avsnitt 7.
 
 ## 1. Prinsipp
 
@@ -121,3 +121,40 @@ Anslått arbeid er 1–2 økter.
 * YouGov, Bored with your clothes? https://yougov.com/en-gb/articles/3807-bored-your-clothes
 * Røyne & Simon (2025), ISEE, agentbasert modell for sko (eget arbeid, OneDrive)
 * Syversen m.fl. (2023), Dypdykk i materialstrømmene for tekstiler fra husholdninger i Norge, Mepex
+
+## 7. Implementering (2026-11-05)
+
+* `calculations/categories.py`:
+  * kobling fra HS til kategori, med test på at alle koder for klær og sko er dekket
+  * andeler per år
+  * levetider per enhet fra relativ levetid, andel ødelagt og andel som kan repareres (tabellert invers for andelen slitasje og gjennomsnittet)
+  * følsomhet for tiltak
+  * `household_core_cohorts`
+* `cohorts.competing_survival` og `cohorts.unit_cohorts`: konkurrerende risikoer, periodeeffekt og ødelagte kasseringer. Testet mot Weibull uten opplevd levetid.
+* 38 parametre i `global_parameters.csv`, trukket flatt i MC. Andelen ødelagt har ±25 % rundt Mepex. Hjemmetekstiler: 32 % ødelagt (Mepex «Husholdning»). Garn: 24 % (antatt lik klær).
+* **Endrede spenn:**
+  * Andelen som kan repareres, må være under 1 − andelen ødelagt. For yttertøy er den derfor 0,3–0,6, og for sko 0,05–0,3 (sport), 0,15–0,4 (lær, vinter) og 0–0,2 (annet). En kombinasjon som ikke går opp, gir feilmelding.
+  * L7 er nå opptaket av reparasjon (0,2–0,8): andelen av feilene som kan repareres og som faktisk repareres.
+* **Historikken:** Fiberlaget og vaskeutslippet fra institusjonene bruker kategoriene. Andelen brukbart i kasseringene er 70 % (klær 75 %, sko 55 %, hjemmetekstiler 68 %), mot 72 %, 76 %, 56 % og 68 % hos Mepex. Ny utgang: `US.HH-US.HH-Stock model broken discards-TOT`.
+* **Fremtiden:** `Reference` bygger enhetsoppsettet. Lagerdrevne kjøp regnes per enhet. Tilstanden til kasseringene skalerer andelen brukbart i restavfallet og ombruket fra sorteringen. X18 er fjernet. Kategoriparametrene er usikre faktorer i scenariene.
+* **Gjenstår:**
+  * Kalibrering mot sammensetningen av lageret (garderobedata fra OsloMet).
+  * Grense for hele skapet som strukturvariant.
+  * Fibersammensetning per kategori (nå har kategoriene sammensetningen til produktet).
+
+## 8. Resultater med kategoriene (1 000 scenarier, 2026-11-05)
+
+* **Historikken (MC, N = 1 000):** Lagermodellens lager i 2025 er 571 kt (389–758), mot 566 kt uten kategorier, fordi nivået er kalibrert. 30 % av kasseringene er ødelagte (27 av 92 kt). Restleddet er 1 174 kt (446–1 823). MC tar nå 626 s, mot 110 s. Lagermodellen med kategorier regnes to ganger per iterasjon (fiberlaget og `us_mc`) og bør bufres.
+* **Effekt på ny tilførsel per innbygger, lagerdrevet etterspørsel**, sammenlignet med L0 i samme scenario:
+
+| | 2035 uten kategorier | **2035 med kategorier** | 2050 med kategorier |
+|---|---|---|---|
+| L3 holdbarhet | −4 % | **−2 %** (−4 til −0,3) | −4 % |
+| L7 reparasjon | −10 % | **−2,4 %** (−4,7 til −0,6) | −2 % |
+| L5 avgift | −14 % | −14 % | −15 % |
+| L8 deling | −4 % | −4 % | −5 % |
+| Alle | −35 % | **−28 %** (−43 til −5) | −31 % |
+
+* **Holdbarhet og reparasjon virker mindre** når andelen kassert på grunn av slitasje er bundet til tilstandsdataene fra Mepex. De fleste klær kasseres før de er utslitt (overdeler: ca. 20 % på grunn av slitasje). Da kan lengre teknisk levetid og reparasjon bare nå en liten del av kasseringene. Det stemmer med funnet i den agentbaserte modellen for sko (ISEE 2025): Slitesterke sko kasseres fordi de oppleves som utdaterte.
+* Andelen brukbart i kasseringene øker litt med tiltakene, fra 71 % (L0) til 73–75 % (L3, L7, alle) i 2035–2050. Det gir litt mer å ombruke.
+* Målet om −30 % ny tilførsel per innbygger i 2035 nås med alle tiltakene i 40 % (lagerdrevet) og 49 % (tilførselsdrevet) av scenariene. Rebound (ρ = −0,61) og trenden i ønsket lager (−0,46) avgjør.

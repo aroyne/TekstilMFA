@@ -22,7 +22,6 @@ import pandas as pd
 
 import flodym as fd
 
-from calculations.categories import history_units
 from calculations.fibre_layer import compute_fibre_layer
 from calculations.future import (FUTURE_YEARS, Policy, Reference, Scenario, execute_future, future_composition_data,
                                  stock_driven_purchases)
@@ -87,8 +86,11 @@ def run_future(history, scenario, policy=None, fibre=True, demand='supply', base
     # SSB's 2026 population projection, as the mean of the year
     population = {**{YEARS[-1]: preloaded_data['population'][YEARS[-1]]},
                   **preloaded_data['population_projection'][scenario.population]}
+    # 'category_shares' <- data_files/Tab_08801_textiles.csv (SSB 08801):
+    # import mass of the function categories of CL and FW per year
     ref = Reference(history['hist'], population, history['current_params'], scenario,
-                    Policy.none() if policy is None else policy, demand, baseline_purchases)
+                    Policy.none() if policy is None else policy, preloaded_data['category_shares'], demand,
+                    baseline_purchases)
     fut = make_system(years=FUTURE_YEARS)
     reset(fut)
     execute_future(fut, ref)
@@ -110,24 +112,8 @@ def run_future(history, scenario, policy=None, fibre=True, demand='supply', base
                                                                             scenario.synthetic_shift_2035),
                                     ref.current_params, history['params'].fibre_composition,
                                     history=history['hist_fibre'],
-                                    household_units=_future_units_without_factors(preloaded_data))
+                                    household_units=ref.units())
     return fut, ref, (fut_fibre, fut_stock)
-
-
-def _future_units_without_factors(preloaded_data):
-    """
-    Unit setup of the household cohort model over the history and the
-    future years for the fibre layer: the 2025 category shares held, without
-    lifetime factors. Work in progress: the future module's own cohort model
-    does not use the function categories yet, so the measures and X4b do not
-    reach the fibre layer's household cohorts (PLAN, 2026-11-05).
-    """
-    # 'category_shares' <- data_files/Tab_08801_textiles.csv (SSB 08801):
-    # import mass of the function categories of CL and FW per year
-    units = history_units(preloaded_data['category_shares'])
-    future = np.repeat(units['shares'][-1:], len(FUTURE_YEARS), axis=0)
-    units['shares'] = np.concatenate([units['shares'], future])
-    return units
 
 
 def run_reference(seed=DEFAULT_SEED):

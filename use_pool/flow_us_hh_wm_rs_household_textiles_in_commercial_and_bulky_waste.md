@@ -74,7 +74,7 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 ## Beregning i koden
 
-Beregnes i `_commercial_and_bulky_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L139). Dokumentasjonen i koden:
+Beregnes i `_commercial_and_bulky_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L140). Dokumentasjonen i koden:
 
 > CL+HT+FW from households collected as commercial waste: moving, estates,
 > skips and bulky waste picked up by private firms, which is not in the

@@ -181,3 +181,6 @@ Hovedpunkter:
 
 ### Kjent svakhet: overgangen i 2028–2030 med lagerdrevet etterspørsel
 Når L5 og L8 senker det ønskede lageret med 10–30 % over 2028–2030, slutter husholdningene nesten å kjøpe til lageret har krympet. Ny tilførsel faller med −35 % i 2030 (L5) og −46 % for alle tiltakene, med 5-persentil −83 %. Det henger sammen fysisk, men er urealistisk som atferd. Effekten i 2035 og 2050 påvirkes lite. **Forslag:** La reduksjonen i ønsket lager fases inn over 2027–2035 med lagerdrevet etterspørsel, slik at garderoben krymper gjennom naturlig avgang.
+
+### Med funksjonskategorier (D43, samme dag)
+Holdbarhet og reparasjon er beregnet på nytt med konkurrerende tekniske og opplevde levetider per kategori, der andelen kassert på grunn av slitasje er bundet til Mepex. Effekten på ny tilførsel med lagerdrevet etterspørsel er nå −2 % (L3) og −2,4 % (L7) i 2035, mot −4 og −10 % uten kategorier. Alle tiltakene gir −28 %. Se [notatet om kategoriene](2026-11-05_funksjonskategorier_forslag.md), avsnitt 8.

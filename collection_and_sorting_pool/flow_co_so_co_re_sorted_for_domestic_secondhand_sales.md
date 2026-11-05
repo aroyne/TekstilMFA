@@ -67,11 +67,11 @@ Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmode
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 47 % | 45 % | 42 % | 38 % | 35 % | 34 % |
+| Bomull | 47 % | 44 % | 42 % | 38 % | 35 % | 35 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
 | Ikke-tekstil | 13 % | 16 % | 18 % | 18 % | 18 % | 17 % |
 | Andre fibre | 1 % | 1 % | 1 % | 1 % | 2 % | 2 % |
-| Syntetisk | 31 % | 30 % | 32 % | 36 % | 38 % | 39 % |
+| Syntetisk | 31 % | 30 % | 32 % | 36 % | 37 % | 38 % |
 | Ull | 5 % | 6 % | 5 % | 5 % | 5 % | 6 % |
 
 <iframe src="../output_files/plots/pages/co_so_co_re_sorted_for_domestic_secondhand_sales_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>

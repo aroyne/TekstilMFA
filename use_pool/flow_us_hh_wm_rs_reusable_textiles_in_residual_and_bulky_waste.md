@@ -73,11 +73,11 @@ For klær, hjemmetekstiler og sko: utstrømmen av årgangsmodellen for husholdni
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 43 % | 44 % | 41 % | 38 % | 35 % | 34 % |
+| Bomull | 43 % | 44 % | 41 % | 37 % | 35 % | 34 % |
 | Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
-| Ikke-tekstil | 18 % | 17 % | 19 % | 18 % | 18 % | 17 % |
+| Ikke-tekstil | 18 % | 17 % | 19 % | 18 % | 18 % | 18 % |
 | Andre fibre | 1 % | 1 % | 1 % | 1 % | 2 % | 2 % |
-| Syntetisk | 30 % | 29 % | 32 % | 35 % | 38 % | 39 % |
+| Syntetisk | 30 % | 30 % | 32 % | 36 % | 37 % | 38 % |
 | Ull | 6 % | 6 % | 5 % | 5 % | 5 % | 6 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_reusable_textiles_in_residual_and_bulky_waste_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
@@ -99,7 +99,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L112). Dokumentasjonen i koden:
+Beregnes i `_reusable_residual_waste_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L113). Dokumentasjonen i koden:
 
 > Part of the CORE residual textiles that could have been reused (D18),
 > share from the pick analyses. The analyses cover CL+HT+FW only, so the

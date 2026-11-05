@@ -38,6 +38,13 @@ Implementert med flodyms `InflowDrivenDSM` i [calculations/fibre_layer.py](../ca
 * Innsvinging: Innstrømmen før 1988 er ukjent. Den settes til 1988-nivået (eller en trend) i et antall innsvingingsår, og valget testes i en følsomhetsanalyse (D2).
 * Sammenligning: Utstrømmen sammenlignes med kasseringene i avfallsstatistikken. Lageret sammenlignes med det akkumulerte restleddet og med garderobestudier (SIFO/OsloMet).
 * Produkter som behandles som emballasje (sekker, SA) får levetiden `immediate`: alt kasseres samme år, og det bygges ikke opp lager (D13).
+* **Funksjonskategorier (D43):** Klær og sko deles i kategorier inne i lagermodellen ([calculations/categories.py](../calculations/categories.py)). Klær har fem: undertøy og sokker, overdeler, underdeler og kjoler, yttertøy og funksjonsklær, barneklær. Sko har fire: sport, lær, vinter og tur, annet. Hver årgang fordeles etter andelen av importmassen per HS-kode (08801) det året. Kategoriene har konkurrerende tekniske og opplevde levetider: Plagget kasseres når den første av de to inntreffer, og overlevelsen er produktet av to Weibull-fordelinger (form 2 og 1,5). Hver kategori har fire parametre:
+  * relativ levetid (WRAP 2012, 2021), skalert slik at snittet for 2025-miksen er levetiden for produktet
+  * andel ødelagt (Syversen m.fl. 2023, tabell 23)
+  * andel slitasje som lett kan repareres
+  * følsomhet for tiltak
+
+  Andelen kassert på grunn av slitasje er andelen ødelagt ÷ (1 − andelen som kan repareres). Den bestemmer forholdet mellom de to levetidene. Kasseringene deles i brukbare og ødelagte, og andelen brukbart blir ca. 70 % (Mepex 72 %). Hjemmetekstiler og garn har én levetid som før. Parametrene trekkes i MC.
 
 ## 4. Overføringskoeffisienter (TK) som endrer seg over tid
 
@@ -123,6 +130,14 @@ Fremtiden har ingen statistikk, så modellen snus ([designnotat](../claude_tekst
 * **Referansebanen** har bare dagens politikk. Destruksjonsforbudet, produsentansvaret og eksportreglene er tiltak i trinn 2 og 3.
 * **Scenarier (trinn 2):** `Scenario` samler de usikre faktorene (X1–X12, X4b). Referansebanen er `Scenario.reference` (2025-verdiene videreført). `future_scenarios.py` trekker 1 000 scenarier med latin hypercube (flate spenn, frø 2027), kjører hvert av dem med fiberlaget og rapporterer spenn (5–95-persentil, min–maks) og Spearman-korrelasjon mellom faktorer og mål. Spennene er det som er mulig, ikke sannsynligheter. I fremtiden følger MA-mellomflytene ferdigproduksjonen, resirkulert fiber er begrenset av spinningen, og eksporten fra MA.FI og MA.TX i fiberlaget har sammensetningen av det prosessene tar inn ([notat](../claude_tekst/2026-11-05_D2_scenarier_forslag.md)).
 * **Tiltak (trinn 3):** `Policy` (L1 produsentansvar med innsamlingsmål, L2 sortering i Norge, L3 holdbarhet, L4 destruksjonsforbud, L5 avgift eller tiltak mot ultrarask mote) med effektene som usikre faktorer, trukket per scenario. `future_policies.py` kjører alle alternativene i de 1 000 scenariene og gir tilfredsstillelse, feilrate, anger (90-persentil) og sårbarhet (Spearman mot avstanden til terskelen). Lagervekst under tiltak: X5 pluss tiltakets endring av lageret i lagermodellen. Sortert ombruk ut over bruktmarkedet i Norge (X13) eksporteres sortert ([notat](../claude_tekst/2026-11-05_D3_tiltak_forslag.md)).
+* **Funksjonskategorier i fremtiden:**
+  * Holdbarhet (L3) virker på den tekniske levetiden for klær.
+  * Ultrarask mote (X4b) virker på den opplevde levetiden for overdeler, underdeler og sportssko.
+  * Reparasjon (L7) er en periodeeffekt. Den tekniske risikoen ganges med (1 − opptak × andel som kan repareres), og den gjelder alle plagg og sko i bruk.
+  * Avgift og deling (L5, L8) virker per kategori etter følsomheten.
+  * Andelen brukbart i kasseringene, sammenlignet med 2025, skalerer andelen brukbart i restavfallet og ombruket fra sorteringen.
+  * Lagerdrevne kjøp regnes per kategori.
+  * Kategoriparametrene er usikre faktorer i scenariene.
 * **To formuleringer av etterspørselen (trinn 4):** Den tilførselsdrevne holder 2025-nivået per innbygger (trinn 1–3). Den lagerdrevne regner kjøpene av CL+HT+FW+YA fra det lageret husholdningene trenger. Overlevelsen kommer fra lagermodellen, bruktkjøp × erstatningsgrad trekkes fra, og rebound legges til. Kjøpene kalibreres til 2025-nivået i 2026. Tiltakene L6–L9 og målene ny tilførsel og jomfruelig fiber per innbygger er lagt til. Begge formuleringene kjøres i de samme scenariene som strukturusikkerhet ([notat](../claude_tekst/2026-11-05_D4_ny_tilforsel_forslag.md)).
 * **Resultat:** `output_files/future_reference.csv` og `output_files/future_reference_fibre.csv` (historikk og fremtid, deterministisk) og `output_files/plots/future_reference.png`.
 

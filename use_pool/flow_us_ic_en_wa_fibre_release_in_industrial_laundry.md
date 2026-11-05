@@ -64,9 +64,9 @@ Andel av summen i nøkkelår (median).
 | Tepper | 48 % | 30 % | 23 % | 25 % | 25 % | 28 % |
 | Klær | 34 % | 47 % | 51 % | 46 % | 44 % | 43 % |
 | Sko | 1 % | 2 % | 2 % | 2 % | 2 % | 1 % |
-| Hjemmetekstiler | 9 % | 12 % | 14 % | 13 % | 13 % | 12 % |
+| Hjemmetekstiler | 9 % | 12 % | 13 % | 13 % | 13 % | 12 % |
 | Andre konfeksjonerte varer | 1 % | 2 % | 2 % | 3 % | 4 % | 5 % |
-| Presenninger og telt | 6 % | 8 % | 8 % | 11 % | 12 % | 11 % |
+| Presenninger og telt | 6 % | 7 % | 8 % | 11 % | 12 % | 11 % |
 
 ### Materiale (fiberlag, D19)
 
@@ -74,11 +74,11 @@ Fibergruppene i tekstillageret i årgangsmodellen for institusjoner og bedrifter
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 53 % | 59 % | 62 % | 56 % | 55 % | 55 % |
+| Bomull | 53 % | 58 % | 62 % | 56 % | 55 % | 55 % |
 | Regenerert cellulose | 8 % | 6 % | 6 % | 7 % | 7 % | 7 % |
 | Andre fibre | 13 % | 12 % | 12 % | 14 % | 14 % | 14 % |
 | Syntetisk | 8 % | 5 % | 5 % | 8 % | 9 % | 9 % |
-| Ull | 17 % | 19 % | 15 % | 16 % | 15 % | 16 % |
+| Ull | 18 % | 19 % | 15 % | 16 % | 15 % | 16 % |
 
 <iframe src="../output_files/plots/pages/us_ic_en_wa_fibre_release_in_industrial_laundry_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -102,7 +102,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_industrial_laundry_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L332). Dokumentasjonen i koden:
+Beregnes i `_industrial_laundry_release_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L336). Dokumentasjonen i koden:
 
 > Fibres released when textiles used by institutions and businesses are
 > washed (mostly in industrial laundries) to wastewater, where the model
@@ -117,4 +117,5 @@ Beregnes i `_industrial_laundry_release_mc` i [calculations/us_mc.py](https://gi
 >
 > `_household_textile_stock`: Stock of textile fibre in the CORE group of US.HH by fibre group, array
 > (year, fibre group), from the cohort model of new goods entering the
-> households, with the composition of registered imports.
+> households (with the function categories of clothing and footwear), with
+> the composition of registered imports.

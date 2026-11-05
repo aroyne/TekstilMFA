@@ -73,11 +73,11 @@ Fibergruppene i tekstillageret i årgangsmodellen for husholdningene (uten ikke-
 
 | Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
 |---|---|---|---|---|---|---|
-| Bomull | 80 % | 79 % | 81 % | 75 % | 73 % | 73 % |
-| Regenerert cellulose | 6 % | 4 % | 4 % | 5 % | 5 % | 5 % |
+| Bomull | 79 % | 79 % | 80 % | 75 % | 73 % | 73 % |
+| Regenerert cellulose | 6 % | 5 % | 4 % | 5 % | 5 % | 5 % |
 | Andre fibre | 1 % | 2 % | 2 % | 3 % | 4 % | 3 % |
 | Syntetisk | 3 % | 3 % | 3 % | 4 % | 4 % | 4 % |
-| Ull | 11 % | 12 % | 10 % | 13 % | 14 % | 15 % |
+| Ull | 11 % | 12 % | 10 % | 13 % | 14 % | 14 % |
 
 <iframe src="../output_files/plots/pages/us_hh_wm_rs_tumble_dryer_lint_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
 
@@ -99,7 +99,7 @@ Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd næ
 
 ## Beregning i koden
 
-Beregnes i `_tumble_dryer_lint_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L245). Dokumentasjonen i koden:
+Beregnes i `_tumble_dryer_lint_mc` i [calculations/us_mc.py](https://github.com/aroyne/TekstilMFA/blob/main/calculations/us_mc.py#L249). Dokumentasjonen i koden:
 
 > Lint caught on the filter of tumble dryers, 88 % (86-91 %, Cummins et
 > al. 2023) of the fibres released in drying (D37). The filter is emptied

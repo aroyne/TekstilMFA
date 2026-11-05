@@ -13,6 +13,7 @@ collection share in 2025, X6 and X7), and population as SSB's three
 projections (X1), each in a third of the scenarios.
 """
 import numpy as np
+import pandas as pd
 from scipy.stats import qmc
 
 from calculations.fibre_layer import DISCARD_FLOWS
@@ -39,12 +40,24 @@ CONTINUOUS = [
     ('residual_export_share_2035', 0.05, 0.25),  # X11
     ('synthetic_shift_2035', 0.0, 0.10),         # X12
     ('reuse_market_2035', 1.6, 10.0),            # X13: kt; 1.6 in 2025
-    # Step 4, used by the stock-driven demand (X14 follows X4).
+    # Step 4, used by the stock-driven demand (X14 follows X4; X18 follows
+    # from the category parameters below).
     ('desired_stock_trend', -0.01, 0.01),        # X15: per year to 2035
     ('displacement', 0.1, 0.85),                 # X16: Farrant et al. 2010 60-85 %, surveys 10-60 %
     ('rebound', 0.0, 1.0),                       # X17
-    ('durability_realised', 0.2, 1.0),           # X18
 ]
+# Parameters of the function categories (calculations/categories.py),
+# drawn flat within their bounds in parameters/global_parameters.csv.
+CATEGORY_PREFIXES = ('relative_lifetime_', 'broken_share_', 'repairable_share_', 'policy_sensitivity_')
+
+
+def category_parameter_bounds(path='parameters/global_parameters.csv'):
+    """[(parameter_id, low, high)] of the category parameters."""
+    table = pd.read_csv(path)
+    rows = table[table['parameter_id'].str.startswith(CATEGORY_PREFIXES)]
+    return list(zip(rows['parameter_id'], rows['lower_bound'].astype(float), rows['upper_bound'].astype(float)))
+
+
 # X9: shares of what is sorted in Norway (reuse, recycling, residues),
 # flat on the simplex and truncated to these bounds.
 SORTING_BOUNDS = [(0.25, 0.80), (0.02, 0.40), (0.10, 0.70)]
@@ -60,14 +73,21 @@ def _truncated_dirichlet(rng, n):
 
 
 def sample_scenarios(n, seed=SCENARIO_SEED):
-    """n Scenarios: Latin hypercube over X1 and the continuous factors, X9 by rejection on the simplex."""
-    lhs = qmc.LatinHypercube(d=1 + len(CONTINUOUS), seed=seed).random(n)
+    """
+    n Scenarios: Latin hypercube over X1, the continuous factors and the
+    category parameters, X9 by rejection on the simplex.
+    """
+    category = category_parameter_bounds()
+    lhs = qmc.LatinHypercube(d=1 + len(CONTINUOUS) + len(category), seed=seed).random(n)
     sorting = _truncated_dirichlet(np.random.default_rng(seed), n)
     scenarios = []
     for row, outcome in zip(lhs, sorting):
         population = POPULATION_ALTERNATIVES[min(int(row[0] * 3), 2)]
-        values = {name: lo + (hi - lo) * u for (name, lo, hi), u in zip(CONTINUOUS, row[1:])}
-        scenarios.append(Scenario(population=population, sorting_outcome_2035=outcome, **values))
+        values = {name: lo + (hi - lo) * u for (name, lo, hi), u in zip(CONTINUOUS, row[1:1 + len(CONTINUOUS)])}
+        drawn = tuple((name, float(lo + (hi - lo) * u))
+                      for (name, lo, hi), u in zip(category, row[1 + len(CONTINUOUS):]))
+        scenarios.append(Scenario(population=population, sorting_outcome_2035=outcome, category_params=drawn,
+                                  **values))
     return scenarios
 
 
@@ -78,6 +98,7 @@ def factor_table(scenario):
     for label, value in zip(('sorting_reuse_2035', 'sorting_recycling_2035', 'sorting_residues_2035'),
                             scenario.sorting_outcome_2035):
         row[label] = value
+    row.update(dict(scenario.category_params))
     return row
 
 
@@ -109,6 +130,9 @@ def metrics(fut, ref, future_indicators, residual_stock_2025, fut_fibre=None):
         # scenario (high discard level or short lifetimes), commercial and
         # bulky waste is 0 and the stock grows less than X5, by this much.
         'stock_growth_shortfall_kt': fut.clipped[COMMERCIAL_BULKY].values[:, CORE],
+        # Share of the household discards (cohort model) not damaged beyond
+        # easy repair.
+        'usable_share_discards': ref.usable_share,
     }
     if fut_fibre is not None:
         discards = sum(fut_fibre.flows[c].values[:, CORE, :] for c in DISCARD_FLOWS)
