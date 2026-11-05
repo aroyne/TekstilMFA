@@ -119,6 +119,26 @@ class Reference:
         return np.repeat(self.base(code)[None], len(FUTURE_YEARS), axis=0)
 
 
+def future_composition_data(preloaded_data):
+    """
+    Trade by fibre class for the fibre layer of the future years
+    (compute_fibre_layer): the 2025 mass per fibre class of each product
+    in every future year, so that goods supplied keep the 2025
+    composition. The composition of discards still changes, because it
+    comes from the cohort models, which carry the older cohorts on.
+    """
+    # 'imports_by_fibre_class' and 'intermediate_by_fibre_class' <-
+    # data_files/Tab_08801_textiles.csv (SSB 08801) and
+    # parameters/hs_main_fibre.csv, summed when the data is loaded
+    def held(kg):
+        return np.repeat(kg[BASE][None], len(FUTURE_YEARS), axis=0)
+    return {
+        'imports_by_fibre_class': held(preloaded_data['imports_by_fibre_class']),
+        'intermediate_by_fibre_class': {key: held(kg) for key, kg in
+                                        preloaded_data['intermediate_by_fibre_class'].items()},
+    }
+
+
 def execute_reference(fut, ref):
     _per_capita_flows(fut, ref)
     _held_flows(fut, ref)

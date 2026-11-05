@@ -334,11 +334,14 @@ def _only(material):
     return shares
 
 
-COHORT_DIMS = fd.DimensionSet(dim_list=[
-    fd.Dimension(letter='t', name='Time', dtype=int, items=YEARS),
-    fd.Dimension(letter='p', name='Product', dtype=str, items=CORE_GROUP_PRODUCTS),
-    fd.Dimension(letter='m', name='Material', dtype=str, items=MATERIALS),
-])
+def _cohort_dims(years):
+    return fd.DimensionSet(dim_list=[
+        fd.Dimension(letter='t', name='Time', dtype=int, items=list(years)),
+        fd.Dimension(letter='p', name='Product', dtype=str, items=CORE_GROUP_PRODUCTS),
+        fd.Dimension(letter='m', name='Material', dtype=str, items=MATERIALS),
+    ])
+
+
 # The parallel stock model (D8), reported next to the statistics; named like
 # flows from US.HH to itself, as the residual stock change is.
 STOCK_MODEL_OUTPUTS = {
@@ -349,11 +352,14 @@ STOCK_MODEL_OUTPUTS = {
 # Stock level of the statistics-based balance: the residual stock changes
 # accumulated from the stock model's stock at the end of 1987 (D2).
 RESIDUAL_STOCK_OUTPUT = 'US.HH-US.HH-Stock-TOT'
-CORE_STOCK_DIMS = fd.DimensionSet(dim_list=[
-    fd.Dimension(letter='t', name='Time', dtype=int, items=YEARS),
-    fd.Dimension(letter='g', name='Product group', dtype=str, items=['CORE']),
-    fd.Dimension(letter='m', name='Material', dtype=str, items=MATERIALS),
-])
+
+
+def _core_stock_dims(years):
+    return fd.DimensionSet(dim_list=[
+        fd.Dimension(letter='t', name='Time', dtype=int, items=list(years)),
+        fd.Dimension(letter='g', name='Product group', dtype=str, items=['CORE']),
+        fd.Dimension(letter='m', name='Material', dtype=str, items=MATERIALS),
+    ])
 
 
 def new_goods_to_households(flows):
@@ -373,28 +379,49 @@ def release_weights(current_params):
     return np.array([1.0 if m == 'SYN' else 0.0 if m == 'NT' else ratio for m in MATERIALS])
 
 
-def household_cohort_model(tot, supply, current_params):
+def _cohorts(inflow, products, current_params, history_inflow, stock='US.HH'):
+    """
+    use_cohorts for the years of the system that inflow (year, product,
+    material) covers. In the future module (D12) history_inflow holds the
+    inflow by material from 1988 to 2025 from the historical fibre system,
+    so that the cohorts still in use in 2025 are carried on; it is None for
+    the historical system. Returns 'outflow' and 'stock' over the system's
+    years, 'stock_before' (the stock at the end of the year before them)
+    and 'stock_1987'.
+    """
+    n = inflow.shape[0]
+    full = inflow if history_inflow is None else np.concatenate([history_inflow, inflow])
+    cohorts = use_cohorts(full, products, current_params, stock=stock)
+    stock_all = np.concatenate([cohorts['stock_1987'][None], cohorts['stock']], axis=0)
+    return {'outflow': cohorts['outflow'][-n:], 'stock': cohorts['stock'][-n:], 'stock_before': stock_all[-n - 1],
+            'stock_1987': cohorts['stock_1987']}
+
+
+def household_cohort_model(tot, supply, current_params, history=None):
     """
     Inflow-driven cohort model of the CORE group (CL+HT+FW and retail yarn)
     in US.HH (D8, D20): new goods entering US.HH by material, Weibull
     lifetimes per product. Second-hand purchases (1-2 % of the inflow) are
     left out. Returns {'discards', 'stock', 'stock_change'} as FlodymArrays
-    (year, product, material) over the model years, and 'stock_1987' as an
-    array (product, material); the stock includes the spin-up cohorts.
+    (year, product, material) over the system's years, and 'stock_1987' as
+    an array (product, material); the stock includes the spin-up cohorts.
+    history is the closed historical fibre system in the future module.
     """
     core = [PRODUCTS.index(p) for p in CORE_GROUP_PRODUCTS]
     new_goods = new_goods_to_households(tot.flows)[:, core]
-    cohorts = use_cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS, current_params)
-    stock = np.concatenate([cohorts['stock_1987'][None], cohorts['stock']], axis=0)
+    past = None if history is None else new_goods_to_households(history.flows)[:, core, :]
+    cohorts = _cohorts(new_goods[:, :, None] * supply[:, core, :], CORE_GROUP_PRODUCTS, current_params, past)
+    stock = np.concatenate([cohorts['stock_before'][None], cohorts['stock']], axis=0)
+    dims = _cohort_dims(tot.dims['t'].items)
     return {
-        'discards': fd.FlodymArray(dims=COHORT_DIMS, values=cohorts['outflow']),
-        'stock': fd.FlodymArray(dims=COHORT_DIMS, values=cohorts['stock']),
-        'stock_change': fd.FlodymArray(dims=COHORT_DIMS, values=np.diff(stock, axis=0)),
+        'discards': fd.FlodymArray(dims=dims, values=cohorts['outflow']),
+        'stock': fd.FlodymArray(dims=dims, values=cohorts['stock']),
+        'stock_change': fd.FlodymArray(dims=dims, values=np.diff(stock, axis=0)),
         'stock_1987': cohorts['stock_1987'],
     }
 
 
-def household_discard_composition(tot, cohorts, supply, current_params):
+def household_discard_composition(tot, cohorts, supply, current_params, history=None):
     """
     Material shares of household discards, array (year, product group,
     material). CORE: outflow of the cohort model of new goods. CA, TA and
@@ -405,9 +432,10 @@ def household_discard_composition(tot, cohorts, supply, current_params):
     outflow = cohorts['discards'].values.sum(axis=1)
     sales = tot.flows['DI.RT-US.HH-Sales to households-TOT'].values
     others = [PRODUCTS.index(p) for p in OTHER_HOUSEHOLD_GOODS]
-    other_outflow = use_cohorts(sales[:, others, None] * supply[:, others, :], OTHER_HOUSEHOLD_GOODS,
-                                      current_params)['outflow']
-    composition = np.empty((len(YEARS), len(PRODUCT_GROUPS), len(MATERIALS)))
+    past = None if history is None else history.flows['DI.RT-US.HH-Sales to households-TOT'].values[:, others, :]
+    other_outflow = _cohorts(sales[:, others, None] * supply[:, others, :], OTHER_HOUSEHOLD_GOODS,
+                             current_params, past)['outflow']
+    composition = np.empty((len(sales), len(PRODUCT_GROUPS), len(MATERIALS)))
     for g, group in enumerate(PRODUCT_GROUPS):
         if group == 'CORE':
             composition[:, g, :] = outflow / outflow.sum(axis=1, keepdims=True)
@@ -419,23 +447,29 @@ def household_discard_composition(tot, cohorts, supply, current_params):
     return composition
 
 
-def institutional_discard_composition(tot, supply, current_params):
+def _institutional_cohorts(tot, supply, current_params, history):
+    sales = tot.flows[INSTITUTIONAL_SALES].values
+    cohort = [PRODUCTS.index(p) for p in INSTITUTIONAL_COHORT_PRODUCTS]
+    past = None if history is None else history.flows[INSTITUTIONAL_SALES].values[:, cohort, :]
+    return cohort, _cohorts(sales[:, cohort, None] * supply[:, cohort, :], INSTITUTIONAL_COHORT_PRODUCTS,
+                            current_params, past, stock='US.IC')
+
+
+def institutional_discard_composition(tot, supply, current_params, history=None):
     """
     Material shares of goods discarded by institutions and businesses, array
     (year, product, material): the outflow of a cohort model of the goods
     sold to them, as in the TOT calculation. Sacks and retail yarn keep the
     supply composition.
     """
-    sales = tot.flows[INSTITUTIONAL_SALES].values
-    cohort = [PRODUCTS.index(p) for p in INSTITUTIONAL_COHORT_PRODUCTS]
-    outflow = use_cohorts(sales[:, cohort, None] * supply[:, cohort, :], INSTITUTIONAL_COHORT_PRODUCTS,
-                          current_params, stock='US.IC')['outflow']
+    cohort, cohorts = _institutional_cohorts(tot, supply, current_params, history)
+    outflow = cohorts['outflow']
     composition = supply.copy()
     composition[:, cohort, :] = outflow / outflow.sum(axis=2, keepdims=True)
     return composition
 
 
-def institutional_release_composition(tot, supply, current_params):
+def institutional_release_composition(tot, supply, current_params, history=None):
     """
     Material shares of fibres released in industrial laundry, array (year,
     product, material): the fibre groups of the textile stock of the US.IC
@@ -443,11 +477,8 @@ def institutional_release_composition(tot, supply, current_params):
     Products without a stock keep the supply composition (their flows are
     zero).
     """
-    sales = tot.flows[INSTITUTIONAL_SALES].values
-    cohort = [PRODUCTS.index(p) for p in INSTITUTIONAL_COHORT_PRODUCTS]
-    stock = use_cohorts(sales[:, cohort, None] * supply[:, cohort, :], INSTITUTIONAL_COHORT_PRODUCTS,
-                        current_params, stock='US.IC')['stock']
-    stock = stock * release_weights(current_params)
+    cohort, cohorts = _institutional_cohorts(tot, supply, current_params, history)
+    stock = cohorts['stock'] * release_weights(current_params)
     composition = supply.copy()
     composition[:, cohort, :] = stock / stock.sum(axis=2, keepdims=True)
     return composition
@@ -476,11 +507,17 @@ def collected_composition(fibre):
     return np.divide(mix, total, out=np.zeros_like(mix), where=total > 0)
 
 
-def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_composition):
+def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_composition, history=None):
     """
     Fills the fibre system from the closed TOT system and closes it. Returns
     {output name: FlodymArray with material dimension} for the parallel stock
     model and for the stock level of the statistics-based balance.
+
+    In the future module (D12) history is the closed historical fibre
+    system: the cohort models then run over the historical and the future
+    years, and the stock level continues from that of 2025. preloaded_data
+    then holds the trade by fibre class of the future years
+    (calculations/future.future_composition_data).
     """
     unassigned = set(tot.flows) - set(SUPPLY_FLOWS + DISCARD_FLOWS + COLLECTED_FLOWS + RELEASE_FLOWS + MIXED_FLOWS
                                       + MANUFACTURING_FLOWS + [INSTITUTIONAL_WASTE, INSTITUTIONAL_RELEASE,
@@ -495,13 +532,13 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
     for code in SUPPLY_FLOWS:
         shares = imported if code == FINISHED_IMPORT else supply
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * shares
-    institutional = institutional_discard_composition(tot, supply, current_params)
+    institutional = institutional_discard_composition(tot, supply, current_params, history)
     for code in (INSTITUTIONAL_WASTE, INSTITUTIONAL_RECYCLING):
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * institutional
     fibre.flows[INSTITUTIONAL_RELEASE].values[...] = tot.flows[INSTITUTIONAL_RELEASE].values[..., None] * (
-        institutional_release_composition(tot, supply, current_params))
-    cohorts = household_cohort_model(tot, supply, current_params)
-    discards = household_discard_composition(tot, cohorts, supply, current_params)
+        institutional_release_composition(tot, supply, current_params, history))
+    cohorts = household_cohort_model(tot, supply, current_params, history)
+    discards = household_discard_composition(tot, cohorts, supply, current_params, history)
     for code in DISCARD_FLOWS:
         fibre.flows[code].values[...] = tot.flows[code].values[..., None] * discards
     collected = collected_composition(fibre)
@@ -540,9 +577,17 @@ def compute_fibre_layer(fibre, tot, preloaded_data, current_params, fibre_compos
         gap = np.abs(fibre.flows[code].values.sum(axis=-1) - extra - flow.values).max()
         if gap > TOLERANCE_KT:
             raise ValueError(f"Fibre layer of {code} does not add up to TOT (max gap {gap:.2e} kt)")
-    stock = fibre.stocks['US.HH']
-    change = (stock.inflow - stock.outflow).values[:, PRODUCT_GROUPS.index('CORE'), :]
-    level = cohorts['stock_1987'].sum(axis=0) + np.cumsum(change, axis=0)
+    change = _core_stock_change(fibre)
+    start = cohorts['stock_1987'].sum(axis=0)
+    if history is not None:
+        start = start + _core_stock_change(history).sum(axis=0)
+    level = start + np.cumsum(change, axis=0)
     result = {STOCK_MODEL_OUTPUTS[key]: cohorts[key] for key in STOCK_MODEL_OUTPUTS}
-    result[RESIDUAL_STOCK_OUTPUT] = fd.FlodymArray(dims=CORE_STOCK_DIMS, values=level[:, None, :])
+    result[RESIDUAL_STOCK_OUTPUT] = fd.FlodymArray(dims=_core_stock_dims(tot.dims['t'].items),
+                                                   values=level[:, None, :])
     return result
+
+
+def _core_stock_change(fibre):
+    stock = fibre.stocks['US.HH']
+    return (stock.inflow - stock.outflow).values[:, PRODUCT_GROUPS.index('CORE'), :]

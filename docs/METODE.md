@@ -119,8 +119,9 @@ Fremtiden har ingen statistikk, så modellen snus ([designnotat](../claude_tekst
 * **Kasseringer fra husholdningene (CORE):** utstrømmen fra lagermodellen med tilførsel fra 1950 til 2050, skalert med s = statistikk ÷ lagermodell i 2025 (0,889 i iterasjon 0). Kasseringene fordeles på innsamling, brukbart og utslitt i restavfall etter andelene i 2025. Gapet (1 − s) går til restlageret som i historikken (D8). Det skal utforskes nærmere.
 * **Andre varer og US.IC:** egne lagermodeller med forlenget tilførsel, som i historikken.
 * **Etter kassering:** CO.CO, CO.SO, CO.RE og WM.RS fordeler det som kommer inn, etter andelene i 2025.
+* **Fiberlaget (D19):** Det samme fiberlaget kjøres på fremtidssystemet. Tilførselen beholder sammensetningen fra 2025 (handel per fiberklasse i 2025 for hvert fremtidsår). Lagermodellene får tilførselen per materiale fra 1988 fra det historiske fiberlaget, så sammensetningen av kasseringene følger årgangene i lageret. Restlageret per materiale fortsetter fra nivået i 2025.
 * **Referansebanen** har bare dagens politikk. Destruksjonsforbudet, produsentansvaret og eksportreglene er tiltak i trinn 2 og 3.
-* **Resultat:** `output_files/future_reference.csv` (historikk og fremtid, deterministisk) og `output_files/plots/future_reference.png`.
+* **Resultat:** `output_files/future_reference.csv` og `output_files/future_reference_fibre.csv` (historikk og fremtid, deterministisk) og `output_files/plots/future_reference.png`.
 
 ## Referanser (metode)
 

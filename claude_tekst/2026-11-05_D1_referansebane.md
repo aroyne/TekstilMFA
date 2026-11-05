@@ -85,4 +85,11 @@ Andelene holdes på 2025-nivået: eksport av usortert, andelen som blir i Norge,
 * Fiberutslippet i industrivask er utslippet per kt lager i US.IC i 2025 × det fremtidige lageret.
 * Grunnlaget for produsentansvaret bruker andelene i tollkodene fra 2025.
 * Strømmer som bare er andeler, er samlet i én funksjon per prosess (CO.CO, CO.SO, CO.RE, WM.RS), og flyter per innbygger og faste flyter er samlet i lister. Det avviker fra regelen om én funksjon per flyt. Alle flytene med egen logikk (kasseringer, balanser, US.IC) har egen funksjon. Fremtidsfunksjonene vises ikke på flytsidene ennå.
-* Bare TOT, ikke fiberlaget.
+
+### Fiberlaget (lagt til samme dag)
+* Fiberlaget kjøres også for 2026–2050 (`output_files/future_reference_fibre.csv`). Tilførselen beholder fibersammensetningen fra 2025. Lagermodellene får historikken per materiale, så kasseringene følger årgangene. Ingen klipping.
+* Andel syntetisk av tekstilet i kasseringene (CL+HT+FW): 40 % (2010), 44 % (2018), 47 % (2025), 47 % (2030), 46 % (2050). Det går mot sammensetningen av det som kjøpes inn i 2025, fordi den holdes fast. En trend i fibersammensetningen er en usikker faktor for trinn 2.
+* Historikken er identisk med før (kontrollert med samme frø, N = 200).
+
+### Opphopningen
+Se [notatet om opphopning hos forbruker](2026-11-05_opphopning_hos_forbruker.md). Litteraturen (særlig Danmark 2018) tilsier at gapet stort sett er kasseringer som ikke fanges opp, ikke lagervekst. Det foreslås å dele gapet i referansebanen.

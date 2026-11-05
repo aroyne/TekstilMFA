@@ -2,7 +2,7 @@
 
 *Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-11-05.*
 
-> **Her fortsetter vi (2026-11-05):** Fase D, trinn 1 er gjort: referansebanen 2026–2050 (`main_future.py`, [notat](../claude_tekst/2026-11-05_D1_referansebane.md)). **Først må vi avklare hvor gapet mellom lagermodellen og statistikken går i fremtiden.** Med s = 0,889 vokser restlageret med ca. 340 kt til 2050. Alternativene er en egen flyt for uregistrerte kasseringer, eller at s går mot 1. **Deretter trinn 2:** scenarier og robusthet (XLRM/EMA, latin hypercube over X), og så trinn 3, tiltakene: produsentansvar med innsamlingsmål, sortering før eksport og holdbarhet.
+> **Her fortsetter vi (2026-11-05):** Fase D, trinn 1 er gjort: referansebanen 2026–2050 med fiberlaget (`main_future.py`, [notat](../claude_tekst/2026-11-05_D1_referansebane.md)). **Først må vi avklare opphopningen hos forbruker** ([notat](../claude_tekst/2026-11-05_opphopning_hos_forbruker.md)). Restlageret vokser med 12–14 kt per år i referansebanen, mens Danmark 2018 anslår lagervekst til høyst ca. 0,2 kg per innbygger per år og mener resten er kasseringer som ikke fanges opp. Første sjekk er om sko er med i plukkanalysene for 2018, 2022 og 2025 (ca. 13 kt per år). Deretter følger grovavfall og næringsavfall fra husholdningene, og et forslag om å dele gapet i referansebanen. **Så trinn 2:** scenarier (XLRM/EMA).
 > **Påminnelse:** Usendte henvendelser (SSB, OsloMet, SNF, PostNord, Tolletaten) samles i [HENVENDELSER.md](HENVENDELSER.md). **Ingenting er sendt** per 2026-11-02.
 
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
@@ -135,6 +135,8 @@ System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE
 - [x] Forslag og beslutninger ([notat](../claude_tekst/2026-11-05_D1_referansebane.md)): egen fremtidsmodul på samme register, start fra iterasjon 0, kg per innbygger fra 2025, gapet går til restlageret inntil videre, ingen nye regimer.
 - [x] SSBs befolkningsframskriving 2026 (tabell 14740, MMM/LLL/HHH) i `data_files/SSB_14740_befolkningsframskriving_2026_2051.csv` (`scripts/fetch_population_projection.py`). 6,22 mill. i 2050 (MMM).
 - [x] `calculations/future.py` og `main_future.py`. `make_system(years=...)` og `use_cohorts` tar nå vilkårlige år. Historikken er uendret (MC_summary identisk). Fire nye tester (29 i alt).
+- [x] Fiberlaget forlenget til 2050: tilførselen beholder sammensetningen fra 2025, og lagermodellene får historikken per materiale. Fiberlaget for historikken er identisk med før.
+- [x] Opphopning hos forbruker ([notat](../claude_tekst/2026-11-05_opphopning_hos_forbruker.md)): Danmark 2018 (Watson m.fl.) hadde et gap på 10 kt (1,8 kg per innbygger) og mener det meste er dataproblemer (grovavfall, videresalg), ikke lagervekst. Kandidater i Norge: sko i plukkanalysene, grovavfall og næringsavfall fra husholdningene, institusjonsandelen, privat utførsel.
 - [x] Resultat: Kassert CL+HT+FW 80,6 kt (2025) → 85,6 kt (2050), innsamling 36 → 38 kt, netto grunnlag for produsentansvaret 95 → 106 kt. Restlageret 1 160 → 1 502 kt, lagermodellen 529 → 576 kt. Plott: `output_files/plots/future_reference.png`.
 
 ## Neste
