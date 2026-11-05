@@ -50,7 +50,7 @@ Avstemmingen av lageret over 37 år er **metoden og diagnosen**, ikke et sikkert
 7. **Ett lite land.** Det er greit som case, men overføringsverdien må gjøres tydelig (nevneren, avstemmingen, de to formuleringene av etterspørselen).
 8. **Modenhet.** Fremtidsmodulen, tiltakene og kategoriene er bygget på én dag. Scenariene avdekket seks regler som måtte endres. Svar fra Mepex og OsloMet kan flytte tallene. Påstandene om nyhet bygger på søk som ikke er systematiske. Ingenting er fagfellevurdert.
 
-9. **Kategoriene har mange parametre** (38). Bare andelen ødelagt er målt (Mepex, for sko bare samlet). Relativ levetid bygger på WRAP. Andelen som kan repareres og følsomheten for tiltak er skjønn. At «brukbart» i plukkanalysene betyr ikke utslitt, er en tolkning. Konklusjonen om at levetidsforlengelse når lite, avhenger av den tolkningen, så den bør testes med en strukturkjøring der andelen kassert på grunn av slitasje ikke er bundet.
+9. **Kategoriene har mange parametre** (38). Bare andelen ødelagt er målt (Mepex, for sko bare samlet). Relativ levetid bygger på WRAP. Andelen som kan repareres og følsomheten for tiltak er skjønn. At «brukbart» i plukkanalysene betyr ikke utslitt, er en tolkning. Konklusjonen om at levetidsforlengelse når lite, avhenger av den tolkningen. En første test (referansescenarioet) viser under 8 % effekt også med 0,7 kassert på grunn av slitasje for alle klær, mot 2–3 % med binding.
 10. **Avgrensningen av ankrene.** «Ikke-klær annet» (vesker, idrettsutstyr, oppbevaring, 8 % i snitt hos Mepex) kan være med i ankrene for restavfallet, og da er CORE overvurdert med 2–5 kt. Det er ikke sjekket.
 11. **Kjøretid.** MC for historikken tar nå ca. 10 min (mot 2 min) fordi lagermodellen med kategorier ikke er bufret. Det er ikke et faglig problem, men det må ordnes før flere kjøringer.
 
@@ -104,6 +104,6 @@ I begge tilfellene gjelder dette:
 5. Gjør et systematisk søk (Scopus) etter lagerdrevne tekstilmodeller og etter sammenligninger av formuleringer av etterspørselen før påstandene om nyhet brukes.
 6. Sjekk årstall og innhold i regelverket mot rettsteksten (WFD 2025/1892, ESPR, WSR) og tallene fra Hot or Cool, Farrant m.fl. (2010) og EEA mot originalene.
 7. La en medforfatter gå gjennom fremtidsmodulen (regelendringene fra trinn 2–4 og kategoriene).
-8. Kjør en strukturkjøring der andelen kassert på grunn av slitasje ikke er bundet til Mepex (for eksempel 0,3–0,6 for alle klær), slik at funnet om levetidsforlengelse kan oppgis med følsomheten.
+8. ~~Strukturkjøring der andelen kassert på grunn av slitasje ikke er bundet~~ (gjort for referansescenarioet: med 0,5 og 0,7 for alle klær gir holdbarhet −4,6 og −6,7 % og reparasjon −4,4 og −7,6 %, mot −3,2 og −2,5 % bundet. Funnet holder i retning, og størrelsen bør oppgis som spenn). Bør gjentas over alle scenariene.
 9. Sjekk om «ikke-klær annet» er med i ankrene for restavfallet, og avklar om registreringen av kassasjonsårsaker fra B2B kan brukes til andelen som kan repareres.
 10. Avklar forfatterskap og bruk av ISEE-arbeidet med Nina Simon.

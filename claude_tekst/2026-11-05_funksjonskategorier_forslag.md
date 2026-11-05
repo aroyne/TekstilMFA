@@ -158,3 +158,14 @@ Anslått arbeid er 1–2 økter.
 * **Holdbarhet og reparasjon virker mindre** når andelen kassert på grunn av slitasje er bundet til tilstandsdataene fra Mepex. De fleste klær kasseres før de er utslitt (overdeler: ca. 20 % på grunn av slitasje). Da kan lengre teknisk levetid og reparasjon bare nå en liten del av kasseringene. Det stemmer med funnet i den agentbaserte modellen for sko (ISEE 2025): Slitesterke sko kasseres fordi de oppleves som utdaterte.
 * Andelen brukbart i kasseringene øker litt med tiltakene, fra 71 % (L0) til 73–75 % (L3, L7, alle) i 2035–2050. Det gir litt mer å ombruke.
 * Målet om −30 % ny tilførsel per innbygger i 2035 nås med alle tiltakene i 40 % (lagerdrevet) og 49 % (tilførselsdrevet) av scenariene. Rebound (ρ = −0,61) og trenden i ønsket lager (−0,46) avgjør.
+
+### Følsomhet for andelen kassert på grunn av slitasje (2026-11-05)
+Referansescenarioet, lagerdrevet etterspørsel, rebound 0,5, ny tilførsel i 2035 sammenlignet med L0:
+
+| Andel kassert på grunn av slitasje, klær | L3 (+30 %) | L7 (opptak 0,5) |
+|---|---|---|
+| Bundet til Mepex (ca. 0,2–0,45 per kategori) | −3,2 % | −2,5 % |
+| 0,5 for alle | −4,6 % | −4,4 % |
+| 0,7 for alle | −6,7 % | −7,6 % |
+
+Funnet holder i retning: Levetidsforlengelse gir under ca. 8 % også med en andel langt over det tilstandsdataene tilsier. Størrelsen avhenger likevel av andelen, med opp til 2–3 ganger forskjell, og bør rapporteres med spennet.
