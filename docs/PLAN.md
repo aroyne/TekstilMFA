@@ -2,7 +2,7 @@
 
 *Levende dokument, oppdateres fortløpende. Sist oppdatert: 2026-11-05.*
 
-> **Her fortsetter vi (2026-11-05):** Fase D er ferdig: referansebanen, 1 000 scenarier og fem ambisiøse tiltak (`future_policies.py`, [notat](../claude_tekst/2026-11-05_D3_tiltak_forslag.md)). Bare produsentansvaret løfter innsamlingsgraden over 50 %. Sortering i Norge fjerner den usorterte eksporten, men øker forbrenningen i Norge. Ingen kombinasjon halverer forbrenningen. Vurdering for ISIE 2027 er i [notatet](../claude_tekst/2026-11-05_ISIE2027_vurdering.md). **Neste:** avklare ankrene med Mepex (sko, næringsavfall), velge vinkling for ISIE og eventuelt fase F (artikkel).
+> **Her fortsetter vi (2026-11-05):** Fase D, trinn 1–3 er ferdige. **Forslag til trinn 4** ligger klart ([notat](../claude_tekst/2026-11-05_D4_ny_tilforsel_forslag.md)): lavere tilførsel av nytt materiale som mål, med en lagerdrevet modell for CL+HT+FW der kjøpene følger ønsket lager, erstatningsgrad for brukt og rebound. Begge formuleringene av etterspørselen beholdes som strukturusikkerhet. Fem spørsmål venter på svar. Vurdering for ISIE i [notatet](../claude_tekst/2026-11-05_ISIE2027_vurdering.md), og datagrunnlaget for lageret i [notatet](../claude_tekst/2026-11-05_lagerets_datagrunnlag_og_nevnerproblemet.md).
 > **Påminnelse:** Usendte henvendelser (SSB, OsloMet, SNF, PostNord, Tolletaten) samles i [HENVENDELSER.md](HENVENDELSER.md). **Ingenting er sendt** per 2026-11-02.
 
 System: [SYSTEMDEFINISJON.md](SYSTEMDEFINISJON.md) · Metode: [METODE.md](METODE.md) · Data: [../DATA_SOURCES.md](../DATA_SOURCES.md)
