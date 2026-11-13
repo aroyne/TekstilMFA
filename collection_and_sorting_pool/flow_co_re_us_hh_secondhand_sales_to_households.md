@@ -1,0 +1,98 @@
+---
+layout: default
+title: Secondhand sales to households
+parent: Second-hand retail (CO.RE)
+grand_parent: 6. Collection and sorting (CO)
+nav_order: 1
+---
+
+# Secondhand sales to households
+
+| | |
+|---|---|
+| Flytkode | `CO.RE-US.HH-Secondhand sales to households-TOT` |
+| Fra | [Second-hand retail (CO.RE)](../collection_and_sorting_pool/subpool_co_re.html) |
+| Til | [Households (US.HH)](../use_pool/subpool_us_hh.html) |
+| Tekstilform | USE – brukte, ombrukbare |
+| Dimensjoner | år × produktgruppe |
+| Metode | balance |
+| Status | implemented |
+| Prioritet | 1 |
+| Kandidatdata | Balance of CO.RE |
+| Merknad | Re-enters the in-use stock |
+
+## Tidsserie
+
+<iframe src="../output_files/plots/pages/co_re_us_hh_secondhand_sales_to_households.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- **CO.RE-US.HH-Secondhand sales to households-TOT** er brukte tekstiler solgt fra innsamlernes bruktbutikker tilbake til husholdningene.
+- Uformell ombruk (Finn, Tise, arv) er ikke med. Den regnes som lengre levetid i husholdningene (D9).
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- Flyten er balansen i CO.RE: alt som sorteres til bruktbutikk, selges.
+
+#### Antakelser
+
+- Usolgte varer i bruktbutikk er ikke med ennå.
+
+#### Sammensetning (varetype og materiale)
+
+- Bare CORE, med blandingen av det som samles inn fra husholdningene (utstrømmen fra årgangsmodellen) og donerte usolgte klær.
+
+#### Tidsutvikling og sammenligninger
+
+- Flyten er liten sammenlignet med salget av nye varer: under 1 kt per år fram til 2021, 1,0 kt i 2022 og 1,9 kt i 2025. Den omfatter også importerte brukte klær.
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Klær, hjemmetekstiler og sko | 100 % | 100 % | 100 % | 100 % | 100 % | 100 % |
+
+### Materiale (fiberlag, D19)
+
+Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmodellen) og usolgte klær som forhandlerne gir til innsamlerne (tilførselssammensetningen).
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 47 % | 44 % | 42 % | 38 % | 35 % | 35 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 13 % | 16 % | 18 % | 18 % | 18 % | 17 % |
+| Andre fibre | 1 % | 1 % | 1 % | 1 % | 2 % | 2 % |
+| Syntetisk | 31 % | 30 % | 32 % | 36 % | 37 % | 38 % |
+| Ull | 5 % | 6 % | 5 % | 5 % | 5 % | 6 % |
+
+<iframe src="../output_files/plots/pages/co_re_us_hh_secondhand_sales_to_households_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `retained_share_collected` | 17 % | 29 % | 63 % |
+| `reuse_fraction_retained` | 22 % | 37 % | 36 % |
+| `08801:export:used` | – | – | 1 % |
+| `gap: retained_share_collected` | 33 % | 17 % | – |
+| `gap: reuse_fraction_retained` | 27 % | 17 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.20 | 0.33 | 1.11 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.23 | 0.40 | 0.97 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
+
+## Beregning i koden
+
+Beregnes i `_secondhand_sales_mc` i `calculations/co_mc.py`. Dokumentasjonen i koden:
+
+> Balance of CO.RE: everything sorted for second-hand sale is sold.

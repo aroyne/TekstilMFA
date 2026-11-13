@@ -1,0 +1,125 @@
+---
+layout: default
+title: Sales to households
+parent: Wholesale and retail (DI.RT)
+grand_parent: 4. Distribution (DI)
+nav_order: 1
+---
+
+# Sales to households
+
+| | |
+|---|---|
+| Flytkode | `DI.RT-US.HH-Sales to households-TOT` |
+| Fra | [Wholesale and retail (DI.RT)](../distribution_pool/subpool_di_rt.html) |
+| Til | [Households (US.HH)](../use_pool/subpool_us_hh.html) |
+| Tekstilform | NEW – nye varer |
+| Dimensjoner | år × produkt |
+| Metode | balance |
+| Status | implemented |
+| Prioritet | 1 |
+| Kandidatdata | Balance of DI.RT |
+| Merknad | Key inflow to the in-use stock |
+
+## Tidsserie
+
+<iframe src="../output_files/plots/pages/di_rt_us_hh_sales_to_households.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- **DI.RT-US.HH-Sales to households-TOT** er nye tekstilvarer solgt til private husholdninger gjennom handelen (butikk og norsk netthandel).
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- Flyten er balansen i DI.RT og har ingen egen datakilde: import (08801) + norske ferdigvarer (MA.TX) + norsk håndstrikkegarn − eksport (08801) − usolgte varer (gitt bort eller kastet), minus salget til institusjoner og bedrifter.
+
+#### Antakelser
+
+- Alt som tilføres handelen og ikke er usolgt, selges samme år. Lagerendring i handelen er ikke med.
+- 12 % av klær, hjemmetekstiler, sko, tepper, presenninger og andre konfeksjonerte varer går til institusjoner og bedrifter. Sekker går bare dit, og garn i detaljopplegg bare til husholdningene.
+- En negativ balanse er ikke-fysisk og klippes til 0. Det har ikke skjedd.
+
+#### Sammensetning (varetype og materiale)
+
+- Klær er 41–44 %, hjemmetekstiler 17 % og sko 13 %. Tepper falt fra 20 % i 1990 til 11 % i 2022.
+- Materialet er blandingen av det som går inn i DI.RT per varetype. Syntetisk økte fra 32 % i 1990 til 42 % i 2022.
+
+#### Tidsutvikling og sammenligninger
+
+- Salget økte fra 76–81 kt rundt 1990 til 116 kt i 2005 og har ligget på 106–131 kt siden (høyest i 2011).
+- Fallet til 107 kt i 2025 følger fallet i klesimporten etter 2023, men en del av det er erstattet av direkte netthandel.
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Tepper | 20 % | 11 % | 10 % | 11 % | 11 % | 12 % |
+| Klær | 41 % | 48 % | 48 % | 43 % | 44 % | 44 % |
+| Sko | 13 % | 13 % | 14 % | 13 % | 13 % | 12 % |
+| Hjemmetekstiler | 17 % | 18 % | 19 % | 19 % | 16 % | 16 % |
+| Andre konfeksjonerte varer | 2 % | 3 % | 3 % | 5 % | 7 % | 9 % |
+| Presenninger og telt | 6 % | 5 % | 5 % | 8 % | 8 % | 6 % |
+| Garn i detaljsalg | 2 % | 1 % | 1 % | 2 % | 1 % | 1 % |
+
+### Materiale (fiberlag, D19)
+
+Sammensetningen til registrert import av produktet samme år (hovedfiber fra HS-koden). Flytene ut av DI.RT er blandet med norske ferdigvarer og norsk spunnet håndstrikkegarn (ull).
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 38 % | 37 % | 35 % | 28 % | 29 % | 30 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 18 % | 17 % | 18 % | 18 % | 18 % | 18 % |
+| Andre fibre | 2 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Syntetisk | 34 % | 35 % | 37 % | 43 % | 43 % | 42 % |
+| Ull | 5 % | 6 % | 5 % | 6 % | 5 % | 6 % |
+
+<iframe src="../output_files/plots/pages/di_rt_us_hh_sales_to_households_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `institutional_share` | 38 % | 36 % | 36 % |
+| `08801:import:finished` | 23 % | 26 % | 28 % |
+| `08801_classification:import:finished` | 21 % | 23 % | 25 % |
+| `unsold_destroyed_share` | 14 % | 14 % | 11 % |
+| `08801_classification:import:intermediate` | 1 % | – | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 8.92 | 12.23 | 10.38 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 9.78 | 13.57 | 11.13 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
+
+## Klipping av negative verdier
+
+Flyten er en balanseflyt. Negative verdier er ikke-fysiske og klippes til 0. Massen som da oppstår, tas opp av klippelageret i prosessen flyten går ut fra (rapportert som «Clipping imbalance»), og flyttes ikke til andre flyter.
+
+I TOT: ikke klippet i noen av de 1000 MC-iterasjonene eller i det deterministiske løpet.
+
+## Beregning i koden
+
+Beregnes i `_sales_to_users_mc` i `calculations/di_mc.py`. Dokumentasjonen i koden:
+
+> Balance of DI.RT per product: registered imports plus finished goods
+> and hand knitting yarn made in Norway minus exports and unsold goods,
+> split between households and institutions/businesses. Sacks (SA) are packaging
+> used by businesses (D13) and go entirely to US.IC; retail yarn (YA) goes
+> entirely to households. The institutional share of the other products is
+> 12 % (4-15 %), the Danish split used by Watson et al. 2020 and Rubach et
+> al. 2023; no Norwegian statistic gives it. The lower bound is the share
+> of clothing imported directly by businesses and the public sector outside
+> wholesale and retail, 3-4 % of the import value in 2016-2024 (Eurostat
+> ext_tec05, D36); the rest of their purchases goes through wholesale and
+> cannot be separated. A negative balance is not physical and is
+> clipped at 0; the clipped mass is recorded and reported on the flow
+> pages.

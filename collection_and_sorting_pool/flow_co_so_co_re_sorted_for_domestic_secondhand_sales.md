@@ -1,0 +1,100 @@
+---
+layout: default
+title: Sorted for domestic secondhand sales
+parent: Sorting (CO.SO)
+grand_parent: 6. Collection and sorting (CO)
+nav_order: 1
+---
+
+# Sorted for domestic secondhand sales
+
+| | |
+|---|---|
+| Flytkode | `CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT` |
+| Fra | [Sorting (CO.SO)](../collection_and_sorting_pool/subpool_co_so.html) |
+| Til | [Second-hand retail (CO.RE)](../collection_and_sorting_pool/subpool_co_re.html) |
+| Tekstilform | USE – brukte, ombrukbare |
+| Dimensjoner | år × produktgruppe |
+| Metode | data |
+| Status | implemented |
+| Prioritet | 1 |
+| Kandidatdata | Collector annual reports |
+| Merknad | – |
+
+## Tidsserie
+
+<iframe src="../output_files/plots/pages/co_so_co_re_sorted_for_domestic_secondhand_sales.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Beskrivelse
+
+<!-- MANUAL:FLOW_DESCRIPTION:START -->
+#### Hva flyten omfatter
+
+- **CO.SO-CO.RE-Sorted for domestic secondhand sales-TOT** er tekstiler sortert i Norge som selges i norske bruktbutikker, og importerte brukte klær (HS 6309) som selges i bruktbutikker og vintagebutikker.
+
+#### Datakilder (og hvordan kildetallene er produsert)
+
+- Andel av det som sorteres i Norge, fra kartleggingene: 54 % i 2018 (Watson m.fl. 2020: 549 av 1 016 t), 95 % i 2022 (Rubach m.fl. 2023: rest ikke oppgitt, antatt liten) og 82 % i 2025 (de Sadeleer & Rubach 2026: 1 622 av 1 986 t).
+
+- Importerte brukte klær: SSB 08801 (HS 6309), 0,02–0,35 kt per år.
+
+#### Antakelser
+
+- Andelen holdes på 2018-nivået før 2018, med usikkerhet som øker bakover (D30), og interpoleres mellom ankerpunktene (usikkerhet 0,3–1,0).
+
+#### Sammensetning (varetype og materiale)
+
+- Bare CORE, med blandingen av det som samles inn fra husholdningene (utstrømmen fra årgangsmodellen) og donerte usolgte klær.
+
+#### Tidsutvikling og sammenligninger
+
+- Flyten var under 0,5 kt per år fram til 2013, 0,7 kt i 2018, 1,0 kt i 2022 og 1,9 kt i 2025.
+<!-- MANUAL:FLOW_DESCRIPTION:END -->
+
+## Sammensetning
+
+Andel av summen i nøkkelår (median).
+
+### Varetype
+
+| Varetype | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Klær, hjemmetekstiler og sko | 100 % | 100 % | 100 % | 100 % | 100 % | 100 % |
+
+### Materiale (fiberlag, D19)
+
+Blandingen av det som samles inn fra husholdningene (utstrømmen av årgangsmodellen) og usolgte klær som forhandlerne gir til innsamlerne (tilførselssammensetningen).
+
+| Materiale | 1990 | 2000 | 2010 | 2018 | 2022 | 2025 |
+|---|---|---|---|---|---|---|
+| Bomull | 47 % | 44 % | 42 % | 38 % | 35 % | 35 % |
+| Regenerert cellulose | 3 % | 3 % | 2 % | 2 % | 2 % | 2 % |
+| Ikke-tekstil | 13 % | 16 % | 18 % | 18 % | 18 % | 17 % |
+| Andre fibre | 1 % | 1 % | 1 % | 1 % | 2 % | 2 % |
+| Syntetisk | 31 % | 30 % | 32 % | 36 % | 37 % | 38 % |
+| Ull | 5 % | 6 % | 5 % | 5 % | 5 % | 6 % |
+
+<iframe src="../output_files/plots/pages/co_so_co_re_sorted_for_domestic_secondhand_sales_materials.html" width="100%" height="420px" frameborder="0" scrolling="no"></iframe>
+
+## Usikkerhetsbidrag
+
+Andel av variansen fra hver kilde (førsteordens analyse: hver kilde settes alene til 2,5- og 97,5-persentilen, D39). Kilder med `gap:` er usikkerheten i år uten publiserte tall (D30). Årlige datasett (for eksempel `08801:import:finished`) er summert over år.
+
+| Kilde | 2000 | 2010 | 2025 |
+|---|---|---|---|
+| `retained_share_collected` | 17 % | 29 % | 63 % |
+| `reuse_fraction_retained` | 22 % | 37 % | 36 % |
+| `08801:export:used` | – | – | 1 % |
+| `gap: retained_share_collected` | 33 % | 17 % | – |
+| `gap: reuse_fraction_retained` | 27 % | 17 % | – |
+| Halvt 95 %-intervall, førsteordens (kt) | 0.20 | 0.33 | 1.11 |
+| Halvt 95 %-intervall, Monte Carlo (kt) | 0.23 | 0.40 | 0.97 |
+
+Når de to intervallene avviker mye, er førsteordens bildet grovt (restledd nær null, klipping, skjeve kilder eller produkter av usikre faktorer).
+
+## Beregning i koden
+
+Beregnes i `_sorted_for_secondhand_mc` i `calculations/co_mc.py`. Dokumentasjonen i koden:
+
+> Share of the retained textiles sold second-hand in Norway (same anchors
+> as the share retained), plus imported used clothing (HS 6309).
