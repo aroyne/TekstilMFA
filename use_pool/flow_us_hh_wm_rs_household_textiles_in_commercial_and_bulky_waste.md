@@ -42,7 +42,7 @@ nav_order: 9
 
 #### Antakelser
 
-- Strukturkjøringen `commercial_bulky_1kg` bruker 1 kg per innbygger × folketallet, altså den danske analogien.
+- Strukturkjøringene `commercial_bulky_0.5kg`, `commercial_bulky_1kg` og `commercial_bulky_2kg` bruker 0,5, 1 og 2 kg per innbygger × folketallet. 1 kg er den danske analogien, og 2 kg er omtrent det danske gapet mellom tilførsel og registrerte kasseringer (1,8 kg i 2016).
 - Strukturkjøringen `bulky_bedding` sender i stedet dyner, puter og møbelputer (HS 9404) som kommer inn i husholdningene, til flyten samme år. Mengden er andelen HS 9404 av importen av hjemmetekstiler × de nye hjemmetekstilene. Wasted Textiles veide fylte soveartikler for seg (Syversen m.fl. 2023), og møbelputer kastes trolig sammen med møblene. Kasseringene av hjemmetekstiler i statistikken er 0,75 av lagermodellen i 2021–2022, mot 0,91 for klær (fase C).
 
 #### Sammensetning (varetype og materiale)
@@ -52,7 +52,7 @@ nav_order: 9
 
 #### Tidsutvikling og sammenligninger
 
-- `commercial_bulky_1kg` gir 4,2 kt i 1990 og 5,6 kt i 2025. Restlageret i 2025 faller da med 183 kt. Innsamlingsgraden som statistikken måler, endres ikke. Med flyten i nevneren går den ned med ca. 3 prosentpoeng (D45).
+- Med 0,5, 1 og 2 kg per innbygger er flyten 2,8, 5,6 og 11,2 kt i 2025, og restlageret i 2025 faller med 91, 183 og 365 kt. Innsamlingsgraden som statistikken måler, endres ikke (48,0 %). Med flyten i nevneren blir den 46,3, 44,7 og 41,8 % i 2025 (D45).
 - `bulky_bedding` gir 4,5 kt i 2025. Restlageret faller med 198 kt, og innsamlingsgraden med flyten i nevneren går ned med 3 prosentpoeng. Avviket mot lagermodellen går fra 763 til 565 kt.
 - Det danske gapet var 10 kt (1,8 kg per innbygger) i 2016, og forfatterne mente det meste var data som ikke fanges opp, ikke lagervekst. Vårt gap i 2025 er ca. 9 kt.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
