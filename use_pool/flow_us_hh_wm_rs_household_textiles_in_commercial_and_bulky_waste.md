@@ -19,7 +19,7 @@ nav_order: 9
 | Status | implemented |
 | Prioritet | 2 |
 | Kandidatdata | Danish analogy: bulky waste taken directly to incineration or private sorting, about 1 kg textiles per inhabitant (Watson et al. 2018, MST); Mepex/Avfall Norge pick analyses of commercial waste (requested) |
-| Merknad | D42. Household textiles collected as commercial waste (moving, estates, skips, bulky waste outside municipal recycling stations), not in the household pick analyses. 0 in the main result (D8), 1 kg per inhabitant in the structural run; in the future module the gap between the scaled cohort model and a realistic stock growth |
+| Merknad | D42. Household textiles collected as commercial waste (moving, estates, skips, bulky waste outside municipal recycling stations), not in the household pick analyses. 0 in the main result (D8), 1 kg per inhabitant in the structural run |
 
 ## Tidsserie
 
@@ -32,7 +32,7 @@ nav_order: 9
 
 - **US.HH-WM.RS-Household textiles in commercial and bulky waste-TOT** er klær, hjemmetekstiler og sko fra husholdningene som går som næringsavfall: flytting, tømming av dødsbo, storsekker og containere, og grovavfall som private firmaer henter. Tekstilene går til forbrenning.
 - Det er ikke med i plukkanalysene for husholdningsavfall, som dekker restavfall fra henteordningen og brennbart avfall fra de kommunale gjenvinningsstasjonene.
-- **Flyten er 0 i hovedresultatet for 1988–2025** (D8, D42). Den brukes i en strukturkjøring og i fremtidsmodulen.
+- **Flyten er 0 i hovedresultatet for 1988–2025** (D8, D42). Den brukes i to strukturkjøringer.
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
@@ -44,7 +44,6 @@ nav_order: 9
 
 - Strukturkjøringen `commercial_bulky_1kg` bruker 1 kg per innbygger × folketallet, altså den danske analogien.
 - Strukturkjøringen `bulky_bedding` sender i stedet dyner, puter og møbelputer (HS 9404) som kommer inn i husholdningene, til flyten samme år. Mengden er andelen HS 9404 av importen av hjemmetekstiler × de nye hjemmetekstilene. Wasted Textiles veide fylte soveartikler for seg (Syversen m.fl. 2023), og møbelputer kastes trolig sammen med møblene. Kasseringene av hjemmetekstiler i statistikken er 0,75 av lagermodellen i 2021–2022, mot 0,91 for klær (fase C).
-- I fremtidsmodulen er flyten resten av balansen i US.HH (CORE) etter en lagervekst på 0,5 kg per innbygger per år (0,3–1). Der er den det som kasseres utover statistikken, ikke et anslag fra data.
 
 #### Sammensetning (varetype og materiale)
 
@@ -53,9 +52,8 @@ nav_order: 9
 
 #### Tidsutvikling og sammenligninger
 
-- `commercial_bulky_1kg` gir 4,2 kt i 1990 og 5,6 kt i 2025. Restlageret i 2025 faller da med 183 kt, og innsamlingsgraden går ned med ca. 3 prosentpoeng.
-- `bulky_bedding` gir 4,5 kt i 2025. Restlageret faller med 198 kt, og innsamlingsgraden går ned med 3 prosentpoeng. Avviket mot lagermodellen går fra 763 til 565 kt.
-- I referansebanen er flyten 7,5 kt i 2026 og 10–11 kt i 2030–2050. Innsamlingsgraden faller fra 45 % i 2025 til 41 % i 2026. Det er et brudd i definisjonen og ingen reell endring: Nevneren tar med flyten først fra 2026.
+- `commercial_bulky_1kg` gir 4,2 kt i 1990 og 5,6 kt i 2025. Restlageret i 2025 faller da med 183 kt. Innsamlingsgraden som statistikken måler, endres ikke. Med flyten i nevneren går den ned med ca. 3 prosentpoeng (D45).
+- `bulky_bedding` gir 4,5 kt i 2025. Restlageret faller med 198 kt, og innsamlingsgraden med flyten i nevneren går ned med 3 prosentpoeng. Avviket mot lagermodellen går fra 763 til 565 kt.
 - Det danske gapet var 10 kt (1,8 kg per innbygger) i 2016, og forfatterne mente det meste var data som ikke fanges opp, ikke lagervekst. Vårt gap i 2025 er ca. 9 kt.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 

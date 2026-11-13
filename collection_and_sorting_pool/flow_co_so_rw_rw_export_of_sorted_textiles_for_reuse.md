@@ -18,8 +18,8 @@ nav_order: 4
 | Metode | parameter |
 | Status | implemented |
 | Prioritet | 2 |
-| Kandidatdata | Future module only: sorted for reuse beyond the Norwegian second-hand market (X13) |
-| Merknad | Phase D step 3. 0 in the history, where exports of HS 6309 count as unsorted (D17); in the future what is sorted in Norway for reuse beyond the domestic second-hand market |
+| Kandidatdata | None: exports of HS 6309 and 6310 are not split into sorted and unsorted |
+| Merknad | 0 in 1988-2025: exports of used textiles count as unsorted (D17), and what is sorted for reuse in Norway is sold here |
 
 ## Tidsserie
 
@@ -35,12 +35,11 @@ nav_order: 4
 
 #### Datakilder (og hvordan kildetallene er produsert)
 
-- Ingen. Flyten brukes bare i fremtidsmodulen (fase D, trinn 3).
+- Ingen egne data. Utenrikshandelsstatistikken skiller ikke sortert fra usortert eksport av brukte tekstiler, og eksporten av HS 6309 og 6310 regnes som usortert (D17).
 
 #### Antakelser
 
-- I fremtiden går det som sorteres til ombruk i Norge, til bruktsalg i Norge opp til markedets størrelse (X13: 1,6 kt i 2025, 1,6–10 kt i 2035). Resten eksporteres sortert.
-- I referansebanen har markedet ingen grense, som i trinn 1 og 2, og flyten er 0.
+- Alt som sorteres til ombruk i Norge, selges i Norge (CO.RE). Sortert ombruk eksporteres ikke.
 
 #### Sammensetning (varetype og materiale)
 
@@ -49,7 +48,7 @@ nav_order: 4
 
 #### Tidsutvikling og sammenligninger
 
-- Med sortering av alt innsamlet i Norge (L2) blir flyten den største strømmen ut av sorteringen. Ombruk i Norge er begrenset av markedet (Spearman 1,0 med X13 under L2).
+- 0 i alle år 1988–2025.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
@@ -73,6 +72,4 @@ Beregnes i `_sorted_reuse_export_mc` i `calculations/co_mc.py`. Dokumentasjonen 
 
 > Textiles sorted in Norway for reuse and exported: 0 in the history.
 > Exports of used textiles (HS 6309+6310) are counted as unsorted export
-> (D17), and what is kept in Norway is sold here or rejected. The flow is
-> used by the future module, where sorting in Norway can exceed what the
-> Norwegian second-hand market takes (phase D, step 3).
+> (D17), and what is kept in Norway is sold here or rejected.

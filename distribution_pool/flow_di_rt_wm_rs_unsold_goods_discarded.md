@@ -56,7 +56,6 @@ nav_order: 4
 
 - 0,8 kt i 1988, ca. 1,3 kt rundt 2012–2022 og 1,1 kt i 2025 (0,2–8,1). Flyten følger det som settes på markedet.
 - Før D38 var flyten 0,1–0,3 kt (minimum fra undersøkelsene). Med EEA-nivået (6,5 %) blir den 4–6 kt per år, og lageret i husholdningene blir 176 kt lavere i 2025 (`structural_sensitivity.py`).
-- EUs økodesignforordning (ESPR) forbyr store virksomheter å destruere usolgte klær og sko fra 19. juli 2026. Det er bare relevant for scenarier.
 <!-- MANUAL:FLOW_DESCRIPTION:END -->
 
 ## Sammensetning
@@ -114,6 +113,4 @@ Beregnes i `_unsold_goods_discarded_mc` i `calculations/di_mc.py`. Dokumentasjon
 > analyse (2022) found an overstock of at least 825 t of clothing, about
 > 0.8 % of the clothing supply. Destroyed goods are commercial waste and are not in
 > the pick analyses of household waste, so they are not counted twice.
-> Material recycling is not split out, so all of it goes to WM.RS. Large
-> enterprises may not destroy unsold clothing and footwear from 19 July
-> 2026 (ESPR), which matters only for scenarios.
+> Material recycling is not split out, so all of it goes to WM.RS.
